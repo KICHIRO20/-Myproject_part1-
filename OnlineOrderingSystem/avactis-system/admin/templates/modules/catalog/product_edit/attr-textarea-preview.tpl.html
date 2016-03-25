@@ -1,0 +1,47 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row">
+						<div class="col-sm-2">
+							 <label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+						</div>
+						<br>
+						<div class="col-sm-2">
+						<button id="EnableEditorButton" class="btn btn-circle btn-default" type="button" onclick="CatalogEditProduct.FormSubmitValue.value = 'EnableEditor';CatalogEditProduct.submit();disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2', 'UploadButton', 'EnableEditorButton'));return true;" ><i class="fa fa-edit"></i> <?php msg('BTN_ENABLE_EDITOR'); ?></button>
+						</div>				
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp(getProductTypeID(),getAttributeTag()); ?>
+							</a>
+						</div>
+						<div class="col-sm-4">  
+						 <input type="hidden" id="<?php AttributeTag(); ?>" name="<?php AttributeTag(); ?>" patternType="<?php AttributePatternType(); ?>" value="<?php AttributeValueEscaped(); ?>"><?php AttributeValue(); ?>
+      <br/>
+      
+      <?php Error(); ?>
+						</div>
+						
+</div>
+
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+
+  <tr id="group_<?php GroupID(); ?><?php Counter(); ?>">
+    <td class="label popup_dialog_body_left_padded" width="20%" style="text-align: right;">
+      <?php AttributeName(); ?>
+      <br>
+      <br>
+      <div id="EnableEditorButton" class="button button_8em" onclick="CatalogEditProduct.FormSubmitValue.value = 'EnableEditor';CatalogEditProduct.submit();disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2', 'UploadButton', 'EnableEditorButton'));return true;"><?php msg('BTN_ENABLE_EDITOR'); ?></div>
+      <br />
+    </td>
+    <td class="help" width="5%">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(),getAttributeTag()); ?>
+		</a>
+	</td>
+    <td class="value popup_dialog_body_right_padded" width="75%">
+      <input type="hidden" id="<?php AttributeTag(); ?>" name="<?php AttributeTag(); ?>" patternType="<?php AttributePatternType(); ?>" value="<?php AttributeValueEscaped(); ?>"><?php AttributeValue(); ?>
+      <br/>
+      
+      <?php Error(); ?>
+    </td>
+  </tr>

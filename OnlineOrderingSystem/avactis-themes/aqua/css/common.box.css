@@ -1,0 +1,162 @@
+/* BOX ************************************************ */
+.box {
+    margin-bottom: 7px;
+    position: relative;
+ 
+    width: 100%;
+}
+
+.box .content {
+    padding: 0px;
+}
+
+.box .cn {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    overflow: hidden;
+}
+
+.box .cn.lt { left: -5px; top: -5px; }
+.box .cn.rt { left: -5px; top: -5px; margin-left: 100%; }
+.box .cn.lb { bottom: -5px; left: -5px; }
+.box .cn.rb { bottom: -5px; left: -5px; margin-left: 100%; }
+/* BOX ************************************************ */
+
+
+/* BOX in .page_container ***************************** */
+.page_container .box .cn {
+
+}
+
+.page_container .box .content {
+    background: white url('../images/bg-box-body.gif') repeat-x 0px 0px;
+    padding-bottom: 16px;
+    border-left: 1px solid #B8C2CA;
+    border-right: 1px solid #B8C2CA;
+    border-bottom: 1px solid #ADB6BD;
+}
+
+.page_container .box.nogradient .content {
+   background-image: none;
+   border-radius:5px 5px 0 0;
+}
+
+.right_column .box  select,
+.left_column .box select {
+    display: block;
+    margin: 16px auto 0px auto;
+    width: 85%;
+}
+
+.box h1,
+.box h2,
+.box .header,
+.box .subheader,
+.box .toolbar {
+    display: block;
+    height: 23px;
+    text-align: left;
+    padding: 5px 21px 0px 21px;
+    margin: 0px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.box h1 span, .box h2 span {
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box h1 span a, .box h2 span a {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box h1, .box h2,
+.box .header {
+    color: #787878;
+   	border-bottom: 1px white solid;
+   	border:1px solid #D6D6D6;
+    border-radius: 5px 5px 0 0;
+    background: url("../images/box-bg.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 28px;
+    line-height: 25px;
+    padding-left: 40px;
+}
+
+.box h2,
+.box .subheader,
+.box .subheader a,
+.box h2 a {
+     background: url("../images/box-bg.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+     height: 28px;
+}
+
+.box h1 a, .box h2 a {
+    font-weight: bold;
+    color: #448AFC;
+}
+
+.box .toolbar {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box hr {
+    width: 95%;
+    height: 1px;
+    color: #DEDEDE;
+    border: 0px;
+    background-color: #DEDEDE;
+    margin: 0px auto;
+    padding: 0px;
+}
+/* BOX in .page_container ***************************** */
+
+
+/* BOX inside BOX in .page_container ****************** */
+.box .box {
+     width: auto;
+}
+
+.box .box .cn {
+    background: none;
+}
+
+.box .box .content {
+    background: none;
+    border: 1px solid #ccd9e6;
+}
+
+.box .box h1, .box .box h2,
+.box .box .header {
+    color: #787878;
+    background: url("../images/box-bg.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    font-size: 9pt;
+    font-weight: bold;
+    height: 30px;
+    border:none;
+}
+
+.box .wishlist_send {
+    margin-top: 5px;
+}
+
+/* BOX inside BOX in .page_container ****************** */
+
+.page_container .box.welcome {
+    height: 413px;
+}
+
+.page_container .box.welcome .content {
+    background: white url('../images/main_banner.png') no-repeat 0px 0px;
+    border: none;    
+    padding: 240px 20px 0px 20px;
+    width:1011px;
+	height:372px;
+}
+

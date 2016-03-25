@@ -1,0 +1,203 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+    updateOrder = function(formname, formAction, formTarget)
+    {
+      var asc_action_input = document.getElementById('asc_action_2');
+      if (asc_action_input)
+      {       
+        asc_action_input.value = 'UpdateOrderAction';
+      }
+      else
+      {
+        return false;
+      }
+      
+      var form = document.getElementById(formname);
+      form.action=formAction;
+      form.target=formTarget;
+      if (form.onsubmit) form.onsubmit();
+      form.submit();
+    }
+    deleteOrders = function(formname, action, formTarget)
+    {
+      var form = document.getElementById(formname);
+      var j = 0;
+      var is_selected = false;
+      while (form.elements.item(j))
+      {
+        if (form.elements.item(j).tagName == 'INPUT' && form.elements.item(j).type == "checkbox" && form.elements.item(j).name == "order_id[]")
+        {
+            if (form.elements.item(j).checked)
+              is_selected = true;
+        }
+        j++;
+      }
+      if (!is_selected)
+      { 
+        alert("<?php Msg('ORDER_DEL_WRN_001'); ?>");
+        return;
+      }
+      form.action = action;
+      var newwindow = _openURLinNewWindow("", formTarget);
+      form.target = formTarget;
+      if (form.onsubmit) form.onsubmit();
+      form.submit();
+    }
+    
+    function exportOrders(formname, action, formTarget,export_all)
+    {
+      var asc_action_input = document.getElementById('asc_action_2');
+      if (asc_action_input)
+      {       
+        asc_action_input_value = asc_action_input.value;
+        asc_action_input.value = '';
+      }
+
+      var form = document.getElementById(formname);
+      var j = 0;
+      var is_selected = false;
+      while (form.elements.item(j))
+      {
+        if (form.elements.item(j).tagName == 'INPUT' && form.elements.item(j).type == "checkbox" && form.elements.item(j).name == "order_id[]")
+        {
+            if (form.elements.item(j).checked)
+              is_selected = true;
+        }
+        j++;
+      }
+      if (!is_selected && export_all == 'false')
+      {
+        alert("<?php xmsg('OECSV','ORDER_EXPORT_WRN_001'); ?>");
+        return;
+      }
+
+      form_action_backup = form.action;
+      form.action = action;
+      
+      var newwindow = _openURLinNewWindow("", formTarget);
+      
+      form_target_backup = form.target;
+      form.target = formTarget;
+      
+      if (form.onsubmit) 
+      {
+        form.onsubmit();
+      }
+      form.submit();
+      
+      asc_action_input.value = asc_action_input_value;
+      form.target = form_target_backup;
+      form.action = form_action_backup;
+      return false;
+    }
+</script> 
+<FORM action="orders.php" name="SearchResults" id="SearchResults" method="post">
+<input type="hidden" name="asc_action"  id="asc_action_2" value="">
+<input type="hidden" name="FormSubmitValue" value="Save">
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="icon-basket font-green-sharp"></i> 
+			<span class="caption-subject font-green-sharp bold uppercase">Order Search Results</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<a id="UpdateButton1" href="javascript:;" class="btn btn-circle btn-default" onclick="updateOrder('SearchResults', 'orders.php', ''); disableButtons(new Array('UpdateButton1', 'UpdateButton2', 'DeleteButton1', 'DeleteButton2'));"><i class="fa fa-refresh"></i> <span class="hidden-480"> <?php msg('ORDERS_RESULTS_UPDATE'); ?> </span></a>
+				<a id="DeleteButton1" href="javascript:;" class="btn btn-circle btn-default" onclick="deleteOrders('SearchResults', '<?php DeleteOrdersLink(); ?>', 'DeleteOrders');"><i class="fa fa-times"></i> <span class="hidden-480"> <?php msg('ORDERS_RESULTS_DELETE'); ?> </span></a>
+				<div class="btn-group">
+					<a data-toggle="dropdown" href="#" class="btn btn-default btn-circle"> 
+						<i class="fa fa-share"></i>
+						<span class="hidden-480"> Export Options </span> 
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu pull-right">				
+						<li><a id="ExportAllButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=OrdersExportCSVView&export_all=true','ExportOrders','true');"> <?php xmsg('OECSV','BTN_EXPORT_ALL'); ?> </a></li>
+						<li><a id="ExportButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=OrdersExportCSVView','ExportOrders','false');"> <?php xmsg('OECSV','BTN_EXPORT'); ?> </a></li>
+						<li class="divider"></li>
+						<li><a id="ExportAllQBButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=QB_Export&export_all=true','ExportOrders','true');"> <?php xmsg('QB','BTN_EXPORT_ALL_QB'); ?> </a></li>
+						<li><a id="ExportQBButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=QB_Export','ExportOrders','false');"> <?php xmsg('QB','BTN_EXPORT_QB'); ?> </a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="alert alert-success">
+        <span><b><?php SearchBy(); ?>:</b> <?php ResultCount(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span><b><?php msg('ORDERS_RESULTS_DATE'); ?>:</b> <?php ResultDateRange(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span><b><?php msg('ORDERS_RESULTS_AMOUNT'); ?>:</b> <?php ResultAmount(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+		<span><b><?php msg('ORDERS_RESULTS_TAX_TOTAL_MINUS_TAX_FULL_EXEMPTION_TOTAL'); ?>:</b> <?php ResultTaxTotalMinusFullTaxExempt(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<div class="portlet-body">
+		<div class="table-container" style="">
+			<div id="datatable_orders_wrapper" class="dataTables_wrapper dataTables_extended_wrapper no-footer">
+				<div class="table-responsive">
+					<table id="datatable_orders" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="datatable_orders_info" role="grid">
+						<thead>
+							<tr class="heading" role="row">
+								<th width="2%" class="sorting_disabled" rowspan="1" colspan="1">
+									<input type="checkbox" onclick="selectItems('SearchResults');" id="SelectAll">
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_ORDER_ID'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_CUSTOMER'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_CUSTOMER_NAME'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_ORDER_DATE'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_AMOUNT'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_TAX'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_ORDER_STATUS'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php msg('ORDERS_RESULTS_PAYMENT_STATUS'); ?>
+								</th>
+								<th class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									Actions
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php Items(); ?>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-title">
+		<div class="actions">
+			<div class="actions btn-set">
+				<a id="UpdateButton1" class="btn btn-circle btn-default" href="javascript:;" onclick="updateOrder('SearchResults', 'orders.php', ''); disableButtons(new Array('UpdateButton1', 'UpdateButton2', 'DeleteButton1', 'DeleteButton2'));"><i class="fa fa-refresh"></i> <span class="hidden-480"> <?php msg('ORDERS_RESULTS_UPDATE'); ?> </span></a>
+				<a id="DeleteButton1" class="btn btn-circle btn-default" href="javascript:;" onclick="deleteOrders('SearchResults', '<?php DeleteOrdersLink(); ?>', 'DeleteOrders');"><i class="fa fa-times"></i> <span class="hidden-480"> <?php msg('ORDERS_RESULTS_DELETE'); ?> </span></a>
+				<div class="btn-group">
+					<a data-toggle="dropdown" href="#" class="btn btn-default btn-circle"> 
+						<i class="fa fa-share"></i>
+						<span class="hidden-480"> Export Options </span> 
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu pull-right">		
+						<li><a id="ExportAllButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=OrdersExportCSVView&export_all=true','ExportOrders','true');"> <?php xmsg('OECSV','BTN_EXPORT_ALL'); ?> </a></li>
+						<li><a id="ExportButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=OrdersExportCSVView','ExportOrders','false');"> <?php xmsg('OECSV','BTN_EXPORT'); ?> </a></li>
+						<li class="divider"></li>
+						<li><a id="ExportAllQBButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=QB_Export&export_all=true','ExportOrders','true');"> <?php xmsg('QB','BTN_EXPORT_ALL_QB'); ?> </a></li>
+						<li><a id="ExportQBButton1" href="javascript:;" onclick="exportOrders('SearchResults','popup_window.php?page_view=QB_Export','ExportOrders','false');"> <?php xmsg('QB','BTN_EXPORT_QB'); ?> </a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

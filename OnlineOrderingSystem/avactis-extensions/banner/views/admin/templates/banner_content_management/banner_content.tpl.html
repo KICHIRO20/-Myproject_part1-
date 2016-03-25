@@ -1,0 +1,234 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<script type="text/javascript" src="../../avactis-extensions/banner/views/admin/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../avactis-extensions/banner/views/admin/js/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="../../avactis-extensions/banner/views/admin/js/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="../../avactis-extensions/banner/views/admin/styles/jquery.ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="../../avactis-extensions/banner/views/admin/styles/admin.css" />
+
+<script type="text/javascript">
+//<![CDATA[
+    window.onerror=function(msg, url, line) {
+        jQuery("body").attr("JSError",msg + "\n" + url + ':' + line);
+    }
+//]]>
+</script>
+<script>
+	function formHandler() {
+		var formAction = jQuery("#AddBannerContentForm").attr("action");
+		AddBannerContentForm.submit();
+	}
+</script>
+</head>
+<body>
+	
+<div class="row"><div class="col-md-12"><div class="row"><div class="col-md-12">
+<div class="portlet light">
+
+
+<div class="portlet-title"><div class="caption">
+<span class="caption-subject font-green-sharp bold uppercase"><?php xMsg('BN','BN_CONTENT'); ?></span>
+<span class="caption-helper location"><a href="index.php"><span><?php xMsg('BN','BN_MAIN'); ?></span></a>&nbsp;::&nbsp;<a
+			href="admin.php?page_view=BannerLocation"><span><?php xMsg('BN','BN_TITLE'); ?></span></a>&nbsp;::&nbsp;
+		<a href="admin.php?page_view=BannerManagement&type=<?php Type(); ?>"> <?php Location(); ?>
+		</a>&nbsp;::&nbsp; <span><?php xMsg('BN','BN_CONTENT'); ?></span></span>
+</div></div>
+
+<div class="portlet box blue-hoki">
+<?php BannerImages() ;?>
+</div>
+
+<div class="portlet box blue-hoki">
+<?php BannerHtml()?>
+</div>
+
+<div class="portlet box blue-hoki">
+
+<div class="portlet-title"><div class="caption"><?php xMsg('BN','BN_CONTENT_ADD'); ?></div></div>
+<div class="portlet-body">
+<form <?php FormAction() ?> method="post" id="AddBannerContentForm" enctype="multipart/form-data"> <input type='hidden' name='FormSubmitValue'></input>
+         <input type="hidden" name="bannerid" value=<?php BannerID(); ?> />
+	     <input type="hidden" name="mode" value="upload_image" />
+		<input type="hidden" name="type" value=<?php Type(); ?> />
+		<input type="hidden" name="banner_type" id="banner_type" value="image" />
+
+<script type="text/javascript">
+//<![CDATA[
+ jQuery(document).ready(function($){
+    var tOpts = {
+      idPrefix: 'ui-tabs-', cookie: { expires: 1 }    };
+   jQuery('#ui-tabs-container').tabs(tOpts);
+  });
+//]]>
+</script>
+
+<div id="ui-tabs-container">
+
+  <ul>
+    <li>
+      <a href="#upload_image"><?php xMsg('BN','BN_ADD_IMAGE'); ?></a>
+    </li>
+    <li>
+      <a href="#upload_html"><?php xMsg('BN','BN_ADD_HTML'); ?></a>
+    </li>
+  </ul>
+
+  <div id="upload_image"> 
+
+    <table>
+
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td><b><?php xMsg('BN','BN_IMAGE_PREVIEW'); ?></b></td>
+              <td>&nbsp;</td>
+              <td><img id="edit_image_A" src="../../avactis-extensions/banner/views/admin/styles/images/preview.png" alt="" /></td>
+            </tr>
+            <tr>
+              <td style="display: none;" id="edit_image_A_text"><br /><br /></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <table cellpadding="4" cellspacing="0">
+            <tr>
+              <td nowrap="nowrap"><b><?php xMsg('BN','BN_SELECT_FILE'); ?></b></td>
+              <td>
+               <input type="file" name="filePhoto"  id="filePhoto" style="display: none;" onchange="Checkfiles()">
+			   <input type="button" value="Browse" onclick="document.getElementById('filePhoto').click();" />
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap"><b><?php xMsg('BN','BN_URL'); ?></b></td>
+              <td>
+                <input type="text" class="form-control input-small" name="url" value="" />
+              </td>
+            </tr>
+            <tr>
+              <td nowrap="nowrap"><b><?php xMsg('BN','BN_ALT_TEXT'); ?></b></td>
+              <td>
+                <input type="text" class="form-control input-small" name="alt" value="" />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+    </table>
+
+  </div>
+
+  <div id="upload_html">
+    
+<script type="text/javascript">
+
+//<![CDATA[
+  var isHTML_Editor = true;
+//]]>
+</script>
+<script type="text/javascript"src="../../avactis-extensions/banner/views/admin/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript"src="../../avactis-extensions/banner/views/admin/js/ckeditor/start_textarea.js"></script>
+
+<div class="AELinkBox" style="width: 80%;">
+<a href="javascript:void(0);" style="display: none;" id="html_bannerDis" onclick="javascript: disableEditor('html_banner','html_banner');"><?php xMsg('BN','BN_DEFAULT_EDITOR'); ?></a>
+<b id="html_bannerDisB"><?php xMsg('BN','BN_DEFAULT_EDITOR'); ?></b>&nbsp;&nbsp;
+<a href="javascript:void(0);" id="html_bannerEnb" onclick="javascript: enableEditor('html_banner','html_banner');"><?php xMsg('BN','BN_WYSIWYG'); ?></a>
+<b id="html_bannerEnbB" style="display: none;"><?php xMsg('BN','BN_WYSIWYG'); ?></b></div>
+<textarea id="html_banner" name="html_banner" cols="65"  rows="15" class="InputWidth " style="width: 80%;"></textarea>
+<div id="html_bannerBox" style="display:none;">
+<textarea id="html_bannerAdv" cols="65"  rows="15" class="InputWidth " style="width: 576px;"></textarea>
+<script type="text/javascript">if (popup_html_editor_text!=undefined) {
+  jQuery("#html_banner").val(popup_html_editor_text);
+  CKEDITOR.replace("html_banner");
+}
+-->
+</script>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var isOpen = getCookie('html_bannerEditorEnabled');
+if (isOpen && isOpen == 'Y')
+ jQuery('#html_bannerEnb').click();
+//]]>
+</script>
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery(document).ready(function($){
+	function Checkfiles(id){
+		var fileName = id.value;
+		var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+		if(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" ){
+			readURL(id);
+			return true;
+		}else{
+			alert("Upload Gif or Jpg images only");
+			return false;
+		}
+	}
+	  function readURL(input) {
+			if (input.files	&& input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					jQuery('#edit_image_A')
+							.attr('src',e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		jQuery("#filePhoto").change(	function() {
+							Checkfiles(this);							
+						});
+    var selected = jQuery("#ui-tabs-container" ).tabs( "option", "selected" );
+    if (selected == 0) {
+      jQuery("input[name=banner_type]").val("image");
+    } else {
+      jQuery("input[name=banner_type]").val("html");
+    }
+
+   jQuery ("#ui-tabs-container").tabs({
+      select: function(e, ui) {
+        var selected = jQuery( "#ui-tabs-container" ).tabs( "option", "selected" );
+        if (selected == 1) {
+          jQuery("input[name=banner_type]").val("image");
+        } else {
+          jQuery("input[name=banner_type]").val("html");
+        }
+        return true;
+      }
+    });
+  });
+
+//]]>
+</script>
+<br />
+<div style="padding: 6px 22px 0px;" id="AddRowButton" class="btn blue button button_4em"
+										onclick="AddBannerContentForm.FormSubmitValue.value = 'AddContent'; formHandler();">
+										<?php xmsg('BN', 'BN_BTN_ADD_ROW'); ?>
+									</div>
+</form>
+</div>
+
+</div>
+
+</div></div></div> <!-- row col-md-12 portlet-light-->
+
+	<!-- /central space -->
+
+</body>
+</html>
+
+<!-- END TPL (DO NOT REMOVE!) -->

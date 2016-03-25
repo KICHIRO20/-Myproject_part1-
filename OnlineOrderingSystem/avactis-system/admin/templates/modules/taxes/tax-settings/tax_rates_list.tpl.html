@@ -1,0 +1,56 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+<td colspan=3 width="100%" valign=top>
+<!-- --------------------------------------------------------- -->
+<!-- -------- Second Row, One Cell: Tax Rates         -------- -->
+<!-- --------------------------------------------------------- -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+CheckBoxId['TaxRateCheckBoxes<?php TaxClassId(); ?>'] = "";
+
+function AddTaxRate(AddLink)
+{
+    if (CanAddTaxRate)
+    {
+        openURLinNewWindow(AddLink, 'TaxSettings');
+    }
+    else
+    {
+        alert('<?php msg("TAXES_PAGE_WRN_011"); ?>');
+    }
+}
+//-->
+</SCRIPT>
+<div class="col-md-12 col-sm-12">
+				<div class="portlet blue-hoki box">
+					<div class="portlet-title">
+						<div class="caption">
+							<?php TaxClassTitle(); ?>
+						</div>
+						<div class="actions">    
+						<button id="AddButton1" title="<?php Msg('BTN_ADD'); ?>" onclick="javascript:AddTaxRate('<?php TaxRateAddLink(); ?>');" type="button" name="?php Msg('BTN_ADD'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>						
+							 <button id="EditButton1" title="<?php Msg('BTN_EDIT'); ?>" onclick="openEditDeleteForm('TaxRateCheckBoxes<?php TaxClassId(); ?>', '<?php TaxRateEditLink(); ?>', 'TaxRatesSettings', 'Edit', '<?php Msg('TAXES_PAGE_WRN_012'); ?>', '');" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_EDIT'); ?></span></button>							 
+							 <button id="DeleteButton1" title="<?php Msg('BTN_DELETE'); ?>" onclick="javascript:openEditDeleteForm('TaxRateCheckBoxes<?php TaxClassId(); ?>', '<?php TaxRateDeleteLink(); ?>', '', 'Delete', '<?php Msg('TAXES_PAGE_WRN_005'); ?>', 'DeleteTaxRate');" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_DELETE'); ?></span></button>                   				        
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered table-striped">
+								<thead>
+									<tr> 
+										<th><?php Msg('TAX_RATE_HEADER_001'); ?></th>
+										<th><?php Msg('TAX_RATE_HEADER_002'); ?></th>
+										<th>Select</th>
+									</tr>
+								</thead>								
+								<tbody>
+									<?php TaxRatesItems(); ?>
+								</tbody>
+							</table>
+						</div>
+					</div>						
+				</div>
+			</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

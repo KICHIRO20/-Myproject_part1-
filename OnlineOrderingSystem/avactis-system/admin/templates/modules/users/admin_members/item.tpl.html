@@ -1,0 +1,15 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr class="odd" role="row">
+<td><INPUT TYPE="checkbox" NAME="<?php AdminCheckBoxName(); ?>" value="<?php AdminId(); ?>" id="<?php AdminCheckBox(); ?>" onclick="selectRow(this); UncheckAll('AdminMembersList');"<?php Enabled(); ?> style="visibility: <?php Style(); ?>"></td>
+   
+	<td>
+		<A HREF="javascript: void(0);" onclick="javascript:go('<?php AdminMemberInfoLink(); ?>', 'AdminMemberInfo');"><?php AdminName(); ?></A><?php CurrentAdmin(); ?>
+	</td>
+	 	<td><?php Email(); ?></td>
+    	<td><?php LogNum(); ?></td>
+    	<td><?php LoggedIn(); ?></td>
+    	<td><?php Created(); ?></td>
+    	<td><?php Modified(); ?></td>
+    	
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

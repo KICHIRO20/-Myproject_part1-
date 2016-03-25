@@ -1,0 +1,52 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+    function submitHandler(formname) 
+    {
+        var form = document.getElementById(formname);
+        if (form.onsubmit) form.onsubmit(); 
+        form.submit();
+    }
+if(!(!window.opener || window.opener.closed))
+{
+    window.opener.location.reload();
+}
+</script>
+<form action="" name="NewsSettings" id="NewsSettings" method="post">
+<input type="hidden" name="asc_action" value="UpdateNewsSettings">
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center" border=0>
+<tr class="title" style="height: 25px;">
+  <td class="title popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;"><?php msg("NEWS_SET_PAGE_TITLE"); ?></td>
+</tr>
+<tr class="subtitle" style="height: 25px;">
+  <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+    <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="80%"><?php msg("NEWS_SET_PAGE_SUBTITLE"); ?></td>
+        <td nowrap style="padding-right: 8px;"><?php PageHelpLink('general_settings'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('general_settings'); ?></td>
+        <td nowrap style="padding-right: 6px;"><div id="EditButton1" class="button button_5em" onclick="submitHandler('NewsSettings');"><?php msg("BTN_UPDATE"); ?></div></td>
+        <td nowrap style="padding-right: 10px;"><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php msg("BTN_CLOSE"); ?></div></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td width="55%" class="label popup_dialog_body_left_padded"><?php msg("NEWS_SET_FIELD_001"); ?></td>
+  <td class="help"><div onclick="getAttrHelp('0','SubcategoryID', 'cat_attr');return false;" style="cursor:pointer;"><img src="images/question.gif"></div></td>
+  <td width="40%" class="value popup_dialog_body_right_padded"><?php GSNewsDisplayCount(); ?></td>
+</tr>
+<tfoot>
+  <tr>
+    <th colspan=3 align="center">
+      <table width="100%" class="clear" >
+        <tr>
+          <td align=right style="padding-right: 4px;"><div id="EditButton2" class="button button_5em" onclick="submitHandler('NewsSettings');"><?php msg("BTN_UPDATE"); ?></div></td>
+          <td align=left ><div id="CancelButton2" class="button button_5em" onclick="closeAndFocusParent();"><?php msg("BTN_CLOSE"); ?></div></td>
+        </tr>
+      </table>
+    </th>
+  </tr>
+</tfoot>
+</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr> 

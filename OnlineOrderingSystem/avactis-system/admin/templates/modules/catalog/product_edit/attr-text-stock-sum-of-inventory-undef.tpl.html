@@ -1,0 +1,16 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row">
+	<div class="col-sm-2">
+		<label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(),getAttributeTag()); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">  
+		<?php xmsg('CTL', 'PRODUCT_QTY_ATTR_SUM_UNDEFINED', getInvEditorLink()); ?>
+		<input type="hidden" name="<?php AttributeTag(); ?>" value="<?php AttributeValue(); ?>">
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+    $settings = modApiFunc('Customer_Account','getSettings');
+    if($settings['CHECKOUT_TYPE'] !== CHECKOUT_TYPE_QUICK):
+?>
+        <span><a href="<?php PageURL('CustomerSignIn'); ?>"><?php Label("ACCOUNT_SIGN_IN"); ?></a></span>
+<?php
+    endif;
+?>
+<!-- END TPL (DO NOT REMOVE!) -->
+

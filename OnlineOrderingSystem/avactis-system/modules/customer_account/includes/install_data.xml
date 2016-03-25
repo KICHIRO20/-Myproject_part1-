@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<customer_account_install_data>
+	<person_info_groups>
+		<group>
+			<name>Customer</name>
+			<lang_code>PIG_CUSTOMER</lang_code>
+		</group>
+		<group>
+			<name>Billing</name>
+			<lang_code>PIG_BILLING</lang_code>
+		</group>
+		<group>
+			<name>Shipping</name>
+			<lang_code>PIG_SHIPPING</lang_code>
+		</group>
+	</person_info_groups>
+	<person_info_attrs>
+		<attr>
+			<name>FirstName</name>
+			<lang_code>PIA_FIRSTNAME</lang_code>
+		</attr>
+		<attr>
+			<name>LastName</name>
+			<lang_code>PIA_LASTNAME</lang_code>
+		</attr>
+		<attr>
+			<name>Email</name>
+			<lang_code>PIA_EMAIL</lang_code>
+		</attr>
+		<attr>
+			<name>Phone</name>
+			<lang_code>PIA_PHONE</lang_code>
+		</attr>
+		<attr>
+			<name>Country</name>
+			<lang_code>PIA_COUNTRY</lang_code>
+		</attr>
+		<attr>
+			<name>State</name>
+			<lang_code>PIA_STATE</lang_code>
+		</attr>
+		<attr>
+			<name>ZipCode</name>
+			<lang_code>PIA_ZIPCODE</lang_code>
+		</attr>
+		<attr>
+			<name>City</name>
+			<lang_code>PIA_CITY</lang_code>
+		</attr>
+		<attr>
+			<name>Streetline1</name>
+			<lang_code>PIA_STREET_LINE_1</lang_code>
+		</attr>
+		<attr>
+			<name>Streetline2</name>
+			<lang_code>PIA_STREET_LINE_2</lang_code>
+		</attr>
+		<attr>
+			<name>AccountName</name>
+			<lang_code>PIA_ACCOUNT_NAME</lang_code>
+		</attr>
+		<attr>
+			<name>Password</name>
+			<lang_code>PIA_PASSWD_1</lang_code>
+		</attr>
+		<attr>
+			<name>RePassword</name>
+			<lang_code>PIA_PASSWD_2</lang_code>
+		</attr>
+	</person_info_attrs>
+	<attrs_to_groups>
+		<group name="Customer">
+			<attr name="AccountName" visible="N" required="N" />
+			<attr name="Email" />
+			<attr name="Password" />
+			<attr name="RePassword" />
+			<attr name="FirstName" />
+			<attr name="LastName" />
+			<attr name="Country" required="N" />
+			<attr name="State" required="N" />
+			<attr name="ZipCode" required="N" />
+			<attr name="City" required="N" />
+			<attr name="Streetline1" required="N" />
+			<attr name="Streetline2" required="N" />
+			<attr name="Phone" required="N" />
+		</group>
+		<group name="Billing">
+			<attr name="FirstName" />
+			<attr name="LastName" />
+			<attr name="Email" />
+			<attr name="Country" />
+			<attr name="State" />
+			<attr name="ZipCode" />
+			<attr name="City" />
+			<attr name="Streetline1" />
+			<attr name="Streetline2" />
+			<attr name="Phone" />
+		</group>
+		<group name="Shipping">
+			<attr name="FirstName" />
+			<attr name="LastName" />
+			<attr name="Email" />
+			<attr name="Country" />
+			<attr name="State" />
+			<attr name="ZipCode" />
+			<attr name="City" />
+			<attr name="Streetline1" />
+			<attr name="Streetline2" />
+			<attr name="Phone" />
+		</group>
+	</attrs_to_groups>
+	<settings>
+		<setting key="AUTH_SCHEME" value="const(AUTH_SCHEME_BY_EMAIL)" />
+		<setting key="ACCOUNT_ACTIVATION_SCHEME" value="const(ACCOUNT_ACTIVATION_SCHEME_NONE)" />
+		<setting key="CHECKOUT_TYPE" value="const(CHECKOUT_TYPE_AUTOACCOUNT)" />
+		<setting key="AUTO_CREATE_ACCOUNT" value="Y" />
+		<setting key="MERGE_ORDERS_BY_EMAIL" value="N"></setting></settings>
+</customer_account_install_data>

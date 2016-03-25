@@ -1,0 +1,128 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+	<!--
+function resetPasswordDialog()
+{
+	bootbox.confirm('<?php Msg("ADMIN_INFO_WARNING_001"); ?> <?php FirstNameInScript(); ?> <?php LastNameInScript(); ?>?', function (result) {
+		if (result) { 
+           openURLinNewWindow('<?php PasswordChangeLink(); ?>','ChangePassword');
+        }
+    });
+}
+//-->
+</SCRIPT>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class=""></i><?php Msg("ADMIN_INFO_PAGE_SUBTITLE"); ?>&nbsp;<?php FirstName(); ?>&nbsp;<?php LastName(); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<?php ButtonsTop(); ?>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body"> 
+		<div class="row">
+			<div class="portlet box blue-hoki">
+				<div class="portlet-title">
+					<div class="caption">
+						<?php Msg("ADMIN_INFO_PAGE_TITLE"); ?>
+					</div>
+				</div>
+			</div>		
+			<div class="row">
+				<div class="col-sm-2">
+					<label class="col-sm-13 control-label"><?php Msg("ADMIN_INFO_FIELD_001"); ?>:</label>
+				</div>
+				<div class="col-sm-4">  
+					<?php FirstName(); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label class="col-sm-13 control-label"><?php Msg("ADMIN_INFO_FIELD_002"); ?>:</label>
+				</div>
+				<div class="col-sm-4">  
+					<?php LastName(); ?>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-2">
+					<label class="col-sm-13 control-label"><?php Msg("ADMIN_INFO_FIELD_003"); ?>:</label>
+				</div>
+				<div class="col-sm-4">  
+					<?php Email(); ?>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="portlet box blue-hoki">
+				<div class="portlet-title">
+					<div class="caption">
+						<?php Msg("ADMIN_INFO_HEADER_001"); ?>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label class="col-sm-13 control-label"><?php Msg("ADMIN_INFO_FIELD_004"); ?>:</label>
+				</div>
+				<div class="col-sm-4">  
+					<?php LogNum(); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label class="col-sm-13 control-label"><?php Msg("ADMIN_INFO_FIELD_005"); ?>:</label>
+				</div>
+				<div class="col-sm-4">  
+					<?php LoggedIn(); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label class="col-sm-13 control-label"><?php Msg("ADMIN_INFO_FIELD_006"); ?>:</label>
+				</div>
+				<div class="col-sm-4">  
+					<?php Created(); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label class="col-sm-13 control-label"><?php Msg("ADMIN_INFO_FIELD_007"); ?>:</label>
+				</div>
+				<div class="col-sm-4">  
+					<?php Modified(); ?>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="portlet box blue-hoki">
+				<div class="portlet-title">
+					<div class="caption">
+						<?php Msg("ADMIN_INFO_HEADER_002"); ?>
+					</div>
+				</div>
+			</div>
+			<?php Permissions(); ?>
+		</div>
+	</div>
+	<hr>
+	<div class="portlet-title">
+		<div class="caption">
+			<div title="Reset Password" onclick="javascript:resetPasswordDialog();" class="btn green " id="DeleteButton1">
+				<i><?php Msg("BTN_CHANGE_PASSWORD"); ?></i> 
+			</div>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<?php ButtonsTop(); ?>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

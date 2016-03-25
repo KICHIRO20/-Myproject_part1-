@@ -1,0 +1,29 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form_row" id="tr_id_<?php Local_trID(); ?>">
+    <div class="form_descr"><label for="input_id_<?php Local_trID(); ?>"><?php Local_FieldLabel(); ?></label></div>
+    <div class="form_field">
+        <span id="<?php Local_FormFieldID(); ?>">
+            <input type="text"
+                   id="input_id_<?php Local_trID(); ?>"
+                   name="<?php Local_FormFieldName(); ?>"
+                   value="<?php Local_FormFieldValue(); ?>"
+                   size="<?php Local_FormFieldSize(); ?>"
+                   maxlength="<?php Local_FormFieldMaxlength(); ?>" />
+        </span>
+    </div>
+</div>
+<div class="form_row" id="tr_req_id_<?php Local_trID(); ?>" style="display: none">
+    <div class="form_descr"><label for="input_req_id_<?php Local_trID(); ?>" class="required"><?php Local_FieldLabel(); ?><?php Label('CHECKOUT_ASTERISK'); ?></label></div>
+    <div class="form_field">
+        <span id="req_<?php Local_FormFieldID(); ?>">
+            <input type="text"
+                   disabled="disabled"
+                   id="input_req_id_<?php Local_trID(); ?>"
+                   name="<?php Local_FormFieldName(); ?>"
+                   value="<?php Local_FormFieldValue(); ?>"
+                   size="<?php Local_FormFieldSize(); ?>"
+                   maxlength="<?php Local_FormFieldMaxlength(); ?>" />
+        </span>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

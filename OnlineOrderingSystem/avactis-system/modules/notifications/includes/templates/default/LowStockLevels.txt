@@ -1,0 +1,7 @@
+{StoreOwnerName}. Low Stock Levels.
+Low stock levels have been registered for the following products.
+----------------------------------------------
+{LowLevelProductsBlock}
+----------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}

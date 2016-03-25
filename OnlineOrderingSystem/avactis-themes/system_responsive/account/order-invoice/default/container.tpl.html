@@ -1,0 +1,115 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount checkout step_4_active invoice nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("ACCOUNT_ORDER_INVOICE_NUMBER"); ?><?php Local_OrderID(); ?></h1>
+        <div class="subheader"><?php StoreOwnerName(); ?></div>
+
+        <div class="box checkout_addresses">
+            <div class="cn lt"></div>
+            <div class="cn rt"></div>
+            <div class="cn lb"></div>
+            <div class="cn rb"></div>
+            <div class="content">
+                <div class="header">
+                    <div class="key_order_details"><?php Label("ACCOUNT_KEY_ORDER_DETAILS"); ?></div>
+                </div>
+                <div class="key_order_details">
+                    <span class="label"><?php Label("ACCOUNT_ORDER_ID"); ?></span> <span class="value"><?php Label("ACCOUNT_BARS"); ?><?php Local_OrderId(); ?></span>
+                    <?php if (($m=getLocal_OrderPaymentProcessorOrderId())!=''): ?>
+                    <span class="label"><?php Label("ACCOUNT_PAYMENT_ID"); ?></span> <span class="value"><?php echo $m; ?></span>
+                    <?php endif; ?>
+                    <span class="label"><?php Label("ACCOUNT_ORDER_DATE"); ?></span> <span class="value"><?php Local_OrderDate(); ?></span>
+                    <span class="label"><?php Label("ACCOUNT_ORDER_STATUS"); ?></span> <span class="value"><?php Local_OrderStatus(); ?></span>
+                    <span class="label"><?php Label("ACCOUNT_PAYMENT_STATUS"); ?></span> <span class="value"><?php Local_OrderPaymentStatus(); ?></span>
+                    <span class="label"><?php Label("ACCOUNT_PAYMENT_METHOD"); ?></span> <span class="value"><?php Local_OrderPaymentMethod(); ?></span>
+                    <span class="label"><?php Label("ACCOUNT_SHIPPING_METHOD"); ?></span> <span class="value"><?php Local_OrderShippingMethod(); ?></span>
+                    <span class="label"><?php Label("ACCOUNT_TRACK_ID"); ?></span> <span class="value"><?php Local_OrderTrackId(); ?></span>
+                    <span class="label">&nbsp;</span>
+                </div>
+                <div class="clear_both"></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="cn lt"></div>
+                <div class="cn rt"></div>
+                <div class="cn lb"></div>
+                <div class="cn rb"></div>
+                <div class="content">
+                <div class="header">
+                    <div class="shipping_form"><?php Label("ACCOUNT_SHIPPING_ADDRESS"); ?></div>
+                    <div class="billing_form"><?php Label("ACCOUNT_BILLING_ADDRESS"); ?></div>
+                </div>
+                <div class="shipping_form">
+                    <?php Local_ShippingFirstname(); ?> <?php Local_ShippingLastname(); ?><br/>
+
+                    <?php Local_ShippingStreetline1(); echo ife(getLocal_ShippingStreetline1()=='','','<br/>'); ?>
+
+                    <?php Local_ShippingStreetline2(); echo ife(getLocal_ShippingStreetline2()=='','','<br/>'); ?>
+
+                    <?php Local_ShippingCity(); ?>, <?php Local_ShippingState(); ?> <?php Local_ShippingPostcode(); ?>
+                    <?php echo ife((getLocal_ShippingCity().getLocal_ShippingState().getLocal_ShippingPostcode())=='','','<br/>'); ?>
+
+                    <?php Local_ShippingCountry(); echo ife(getLocal_ShippingCountry()=='','','<br/>');?>
+
+                    <br/>
+                    <?php Local_ShippingPhone(); echo ife(getLocal_ShippingPhone()=='','','<br/>');?>
+                    <?php Local_ShippingEmail(); echo ife(getLocal_ShippingEmail()=='','','<br/>');?>
+
+                    <br/>
+                    <?php Local_ShippingCommentArea(); echo ife(getLocal_ShippingCommentArea()=='','','<br/>'); ?>
+                    <?php Local_ShippingCommentLine(); echo ife(getLocal_ShippingCommentLine()=='','','<br/>'); ?>
+                    <?php echo ife((getLocal_ShippingCommentLine().getLocal_ShippingCommentArea())=='','','<br/>'); ?>
+                    <?php
+                            $custom_tags = modApiFunc("OrderInvoice", "getShippingCustomTags");
+                            foreach($custom_tags as $tag_info)
+                            {
+                                if ($tag_info['value'] != '')
+                                {
+                                    echo $tag_info['name'].' '.$tag_info['value'].'<br/>';
+                                }
+                            }
+                    ?>
+                </div>
+                <div class="billing_form">
+                    <?php Local_BillingFirstname(); ?> <?php Local_BillingLastname(); ?><br/>
+
+                    <?php Local_BillingStreetline1(); echo ife(getLocal_BillingStreetline1()=='','','<br/>'); ?>
+
+                    <?php Local_BillingStreetline2(); echo ife(getLocal_BillingStreetline2()=='','','<br/>'); ?>
+
+                    <?php Local_BillingCity(); ?>, <?php Local_BillingState(); ?> <?php Local_BillingPostcode(); ?>
+                    <?php echo ife((getLocal_BillingCity().getLocal_BillingState().getLocal_BillingPostcode())=='','','<br/>'); ?>
+
+                    <?php Local_BillingCountry(); echo ife(getLocal_BillingCountry()=='','','<br/>');?>
+
+                    <br/>
+                    <?php Local_BillingPhone(); echo ife(getLocal_BillingPhone()=='','','<br/>');?>
+                    <?php Local_BillingEmail(); echo ife(getLocal_BillingEmail()=='','','<br/>');?>
+
+                    <br/>
+                    <?php Local_BillingCommentArea(); echo ife(getLocal_BillingCommentArea()=='','','<br/>'); ?>
+                    <?php Local_BillingCommentLine(); echo ife(getLocal_BillingCommentLine()=='','','<br/>'); ?>
+                    <?php echo ife((getLocal_BillingCommentLine().getLocal_BillingCommentArea())=='','','<br/>'); ?>
+                    <?php
+                            $custom_tags = modApiFunc("OrderInvoice", "getBillingCustomTags");
+                            foreach($custom_tags as $tag_info)
+                            {
+                                if ($tag_info['value'] != '')
+                                {
+                                    echo $tag_info['name'].' '.$tag_info['value'].'<br/>';
+                                }
+                            }
+                    ?>
+                </div>
+                <div class="clear_both"></div>
+            </div>
+        </div>
+        <?php Local_ProductList(); ?>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

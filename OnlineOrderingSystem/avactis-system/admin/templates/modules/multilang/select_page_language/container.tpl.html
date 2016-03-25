@@ -1,0 +1,12 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="admin.php" method="post" name="change_page_language" class="inline">
+<input type="hidden" name="returnURL" value="<?php ReturnURL(); ?>" />
+<input type="hidden" name="asc_action" value="ChangePageLanguage" />
+<?php Pages(); ?>
+<?php Views(); ?>
+<?php Actions(); ?>
+<select class="form-control input-sm input-small inline" name="lng" onchange="<?php OnChangeAction(); ?>">
+<?php Languages(); ?>
+</select>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

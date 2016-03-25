@@ -1,0 +1,62 @@
+{StoreOwnerName}. Your order #{OrderID}
+Dear {CustomerFirstname} {CustomerLastname},
+
+Thank you for making your order.  Your order's details are provided below.
+
+-----------------------------------------------------
+Purchasing Information:
+-----------------------------------------------------
+E-mail Address: {CustomerEmail}
+
+Billing Address:
+----------------
+{BillingFirstname} {BillingLastname}
+{BillingStreetline1}
+{BillingStreetline2}
+{BillingCity}, {BillingState}, {BillingPostcode}
+{BillingCountry}
+{BillingPhone}
+
+Comment:
+{BillingCommentLine}
+
+
+Shipping Address:
+-----------------
+{ShippingFirstname} {ShippingLastname}
+{ShippingStreetline1}
+{ShippingStreetline2}
+{ShippingCity}, {ShippingState}, {ShippingPostcode}
+{ShippingCountry}
+{ShippingPhone}
+
+Comment:
+{ShippingCommentLine}
+
+-----------------------------------------------------
+Order Summary:
+-----------------------------------------------------
+Order #: {OrderID}
+Payment Method: {OrderPaymentMethod}
+Additional payment information :
+ {OrderPaymentMethodText}
+Shipping Method: {OrderShippingMethod}
+
+Items:
+----------
+{OrderContentBlock}
+Subtotal of Items: {OrderSubtotal}
+{OrderDiscountsBlock}
+Shipping & Handling: {OrderTotalShippingAndHandlingCost}
+{OrderTax}
+
+Tax Exemption: {OrderTaxExptMark}
+Amount: {OrderTaxExptAmount}
+Customer Input: {OrderTaxExptInput}
+--------------
+Total for this Order: {OrderTotal}
+
+Thanks again for shopping with us.
+
+{StoreOwnerName}
+{StoreOwnerWebsite}

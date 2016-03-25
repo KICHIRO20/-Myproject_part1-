@@ -1,0 +1,18 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box shoppingcart nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label('CATALOG_SHOPPING_CART_LABEL'); ?><?php CustomerSignInOutHint(); ?></h1>
+        <?php if ( ($m=getLocal_ShoppingCartResultMessage()) != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+        <div class="product_list_items empty">
+            <?php Label('CATALOG_NO_ITEMS_MESSAGE'); ?>
+        </div>
+        <div class="cart_buttons">
+            <a href="<?php PageURL('ProductList'); ?>"><span class="<?php lang(); ?> button_continue_shopping_back"></span></a>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

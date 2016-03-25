@@ -1,0 +1,539 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script src="js/javascript_sprintf.js"></script>
+<script src="js/timer.js"></script>
+<script language="JavaScript">
+document.title = '<?php xmsg('FRG', 'FG_TITLE'); ?>';
+</script>
+<script languge="JavaScript">
+var _log_str = '<?php xmsg('FRG','FG_PROCESSING_COUNT'); ?>';
+
+var current_section = 1;
+function switchSection(new_section)
+{
+    hideBlock('section_'+current_section);
+    showBlock('section_'+new_section,0);
+    current_section = new_section;
+};
+
+function toggleLocation()
+{
+  var form = document.forms["FroogleExportForm"];
+  var isChecked = form.LocationSelected.checked;
+  var locationDiv = document.getElementById('LocationField');
+  var noLocationDiv = document.getElementById('NoLocation');
+    
+  locationDiv.style.display = isChecked ? "" : "none";
+  locationDiv.style.visibility = isChecked ? "visible" : "hidden";
+  noLocationDiv.style.display = isChecked ? "none" : "";
+  noLocationDiv.style.visibility = isChecked ? "hidden" : "visible";
+}
+
+function togglePaymentNotes()
+{
+  var form = document.forms["FroogleExportForm"];
+  var isChecked = form.PaymentNotesSelected.checked;
+  var paymentNotesDiv = document.getElementById('PaymentNotesField');
+  var noPaymentNotesDiv = document.getElementById('NoPaymentNotes');
+    
+  paymentNotesDiv.style.display = isChecked ? "" : "none";
+  paymentNotesDiv.style.visibility = isChecked ? "visible" : "hidden";
+  noPaymentNotesDiv.style.display = isChecked ? "none" : "";
+  noPaymentNotesDiv.style.visibility = isChecked ? "hidden" : "visible";
+}
+
+function togglePaymentAccepted()
+{
+  var form = document.forms["FroogleExportForm"];
+  var isChecked = form.PaymentAcceptedSelected.checked;
+  var optionsDiv = document.getElementById("PaymentOptions");
+  var noOptionsDiv = document.getElementById("NoPaymentOptions");
+    
+  optionsDiv.style.display = isChecked ? "" : "none";
+  optionsDiv.style.visibility = isChecked ? "visible" : "hidden";
+  noOptionsDiv.style.display = isChecked ? "none" : "";
+  noOptionsDiv.style.visibility = isChecked ? "hidden" : "visible";
+}
+
+//
+//               onload.              "           " (                      )                            
+//
+function refreshUI()
+{
+  var form = document.forms["FroogleExportForm"];
+
+  form.LocationSelected.checked = form.Location.value ? true : false;
+  toggleLocation();
+    
+  form.PaymentNotesSelected.checked = form.PaymentNotes.value ? true : false;
+  togglePaymentNotes();
+    
+  var foundAccepted = false;
+  for (var i = 0; i < form.elements.length; i++)
+  {
+    var elem = form.elements[i];
+    if (elem.type == 'checkbox' && elem.name.substring(0,3) == 'PA_' && elem.checked)
+    {
+      foundAccepted = true;
+      break;
+    }
+  }
+  form.PaymentAcceptedSelected.checked = foundAccepted;
+  togglePaymentAccepted();
+}
+
+//
+//                   -                                              
+//
+function getPaymentAcceptedList()
+{
+  var form = document.forms["FroogleExportForm"];
+  if (!form.PaymentAcceptedSelected.checked)
+    return '';
+  var acceptedMethods = '';
+  for (var i = 0; i < form.elements.length; i++)
+  {
+    var elem = form.elements[i];
+    if (elem.type == 'checkbox' && elem.name.substring(0,3) == 'PA_' && elem.checked)
+    {
+      acceptedMethods += elem.name.substring(3, elem.name.length) + ',';
+    }
+  }
+  if (acceptedMethods.length > 0)
+    acceptedMethods = acceptedMethods.substring(0, acceptedMethods.length-1);
+  return acceptedMethods;
+}
+
+var prevOnLoad = window.onload;
+window.onload = function()
+{
+  if (prevOnLoad) prevOnLoad();
+  refreshUI();
+}
+</script>
+
+<style type="text/css">
+.progress_bar_container {
+  border: solid 1px black;
+  width: 650px;
+  height: 15px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 15px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+<script language="JavaScript">
+var products_count = 0;
+var pixels_count = 100;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = 0;
+var finished = 0;
+var executed = 0;
+
+function increment_bar()
+{
+  current_progress++;
+  document.getElementById('pbar_bar').style.width = current_progress+'%';
+  document.getElementById('bar_completed').innerHTML=current_progress+'% Completed';
+  if(current_progress<(pixels_count-1))
+    setTimeout("increment_bar()",increment_speed);
+  else{
+  	finished++;
+	document.getElementById('bar_completed').innerHTML='Completed';
+  }
+}
+</script>
+<script language="JavaScript">
+function requestToInit()
+{
+  switchSection(2);
+  
+  addTimer('export_timer');
+  showTimer('export_timer');
+  startTimer('export_timer');
+
+  document.getElementById('step_text').innerHTML = '<?php xmsg('FRG','FG_PRC_PREPARING'); ?>';
+  document.getElementById('step_percents').style.display = '';
+
+  var export_form = document.forms["FroogleExportForm"];
+  var param_expires = export_form.date_year.value+'-'+export_form.date_month.value+'-'+export_form.date_day.value;
+  var param_location = export_form.LocationSelected.checked ? export_form.Location.value : '';
+  var param_payment_notes = export_form.PaymentNotesSelected ? export_form.PaymentNotes.value : '';
+  var param_payment_accepted = getPaymentAcceptedList();
+  
+  var storefront_link = '';
+  
+  for(i=0;i<export_form.elements.length;i++)
+  {
+      if(export_form.elements[i].name=='storefront_link' && export_form.elements[i].checked)
+          storefront_link = export_form.elements[i].value;
+  };
+  
+  appendStringToLog('export_log','<?php xmsg('FRG','FG_PRC_STARTED'); ?>','black')
+  
+  jQuery.post(
+    'jquery_ajax_handler.php', // backend
+    {
+        'asc_action': 'do_froogle_export',
+        'frg_target': 'init',
+        'expiration_date' : param_expires,
+        'location' : param_location,
+        'payment_notes' : param_payment_notes,
+        'payment_accepted' : param_payment_accepted,
+        'storefront_link': storefront_link,
+        'src_category': export_form.ProductCategory.value,
+        'export_recurs': document.getElementById('export_cat_recurs').checked ? 'Y' : 'N'
+    },
+    // Function is called when an answer arrives. 
+    function(result, output) {
+      appendToLog('export_log',result);
+      if(result["process_info"]["status"]=='INITED')
+      {
+   		document.getElementById('step_text').innerHTML = '<?php xmsg('FRG','FG_PRC_PROCESSING'); ?>';
+        products_count = result["process_info"]["items_count"];
+        increment_speed = products_count / start_speed * 10 / (pixels_count / 100);
+        setTimeout("requestToDo()",10);
+   	    setTimeout("increment_bar()",10);
+   	    setTimeout("waitFinish()",500);
+   	  }
+   	  else
+   	  {
+   	    breakExport();
+   	  }
+    },
+    'json'
+  );
+};
+
+function requestToDo()
+{
+  var d = new Date();
+  var start_time = d.getTime();
+  jQuery.post(
+    'jquery_ajax_handler.php', // backend
+    {
+     	'asc_action': 'do_froogle_export',
+     	'frg_target': 'do'
+    },
+    // Function is called when an answer arrives. 
+    function(result) {
+	  var d = new Date();
+      var end_time = d.getTime();
+      var ex = result["process_info"]["items_processing"] - executed;
+      var k = ex * 100 / products_count;
+      increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+      executed = result["process_info"]["items_processing"];
+      if(result["process_info"]["status"]=='COMPLETED')
+      {
+        finished++;
+        increment_speed = 2;
+      }
+      else if(result["process_info"]["status"]=='PROCESSING')
+      {
+   	    __log_str = _log_str.replace('%01%',executed).replace('%02%',products_count);
+   	    appendStringToLog('export_log',__log_str,'black');
+        setTimeout("requestToDo()",10);
+      }
+      else
+      {
+        breakExport();
+      };
+    },
+    'json'
+  );
+};
+
+function waitFinish()
+{
+  if(finished<2)
+  {
+  	setTimeout("waitFinish()",500);
+  	return;
+  };
+  
+  stopTimer('export_timer');
+  increment_bar();
+  document.getElementById('step_percents').style.display = 'none';
+  document.getElementById('step_text').innerHTML = '<?php xmsg('FRG','FG_FINISHED'); ?>';
+  document.getElementById('DownloadButton').className = 'btn btn-primary btn-circle';
+  document.getElementById('DownloadButton').onclick = function() { getFroogleResult(); };
+
+  __log_str = _log_str.replace('%01%',executed).replace('%02%',products_count);
+  appendStringToLog('export_log',__log_str,'black');
+  __log_str = '<?php xmsg('FRG','FG_FINISHED'); ?>';
+  __log_str += '&nbsp;'+'<?php xmsg('FRG','FG_MSG_DWNLD'); ?>'
+  appendStringToLog('export_log',__log_str,'black');
+};
+
+function breakExport()
+{
+  document.getElementById('step_percents').style.display = 'none';
+  document.getElementById('step_text').innerHTML = '<?php xmsg('FRG','FG_PRC_ERRORS'); ?>!';
+  increment_speed = 3600000;
+  stopTimer('export_timer');
+};
+
+function getFroogleResult()
+{
+  document.forms['getFroogleResultForm'].submit();
+  document.getElementById('DownloadButton').innerHTML = '<i class="fa fa-times-circle"></i>&nbsp;<?php Msg("BTN_CLOSE"); ?>';
+  document.getElementById('DownloadButton').className = 'btn btn-default btn-circle';
+  document.getElementById('DownloadButton').onclick = function() { closeAndFocusParent(); };
+  document.getElementById('step_percents').style.display = 'none';
+};
+
+function setStartButton()
+{
+    if(!document.forms['FroogleExportForm'].elements['storefront_link'])
+        disableButton('StartButton1');
+};
+
+function appendToLog(log_id,res)
+{
+    for(i=0;i<res["errors"].length;i++)
+        appendStringToLog(log_id,res["errors"][i],'red');
+    for(i=0;i<res["warnings"].length;i++)
+        appendStringToLog(log_id,res["warnings"][i],'blue');
+    for(i=0;i<res["messages"].length;i++)
+        appendStringToLog(log_id,res["messages"][i],'green');
+};
+
+function appendStringToLog(log_id,str,color)
+{
+    _time = new Date();
+    _time_str = '['+sprintf("%02d",_time.getHours())+':'+sprintf("%02d",_time.getMinutes())+':'+sprintf("%02d",_time.getSeconds())+']';
+    log_el = document.getElementById(log_id);
+    _html = _time_str+'&nbsp;<span style="color: '+color+'; font-weight: normal;">'+str+'</span><br>';
+    if(navigator.userAgent.indexOf("MSIE")!=-1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+};
+
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-sign-out"></i>&nbsp;<?php xmsg('FRG', 'FG_TITLE'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<?php PageHelpLink('froogle_export'); ?>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!-- begin setings pane -->
+		<!--Responsive Table Start -->
+		<div class="table-responsive">
+			
+		        <form name="FroogleExportForm" method="GET" action="">
+				<table class="table table-bordered borderless table-striped table-hover" id="section_1">
+					<thead>
+						<tr class="bg-info">
+							<th colspan="3"><?php xmsg('FRG','FG_STEP_1_TITLE'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td><?php xmsg('CTL','EXP_SRC_CATEGORY'); ?></td>
+						<td width="1%">
+							 <a class="pull-left" style="cursor:pointer;"><?php hinttext('EXP_SRC_CATEGORY','catalog-messages'); ?>
+							</a>
+						</td>
+						<td><?php ProductListSubcategories(); ?></td>
+					</tr>
+					<tr>
+						<td><?php xmsg('CTL','EXP_RECURS'); ?></td>
+						<td width="1%">
+							<a class="pull-left" style="cursor:pointer;"><?php hinttext('EXP_RECURS','catalog-messages'); ?>
+							</a>
+						</td>
+						<td><input type="checkbox" id="export_cat_recurs" checked></td>
+					</tr>
+					<tr>
+						<td><?php xmsg('FRG','FG_STOREFRONT_LINKS'); ?></td>
+						<td width="1%">
+							<a class="pull-left" style="cursor:pointer;"><?php hinttext('FG_STOREFRONT_LINKS','froogle-messages'); ?>
+							</a>
+						</td>
+						<td class="value"><?php StorefrontLinks(); ?></td>
+					</tr>
+					<!-- field: expiration date -->
+					<tr>
+						<td><?php xmsg('FRG', 'FG_PARAM_EXPIRES'); ?></td>
+						<td width="1%">
+							<a class="pull-left" style="cursor:pointer;"><?php hinttext('FG_PARAM_EXPIRES','froogle-messages'); ?>
+							</a>
+						</td>
+						<td class="value"><?php DateSelector(); ?></td>
+					</tr>
+					<!-- field: location -->
+					<tr>
+						<td>
+							<input type="checkbox" name="LocationSelected" checked onclick="toggleLocation();" class="inline">
+							<?php xmsg('FRG', 'FG_PARAM_LOCATION'); ?>
+						</td>
+						<td width="1%">
+							<a class="pull-left" style="cursor:pointer;"><?php hinttext('FG_PARAM_LOCATION','froogle-messages'); ?>
+							</a>
+						</td>
+						<td>
+							<div id="NoLocation" class="bold">
+								<?php xmsg('FRG', 'FG_NO_LOCATION'); ?>
+							</div>
+							<div id="LocationField">
+								<input type="text" class="form-control input-sm input-medium" id="Location" name="Location" value="<?php Location(); ?>" maxlength="128" class="input" />
+							</div>
+						</td>
+					</tr>
+					<!-- field: payment notes -->
+					<tr>
+						<td>
+							<input type="checkbox" name="PaymentNotesSelected" checked onclick="togglePaymentNotes();" class="inline">
+							<?php xmsg('FRG', 'FG_PARAM_PAYMENT_NOTES'); ?></td>
+						<td width="1%">
+							<a class="pull-left" style="cursor:pointer;"><?php hinttext('FG_PARAM_PAYMENT_NOTES','froogle-messages'); ?>
+							</a>
+						</td>
+						<td>
+							<div id = "NoPaymentNotes" class="bold">
+								<?php xmsg('FRG', 'FG_NO_PAYMENT_NOTES'); ?>
+							</div>
+							<div id = "PaymentNotesField">
+								<textarea class="form-control input-medium" rows="4" name="PaymentNotes" maxlength="512" class="input">
+									<?php PaymentNotes(); ?>
+								</textarea>
+							</div>
+						</td>
+					</tr>
+					<!-- field: payment accepted -->
+					<tr>
+						<td>
+							<input type="checkbox" name="PaymentAcceptedSelected" onclick="togglePaymentAccepted()">
+							<?php xmsg('FRG', 'FG_PARAM_PAYMENT_ACCEPTED'); ?>
+						</td>
+						<td width="1%">
+							<a class="pull-left" style="cursor:pointer;"><?php hinttext('FG_PARAM_PAYMENT_ACCEPTED','froogle-messages'); ?>
+							</a>
+						</td>
+						<td>
+							<div id="NoPaymentOptions" class="bold">
+								<?php xmsg('FRG', 'FG_NO_PAYMENT_ACCEPTED'); ?>
+							</div>
+							<div id="PaymentOptions" style="visibility: hidden; display: none;">
+								<?php PaymentAcceptedList(); ?>
+							</div>
+						</td>
+					</tr>
+ 					</tbody>
+					<tfoot>
+						<tr>
+							<td class="text-center" colspan="3">
+								<div id="StartButton1" class="btn btn-primary btn-circle" onclick="requestToInit();">
+									<i class="fa fa-play-circle"></i>&nbsp;<?php xmsg('FRG', 'FG_BT_START_EXPORT'); ?>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+			<table class="table table-bordered borderless table-striped table-hover" id="section_2" style="display:none;">
+				<thead>
+					<tr class="bg-info">
+						<th colspan="3"><?php xmsg('FRG','FG_STEP_2_TITLE'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr style="height: 19px;">
+					<td><span id="step_text"></span></td>
+					<td width="1%"><img id="step_percents" src="images/ajax/snake.gif"></td>
+					<td class="text-center" width="20%"><?php xmsg('CTL','TIME_ELAPSED'); ?>&nbsp;<div id="export_timer"></div></td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<div id="pbar_container" class="progress">
+							<div id="pbar_bar" role="progressbar" class="progress-bar progress-bar-striped active">
+								<span class="" id="bar_completed">0%</span></div>
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+				<td colspan="3">
+					<strong><?php xmsg('FRG','FG_PRC_LOG'); ?>&nbsp;:</strong><br />
+					<div id="export_log" style="overflow: auto;background: white;"></div>
+				</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="text-center" colspan="3">
+							<div id="DownloadButton" class="btn btn-primary btn-circle disabled">
+								<i class="fa fa-download"></i>&nbsp;<?php xmsg('FRG','BTN_DOWNLOAD'); ?>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+			
+			
+		</div>
+		<!--Responsive Table End -->
+		<!-- end settings pane -->
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- begin export pane -->
+<table class="form" id="ExportProgressPane" cellspacing="1" cellpadding="0" width="100%" style="display:none;">
+  <tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;"><?php xmsg('FRG','FG_TITLE'); ?></td>
+  </tr>
+
+</table>
+<!-- end export pane -->
+
+<!-- get exported csv form -->
+<form action="popup_window.php" name="getFroogleResultForm" method="post">
+  <input type="hidden" name="asc_action" value="do_froogle_export">
+  <input type="hidden" name="frg_target" value="get">
+</form>
+
+<script language="JavaScript">
+frg_win_onload = window.onload;
+window.onload = function()
+{
+    if(frg_win_onload)
+        frg_win_onload();
+    setStartButton();
+};
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

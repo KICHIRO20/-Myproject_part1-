@@ -1,0 +1,45 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+
+function repositionBlock(div_id)
+{
+    doc_width = document.documentElement.clientWidth;
+    doc_height = document.documentElement.clientHeight;
+    div_width = document.getElementById(div_id).offsetWidth;
+    div_height = document.getElementById(div_id).offsetHeight;
+    
+    div_left = (doc_width - div_width) / 2.5;
+    div_top = document.documentElement.scrollTop + (doc_height - div_height) / 10;
+
+    if(div_top < 0)
+        div_top = 0;
+    if(div_left < 0)
+        div_left = 0;
+
+    document.getElementById(div_id).style.left = div_left + 'px';
+    document.getElementById(div_id).style.top = div_top + 'px';
+};
+
+function showSortForm()
+{
+    disableBlock('ImagesManageBlock',2);
+    showBlock('SortImagesForm',3);
+    repositionBlock('SortImagesForm');
+};
+</script>
+<hr>
+<div class="row">
+<div class="btn-set pull-left">
+	<a onclick="" class="btn yellow disabled" id="RemoveImagesButton1"><i class="fa fa-times" title="remove from database"> Remove</i></a>
+	<a onclick="" class="btn red disabled" id="DelImagesButton1"><i class="fa fa-trash-o" title="remove from database and server"> <?php msg('BTN_DELETE'); ?></i></a>
+</div>
+<div class="btn-set pull-right">
+	<div onclick="showSortForm();" class="btn blue" id="SormImagesButton1">
+		<i class="fa fa-sort"> <?php msg('BTN_SORT'); ?></i> 
+	</div>  
+    <div onclick="onUpdateClick();" class="btn green" id="UpdateImagesButton1">
+		<i class="fa fa-refresh"> <?php msg('BTN_UPDATE'); ?></i> 
+	</div>  
+</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

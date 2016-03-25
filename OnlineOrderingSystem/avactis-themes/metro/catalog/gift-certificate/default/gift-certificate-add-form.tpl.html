@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="gift_certificate_form">
+    <?php if (($m=getLocal_Error()) != ''): ?><div class="note note-danger"><?php echo $m; ?></div><?php endif; ?>
+<div class="form-group">
+<label class="control-label col-lg-2"><?php Label('CATALOG_ENTER_GIFTCERTIFICATE_LABEL'); ?></label>
+<div class="col-lg-3"><input class="form-control input-medium" id="input_gift_certificate" name="promo_code" value="" /></div>
+<div class="col-lg-3"><input type="button" onclick="return asc_go('<?php Local_AddURL(); ?>&amp;gc_code='+document.getElementById('input_gift_certificate').value);" value="<?php Label('CATALOG_APPLY_LABEL'); ?>" class="btn" /></div>
+</div>
+</div>
+<?php Local_AppliedGCList(); ?>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,108 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+var CheckedId<?php VariantId(); ?> = -1;
+
+function setId<?php VariantId(); ?>(id) {
+    CheckedId<?php VariantId(); ?> = id;
+}
+
+function OnEditClick<?php VariantId(); ?>() {
+    if (CheckedId<?php VariantId(); ?> == -1) {
+        alert("<?php Msg('CHECKOUT_INFO_EDIT_IS_NOT_POSSIBLE'); ?>");
+        return;
+    }
+//    unselect("radio<?php VariantId(); ?>");
+    var url = '<?php EditFieldLink(); ?>' + '?' + 'VariantId=<?php VariantId(); ?>' + '&AttributeId=' + CheckedId<?php VariantId(); ?>;
+    openURLinNewWindow(url, 'checkout_info_window');
+//    CheckedId<?php VariantId(); ?> = -1
+}
+
+function OnUpdateClick<?php VariantId(); ?>() 
+{
+    var z = document.getElementById('UpdateButton<?php VariantId(); ?>');
+    
+    if (z.className.match('button_disabled') != null)
+    {
+        return false;
+    }
+    
+    document.forms['PersonInfoTypeIdStatus<?php VariantId(); ?>'].action = "<?php UpdateActionHref(); ?>";
+    document.forms['PersonInfoTypeIdStatus<?php VariantId(); ?>'].submit();
+    return true;
+}
+
+function OnSortClick<?php VariantId(); ?>() {
+    var url = '<?php SortGroupLink(); ?>' + '?' + 'VariantId=<?php VariantId(); ?>';
+    openURLinNewWindow(url, 'checkout_info_window');
+}
+
+function OnStatusClick<?php PersonInfoTypeId(); ?>() {
+
+    document.forms['PersonInfoTypeIdStatus<?php VariantId(); ?>'].submit();
+}
+
+function OnCheckboxClick<?php VariantId(); ?>(id)
+{
+    var z = document.getElementById('UpdateButton<?php VariantId(); ?>');
+    z.className = z.className.replace("button_disabled","");
+}
+
+//-->
+</SCRIPT>
+<form action="<?php FlipPersonInfoTypeStatusHref(); ?>" id="PersonInfoTypeIdStatus<?php VariantId(); ?>" name="PersonInfoTypeIdStatus<?php VariantId(); ?>" method="post">
+<input type="hidden" name="person_info_type_id" value="<?php PersonInfoTypeId(); ?>">
+<input type="hidden" name="person_info_variant_id" value="<?php VariantId(); ?>">
+<div class="portlet light">
+	<!-- Title And Button -->
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-bank font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php VisibleName(); ?></span>
+			<span class="caption-helper text-lowercase"></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">				
+				<button id="CustomFieldsButton<?php VariantId(); ?>" title="<?php Msg('CHECKOUT_INFO_BTN_CUSTOM_FILEDS'); ?>" onclick="javascript: openURLinNewWindow('popup_window.php?page_view=ManageCustomFields&variant_id=<?php VariantId(); ?>', 'ManageCustomFields');" type="button" name="<?php Msg('CHECKOUT_INFO_BTN_CUSTOM_FILEDS'); ?>" class="btn blue"><i class="fa fa-tags"></i> <span class="hidden-480"><?php Msg('CHECKOUT_INFO_BTN_CUSTOM_FILEDS'); ?></span></button>
+				
+				<button id="SortButton<?php VariantId(); ?>" title="<?php Msg('CHECKOUT_INFO_BTN_SORT'); ?>" onclick="return OnSortClick<?php VariantId(); ?>();" type="button" name="<?php Msg('CHECKOUT_INFO_BTN_SORT'); ?>" class="btn blue"><i class="fa fa-sort"></i> <span class="hidden-480"><?php Msg('CHECKOUT_INFO_BTN_SORT'); ?></span></button>
+				
+				<button id="UpdateButton<?php VariantId(); ?>" title="<?php Msg('CHECKOUT_INFO_BTN_UPDATE'); ?>" onclick="return OnUpdateClick<?php VariantId(); ?>();" type="button" name="<?php Msg('CHECKOUT_INFO_BTN_UPDATE'); ?>" class="btn blue"><i class="fa fa-refresh"></i> <span class="hidden-480"><?php Msg('CHECKOUT_INFO_BTN_UPDATE'); ?></span></button>
+				
+				<button id="StatusButton<?php VariantId(); ?>"  title="<?php Msg('CHECKOUT_INFO_BTN_TURN_STATUS_OFF'); ?>"  onclick="return OnStatusClick<?php PersonInfoTypeId(); ?>();" type="button" name="<?php Msg('CHECKOUT_INFO_BTN_TURN_STATUS_OFF'); ?>" class="btn red"><i class="fa fa-off"></i> <span class="hidden-480"><?php Msg('CHECKOUT_INFO_BTN_TURN_STATUS_OFF'); ?></span></button>								                                                                   
+			</div>
+		</div>
+	</div>
+	<!-- Title And Button End -->
+	<!-- Body -->
+	<div class="portlet-body">
+		<div class="table-responsive">
+			<table  id="datatable_promo_codes" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="datatable_orders_info" role="grid">
+			<thead>
+				<tr role="row" class="heading">
+				<th width="40%" style="text-align: center;">
+					<?php Msg('CHECKOUT_INFO_TABLE_HEADER_001'); ?>
+				</th>
+				<th width="40%" style="text-align: center;">
+					<?php Msg('CHECKOUT_INFO_TABLE_HEADER_002'); ?>
+				</th>
+				<th width="10%" style="text-align: center;">
+					<?php Msg('CHECKOUT_INFO_TABLE_HEADER_003'); ?>
+				</th>
+				<th width="10%"  style="text-align: center;">
+					<?php Msg('CHECKOUT_INFO_TABLE_HEADER_004'); ?>
+    			</th>    							
+				</thead>
+				<tbody>
+					<?php Attributes(); ?>
+				</tbody>
+            </table>
+		</div>				
+	</div>	
+	<!-- Body End--->
+</div>
+        </form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

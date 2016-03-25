@@ -1,0 +1,37 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE><?php Label('CHECKOUT_REDIRECT_PAGE_TITLE_LABEL'); ?></TITLE>
+
+</HEAD>
+<BODY onLoad="___CheckoutConfirmationBodyOnLoad">
+<CENTER>
+<div style="padding-top: 200px;">
+	<div id="wraper_ajax" style="position: fixed; top: 0px; left: 0px; z-index: 99999; width: 100%; height: 100%; background-color: white; opacity: 0.6;">
+		<div class="loadding_ajaxcart" style="z-index:999999;position:fixed; top:35%; left:35%;">
+		 
+			<img src="<?php echo getTemplateFileURL('images/loading.gif'); ?>">
+			<div style="font-size:20px; color:black;">Please wait you order is getting placed ...</div>
+		</div>
+	</div>
+</div>
+</CENTER>
+
+<form name="checkout" id="checkout" action="___CheckoutConfirmationFormAction" method="___CheckoutConfirmationFormMethod" style="margin: 0px; padding: 0px;">
+<span style="color: red">___Errors</span>
+___ProcessPaymentHiddenFields
+
+<script type="text/javascript"></script>
+<noscript>
+<?php Label('CHECKOUT_JAVASCRIPT_DISABLED_MESSAGE'); ?>
+<input type="submit" class="<?php lang(); ?> text_buttons button_payment_redirect" value="<?php Label('CHECKOUT_NEXT_LABEL'); ?>" />
+</noscript>
+
+</form>
+</BODY>
+</HTML>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+

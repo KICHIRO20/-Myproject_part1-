@@ -1,0 +1,21 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label('ACCOUNT_PERSONAL_INFO_LABEL'); ?></h1>
+        <div class="subheader"><?php Label("ACCOUNT_MANAGE_PERSONAL_INFO"); ?></div>
+        <div class="personalinfo_form">
+            <?php MessageBox(); ?>
+            <p><?php Label("ACCOUNT_PLEASE_FILL_OUT"); ?></p>
+            <form action="<?php Local_FormActionURL(); ?>" name="PersonalInfoForm" method="post">
+            <?php Local_PersonalInfo(); ?>
+            <input type="submit" value="" class="<?php lang(); ?> buttons button_save_changes" />
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

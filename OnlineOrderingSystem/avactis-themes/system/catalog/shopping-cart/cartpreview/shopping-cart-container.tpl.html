@@ -1,0 +1,8 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="cart_preview <?php ViewClassName(); ?>">
+    <?php if (getShoppingCartProductsQuantity() > 0) { ?>
+        <span class="<?php lang(); ?> buttons button_checkout" onclick="location.href='<?php echo PageUrl('CheckoutView'); ?>'"></span>
+    <?php } ?>
+    <?php ShoppingCartProductsQuantity(); ?> <?php Label('PAGES_ITEMS_IN_YOUR_BAG');?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

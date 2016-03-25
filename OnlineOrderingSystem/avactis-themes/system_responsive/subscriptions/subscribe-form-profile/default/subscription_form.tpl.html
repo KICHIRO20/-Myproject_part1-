@@ -1,0 +1,13 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="current_email">
+    <form action="<?php Local_FormActionURL(); ?>" name="SubscribeForm" method="post">
+        <input type="hidden" name="asc_action" value="customer_subscribe" />
+        <input type="hidden" name="email" value="<?php Local_SubscribedEmail(); ?>" />
+        <?php Label("SUBSCRIPTION_SUBSCRIPTION_EMAIL_COLON"); ?><b><?php Local_SubscribedEmail(); ?></b>
+        <br/>
+        <?php Label("SUBSCRIPTION_OPEN_BRACKET"); ?><a href="javascript:void(0)" onclick="if (confirm('<?php Label("SUBSCRIPTION_ARE_YOU_SURE_YOU_WANT_TO_DELETE"); ?>')) document.location.href='<?php Local_RemoveEmailURL() ?>'"><?php Label("SUBSCRIPTION_REMOVE_THIS_SUBSCRIPTION"); ?></a><?php Label("SUBSCRIPTION_CLOSING_BRACKET"); ?>
+        <?php Local_TopicsList(); ?>
+        <?php Local_SubmitButton(); ?>
+    </form>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

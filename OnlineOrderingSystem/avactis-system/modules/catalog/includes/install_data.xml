@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<catalog_install_data>
+	<input_types>
+		<type k="1-TEXT">
+			<id>1</id>
+			<name>TEXT</name>
+		</type>
+		<type k="2-TEXTAREA">
+			<id>2</id>
+			<name>TEXTAREA</name>
+		</type>
+		<type k="3-SELECT">
+			<id>3</id>
+			<name>SELECT</name>
+			<values>
+				<value id="const-PRODUCT_FREESHIPPING_YES" value="lang-PRDTYPE_VALUE_YES" />
+				<value id="const-PRODUCT_FREESHIPPING_NO" value="lang-PRDTYPE_VALUE_NO" />
+			</values>
+		</type>
+		<type k="4-FILE">
+			<id>4</id>
+			<name>FILE</name>
+		</type>
+		<type k="5-IMAGE">
+			<id>5</id>
+			<name>IMAGE</name>
+		</type>
+		<type k="6-SELECT">
+			<id>6</id>
+			<name>SELECT</name>
+		</type>
+		<type k="7-SELECT">
+			<id>7</id>
+			<name>SELECT</name>
+			<values>
+				<value id="const-PRODUCT_STATUS_ONLINE" value="lang-PRDTYPE_VALUE_STATUS_ONLINE" />
+				<value id="const-PRODUCT_STATUS_OFFLINE" value="lang-PRDTYPE_VALUE_STATUS_OFFLINE" />
+			</values>
+		</type>
+        <type k="8-SELECT">
+            <id>8</id>
+            <name>SELECT</name>
+        </type>		
+		<type k="9-SELECT">
+			<id>9</id>
+			<name>SELECT</name>
+			<values>
+				<value id="const-PRODUCT_CUSTOMER_REVIEWS_MESSAGE_RATE" value="lang-PRDTYPE_VALUE_REVIEW_RATE" />
+				<value id="const-PRODUCT_CUSTOMER_REVIEWS_MESSAGE" value="lang-PRDTYPE_VALUE_REVIEW" />
+				<value id="const-PRODUCT_CUSTOMER_REVIEWS_RATE" value="lang-PRDTYPE_VALUE_RATE" />
+				<value id="const-PRODUCT_CUSTOMER_REVIEWS_NOREVIEW" value="lang-PRDTYPE_VALUE_NOREVIEW" />
+			</values>
+		</type>
+        <type k="10-CHECKBOXGROUP">
+            <id>10</id>
+            <name>CHECKBOXGROUP</name>
+         </type>
+		<type k="11-SELECT">
+			<id>11</id>
+			<name>SELECT</name>
+			<values>
+				<value id="const-GPC_NOT_SELECTED" value="lang-PRDTYPE_VALUE_NOT_SELECTED" />
+				<value id="const-GPC_ACCESSORIES_CLOTHING" value="lang-PRDTYPE_VALUE_ACCESSORIES_CLOTHING" />
+				<value id="const-GPC_ACCESSORIES_SHOES" value="lang-PRDTYPE_VALUE_ACCESSORIES_SHOES" />
+				<value id="const-GPC_ACCESSORIES" value="lang-PRDTYPE_VALUE_ACCESSORIES" />
+				<value id="const-GPC_MEDIA_BOOKS" value="lang-PRDTYPE_VALUE_MEDIA_BOOKS" />
+				<value id="const-GPC_MEDIA_DVD" value="lang-PRDTYPE_VALUE_MEDIA_DVD" />
+				<value id="const-GPC_MEDIA_MUSIC" value="lang-PRDTYPE_VALUE_MEDIA_MUSIC" />
+				<value id="const-GPC_SOFTWARE_VIDEO_GAME" value="lang-PRDTYPE_VALUE_SOFTWARE_VIDEO_GAME" />
+			</values>
+		</type>
+		<type k="12-SELECT">
+			<id>12</id>
+			<name>SELECT</name>
+			<values>
+				<value id="const-G_AGE_GROUP_NOT_SELECTED" value="lang-PRDTYPE_VALUE_NOT_SELECTED" />
+				<value id="const-G_AGE_GROUP_ADULT" value="lang-PRDTYPE_VALUE_ADULT" />
+				<value id="const-G_AGE_GROUP_KIDS" value="lang-PRDTYPE_VALUE_KIDS" />
+			</values>
+		</type>
+		<type k="13-SELECT">
+			<id>13</id>
+			<name>SELECT</name>
+			<values>
+				<value id="const-G_GENDER_NOT_SELECTED" value="lang-PRDTYPE_VALUE_NOT_SELECTED" />Not selected
+				<value id="const-G_GENDER_MALE" value="lang-PRDTYPE_VALUE_MALE" />male
+				<value id="const-G_GENDER_FEMALE" value="lang-PRDTYPE_VALUE_FEMALE" />female
+				<value id="const-G_GENDER_UNISEX" value="lang-PRDTYPE_VALUE_UNISEX" />unisex
+			</values>
+		</type>
+	</input_types>
+	<attribute_groups>
+		<group k="Key Details">
+			<id>1</id>
+			<name>PT_ATTRGRP_001</name>
+			<sort_order>1</sort_order>
+			<attributes type="standard">
+				<attribut k="SalePrice">
+					<id>1</id>
+					<input_id>1</input_id>
+					<unit_type>currency</unit_type>
+					<view_tag>SalePrice</view_tag>
+					<name>PRD_SALEPRC_NAME</name>
+					<descr>PRD_SALEPRC_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+					<multilang>N</multilang>
+					<sort_order>1</sort_order>
+				</attribut>
+				<attribut k="ListPrice">
+					<id>2</id>
+					<input_id>1</input_id>
+					<unit_type>currency</unit_type>
+					<view_tag>ListPrice</view_tag>
+					<name>PRD_LISTPRC_NAME</name>
+					<descr>PRD_LISTPRC_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+					<multilang>N</multilang>
+					<sort_order>2</sort_order>
+				</attribut>
+				<attribut k="QuantityInStock">
+					<id>3</id>
+					<input_id>1</input_id>
+					<unit_type>item</unit_type>
+					<view_tag>QuantityInStock</view_tag>
+					<name>PRD_QUINSTOCK_NAME</name>
+					<descr>PRD_QUINSTOCK_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+					<multilang>N</multilang>
+					<sort_order>3</sort_order>
+				</attribut>
+				<attribut k="LowStockLevel">
+					<id>6</id>
+					<input_id>1</input_id>
+					<unit_type>item</unit_type>
+					<view_tag>LowStockLevel</view_tag>
+					<name>PRD_LOWLEV_NAME</name>
+					<descr>PRD_LOWLEV_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+					<multilang>N</multilang>
+					<sort_order>4</sort_order>
+				</attribut>
+				<attribut k="SKU">
+					<id>4</id>
+					<input_id>1</input_id>
+					<unit_type>string256</unit_type>
+					<view_tag>SKU</view_tag>
+					<name>PRD_SKU_NAME</name>
+					<descr>PRD_SKU_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>256</max>
+					<size>30</size>
+					<multilang>N</multilang>
+					<sort_order>5</sort_order>
+				</attribut>
+                <attribut k="MinQuantity">
+                    <id>5</id>
+                    <input_id>1</input_id>
+                    <unit_type>item</unit_type>
+                    <view_tag>MinQuantity</view_tag>
+                    <name>PRD_QUINORDER_NAME</name>
+                    <descr>PRD_QUINORDER_DESCR</descr>
+                    <allow_html>0</allow_html>
+                    <min>0</min>
+                    <max>15</max>
+                    <size>15</size>
+                    <multilang>N</multilang>
+                    <sort_order>6</sort_order>
+                </attribut>
+				<attribut k="Available">
+					<id>7</id>
+					<input_id>7</input_id>
+					<unit_type></unit_type>
+					<view_tag>Available</view_tag>
+					<name>PRD_AVAIL_NAME</name>
+					<descr>PRD_AVAIL_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>10</max>
+					<size>5</size>
+                    <multilang>N</multilang>
+					<sort_order>7</sort_order>
+				</attribut>
+				<attribut k="TaxClass">
+					<id>8</id>
+					<input_id>6</input_id>
+					<unit_type></unit_type>
+					<view_tag>TaxClass</view_tag>
+					<name>PRD_TAX_CLASS_NAME</name>
+					<descr>PRD_TAX_CLASS_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                    <multilang>N</multilang>
+					<sort_order>8</sort_order>
+				</attribut>
+                <attribut k="Manufacturer">
+                    <id>24</id>
+                    <input_id>8</input_id>
+                    <unit_type></unit_type>
+                    <view_tag>Manufacturer</view_tag>
+                    <name>PRD_MANUFACTURER_NAME</name>
+                    <descr>PRD_MANUFACTURER_DESCR</descr>
+                    <allow_html>0</allow_html>
+                    <min>0</min>
+                    <max>0</max>
+                    <size>0</size>
+                    <multilang>N</multilang>
+                    <sort_order>9</sort_order>
+                </attribut>
+                <attribut k="UPC">
+                    <id>27</id>
+                    <input_id>1</input_id>
+                    <unit_type>string256</unit_type>
+                    <view_tag>UPC</view_tag>
+                    <name>PRD_UPC_NAME</name>
+                    <descr>PRD_UPC_DESCR</descr>
+                    <allow_html>0</allow_html>
+                    <min>0</min>
+                    <max>15</max>
+                    <size>15</size>
+                    <multilang>N</multilang>
+                    <sort_order>10</sort_order>
+                </attribut>
+                <attribut k="EAN">
+                    <id>28</id>
+                    <input_id>1</input_id>
+                    <unit_type>string256</unit_type>
+                    <view_tag>EAN</view_tag>
+                    <name>PRD_EAN_NAME</name>
+                    <descr>PRD_EAN_DESCR</descr>
+                    <allow_html>0</allow_html>
+                    <min>0</min>
+                    <max>15</max>
+                    <size>15</size>
+                    <multilang>N</multilang>
+                    <sort_order>11</sort_order>
+                </attribut>
+                <attribut k="JAN">
+                    <id>29</id>
+                    <input_id>1</input_id>
+                    <unit_type>string256</unit_type>
+                    <view_tag>JAN</view_tag>
+                    <name>PRD_JAN_NAME</name>
+                    <descr>PRD_JAN_DESCR</descr>
+                    <allow_html>0</allow_html>
+                    <min>0</min>
+                    <max>15</max>
+                    <size>15</size>
+                    <multilang>N</multilang>
+                    <sort_order>12</sort_order>
+                </attribut>
+                <attribut k="ISBN">
+                    <id>30</id>
+                    <input_id>1</input_id>
+                    <unit_type>string256</unit_type>
+                    <view_tag>ISBN</view_tag>
+                    <name>PRD_ISBN_NAME</name>
+                    <descr>PRD_ISBN_DESCR</descr>
+                    <allow_html>0</allow_html>
+                    <min>0</min>
+                    <max>15</max>
+                    <size>15</size>
+                    <multilang>N</multilang>
+                    <sort_order>13</sort_order>
+                </attribut>
+                <attribut k="MPN">
+                    <id>31</id>
+                    <input_id>1</input_id>
+                    <unit_type>string256</unit_type>
+                    <view_tag>MPN</view_tag>
+                    <name>PRD_MPN_NAME</name>
+                    <descr>PRD_MPN_DESCR</descr>
+                    <allow_html>0</allow_html>
+                    <min>0</min>
+                    <max>256</max>
+                    <size>15</size>
+                    <multilang>N</multilang>
+                    <sort_order>14</sort_order>
+                </attribut>
+			</attributes>
+		</group>
+		<group k="Main Image">
+			<id>2</id>
+			<name>PT_ATTRGRP_002</name>
+			<sort_order>2</sort_order>
+			<attributes type="standard">
+				<attribut k="LargeImage">
+					<id>9</id>
+					<input_id>5</input_id>
+					<unit_type></unit_type>
+					<view_tag>LargeImage</view_tag>
+					<name>PRD_LRGIMG_NAME</name>
+					<descr>PRD_LRGIMG_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>N</multilang>
+					<sort_order>1</sort_order>
+				</attribut>
+				<attribut k="SmallImage">
+					<id>10</id>
+					<input_id>5</input_id>
+					<unit_type></unit_type>
+					<view_tag>SmallImage</view_tag>
+					<name>PRD_SMLIMG_NAME</name>
+					<descr>PRD_SMLIMG_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>N</multilang>
+					<sort_order>2</sort_order>
+				</attribut>
+				<attribut k="ImageAltText">
+					<id>11</id>
+					<input_id>1</input_id>
+					<unit_type>string256</unit_type>
+					<view_tag>ImageAltText</view_tag>
+					<name>PRD_IMGDESCR_NAME</name>
+					<descr>PRD_IMGDESCR_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>256</max>
+					<size>70</size>
+                                        <multilang>Y</multilang>
+					<sort_order>3</sort_order>
+				</attribut>
+			</attributes>
+		</group>
+		<group k="Descriptions">
+			<id>3</id>
+			<name>PT_ATTRGRP_003</name>
+			<sort_order>3</sort_order>
+			<attributes type="standard">
+				<attribut k="ShortDescription">
+					<id>12</id>
+					<input_id>2</input_id>
+					<unit_type>mstring</unit_type>
+					<view_tag>ShortDescription</view_tag>
+					<name>PRD_SHRDESCR_NAME</name>
+					<descr>PRD_SHRDESCR_DESCR</descr>
+					<allow_html>1</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>Y</multilang>
+					<sort_order>1</sort_order>
+				</attribut>
+				<attribut k="DetailedDescription">
+					<id>13</id>
+					<input_id>2</input_id>
+					<unit_type>mstring</unit_type>
+					<view_tag>DetailedDescription</view_tag>
+					<name>PRD_DETDESCR_NAME</name>
+					<descr>PRD_DETDESCR_DESCR</descr>
+					<allow_html>1</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>Y</multilang>
+					<sort_order>2</sort_order>
+				</attribut>
+			</attributes>
+		</group>
+		<group k="Shipping Info">
+			<id>4</id>
+			<name>PT_ATTRGRP_004</name>
+			<sort_order>4</sort_order>
+			<attributes type="standard">
+				<attribut k="PerItemShippingCost">
+					<id>14</id>
+					<input_id>1</input_id>
+					<unit_type>currency</unit_type>
+					<view_tag>PerItemShippingCost</view_tag>
+					<name>PRD_SHIPPRC_NAME</name>
+					<descr>PRD_SHIPPRC_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+                                        <multilang>N</multilang>
+					<sort_order>1</sort_order>
+				</attribut>
+				<attribut k="PerItemHandlingCost">
+					<id>20</id>
+					<input_id>1</input_id>
+					<unit_type>currency</unit_type>
+					<view_tag>PerItemHandlingCost</view_tag>
+					<name>PRD_HANDRC_NAME</name>
+					<descr>PRD_HANDRC_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+                                        <multilang>N</multilang>
+					<sort_order>2</sort_order>
+				</attribut>
+				<attribut k="Weight">
+					<id>15</id>
+					<input_id>1</input_id>
+					<unit_type>weight</unit_type>
+					<view_tag>Weight</view_tag>
+					<name>PRD_WEIGHT_NAME</name>
+					<descr>PRD_WEIGHT_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+                                        <multilang>N</multilang>
+					<sort_order>3</sort_order>
+				</attribut>
+				<attribut k="FreeShipping">
+					<id>21</id>
+					<input_id>3</input_id>
+					<unit_type></unit_type>
+					<view_tag>FreeShipping</view_tag>
+					<name>PRD_FREESHIP_NAME</name>
+					<descr>PRD_FREESHIP_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>N</multilang>
+					<sort_order>4</sort_order>
+				</attribut>
+				<attribut k="NeedShipping">
+					<id>22</id>
+					<input_id>3</input_id>
+					<unit_type></unit_type>
+					<view_tag>NeedShipping</view_tag>
+					<name>PRD_NEEDSHIP_NAME</name>
+					<descr>PRD_NEEDSHIP_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>N</multilang>
+					<sort_order>5</sort_order>
+				</attribut>
+				<attribut k="Length">
+					<id>75</id>
+					<input_id>1</input_id>
+					<unit_type>length</unit_type>
+					<view_tag>Length</view_tag>
+					<name>PRD_LENGTH_NAME</name>
+					<descr>PRD_LENGTH_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+                                        <multilang>N</multilang>
+					<sort_order>6</sort_order>
+				</attribut>
+				<attribut k="Width">
+					<id>76</id>
+					<input_id>1</input_id>
+					<unit_type>length</unit_type>
+					<view_tag>Width</view_tag>
+					<name>PRD_WIDTH_NAME</name>
+					<descr>PRD_WIDTH_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+                                        <multilang>N</multilang>
+					<sort_order>7</sort_order>
+				</attribut>
+				<attribut k="Height">
+					<id>77</id>
+					<input_id>1</input_id>
+					<unit_type>length</unit_type>
+					<view_tag>Height</view_tag>
+					<name>PRD_HEIGHT_NAME</name>
+					<descr>PRD_HEIGHT_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>15</max>
+					<size>15</size>
+                                        <multilang>N</multilang>
+					<sort_order>8</sort_order>
+				</attribut>
+			</attributes>
+		</group>
+		<group k="SEO Info">
+			<id>5</id>
+			<name>PT_ATTRGRP_005</name>
+			<sort_order>5</sort_order>
+			<attributes type="standard">
+				<attribut k="PageTitle">
+					<id>17</id>
+					<input_id>1</input_id>
+					<unit_type>string256</unit_type>
+					<view_tag>PageTitle</view_tag>
+					<name>PRD_PAGETTL_NAME</name>
+					<descr>PRD_PAGETTL_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>256</max>
+					<size>75</size>
+                                        <multilang>Y</multilang>
+					<sort_order>1</sort_order>
+				</attribut>
+				<attribut k="MetaKeywords">
+					<id>18</id>
+					<input_id>2</input_id>
+					<unit_type>string1024</unit_type>
+					<view_tag>MetaKeywords</view_tag>
+					<name>PRD_METAKWRD_NAME</name>
+					<descr>PRD_METAKWRD_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>Y</multilang>
+					<sort_order>2</sort_order>
+				</attribut>
+				<attribut k="MetaDescription">
+					<id>19</id>
+					<input_id>2</input_id>
+					<unit_type>string1024</unit_type>
+					<view_tag>MetaDescription</view_tag>
+					<name>PRD_METADESCR_NAME</name>
+					<descr>PRD_METADESCR_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                                        <multilang>Y</multilang>
+					<sort_order>3</sort_order>
+				</attribut>
+				<attribut k="SEOPrefix">
+					<id>23</id>
+					<input_id>1</input_id>
+					<unit_type>string256</unit_type>
+					<view_tag>SEOPrefix</view_tag>
+					<name>PRD_SEOURL_NAME</name>
+					<descr>PRD_SEOURL_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>256</max>
+					<size>75</size>
+                    <multilang>Y</multilang>
+					<sort_order>4</sort_order>
+				</attribut>
+			</attributes>
+		</group>
+		<group k="Custom">
+			<id>6</id>
+			<name>PT_ATTRGRP_006</name>
+			<sort_order>8</sort_order>
+            <attributes type="custom">
+				<attribut k="Gpc">
+					<id>60</id>
+					<input_id>11</input_id>
+					<unit_type></unit_type>
+					<view_tag>Gpc</view_tag>
+					<name>Google Product Category</name>
+					<descr>Value which is necessary for exporting products to the Google Merchant Center.For more information see http://www.google.com/support/merchants/</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>255</max>
+					<size>0</size>
+                    <multilang></multilang>
+					<sort_order>1</sort_order>
+				</attribut>
+				<attribut k="Agegroup">
+					<id>61</id>
+					<input_id>12</input_id>
+					<unit_type></unit_type>
+					<view_tag>Agegroup</view_tag>
+					<name>Age Group</name>
+					<descr>Value which is necessary for exporting products to the Google Merchant Center.For more information see http://www.google.com/support/merchants/</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>255</max>
+					<size>0</size>
+                    <multilang></multilang>
+					<sort_order>2</sort_order>
+				</attribut>
+				<attribut k="Gender">
+					<id>62</id>
+					<input_id>13</input_id>
+					<unit_type></unit_type>
+					<view_tag>Gender</view_tag>
+					<name>Gender</name>
+					<descr>Value which is necessary for exporting products to the Google Merchant Center.For more information see http://www.google.com/support/merchants/</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>255</max>
+					<size>0</size>
+                    <multilang></multilang>
+					<sort_order>3</sort_order>
+				</attribut>
+				<attribut k="Apparelsize">
+					<id>63</id>
+					<input_id>1</input_id>
+					<unit_type></unit_type>
+					<view_tag>Apparelsize</view_tag>
+					<name>Apparel size</name>
+					<descr>Value which is necessary for exporting products to the Google Merchant Center.For more information see http://www.google.com/support/merchants/</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>255</max>
+					<size>0</size>
+                    <multilang></multilang>
+					<sort_order>4</sort_order>
+				</attribut>
+				<attribut k="Apparelcolor">
+					<id>64</id>
+					<input_id>1</input_id>
+					<unit_type></unit_type>
+					<view_tag>Apparelcolor</view_tag>
+					<name>Apparel color</name>
+					<descr>Value which is necessary for exporting products to the Google Merchant Center.For more information see http://www.google.com/support/merchants/</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>255</max>
+					<size>0</size>
+                    <multilang></multilang>
+					<sort_order>5</sort_order>
+				</attribut>
+			</attributes>
+		</group>
+		<group k="Customer Review Info">
+			<id>7</id>
+			<name>PT_ATTRGRP_007</name>
+			<sort_order>6</sort_order>
+            <attributes type="standard">
+				<attribut k="CustomerReviews">
+					<id>25</id>
+					<input_id>9</input_id>
+					<unit_type></unit_type>
+					<view_tag>CustomerReviews</view_tag>
+					<name>PRD_CUSTOMER_REVIEWS_NAME</name>
+					<descr>PRD_CUSTOMER_REVIEWS_DESCR</descr>
+					<allow_html>0</allow_html>
+					<min>0</min>
+					<max>0</max>
+					<size>0</size>
+                    <multilang>N</multilang>
+					<sort_order>61</sort_order>
+				</attribut>
+			</attributes>
+		</group>
+        <group k="Membership Visibility">
+             <id>8</id>
+             <name>PT_ATTRGRP_008</name>
+             <sort_order>7</sort_order>
+             <attributes type="standard">
+                 <attribut k="MembershipVisibility">
+                     <id>26</id>
+                     <input_id>10</input_id>
+                     <unit_type></unit_type>
+                     <view_tag>MembershipVisibility</view_tag>
+                     <name>PRD_MEMBERSHIP_VISIBILITY_NAME</name>
+                     <descr>PRD_MEMBERSHIP_VISIBILITY_DESCR</descr>
+                     <allow_html>0</allow_html>
+                     <min>0</min>
+                     <max>0</max>
+                     <size>0</size>
+                     <multilang>N</multilang>
+                     <sort_order>62</sort_order>
+                 </attribut>
+             </attributes>
+         </group>
+	</attribute_groups>
+	<product_types>
+		<product_type k="General Products">
+			<id>1</id>
+			<name>lang-PRDTYPE_GENERAL_NAME</name>
+			<descr>lang-PRDTYPE_GENERAL_DESCR</descr>
+			<attributes>
+				<attribut tag="SalePrice">
+					<visible>Y</visible>
+					<required>Y</required>
+					<default></default>
+				</attribut>
+				<attribut tag="ListPrice">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="QuantityInStock">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="LowStockLevel">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+                <attribut tag="MinQuantity">
+                    <visible>Y</visible>
+                    <required>N</required>
+                    <default></default>
+                </attribut>
+				<attribut tag="SKU">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="Available">
+					<visible>Y</visible>
+					<required>N</required>
+					<default type="const">PRODUCT_STATUS_ONLINE</default>
+				</attribut>
+				<attribut tag="TaxClass">
+					<visible>Y</visible>
+					<required>N</required>
+					<default>2</default>
+				</attribut>
+                <attribut tag="Manufacturer">
+                    <visible>Y</visible>
+                    <required>N</required>
+                    <default></default>
+                </attribut>				
+				<attribut tag="LargeImage">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="SmallImage">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="ImageAltText">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="ShortDescription">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="DetailedDescription">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="PerItemShippingCost">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="PerItemHandlingCost">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="Weight">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="FreeShipping">
+					<visible>Y</visible>
+					<required>N</required>
+					<default type="const">PRODUCT_FREESHIPPING_NO</default>
+				</attribut>
+				<attribut tag="NeedShipping">
+					<visible>Y</visible>
+					<required>N</required>
+					<default type="const">PRODUCT_FREESHIPPING_YES</default>
+				</attribut>
+				<attribut tag="Length">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="Width">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="Height">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="PageTitle">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="MetaKeywords">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="MetaDescription">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="SEOPrefix">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+				<attribut tag="CustomerReviews">
+					<visible>Y</visible>
+					<required>N</required>
+					<default></default>
+				</attribut>
+                <attribut tag="MembershipVisibility">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="UPC">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="EAN">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="JAN">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="ISBN">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="MPN">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="Gpc">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="Agegroup">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="Gender">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="Apparelsize">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+                <attribut tag="Apparelcolor">
+                     <visible>Y</visible>
+                     <required>N</required>
+                     <default></default>
+                </attribut>
+			</attributes>
+		</product_type>
+	</product_types>
+	<categories>
+		<category k="Home">
+			<id>1</id>
+			<left>1</left>
+			<right>2</right>
+			<level>0</level>
+			<sort_order>0</sort_order>
+			<name>lang-CTGR_HOME_NAME</name>
+			<descr>lang-CTGR_HOME_DESCR</descr>
+		</category>
+	</categories>
+</catalog_install_data>

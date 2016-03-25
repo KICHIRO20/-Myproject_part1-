@@ -1,0 +1,12 @@
+{StoreOwnerName}. Important Notice: You must activate your account.
+Dear {CustomerFirstname},
+
+You must activate the account {AccountName} to be able to use it.
+
+To do so, please click the following link:
+{AccountActivationLink}
+
+-------------------------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}
+-------------------------------------------------------------

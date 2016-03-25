@@ -1,0 +1,26 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main"><div class="container"><div class="row margin-bottom-40">
+<div class="myaccount col-lg-12 <?php ViewClassName(); ?>">
+        <h1><?php Label('ACCOUNT_REGISTRATION_FORM_LABEL'); ?></h1>
+    <div class="content-page">
+        <h3><?php Label("ACCOUNT_CREATE_NEW_ACCOUNT"); ?></h3>
+        <div class="registration_form">
+            <?php MessageBox(); ?>
+            <p><?php Label("ACCOUNT_PLEASE_FILL_OUT_MESSAGE"); ?></p>
+            <form action="<?php Local_FormActionURL(); ?>" name="RegForm" method="post" class="form-horizontal">
+             
+                <?php Local_Form(); ?>
+               
+             <div class="form-group">
+             <div class="col-lg-4"></div>
+             <div class="col-lg-6">
+             <input type="submit" value="<?php Label('ACCOUNT_REGISTER_LABEL'); ?>" class="<?php lang(); ?> btn btn-primary btn-register" />
+             </div></div>
+            </form>
+        </div>
+    </div>
+</div>
+</div></div></div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+

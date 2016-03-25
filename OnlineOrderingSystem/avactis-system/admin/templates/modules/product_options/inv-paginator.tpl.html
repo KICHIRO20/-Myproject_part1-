@@ -1,0 +1,13 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<table class="form" cellpadding="1" cellspacing="1">
+<tr>
+  <td><img src="images/arrow_left_list<?php leftImgSuffix(); ?>.gif" onClick="<?php firstOnClick(); ?>" <?php leftStyle(); ?>></td>
+  <td><img src="images/arrow_left<?php leftImgSuffix(); ?>.gif" onClick="<?php prevOnClick(); ?>" <?php leftStyle(); ?>></td>
+  <td class="value" style="vertical-align: middle;"><input id="directPageNumber" type="text" <?php InvPaginatorField(); ?>></td>
+  <td valign="middle">(<?php PagesCount(); ?>)</td>
+  <td><img src="images/redo.gif" style="cursor: pointer;" onClick="<?php directOnClick(); ?>"></td>
+  <td><img src="images/arrow_right<?php rightImgSuffix(); ?>.gif" onClick="<?php nextOnClick(); ?>" <?php rightStyle(); ?>></td>
+  <td><img src="images/arrow_right_list<?php rightImgSuffix(); ?>.gif" onClick="<?php lastOnClick(); ?>" <?php rightStyle(); ?>></td>
+</tr>
+</table>
+<!-- END TPL (DO NOT REMOVE!) -->

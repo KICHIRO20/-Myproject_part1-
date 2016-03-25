@@ -1,0 +1,32 @@
+- CustomerSignInBox:
+    title: Customer sign in box
+    description: Customer sign in box
+- CustomerRegistrationForm:
+    title: Customer registration form
+    description: Customer registration form
+    page: register.php
+- CustomerPersonalInfo:
+    title: Customer personal info
+    description: Customer personal info
+    page: personal-info.php
+- CustomerNewPasswordForm:
+    title: Customer new password form
+    description: Customer new password form
+    page: new-password.php
+- CustomerChangePasswordForm:
+    title: Customer change password form
+    description: Customer change password form
+    page: change-password.php
+- CustomerForgotPasswordForm:
+    title: Customer forgot password form
+    description: Customer forgot password form
+    page: forgot-password.php
+- CustomerHomePage:
+    title: Customer home page
+    description: Customer home page
+    page: home.php
+- CustomerSignInForm:
+    title: Customer sign in form
+    description: Customer sign in form
+    page: sign-in.php
+

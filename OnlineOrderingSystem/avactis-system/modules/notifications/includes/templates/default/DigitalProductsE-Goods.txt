@@ -1,0 +1,13 @@
+{StoreOwnerName}. Digital Products Ordered.
+Dear {CustomerFirstname} {CustomerLastname},
+
+We have received your payment for order (#{OrderID}).
+-----------------------------------------------------
+
+To download the ordered packages, please use the following link(s):
+
+{OrderDownloadLinksBlock}
+
+----------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}

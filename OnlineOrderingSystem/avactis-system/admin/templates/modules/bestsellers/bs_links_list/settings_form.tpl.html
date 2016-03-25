@@ -1,0 +1,71 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<table class="form table borderless table-hover" >
+	<thead>
+	<tr class="bg-blue-hoki">
+	    <th colspan="3" align="left"><label class="col-md-3 control-label"><?php xmsg('BS','SETTINGS_HEADER'); ?></label></th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+	    <td><label class="col-md-4 control-label"><?php xmsg('BS','SETS_ADD_BS_FROM_STAT'); ?></label></td>
+	    <td><a class="pull-left" style="cursor: pointer;"><?php hinttext('SETS_ADD_BS_FROM_STAT','bestsellers-messages'); ?></a></td>
+	    <td ><?php setsAFSselect(); ?></td>
+	</tr>
+	<tr>
+	    <td ><label class="col-md-4 control-label"><?php xmsg('BS','SETS_BS_FROM_STAT_COUNT'); ?></label></td>
+	    <td><a class="pull-left" style="cursor: pointer;"><?php hinttext('SETS_BS_FROM_STAT_COUNT','bestsellers-messages'); ?></a></td>
+	    <td class="value"><input class="form-control input-sm input-small" type="text" name="sets[BS_FROM_STAT_COUNT]" size="10" maxlength="10" value="<?php setsFSCvalue(); ?>"></td>
+	</tr>
+	<tr>
+	    <td ><label class="col-md-4 control-label"><?php xmsg('BS','SETS_BS_FROM_STAT_PERIOD'); ?></label></td>
+	    <td><a class="pull-left" style="cursor: pointer;"><?php hinttext('SETS_BS_FROM_STAT_PERIOD','bestsellers-messages'); ?></a></td>
+	    <td class="value"><input class="form-control input-sm input-small" type="text" name="sets[BS_FROM_STAT_PERIOD][count]" size="10" maxlength="10" value="<?php setsFSPvalue(); ?>">&nbsp;<?php setsFSPtype(); ?></td>
+	</tr>
+	<tr>
+	    <td ><label class="col-md-4 control-label"><?php xmsg('BS','SETS_SHOW_RECURSIVELY'); ?></label></td>
+	    <td><a class="pull-left" style="cursor: pointer;"><?php hinttext('SETS_SHOW_RECURSIVELY','bestsellers-messages'); ?></a></td>
+	    <td class="value"><?php setsSRselect(); ?></td>
+	</tr>
+	</tbody>
+</table>
+
+<script language="JavaScript">
+function setSettingsFormState()
+{
+    var frm = document.forms['BSForm'];
+    var add_bs_from_stat = frm.elements['sets[ADD_BS_FROM_STAT]'].value;
+    
+    for(i=0; i<frm.elements.length; i++)
+    {
+        el = frm.elements[i];
+        if(el.name!='sets[ADD_BS_FROM_STAT]' && el.name.indexOf('sets')==0)
+        {
+            if(add_bs_from_stat == 'Y')
+                el.disabled = false;
+            else
+                el.disabled = true;
+        };
+    };
+};
+
+function enableSettingsForm()
+{
+    var frm = document.forms['BSForm'];
+    for(i=0; i<frm.elements.length; i++)
+    {
+        el = frm.elements[i];
+        if(el.name.indexOf('sets')==0)
+        {
+                el.disabled = false;
+        };
+    };
+};
+
+bss_win_back = window.onload;
+window.onload = function() {
+    if(bss_win_back)
+        bss_win_back();
+    setSettingsFormState();
+};
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

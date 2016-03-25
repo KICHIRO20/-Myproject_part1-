@@ -1,0 +1,165 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.table-cell-center{
+   text-align: center;
+   vertical-align: middle;
+}
+
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+.row-eq-height {
+    display: flex;
+}
+</style>
+<script language="JavaScript" src="js/utility.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+
+// ********************************
+// application-specific functions *
+// ********************************
+
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		curleft = obj.offsetLeft
+		curtop = obj.offsetTop
+		while (obj = obj.offsetParent) {
+			curleft += obj.offsetLeft
+			curtop += obj.offsetTop
+		}
+	}
+	return new Array(curleft,curtop);
+}
+
+function preShowMenu()
+{
+    return true;
+}
+
+function showMenu(menuNumber, eventObj)
+{
+    hideAllMenus();
+    var menuId = 'search_menu1';// + menuNumber;
+    this_el  = document.getElementById(menuId);
+    this_el.style.visibility = 'visible';
+    eventObj.cancelBubble = true;
+    return true;
+}
+
+
+function hideAllMenus()
+{
+    changeObjectVisibility('search_menu1', 'hidden');
+    var menuTitle = getStyleObject('search_menuTitle1');
+}
+
+function stopEventProparation(e)
+{
+    /* Don't allow document.onclick event handler to close popup DIV
+       if click is on DIV itself.
+    */
+    if (!e) var e = window.event
+    // handle event
+    e.cancelBubble = true;
+    if (e.stopPropagation) 
+        e.stopPropagation();
+}
+
+document.onclick = hideAllMenus;
+
+// -->
+</SCRIPT>
+<script language="JavaScript" type="text/javascript"><!--
+var url_ctg_add  = '<?php AddCatHref(); ?>';
+var url_ctg_edit = '<?php EditCatHref(); ?>';
+var msg_ctg_del_cfm = '<?php xmsg('CTL','MNG_CTG_DEL_CFM'); ?>';
+
+<?php CategoriesTreeScript(); ?>
+--></script>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function sort(alert_message)
+{
+    if (alert_message == '')
+    {
+        NewWindow('SortCat', '<?php SortCatHref(); ?>', 'SortCat', true, '');
+    }
+    else
+    {
+        alert(alert_message);
+        return;
+    }
+}
+//-->
+</SCRIPT>
+<style>
+.tree_msg, .tree_alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 220px;
+   
+    padding: 6px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 9pt;
+    font-weight: bold;
+    display: none;
+}
+.tree_box {
+	width: 100%;
+    height: 480px;
+	overflow: auto;
+}
+.tree_msg, .tree_alert {
+    
+    display: none;
+}
+</style>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-folder-open font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php msg(MNG_CTGR_PAGE_NAME); ?></span>
+		</div>
+		<div class="actions">
+			<button id="btn_undoCategoriesTree"   type="button" class="btn btn-circle btn-default" title="<?php xmsg('CTL','BTN_UNDO_CAT_CHNGS_TITLE'); ?>" onselectstart="return false"><i class="fa fa-undo"></i> <?php xmsg('CTL','BTN_UNDO_CAT_CHNGS'); ?></button>
+			<button id="btn_redoCategoriesTree"   type="button" class="btn btn-circle btn-default" title="<?php xmsg('CTL','BTN_REDO_CAT_CHNGS_TITLE'); ?>" onselectstart="return false"><i class="fa fa-repeat"></i> <?php xmsg('CTL','BTN_REDO_CAT_CHNGS'); ?></button>
+
+	        <button id="mng_ctg_add"   type="button" class="btn btn-circle btn-default" title="<?php xmsg('CTL','BTN_ADD_SUBCTGR_TITLE'); ?>" ><i class="fa fa-plus"></i> <?php xmsg('CTL','BTN_ADD_SUBCTGR'); ?></button>
+			<button id="mng_ctg_edit"   type="button" class="btn btn-circle btn-default" title="<?php xmsg('CTL','BTN_EDIT_SUBCTGR_TITLE'); ?>" ><i class="fa fa-edit"></i> <?php xmsg('CTL','BTN_EDIT_SUBCTGR'); ?></button>
+	        <button id="mng_ctg_del"   type="button" class="btn btn-circle btn-default" title="<?php xmsg('CTL','BTN_DELETE_SUBCTGR_TITLE'); ?>" ><i class="fa fa-times"></i> <?php xmsg('CTL','BTN_DELETE_SUBCTGR'); ?></button>
+	        <button id="btn_saveCategoriesTree"   type="button" class="btn btn-circle btn-default" title="<?php xmsg('CTL','BTN_SAVE_CAT_CHNGS_TITLE'); ?>" onselectstart="return false"><i class="fa fa-save"></i> <?php xmsg('CTL','BTN_SAVE_CAT_CHNGS'); ?></button>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="row row-eq-height">
+			<div class="col-sm-6">
+				<div id="cat_tree">
+					<br><?php CategoriesTreeBox(); ?>
+				</div>							
+			</div>
+			<div class="col-sm-6">
+				<div id="cat_review_choose"><?php xmsg('CTL','MNG_CTGR_CHOOSE') ?></div>
+            	<div id="cat_review_loading" class="table-cell-center" style="display:none">
+					<?php xmsg('CTL','MNG_CTGR_LOADING') ?><br /><img src="images/process_green_01.gif" border="0" />
+				</div>
+				<div id="cat_review_save" style="display:none"><?php xmsg('CTL','MNG_CTGR_SAVE') ?></div>
+               	<div id="cat_review_content" style="display:none"></div>
+			</div>
+		</div>
+	</div>
+</div>    
+<!-- END TPL (DO NOT REMOVE!) --><hr>

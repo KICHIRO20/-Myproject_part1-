@@ -1,0 +1,327 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless tbody tr td, .borderless thead tr th {
+    border: none;
+}
+</style>
+<script language="javascript" type="text/javascript">
+<!--
+function checkNewLinkName(field)
+{
+    if (field.value)
+    {
+        enableButton('AddLinkButton', function () {document.getElementById('mode').value="add_link"; document.forms['CMSMenuDataForm'].submit();});
+    }
+    else
+    {
+        disableButton('AddLinkButton');
+    }
+}
+
+function checkSelectedItems(box)
+{
+    if (box.checked)
+    {
+        enableButton('DeleteLinksButton', function () {document.getElementById('mode').value="delete_links"; document.forms['CMSMenuDataForm'].submit();});
+    }
+    else
+    {
+        found = false;
+        for(el in box.form.elements)
+        {
+            tmpbox = box.form.elements[el];
+            if (tmpbox.type == "checkbox" 
+                && tmpbox.name.substring(0,6) == "delete"
+                && tmpbox.checked)
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+            disableButton('DeleteLinksButton');
+    }
+}
+
+function checkLinkType(box, div_name, linkbox_name)
+{
+    if (document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>'))
+        document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>').style.display='none';
+    if (document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>'))
+        document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>').style.display='none';
+    if (document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>'))
+        document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>').style.display='none';
+    if (document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodlist'))
+        document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodlist').style.display='none';
+    if (document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodinfo'))
+        document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodinfo').style.display='none';    
+    if (document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>'))
+        document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>').style.display='none';
+    if (document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>'))
+        document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>').style.display='none';
+    if (document.getElementById(div_name + box.value))
+    {
+        document.getElementById(div_name + box.value).style.display='';
+
+        linkbox = box.form.elements[linkbox_name];
+        if (box.value == '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>'
+            && linkbox.value.toLowerCase() == 'productlist'
+            && document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodlist'))
+            document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodlist').style.display='';
+
+        if (box.value == '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>'
+            && linkbox.value.toLowerCase() == 'productinfo'
+            && document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodinfo'))
+            document.getElementById(div_name + '<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>' + '_prodinfo').style.display='';
+    }
+}
+// -->
+</script>
+<?php MenuJSCode(); ?>
+<?php ResultMessage(); ?>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-link font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php EditMenuTitle(); ?> </span>
+			<span class="caption-helper text-lowercase"><?php xMsg('CMS', 'CMS_MENU_DATA'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<a id="UpdateButton2" class="btn btn-circle btn-default" onclick="document.forms['CMSMenuDataForm'].submit();"><i class="fa fa-save"></i>&nbsp;<?php Msg('BTN_SAVE'); ?></a>
+			</div>
+		</div>
+	</div>		
+	<div class="portlet-body">
+		<div class="table-responsive">
+			<form action="cms_add_menus.php" method="post" name="CMSMenuDataForm">
+				<input type="hidden" name="asc_action" value="update_menu_data" />
+				<input type="hidden" name="mode" id ="mode" value="update" />
+				<input type="hidden" name="menu_data[menu_id]" value="<?php MenuID(); ?>" />
+				<table class="table borderless">
+					<tbody>
+						<tr>
+							<td><?php xMsg('CMS', 'CMS_MENU_SYSTEM_NAME'); ?>&nbsp<span style="color: red">*</span></td>
+							<td><input class="form-control input-sm input-medium" type="text" name="menu_data[menu_index]" value="<?php MenuIndex(); ?>"/></td>
+						</tr>
+						<tr>
+							<td><?php xMsg('CMS', 'CMS_MENU_NAME'); ?></td>
+							<td><input class="form-control input-sm input-medium" type="text" name="menu_data[menu_name]" value="<?php MenuName(); ?>"/></td>
+						</tr>
+						<?php if (getMenuID() > 0) { ?>
+							<tr>
+								<td><?php xMsg('CMS', 'CMS_MENU_ITEMS'); ?></td>
+								<td>
+									<table class="table boderless table-hover table-striped">
+										<thead>
+											<tr>
+												<th><?php xMsg('CMS', 'CMS_MENU_LINK_NAME'); ?></th>
+												<th>
+													<?php xMsg('CMS', 'CMS_MENU_LINK_TYPE'); ?>
+												</th>
+												<th>
+													<?php xMsg('CMS', 'CMS_MENU_LINK_TARGET'); ?>
+												</th>
+												<th class="text-center">
+													<?php xMsg('CMS', 'CMS_MENU_LINK_STATUS'); ?>
+												</th>
+												<th>&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php if(getMenuItemCount()) { MenuItems(); } else { ?>
+												<tr>
+													<td colspan="5">
+														<?php xMsg('CMS', 'CMS_MENU_NO_LINKS'); ?>
+													<td>
+												</tr>
+											<?php } if(getMenuItemCount()) {?>
+												<tr>
+													<td colspan="2">
+														<?php if (getMenuItemCount() > 1) { ?>
+															<div id="SortLinksButton" class="btn btn-circle btn-default" onclick="document.getElementById('sort_form_div').style.display='';">
+																<i class="fa fa-sort"></i>&nbsp;
+																<?php xMsg('CMS','BTN_SORT_LINKS'); ?>
+															</div>
+														<?php } else { ?>
+															&nbsp;
+														<?php } ?>
+													</td>
+													<td colspan="3" class="text-right">
+														<div id="DeleteLinksButton" class="btn btn-circle btn-default disabled" onclick="">
+															<i class="fa fa-times"></i>&nbsp;
+															<?php xMsg('CMS', 'BTN_DELETE_LINKS'); ?>
+														</div>
+													</td>
+												</tr>
+											<?php } ?>
+											<tr>
+												<td colspan="5" style="background-color: #DDDDDD;">
+													<strong><?php xMsg('CMS', 'CMS_MENU_ADD_LINK'); ?></strong>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="text" name="link_new[item_name]" value="" onchange="checkNewLinkName(this);" class="form-control input-sm"/>
+												</td>
+												<td class="text-center">
+													<select name="link_new[item_type]" onchange="checkLinkType(this,'link_new_','link_new[link_system_page]');" class="form-control input-sm">
+														<option value="<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>">
+															<?php xMsg('CMS', 'CMS_MENU_TYPE_URL'); ?>
+														</option>
+														<option value="<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>">
+															<?php xMsg('CMS', 'CMS_MENU_TYPE_SYSTEM_PAGE'); ?>
+														</option>
+														<option value="<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>">
+															<?php xMsg('CMS', 'CMS_MENU_TYPE_STATIC_PAGE'); ?>
+														</option>
+														<option value="<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>">
+															<?php xMsg('CMS', 'CMS_MENU_TYPE_TEXT'); ?>
+														</option>
+														<option value="<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>">
+															<?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?>
+														</option>
+													</select>
+												</td>
+												<td>
+													<div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>">
+														<input type="text" name="link_new[link_url]" value="" class="form-control input-sm"/>
+													</div>
+													<div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>" style="display:none;">
+														<input type="text" name="link_new[link_external_url]" value="" class="form-control input-sm" />
+													</div>
+													<div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>" style="display: none;">
+														<?php if (getMenuSystemCount()) { ?>
+															<select name="link_new[link_system_page]" class="form-control input-sm" onchange="checkLinkType(this.form.elements['link_new[item_type]'], 'link_new_', this.name);">
+																<?php MenuSystemPages(); ?>
+															</select>
+														<?php } else { ?>
+															<?php xMsg('CMS', 'CMS_MENU_NO_SYSTEM_PAGES'); ?>
+														<?php } ?>
+													</div>
+													<div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>_prodlist" style="display: none;">
+														<table class="table boderless">
+															<tbody>
+																<tr>
+																	<td class="text-right"><?php xMsg('CMS', 'CMS_MENU_ITEM_CATEGORY_ID'); ?>&nbsp;:</td>
+																	<td><input type="text" name="link_new[list_catid]" value="" class="form-control input-sm input-xsmall" /></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>_prodinfo" style="display: none;">
+														<table class="table boderless">
+															<tbody>
+																<tr>
+																	<td class="text-right"><?php xMsg('CMS', 'CMS_MENU_ITEM_PRODUCT_ID'); ?>&nbsp;:</td>
+																	<td><input type="text" name="link_new[info_prodid]" value="" class="form-control input-sm input-xsmall" /></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>" style="display: none;">
+														<?php if (getMenuStaticCount()) { ?>
+															<select name="link_new[link_static_page]" class="form-control input-sm">
+																<?php MenuStaticPages(); ?>
+															</select>
+														<?php } else { ?>
+															<?php xMsg('CMS', 'CMS_MENU_NO_STATIC_PAGES'); ?>
+														<?php } ?>
+													</div>
+													<div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>" style="display: none;">&nbsp;</div>
+												</td>
+												<td>
+													<input type="checkbox" name="link_new[item_status]" checked="checked" class="form-control" />
+												</td>
+												<td class="text-center">
+													<div id="AddLinkButton" class="btn btn-circle btn-default disabled" onclick="">
+														<i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+													</div>
+												</td>
+											</tr>
+										<tbody>
+									</table>
+								</td>
+							</tr>
+						<?php } ?>
+						<tr>
+							<td class="text-left" colspan="2" style="color: red;">
+								<?php xMsg('CMS', 'CMS_REQUIRED_FIELDS'); ?>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-center">
+								<div id="UpdateButton1" class="btn btn-circle btn-default" onclick="document.forms['CMSMenuDataForm'].submit();">
+									<i class="fa fa-save"></i>&nbsp;<?php Msg('BTN_SAVE'); ?>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script language="javascript" type="text/javascript">
+	document.title = '<?php xMsg('CMS', 'CMS_MENU_DATA'); ?>';
+</script>
+<script language="JavaScript" type="text/javascript" src="js/shuttle.js"></script>
+
+<div id="sort_form_div" style="position: absolute; left: 27%; top: 20%; z-index: 10; display: none;">
+	<!-- BEGIN Portlet PORTLET-->
+	<div class="portlet box blue-hoki">
+		<div class="portlet-title">
+			<div class="caption">
+				<span class="caption-subject bold uppercase">
+					<i class="fa fa-sort"></i>&nbsp;<?php xmsg('CMS','CMS_SORT_PAGES'); ?>
+				</span>
+			</div>
+			<div class="actions">
+				<a href="javascript: void(0);" onClick="document.getElementById('sort_form_div').style.display='none'" class="btn btn-circle btn-default">
+					<i class="fa fa-times"></i>
+				</a>
+			</div>
+		</div>		
+		<div class="portlet-body table-responsive">
+			<form action="cms_add_menus.php" method="post" name="CMSMenuItemsSortForm">
+				<input type="hidden" name="asc_action" value="update_menu_data" />
+				<input type="hidden" name="mode" value="sort_links" />
+				<input type="hidden" name="menu_data[menu_id]" value="<?php MenuID(); ?>" />
+				<table class="table boderless">
+					<tbody>
+						<tr>
+							<td class="text-center" style="vertical-align: middle;">
+								<a href="javascript:moveItemUp('cms_menu_items_sort_order');">
+									<i class="fa fa-arrow-circle-up fa-lg"></i>
+								</a>
+							</td>
+							<td rowspan="2">
+							        <select id="cms_menu_items_sort_order" name="cms_menu_items_sort_order" size="8" class="form-control">
+									<?php SortItems(); ?>
+								</select>
+								<input type="hidden" id="cms_menu_items_sort_order.hidden" name="cms_menu_items_sort_order.hidden" value="" />
+							</td>
+						</tr>
+						<tr>
+							<td class="text-center" style="vertical-align: middle;">
+								<a href="javascript:moveItemDown('cms_menu_items_sort_order');">
+									<i class="fa fa-arrow-circle-down fa-lg"></i>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-center">
+								<a class="btn btn-circle btn-default" href="javascript:document.forms['CMSMenuItemsSortForm'].submit();">
+									<i class="fa fa-refresh"></i>&nbsp;<?php Msg('BTN_UPDATE'); ?>
+								</a>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+	<!-- END Portlet PORTLET-->
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

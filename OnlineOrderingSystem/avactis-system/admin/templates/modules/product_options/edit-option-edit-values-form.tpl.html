@@ -1,0 +1,92 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="JavaScript">
+
+function tryToUpdateSubmit()
+{
+	var update_form=document.forms['UpdateValues_Form'];
+	<?php JSValuesIDs(); ?>
+	<?php JSModifiersArray(); ?>
+	
+	for(var i=0; i<values_ids.length; i++)
+	{
+		if(update_form.elements['UpdateValues['+values_ids[i]+'][Name]'].value=='')
+		{
+			alert('<?php xmsg('PO','ALERT_005'); ?>');
+			update_form.elements['UpdateValues['+values_ids[i]+'][Name]'].focus();
+			return;
+		}
+
+		for(var j=0; j<modifiers.length; j++)
+		{
+			if(update_form.elements['UpdateValues['+values_ids[i]+']['+modifiers[j]+'_modifier]'].value=='')
+			{
+				alert('<?php xmsg('PO','ALERT_006'); ?>');
+				update_form.elements['UpdateValues['+values_ids[i]+']['+modifiers[j]+'_modifier]'].focus();
+				return;
+			}
+		}
+	}
+	
+	update_form.submit();
+}
+
+function tryToDeleteSubmit()
+{
+	var update_form=document.forms['UpdateValues_Form'];
+	<?php JSValuesIDs(); ?>
+	
+	var one_selected=false;
+	for(var i=0; i<values_ids.length; i++)
+	{
+		if(update_form.elements['toDeleteValues['+values_ids[i]+']'].checked)
+			one_selected=true;
+	};
+	
+	if(one_selected==false)
+	{
+		alert('<?php xmsg('PO','ALERT_007'); ?>');
+		return;
+	};
+	
+	update_form.action="po_edit_option.php?asc_action=del_values_from_option";
+	update_form.submit();
+}
+
+</script>
+<form action="po_edit_option.php?asc_action=update_values_of_option" method="POST" name="UpdateValues_Form">
+	<input type="hidden" name="option_id" value="<?php _option_id(); ?>">
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th colspan="7" class="bg-info">
+					<span class="pull-left"><?php xmsg('PO','EDIT_VALUES'); ?></span>
+					<div style="display: <?php butSRTdisplay(); ?>" id="SortValuesButton" class="btn btn-circle btn-default pull-right" onClick="document.getElementById('sort_form_div').style.display=''">
+						<i class="fa fa-sort"></i>&nbsp;<?php msg('BTN_SORT'); ?>
+					</div>
+				</th>
+			</tr>
+			<?php ValueHeader(); ?>
+		</thead>
+		<tbody>
+			<?php ValuesRows(); ?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="7" class="text-center">
+
+					<div id="UpdateValuesButton" class="btn btn-default btn-circle pull-left" onClick="javascript: tryToUpdateSubmit();">
+						<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+					</div>
+					<div style="display: <?php butSRTdisplay(); ?>" id="SortValuesButton" class="btn btn-default btn-circle" onClick="document.getElementById('sort_form_div').style.display=''">
+						<i class="fa fa-sort"></i>&nbsp;<?php msg('BTN_SORT'); ?>
+					</div>
+					<div id="DeleteValuesButton" class="btn btn-default btn-circle pull-right" onClick="javascript: tryToDeleteSubmit();" style="display: <?php butDSdisplay(); ?>">
+						<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_DELETE'); ?>
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

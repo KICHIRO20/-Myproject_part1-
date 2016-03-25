@@ -1,0 +1,28 @@
+---
+settings: 
+  template: 'page.template.tpl.html'
+  page_title: '<?php StoreOwnerPageTitle(); ?>'
+  page_description: '<?php CategoryMetaDescription(); ?>'
+  page_keywords: '<?php CategoryMetaKeywords(); ?>'
+placeholders: 
+  header: 
+    blocks: 
+    visibility: hidden
+  main_menu: 
+    blocks: 
+    visibility: hidden
+  left_column: 
+    blocks: 
+    visibility: hidden
+  center_column: 
+    blocks: 
+      - 
+        name: OrderInvoice
+        visibility: visible
+    visibility: visible
+  right_column: 
+    blocks: 
+    visibility: hidden
+  footer: 
+    blocks: 
+    visibility: hidden

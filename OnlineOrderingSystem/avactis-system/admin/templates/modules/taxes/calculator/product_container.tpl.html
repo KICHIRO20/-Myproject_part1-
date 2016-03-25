@@ -1,0 +1,21 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<TR>
+  <TD style="padding-bottom: 4px;"><B><?php ProductName(); ?></B></TD>
+</TR>
+<TR>
+  <TD style="padding-bottom: 10px;">
+    <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+      <TR>
+        <TH><?php Msg('TAX_CALCULATOR_TABLE_PRODUCT_HEADER_001'); ?></TH>
+        <TH><?php Msg('TAX_CALCULATOR_TABLE_PRODUCT_HEADER_002'); ?></TH>
+        <TH><?php Msg('TAX_CALCULATOR_TABLE_PRODUCT_HEADER_003'); ?><?php CurrencySign(); ?></TH>
+      </TR>
+        <?php Items(); ?>
+      <TR>
+        <TD align="right" colspan="2"><B>TOTAL:</B></TD>
+        <TD><?php ProductTaxTotal(); ?></TD>
+      </TR>
+    </TABLE>
+  </TD>
+</TR>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

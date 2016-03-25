@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<body>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- amcolumn script-->
+
+<script type="text/javascript">
+
+	var chartData1 = [];
+	var chartData2 = [];
+	var chartData3 = [];
+
+	//generateChartData();
+	var csv_url = decodeURIComponent('{CSV_FILE_URL}');
+
+	loadCSV(csv_url);
+
+	function loadCSV(file) {
+	  if (window.XMLHttpRequest) {
+		// IE7+, Firefox, Chrome, Opera, Safari
+		var request = new XMLHttpRequest();
+	  } else {
+		// code for IE6, IE5
+		var request = new ActiveXObject('Microsoft.XMLHTTP');
+	  }
+	  // load
+	  try {
+		request.open('GET', file, false);
+		request.send();
+		if (200 != request.status)
+		  return [];
+	  }
+	  catch(e) {
+		return [];
+	  }
+	  return parseCSV(request.responseText);
+	}
+
+	function generateChartData() {
+		var firstDate = new Date();
+		firstDate.setDate(firstDate.getDate() - 500);
+		firstDate.setHours(0, 0, 0, 0);
+
+		for (var i = 0; i < 500; i++) {
+			var newDate = new Date(firstDate);
+			newDate.setDate(newDate.getDate() + i);
+
+			var a1 = Math.round(Math.random() * (40 + i)) + 100 + i;
+			var a2 = Math.round(Math.random() * (100 + i)) + 200 + i;
+			var a3 = Math.round(Math.random() * (100 + i)) + 200;
+
+			chartData1.push({
+				date: newDate,
+				value: a1,
+			});
+			chartData2.push({
+				date: newDate,
+				value: a2,
+			});
+			chartData3.push({
+				date: newDate,
+				value: a3,
+			});
+		}
+	}
+
+	AmCharts.makeChart("{UNIQUE_CONTROL_ID}", {
+		type: "stock",
+		dataDateFormat: "YYYY-MM-DD",
+		pathToImages: "amcharts/stockchart/images/",
+		dataSets: [{
+			title: "{TITLE1}",
+			fieldMappings: [{
+				fromField: "value",
+				toField: "value"
+			}],
+			dataProvider: chartData1,
+			categoryField: "date"
+		},
+
+		{
+			title: "{TITLE2}",
+			fieldMappings: [{
+				fromField: "value",
+				toField: "value"
+			}],
+			dataProvider: chartData2,
+			categoryField: "date"
+		},
+
+		{
+			title: "{TITLE3}",
+			fieldMappings: [{
+				fromField: "value",
+				toField: "value"
+			}],
+			dataProvider: chartData3,
+			categoryField: "date"
+		}],
+
+		panels: [{
+
+			showCategoryAxis: true,
+			title: "Value",
+			percentHeight: 70,
+			recalculateToPercents: 'never',
+
+			stockGraphs: [{
+				id: "g1",
+
+				valueField: "value",
+				comparable: true,
+				compareField: "value",
+				bullet: "round",
+				bulletBorderColor: "#FFFFFF",
+				bulletBorderAlpha: 1,
+				balloonText: "[[title]]:<b>[[value]]</b>",
+				compareGraphBalloonText: "[[title]]:<b>[[value]]</b>",
+				compareGraphBullet: "round",
+				compareGraphBulletBorderColor: "#FFFFFF",
+				compareGraphBulletBorderAlpha: 1
+			}],
+
+			stockLegend: {
+				periodValueTextComparing: "[[percents.value.close]]%",
+				periodValueTextRegular: "[[value.close]]"
+			}
+		}],
+
+		chartScrollbarSettings: {
+			graph: "g1"
+		},
+
+		chartCursorSettings: {
+			valueBalloonsEnabled: true,
+			valueLineEnabled:true,
+			valueLineBalloonEnabled:true
+		},
+
+		dataSetSelector: {
+			position: "top"
+		}
+	});
+
+	/**
+	 * Parses CSV file
+	 */
+	function parseCSV(data) {
+
+		//replace UNIX new lines
+		data = data.replace(/\r\n/g, "\n");
+		//replace MAC new lines
+		data = data.replace(/\r/g, "\n");
+		//split into rows
+		var rowsR = data.split("\n");
+		var rows = rowsR.reverse();
+		// loop through all rows
+		var row;
+		for (var i = 0; i < rows.length; i++) {
+		// this line helps to skip empty rows
+			if (rows[i]) {
+			// our columns are separated by semicolon
+				var column = rows[i].split(";");
+				// column is array now 
+				// first item is date
+				var date = AmCharts.stringToDate(column[0], "YYYY-MM-DD");
+				// second item is value of the second column
+				var value1 = parseInt(column[1]);
+				var value2 = parseInt(column[2]);
+				var value3 = parseInt(column[3]);
+				// create object which contains all these items:
+				chartData1.push({
+					date: date,
+					value: value1,
+				});
+				chartData2.push({
+					date: date,
+					value: value2,
+				});
+				chartData3.push({
+					date: date,
+					value: value3,
+				});
+			}
+		}
+		return true;
+	}
+</script>
+
+<div id="{UNIQUE_CONTROL_ID}" style="width:100%; height:600px;"></div>
+
+<!-- end of amcolumn script -->
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="portlet-title">
+	<div class="caption">
+		<i class="fa fa-users font-green-sharp"></i>
+		<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('SUBSCR', 'SUBSCRIPTIONS_TITLE'); ?>:</span>
+		<span class="caption-subject font-green-sharp">{Title}</span>
+		<span class="caption-helper text-lowercase"><?php xmsg('SUBSCR', 'MANAGE_SUBSCRIBERS'); ?>...</span>
+	</div>
+	<div class="actions">
+		<div class="actions btn-set">
+			<a id="EditRowsButton" title="<?php xmsg('SUBSCR', 'BTN_EDIT_TOPIC'); ?>" onclick="javascript:editTopic('{TopicId}')" class="btn btn-circle btn-default"><i class="fa fa-edit"></i> <span class="hidden-480"><?php xmsg('SUBSCR', 'BTN_EDIT_TOPIC'); ?></span></a>
+
+			<a id="btn_delete_emails" title="<?php xmsg('SUBSCR', 'BTN_DELETE_TOPIC'); ?>" href="javascript:void(0);" onclick="javascript:submitDeleteEmails(this)" class="btn btn-circle btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php xmsg('SUBSCR', 'BTN_DELETE_EMAILS'); ?></span></a>
+			<div class="btn-group">
+				<a data-toggle="dropdown" href="javascript:void(0);" class="btn btn-default btn-circle">
+				<i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i></a>
+				<ul class="dropdown-menu pull-right">
+					<li><a href="javascript:exportEmails();"><?php xmsg('SUBSCR', 'BTN_EXPORT_EMAILS'); ?></a></li>
+					<li class="divider"></li>
+					<li><a href="javascript:subscribe();"><?php xmsg('SUBSCR', 'BTN_SUBSCRIBE_EMAILS'); ?></a></li>
+					<li><a href="javascript:unsubscribe();"><?php xmsg('SUBSCR', 'BTN_UNSUBSCRIBE_EMAILS'); ?></a></li>
+					<li class="divider"></li>
+					<li><a href="subscriptions_signature.php"><?php xmsg('SUBSCR', 'BTN_SIGNATURE'); ?> </a></li>
+					<li><a href="newsletter_archive.php"><?php xmsg('SUBSCR', 'BTN_NEWSLETTERS'); ?></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

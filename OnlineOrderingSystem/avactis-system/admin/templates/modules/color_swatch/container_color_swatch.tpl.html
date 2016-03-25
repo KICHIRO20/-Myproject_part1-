@@ -1,0 +1,128 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- begin Bookmarks -->
+<script type="text/javascript">
+
+function tryToUpdateValue()
+{
+	var update_val_form=document.forms['UpdateValues_Form'];
+	update_val_form.submit();	
+}
+
+function tryToUpdateNumberAndLabel()
+{
+	var update_num_form=document.forms['UpdateNumberAndLabel'];
+	update_num_form.submit();	
+}
+
+function tryToDeleteSubmit()
+{
+	var update_form=document.forms['UpdateValues_Form'];
+	
+	var product_id = <?php echo $_GET['product_id']; ?>;
+	
+	update_form.action="pi_color_swatch_list.php?product_id="+product_id+"&asc_action=del_values_of_color_swatch_action";
+	update_form.submit();
+}
+
+</script>
+
+
+<table class="form" cellspacing="0" cellpadding="0" width="100%" >
+	<tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;"><?php msg('MNG_CTGR_CURR_PRD'); ?>&nbsp;<?php ProductName(); ?></td>
+  <tr>
+	<tr style="height: 3px;">
+   <td width="100%" class="popup_dialog_header_left_right_padded" style="background: #CED4DD;"></td>
+  </tr>
+	<tr>
+  	<td width="100%" style="padding: 0px 2px 0px 2px;"><?php Local_ProductBookmarks(); ?></td>
+  </tr>
+   <tr>
+    <td width="100%" style="padding: 0px 2px 0px 2px;">
+      <table class="buttons_block" width="100%" cellpadding="4" cellspacing="0">
+        <tr>
+          <td width="80%" class="section_title">
+              <table>
+              <tr>
+                  <td class="section_title">
+                      <?php xMsg('CLRSW', 'PRD_COLR_SWATCH_TITLE'); ?>&nbsp;
+                  </td>
+                  <td>
+                      <?php SelectPageLanguage(array('catalog_editproduct.php', 'po_options_list.php', 'po_edit_option.php', 'add_image_to_product', 'upload_image_for_preview', 'del_images_from_product', 'update_images_of_product', 'update_imgs_sort_order')); ?>
+                  </td>
+              </tr>
+              </table>
+          </td>
+          <td nowrap><div id="UpdateValuesButton" class="button button_small" onclick="javascript: tryToUpdateValue();" ><?php msg('BTN_UPDATE'); ?></div></td>
+          <?php
+            if ($link = getProductInfoLink()) {
+                ?><td><div class="button button_6em" onclick="openURLinNewLargeWindow('<?php echo $link?>', 'ProductPreview')"><?php xmsg('CTL', 'PREVIEW_PRODUCT_BUTTON') ?></div></td><?php
+            } 
+          ?>
+          <td nowrap><div id="CloseButton1" class="button button_small" onclick="closeAndFocusParent();" title="<?php msg('BTN_CLOSE_INFO_PRD_TITLE'); ?>"><?php msg('BTN_CLOSE_INFO_PRD'); ?></div></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- end Bookmarks -->
+
+<?php $product_id = $_GET['product_id']; ?>
+
+<form name="UpdateNumberAndLabel" id="UpdateNumberAndLabel" method="post" action="pi_color_swatch_list.php?product_id=<?php echo $product_id; ?>&asc_action=update_number_label_action" style="background-color:#EEF2F8;">
+<table class="form" align="center" cellspacing="1" cellpadding="5" width="100%" id="selectnumform" border="0" style="padding: 0 3px;">
+<?php SavedOkMessage(); ?>
+<?php ResultMessage(); ?>
+<?php DeleteMessage(); ?>
+<?php if(getListOfColors()!='') { ?>
+	<tr>
+		<td style="width:30%" class="label">Select Number of Color Swatches:</td>
+		<td class="label" style="text-align:left">
+			<?php SelectColorsForm(); ?>
+		</td>
+		
+	</tr>
+        <tr>
+		<td style="width:30%" class="label">Select Label Text for Color Swatches:</td>
+		<?php AddLabelText(); ?>
+		
+	</tr>
+        <tr><td><div style="float:right;"  onclick="javascript: tryToUpdateNumberAndLabel();" class="button button_small" id="SaveButton2">Save</div></td></tr>
+<?php } ?>
+</table>
+</form>
+
+<form name="UpdateValues_Form" id="UpdateValues_Form" method="POST" action="pi_color_swatch_list.php?product_id=<?php echo $product_id; ?>&asc_action=update_values_of_color_swatch_action" style="background-color:#EEF2F8;">
+<!-- <input type="hidden" name="asc_action" value="update_values_of_color_swatch_action" />-->
+<?php if(getListOfColors()!='') { ?>
+<table class="form" cellspacing="1" align="center" cellpadding="5" width="100%" id="ImagesManageBlock" border="0" style="padding: 0 3px;">
+	<tr>
+		<th style="width:37%;background-color:#CED4DD"><?php msg('MNG_PRD_COL_HDR_004'); ?></th>
+		<th style="background-color:#CED4DD"><?php xMsg('CLRSW', 'CLR_SWTCH_MAIN_IMG'); ?></th>
+		<!--<th style="background-color:#CED4DD"><?php Msg('CLR_SWTCH_CHECKED_IMG'); ?></th>-->
+                <th style="background-color:#CED4DD"></th>
+	</tr>
+	
+	<?php ListOfColors(); ?>
+   
+    <td colspan="5" align="center">
+      <table class="clear" cellpadding="0" cellspacing="3">
+        <tr>
+          <td nowrap style="padding-right: 4px;width:100%" align="left">
+    
+          <div id="UpdateValuesButton" class="button button_small" onclick="javascript: tryToUpdateValue();" ><?php msg('BTN_UPDATE'); ?></div>
+          </td>
+          <td >
+          	<div id="DeleteValuesButton" class="button button_small" onClick="javascript: tryToDeleteSubmit();" ><?php msg('BTN_DELETE'); ?></div>
+          </td>
+          
+        </tr>
+      </table>
+    </td>
+	  </tr>
+</table>
+<?php } ?>
+</form>
+
+<?php AddNewColor_Form(); ?>
+<!-- END TPL (DO NOT REMOVE!) -->

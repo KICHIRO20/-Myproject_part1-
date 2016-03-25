@@ -1,0 +1,156 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+// Function is not finished.
+// For prototype design only.
+var TaxNamesListId = new Array();
+var TaxNamesListName = new Array();
+
+function addCondition() 
+{
+    var FormulaView = document.getElementById('FormulaView');
+    var Formula = document.getElementById('Formula');
+    var selectedTax    = document.getElementById('tax_selector');
+
+    if (Formula.value == '') 
+    {
+        Formula.value = '{'+selectedTax.value+'}';
+        FormulaView.innerHTML = "";
+        FormulaView.innerHTML = selectedTax.options[selectedTax.selectedIndex].getAttribute('taxname');
+    }
+    else 
+    {
+        Formula.value += '+{'+selectedTax.value+'}';
+        FormulaView.innerHTML += '+'+selectedTax.options[selectedTax.selectedIndex].getAttribute('taxname');
+    }
+//    selectedTax.options[selectedTax.selectedIndex] = null;
+}
+
+function clearCondition() 
+{
+    var FormulaView = document.getElementById('FormulaView');
+    var Formula = document.getElementById('Formula');
+    var selectedTax    = document.getElementById('tax_selector');
+
+    FormulaView.innerHTML = '&nbsp;';
+    Formula.value = '';
+/*
+    for (i=0; i<selectedTax.options.length; i++)
+    {
+        selectedTax.options[i] = null;
+    }
+    for (i=0; i<TaxNamesListId.length; i++)
+    {
+        selectedTax.options[i] = new Option(TaxNamesListName[i], TaxNamesListId[i]);
+        selectedTax.options[i].setAttribute('taxname', TaxNamesListName[i]);
+    }
+*/
+}
+
+function TaxDisplayOptionsFormSubmit()
+{
+    var formula = document.getElementById('Formula');
+    var display = document.getElementById('Display');
+    if (formula.value == "" || display.value == "")
+    {
+        alert('<?php Msg("ADD_TAX_DISPLAY_OPTION_WRN_001"); ?>');
+        return;
+    }
+    var form = document.forms['TaxDisplayOptionsForm'];
+    form.submit();
+}
+
+
+//-->
+</SCRIPT>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('ADD_TAX_DISPLAY_OPTION_PAGE_NAME'); ?></span>
+			<span class="caption-helper text-lowercase"><?php Subtitle(); ?>&nbsp;<?php if (getId()) { SelectPageLanguage(array('store_settings_tax_edit_display.php'), 'EditTaxDisplayOption', array('UpdateTaxDisplayAction')); } else { echo '&nbsp;'; } ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">            	
+            	<button id="EditButton1" title="<?php Button(); ?>"  onclick="TaxDisplayOptionsFormSubmit();" type="button" name="<?php Button(); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Button(); ?></span></button>
+				<button id="CancelButton1" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+            </div>
+		</div>
+	</div>
+	<FORM METHOD=POST ACTION="<?php FormAction(); ?>" NAME="TaxDisplayOptionsForm" ID="TaxDisplayOptionsForm">
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+				<lable class="help-block"><?php Msg('ADD_TAX_DISPLAY_OPTION_FIELD_001'); ?>&nbsp;*</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">				
+				<div id="FormulaView" class="col-sm-8 form-control form-filter input-sm input-medium inline disable"><?php FormulaView(); ?>&nbsp;</div>
+				&nbsp;&nbsp;
+				<button id="CancelButton1" class="btn btn-default" name="<?php Msg('BTN_CLEAR'); ?>" type="button" onclick="javascript:clearCondition();" title="<?php Msg('BTN_CLEAR'); ?>"><i class="fa fa-times"></i><span class="hidden-480">&nbsp;<?php Msg('BTN_CLEAR'); ?></span></button>
+                <INPUT TYPE="hidden" name="Formula" id="Formula" value="<?php Formula(); ?>">
+                <INPUT TYPE="hidden" name="Id" value="<?php Id(); ?>">
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+			<?php Msg('ADD_TAX_DISPLAY_OPTION_FIELD_003'); ?>
+			</div>
+			<div class="col-md-8" style="float:left;">				
+				<select class="form-control form-filter input-sm input-medium inline" id="tax_selector" name="Tax">
+                    <?php TaxItems(); ?>
+                </select>
+		<button id="AddButton2" title="<?php Msg('BTN_ADD'); ?>" onclick="javascript:addCondition();"  type="button" name="<?php Msg('BTN_ADD'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>				
+				
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+			<?php Msg('ADD_TAX_DISPLAY_OPTION_FIELD_004'); ?>
+			</div>
+			<div class="col-md-8" style="float:left;">				
+				<select class="form-control form-filter input-sm input-medium" id="Option" name="Option">
+                    <?php OptionsList(); ?>
+                </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+			<?php Msg('ADD_TAX_DISPLAY_OPTION_FIELD_002'); ?>&nbsp;*
+			</div>
+			<div class="col-md-8" style="float:left;">				
+				<INPUT class="form-control form-filter input-sm input-medium"  TYPE="text" NAME="Display" id="Display" value="<?php Display(); ?>">
+			</div>
+		</div>
+		<!-- End - Row -->
+	</div>
+	<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button id="EditButton2" title="<?php Button(); ?>"  onclick="TaxDisplayOptionsFormSubmit();" type="button" name="<?php Button(); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Button(); ?></span></button>
+				<button id="CancelButton2" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+		</div>
+	</div>
+</div>
+</FORM>
+<!--
+<SCRIPT LANGUAGE="JavaScript">
+/*
+var TaxNamesListElement = document.getElementById('tax_selector');
+for (i=0; i<TaxNamesListElement.options.length; i++)
+{
+    TaxNamesListId[i] = TaxNamesListElement.options[i].value;
+    TaxNamesListName[i] = TaxNamesListElement.options[i].getAttribute('taxname');
+}*/
+</SCRIPT>
+//-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

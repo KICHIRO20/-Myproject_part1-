@@ -1,0 +1,16 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="actions pull-right">
+	<div class="actions btn-set">
+		<a id="AddButton2" class="btn btn-default btn-circle" onclick="javascript: openURLinNewWindow('popup_window.php?page_view=LabelData&lng=<?php CurLang(); ?>', 'LabelData');"><i class="fa fa-plus"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_ADD_NEW'); ?></span></a>
+		<a id="UpdateButton2" class="btn btn-default btn-circle" onclick="updateLabels();"><i class="fa fa-refresh"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_UPDATE_LABELS'); ?></span></a>
+		<a id="DeleteButton2" class="btn btn-default btn-circle<?php DisabledButton(); ?>" onclick="<?php if(!getDisabledButton()) { ?>submitHandler('SearchResults', 'delete');<?php } else { ?>void(0);<?php } ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_REMOVE_TRANSLATION'); ?></span></a>
+	</div>
+</div>
+
+<div class="actions pull-left">
+	<div class="actions btn-set">
+		<a id="ImportButton" title="<?php xMsg('ML', 'BTN_IMPORT_LABELS'); ?>" class="btn btn-default btn-circle" href="import_labels.php"><i class="fa fa-sign-in"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_IMPORT_LABELS'); ?></span></a>
+		<a id="ExportButton" title="<?php xMsg('ML', 'BTN_EXPORT_LABELS'); ?>" class="btn btn-default btn-circle" href="export_labels.php"><i class="fa fa-sign-out"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_EXPORT_LABELS'); ?></span></a>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

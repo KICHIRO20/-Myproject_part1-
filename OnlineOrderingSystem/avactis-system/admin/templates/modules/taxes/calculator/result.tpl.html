@@ -1,0 +1,136 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<TABLE width="100%" cellpadding="1" cellspacing="0" border="0">
+  <TR>
+    <TD style="padding-bottom: 8px;"><B><U><?php Msg('TAX_CALCULATOR_STEP_001'); ?></U></B><br><span class="required"><?php NoShippingMethod(); ?></span></TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 4px;"><B><?php Msg('TAX_CALCULATOR_TABLE1_TITLE'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 10px;">
+      <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+        <TR>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE1_HEADER_001'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE1_HEADER_002'); ?><?php CurrencySign(); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE1_HEADER_003'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE1_HEADER_004'); ?><?php CurrencySign(); ?></TH>
+        </TR>
+        <?php Table1(); ?>
+        <TR>
+          <TD colspan="3" align="right"><B><?php Msg('TAX_CALCULATOR_TOTAL_LABEL'); ?></B></TD>
+          <TD><?php Table1_total(); ?></TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 4px;"><B><?php Msg('TAX_CALCULATOR_TABLE2_TITLE'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 10px;">
+      <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+        <TR>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE2_HEADER_001'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE2_HEADER_002'); ?><?php CurrencySign(); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE2_HEADER_003'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE2_HEADER_004'); ?><?php CurrencySign(); ?></TH>
+        </TR>
+        <?php Table2(); ?>
+        <TR>
+          <TD colspan="3" align="right"><B><?php Msg('TAX_CALCULATOR_TOTAL_LABEL'); ?></B></TD>
+          <TD><?php Table2_total(); ?></TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 4px;"><B><?php Msg('TAX_CALCULATOR_TABLE3_TITLE'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 10px;">
+      <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+        <TR>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE3_HEADER_001'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE3_HEADER_002'); ?><?php CurrencySign(); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE3_HEADER_003'); ?></TH>
+        </TR>
+        <?php Table3(); ?>
+        <TR>
+          <TD align="right"><B><?php Msg('TAX_CALCULATOR_TOTAL_LABEL'); ?></B></TD>
+          <TD><?php Table3_total_price_sale(); ?></TD>
+          <TD><?php Table3_total_price_share(); ?></TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 4px;"><B><?php Msg('TAX_CALCULATOR_TABLE4_TITLE'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 10px;">
+      <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+        <TR>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE4_HEADER_001'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE4_HEADER_002'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE4_HEADER_003'); ?><?php CurrencySign(); ?></TH>
+        </TR>
+        <?php Table4(); ?>
+        <TR>
+          <TD colspan="2" align="right"><B><?php Msg('TAX_CALCULATOR_TOTAL_LABEL'); ?></B></TD>
+          <TD><?php Table4_total(); ?></TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 4px;"><B><?php Msg('TAX_CALCULATOR_TABLE5_TITLE'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 10px;">
+      <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+        <TR>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE5_HEADER_001'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE5_HEADER_002'); ?><?php CurrencySign(); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE5_HEADER_003'); ?><?php CurrencySign(); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE5_HEADER_004'); ?><?php CurrencySign(); ?></TH>
+        </TR>
+        <?php Table5(); ?>
+        <TR>
+          <TD align="right"><B><?php Msg('TAX_CALCULATOR_TOTAL_LABEL'); ?></B></TD>
+          <TD><?php Table5_total_per_item_shipping_cost(); ?></TD>
+          <TD><?php Table5_total_order_level_shipping_cost(); ?></TD>
+          <TD><?php Table5_total_shipping_cost(); ?></TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 4px;"><B><?php Msg('TAX_CALCULATOR_TABLE6_TITLE'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 10px;">
+      <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+        <TR>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE6_HEADER_001'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE6_HEADER_002'); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE6_HEADER_003'); ?><?php CurrencySign(); ?></TH>
+          <TH><?php Msg('TAX_CALCULATOR_TABLE6_HEADER_004'); ?><?php CurrencySign(); ?></TH>
+        </TR>
+        <?php Table6(); ?>
+        <TR>
+          <TD colspan="2" align="right"><B><?php Msg('TAX_CALCULATOR_TOTAL_LABEL'); ?></B></TD>
+          <TD><?php Table6_total_sales_price(); ?></TD>
+          <TD><?php Table6_total_shipping_cost(); ?></TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD style="padding-bottom: 8px;"><B><U><?php Msg('TAX_CALCULATOR_STEP_002'); ?></U></B><br><span class="required"><?php TaxToShipping(); ?></span></TD>
+  </TR>
+  <?php Tax_per_Products(); ?>
+  <TR>
+    <TD><B><?php Msg('TAX_CALCULATOR_TAX_TOTAL_LABEL'); ?><?php Total(); ?></B></TD>
+  </TR>
+</TABLE>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

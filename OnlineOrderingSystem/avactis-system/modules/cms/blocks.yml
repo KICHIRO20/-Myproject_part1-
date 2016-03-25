@@ -1,0 +1,37 @@
+- user3:
+    title: Support Phone
+    description: Support Phone
+    template: '<?php CMSMenu('Support Phone'); ?>'
+- top_phone:
+    title: Support Phone
+    description: Support Phone
+    template: '<?php CMSMenu('Support Phone'); ?>'
+- top_menu:
+    title: CMS top menu
+    description: CMS top menu
+    template: '<?php CMSMenu('top_menu'); ?>'
+- main_menu:
+    title: CMS main menu
+    description: CMS main menu
+    template: '<?php CMSMenu('main_menu'); ?>'
+- footer_menu:
+    title: CMS footer menu
+    description: CMS footer menu
+    template: '<?php CMSMenu('footer_menu'); ?>'
+- copyright:
+    title: Copyright
+    description: Copyright string
+    template: '<?php CMSPageContent('copyright'); ?>'
+- CMSPage:
+    title: CMS page
+    description: CMS page
+    page: cmspage.php
+- welcome_text:
+    title: Welcome Text
+    description: Welcome Text
+    template: '<div class='box welcome'><div class='content'><?php CMSPageContent('welcome_text'); ?></div></div>'
+- RightBanner:
+    title: Right Banner
+    description: Right Banner
+    template: '<?php CMSPageContent('right_banner'); ?>'
+

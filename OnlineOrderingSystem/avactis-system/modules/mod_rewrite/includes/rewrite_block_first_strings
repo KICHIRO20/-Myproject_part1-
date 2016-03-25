@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+%mr_fsl_string%
+RewriteEngine On
+
+RewriteBase %url_dir%
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d

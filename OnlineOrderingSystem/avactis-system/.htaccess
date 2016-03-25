@@ -1,0 +1,8 @@
+Order Deny,Allow
+Deny from all
+<Files TagErrors.html>
+Allow from all
+</Files>
+<Files rest.php>
+Allow from all
+</Files>

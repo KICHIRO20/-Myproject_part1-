@@ -1,0 +1,249 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="row">
+   <div class="col-md-4">
+      <div id="accordion4" class="panel-group accordion">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a class="accordion-toggle accordion-toggle-styled collapsed"
+                     href="#collapse_4_1" data-parent="#accordion4"
+                     data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_URL'); ?>
+                  </a>
+               </h4>
+            </div>
+            <div class="panel-collapse collapse" id="collapse_4_1" style="">
+               <div class="panel-body">
+                  <div class="form-group row">
+                     <label class="control-label col-lg-3" style="font-size: 13px"><?php xMsg('CMS', 'CMS_MENU_LINK_TEXT'); ?>
+                     </label> <input type="text" name="link_new[item_name]"
+                        class="form-control input-sm input-medium" readonly />
+                  </div>
+                  <div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>"
+                     class="form-group row">
+                     <label class="control-label col-lg-3"><?php xMsg('CMS', 'CMS_MENU_TYPE_URL'); ?>
+                     </label> 
+                     <input type="text" name="link_new[link_url]" value=""
+                      class="form-control input-sm input-medium" readonly />
+                  </div>
+                  <span id="AddLinkButton"
+                     class="btn btn-circle btn-default disabled"> <i
+                     class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                  </span>
+               </div>
+            </div>
+         </div>
+         <div class="panel panel-default">
+         <div class="panel-heading">
+         <h4 class="panel-title">
+         <a class="accordion-toggle accordion-toggle-styled collapsed"
+            href="#collapse_4_2" data-parent="#accordion4"
+            data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_STATIC_PAGE'); ?>
+         </a>
+         </h4>
+         </div>
+         <div class="panel-collapse collapse" id="collapse_4_2" style="">
+         <div class="panel-body">
+         <div class="tabbable-custom">
+         <ul class="nav nav-tabs ">
+         <li class="active"><a data-toggle="tab"
+            href="#tab_6_1"> <?php xMsg('CMS', 'CMS_NAV_MENU_ALL'); ?> </a>
+         </li>
+         <li><a data-toggle="tab" href="#tab_6_2"> <?php xMsg('CMS', 'CMS_NAV_SEARCH'); ?> </a></li>
+         </ul>
+         <div class="tab-content margin-bottom-10">
+         <div id="tab_6_1" class="tab-pane active">
+         <div
+            id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>"
+            class="row form-group">
+         </div>
+         </div>
+         <!-- tab 6-1 -->
+         <div id="tab_6_2" class="tab-pane">
+         <div class="form-group">
+         <input class="quick-search form-control" type="text" name="search_pattern" value=""
+            placeholder="Search">
+         </div>
+         <div id="list-static-article"
+            name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>[link_static_page]"
+            class="checkbox-list"></div>	
+         </div>
+         </div>
+         <!-- tab content -->
+         <span id="AddStaticPageButton"
+            class="btn btn-circle btn-default disabled" >
+         <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+         </span>
+         </div>
+         </div>
+         </div>
+         </div>
+         <div class="panel panel-default">
+         <div class="panel-heading">
+         <h4 class="panel-title">
+         <a class="accordion-toggle accordion-toggle-styled collapsed"
+            href="#collapse_4_3" data-parent="#accordion4"
+            data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_TEXT'); ?>
+         </a>
+         </h4>
+         </div>
+         <div class="panel-collapse collapse" id="collapse_4_3" style="">
+         <div class="panel-body">
+         <div class="form-group row">
+         <label class="control-label col-lg-3" style="font-size: 13px"><?php xMsg('CMS', 'CMS_MENU_LINK_TEXT'); ?>
+         </label> <input type="text" name="link_new[item_name]"
+            class="form-control input-sm input-medium" readonly />
+         </div>
+         <span id="AddLinkButton"
+            class="btn btn-circle btn-default disabled"> <i
+            class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+         </span>
+         </div>
+         </div>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a class="accordion-toggle accordion-toggle-styled collapsed"
+                     href="#collapse_4_4" data-parent="#accordion4"
+                     data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?>
+                  </a>
+               </h4>
+            </div>
+            <div class="panel-collapse collapse" id="collapse_4_4" style="">
+               <div class="panel-body">
+                  <div class="form-group row">
+                     <label class="control-label col-lg-3" style="font-size: 13px"><?php xMsg('CMS', 'CMS_MENU_LINK_TEXT'); ?>
+                     </label> <input type="text" name="link_new[item_name]"
+                        class="form-control input-sm input-medium" readonly />
+                  </div>
+                  <div id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>"
+                     class="form-group row">
+                     <label class="control-label col-lg-3" style="font-size: 13px"><?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?>
+                     </label> <input type="text" name="link_new[link_external_url]"
+                        value="" class="form-control input-sm input-medium" readonly />
+                  </div>
+                  <span id="AddLinkButton" class="btn btn-circle btn-default disabled" onclick=""> 
+                  <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                  </span>
+               </div>
+            </div>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a class="accordion-toggle accordion-toggle-styled collapsed"
+                     href="#collapse_4_5" data-parent="#accordion4"
+                     data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_SYSTEM_PAGE'); ?>
+                  </a>
+               </h4>
+            </div>
+            <div class="panel-collapse collapse" id="collapse_4_5" style="">
+               <div class="panel-body">
+                  <div class="tabbable-custom">
+                     <ul class="nav nav-tabs ">
+                        <li class="active"><a href="#tab_7_1"
+                           data-toggle="tab"> <?php xMsg('CMS', 'CMS_NAV_MENU_ALL'); ?> </a>
+                        </li>
+                        <li><a href="#tab_7_2" data-toggle="tab"> <?php xMsg('CMS', 'CMS_NAV_SEARCH'); ?> </a>
+                        </li>
+                     </ul>
+                     <div class="tab-content margin-bottom-10">
+                        <div id="tab_7_1" class="tab-pane active">
+                           <div
+                              id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>"
+                              class="form-group row">
+                           </div>
+                        </div>
+                        <div id="tab_7_2" class="tab-pane">
+                           <div class="form-group">
+                              <input class="quick-search form-control" type="text"
+                                 placeholder="Search" value="" name="search_pattern">
+                           </div>
+                           <div id="system-pages-list"
+                              name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>[link_system_page]"
+                              class="checkbox-list"></div>
+                        </div>
+                     </div>
+                     <span id="AddLinkButton" class="btn btn-circle btn-default disabled"
+                        onclick="AddNewLinkName(<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>);">
+                     <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                     </span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a class="accordion-toggle accordion-toggle-styled collapsed"
+                     href="#collapse_4_7" data-parent="#accordion4"
+                     data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_CATEGORY_LIST'); ?>
+                  </a>
+               </h4>
+            </div>
+            <div class="panel-collapse collapse" id="collapse_4_7" style="">
+               <div class="panel-body">
+                  <div class="tabbable-custom">
+                     <ul class="nav nav-tabs ">
+                        <li class="active"><a data-toggle="tab" href="#tab_8_1"> <?php xMsg('CMS', 'CMS_NAV_MENU_ALL'); ?> </a></li>
+                        <li><a data-toggle="tab" href="#tab_8_2"> <?php xMsg('CMS', 'CMS_NAV_SEARCH'); ?> </a></li>
+                     </ul>
+                     <div class="tab-content margin-bottom-10">
+                        <div id="tab_8_1" class="tab-pane active">
+                           <div
+                              id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>"
+                              class="form-group row">
+                           </div>
+                        </div>
+                        <div id="tab_8_2" class="tab-pane">
+                           <div class="form-group">
+                              <input class="quick-search form-control" type="text"
+                                 name="search_pattern" value=""
+                                 placeholder="Search"></input>
+                           </div>
+                           <div class="checkbox-list" name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>[link_category]" id="list-category"></div>
+                        </div>
+                     </div>
+                     <span id="AddLinkButton" class="btn btn-circle btn-default disabled"
+                        onclick="AddNewLinkName(<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>);">
+                     <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                     </span>
+                  </div>
+                  <!-- tab custom -->
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-8">
+      <div class="portlet box grey-cascade">
+         <div class="portlet-body form">
+            <div class="form-actions top right" id="nav_menu_create_top">
+               <div class="form-group col-lg-12">
+                  <label class="control-label col-lg-3 menu_label"><?php xMsg('CMS', 'CMS_NAV_MENU_NAME'); ?></label> 
+                  <span class="col-lg-7">
+                  <input class="form-control input-medium input-sm" type="text"
+                     placeholder="Enter menu name here" name="menu_data[menu_index]"
+                     value="<?php MenuIndex(); ?>" /> </span>
+                  <button id="UpdateButton1" class="btn blue input-sm" type="submit"
+                     onclick="document.forms['CMSMenuDataForm'].submit();"><?php xMsg('CMS', 'CMS_NAV_BTN_CREATE'); ?>
+                  </button>
+               </div>
+            </div>
+            <div class="form-body">
+               <div class="form-group">
+                  <input class="form-control input-medium" type="hidden"
+                     name="menu_data[menu_name]" value="" /> &nbsp;<br /> <label
+                     class="control-label"><?php xMsg('CMS', 'CMS_NAV_CONTENT'); ?></label>
+               </div>
+            </div>
+            <div class="form-actions right" id="create_nav_menu">
+               <button id="UpdateButton1" class="btn blue input-sm" type="submit"
+                  onclick="document.forms['CMSMenuDataForm'].submit();"><?php xMsg('CMS', 'CMS_NAV_BTN_CREATE'); ?></button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

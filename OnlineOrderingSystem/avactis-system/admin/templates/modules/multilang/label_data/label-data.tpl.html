@@ -1,0 +1,95 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+<!--
+var usage_text = "<?php LabelUsageText(); ?>";
+
+function showLabelUsage(field) {
+    if (!DOM) return;
+    field.value = field.value.toUpperCase();
+    result = "";
+    for(i=0; i < field.value.length; i++)
+        if ((field.value.charCodeAt(i) > 47 && field.value.charCodeAt(i) < 58)
+            || (field.value.charCodeAt(i) > 64 && field.value.charCodeAt(i) < 91)
+            || field.value.charCodeAt(i) == 95)
+            result = result + field.value.charAt(i);
+    field.value = result;
+    document.getElementById('usage_div').innerHTML = usage_text + field.value + "'); ?&gt;";
+}
+// -->
+</script>
+<div class="row margin-bottom-10">
+	<div class="col-sm-4 bold">
+		<?php xMsg('ML', 'ML_LANGUAGE'); ?>
+	</div>
+	<div class="col-sm-8">
+		<?php Language(); ?>
+	</div>
+</div>
+
+<div class="row margin-bottom-10">
+	<div class="col-sm-4 bold">
+		<?php xMsg('ML', 'ML_LABEL_NAME'); ?>
+	</div>
+	<div class="col-sm-8">
+		<?php LabelName(); ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php CustomName(); ?>
+	</div>
+</div>
+
+<div class="row margin-bottom-10">
+	<div class="col-sm-4 bold">
+		<?php xMsg('ML', 'ML_LABEL_ZONE'); ?>
+	</div>
+	<div class="col-sm-8">
+		<?php LabelZone(); ?>
+	</div>
+</div>
+
+<div class="row margin-bottom-10">
+	<div class="col-sm-4 bold">
+		<?php xMsg('ML', 'ML_LABEL_TYPE'); ?>
+	</div>
+	<div class="col-sm-8">
+		<?php LabelType(); ?>
+	</div>
+</div>
+
+<?php if (getLabelStatus()) { ?>
+<div class="row margin-bottom-10">
+	<div class="col-sm-4 bold">
+		<?php xMsg('ML', 'ML_LABEL_STATUS'); ?>
+	</div>
+	<div class="col-sm-8">
+		<?php LabelStatus(); ?>
+	</div>
+</div>
+<?php } ?>
+
+<div class="row margin-bottom-10">
+	<div class="col-sm-4 bold">
+		<?php xMsg('ML', 'ML_LABEL_USAGE'); ?>
+	</div>
+	<div class="col-sm-8">
+		<div id="usage_div"><?php LabelUsage(); ?></div>
+	</div>
+</div>
+
+<?php if (getLabelValue()) { ?>
+<div class="margin-bottom-10">
+	<div class="bold">
+		<?php xMsg('ML', 'ML_VALUE'); ?><br />(<?php xMsg('ML', 'ML_TO'); ?> <?php Language(); ?>)
+	</div>
+	<div align="center">
+		<?php LabelValue(); ?>
+	</div>
+</div>
+<?php } ?>
+
+<div class="margin-bottom-10">
+	<div class="bold">
+		<?php xMsg('ML', 'ML_DEFAULT_VALUE'); if (getDefLanguage()) { ?><br />(<?php xMsg('ML', 'ML_IN'); ?> <?php DefLanguage(); ?>)<?php } ?>
+	</div>
+	<div align="center">
+		<?php LabelDefValue(); ?>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

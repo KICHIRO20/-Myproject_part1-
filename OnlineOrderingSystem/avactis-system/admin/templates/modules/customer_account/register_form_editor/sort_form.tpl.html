@@ -1,0 +1,44 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript" src="js/shuttle.js"></script>
+<div class="portlet box" style="position: absolute; display: none;" id="SortRegForm">
+	<div class="page-content-wrapper">
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-blue-sharp bold uppercase"><?php xmsg('CA','SORT_ORDER'); ?></span>
+					<span><a href="javascript: void(0);" onClick="hideSortForm();"><button id="cboxClose" type="button">close</button></a></span>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-container form">
+					<form action="<?php SortFormAction(); ?>" method="post" name="SortForm">
+                	<input type="hidden" name="GroupName" value="<?php GroupName(); ?>">
+                	<table class="form" cellpadding="4" cellspacing="1" align="center" border="0" width="100%">
+                		<tr>
+                    		<td valign="bottom" align="center" width="10%">
+                    			<a href="javascript: void(0);" onClick="javascript: moveItemUp('SortOrder');"><i class="fa fa-arrow-up"></i></a>
+                    		</td>
+				            <td rowspan="2">
+				                <select id="SortOrder" name="SortOrder" style="width: 250px; height: 250px" size="8" class="margin-bottom-10 form-control"><?php SortItems(); ?></select>
+				                <input type="hidden" name="SortOrder.hidden" id="SortOrder.hidden" value="">
+				            </td>
+				        </tr>
+				        <tr>
+				            <td valign="top" align="center">
+				            	<a href="javascript: void(0);" onClick="javascript: moveItemDown('SortOrder');"><i class="fa fa-arrow-down"></i></a>
+				            </td>
+				        </tr>
+                	</table>
+					</form>
+				</div>
+				<div class="actions" align="center">
+					<div class="actions btn-set">
+      					<button id="UpdateSortOrderButton1" title="<?php msg('BTN_UPDATE'); ?>" onclick="document.forms['SortForm'].submit();" type="button" name="<?php msg('BTN_UPDATE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_UPDATE'); ?></span></button>
+      					<button id="CloseSortFormButton1" title="<?php msg('BTN_CANCEL'); ?>" onclick="hideSortForm();" type="button" name="<?php msg('BTN_CANCEL'); ?>" class="btn btn-default"><?php msg('BTN_CANCEL'); ?></button>
+      				</div>
+    			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

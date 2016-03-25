@@ -1,0 +1,199 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+.cats_block_td
+{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.cats_block_div
+{
+    overflow: auto;
+    border: solid 1px #CED4DD;
+    height: 300px;
+}
+</style>
+<!--[if lt IE 7]>
+<style type="text/css">
+.cats_block_td {
+    padding-left: 10px;
+    padding-right: 26px;
+}
+.cats_block_div
+{
+    overflow: scroll;
+    border: solid 1px #CED4DD;
+    height: 300px;
+}</style>
+<![endif]-->
+
+<?php ResultMessage(); ?>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-plus-circle"></i>&nbsp;<?php xmsg('CTL','MNG_PRODUCT_CATS'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			
+			<div id="UpdateButton1" class="btn btn-default btn-circle" onClick="submitProductCatsForm()">
+				<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+			</div>
+			
+			<?php
+            			if ($link = getProductInfoLink()) {
+                	?>
+					<div class="btn btn-default btn-circle" onclick="openURLinNewLargeWindow('<?php echo $link?>', 'ProductPreview')">
+						<i class="fa fa-eye"></i>&nbsp;<?php xmsg('CTL', 'PREVIEW_PRODUCT_BUTTON') ?>
+					</div>
+			<?php } ?>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!-- begin Bookmarks -->
+		<div class="caption font-green-sharp">
+			<strong><i class="fa fa-info-circle"></i>&nbsp;<?php msg('MNG_CTGR_CURR_PRD'); ?>&nbsp;</strong><?php ProductName(); ?>
+		</div>
+		<br />
+		<?php Local_ProductBookmarks(); ?>
+		<!-- end Bookmarks -->
+		
+		<div class="table-responsive">
+			<form action="mng_product_cats.php?asc_action=update_product_cats" name="ProductCatsForm" method="post">
+				<input type="hidden" name="product_id" value="<?php ProductID(); ?>">
+				<table class="table borderless table-bordered">
+					<tbody>
+						<tr>
+							<td class="text-left"><?php xmsg('CTL','TEXT_ABOVE_CATS_LIST'); ?></td>
+						</tr>
+						<tr>
+							<td class="text-center"><div id="cats_box_div" class="cats_block_div"></div></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td class="text-center">
+								<div id="UpdateButton2" class="btn btn-default btn-circle" onClick="submitProductCatsForm()">
+								<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+								</div>
+							</td>
+						</tr>
+
+					</tfoot>
+				</table>
+			</form>
+		</div>
+		
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+
+<style type="text/css">
+.cats_block
+{
+  font-size: 8pt;
+  font-family: Verdana, San-Serif;
+  font-weight: normal;
+  cursor: default;
+}
+.cats_block .selected_cat
+{
+  background: #EEF2F8;
+  font-weight: bold;
+}
+.cats_block .unselected_cat
+{
+  background: #FFFFFF;
+  font-weight: normal;
+}
+</style>
+
+<script language="JavaScript">
+
+<?php reloadPrent(); ?>
+
+function submitProductCatsForm()
+{
+    document.forms['ProductCatsForm'].submit();
+}
+
+function setSubmitButton()
+{
+    var frm = document.forms['ProductCatsForm'];
+    var one_checked = false;
+    for(i=0;i<frm.elements.length;i++)
+        if(frm.elements[i].name.indexOf('product_cats')==0 && frm.elements[i].checked)
+            one_checked = true;
+    
+    if(one_checked)
+    {
+        enableButton('UpdateButton1',function() { submitProductCatsForm(); });
+        enableButton('UpdateButton2',function() { submitProductCatsForm(); });
+    }
+    else
+    {
+        disableButton('UpdateButton1');
+        disableButton('UpdateButton2');
+    };
+}
+
+function onCatClick(el)
+{
+  if(el.className == 'active')
+  {
+    el.className = '';
+    el.cells[0].childNodes[0].checked = false;
+  }
+  else if(el.className == '')
+  {
+    el.className = 'active';
+    el.cells[0].childNodes[0].checked = true;
+  };
+  
+  setSubmitButton();
+}
+
+function createCategoriesBox(container_id,cats_array,onclick_string)
+{
+  _html = '<table class="table borderless table-hover cats_block"';
+  
+  for(i=0;i<cats_array.length;i++)
+  {
+    if(i != 0)
+      _html += '<tr></tr>';
+    _class = cats_array[i].status == 'n' ? '' : 'active';
+    _cb_stat = cats_array[i].status == 'n' ? '' : ' checked';
+    _cb_dis = cats_array[i].status == 'm' ? ' disabled' : '';
+    _html += '<tr class="'+_class+'" onClick="'+(cats_array[i].status == 'm' ? '' : onclick_string)+'">';
+    _html += '<td width="2%"><input type="checkbox" name="product_cats['+cats_array[i].el_id+']"'+_cb_stat+_cb_dis+'></td>';
+    _html += '<td class="text-left">'+cats_array[i].display_string+'</td>';
+    _html += '</tr>';
+  }
+  
+  _html += '</table>';
+  document.getElementById(container_id).innerHTML = _html;
+}
+
+<?php jsCatsArray(); ?>
+
+var win_onload_back = window.onload;
+window.onload = function() {
+    if(win_onload_back)
+        win_onload_back();
+    createCategoriesBox('cats_box_div',cats_arr,'onCatClick(this)');
+};
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

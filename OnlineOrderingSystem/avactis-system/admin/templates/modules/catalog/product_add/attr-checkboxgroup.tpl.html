@@ -1,0 +1,18 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row margin-bottom-10">
+	<div class="col-sm-2">
+		<label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div>			
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(), getAttributeTag()); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">  
+		<input type="radio" name="mradio" onclick="jQuery('.<?php AttributeTag(); ?>').attr('disabled',true).attr('checked', false);" checked /> <?php xMsg('CA','LBL_VISIBLE_FOR_ALL'); ?><br/>
+		<input type="radio" name="mradio" onclick="jQuery('.<?php AttributeTag(); ?>').attr('disabled',false);" /> <?php xMsg('CA','LBL_VISIBLE_FOR_GROUPS_BELOW'); ?><br/><?php AttributeCheckboxes(); ?>
+		<INPUT TYPE="hidden" name="<?php AttributeTagHidden(); ?>" value="<?php AttributeDefaultValue(); ?>">
+		<INPUT TYPE="hidden" name="<?php AttributeTag(); ?>" value="-1" class="membership_str" />
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

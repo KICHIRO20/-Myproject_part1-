@@ -1,0 +1,91 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function formSubmitAdminMembersList(formId, formTarget)
+{
+    var form = document.forms[formId];
+
+    var is_selected = false;
+
+    var i=0;
+    var elem = document.getElementById('select_'+i);
+    while (elem)
+    {
+        if (elem.checked)
+        {
+            is_selected = true;
+            break;
+        }
+        i++;
+        elem = document.getElementById('select_'+i);
+    }
+    if(!is_selected)
+    {
+        alert('<?php Msg("ADMIN_DELETE_MEMBER_WARNING_002"); ?>');
+        return; 
+    }
+
+    form.target = formTarget;
+
+    form.submit();
+}
+//-->
+</SCRIPT>
+<FORM <?php FORM(); ?> id="AdminMembersList">
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg("ADMIN_MEMBERS_PAGE_TITLE"); ?></span>
+			<span class="caption-helper text-lowercase">...</span>
+		</div>
+		<div class="actions">
+        <?php Buttons(); ?>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="table-container" style="">
+			<div id="datatable_orders_wrapper" class="dataTables_wrapper dataTables_extended_wrapper no-footer">
+				<div class="table-scrollable">
+					<table id="datatable_orders" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="datatable_orders_info" role="grid">
+						<thead>
+							<tr class="heading" role="row">
+								<th width="2%" class="sorting_disabled" rowspan="1" colspan="1">
+									<input type="checkbox" onclick="selectItems('SearchResults');" id="SelectAll">
+								</th>
+								<th width="5%" class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php Msg("ADMIN_MEMBERS_TABLE_HEADER_001"); ?>
+								</th>
+								<th width="15%" class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php Msg("ADMIN_MEMBERS_TABLE_HEADER_002"); ?>
+								</th>
+								<th width="10%" class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php Msg("ADMIN_MEMBERS_TABLE_HEADER_003"); ?>
+								</th>
+								<th width="15%" class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php Msg("ADMIN_MEMBERS_TABLE_HEADER_004"); ?>
+								</th>
+								<th width="10%" class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php Msg("ADMIN_MEMBERS_TABLE_HEADER_005"); ?>
+								</th>
+								<th width="10%" class="sorting" tabindex="0" aria-controls="datatable_orders" rowspan="1" colspan="1">
+									<?php Msg("ADMIN_MEMBERS_TABLE_HEADER_006"); ?>
+     </th>
+								
+</tr>
+</thead>
+						<tbody>
+<?php Items(); ?>
+						</tbody>
+    </table>
+				</div>				
+			</div>
+		</div>
+	</div>
+<div class="portlet-title">
+		<div class="actions">
+            <?php Buttons(); ?>
+		</div>
+	</div>
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

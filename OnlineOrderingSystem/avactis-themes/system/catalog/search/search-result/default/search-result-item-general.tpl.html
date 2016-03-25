@@ -1,0 +1,12 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="product_item">
+    <?php if(($i=getProductSmallImage())!=''): ?>
+    <div class="product_img"><a href="<?php ProductInfoLink(); ?>"><?php echo $i; ?></a></div>
+    <?php endif; ?>
+    <div class="product_name"><a href="<?php ProductInfoLink(); ?>"><?php ProductName(); ?></a></div>
+    <div class="product_rating"><?php ProductRating(); ?></div>
+    <div class="product_sale_price"><span class="label"><?php Label("CATALOG_SALE_PRICE_COLON"); ?></span><span class="value"><?php ProductSalePrice(); ?></span></div>
+    <br/>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

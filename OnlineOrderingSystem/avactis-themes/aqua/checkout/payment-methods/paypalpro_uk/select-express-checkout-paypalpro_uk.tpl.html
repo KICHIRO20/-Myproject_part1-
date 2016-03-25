@@ -1,0 +1,16 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="paypalpro_uk_expresscheckout">
+        <div><?php Local_PaymentMethodName(); ?></div>
+        <div>
+            <?php $v = getLocal_ErrorMessage(); if ($v != '') { ?><div class="error_message"><?php echo $v; ?></div><?php } ?>
+            <div>
+            <!-- Required PayPal Pro Tag Begin (DO NOT REMOVE!) -->
+            <?php Local_PayPalProUKExpressCheckoutMethod(); ?>
+            </div>
+            <div>
+            <!-- Required PayPal Pro Tag End (DO NOT REMOVE!) -->
+            <?php Label('CHECKOUT_PAYPAL_PRO_UK_EXPRESS_CHECKOUT2_MESSAGE'); ?>
+            </div>
+        </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

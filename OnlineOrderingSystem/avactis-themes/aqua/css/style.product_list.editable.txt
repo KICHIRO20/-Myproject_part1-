@@ -1,0 +1,152 @@
+[Product List Subheader]
+.product_list .subheader {
+    text;
+    background;
+    border;
+}
+
+[Product List Toolbar]
+.product_list .toolbar {
+    border;
+}
+
+[Product List Top Toolbar]
+.product_list .toolbar.top {
+    border;
+}
+
+[Product List Bottom Toolbar]
+.product_list .toolbar.bottom {
+    border;
+    background;
+}
+
+[Products Box Content]
+.box.product_list .content {
+    padding;
+}
+
+[Product List Empty]
+.checkout .product_list_items.empty,
+.shoppingcart .product_list_items.empty,
+.product_list .product_list_items.empty {
+    padding;
+    text;
+    text-align;
+    line-height;
+}
+
+[Product List - View All Link Container]
+.product_list .view_all_link {
+    text;
+    padding;
+    margin;
+}
+
+[Center Column Product List - View All Link Container]
+.center_column .product_list .view_all_link {
+    position;
+}
+
+[Center Column Product List - View All Link]
+.center_column .product_list .view_all_link a {
+    text;
+}
+
+
+[Product Item]
+.product_item {
+    width;
+    text-align;
+}
+
+[4 Columns List - Product Item]
+.product_list_items.columns_4  .product_item {
+    width;
+}
+
+[5 Columns List - Product Item]
+.product_list_items.columns_5  .product_item {
+    width;
+}
+
+[Product Item Rating Box]
+.product_item .product_rating .rating-box {
+    margin;
+}
+
+[Product Item - Image Section]
+.product_item .product_img {
+    text-align;
+    width;
+    padding;
+    margin;
+}
+
+[Product Item - Product Name]
+.product_item .product_name a {
+    text;
+}
+[Product Item - Product Name Hovered]
+.product_item .product_name a:hover {
+    text;
+    background;
+}
+
+[Product Item - Rating Section]
+.product_item .product_rating {
+    margin;
+    padding;
+    width;
+}
+
+[Product Item - List Price Section]
+.product_item .product_list_price {
+    text;
+    width;
+    padding;
+    margin;
+}
+[Product Item - List Price Value]
+.product_item .product_list_price .value {
+    text;
+}
+
+[Product Item - Sale Price Section]
+.product_item .product_sale_price {
+    text;
+    width;
+    padding;
+    margin;
+}
+[Product Item - Sale Price Value]
+.product_item .product_sale_price .value {
+    text;
+}
+
+[Product Item - Limited Inventory]
+.product_item .limited_inventory {
+    text;
+    background;
+}
+
+[Product Item - Buttons Section]
+.product_item .product_buttons {
+    padding;
+    margin;
+}
+
+
+[Product Item in Side Column]
+.left_column .product_list.bestsellers .product_item,
+.right_column .product_list.bestsellers .product_item,
+.left_column .product_list.related_products .product_item,
+.right_column .product_list.related_products .product_item,
+.left_column .product_list.featured_products .product_item,
+.right_column .product_list.featured_products .product_item {
+    width;
+    border;
+    padding;
+    margin;
+}
+

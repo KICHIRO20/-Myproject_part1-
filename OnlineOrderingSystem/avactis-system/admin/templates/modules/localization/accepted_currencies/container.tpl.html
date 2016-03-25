@@ -1,0 +1,77 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!-- 
+    function changeCurrencyActivation(el, id)
+    {
+        if(!el.checked)
+        {
+            el_default_currency = document.getElementById("default_" + id);
+            //If currency is the default currency, don't allow to deactivate
+            if(el_default_currency.checked)
+            {
+                return false;
+            }
+            else
+            {
+                changeCountryStateActivation(el);
+                return true;
+            }
+        }
+        changeCountryStateActivation(el);
+        return true;
+    }
+//-->
+</SCRIPT>
+
+
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center" border=0>
+<tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" colspan="4" style="padding: 0px 0px 0px 4px;"><?php Msg('MNG_CNTR_PAGE_NAME'); ?></td>
+</tr>
+<tr class="subtitle" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="4" style="padding: 0px 0px 0px 4px;">
+        <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="80%"><?php Msg('MNG_CURR_PAGE_HEADER'); ?></td>
+            <td nowrap style="padding-right: 8px;"><?php PageHelpLink('localization_accepted_currencies'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('localization_accepted_currencies'); ?></td>
+            <td nowrap style="padding-right: 6px;"><div id="UpdateButton1" class="button button_5em" onclick="UpdateAcceptedCurrenciesForm.submit();"><?php Msg('BTN_SAVE'); ?></div></td>
+            <td nowrap style="padding-right: 10px;"><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg('BTN_CANCEL'); ?></div></td>
+        </tr>
+        </table>
+    </td>
+</tr>
+<tr  class="group">
+    <td width="10%" style="text-align: center;" class="label popup_dialog_body_left_padded"><?php Msg('MNG_CURR_TABLE_HEADER_001'); ?></td>
+    <td class="help" style="text-align: center;"><?php Msg('MNG_CURR_TABLE_HEADER_002'); ?></td>
+    <td width="10%" style="text-align: center;" class="label"><?php Msg('MNG_CURR_TABLE_HEADER_003'); ?></td>
+    <td width="10%" style="text-align: center;" class="label popup_dialog_body_right_padded"><?php Msg('MNG_CURR_TABLE_HEADER_004'); ?></td>
+</tr>
+<FORM <?php UpdateAcceptedCurrenciesForm(); ?> id="UpdateAcceptedCurrenciesForm">
+<?php HiddenArrayViewState(); ?>
+<?php Items(); ?>
+</FORM>
+<tr>
+    <td colspan=4 align=center>
+<!--        <php PaginatorLine(); ?>-->
+    </td>
+</tr>
+<tr>
+    <td colspan=4 align=center>
+<!--        <php PaginatorRows(); ?>-->
+    </td>
+</tr>
+<tfoot>
+    <tr>
+        <th colspan=4 align="center">
+            <table width="100%" class="clear" >
+                <tr>
+                    <td align=right style="padding-right: 4px;"><div id="UpdateButton2" class="button button_5em" onclick="UpdateAcceptedCurrenciesForm.submit();"><?php Msg('BTN_SAVE'); ?></div></td>
+                    <td align=left ><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg('BTN_CANCEL'); ?></div></td>
+                </tr>
+            </table>
+        </th>
+    </tr>
+</tfoot>
+</table>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

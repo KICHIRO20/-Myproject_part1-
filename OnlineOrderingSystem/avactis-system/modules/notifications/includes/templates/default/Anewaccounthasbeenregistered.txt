@@ -1,0 +1,15 @@
+{StoreOwnerWebsite}. Your account has been registered.
+Dear {CustomerFirstname},
+
+You have successfully registered with {StoreOwnerWebsite}.
+
+Account Name: {AccountName}
+First Name: {CustomerFirstname}
+Last Name: {CustomerLastname}
+
+Thank you for visiting our store!
+
+-------------------------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}
+-------------------------------------------------------------

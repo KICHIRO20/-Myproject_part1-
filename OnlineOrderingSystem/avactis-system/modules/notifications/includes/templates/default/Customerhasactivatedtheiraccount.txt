@@ -1,0 +1,11 @@
+{StoreOwnerName}. You have successfully activated your account {AccountName}.
+Dear {CustomerFirstname},
+
+You have successfully activated your account {AccountName} on our website {StoreOwnerWebsite}
+
+Thank you for visiting our store!
+
+-------------------------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}
+-------------------------------------------------------------

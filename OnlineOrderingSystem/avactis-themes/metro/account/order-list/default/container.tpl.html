@@ -1,0 +1,18 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+    <div class="note note-success"><?php Local_FilterInfo(); ?></div>
+<div class="goods-data">
+<table class="order_list">
+<tr>
+    <th class="order_id"><?php Label('ACCOUNT_ORDER_ID_LABEL'); ?></th>
+    <th class="order_id"><?php Label("ACCOUNT_INVOICE_ORDER_LIST"); ?></th>
+    <th class="order_date"><?php Label('ACCOUNT_ORDER_DATE_LABEL'); ?></th>
+    <th class="order_amount"><?php Label('ACCOUNT_AMOUNT_LABEL'); ?></th>
+    <th class="order_tax"><?php Label("ACCOUNT_TAX_ORDER_LIST"); ?></th>
+    <th class="order_status"><?php Label('ACCOUNT_ORDER_STATUS_LABEL'); ?></th>
+    <th class="order_payment_status"><?php Label('ACCOUNT_PAYMENT_STATUS_LABEL'); ?></th>
+    <?php echo apply_filters("cz_orderlist_addcolumn","");?>	
+</tr>
+<?php Local_Items(); ?>
+</table>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

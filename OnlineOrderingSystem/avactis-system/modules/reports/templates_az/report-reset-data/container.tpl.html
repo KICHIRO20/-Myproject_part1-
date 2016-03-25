@@ -1,0 +1,73 @@
+<hr>
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript" type="text/javascript">
+   <!--
+      
+      function ResetDataOnSubmit()
+      {
+          var warning = new String('{CONFIRM_WARNING}');
+          result = confirm(warning);
+          if (result)
+          {
+              jQuery.post(
+                  'jquery_ajax_handler.php', // backend
+                  {
+                      'asc_action': 'ClearStat',
+                      'ResetReportScope': document.getElementById('scope').value
+                  },
+                  // Function is called when an answer arrives. 
+                  function(result, output) 
+                  {
+                      alert('{REPORT_DATA_RESET}');
+                      if(!(!window.opener || window.opener.closed))
+                      {
+                          window.opener.focus();
+                      }
+                      window.close();
+                  },
+                  'json'
+              );
+          }
+          return false;
+      }
+      // -->
+</SCRIPT>
+   <!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+  <div class="portlet-title">
+     <div class="caption">
+        <span class="caption-subject font-green-sharp bold uppercase"> <i
+           class="fa fa-file-text"></i>&nbsp;<?php xmsg('RPTS',"RESET_DATA_PAGE_TITLE"); ?>
+        </span>
+     </div>
+  </div>
+  <div class="portlet-body">
+     <div class="row">
+        <div class="col-md-12">
+           <div class="alert alert-warning alert-bordered" role="alert">
+              <?php xmsg('RPTS','RESET_DATA_WARNING'); ?>
+			</div>
+		</div>
+	</div>
+	<form>
+		<div class="row">
+           <div class="col-sm-6">
+              <label class="radio-inline"><span>
+				<input checked type="radio" name="resetReportScope" value="ClearVisitorStat"> </span> <?php xmsg('RPTS',"VISITORS_REPORTS"); ?>
+              &nbsp;&nbsp;</label> <label class="radio-inline"><span><input
+                 type="radio" name="resetReportScope" value="ClearSaleStat"> </span>
+              <?php xmsg('RPTS',"SALE_REPORTS"); ?> &nbsp;&nbsp;</label> <label
+                 class="radio-inline"><span><input type="radio"
+                 name="resetReportScope" value="ClearAllStat"> </span> <?php xmsg('RPTS',"BOTH_REPORTS"); ?>
+              &nbsp;&nbsp;</label> <input type="hidden" name="scope" value="" id="scope">
+           </div>
+           <div class="col-sm-6">
+					<a class="btn red" onclick="ResetDataOnSubmit();" id="EditButton2" style=""><i class="fa fa-times"></i> <?php Msg("BTN_RESET"); ?></a>
+			</div>
+		</div>
+	</form>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) -->
+<hr>

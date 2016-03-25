@@ -1,0 +1,185 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+   jQuery(function  () {
+      jQuery("#accordion3").sortable()
+   });
+</script>
+<div class="col-lg-10 margin-bottom-10 nav_menu_item"
+   value="sort_menu[<?php MenuItemID(); ?>];">
+   <div class="panel panel-default">
+      <div class="panel-heading">
+         <h4 class="panel-title">
+            <a class="accordion-toggle accordion-toggle-styled collapsed"
+               href="#<?php MenuItemID(); ?>" data-parent="#accordion3"
+               data-toggle="collapse">
+            <?php MenuItemName(); ?> </a>
+         </h4>
+         <div class="tools">
+            <?php MenuItemTypeName(); ?>
+         </div>
+      </div>
+      <div id="<?php MenuItemID(); ?>" class="panel-collapse collapse" style="height: 0px;">
+         <div class="panel-body">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label class="control-label"><?php xMsg('CMS', 'CMS_NAV_MENU_LABEL'); ?></label> <input
+                     type="text" class="form-control input-sm"
+                     name="link[<?php MenuItemID(); ?>][item_name]"
+                     value="<?php MenuItemName(); ?>" />
+               </div>
+            </div>
+            <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_EXTERNAL_URL) { ?>
+            <div class="col-md-6">
+               <label class="control-label">
+               <?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?>
+               </label>
+               <div class="form-group">
+                  <div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>"
+                     <?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_EXTERNAL_URL) {
+                        ?> style="display: none;"
+                     <?php } ?>>
+                     <input type="text" name="link[<?php MenuItemID(); ?>][link_external_url]" 
+                     value="<?php MenuItemLinkURL(); ?>" class="form-control input-sm" />
+                  </div>
+               </div>
+            </div>
+            <?php } ?>
+            <div class="col-md-6" style="display: none;">
+               <label class="control-label"><?php xMsg('CMS', 'CMS_MENU_ITEMS'); ?></label> 
+               <select
+                  name="link[<?php MenuItemID(); ?>][item_type]"
+                  onchange="checkLinkType(this, 'link_<?php MenuItemID(); ?>_', 'link[<?php MenuItemID(); ?>][link_system_page]');"
+                  class="form-control input-sm">
+                  <option value="<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>" <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_URL) { ?> selected="selected"<?php } ?> >
+                     <?php xMsg('CMS', 'CMS_MENU_TYPE_URL'); ?>
+                  </option>
+                  <option value="<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>"
+                     <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_SYSTEM_PAGE) {
+                        ?> selected="selected"
+                     <?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_SYSTEM_PAGE'); ?></option>
+                  <option value="<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>"
+                     <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_STATIC_PAGE) {
+                        ?> selected="selected"
+                     <?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_STATIC_PAGE'); ?></option>
+                  <option value="<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>"
+                     <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_TEXT) { ?>
+                     selected="selected"
+                     <?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_TEXT'); ?></option>
+                  <option value="<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>"
+                     <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_EXTERNAL_URL) {
+                        ?> selected="selected"
+                     <?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?></option>
+                  <option value="<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>"
+                     <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_CATEGORY_LIST)
+                        { ?> selected="selected"
+                     <?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_CATEGORY_LIST'); ?></option>
+               </select>
+            </div>
+            <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_URL) { ?>
+            <div class="col-md-6">
+               <label class="control-label"> <?php xMsg('CMS', 'CMS_MENU_TYPE_URL'); ?>
+               </label>
+               <div class="form-group">
+                  <div
+                     id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>"
+                     <?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_URL) { ?>
+                     style="display: none;"
+                     <?php } ?>>
+                     <input type="text" name="link[<?php MenuItemID(); ?>][link_url]" value="<?php MenuItemLinkURL(); ?>" class="form-control input-sm" />
+                  </div>
+               </div>
+            </div>
+            <?php } ?>
+            <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_CATEGORY_LIST) { ?>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <div
+                     id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>_prodlist">
+                     <label class="control-label">
+                     <?php xMsg('CMS', 'CMS_MENU_ITEM_CATEGORY_ID'); ?>:&nbsp;</label> <input
+                        type="text" name="link[<?php MenuItemID(); ?>][list_catid]"
+                        value="<?php MenuItemParam1(); ?>"
+                        class="form-control input-sm input-xsmall" />
+                  </div>
+               </div>
+            </div>
+            <?php } ?>
+            <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_SYSTEM_PAGE) { ?>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <div
+                     id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>"
+                     <?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_SYSTEM_PAGE) {
+                        ?> style="display: none;"
+                     <?php } ?>>
+                     <?php if (getMenuSystemCount()) { ?>
+                     <select name="link[<?php MenuItemID(); ?>][link_system_page]" class="form-control input-sm" style="display:none;">
+                        <!--  <?php MenuItemSystemPages(); ?> -->
+                     </select>
+                     <?php } else { ?>
+                     <label class="control-label"><?php xMsg('CMS', 'CMS_MENU_NO_SYSTEM_PAGES'); ?></label>
+                     <?php } ?>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <!--  <div class="form-group">
+                  <div
+                  	id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>_prodinfo"
+                  	style="">
+                  
+                  	<?php xMsg('CMS', 'CMS_MENU_ITEM_PRODUCT_ID'); ?>
+                  	:&nbsp; <input type="text"
+                  		name="link[<?php MenuItemID(); ?>][info_prodid]"
+                  		value="<?php MenuItemParam2(); ?>"
+                  		class="form-control input-sm input-xsmall" />
+                  </div>
+                  </div>-->
+            </div>
+            <?php } ?>
+            <?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_STATIC_PAGE) { ?>
+            <div class="col-md-6">
+               <label class="control-label">
+               <?php xMsg('CMS', 'CMS_MENU_TYPE_STATIC_PAGE'); ?>
+               </label>
+               <div class="form-group">
+                  <div
+                     id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>"
+                     <?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_STATIC_PAGE) {
+                        ?> style="display: none;"
+                     <?php } ?> >
+                     <a href="../../cmspage.php?page_id=<?php MenuItemLink(); ?>" target="_blank"><?php MenuItemName(); ?></a>
+                     <?php if (getMenuStaticCount()) { ?>
+                     <select  class= "form-control input-sm" name="link[<?php MenuItemID(); ?>][link_static_page]" style="display:none;">
+                     </select> 
+                     <?php } else { ?>
+                     <?php xMsg('CMS', 'CMS_MENU_NO_STATIC_PAGES'); ?>
+                     <?php } ?>
+                  </div>
+               </div>
+            </div>
+            <?php } ?>
+            <div
+               id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>"
+               <?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_TEXT) { ?>
+               style="display: none;"
+               <?php } ?>>
+               &nbsp; 
+            </div>
+            <div class="form-group col-lg-12 nav_menu_status">
+               <label class="col-lg-2"> <input
+                  type="checkbox" name="link[<?php MenuItemID(); ?>][item_status]"<?php
+                     if (getMenuItemStatus() == CMS_MENU_ITEM_STATUS_ACTIVE) { ?>
+                  checked="checked"<?php } ?> > </input><span><?php xMsg('CMS', 'CMS_ACTIVE_STATUS'); ?></span>
+               |</label> <label class="remove_menu_item"><a
+                  class="delete[<?php MenuItemID(); ?>]" id="<?php MenuItemID(); ?>"
+                  name="delete[<?php MenuItemID(); ?>]" href="javascript:void(0);"
+                  onclick="DeleteSelectedItems(<?php MenuItemID(); ?>);"><?php xMsg('CMS', 'CMS_NAV_MENU_REMOVE'); ?></a>
+               </label>
+            </div>
+         </div>
+         <!-- panel body -->
+      </div>
+   </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

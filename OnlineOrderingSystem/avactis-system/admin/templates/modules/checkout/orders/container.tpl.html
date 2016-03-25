@@ -1,0 +1,91 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function onStatusChanged (orderId) {
+    if (!DOM) return;
+    checkbox = document.getElementById('select_'+orderId);
+    checkbox.checked = true;
+    selectRow(checkbox);
+}
+
+//-->
+</SCRIPT>
+
+<!-- BEGIN DASHBOARD STATS -->
+<div class="row">
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light blue-soft" href="orders.php?asc_action=OrdersSearchByStatus&status_id=1">
+			<div class="visual">
+				<i class="fa fa-star"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountByStatus1(); ?>
+				</div>
+				<div class="desc">
+					<?php msg('ORDERS_SEARCH_NEW_ORDERS'); ?>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light red-soft" href="orders.php?asc_action=OrdersSearchByStatus&status_id=2">
+			<div class="visual">
+				<i class="fa fa-forward"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountByStatus2(); ?>
+				</div>
+				<div class="desc">
+					<?php msg('ORDERS_SEARCH_IN_PROGRESS'); ?>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light green-soft" href="orders.php?asc_action=OrdersSearchByStatus&status_id=3">
+			<div class="visual">
+				<i class="fa fa-truck"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountByStatus3(); ?>
+				</div>
+				<div class="desc">
+					<?php msg('ORDERS_SEARCH_READY_TO_SHIP'); ?>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light purple-soft" href="orders.php?asc_action=OrdersSearchByStatus&status_id=0">
+			<div class="visual">
+				<i class="fa fa-shopping-cart"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountByStatus0(); ?>
+				</div>
+				<div class="desc">
+					<?php msg('ORDERS_SEARCH_ALL'); ?>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+<!-- END DASHBOARD STATS -->
+<div class="clearfix"></div>
+
+<?php ResultMessageRow(); ?>
+<?php SearchOrders(); ?>
+<?php SearchResults(); ?>
+<table cellspacing="0" cellpadding="5" width="100%">
+    <tr>
+        <td style="text-align: center" width="100%"><?php PaginatorLine(); ?></td>
+    </tr>
+    <tr>
+        <td style="text-align: center" width="100%"><?php PaginatorRows(); ?></td>
+    </tr>
+</table>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

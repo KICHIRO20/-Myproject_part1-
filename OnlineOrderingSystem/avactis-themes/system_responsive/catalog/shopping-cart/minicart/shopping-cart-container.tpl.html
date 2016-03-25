@@ -1,0 +1,23 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box minishoppingcart nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("CATALOG_YOUR_CART"); ?></h1>
+        <?php Local_Items(); ?>
+        <div class="clear_both"></div>
+        <div class="shoppingcart_total">
+            <span class="total_name"><?php Label("CATALOG_SUBTOTAL"); ?><?php Label('CATALOG_COLON'); ?></span>
+            <span class="total_value"><?php ShoppingCartSubtotal(); ?></span>
+        </div>
+        <div class="cart_buttons">
+        <a href="<?php PageURL('CartContent'); ?>"><?php Label("CATALOG_MANAGE_CART"); ?></a>
+        <?php if (!getLocal_HideCheckoutLink()) { ?>
+        <a href="<?php PageURL('CheckoutView'); ?>"><?php Label("CATALOG_CHECKOUT"); ?></a>
+        <?php } ?>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,50 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main checkout step_3_active nogradient">
+    <div class="container">
+        <h1><?php Label("CHECKOUT_CHECKOUT"); ?><?php CustomerSignInOutHint(); ?></h1>
+        <form name="<?php Local_FormName(); ?>" action="<?php Local_ConfirmationFormAction(); ?>" method="<?php Local_FormMethod(); ?>">
+        <?php Local_FormHiddenFields(); ?>
+        <div class="checkout_rule">
+	            <span class="step_1"><?php Label("CHECKOUT_STEP_1"); ?></span>
+	            <span class="step_1_2"></span>
+            </div>
+            <div class="checkout_rule ">
+	          <span class="step_2"><?php Label("CHECKOUT_STEP_2"); ?></span>
+	            <span class="step_2_3"></span>
+            </div>
+        <div class="checkout_rule step_3_active">
+            <span class="step_3"><?php Label("CHECKOUT_STEP_3"); ?></span>
+        </div>
+        <?php if (($m=getCheckoutErrors())!=''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+        <div class="box checkout_addresses">
+            <div class="content-page">
+                <div class="header">
+                    <h3 class="shipping_form"><?php Label("CHECKOUT_SHIPPING_ADDRESS"); ?></h3>
+                    <h3 class="billing_form"><?php Label("CHECKOUT_BILLING_ADDRESS"); ?></h3>
+                </div>
+                <div class="shipping_form col-lg-6"><?php CheckoutShippingInfoOutput(); ?></div>
+                <div class="billing_form col-lg-6"><?php CheckoutBillingInfoOutput(); ?></div>
+                <div class="clear_both"></div>
+                <div class="content-page  selected_payment_shipping_methods">
+                    <h3><?php Label("CHECKOUT_BILLING_AND_SHIPPING_OPTIONS"); ?></h3>
+                    <div class="selected_payment_method" style="overflow:hidden">
+                        <span class="col-lg-2"><?php Label("CHECKOUT_PAYMENT_METHOD_COLON"); ?></span>
+                       <div class="payment_method_list col-lg-5"> <?php CheckoutPaymentMethodsOutput(); ?></div>
+                    </div>
+                    <div class="selected_shipping_method">
+                        <span class="col-lg-2"><?php Label("CHECKOUT_SHIPPING_METHOD_COLON"); ?></span>
+                       <div class="shipping_method_list col-lg-5"><?php CheckoutShippingMethodsOutput(); ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php CheckoutSummary(); ?>
+        <?php SubscribeOnCheckoutOutput(); ?>
+        <div class="checkout_buttons">
+            <a href="<?php CheckoutStepLink(2); ?>"><span class="<?php lang(); ?>  btn btn-default button_back"><?php Label('CHECKOUT_BACK_TO_PREVIOUS_STEP'); ?></span></a>
+            <input type="submit" value="<?php Msg('PLACE_ORDER'); ?>" class="<?php lang(); ?> btn btn-primary button_place_order" />
+        </div>
+        </form>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

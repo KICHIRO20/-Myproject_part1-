@@ -1,0 +1,100 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var groups = new Array();
+      jQuery.map(jQuery('.MembershipVisibility'), function(checkbox){
+        if(checkbox.checked) groups.push(checkbox.value);
+      });
+      var gr_str = groups.join('|');
+      if(gr_str!='') $('.membership_str').val(gr_str);
+      var form = document.getElementById(formname);
+      if (form.SelectTypeID.value == '')
+          return;
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+
+    function SaveAndAddAnother(formname)
+    {
+        var form = document.getElementById(formname);
+        if (form.SelectTypeID.value == '')
+            return;
+        form.addAnother.value = "true";
+        form.submit();
+    }
+
+    function formElementOnFocus()
+    {
+        return true;
+//        formSaveOnFocus();
+    }
+
+    function formSaveOnFocus()
+    {
+        switch(<?php nOnFocusMode(); ?>)
+        {
+            case 1: document.forms['CatalogAddProduct'].elements['SelectTypeID'].focus(); showPopup_addProduct(document.forms['CatalogAddProduct'].elements['SelectTypeID'], '<?php msg("ADD_PRD_PRDTYPE_WRNG"); ?>'); return false; break; 
+            case 2: return true;break;
+            default: break;
+        }
+    }
+
+    function _disableButtons()
+    {
+        var buttons = new Array('SaveButton1','SaveButton2','SaveAddButton1','SaveAddButton2','CancelButton1','CancelButton2','UploadButton');
+        disableButtons(buttons);
+        var prodtype = document.getElementById('ProductTypeSelect');
+        prodtype.onchange = "";
+    }
+
+    <?php refreshParent(); ?>
+  </script>
+  <div class="portlet light">
+<div class="portlet">
+<div class="portlet-title">
+	<div class="caption">
+		<i class="fa fa-gift font-green-sharp"></i>
+		<span class="caption-subject font-green-sharp bold uppercase"><?php msg('MNG_PRD_CURR_CTGR'); ?> <?php Breadcrumb(); ?></span>
+		<span class="caption-helper text-lowercase"><?php msg('ADD_PRD_PAGE_NAME'); ?></span>
+	</div>
+	<div class="actions">
+		<div class="actions btn-set">
+			<button title="Save" onclick="if(formSaveOnFocus()){submitHandler('CatalogAddProduct'); _disableButtons();}" type="button" name="btn_save" class="btn btn-circle btn-default" id="SaveButton1"><i class="fa fa-save"></i> <span class="hidden-480">Save</span></button>
+			<button title="<?php msg('BTN_SAVEANDADDANOTHER_NEW_PRD_TITLE'); ?>" onclick="if(formSaveOnFocus()){SaveAndAddAnother('CatalogAddProduct'); _disableButtons();}" type="button" name="btn_save" class="btn btn-circle btn-default" id="SaveAddButton1"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVEANDADDANOTHER_NEW_PRD'); ?></span></button>
+		</div>
+	</div>
+</div></div>
+<div class="portlet-body">
+<?php Local_ProductBookmarks(); ?>
+  <form action="catalog_addproduct.php" method="post" id="CatalogAddProduct" name="CatalogAddProduct" enctype="multipart/form-data">
+  <input type="hidden" name="asc_action" value="AddProductInfoAction">
+  <input type="hidden" name="addAnother" value="false">
+  <input type="hidden" name="FormSubmitValue" value="UploadImagesAndSave">
+  <input type="hidden" name="ViewState[hasCloseScript]" value="<?php ViewStateClose(); ?>">
+  <input type="hidden" name="ViewState[LargeImage]" value="<?php ViewStateLargeImage(); ?>" id="ViewState_LargeImage">
+  <input type="hidden" name="ViewState[SmallImage]" value="<?php ViewStateSmallImageRelativePath(); ?>" id="ViewState_SmallImage">
+  <input type="hidden" name="ViewState[TypeID]" value="<?php ViewStateTypeID(); ?>">
+  <input type="hidden" name="TypeID" value="<?php ProductTypeID(); ?>">
+  <input type="hidden" name="TypeName" value="<?php ProductTypeName(); ?>">
+   <?php Errors(); ?>
+  <div class="tab-content">
+  <div class="tab-pane active" id="tab_1">
+  <div class="panel-group" id="accordion1">
+  <?php Items(); ?>
+  </div>
+  </div>
+  </div>
+ 
+</form>
+</div>
+<script language="javascript">jQuery(function () { setVisible('group_1'); });</script>
+<div class="row">
+  <div class="col-sm-12 col-sm-offset-5">
+	<button title="Save" onclick="if(formSaveOnFocus()){submitHandler('CatalogAddProduct'); _disableButtons();}" type="button" name="btn_save" class="btn btn-circle btn-default" id="SaveButton2"><i class="fa fa-save"></i> <span class="hidden-480">Save</span></button>
+	<button title="<?php msg('BTN_SAVEANDADDANOTHER_NEW_PRD_TITLE'); ?>" onclick="if(formSaveOnFocus()){SaveAndAddAnother('CatalogAddProduct'); _disableButtons();}" type="button" name="btn_save" class="btn btn-circle btn-default" id="SaveAddButton2"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVEANDADDANOTHER_NEW_PRD'); ?></span></button>
+        		  						
+  </div>
+</div>			
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

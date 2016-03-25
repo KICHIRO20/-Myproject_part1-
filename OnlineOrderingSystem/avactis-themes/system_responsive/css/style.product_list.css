@@ -1,0 +1,173 @@
+/* PRODUCT LIST LAYOUT ********************************************* */
+.product_list .subheader {
+    border-bottom: 1px solid white;
+}
+
+.product_list .toolbar {
+    border-top: 1px solid #b6c9db;
+    border-bottom: 1px solid #dedede;
+}
+
+.product_list .toolbar.top {
+    border-top: 1px solid #b6c9db;
+    border-bottom: 1px solid #dedede;
+}
+
+.product_list .toolbar.bottom {
+    border-top: 1px solid #dedede;
+    border-bottom: none;
+    background-color: white;
+}
+
+.box.product_list.category_products .content {
+    padding-bottom: 5px;
+}
+
+.checkout .product_list_items.empty,
+.shoppingcart .product_list_items.empty,
+.product_list .product_list_items.empty {
+    background-image: none;
+    padding: 100px 0px 100px 0px;
+    text-align: center;
+}
+
+.product_list .subheader .product-list-sorter {
+    padding-top: 2px;
+}
+
+.product_list .view_all_link {
+    text-align: center;
+    padding-top: 5px;
+    text-decoration: none;
+}
+
+.center_column .product_list .view_all_link {
+    position: absolute;
+    top: 1px;
+    right: 20px;
+}
+
+.center_column .product_list .view_all_link a {
+    color: white;
+}
+/* **************************************************************** */
+
+
+/* PRODUCT LIST ITEM LAYOUT *************************************** */
+.product_item {
+    float: left;
+    width: 33%;
+    text-align: left;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.product_list_items.columns_4  .product_item {
+    width: 25%;
+}
+
+.product_list_items.columns_5  .product_item {
+    width: 20%;
+}
+
+.product_item .limited_inventory,
+.product_item .product_rating,
+.product_item .product_buttons,
+.product_item .product_img,
+.product_item .product_list_price,
+.product_item .product_sale_price,
+.product_item .product_name {
+    margin: auto auto;
+    padding-top: 10px;
+    width: 70%;
+}
+
+.product_item .product_rating .rating-box {
+    margin: 0px;
+}
+
+.product_item .product_img {
+    text-align: center;
+    width: 100%;
+    padding-top: 25px;
+}
+
+.product_item .product_list_price {
+    padding-top: 0px;
+}
+
+.product_item .product_sale_price .label,
+.product_item .product_list_price .label {
+    display: none;
+}
+
+.product_item .product_buttons {
+    padding-bottom: 5px;
+}
+
+.product_item .product_name a {
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Tahoma;
+    color: #404040;
+}
+.product_item .product_name a:hover {
+    color: #315d86;
+}
+
+.product_item .product_list_price {
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Tahoma;
+    color: #585858;
+}
+
+.product_item .product_list_price .value {
+    text-decoration: line-through;
+}
+
+.product_item .product_sale_price {
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Tahoma;
+    color: #c71b31;
+}
+
+.product_item .limited_inventory {
+    color: red;
+    font-size: 8pt;
+}
+
+/* *************************************************************** */
+
+
+/* FEATURED PRODUCTS & BESTSELLERS LIST **************************************** */
+.left_column .product_list.bestsellers .product_item,
+.right_column .product_list.bestsellers .product_item,
+.left_column .product_list.related_products .product_item,
+.right_column .product_list.related_products .product_item,
+.left_column .product_list.featured_products .product_item,
+.right_column .product_list.featured_products .product_item {
+    width: 100%;
+    float: none;
+    border-bottom: 1px solid #dedede;
+}
+
+.left_column .product_list.bestsellers hr,
+.right_column .product_list.bestsellers hr,
+.left_column .product_list.related_products hr,
+.right_column .product_list.related_products hr,
+.left_column .product_list.featured_products hr,
+.right_column .product_list.featured_products hr {
+    display: none;
+}
+
+.right_column  .product_list.featured_products .product_list_items,
+.left_column  .product_list.featured_products .product_list_items,
+.right_column  .product_list.related_products .product_list_items,
+.left_column  .product_list.related_products .product_list_items,
+.right_column  .product_list.bestsellers .product_list_items,
+.left_column  .product_list.bestsellers .product_list_items {
+    background-image: none;
+}
+/* *************************************************************** */

@@ -1,0 +1,17 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row">
+	<div class="col-sm-2">
+		<label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(),getAttributeTag()); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">  
+		<input class="form-control" type="hidden" name="<?php AttributeTag(); ?>" value="<?php AttributeValue(); ?>" size="<?php AttributeSize(); ?>" maxlength="<?php AttributeMax(); ?>" onBlur="formatInput(this);" patternType="<?php AttributePatternType(); ?>" <?php AttributeFormat(); ?> >
+		<?php xmsg('CTL', 'PRODUCT_QTY_ATTR_ISNT_USABLE', getInvEditorLink()); ?><br/>
+		<?php Error(); ?>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

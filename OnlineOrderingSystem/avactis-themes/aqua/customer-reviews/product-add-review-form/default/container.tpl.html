@@ -1,0 +1,44 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<a name="add_review_<?php Local_ProductID(); ?>"></a>
+<div class="box nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <form action="<?php Local_FormAction(); ?>" method="post">
+        <input type="hidden" name="asc_action" value="post_review" />
+        <input type="hidden" name="return_url" value="<?php Local_ReturnURL(); ?>" />
+        <input type="hidden" name="product_id" value="<?php Local_ProductID(); ?>" />
+        <h2><?php Label('CUSTOMER_REVIEWS_ADD_REVIEW_LABEL'); ?></h2>
+        <?php if ( ($m=getLocal_Error()) != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+        <?php if ( ($m=getLocal_Success()) != ''): ?><div class="success_message"><?php echo $m; ?></div><?php endif; ?>
+        <div class="add_review">
+            <div class="review_target">
+                <span class="label"><?php Label('CUSTOMER_REVIEWS_YOU_ARE_REVIEWING_LABEL'); ?></span>
+                <span class="product_name"><?php Local_ProductName(); ?></span>
+            </div>
+
+            <div class="review_input_name">
+                <label><span class="label required"><?php Label('CUSTOMER_REVIEWS_NICKNAME_LABEL'); ?></span> <input type="text" id="author_review_id" name="author" value="<?php Local_Author(); ?>" /></label>
+            </div>
+
+            <?php Local_Rating(); ?>
+
+            <?php Local_Review(); ?>
+             <?php  $moduleexists = modApiFunc('Modules_Manager','isModulePresentInAvactisExtensionsFolder','captcha');
+         
+        	if($moduleexists == 1)
+       		 { ?>
+            <div class="myraterecap"></div> 
+			<?php } ?>
+
+            <input type="submit" class="<?php lang(); ?> text_buttons button_add_review button_add_to_cart" value="<?php Label("CUSTOMER_REVIEWS_BTN_POST_REVIEW"); ?>" />
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    var use_ajax_for_customer_reviews = '<?php Local_isAJAXActive(); ?>';
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,13 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php if (getLocal_PageFirst() && getLocal_Level() == 0) { ?>
+<div class="cmspage_tree">
+<span><?php Label('CMS_SUBPAGE_LIST'); ?></span>
+<?php } ?>
+<?php if (getLocal_PageFirst()) { ?><ul><?php } ?>
+<li><a href="<?php CMSPageLink(getLocal_PageID()); ?>"><?php Local_PageName(); ?></a></li>
+<?php Local_SubTree(); ?>
+<?php if (getLocal_PageLast()) { ?></ul><?php } ?>
+<?php if (getLocal_PageLast() && getLocal_Level() == 0) { ?>
+</div>
+<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->

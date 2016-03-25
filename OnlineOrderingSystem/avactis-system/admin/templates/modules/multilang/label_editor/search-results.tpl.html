@@ -1,0 +1,24 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="label_editor.php" name="SearchResults" id="SearchResults" method="post" style="padding: 0;"> 
+<?php ResActionField(); ?>
+<?php ResModeField(); ?>
+<?php LngField(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-filter"></i><?php xMsg('ML', 'ML_FILTER_RESULTS'); ?>: <?php SearchTotal(); ?>
+		</div>
+		<div class="actions" style="text-align:center;">
+			<div class="actions btn-set">
+				<a id="AddButton1" title="<?php xMsg('ML', 'BTN_ADD_NEW'); ?>" class="btn btn-circle btn-default" type="button" onclick="javascript: openURLinNewWindow('popup_window.php?page_view=LabelData&lng=<?php CurLang(); ?>', 'LabelData');">
+					<i class="fa fa-plus"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_ADD_NEW'); ?></span>
+				</a>
+				<?php TopButtons(); ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php ResultForm(); ?>
+<?php BottomButtons(); ?>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

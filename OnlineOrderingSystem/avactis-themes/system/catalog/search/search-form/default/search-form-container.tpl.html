@@ -1,0 +1,9 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="search <?php ViewClassName(); ?>">
+    <form method="post" action="<?php Local_SearchFormAction(); ?>" name="<?php Local_SearchFormName(); ?>">
+        <input type="hidden" name="<?php Local_ActionName(); ?>" value="<?php Local_ActionValue(); ?>" />
+        <input type="text" name="<?php Local_SearchTextFieldName(); ?>" value="<?php Local_SearchText(); ?>" />
+        <input type="submit" value="" class="<?php lang(); ?> buttons button_search" />
+    </form>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

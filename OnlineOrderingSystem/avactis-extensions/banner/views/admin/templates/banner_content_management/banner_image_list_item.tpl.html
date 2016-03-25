@@ -1,0 +1,34 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr bgcolor="#FFFAFC" ;>
+	<td><input
+		type="checkbox" class="<?php DelCheckboxCssClass(); ?>"
+		id="select_<?php BannerN(); ?>"
+		name="selected_images[<?php ImageID(); ?>]"
+		onclick="selectRow(this); formDelete(this);"
+		value="<?php ImageID(); ?>" type="checkbox"></td>
+
+  <!-- <td align="center" style="text-align: center;" valign="top">
+    <input type="text" value="10" name="image[<?php ImageID(); ?>][orderby]" maxlength="5" size="3">
+  </td> -->
+
+	<td>
+    <a target="_blank" href="<?php ImageUrl(); ?>"><img width="110" alt="<?php ImageAlt(); ?>" src="<?php ImagePath(); ?>"></a>
+   
+	</td>
+
+  <td>
+    <input type="text" class="form-control input-small" value="<?php ImageUrl(); ?>" name="image[<?php ImageID(); ?>][url]">
+  </td>
+
+  <td>
+    <input type="text" class="form-control input-small" value="<?php ImageAlt(); ?>" name="image[<?php ImageID(); ?>][alt]">
+  </td>
+
+  <td>
+    <select name="image[<?php ImageID(); ?>][avail]" class="form-control input-small">
+      <?php ImageAvail(); ?>
+    </select>
+	</td>
+</tr>
+
+<!-- END TPL (DO NOT REMOVE!) -->

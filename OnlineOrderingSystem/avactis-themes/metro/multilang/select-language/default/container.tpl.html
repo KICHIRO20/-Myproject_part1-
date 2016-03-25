@@ -1,0 +1,22 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" language="javascript">
+<!--
+var defaultURL = '<?php DefaultURL(); ?>';
+var URLs = new Array();
+<?php URLs(); ?>
+function getReturnURL(lng)
+{
+    if (URLs[lng])
+        return URLs[lng];
+
+    return defaultURL;
+}
+// -->
+</script>
+        <!---<h2><?php Label('MULTILANG_LANGUAGE_LABEL'); ?></h2>-->
+<li class="langs-block">
+        <select class="multilang current" onchange="<?php OnChangeAction(); ?>">
+        <?php Languages(); ?>
+        </select>
+ </li>    
+<!-- END TPL (DO NOT REMOVE!) -->

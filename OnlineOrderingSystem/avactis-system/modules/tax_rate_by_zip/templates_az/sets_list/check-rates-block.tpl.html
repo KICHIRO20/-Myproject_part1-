@@ -1,0 +1,62 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<br/>
+<FORM {FormInners} id="CheckRatesForm_id">
+<input type="hidden" value="checkRate" name="ViewState[FormSubmitValue]"/>
+<div class="portlet light">
+	<!-- Title -->
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('TAX_ZIP', 'SETS_LIST_CHECK_HEADER'); ?></span>
+			<span class="caption-helper text-lowercase">...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">            		
+			</div>
+		</div>
+	</div>
+	<!-- End Title -->
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"><?php xmsg("TAX_ZIP", "SETS_LIST_TABLE_DESCRIPTION"); ?>:</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">
+			<select class="form-control form-filter input-medium" name="CheckRate_sid" style="width: 200px">{ZipSetsSelect}</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"><?php xmsg("TAX_ZIP", "SETS_LIST_TABLE_ZIP"); ?>:</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">
+			<input class="form-control form-filter input-medium" name="CheckRate_zip" type=text class="input_value" style="width: 200px" value='{CheckRateZipValue}'>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<div class="actions" style="text-align:center;">
+			<div class="actions btn-set">
+				<button id="CheckButton" title="<?php Msg('BTN_CHECK'); ?>" onclick="submitCheckRates();" type="button" name="<?php Msg('BTN_CHECK'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_CHECK"); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+	<div class="panel-group accordion scrollable" id="accordion2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_1"><?php xmsg("TAX_ZIP", "SETS_LIST_RATE"); ?>&nbsp;&nbsp;:&nbsp;&nbsp;{WorkingRate}%</a>
+			</h4>
+			</div>
+		</div>
+	</div>
+	{CheckRatesDetails}
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

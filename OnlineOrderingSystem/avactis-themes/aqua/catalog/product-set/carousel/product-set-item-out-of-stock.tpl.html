@@ -1,0 +1,22 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="product_item">
+    <div class="product_img"><a href="<?php ProductInfoLink(); ?>"><?php ProductSmallImage(); ?></a></div>
+    <div class="product_name"><a href="<?php ProductInfoLink(); ?>"><?php ProductName(); ?></a></div>
+    <div class="product_rating"><?php ProductRating(); ?></div>
+    <div class="product_sale_price"><span class="label"><?php Label("CATALOG_SALE_PRICE_COLON"); ?></span><span class="value"><?php ProductSalePrice(); ?></span></div>
+    <?php
+            if (getProductListPrice() != '')
+            {
+                $lp = getValProductListPrice();
+                $sp = getValProductSalePrice();
+                if ($lp!=0 && $lp>$sp)
+                {
+                    $d = round(($lp-$sp)*100/$lp);
+    ?>
+                    <div class="product_list_price"><span class="label"><?php Label("CATALOG_LIST_PRICE_COLON"); ?></span><span class="value"><?php ProductListPrice(); ?></span></div>
+                    <div class="discount_star"><span class="label"><?php Label("CATALOG_YOU_SAVE"); ?></span><span class="value"><?php echo $d; ?><?php Label("CATALOG_PERCENT"); ?></span></div>
+    <?php       }
+            }
+    ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,79 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" src="dtree/dtree.js"></script>
+<script type="text/javascript" src="jstree/tree_component.js"></script>
+<!-- script type="text/javascript" src="jstree/css.js"></script -->
+<script language="javascript" type="text/javascript">
+document.title = '<?php xmsg('CR','CR_SELECT_PRODUCT'); ?>';
+</script>
+<style type="text/css">
+.rp_list_item {
+    cursor: default;
+}
+</style>
+<!-- begin Bookmarks -->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php xMsg('CR', 'CR_NAME'); ?>: </span>
+			<span class="caption-subject font-blue-sharp"><?php xMsg('CR','CR_SELECT_PRODUCT'); ?></span>
+		</div>
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="CancelButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default btn-circle"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end Bookmarks -->
+<div class="portlet light" id="RPInterfaceBlock">
+	<div class="portlet-body" id="ProductsBrowserBlock">
+		<?php Local_ProductsBrowser(); ?>
+	</div>
+</div>
+<script language="javascript" type="text/javascript">
+
+var product_array = new Array();
+product_array[0] = '<?php PrefilledPID(); ?>';
+
+function selectProduct(product_id, product_name)
+{
+    var formname = "<?php CallbackForm(); ?>";
+    var productidfield = "<?php CallbackIDField(); ?>";
+    var productnamefield = "<?php CallbackNameField(); ?>";
+
+    var use_external_function = "<?php CallbackFunction(); ?>";
+
+    if ((parent.document && parent.document.forms[formname]) || (window.opener && window.opener.document && window.opener.document.forms[formname]))
+    {
+		if(window.opener)
+	        form = window.opener.document.forms[formname];
+		else
+			form = parent.document.forms[formname];
+
+        if (form.elements && form.elements[productnamefield])
+            form.elements[productnamefield].value = product_name;
+
+        if (form.elements && form.elements[productidfield])
+            form.elements[productidfield].value = product_id;
+    }
+
+    if (use_external_function == 'yes' && (parent.onproductselection || window.opener.onproductselection))
+	
+		if(window.opener)
+	        window.opener.onproductselection(product_id, product_name);
+		else
+	        parent.onproductselection(product_id, product_name);
+
+    closeAndFocusParent();
+};
+
+var rp_back = window.onload;
+window.onload = function() {
+    if(rp_back)
+        rp_back();
+};
+
+</script>
+
+<!-- END TPL (DO NOT REMOVE!) -->

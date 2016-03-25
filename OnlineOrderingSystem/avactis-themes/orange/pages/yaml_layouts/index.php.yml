@@ -1,0 +1,84 @@
+---
+settings: 
+  template: 'page.template.tpl.html'
+  page_title: '<?php StoreOwnerPageTitle(); ?>'
+  page_description: '<?php CategoryMetaDescription(1); ?>'
+  page_keywords: '<?php CategoryMetaKeywords(1); ?>'
+placeholders: 
+  header: 
+    blocks: 
+      - 
+        name: user1
+        visibility: visible
+      - 
+        name: top_menu
+        visibility: visible
+      - 
+        name: top_phone
+        visibility: visible
+      - 
+        name: welcome_text
+        visibility: visible
+    visibility: visible
+  main_menu: 
+    blocks: 
+      - 
+        name: main_menu
+        visibility: visible
+    visibility: visible
+  left_column: 
+    blocks: 
+      - 
+        name: SelectLanguage
+        visibility: visible
+      - 
+        name: NavigationBarCustom1
+        visibility: visible
+      - 
+        name: SubscribeBox
+        visibility: visible
+      - 
+        name: FeaturedProducts1
+        visibility: visible
+    visibility: visible
+  center_column: 
+    blocks: 
+      - 
+        name: BoxedCategoryLargeImage1
+        visibility: visible
+      - 
+        name: Subcategories1
+        visibility: visible
+      - 
+        name: ProductSet_Carousel
+        visibility: visible
+      - 
+        name: Bestsellers1
+        visibility: visible
+    visibility: visible
+  right_column: 
+    blocks: 
+
+      - 
+        name: RightBanner2
+        visibility: visible
+
+      - 
+        name: CurrencySelector
+        visibility: visible
+      - 
+        name: MiniCart
+        visibility: visible
+      - 
+        name: CustomerSignInBox
+        visibility: visible
+    visibility: visible
+  footer: 
+    blocks: 
+      - 
+        name: footer_menu
+        visibility: visible
+      - 
+        name: copyright
+        visibility: visible
+    visibility: visible

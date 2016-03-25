@@ -1,0 +1,38 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row">
+	<div class="col-sm-2">
+		 <label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div><br>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(),'SmallImage'); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">
+		<img id="cat-SmallImage" src="<?php ViewStateSmallImage(); ?>" width="100px">
+		<span id="buttons-SmallImage">
+			<a href="javascript:;" onclick="javascript:SmallImage_togglebuttons();" class="btn yellow" title="<?php xmsg('SH','FILE_ON_LOCAL_PC'); ?>"><i class="fa fa-upload"></i></a>
+			<a href="javascript:;" onclick="javascript:openURLinNewWindow('tinymce/plugins/image/image.php?catalog=yes&for=SmallImage','Image Manager')" class="btn blue" title="<?php xmsg('SH','FILE_ON_SERVER'); ?>"><i class="fa fa-check"></i></a>
+			<a href="javascript:;" onclick="javascript:SmallImage_deletebuttons();" class="btn red" title="Remove Image"><i class="fa fa-times"></i></a>
+		</span>
+		<div class="alert alert-warning" style="display:none;" id="upload-SmallImage">
+			<span class="pull-right"><a href="javascript:;" onclick="javascript:SmallImage_togglebuttons()"><i class="fa fa-times"></i></a></span>
+			<input type="file" onkeydown="return false;" onkeypress="return false;" size="65" name="SmallImage"><br />
+			<?php AutoGenSmallImageComment(); ?>
+		</div>
+	</div>
+</div><br>
+<script>
+function SmallImage_togglebuttons()
+{
+	jQuery("#buttons-SmallImage").toggle();
+	jQuery("#upload-SmallImage").toggle();
+}
+
+function SmallImage_deletebuttons()
+{
+    jQuery("#ViewState_SmallImage").val('<?php NoImagePath(); ?>');
+	jQuery("#cat-SmallImage").attr('src', '<?php NoImagePath(); ?>');
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

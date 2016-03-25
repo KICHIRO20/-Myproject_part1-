@@ -1,0 +1,28 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" language="javascript">
+<!--
+var defaultURL = '<?php DefaultURL(); ?>';
+var URLs = new Array();
+<?php URLs(); ?>
+function getReturnURL(lng)
+{
+    if (URLs[lng])
+        return URLs[lng];
+
+    return defaultURL;
+}
+// -->
+</script>
+<div class="box nogradient">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h2><?php Label('MULTILANG_LANGUAGE_LABEL'); ?></h2>
+        <select onchange="<?php OnChangeAction(); ?>">
+        <?php Languages(); ?>
+        </select>
+     </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

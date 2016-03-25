@@ -1,0 +1,310 @@
+<html>
+<head>
+	<title>Send Letter</title>
+</head>
+<body>
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/javascript_sprintf.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<script language="JavaScript">
+	document.title = "<?php xmsg('NLT', 'NLT_SEND_TITLE'); ?>";
+</script>
+<script languge="JavaScript">
+var _log_str = "<?php xmsg('NLT','PROCESSING_COUNT'); ?>";
+</script>
+
+<style type="text/css">
+.progress_bar_container {
+  border: solid 1px black;
+  width: 100%;
+  height: 15px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 15px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+<script language="JavaScript">
+var letter_id = "<?php LetterId(); ?>";
+
+var recipients_count = 0;
+var recipient_num = 0;
+var pixels_count = 100;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = 0;
+var finished = 0;
+var executed = 0;
+
+function increment_bar()
+{
+  current_progress++;
+  document.getElementById('pbar_bar').style.width = current_progress+'%';
+  document.getElementById('bar_completed').innerHTML=current_progress+'% Completed';
+  if(current_progress<(pixels_count-1))
+	{
+    setTimeout("increment_bar()",increment_speed);
+	}
+  else
+	{
+  	finished++;
+	}
+}
+
+</script>
+
+<script language="JavaScript">
+
+function el(elem_id)
+{
+    return document.getElementById(elem_id);
+}
+
+function requestToInit2()
+{
+  jQuery.post(
+    'jquery_ajax_handler.php', // backend
+    {
+        'asc_action': 'do_newsletter_send',
+        'subtask_id': 'init2',
+        'letter_id' : letter_id
+    },
+    // Function is called when an answer arrives. 
+    function(result, output) {
+		//
+		// calculate all necessary params, but do not scedule request    ()
+		//
+        hideBlock('section_1b');
+        hideBlock('section_1c');
+        recipients_count = result.total_count;
+        recipient_num = result.num;
+        increment_speed = recipients_count / start_speed * 10 / (pixels_count / 100);
+        if (recipients_count > 0)
+        {
+          switchToProgress();
+        }
+    },
+    'json'
+  );    
+}
+
+function switchToProgress()
+{
+	hideBlock('section_1');
+	showBlock('section_2', 0);
+ 	el('step_text').innerHTML = "<?php xmsg('NLT','STEP_DELIVERY'); ?>";
+    el('step_percents').style.display = '';
+	
+    addTimer('delivery_timer');
+    showTimer('delivery_timer');
+    startTimer('delivery_timer');
+
+	appendStringToLog('delivery_log',"<?php xmsg('NLT', 'STATUS_STARTED'); ?>", 'black');
+	
+    setTimeout("requestToDo()",10);
+	setTimeout("increment_bar()",200);
+    setTimeout("waitFinish()",500);
+}
+
+function requestToDo()
+{
+  var d = new Date();
+  var start_time = d.getTime();
+  jQuery.post(
+    'jquery_ajax_handler.php', // backend
+    {
+     	'asc_action': 'do_newsletter_send',
+     	'subtask_id': 'do',
+        'num': recipient_num
+    },
+    // Function is called when an answer arrives. 
+    function(result, output) {
+	  var d = new Date();
+      var end_time = d.getTime();
+      var ex = result.sent_total - executed;
+      var k = ex * 100 / recipients_count;
+      increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+      executed = result.sent_total;
+      if(result.sending_status == 'COMPLETED')
+      {
+        finished++;
+        increment_speed = 2;
+      }
+      else if(result.sending_status == 'PROCESSING')
+      {
+   	    __log_str = _log_str.replace('%01%', executed).replace('%02%',recipients_count);
+   	    appendStringToLog('delivery_log',__log_str,'black');
+        setTimeout("requestToDo()",10);
+      }
+      else
+      {
+        breakExport();
+      }
+    },
+    'json'
+  );
+}
+
+function waitFinish()
+{
+  if(finished<2)
+  {
+  	setTimeout("waitFinish()",500);
+  	return;
+  }
+  
+  stopTimer('delivery_timer');
+  increment_bar();
+	
+  el('step_percents').style.display = 'none';
+  el('step_text').innerHTML = "<?php xmsg('NLT','STATUS_FINISHED'); ?>";
+	el('CancelButton1').innerHTML = "<?php msg('BTN_CLOSE'); ?>";
+	el('CancelButton1').onclick = closeAndReloadParent;
+
+  __log_str = _log_str.replace('%01%',executed).replace('%02%',recipients_count);
+  appendStringToLog('delivery_log',__log_str,'black');
+  __log_str = "<?php xmsg('NLT','STATUS_FINISHED'); ?>";
+  appendStringToLog('delivery_log',__log_str,'black');
+}
+
+function breakSend()
+{
+  el('step_percents').style.display = 'none';
+  el('step_text').innerHTML = "<?php xmsg('NLT','STATUS_ERRORS'); ?>!";
+  increment_speed = 3600000;
+  stopTimer('delivery_timer');
+}
+
+function appendToLog(log_id,res)
+{
+  for(i=0;i<res.errors.length;i++)
+    appendStringToLog(log_id,res.errors[i],'red');
+  for(i=0;i<res.warnings.length;i++)
+    appendStringToLog(log_id,res.warnings[i],'blue');
+  for(i=0;i<res.messages.length;i++)
+    appendStringToLog(log_id,res.messages[i],'green');
+}
+
+function appendStringToLog(log_id,str,color)
+{
+  _time = new Date();
+  _time_str = '['+sprintf("%02d",_time.getHours())+':'+sprintf("%02d",_time.getMinutes())+':'+sprintf("%02d",_time.getSeconds())+']';
+  log_el = document.getElementById(log_id);
+  _html = _time_str+'&nbsp;<span style="color: '+color+'; font-weight: normal;">'+str+'</span><br>';
+  if(navigator.userAgent.indexOf("MSIE")!=-1)
+  {
+    new_div = document.createElement("div");
+    new_div.innerHTML = _html;
+    log_el.appendChild(new_div);
+  }
+  else
+  {
+    log_el.innerHTML += _html;
+  }
+  log_el.scrollTop = 1000000;
+}
+
+
+function onClickMoveToSelectedButton()
+{
+     moveItems('AvailableSelect_Offline', 'SelectedModules');
+     return true;
+}
+
+function onClickMoveToAvailableButton()
+{
+     moveItems('SelectedModules', 'AvailableSelect_Offline');
+     return true;
+}
+</script>
+
+<script language="JavaScript">
+nlt_win_onload = window.onload;
+window.onload = function()
+{
+    if(nlt_win_onload)
+		{
+			nlt_win_onload();
+		}
+    if ('<?php EnableSend(); ?>' == 'yes') {
+        enableButton('StartButton1', function() { requestToInit2(); });
+    }
+};
+</script>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-envelope font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp"><?php xmsg('NLT', 'DELIVERY_TITLE'); ?></span>
+		</div>
+	</div>
+
+	<div class="portlet-body" id="ExportSettingsPane">
+		<div id="section_1" style="margin-left:50px">
+			<div class="caption-subject font-blue-sharp"><?php xmsg('NLT','DELIVERY_STEP_1_TITLE'); ?></div>
+			<div class="margin-bottom-10">
+				<span class="margin-right-10"><label class="bold"><?php xmsg('NLT', 'FIELD_SUBJECT'); ?>: </label></span>
+				<span><?php LetterSubject(); ?></span>
+			</div>
+			<div class="margin-bottom-10">
+				<span class="margin-right-10"><label class="bold"><?php xmsg('NLT', 'FIELD_FROM'); ?>: </label></span>
+				<span><?php LetterFrom(); ?></span>
+			</div>
+			<div class="margin-bottom-10">
+				<span class="margin-right-10"><label class="bold"><?php xmsg('SUBSCR', 'FIELD_TOPICS'); ?>: </label></span>
+				<span><?php LetterTopics(); ?></span>
+			</div>
+			<div class="margin-bottom-10">
+				<span class="margin-right-10"><label class="bold"><?php xmsg('SUBSCR', 'TOTAL_RECIPIENTS'); ?>: </label></span>
+				<span><?php TotalRecipients(); ?></span>
+			</div>
+		</div>
+
+		<div class="actions" align="center" id="section_1b">
+			<div class="actions btn-set">
+				<button id="StartButton1" class="btn blue button_disabled disabled " type="button" onclick="" title="<?php xmsg('NLT', 'BUTTON_SEND'); ?>"><i class="fa fa-send"></i> <span class="hidden-480"><?php xmsg('NLT', 'BUTTON_SEND'); ?></span></button>
+				<button class="btn btn-default" type="button" onClick="closeAndFocusParent();"><i class="fa fa-times"></i> <span class="hidden-480"><?php msg('BTN_CANCEL'); ?></span></button>
+			</div>
+		</div>
+
+		<div id="section_1c" style="display: none;">
+			<?php xmsg('NLT', 'DELIVERY_STEP_1_HINT_SHIFT_CTRL'); ?>
+		</div>
+
+		<div id="section_1d" style="display: none;">
+			<?php xmsg('NLT', 'MSG_NO_EMAILS'); ?>
+		</div>
+
+		<div id="section_2" style="display: none; margin-left:50px;">
+			<div class="caption-subject font-blue-sharp"><?php xmsg('NLT','DELIVERY_STEP_2_TITLE'); ?></div>
+			<div align="right"><?php xmsg('CTL','TIME_ELAPSED'); ?>&nbsp;<span id="delivery_timer"></span></div>
+
+			<span id="step_text"></span>
+			<div align="right" style="padding-right: 6px;"><img id="step_percents" src="images/ajax/snake.gif"></div>
+
+		<div id="pbar_container" class="progress">
+			<div id="pbar_bar" class="progress-bar progress-bar-striped active" role="progressbar">
+				<span id="bar_completed" class="">0%<span>
+			</div>
+		</div>
+
+			<div><?php xmsg('NLT','NLT_PRC_LOG'); ?></div>
+            <div style="background: white; height: 100px; overflow: auto;">
+            	<code id="delivery_log"></code>
+            </div>
+			<div class="actions" align="center">
+				<div class="actions btn-set">
+					<button id="CancelButton1" class="btn btn-default" type="button" onclick="closeAndFocusParent();" title="<?php msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php msg('BTN_CANCEL'); ?></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

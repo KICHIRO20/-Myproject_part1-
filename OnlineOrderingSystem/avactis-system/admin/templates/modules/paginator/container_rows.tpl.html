@@ -1,0 +1,6 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<label>Records per Page</label>
+<SELECT NAME="rows" class="form-control input-xsmall input-sm input-inline" onchange="document.location = '<?php ViewName(); ?>?<?php AdditionalKeyList(); ?>asc_action=Paginator_SetRowsPerPage&pgname=<?php pgname(); ?>&rows=' + this.value">
+	<?php Row_Options(); ?>
+</SELECT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

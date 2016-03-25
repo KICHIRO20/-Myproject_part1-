@@ -1,0 +1,43 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="sidebar-products myaccount <?php ViewClassName(); ?> margin-bottom-25">
+    <div class="content">
+        <h2><?php Label("ACCOUNT_SIGN_IN"); ?></h2>
+        <div class="signin_box">
+            <?php MessageBox(); ?>
+            <form action="<?php Local_FormActionURL(); ?>" name="SignInForm" method="post" class="form-horizontal">
+                
+                    <div class="form-group">
+                       <label for="sign_in_box_email" class="col-lg-8"><?php Label('ACCOUNT_EMAIL_LABEL'); ?></label>
+                        <div class="col-lg-12">
+                        
+                            <input type="text" id="sign_in_box_email" name="email" class="form-control" />
+                                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                       <label for="sign_in_box_password" class="col-lg-8"><?php Label('ACCOUNT_PASSWORD_LABEL'); ?></label>
+                        <div class="col-lg-12">
+                        
+                            <input type="password" id="sign_in_box_password" name="passwd" class="form-control" />
+                        
+                        
+                        </div>
+                    </div>
+                    <?php if (getLocal_RememberMeOptionEnabled() === "TRUE") { ?>
+                    <label class="account_remember_me_option"><input type='checkbox' name='remember_me' value='save' checked="checked" />&nbsp;<?php Label('ACCOUNT_KEEP_ME_SIGNED_MESSAGE'); ?></label>
+                    <?php } ?>
+                
+                <a href="<?php PageURL('CustomerForgotPassword'); ?>"><?php Label("ACCOUNT_FORGOT_YOUR_PASSWORD"); ?></a>
+                <br/>
+                <a href="<?php PageURL('Registration'); ?>"><?php Label('ACCOUNT_REGISTER_LABEL'); ?></a>
+                <div class="form-group"> 
+                 <div class="col-lg-12">
+                <input type="submit" value="<?php Label('ACCOUNT_SIGN_IN'); ?>" class="<?php lang(); ?> btn btn-primary" />
+                 </div>
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

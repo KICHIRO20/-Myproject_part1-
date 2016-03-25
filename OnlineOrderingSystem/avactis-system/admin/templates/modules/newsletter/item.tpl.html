@@ -1,0 +1,12 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr role="row" class="">
+  <td align="center" style="text-align: center;">
+    <input type="radio" name="letter_id" id="letter_id_<?php LetterNum(); ?>" value="<?php LetterId(); ?>" onclick="selectRowDeselectOther(this);">
+  </td>
+  <td align="center" style="text-align: center;"><a title="Message Subject" href="compose_newsletter.php?letter_id=<?php LetterId(); ?>"><?php LetterSubject(); ?></a></td>
+  <td align="center" style="text-align: center;"><?php LetterFrom(); ?></td>
+  <td align="center" style="text-align: center;"><?php LetterTopics(); ?></td>
+  <td align="center" style="text-align: center;"><?php LetterCreationDate(); ?></td>
+  <td align="center" style="text-align: center;"><?php LetterSentDate(); ?></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

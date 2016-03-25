@@ -1,0 +1,69 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<FORM action="" method="POST" name="ProgressBar" id="ProgressBar">
+</FORM>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function backupComplete()
+    {
+        if(parent.document.getElementById('Message1'))
+        {
+        parent.document.getElementById('Message1').style.display = "none";
+        }
+        parent.document.getElementById('Message2').style.display = "inline";
+        parent.document.getElementById('progressBarMessage').style.visibility = "hidden";
+        parent.document.getElementById('progressBarBorder').style.visibility = "hidden";
+        parent.document.getElementById('progressBarMessage2').style.visibility = "hidden";
+        parent.document.getElementById('progressBarBorder2').style.visibility = "hidden";
+        if(parent.document.getElementById('StartButton1'))
+        {
+        parent.document.getElementById('StartButton1').style.display = "none";
+        }
+//        parent.document.getElementById('StartButton2').style.display = "none";
+        if(parent.document.getElementById('CloseButton1'))
+        {
+        parent.document.getElementById('CloseButton1').style.display = "block";
+        }
+//        parent.document.getElementById('CloseButton2').style.display = "block";
+        if(parent.document.getElementById('CancelButton1'))
+        {
+        parent.document.getElementById('CancelButton1').style.display = "none";
+        }
+//        parent.document.getElementById('CancelButton2').style.display = "none";
+        parent.window.opener.location.reload();
+    }
+    parent.document.getElementById('progressBar').style.width = "<?php ProgressBarWidth(); ?>px";
+
+    if (<?php DBBackup(); ?>)
+    {
+        if (<?php ProgressBarWidth(); ?> != 400)
+        {
+            var form = document.forms['ProgressBar'];
+            form.action = "<?php ProgressBarFormAction(); ?>";
+            form.submit();
+        }
+        else
+        {
+            parent.document.getElementById('progressBar').style.width = "400px";
+        }
+    }
+    else
+    {
+        parent.document.getElementById('progressBar').style.width = "400px";
+        parent.document.getElementById('progressBar2').style.width = "<?php ProgressBarWidth2(); ?>px";
+        parent.document.getElementById('progressBarMessage2').style.visibility = "visible";
+        parent.document.getElementById('progressBarBorder2').style.visibility = "visible";
+        if (<?php ProgressBarWidth2(); ?> != 400)
+        {
+            var form = document.forms['ProgressBar'];
+            form.action = "<?php ProgressBar2FormAction(); ?>";
+            form.submit();
+        }
+        else
+        {
+            parent.document.getElementById('progressBar2').style.width = "400px";
+            window.setTimeout("backupComplete();", 1000);
+        }
+    }
+//-->
+</SCRIPT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

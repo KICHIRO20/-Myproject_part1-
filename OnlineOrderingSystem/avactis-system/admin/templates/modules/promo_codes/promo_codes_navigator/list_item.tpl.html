@@ -1,0 +1,14 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+    <tr role="row" class="odd">
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;" align="center"><input type="radio" name="promo_code_id" value="<?php PromoCodeID(); ?>"></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: left; padding-left: 1%;"><?php PromoCodeCampaign_Name(); ?></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: left; padding-left: 1%;"><input type="hidden" id="PromoCodePromoCode_<?php PromoCodeID(); ?>" name="PromoCodePromoCode_<?php PromoCodeID(); ?>" value="<?php PromoCodePromo_Code(); ?>"><a href="<?php PromoCodeEditPromo_CodeHref(); ?>"><b><?php PromoCodePromo_Code(); ?></b></a></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;"><?php PromoCodeB_Ignore_Other_Discounts(); ?></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;"><?php PromoCodeStatus(); ?></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;"><?php PromoCodeDiscounted_Items_Qty(); ?></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;"><?php PromoCodeMin_Subtotal(); ?></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;"><?php PromoCodeDiscount_Cost(); ?></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;"><nobr><?php PromoCodeStart_Date(); ?> / <?php PromoCodeEnd_Date(); ?></nobr></td>
+        <td style="<?php PromoCodeCSSStyle(); ?>; text-align: center;"><?php PromoCodeTimes_Used(); ?>/<?php PromoCodeTimes_To_Use(); ?></td>
+    </tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,79 @@
+.ajax_loader {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    top: 0px;
+    border: 9px solid rgb(218, 218, 218);
+    border-radius: 6px 6px 6px 6px;
+    padding: 21px 23px 20px 30px;
+    letter-spacing: 1px;
+    margin-top: 14px;
+    background: none repeat scroll 0% 0% white;
+    font-size: 19px;
+}
+
+.ajax_coverlet {
+    display:none;
+    position:absolute;
+    z-index:999;
+    left:0px;
+    top:0px;
+    background: #000;
+}
+
+.ajax_loader .ajax_loader_image {
+    background: url("../images/ajax-loader.gif") no-repeat scroll 0% 0% transparent;
+    height: 31px;
+    margin-top: 0px;
+    width: 22%;
+    float: left;
+}
+
+.ajax_loader .ajax_loader_text {
+    margin: 0px 7px 0px 40px;
+}
+
+.ajax_message_box {
+    display:none; 
+    position:absolute; 
+    z-index:1000; 
+    top:0px;
+    background:#fff;
+    width: 600px;
+    padding: 10px;
+    margin-bottom: 50px;
+    border: 1px solid #888;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
+
+.ajax_message_error {
+    border-color: #f00;
+}
+
+.ajax_message_box_text{
+    margin-left: 30px;
+    padding-bottom: 5px;
+}
+
+.ajax_message_box_text h2{
+    margin: 0 0 6px 0;
+}
+
+.ajax_message_box_cross {
+    float: right;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #FF6A00;
+    text-decoration: underline;
+}
+
+.ajax_message_cart_prod_link {
+    float: left;
+    margin-left: 30px;
+}
+.ajax_message_cart_prod_qty {
+    float: left;
+    margin-left: 20px;
+}

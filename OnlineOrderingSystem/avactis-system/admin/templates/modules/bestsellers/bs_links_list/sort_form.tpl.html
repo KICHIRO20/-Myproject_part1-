@@ -1,0 +1,51 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript" src="js/shuttle.js"></script>
+<div style="position: absolute; display: none;" id="SortBSForm">
+<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+				<span class="caption-subject bold uppercase">
+					<i class="fa fa-sort"></i>&nbsp;<?php xmsg('RP','SORT_ORDER'); ?>
+				</span>
+			</div>
+			<div class="tools">
+				<a class="remove" href="javascript:hideBlock('SortBSForm'); enableBlock('BSInterfaceBlock');" data-original-title="" title=""></a>
+			</div>
+</div>
+<div class="portlet-body">
+<div class="table-responsive">
+ <table class="table borderless">
+ 	<tbody>
+						<tr>
+							<td style="vertical-align: middle;">
+								<a href="javascript:moveItemUp('BSSortOrder');"><i class="fa fa-chevron-circle-up fa-lg"></i></a>
+								<br />
+								<a href="javascript:moveItemDown('BSSortOrder');"><i class="fa fa-chevron-circle-down fa-lg"></i></a>
+							</td>
+							<td>
+							  <select id="BSSortOrder" name="BSSortOrder" style="width: 250px; height: 250px" size="8">
+						</select>
+						<input type="hidden" name="BSSortOrder.hidden" id="BSSortOrder.hidden" value="">
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2" class="text-center">
+								<div id="UpdateSortOrderButton1" class="btn btn-default btn-circle" onClick="OnUpdateBSSortOrderClick();">
+									<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+								</div>
+                  						<div id="CloseSortFormButton1" class="btn btn-default btn-circle" onClick="hideBlock('SortBSForm'); enableBlock('SortBSForm');">
+									<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_CANCEL'); ?>
+								</div>				
+							</td>			
+						</tr>
+					</tfoot>
+					
+ </table>
+</div>
+</div>
+</div>
+    
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

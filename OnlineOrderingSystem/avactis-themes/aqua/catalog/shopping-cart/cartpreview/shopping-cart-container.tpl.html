@@ -1,0 +1,23 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script>
+	$(document).ready(function(){
+				
+		$(".cart_preview").click(function () {
+            if ($("#minicartmain").is(":hidden")) {
+                $("#minicartmain").slideDown("slow");
+            } else {
+                $("#minicartmain").hide();
+            }
+        });
+
+		$("#minicartmain").mouseleave(function(){
+		  $(this).hide('fast',function(){
+		   });
+		});
+	});
+</script>
+<div class="cart_preview <?php ViewClassName(); ?>">
+      <?php ShoppingCartProductsQuantity(); ?> <?php Label('PAGES_ITEMS_IN_YOUR_BAG');?>
+</div>
+<div id="minicartmain" style="display:none;"><?php MiniCart(); ?></div>
+<!-- END TPL (DO NOT REMOVE!) -->

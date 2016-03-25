@@ -1,0 +1,21 @@
+- LeftBanner:
+    title: Left Banner
+    description: Left Banner 
+    template: '<?php Banners('L'); ?>'
+
+- TopBanner:
+    title: Top Banner
+    description: Top Banner 
+    template: '<?php Banners('T'); ?>'
+
+- BottomBanner:
+    title: Bottom Banner
+    description: Bottom Banner 
+    template: '<?php Banners('B'); ?>'
+
+- RightBannerNew:
+    title: Right Banner New
+    description: Right Banner New
+    template: '<?php Banners('R'); ?>'
+
+

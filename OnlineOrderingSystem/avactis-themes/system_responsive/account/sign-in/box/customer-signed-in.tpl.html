@@ -1,0 +1,21 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label('ACCOUNT_ACCOUNT_LABEL'); ?></h1>
+        <div class="signed_in_box">
+            <p><?php CustomerAccountName(); ?></p>
+            <a href="<?php PageURL('CustomerOrdersHistory',array('filter'=>'new')); ?>"><?php Label('ACCOUNT_ORDERS_HISTORY_LABEL'); ?></a>
+            <a href="<?php PageURL('CustomerPersonalInfo'); ?>"><?php Label('ACCOUNT_PERSONAL_INFO_LABEL'); ?></a>
+            <a href="<?php PageURL('CustomerChangePassword'); ?>"><?php Label('ACCOUNT_CHANGE_PASSWORD_LABEL'); ?></a>
+            <a href="<?php PageURL('Wishlist'); ?>"><?php Label('WL_WISHLIST_LABEL'); ?></a>
+            <a href="<?php CustomerSignOutURL(); ?>" class="sign_out_link"><?php Label("ACCOUNT_SIGN_OUT"); ?></a>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+

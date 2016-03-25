@@ -1,0 +1,32 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) --> 
+            <tr>
+                <td>
+                <a href="cms_add_article.php?page_id=<?php PageID(); ?>"><?php PageIndex(); ?></a>
+                </td>
+                <td>
+                <a href="cms_add_article.php?page_id=<?php PageID(); ?>"><?php PageName(); ?></a>
+                </td>
+                <td>
+                <select class="form-control form-filter input-sm" name="data[<?php PageID(); ?>][parent_id]" style="width: 100%;">
+                <?php PageParent(); ?>
+                </select>
+                </td>
+                <td style="text-align: center;">
+                <select class="form-control form-filter input-sm" name="data[<?php PageID(); ?>][status]">
+                <option value="A"<?php if (getPageStatus() == 'A') { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ACTIVE_STATUS'); ?></option>
+                <option value="H"<?php if (getPageStatus() == 'H') { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_HIDDEN_STATUS'); ?></option>
+                <option value="D"<?php if (getPageStatus() == 'D') { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_DISABLED_STATUS'); ?></option>
+                </select>
+                </td>
+                <td style="text-align: center;">
+                <select class="form-control form-filter input-sm" name="data[<?php PageID(); ?>][availability]">
+                <option value="C"<?php if (getPageAvail() == 'C') { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ALL_CUSTOMERS'); ?></option>
+                <option value="R"<?php if (getPageAvail() == 'R') { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_REGISTERED_CUSTOMERS'); ?></option>
+                <option value="A"<?php if (getPageAvail() == 'A') { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ANONYMOUS_CUSTOMERS'); ?></option>
+                </select>
+                </td>
+                <td style="text-align: center;">
+                <input type="checkbox" name="delete[<?php PageID(); ?>]" value="Y" onclick="checkSelectedRows(this);" />
+                </td>
+            </tr>
+<!-- END TPL (DO NOT REMOVE!) -->

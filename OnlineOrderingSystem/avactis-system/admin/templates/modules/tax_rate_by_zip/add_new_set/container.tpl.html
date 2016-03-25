@@ -1,0 +1,827 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+document.title = '<?php xmsg('TAX_ZIP','ADD_NEW_SET_PAGE_TITLE'); ?>';
+</script>
+<script src="js/javascript_sprintf.js"></script>
+<script src="js/timer.js"></script>
+<style type="text/css">
+.progress_bar_container {
+  border: solid 1px black;
+  width: 650px;
+  height: 15px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 15px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+
+<script language="JavaScript">
+var _log_str_v = '<?php xmsg('CTL','IMP_VLD_COUNT'); ?>';
+var _log_str_i = '<?php xmsg('CTL','IMP_PRC_COUNT'); ?>'
+
+var current_section = 1;
+function changeSection(new_section)
+{
+	document.getElementById('section_'+current_section).style.display='none';
+	document.getElementById('section_'+new_section).style.display='';
+	current_section = new_section;
+};
+
+function setNextButton()
+{
+    if(document.getElementById('csv_file_name_hidden').value=='')
+        disableButton('NextButton1');
+    else
+        enableButton('NextButton1',(function() { startValidation(); }));
+};
+
+var items_count = 0;
+var pixels_count = 650;
+var current_progress = 0;
+var start_speed = 1;
+var increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+var finished = 0;
+var executed = 0;
+function increment_bar(bar_id)
+{
+  current_progress++;
+  document.getElementById(bar_id).style.width = current_progress+'px';
+
+  if(current_progress<(pixels_count-1))
+    setTimeout('increment_bar(\''+bar_id+'\')',increment_speed);
+  else
+  	finished++;
+};
+
+function clearLog(log_id)
+{
+    document.getElementById(log_id).innerHTML = '';
+};
+
+function appendToLog(log_id,res)
+{
+    for(i=0;i<res["errors"].length;i++)
+        appendStringToLog(log_id,res["errors"][i],'red');
+    for(i=0;i<res["warnings"].length;i++)
+        appendStringToLog(log_id,res["warnings"][i],'blue');
+    for(i=0;i<res["messages"].length;i++)
+        appendStringToLog(log_id,res["messages"][i],'green');
+};
+
+function appendStringToLog(log_id,str,color)
+{
+    _time = new Date();
+    _time_str = '['+sprintf("%02d",_time.getHours())+':'+sprintf("%02d",_time.getMinutes())+':'+sprintf("%02d",_time.getSeconds())+']';
+    log_el = document.getElementById(log_id);
+    _html = _time_str+'&nbsp;<span style="color: '+color+'; font-weight: normal;">'+str+'</span><br>';
+    if(navigator.userAgent.indexOf("MSIE")!=-1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+};
+
+
+var vld_res = new Array(0,0,0);
+var pattrs = new Array();
+var need_imgs_src = false;
+var illgl_wrn = true;
+
+function startValidation()
+{
+    changeSection(2);
+    current_progress = 0;
+    start_speed = 50;
+    increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+    finished = 0;
+    executed = 0;
+    document.getElementById('valid_process_img').style.display = '';
+    document.getElementById('valid_process_text').innerHTML = '<?php xmsg('CTL','IMP_VLD_PROCESSING'); ?>';
+    disableButton('StartImportButton1');
+    disableButton('BackButton1');
+    __str = new String('<?php xmsg('CTL','IMP_STEP_2_TITLE'); ?>');
+    document.getElementById('step_2_title').innerHTML = __str.replace("%01%",document.getElementById('csv_file_name').innerHTML);
+    document.getElementById('validation_pbar').style.width = current_progress+'px';
+    document.getElementById('vr_new').innerHTML = '<img src="images/ajax/process.gif">';
+    document.getElementById('vr_exist').innerHTML = '<img src="images/ajax/process.gif">';
+    document.getElementById('vr_illegal').innerHTML = '<img src="images/ajax/process.gif">';
+    vld_res = new Array(0,0,0);
+    pattrs = new Array();
+    need_imgs_src = false;
+    illgl_wrn = true;
+    clearLog('v_log');
+    hideBlock('illegal_warning_block');
+    document.getElementById('iw_01').checked = true;
+    document.getElementById('iw_02').checked = false;
+    hideBlock('additional_import_form');
+    hideBlock('images_src_form');
+    appendStringToLog('v_log','<?php xmsg('CTL','IMP_VALID_START'); ?>');
+    addTimer('vld_timer');
+    showTimer('vld_timer');
+    startTimer('vld_timer');
+    requestToInitValidation();
+};
+
+function requestToInitValidation()
+{
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'do_products_import',
+            	'pi_target': 'init',
+            	'script_step': '1',
+            	'src_file': document.getElementById('csv_file_name_hidden').value
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                appendToLog('v_log',result);
+                if(result["process_info"]["status"]=='INITED')
+                {
+            	    items_count = result["process_info"]["items_count"];
+            	    pattrs = result["process_info"]["attrs"];
+            	    increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+          		    setTimeout("requestToDoValidation()",10);
+   	       		    setTimeout('increment_bar(\'validation_pbar\')',10);
+       	   		    setTimeout("waitFinishValidation()",500);
+       	   		}
+       	   		else if(result["process_info"]["status"]=='ERRORS_HAPPENED')
+       	   		{
+       	   		    breakValidation();
+       	   		};
+            },
+            'json'
+        );
+};
+
+function requestToDoValidation()
+{
+		var d = new Date();
+		var start_time = d.getTime();
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'do_products_import',
+            	'pi_target': 'do'
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                appendToLog('v_log',result, output);
+                
+				var d = new Date();
+            	var end_time = d.getTime();
+            	var ex = result["process_info"]["items_processing"] - executed;
+            	var k = ex * 100 / items_count;
+            	increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+				executed = result["process_info"]["items_processing"];
+				
+				vld_res[0] += parseInt(result["process_info"]["items_statuses"]["new"]);
+				vld_res[1] += parseInt(result["process_info"]["items_statuses"]["exist"]);
+				vld_res[2] += parseInt(result["process_info"]["items_statuses"]["illegal"]);
+				
+            	if(result["process_info"]["status"]=='COMPLETED')
+            	{
+            		finished++;
+            		increment_speed = 2;
+            	}
+            	else if(result["process_info"]["status"]=='PROCESSING')
+            	{
+            	    __log_str = _log_str_v.replace('%01%',executed).replace('%02%',items_count);
+            	    appendStringToLog('v_log',__log_str,'black');
+	           		setTimeout("requestToDoValidation()",10);
+	            }
+	            else if(result["process_info"]["status"]=='ERRORS_HAPPENED')
+	            {
+	                breakValidation();
+	            };
+            },
+            'json'
+        );
+};
+
+function waitFinishValidation()
+{
+  if(finished<2)
+  {
+  	setTimeout("waitFinishValidation()",500);
+  	return;
+  };
+  
+  increment_bar('validation_pbar');
+  document.getElementById('valid_process_img').style.display = 'none';
+  document.getElementById('valid_process_text').innerHTML = '<?php xmsg('CTL','IMP_VLD_COMPLETED'); ?>';
+  enableButton('BackButton1',(function() { changeSection(1); }));
+  
+  document.getElementById('vr_new').innerHTML = vld_res[0];
+  document.getElementById('vr_exist').innerHTML = vld_res[1];
+  document.getElementById('vr_illegal').innerHTML = vld_res[2];
+
+  stopTimer('vld_timer');
+
+  if(vld_res[0]>0)
+  {
+      showBlock('additional_import_form',1);
+  };
+  
+  if((vld_res[0]+vld_res[1]) > 0)
+  {
+      for(a in pattrs)
+          if(pattrs[a]["input_type_name"]=='image')
+              need_imgs_src = true;
+  };
+
+  if(need_imgs_src)
+  {
+      showBlock('images_src_form',1);
+  };
+
+  if(vld_res[2]>0)
+  {
+      showBlock('illegal_warning_block',1);
+  };
+
+  __log_str = _log_str_v.replace('%01%',executed).replace('%02%',items_count);
+  appendStringToLog('v_log',__log_str,'black');
+  __log_str = '<?php xmsg('CTL','IMP_VLD_COMPLETED'); ?>';
+  appendStringToLog('v_log',__log_str,'black');
+
+  setStartButton();
+};
+
+function breakValidation()
+{
+    document.getElementById('valid_process_img').style.display = 'none';
+    document.getElementById('valid_process_text').innerHTML = '<?php xmsg('CTL','IMP_VLD_ERRORS'); ?>';
+    enableButton('BackButton1',(function() { changeSection(1); }));
+    document.getElementById('vr_new').innerHTML = '';
+    document.getElementById('vr_exist').innerHTML = '';
+    document.getElementById('vr_illegal').innerHTML = '';
+    increment_speed = 3600000;
+    stopTimer('vld_timer');
+};
+
+var images_src = 'tar';
+function changeImagesSrc(new_src)
+{
+    switch(new_src)
+    {
+        case 'tar':
+            {
+                disableButton('ChooseImagesDirButton1');
+                enableButton('ChooseImagesTarButton1',(function() { disableBlock('ImportProductsForm',3); showBlock('fselector_imgs_tar_file',4); }));
+                images_src = 'tar';
+            };
+            break;
+        case 'dir':
+            {
+                disableButton('ChooseImagesTarButton1');
+                enableButton('ChooseImagesDirButton1',(function() { disableBlock('ImportProductsForm',3); showBlock('dbrowser',4); }));
+                images_src = 'dir';
+            };
+            break;
+    };
+    setStartButton();
+};
+
+function setStartButton()
+{
+    if(vld_res[0]+vld_res[1]==0)
+    {
+        disableButton('StartImportButton1');
+        return;
+    };
+    if(vld_res[2]>0 && !illgl_wrn)
+    {
+        disableButton('StartImportButton1');
+        return;
+    };
+    if(need_imgs_src && images_src=='tar' && document.getElementById('imgs_tar_file_hidden').value=='')
+    {
+        disableButton('StartImportButton1');
+        return;
+    };
+    if(need_imgs_src && images_src=='dir' && document.getElementById('imgs_dir_path').value=='')
+    {
+        disableButton('StartImportButton1');
+        return;
+    };
+    
+    enableButton('StartImportButton1',(function() { startImport(); }));
+};
+
+function startImport()
+{
+    changeSection(3);
+    current_progress = 0;
+    start_speed = 5;
+    increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+    finished = 0;
+    executed = 0;
+    document.getElementById('import_process_img').style.display = '';
+    document.getElementById('import_process_text').innerHTML = '<?php xmsg('CTL','IMP_PRC_PROCESSING'); ?>';
+    document.getElementById('import_pbar').style.width = current_progress+'px';
+    disableButton('EndButton1');
+
+    __str = new String('<?php xmsg('CTL','IMP_STEP_3_TITLE'); ?>');
+    __str = __str.replace("%01%",document.getElementById('csv_file_name').innerHTML);
+    if(need_imgs_src)
+    {
+        switch(images_src)
+        {
+            case 'tar': 
+                {
+                    __st = new String('<?php xmsg('CTL','IMP_STEP_3_TITLE_P2'); ?>');
+                    __st = __st.replace("%01%",document.getElementById('imgs_tar_file').innerHTML);
+                    break;
+                };
+            case 'dir':
+                {
+                    __st = new String('<?php xmsg('CTL','IMP_STEP_3_TITLE_P3'); ?>');
+                    __st = __st.replace("%01%",document.getElementById('imgs_dir_path').value);
+                    break;
+                };
+        };
+        __str += '<br>' + __st;
+    };
+    document.getElementById('step_3_title').innerHTML = __str;
+
+    appendStringToLog('i_log','<?php xmsg('CTL','IMP_PRC_STARTED'); ?>');
+    addTimer('imp_timer');
+    showTimer('imp_timer');
+    startTimer('imp_timer');
+    requestToInitImport();
+};
+
+function requestToInitImport()
+{
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'do_products_import',
+            	'pi_target': 'init',
+            	'script_step': '2',
+            	'target_ptype': document.getElementById('TargetPType').value,
+            	'target_category': document.getElementById('TargetCategory').value,
+            	'src_images_dir': (need_imgs_src && images_src=='dir') ? document.getElementById('imgs_dir_path').value : 'NONE',
+            	'src_images_tar': (need_imgs_src && images_src=='tar') ? document.getElementById('imgs_tar_file_hidden').value : 'NONE'
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                appendToLog('i_log',result);
+                if(result["process_info"]["status"]=='INITED')
+                {
+            	    items_count = result["process_info"]["items_count"];
+            	    increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+          		    setTimeout("requestToDoImport()",10);
+   	       		    setTimeout('increment_bar(\'import_pbar\')',10);
+       	   		    setTimeout("waitFinishImport()",500);
+       	   		}
+       	   		else
+       	   		{
+       	   		    breakImport();
+       	   		};
+            },
+            'json'
+        );
+};
+function requestToDoImport()
+{
+		var d = new Date();
+		var start_time = d.getTime();
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'do_products_import',
+            	'pi_target': 'do'
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                appendToLog('i_log',result);
+                
+				var d = new Date();
+            	var end_time = d.getTime();
+            	var ex = result["process_info"]["items_processing"] - executed;
+            	var k = ex * 100 / items_count;
+            	increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+				executed = result["process_info"]["items_processing"];
+            	if(result["process_info"]["status"]=='COMPLETED')
+            	{
+            	    __log_str = _log_str_i.replace('%01%',executed).replace('%02%',items_count);
+            	    appendStringToLog('i_log',__log_str,'black');
+                    document.getElementById('import_process_text').innerHTML = '<?php xmsg('CTL','IMP_DEL_TEMP_FILES'); ?>';
+                    setTimeout("requestToDelUploaded()",10);
+            		increment_speed = 2;
+            	}
+            	else if(result["process_info"]["status"]=='PROCESSING')
+            	{
+            	    __log_str = _log_str_i.replace('%01%',executed).replace('%02%',items_count);
+            	    appendStringToLog('i_log',__log_str,'black');
+	           		setTimeout("requestToDoImport()",10);
+	            }
+	            else if(result["process_info"]["status"]=='ERRORS_HAPPENED')
+	            {
+	                breakImport();
+	            };
+            },
+            'json'
+        );
+};
+function waitFinishImport()
+{
+  if(finished<2)
+  {
+  	setTimeout("waitFinishImport()",500);
+  	return;
+  };
+  
+  increment_bar('import_pbar');
+  document.getElementById('import_process_img').style.display = 'none';
+  document.getElementById('import_process_text').innerHTML = '<?php xmsg('CTL','IMP_PRC_COMPLETED'); ?>';
+  enableButton('EndButton1',(function() { closeAndReloadParent(); }));
+
+  stopTimer('imp_timer');
+
+  __log_str = '<?php xmsg('CTL','IMP_PRC_COMPLETED'); ?>';
+  appendStringToLog('i_log',__log_str,'black');
+};
+
+function breakImport()
+{
+    document.getElementById('import_process_img').style.display = 'none';
+    document.getElementById('import_process_text').innerHTML = '<?php xmsg('CTL','IMP_PRC_ERRORS'); ?>';
+    disableButton('EndButton1');
+    increment_speed = 3600000;
+    stopTimer('imp_timer');
+};
+
+function requestToDelUploaded()
+{
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'shell_del_uploaded',
+            	'to_del': new Array(document.getElementById('csv_file_name_hidden').value, document.getElementById('imgs_tar_file_hidden').value)
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+            		finished++;
+            },
+            'json'
+        );
+};
+
+</script>
+
+<table class="form" cellspacing="0" cellpadding="0" width="100%" id="ImportProductsForm">
+    
+    
+
+      <tr class="title" style="height: 25px;">
+        <td width="100%" class="title popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;"><?php xmsg('TAX_ZIP','ADD_NEW_SET_PAGE_TITLE'); ?></td>
+      </tr>
+
+
+
+    <tr id="section_1">
+        <td class="popup_dialog_header_left_right_padded">
+            <table class="form" cellspacing="1" cellpadding="4" width="100%" align="center">
+            	<colgroup>
+            		<col width="30%">
+            		<col width="0%">
+            		<col width="70%">
+	            </colgroup>
+
+                <tr class="subtitle" style="height: 25px;">
+                    <td width="100%" style="padding: 0px;" colspan="4">
+                        <table  class="clear" width="100%" cellpadding="0" cellspacing="0" >
+                            <tr style="height: 25px;">
+                                <td width="100%" style="padding: 0px 0px 0px 4px;"><?php xmsg('TAX_ZIP','ADD_NEW_SET_FIRST_STEP_TABLE_TITLE'); ?></td>
+                                <td  align="right" nowrap style="padding-right: 8px; text-align: right;"><?php PageHelpLink('import_products'); ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                	<td class="label">
+                		<?php xmsg('CTL','IMP_PRDS_SOURCE_FILE'); ?>
+	                </td>
+	                <td class="help">
+	                	<div onclick="<?php hinttext('IMP_PRDS_SOURCE_FILE','catalog-messages'); ?>" style="cursor:pointer;"><img src="images/question.gif"></div>
+                	</td>
+                	<td>
+                	    <table class="form" cellpadding="0" cellspacing="0" width="100%">
+                	        <tr>
+                	            <td class="value" width="30%" nowrap>
+                            		<span id="csv_file_name"><?php xmsg('CTL','IMP_SRC_FILE_NOT_DEFINED'); ?></span>
+                                </td>
+                                <td style="padding-left: 6px;">
+                            		<div class="button button_7em" onClick="disableBlock('ImportProductsForm',3); showBlock('fselector_csv_file_name',4);"><?php xmsg('CTL','BTN_CHOOSE'); ?></div>
+                                </td>
+                            </tr>
+                        </table>
+	                </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="padding-top: 15px;" align="center">
+                    	<table cellpadding="2" cellspacing="0">
+                    		<tr>
+                    			<td align="right">
+                    				<div id="NextButton1" class="button button_small button_disabled" onClick=""><?php xmsg('CTL','BTN_NEXT'); ?></div>
+			                    </td>
+                    			<td align="left">
+                    				<div class="button button_small" onClick="closeAndFocusParent();"><?php msg('BTN_CANCEL'); ?></div>
+			                    </td>
+		                    </tr>
+	                    </table>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" id="csv_file_name_hidden" value="">
+        </td>
+    </tr>
+
+    <tr id="section_2" style="display: none;">
+        <td class="popup_dialog_header_left_right_padded">
+            <table class="form" cellspacing="0" cellpadding="4" width="100%" align="center" border="0">
+                <tr style="height: 1px;"></tr>
+
+
+              
+                <tr class="subtitle" style="height: 25px;">
+                    <td colspan="3" width="100%" style="padding: 0px;" colspan="4">
+                        <table  class="clear" width="100%" cellpadding="0" cellspacing="0" >
+                            <tr style="height: 25px;">
+                                <td width="100%" style="padding: 0px 0px 0px 4px;"><span id="step_2_title"><?php xmsg('CTL','IMP_STEP_2_TITLE'); ?></span></td>
+                                <td  align="right" nowrap style="padding-right: 8px; text-align: right;"><?php PageHelpLink('import_products'); ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="3">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr style="height: 19px;">
+                            <td id="valid_process_text"><?php xmsg('CTL','IMP_VLD_PROCESSING'); ?></td>
+                            <td width="3%"><img id="valid_process_img" src="images/ajax/snake.gif"></td>
+                            <td width="15%" align="right"><?php xmsg('CTL','TIME_ELAPSED'); ?></td>
+                            <td width="5%" align="left" width="5%"><span id="vld_timer"></span></td>
+                          </tr>
+                          <tr>
+                            <td colspan="4" align="left">
+                    			<div class="progress_bar_container"><div id="validation_pbar" class="progress_bar_bar"></div></div>
+                            </td>
+                          </tr>
+                      </table>
+                    </td>
+                </tr>
+
+
+
+
+                <tr id="validation_results">
+                  <td style="padding-left: 2px; padding-right: 6px;" colspan="3">
+                      <table class="form" cellpadding="0" cellspacing="2" width="100%">
+                          <tr>
+                              <td width="35%" valign="top">
+                                  <table width="100%" cellpadding="4" cellspacing="1" style="background: #CED4DD;">
+                                      <tr>
+                                          <td colspan="2"><?php xmsg('CTL','IMP_VLD_RESULTS'); ?></td>
+                                      </tr>
+                                      <tr>
+                                          <td width="55%" bgcolor="white"><?php xmsg('CTL','IMP_VLD_RES_NEW'); ?></td>
+                                          <td id="vr_new" bgcolor="white"><img src="images/ajax/process.gif"></td>
+                                      </tr>
+                                      <tr>
+                                          <td bgcolor="white"><?php xmsg('CTL','IMP_VLD_RES_EXIST'); ?></td>
+                                          <td id="vr_exist" bgcolor="white"><img src="images/ajax/process.gif"></td>
+                                      </tr>
+                                      <tr>
+                                          <td bgcolor="white"><?php xmsg('CTL','IMP_VLD_RES_ILLEGAL'); ?></td>
+                                          <td id="vr_illegal" bgcolor="white"><img src="images/ajax/process.gif"></td>
+                                      </tr>
+                                  </table>
+                              </td>
+                              <td width="65%" valign="top">
+                                  <table width="100%" cellpadding="4" cellspacing="1" style="background: #CED4DD;">
+                                      <tr>
+                                          <td><?php xmsg('CTL','IMP_VLD_LOG'); ?></td>
+                                      </tr>
+                                      <tr>
+                                          <td bgcolor="white">
+                                          <div id="v_log" style="height: 83px; overflow: auto;"></div>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+                </tr>
+                <tr id="illegal_warning_block">
+                  <td style="padding-left: 6px; padding-right: 6px;" colspan="3">
+                    <table class="form" cellpadding="0" cellspacing="2" width="100%">
+                        <colgroup>
+                            <col width="2%">
+                            <col width="98%">
+                        </colgroup>
+                        <tr>
+                            <td class="required" colspan="2"><?php xmsg('CTL','IMP_ILLEGAL_WRN'); ?></td>
+                        </tr>
+                        <tr>
+                            <td class="value"><input id="iw_01" type="radio" name="illegal_warn" onClick="illgl_wrn=true; setStartButton();" checked></td>
+                            <td class="required"><?php xmsg('CTL','IMP_ILLEGAL_CH1'); ?></td>
+                        </tr>
+                        <tr>
+                            <td class="value"><input id="iw_02" type="radio" name="illegal_warn" onClick="illgl_wrn=false; setStartButton();"></td>
+                            <td class="required"><?php xmsg('CTL','IMP_ILLEGAL_CH2'); ?></td>
+                        </tr>
+                    </table>
+                   </td>
+                </tr>
+                <tr id="additional_import_form">
+                  <td style="padding-left: 2px; padding-right: 6px;" colspan="3">
+                    <table class="form" cellpadding="0" cellspacing="2" width="100%">
+                        <tr>
+                            <td width="100%" valign="top">
+                                <table class="form" cellpadding="4" cellspacing="1" width="100%">
+                                    <tr>
+                                        <td colspan="3" bgcolor="#CED4DD"><?php xmsg('CTL','IMP_NEED_PARAMS_FOR_NEW'); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" class="label"><?php xmsg('CTL','IMP_PRDS_TARGET_PTYPE'); ?></td>
+                                        <td class="help"><div onClick="<?php hinttext('IMP_PRDS_TARGET_PTYPE','catalog-messages'); ?>" style="cursor:pointer;"><img src="images/question.gif"></div></td>
+                                        <td width="70%" class="value" bgcolor="white"><?php PTypesList(); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" class="label"><?php xmsg('CTL','IMP_PRDS_TARGET_CATEGORY'); ?></td>
+                                        <td class="help"><div onClick="<?php hinttext('IMP_PRDS_TARGET_CATEGORY','catalog-messages'); ?>" style="cursor:pointer;"><img src="images/question.gif"></div></td>
+                                        <td width="70%" class="value" bgcolor="white"><?php CategoriesList(); ?></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                   </td>
+                 </tr>
+                 <tr id="images_src_form">
+                   <td style="padding-left: 2px; padding-right: 6px;" colspan="3">
+                    <table class="form" cellpadding="0" cellspacing="2" width="100%">
+                        <tr>
+                            <td width="100%" valign="top">
+                                <table class="form" cellpadding="1" cellspacing="1" width="100%">
+                                    <tr>
+                                        <td colspan="2" bgcolor="#CED4DD" style="padding: 4px;"><?php xmsg('CTL','IMP_IMAGES_SOURCE'); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="2%" class="value"><input type="radio" name="images_location" checked onClick="changeImagesSrc('tar');"></td>
+                                        <td><?php xmsg('CTL','IMP_IMG_SRC_TAR'); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <table class="form" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <input type="hidden" id="imgs_tar_file_hidden" value="">
+                                                    <td class="value" width="20%" nowrap><span id="imgs_tar_file"><?php xmsg('CTL','IMP_SRC_FILE_NOT_DEFINED'); ?></span></td>
+                                                    <td align="left"><div id="ChooseImagesTarButton1" class="button button_small" onClick="disableBlock('ImportProductsForm',3); showBlock('fselector_imgs_tar_file',4);"><?php xmsg('CTL','BTN_CHOOSE'); ?></div></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="2%" class="value"><input type="radio" name="images_location" onClick="changeImagesSrc('dir');"></td>
+                                        <td><?php xmsg('CTL','IMP_IMG_SRC_DIR'); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <table class="form" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td class="value" width="90%"><textarea id="imgs_dir_path" style="width: 578px; height: 30px; cursor: default;" readonly></textarea></td>
+                                                    <td align="left"><div id="ChooseImagesDirButton1" class="button button_small button_disabled" onClick=""><?php xmsg('CTL','BTN_CHOOSE'); ?></div></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 15px;" align="center" colspan="3">
+                    	<table cellpadding="2" cellspacing="0" width="100%">
+                    		<tr>
+                    		    <td align="left" width="10%">
+                    		        <div class="button button_small" onClick="closeAndFocusParent()"><?php msg('BTN_CANCEL'); ?></div>
+                    		    </td>
+                    			<td align="right">
+                    				<div id="BackButton1" class="button button_small button_disabled" onClick=""><?php xmsg('CTL','BTN_BACK'); ?></div>
+			                    </td>
+                    			<td align="left">
+                    				<div id="StartImportButton1" class="button button_small button_disabled" onClick=""><?php xmsg('CTL','BTN_START'); ?></div>
+			                    </td>
+                    		    <td align="left" width="10%"></td>
+		                    </tr>
+	                    </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr id="section_3"  style="display: none;">
+        <td class="popup_dialog_header_left_right_padded">
+            <table class="form" cellspacing="0" cellpadding="4" width="100%" align="center">
+                <tr style="height: 1px;"></tr>
+                
+
+
+             
+                <tr class="subtitle" style="height: 25px;">
+                    <td colspan="3" width="100%" style="padding: 0px;" colspan="4">
+                        <table  class="clear" width="100%" cellpadding="0" cellspacing="0" >
+                            <tr style="height: 25px;">
+                                <td width="100%" style="padding: 0px 0px 0px 4px;"><span id="step_3_title"><?php xmsg('CTL','IMP_STEP_3_TITLE'); ?></span></td>
+                                <td  align="right" nowrap style="padding-right: 8px; text-align: right;"><?php PageHelpLink('import_products'); ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="3">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr style="height: 19px;">
+                            <td id="import_process_text"><?php xmsg('CTL','IMP_PRC_PROCESSING'); ?></td>
+                            <td width="3%"><img id="import_process_img" src="images/ajax/snake.gif"></td>
+                            <td width="15%" align="right"><?php xmsg('CTL','TIME_ELAPSED'); ?></td>
+                            <td width="5%" align="left" width="5%"><span id="imp_timer"></span></td>
+                          </tr>
+                          <tr>
+                            <td colspan="4" align="left">
+                    			<div class="progress_bar_container"><div id="import_pbar" class="progress_bar_bar"></div></div>
+                            </td>
+                          </tr>
+                      </table>
+                    </td>
+                </tr>
+                <tr>
+                  <td style="padding-left: 2px; padding-right: 6px;" colspan="3">
+                      <table class="form" cellpadding="0" cellspacing="2" width="100%">
+                          <tr>
+                              <td width="100%" valign="top">
+                                  <table width="100%" cellpadding="4" cellspacing="1" style="background: #CED4DD;">
+                                      <tr>
+                                          <td><?php xmsg('CTL','IMP_PRC_LOG'); ?></td>
+                                      </tr>
+                                      <tr>
+                                          <td bgcolor="white">
+                                          <div id="i_log" style="height: 150px; overflow: auto;">
+                                          </div>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="3">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td align="left" width="10%">
+                                    <div style="display: none;" class="button button_small" onClick="closeAndFocusParent()"><?php msg('BTN_CANCEL'); ?></div>
+                                </td>
+                                <td align="center">
+                                    <div id="EndButton1" class="button button_small button_disabled" onClick=""><?php msg('BTN_CLOSE'); ?></div>
+                                </td>
+                                <td align="left" width="10%">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<?php FileSelector('ImportProductsForm','csv_file_name','setNextButton();'); ?>
+<?php FileSelector('ImportProductsForm','imgs_tar_file','setStartButton();'); ?>
+<?php FSBrowser('DIRS','ImportProductsForm','imgs_dir_path','setStartButton();'); ?>
+<!-- END TPL (DO NOT REMOVE!) -->

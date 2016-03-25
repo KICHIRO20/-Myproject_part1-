@@ -1,0 +1,5 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<li class="<?php if(getLocalMenuItemLast()){echo 'last ';}; if(getLocalMenuItemType()==CMS_MENU_ITEM_TYPE_TEXT){echo 'nolink ';}; ?>"><?php if (getLocalMenuItemLink()): ?><a href="<?php LocalMenuItemLink(); ?>"><?php endif; ?>
+<?php LocalMenuItemName(); ?>
+<?php if (getLocalMenuItemLink()): ?></a><?php endif; ?></li>
+<!-- END TPL (DO NOT REMOVE!) -->

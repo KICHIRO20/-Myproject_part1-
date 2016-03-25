@@ -1,0 +1,164 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+<!--
+function checkSelectedRows(box)
+{
+    if (box.checked)
+    {
+        enableButton('DeleteButton', function () {bootbox.confirm('<?php xMsg('CMS', 'CMS_PAGE_DELETE_WARNING') ?>',function(result) {if(result){document.PageResultForm.mode.value="delete"; document.PageResultForm.submit();}});});
+    }
+    else
+    {
+        found = false;
+        for(el in box.form.elements)
+        {
+            tmpbox = box.form.elements[el];
+            if (tmpbox.type == "checkbox" 
+                && tmpbox.name.substring(0,6) == "delete"
+                && tmpbox.checked)
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+            disableButton('DeleteButton');
+    }
+    selectRow(box);
+}
+// -->
+</script>
+<?php ResultMessage(); ?>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-file-text-o font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php msg('CMS_HEADER_001'); ?></span>
+			<span class="caption-helper text-lowercase">Manage articles...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<a id="AddButton" class="btn btn-default btn-circle" href="cms_add_article.php"><i class="fa fa-plus"></i> <?php xMsg('CMS', 'BTN_ADD_NEW') ?></a>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="table-responsive">
+		<table class="table table-striped table-bordered">
+			<tr>
+				<td>
+					<form action="cms_pages.php" method="get" style="margin: 0;" name="FilterForm">
+					<input type="hidden" name="action" value="search" />
+					<table class="table table-striped table-bordered table-hover" width="100%" cellpadding="4" cellspacing="0">
+					<tr>
+					    <td style="width: 7%; font-weight: bold; background: rgb(175,192,222); color: black;">
+					    <?php xMsg('CMS', 'CMS_PAGE_INDEX'); ?>
+					    </td>
+					    <td style="width: 33%; font-weight: bold; background: rgb(175,192,222); color: black;">
+					    <?php xMsg('CMS', 'CMS_PAGE_NAME'); ?>
+					    </td>
+					    <td style="width: 20%; font-weight: bold; background: rgb(175,192,222); color: black;">
+					    <?php xMsg('CMS', 'CMS_PARENT_PAGE'); ?>
+					    </td>
+					    <td style="width: 20%; font-weight: bold; background: rgb(175,192,222); color: black; text-align: center;">
+					    <?php xMsg('CMS', 'CMS_PAGE_STATUS'); ?>
+					    </td>
+					    <td style="width: 20%; font-weight: bold; background: rgb(175,192,222); color: black; text-align: center;">
+					    <?php xMsg('CMS', 'CMS_PAGE_AVAILABILITY'); ?>
+					    </td>
+					    <td style="width: 20px; font-weight: bold; background: rgb(175,192,222); color: black; text-align: center;">
+					    &nbsp;
+					    </td>
+					</tr>
+					<?php PageFilter(); ?>
+					</form>
+					<form action="cms_pages.php" method="post" style="margin: 0;" name="PageResultForm">
+					<input type="hidden" name="asc_action" value="update_pages" />
+					<input type="hidden" name="mode" value="update" />
+					<?php FoundPages(); ?>
+					</table>
+					<table style="margin-top: 10px;" cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+					    <td style="text-align: left; width: 20%;"><?php if (getPageCount() > 1) { ?><a id="SortButton" class="btn btn-default btn-circle" onclick="document.getElementById('sort_form_div').style.display='';"><i class="fa fa-sort"></i> <?php xMsg('CMS', 'BTN_SORT') ?></a><?php } else { ?>&nbsp;<?php } ?></td>
+					    <td style="<?php if (getPageCount()) { ?>width: 30%; padding-right: 4px;<?php } else { ?>width: 80%;<?php } ?>">
+					        <table align="right" cellpadding="0" cellspacing="0">
+					        <tr>
+					            <td>
+									<a id="AddButton" class="btn btn-default btn-circle" href="cms_add_article.php"><i class="fa fa-plus"></i> <?php xMsg('CMS', 'BTN_ADD_NEW') ?></a>
+					            </td>
+					        </tr>
+					        </table>
+					    </td>
+					    <?php if (getPageCount()) { ?>
+					    <td style="text-align: left; width: 30%; padding-left: 4px;">  
+					    <a class="btn btn-default btn-circle" onclick="document.PageResultForm.mode.value='update'; document.PageResultForm.submit();"><i class="fa fa-refresh"></i> <?php Msg('BTN_UPDATE'); ?></a></td>
+					    </td>
+					    <td style="text-align: right; width: 20%;">
+					        <table align="right" cellpadding="0" cellspacing="0">
+					        <tr>
+					            <td>
+					                <a id="DeleteButton" class="btn btn-default btn-circle disabled button_disabled" onclick=""><i class="fa fa-times"></i> <?php Msg('BTN_DELETE') ?></a>
+					            </td>
+					        </tr>
+					        </table>
+					    </td>
+					    <?php } ?>
+					</tr>
+					</table>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center" width="100%"><?php PaginatorLine(); ?></td>
+			</tr>
+			<tr>
+				<td style="text-align: center" width="100%"><?php PaginatorRows(); ?></td>
+			</tr>
+		</table>
+		</div>
+		<script language="JavaScript" type="text/javascript" src="js/shuttle.js"></script>
+		<div id="sort_form_div" style="position: absolute; left: 27%; top: 20%; z-index: 10; display: none;">
+			<table cellpadding="0" cellspacing="0" style="border: solid 1px black; text-align: center;" width="350">
+				<tr style="background-color: #2b7dc7; height: 20px;">
+					<td align="left" style="padding-left: 4px; color: white; font-weight: bold; font-family: Tahoma, Sans-serif; font-size: 8pt;"><?php xmsg('CMS','CMS_SORT_PAGES'); ?></td>
+					<td align="right" width="10px"><a href="javascript: void(0);" onClick="document.getElementById('sort_form_div').style.display='none'"><img src="images/close.gif" border="0"></a></td>
+				</tr>
+				<tr style="background-color: #FFFFFF;">
+					<td valign="top" colspan="2">
+		<form action="cms_pages.php" method="post" name="CMSPagesSortForm">
+		<input type="hidden" name="asc_action" value="update_pages" />
+		<input type="hidden" name="mode" value="sort" />
+		<table class="form" style="text-align: center" cellpadding="4" cellspacing="1" border="0" width="100%">
+		<tr>
+			<td style="vertical-align: bottom; text-align: center; width: 10%;">
+				<img src="images/arrow_up.gif" onclick="moveItemUp('cms_pages_sort_order');" />
+			</td>
+			<td rowspan="2" width="90%">
+				<select id="cms_pages_sort_order" name="cms_pages_sort_order" class="form-control" size="8">
+					<?php SortItems(); ?>
+				</select>
+				<input type="hidden" id="cms_pages_sort_order.hidden" name="cms_pages_sort_order.hidden" value="" />
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top; text-align: center; width: 10%;">
+				<img src="images/arrow_down.gif" onclick="moveItemDown('cms_pages_sort_order');" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;" colspan="2">
+			<table align="center" cellspacing="0" cellpadding="0"><tr><td>
+			<a class="btn btn-default btn-circle" onclick="document.forms['CMSPagesSortForm'].submit();"><i class="fa fa-refresh"></i> <?php Msg('BTN_UPDATE'); ?></a>
+			</td></tr></table>
+			</td>
+		</tr>
+		</table>
+		</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

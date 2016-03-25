@@ -1,0 +1,53 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>#page_title#</title>
+    <meta name="description" content="#page_description#" />
+    <meta name="keywords" content="#page_keywords#" />
+    <meta name="author" content="Avactis Team" />
+    <?php include(getTemplateFileAbsolutePath('pages/templates/part.header.tpl.html')); ?>
+</head>
+<body>
+
+<div class="page_background">     
+
+    <div class="box page_header">
+        <div class="cn lb"></div>
+        <div class="cn rb"></div>
+        <div class="content">
+            <!-- LOGO -->
+            <div class="logo_bg"><a class="logo_img" href="<?php PageURL('index.php') ?>"></a></div>
+        </div>
+    </div>
+
+
+	<div class="page_container columnsC">
+		<div class="center_column">
+            <div class="box store_closed nogradient">
+                <div class="cn lt"></div>
+                <div class="cn rt"></div>
+                <div class="cn lb"></div>
+                <div class="cn rb"></div>
+                <div class="content">
+                    <h1>&nbsp;</h1>
+                    <div class="empty">
+                        <?php Label('STOREFRONT_STORE_CLOSED_MESSAGE'); ?>
+                    </div>
+                 </div>
+            </div> 
+        </div>
+	</div>
+
+<?php if ('[copyright]' != ''): ?>    
+    <div class="page_footer">
+        <hr/>
+        <div class="copyright">#copyright#</div>
+    </div>
+<?php endif; ?>    
+</div>
+</body>
+</html>
+

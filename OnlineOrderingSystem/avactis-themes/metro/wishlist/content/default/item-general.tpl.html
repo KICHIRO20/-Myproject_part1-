@@ -1,0 +1,42 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="product_img goods-page-image">
+        <?php
+                if (getValLocal_ProductLargeImageWidth() == '1') {
+                    if (getValLocal_ProductSmallImageWidth() == '1') {
+                        ?><div class="noimage"></div><?php
+                    }
+                    else {
+                        ?><img src="<?php Local_ProductSmallImageSrc(); ?>" width="<?php if (getValLocal_ProductSmallImageWidth()<170) { Local_ProductSmallImageWidth(); } else { echo '170'; } ?>" /><?php
+                    }
+                }
+                else {
+                    if (getValLocal_ProductSmallImageWidth() == '1') {
+                        ?><a class="color_box" href="<?php Local_ProductLargeImageSrc(); ?>" title="<?php Local_ProductName(); ?>"><img src="<?php Local_ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>" alt="<?php Local_ProductName(); ?>" /></a><?php
+                    }
+                    else {
+                        ?><a class="color_box" href="<?php Local_ProductLargeImageSrc(); ?>" title="<?php Local_ProductName(); ?>"><img src="<?php Local_ProductSmallImageSrc(); ?>" width="<?php if (getValLocal_ProductSmallImageWidth()<170) {Local_ProductSmallImageWidth();} else {echo '170';}; ?>" alt="<?php Local_ProductName(); ?>" /></a><?php
+                    }
+                } 
+        ?>
+    </td>
+    <td class="product_data goods-page-description">
+        <a class="product_name" href="<?php Local_ProductInfoLink(); ?>"><?php Local_ProductName(); ?></a>
+        <?php Local_ProductOptionsSelected(); ?>
+    </td>
+    <td class="product_quantity_selector">
+        <select name="<?php Local_FormQuantityFieldName(); ?>" onchange="this.form.asc_action.value='UpdateWishlistContent'; this.form.submit();">
+            <?php Local_ProductQuantityOptions(); ?>
+        </select>
+    </td>
+    <td class="product_sale_price goods-page-price" style="width: 15%;padding: 21px 26px;"><span class="value"><?php Local_WLItemSalePrice(); ?></span></div>
+    <td class="product_total_price goods-page-price">
+        <span class="value"><?php Local_ProductSubtotal(); ?></span><br/><br />
+    </td>
+   <td class="del-goods-col">
+        <a class="del-goods" href="<?php Local_RemoveProductLink(); ?>"> </a>
+   <a class="add-goods" href="<?php Local_AddToCartLink(); ?>"> </a>
+   </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->
+

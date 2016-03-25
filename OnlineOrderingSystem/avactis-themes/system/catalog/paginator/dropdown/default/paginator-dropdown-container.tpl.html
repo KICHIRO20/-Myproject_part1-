@@ -1,0 +1,9 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="paginator dropdown">
+    <select name="<?php Local_FormSelectFieldName(); ?>"
+            onchange="document.location = '<?php Local_FormAction(); ?>?<?php Local_FormActionFieldName(); ?>=<?php Local_FormActionFieldValue(); ?>&amp;<?php Local_FormPaginatorFieldName(); ?>=<?php Local_FormPaginatorFieldValue(); ?>&amp;<?php Local_FormSelectFieldName(); ?>=' + this.value;">
+        <?php Local_FormSelectOptions(); ?>
+    </select>
+    <?php Local_ItemsName(); ?><?php Label("CATALOG_PER_PAGE"); ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

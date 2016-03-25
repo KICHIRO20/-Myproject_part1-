@@ -1,0 +1,15 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<?php CZHTTPSLayoutSections(); ?>
+<input type="hidden" name="layout_<?php CZHTTPSLayoutId(); ?>_res" value="<?php CZHTTPSLayoutCheckedSections(); ?>">
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var onload_bak_layout_<?php CZHTTPSLayoutId(); ?> = window.onload;
+window.onload = function()
+{
+    if(onload_bak_layout_<?php CZHTTPSLayoutId(); ?>){onload_bak_layout_<?php CZHTTPSLayoutId(); ?>();}
+    selectCZSections(<?php CZHTTPSLayoutId(); ?>);
+}
+//-->
+</SCRIPT>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

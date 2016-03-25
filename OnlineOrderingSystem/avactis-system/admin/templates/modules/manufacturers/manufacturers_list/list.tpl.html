@@ -1,0 +1,137 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function sort(alert_message)
+{
+    if (alert_message == '')
+    {
+        NewWindow('SortManufacturers', '<?php SortManufacturersHref(); ?>', 'SortManufacturers', true, '');
+    }
+    else
+    {
+        alert(alert_message);
+        return;
+    }
+}
+//-->
+</SCRIPT>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function DelManufacturerInfoOnSubmit(alert_message, windowURL)
+{
+    var i=0
+    var elem = document.manufacturerListForm.manufacturer_id;
+    var elem_id = '';
+    if (elem)
+    {
+        URL = windowURL;
+        if (!elem.length)
+        {
+            URL = windowURL+elem.value;
+            elem_id = elem.value;
+        }
+        else
+        {
+            while (elem[i])
+            {
+                if (elem[i].checked)
+                {
+                    URL = windowURL+elem[i].value;
+                    elem_id = elem[i].value;
+                    break;
+                }
+                i++;
+            }
+        }
+        if (URL == windowURL)
+        {
+            alert(alert_message);
+            return;
+        }
+    }
+    else
+    {
+        alert(alert_message);
+        return;
+    }
+
+    var Manufacturer = document.getElementById("Manufacturer_"+elem_id).value;
+    var warning = new String('<?php xmsg("MNF", "MNFS_PAGE_WRN_001"); ?>');
+    warning = warning.replace('{Manufacturer}', Manufacturer);
+
+    if (!confirm(warning))
+        return false;
+    go(URL);
+    return true;
+}
+
+// -->
+</SCRIPT>
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-building"></i>&nbsp;<?php xmsg('MNF','TAB_MANUFACTURERS_MENU_TITLE'); ?>
+					</span>
+				</div>
+				<div class="actions">
+					<a class="btn btn-circle btn-default" href="<?php AddManufacturerHref(); ?>" data-original-title="" title="<?php xmsg('MNF', 'BTN_ADD_MANUFACTURER_TITLE'); ?>">
+						<i class="fa fa-plus-circle"></i><span class="hidden-480">&nbsp;<?php xmsg('MNF','BTN_ADD_MANUFACTURER'); ?></span>
+					</a>
+                                       <a class="btn btn-circle btn-default" href="javascript:NewWindowExt('EditManufacturer', '<?php EditManufacturerHref(); ?>', 'Edit', true, <?php AlertMessage(); ?>, 'manufacturerListForm', 'manufacturer_id');" data-original-title="" title="<?php xmsg('MNF', 'BTN_EDIT_MANUFACTURER_TITLE'); ?>">
+						<i class="fa fa-plus-circle"></i><span class="hidden-480">&nbsp;<?php xmsg('MNF', 'BTN_EDIT_MANUFACTURER'); ?></span>
+					</a>
+					<a class="btn btn-circle btn-default" href="javascript:DelManufacturerInfoOnSubmit(<?php AlertMessage(); ?>, '<?php DelManufacturerHref(); ?>');" title="<?php xmsg('MNF', 'BTN_DELETE_MANUFACTURER_TITLE'); ?>" data-original-title="">
+						<i class="fa fa-trash-o"></i><span class="hidden-480">&nbsp;<?php xmsg('MNF', 'BTN_DELETE_MANUFACTURER'); ?></span>
+					</a>
+					<a class="btn btn-circle btn-default" href="javascript:sort('<?php SortAlertMessage(); ?>');" title="<?php xmsg('MNF','BTN_SORT'); ?>" data-original-title="">
+						<i class="fa fa-sort-amount-asc"></i><span class="hidden-480">&nbsp;<?php xmsg('MNF','BTN_SORT'); ?></span>
+					</a>
+				</div>
+			</div>		
+			<div class="portlet-body">
+				<form name="manufacturerListForm">
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<th><?php xmsg('MNF', 'MNF_COL_HDR_001'); ?></th>
+							<th><?php xmsg('MNF', 'MNF_COL_HDR_002'); ?></th>
+							<th><?php xmsg('MNF', 'MNF_COL_HDR_003'); ?></th>
+							<th></th>
+						</thead>
+						<tbody>
+							<?php Items(); ?>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="4">
+									<div class="pull-right">
+										<a class="btn btn-circle btn-default" href="<?php AddManufacturerHref(); ?>" data-original-title="" title="<?php xmsg('MNF', 'BTN_ADD_MANUFACTURER_TITLE'); ?>">
+											<i class="fa fa-plus"></i>&nbsp;<?php xmsg('MNF','BTN_ADD_MANUFACTURER'); ?>
+										</a>
+                                                                                <a class="btn btn-circle btn-default" href="javascript:NewWindowExt('EditManufacturer', '<?php EditManufacturerHref(); ?>', 'Edit', true, <?php AlertMessage(); ?>, 'manufacturerListForm', 'manufacturer_id');" data-original-title="" title="<?php xmsg('MNF', 'BTN_EDIT_MANUFACTURER_TITLE'); ?>">
+						<i class="fa fa-plus-circle"></i><span class="hidden-480">&nbsp;<?php xmsg('MNF', 'BTN_EDIT_MANUFACTURER'); ?></span>
+					</a>
+										<a class="btn btn-circle btn-default" href="javascript:DelManufacturerInfoOnSubmit(<?php AlertMessage(); ?>, '<?php DelManufacturerHref(); ?>');" title="<?php xmsg('MNF', 'BTN_DELETE_MANUFACTURER_TITLE'); ?>" data-original-title="">
+											<i class="fa fa-trash-o"></i>&nbsp;<?php xmsg('MNF', 'BTN_DELETE_MANUFACTURER'); ?>
+										</a>
+										<a class="btn btn-circle btn-default" href="javascript:sort('<?php SortAlertMessage(); ?>');" title="<?php xmsg('MNF','BTN_SORT'); ?>" data-original-title="">
+											<i class="fa fa-sort-amount-asc"></i>&nbsp;<?php xmsg('MNF','BTN_SORT'); ?>
+										</a>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

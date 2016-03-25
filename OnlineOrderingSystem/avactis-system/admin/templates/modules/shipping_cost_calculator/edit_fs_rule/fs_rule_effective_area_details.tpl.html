@@ -1,0 +1,32 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script>
+function flipEffectiveAreaDetails()
+{
+    var area = document.getElementById('effective_area_details_id');
+    if (area)
+    {
+        if (area.style.display == 'none')
+            area.style.display = '';
+        else
+            area.style.display = 'none';
+    }
+}
+</script>
+<a href='' onClick='flipEffectiveAreaDetails();return false;'><?php xmsg('SCC', 'FS_RULE_DETAILS_LABEL'); ?></a>
+<table id='effective_area_details_id' style='display: none' width="100%" class="table table-striped">
+    <thead>
+        <tr role="row" class="heading">
+            <th width="10%" style="text-align: center;">
+              <?php xmsg("SCC", "FS_RULE_CATEGORIES_AFFECTED"); ?></th>
+            <th width="10%" style="text-align: center;">
+              <?php xmsg("SCC", "FS_RULE_PRODUCTS_AFFECTED"); ?>
+            </th>
+    </thead>
+    <tbody>
+        <tr role="row" class="odd">
+            <td align="center" style="text-align: center;"><?php CategoriesAffectedList(); ?></td>
+            <td align="center" style="text-align: center;"><?php ProductsAffectedList(); ?></td>
+        </tr>
+    </tbody>
+</table>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

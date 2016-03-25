@@ -1,0 +1,18 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main">
+    <div class="container">
+    <div class="row margin-bottom-40"> 
+<div class="myaccount col-md-12 <?php ViewClassName(); ?>">
+  <h1><?php Label("ACCOUNT_DOWNLOAD_FILES"); ?><?php Label('ACCOUNT_ORDER_NUMBER'); ?> <?php Local_OrderID(); ?></h1>
+    <div class="content-page">
+        <h3><?php Label('ACCOUNT_LINKS_FOR_A_PRODUCT_LABEL'); ?>&nbsp;<?php Local_OrderedProductName(); ?></h3>
+        <?php Local_HotlinksList(); ?>
+        <a href="<?php Local_OrderInfoLink(); ?>">
+        <span class="<?php lang(); ?> button_back btn btn-default"><?php Label('ACCOUNT_BACK_TO_HOME_PAGE'); ?></span></a>
+       
+    </div>
+</div>
+
+</div></div></div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

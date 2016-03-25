@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- BEGIN TOP SEARCH -->
+            <li class="menu-search" style="list-style: none;">
+            <span class="sep"></span>
+            <i class="fa fa-search search-btn"></i>
+            <div class="search-box">
+                <form method="post" action="<?php Local_SearchFormAction(); ?>" name="<?php Local_SearchFormName(); ?>">
+                  <div class="input-group">
+                    <input type="hidden" name="<?php Local_ActionName(); ?>" value="<?php Local_ActionValue(); ?>" />
+                    <input type="text" placeholder="Search" name="<?php Local_SearchTextFieldName(); ?>" class="form-control">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="submit"><?php Label('STOREFRONT_MAIN_MENU_SEARCH_LABEL'); ?></button>
+                    </span>
+                  </div>
+                </form>
+            </div> 
+            </li>
+            <!-- END TOP SEARCH -->
+<!-- END TPL (DO NOT REMOVE!) -->
+

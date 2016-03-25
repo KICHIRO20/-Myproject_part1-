@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>FedEx rates importing information</title>
+</head>
+<style type="text/css">
+BODY,TH,TD,P {
+        FONT-FAMILY: Arial, Sans-serif; 
+        COLOR: #000000; FONT-SIZE: 14px;
+}
+A:link {
+        COLOR: #000000; TEXT-DECORATION: none;
+}
+A:visited {
+        COLOR: #000000; TEXT-DECORATION: none;
+}
+A:hover {
+        COLOR: #000000; TEXT-DECORATION: underline;
+}
+A:active  {
+        COLOR: #000000; TEXT-DECORATION: none;
+}
+BODY {
+    margin: 6px;
+    background-color: #b4cadc;
+}
+</style>
+<body>
+<TABLE border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
+<TR><TD>
+<B>FedEx rates importing information</B>
+<P>
+FedEx rate estimation is based on rate tables, so before using rate estimation for FedEx you need to download rate tables from FedEx site and import them.
+<P>
+First you need to obtain the following files from FedEx:
+
+<OL>
+<LI>Download .csv files for the following services from 
+<A href="ftp://ftp.fedex.com/pub/us/rates/downloads/documents2/" target="_blank"><B>ftp://ftp.fedex.com/pub/us/rates/downloads/documents2/</B></A>
+<br>or from <br>
+<a href="http://www.fedex.com/ratetools/RateToolsMain.do" target="_blank"><b>http://www.fedex.com/ratetools/RateToolsMain.do</b></a>
+<P>
+2nd Day<BR>
+Express Saver<BR>
+First Overnight<BR>
+Priority Overnight<BR>
+Standard Overnight<BR>
+Ground<BR>
+Home Delivery<BR>
+International Economy<BR>
+International Priority<BR>
+International First<BR>
+Express: US to Puerto Rico<BR>
+<P>
+<LI>Please make sure you have entered your origination Postcode at the "Store settings -&gt; Store Owner's Profile" section. After that please download the ASCII zone chart at this page:
+<P>
+<TABLE border="0"><TR><TD><a href="http://www.fedex.com/ratetools/RateToolsMain.do" target="_blank"><b>http://www.fedex.com/ratetools/RateToolsMain.do</b></a></TD></TR></TABLE>
+</OL>
+<P>
+Put all these files on your server where Avactis is installed in the directory <b>'&lt;avactis-dir&gt;/avactis-system/modules/shipping_module_fedex/imort_data/'</b>. 
+Then press 'Import' button at the FedEx configuration page. Please do not forget to update rate tables and  'Fuel surcharges' regulary to keep it up to date.
+</TD>
+</TR>
+</TABLE>
+<div align="right">
+	<a href="javascript:window.close();">Close this window</a>
+</div>
+ </body>
+</html>

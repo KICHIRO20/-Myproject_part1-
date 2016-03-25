@@ -1,0 +1,24 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="row">
+						<div class="col-sm-1">
+							 <input type="checkbox" name="pf_to_del[<?php FileID(); ?>]" onClick="onDelCBclick(this);">
+						</div>
+										
+						<div class="col-sm-2">
+						 <b><?php xmsg('PF','LBL_FILE'); ?>:</b>&nbsp;<?php FileName(); ?>
+						</div>
+						<div class="col-sm-2">
+						  <?php FSize(); ?>
+						</div>
+						<div class="col-md-4">  
+						    <?php xmsg('PF','LBL_DESCRIPTION'); ?>:&nbsp;<input class="form-control form-filter input-sm input-large" type="text" name="files_descr[<?php FileID(); ?>]" size="70" maxlength="255" value="<?php FileDescr(); ?>">
+						</div>
+						<div class="col-md-2">  
+							<a href="<?php DirectFileLink(); ?>"><?php xmsg('PF','LBL_DOWNLOAD_FILE'); ?></a>
+						</div>
+
+</div>
+<br>
+
+  
+<!-- END TPL (DO NOT REMOVE!) -->

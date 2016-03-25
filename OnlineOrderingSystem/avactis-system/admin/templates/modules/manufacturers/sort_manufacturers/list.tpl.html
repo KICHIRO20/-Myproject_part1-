@@ -1,0 +1,87 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:  flex;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+</style>
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function submitSaveSortForm(formID)
+    {
+        var form = document.forms[formID];
+        form.elements['asc_action'].value = 'SaveSortedManufacturers';
+        form.elements['ViewState[hasCloseScript]'].value = 'true';
+        form.submit();
+    }
+//-->
+</SCRIPT>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light" id="sort_browser">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-sort"></i>&nbsp;<?php xmsg('MNF', 'SORT_MANUFACTURERS_LABEL'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<a class="btn btn-circle btn-default" href="javascript:submitSaveSortForm('SaveSortForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" data-original-title="" title="">
+				<i class="fa fa-save"></i><span class="hidden-480">&nbsp;<?php msg('BTN_SAVE'); ?></span>
+			</a>
+			<a class="btn btn-circle btn-default" href="javascript:closeAndFocusParent();" data-original-title="" title="">
+				<i class="fa fa-times"></i><span class="hidden-480">&nbsp;<?php msg('BTN_CANCEL'); ?></sapn>
+			</a>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<form METHOD=POST ACTION="<?php SaveSortHref(); ?>" id="SaveSortForm" name="SaveSortForm">
+			<INPUT TYPE="hidden" <?php HiddenFieldAction(); ?>>
+			<input type="hidden" id="ObjectList.hidden" name="ObjectList.hidden" value="">
+			<?php HiddenArrayViewState(); ?>
+			<div class="col-md-1row row-eq-height vertical-align">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-6">
+					<select name="ObjectList" size="17" id="ObjectList" class="form-control input-medium">
+        					<?php OptionsList(); ?>
+    					</select>
+				</div>
+				<div class="col-sm-0">
+					<div class="row">
+						<div class="col-sm-1">
+						<a ALT="<?php Msg('SORT_CTGR_004'); ?>" title="<?php Msg('SORT_CTGR_004'); ?>" href="javascript:moveItemUpTop('ObjectList');"><i class="fa fa-caret-square-o-up fa-2x"></i></a>
+						</div>
+					</div><br />
+					<div class="row"><div class="col-sm-1">
+						    <a ALT="<?php Msg('SORT_CTGR_005'); ?>" title="<?php Msg('SORT_CTGR_005'); ?>" href="javascript:moveItemUp('ObjectList');"><i class="fa fa-chevron-circle-up fa-2x"></i></a>
+					</div></div><br />
+					<div class="row"><div class="col-sm-1">
+						    <a ALT="<?php Msg('SORT_CTGR_006'); ?>" title="<?php Msg('SORT_CTGR_006'); ?>" href="javascript:moveItemDown('ObjectList');"><i class="fa fa-chevron-circle-down fa-2x"></i></a>
+					</div></div><br />
+					<div class="row"><div class="col-sm-1">
+						    <a ALT="<?php Msg('SORT_CTGR_007'); ?>" title="<?php Msg('SORT_CTGR_007'); ?>" href="javascript:moveItemDownBottom('ObjectList');"><i class="fa fa-caret-square-o-down fa-2x"></i></a>
+					</div></div>
+				</div>
+			</div>					
+		</form><br />
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<a class="btn btn-circle btn-default" href="javascript:submitSaveSortForm('SaveSortForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));"><i class="fa fa-save"></i> &nbsp;<?php msg('BTN_SAVE'); ?></a>
+				<a class="btn btn-circle btn-default" href="javascript:closeAndFocusParent();"><i class="fa fa-times"></i>&nbsp;<?php msg('BTN_CANCEL'); ?></a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

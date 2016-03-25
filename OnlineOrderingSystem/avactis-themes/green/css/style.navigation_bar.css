@@ -1,0 +1,24 @@
+.navigation_bar ul li span {
+    border-bottom: 1px dotted #cccccc;
+}
+
+.navigation_bar.empty p {
+    padding: 50px 0px 50px 0px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.box.navigation_bar .content {
+    background: #96c56f url('../images/bg-navigationbar.png') repeat-x 0px 29px;
+}
+
+.navigation_bar .content .tree span a {
+    color: white;
+}
+
+.page_container .box.navigation_bar .cn {
+    background: url('../images/bg-navigationbar-corners.gif') no-repeat;
+}
+
+
+

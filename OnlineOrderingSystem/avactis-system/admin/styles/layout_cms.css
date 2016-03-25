@@ -1,0 +1,483 @@
+.h_el 
+{
+    display: none;
+}
+
+.button 
+{
+    margin: 0 3px;
+}
+/**
+.column 
+{ 
+    float: left; 
+    margin-bottom: 8px; 
+    background: #fff;
+    padding-bottom: 10px;
+}
+
+.list .column 
+{
+    border: solid 2px #66e0a0; 
+    padding-bottom: 20px;
+}
+
+.fixed .column,
+.list .hidden_col
+{
+    border: solid 2px #c9c9c9;
+}
+**/
+.column_header 
+{
+    height: 20px;
+}
+
+.column_hidden_lbl
+{
+    font-size: 20px; 
+    color: #aaa;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.column_title 
+{
+    margin: 5px 0 0 5px; 
+    font-size: 13px; 
+    float:left;
+}
+
+.column_show, 
+.column_hide, 
+.column_delete, 
+.block_add 
+{
+    float:right; 
+    margin: 5px 10px 0 0; 
+    text-decoration:underline; 
+    cursor:pointer;
+}
+
+.block 
+{ 
+    margin: 8px; 
+    background: #B4CADC; 
+    border: 1px solid #00d;
+}
+
+.block-header 
+{ 
+    color: #000; 
+    font-size: 12px; 
+    padding: 4px;
+    text-align: center; 
+    background: #B4CADC; 
+}
+
+.block-descr 
+{
+    color:#000; 
+    display: none;
+}
+
+.list .block-header 
+{
+    cursor: move;
+}
+
+.block-tmpl
+{
+    display:none;
+}
+
+.hidden_col, 
+.hidden_block 
+.block-header, 
+.hidden_block .block-descr 
+{
+    background: #eee;
+}
+
+.hidden_block 
+{
+    border: solid 1px #C9C9C9;
+}
+
+.cross 
+{
+    float:left; 
+    margin: 1px 5px 0 0; 
+    width:13px; 
+    height:13px; 
+    background-image: url('../images/cross.gif');
+}
+
+.hidden_block .cross 
+{
+    background-image: url('../images/cross_gray_bg.gif');
+}
+
+.edit-block, 
+.show-block, 
+.hide-block 
+{
+    float: right; 
+    cursor:pointer; 
+    text-decoration: underline; 
+    margin-left: 5px;
+}
+
+.edit-block 
+{
+    margin-right: 3px;
+}
+
+.info-icon 
+{
+    float: left; 
+    cursor: pointer; 
+    width:16px; 
+    height:16px; 
+    margin: 0; 
+    background-image: url('../images/icon-info-v2-rev6.gif');
+}
+
+.ui-icon-delete 
+{
+    float: right;
+    cursor:pointer;
+    width:16px; 
+    height:15px; 
+    background-image: url('../images/delete.gif'); 
+    margin: 2px 2px 0 5px;
+}
+
+.block-descr 
+{ 
+    padding: 0.4em; 
+    cursor: default; 
+    font-style: italic;
+}
+
+.block-description,
+.block-content
+{
+    display: none;
+}
+
+.ui-sortable-placeholder 
+{ 
+    visibility: visible !important; 
+    height: 50px !important; 
+}
+
+.ui-sortable-placeholder * 
+{ 
+    visibility: hidden; 
+}
+/**
+.template .header .column, 
+.template .footer .column,
+.template .main_menu .column
+{
+    width:99%;
+}
+
+.template .header .column
+{
+    margin-top: 10px;
+}
+**/
+#left_column, 
+#right_column,
+#center_column
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+/**
+#center_column 
+{
+    width:50%; 
+}
+**/
+.blocks-list 
+{
+    margin-right: 8px; 
+    height:300px; 
+    width:250px; 
+    overflow:auto;
+}
+
+.edit-block-content 
+{
+    position:absolute; 
+}
+
+.controls 
+{
+    float:left;
+}
+
+.controls h4 
+{
+    margin: 5px 5px 8px 0;
+}
+
+#current-page-title 
+{
+    margin: 6px 0 0 6px; 
+}
+/**
+.page-settings 
+{
+    float: right; 
+    margin-top: 20px;
+}
+
+.page-settings-note 
+{
+    float: right; 
+    margin: 0 0px 10px;
+    padding-right: 345px;
+}
+
+.page-settings table td 
+{
+    padding:5px; 
+    font-size:12px; 
+    text-align:right;
+}
+
+.page-settings-inp 
+{
+    width: 240px;
+}
+**/
+.coverlet 
+{
+    display:none; 
+    background:#000; 
+    position:fixed; 
+    left:0px; 
+    top:0px; 
+    width:100%; 
+    height:100%;
+    z-index:100; 
+}
+
+.edit-block-form 
+{ 
+    display:none; 
+    background:#fff; 
+    z-index:200; 
+    position:absolute;
+    left:0px; 
+    top:0px; 
+    width:332px; 
+    height:300px; 
+    padding:1em 3.7em;
+}
+
+.waiter 
+{
+    display:none; 
+    z-index:200; 
+    position: absolute; 
+    width:208px; 
+    height:13px; 
+    background: #000 url('../images/loading13.gif'); 
+    left:0px; 
+    top:0px;
+}
+
+.settings-helper 
+{
+    display:none; 
+    z-index:200; 
+    position: absolute; 
+    width:300px; 
+    height:300px; 
+    background: #fff; 
+    left:0px; 
+    top:0px;
+}
+
+.settings-list{
+    background: #fff; 
+    width:100%; 
+    height:100%; 
+    overflow: auto;
+}
+
+.search-setting
+{
+    width:294px;
+}
+
+.setting
+{
+    margin-left:7px; 
+    cursor: pointer;
+}
+
+.a_block 
+{
+    cursor: pointer;
+}
+
+.setting:hover, 
+.a_block:hover 
+{
+    background:#ddd;
+}
+
+#blocks_search 
+{
+    padding-right: 35px;
+}
+
+#blocks_search_inp 
+{
+    width: 100%;
+}
+
+.add-block-form{
+    position:absolute; 
+    z-index:200; 
+    display:none; 
+    background:#fff; 
+    padding:15px;
+}
+
+.ab-container h4 
+{
+    margin: 19px 0 1px 0;
+}
+/**
+.add-block-params 
+{
+    margin-top: 70px;
+    padding-left: 13px;
+}
+
+.ab-title{
+    width:250px;
+}
+**/
+.section-title 
+{
+    width:100%; 
+    height:25px; 
+    background:#AFC0DE;
+}
+
+.section-title-page, 
+.section-title-page-options, 
+.section-title-blocks 
+{
+    float:left; 
+    color:black; 
+    font-weight:bold; 
+    margin:5px 0 0 6px;
+}
+
+.section-title-page 
+{
+    width:40%;
+}
+
+.edit-block-form .button, 
+.add-block-form .button 
+{
+    float: left;
+}
+
+.template-cont {
+    padding: 10px 20px; 
+    background:#eef2f8;
+}
+
+.cp-title-cont {
+    float: left; 
+    margin-bottom: 3px;
+}
+
+.ph-legend {
+    float:right; 
+    margin-top: 7px;
+}
+
+.d-n-d-rect, 
+.d-n-d-label, 
+.static-rect, 
+.static-label 
+{
+    float:left;
+}
+
+.d-n-d-label, 
+.static-label 
+{
+    margin-right: 13px;
+}
+
+.d-n-d-rect, 
+.static-rect 
+{
+    width: 10px; 
+    height: 7px; 
+    margin-right: 5px;
+}
+
+.d-n-d-rect {
+    border: 2px solid #66e0a0;
+}
+
+.static-rect {
+    border: 2px solid #c9c9c9;
+}
+
+.show-block, 
+.hide-block 
+{
+    width:27px;
+}
+
+.column_hide, 
+.column_show 
+{
+    width:24px;
+}
+
+.ab-title, 
+.ab-descr,
+.eb-title, 
+.eb-descr
+{
+    margin-bottom: 5px;
+}
+
+.active-skin {
+    font-weight: bold;
+}
+
+#theme-select, #page-select {
+    width: 200px;
+}
+
+.borderless tbody tr td, .borderless thead tr th {
+    border: none;
+}
+div.borders {
+        border: 2px solid #c9c9c9;
+}
+.template .row,
+.template .fixed,
+.template .header{
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

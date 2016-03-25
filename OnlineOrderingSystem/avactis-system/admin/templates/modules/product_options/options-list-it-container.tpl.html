@@ -1,0 +1,143 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+  <tr>
+  	<td width=100% align="center" valign="middle" style="padding-left: 4px; padding-right: 4px; padding-top: 30px;">
+
+<div id="halftransbox" style="display: none; position: absolute; width: 0px; height: 0px; left: 0px; top: 0px; border: 1px solid black; z-index: 10; background-image: url(images/halftranspixel.png);">
+</div>
+<script language="JavaScript">
+function disableInventoryForm()
+{
+	document.getElementById('inv_paginator').disabled=true;
+	document.getElementById('inv_process_img').style.display='';
+	document.getElementById('UpdInvButton').style.display='none';
+	
+	var inv_tbl_element = document.getElementById('inventory_table');
+	
+	var inv_tbl_width  = inv_tbl_element.offsetWidth;
+	var inv_tbl_height = inv_tbl_element.offsetHeight;
+	var inv_tbl_left = inv_tbl_element.offsetLeft;
+	obj = inv_tbl_element;
+	while(obj.offsetParent)
+	{
+		inv_tbl_left+=obj.offsetParent.offsetLeft;
+		obj=obj.offsetParent;
+	};
+	var inv_tbl_top = inv_tbl_element.offsetParent.offsetTop+document.getElementById('inventory_table').offsetTop;
+	
+	var box_element = document.getElementById('halftransbox');
+	
+	box_element.style.width = inv_tbl_width + 'px';
+	box_element.style.height = inv_tbl_height + 'px';
+	box_element.style.left = inv_tbl_left + 'px';
+	box_element.style.top = inv_tbl_top + 'px';
+	box_element.style.display='';
+};
+function enableInventoryForm()
+{
+	document.getElementById('inv_paginator').disabled=false;
+    document.getElementById('inv_process_img').style.display='none';
+	document.getElementById('UpdInvButton').style.display='';
+	document.getElementById('halftransbox').style.display='none';
+}
+function loadInventoryPage(page_number)
+{
+		disableInventoryForm();
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'get_inventory_page',
+                'parent_entity': '<?php _parent_entity(); ?>',
+                'entity_id': <?php _entity_id(); ?>,  
+                'it_page': page_number
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                document.getElementById("inventory_table").innerHTML = org_inv_tbl_html + output + '</tbody></table>';
+                if(result["pages_count"]==0)
+                {
+                	document.getElementById('inventory_table').style.display='none';
+                	document.getElementById('inventory_buttons').style.display='none';
+                }
+                else
+                {
+                	buildInventoryPaginator(result["pages_count"], result["page_number"]);
+	            };
+                enableInventoryForm();
+            },
+            'json'
+        );
+};
+function updateInventory()
+{
+		disableInventoryForm();
+		document.forms['InventoryForm'].elements['page'].value=document.getElementById('inv_paginator').value;
+        var req = new JsHttpRequest();
+	    req.onreadystatechange = function() 
+	    {
+    	    if (req.readyState == 4) 
+    	    {
+                document.getElementById("inventory_table").innerHTML = org_inv_tbl_html + req.responseText + '</tbody></table>';
+                buildInventoryPaginator(req.responseJS.pages_count, req.responseJS.page_number);
+                enableInventoryForm();
+	        }
+    	}
+	    req.open(null, 'po_inventory.php', true);
+        req.send( { form: document.getElementById('InventoryForm') } );
+};
+function buildInventoryPaginator(pages_count, page_number)
+{
+	var inv_pag = document.getElementById('inv_paginator');
+	if(inv_pag.options.length=='')
+	{
+		for(var i=1;i<=pages_count;i++)
+			inv_pag.options[i-1]=new Option('page '+i,i);
+		inv_pag.style.display='';
+	};
+}
+</script>
+<form name="InventoryForm" enctype="multipart/form-data" id="InventoryForm" method="post">
+<input type="hidden" name="asc_action" value="update_inventory">
+<input type="hidden" name="parent_entity" value="<?php _parent_entity(); ?>">
+<input type="hidden" name="entity_id" value="<?php _entity_id(); ?>">
+<input type="hidden" name="page" value="">
+<div id="inventory_table">
+<table class="form" width="100%" cellpadding="4" cellspacing="1">
+	<tr class="group">
+		<td colspan="4"><?php lblInvTrck(); ?></td>
+	</tr>
+	<tr bgcolor="#B2C2DF">
+		<td width="30%" colspan="2">Combination</td>
+		<td width="35%">SKU</td>
+		<td width="35%">Quantity</td>
+	</tr>
+	<?php InvTrckTable(); ?>
+</table>
+</div>
+</form>
+<div id="inventory_buttons">
+<table class="form" width="100%" cellpadding="4" cellspacing="1">
+	<tr>
+		<td width="40%">
+			<div id="UpdInvButton" class="button button_8em" onClick="updateInventory();"><?php lblUpdateInv(); ?></div>
+			<div id="RebuildInvButton" class="button button_8em" onClick="window.location='<?php RebuildInvLink(); ?>'"><?php lblRebuildInv(); ?></div>
+		</td>
+		<td><img src="images/process_green_01.gif" id="inv_process_img" style="display: none"></td>
+		<td width="40%" align="right">
+			<?php InventoryPaginator(); ?>
+		</td>
+	</tr>
+</table>
+</div>
+<script language="JavaScript">
+	var org_inv_tbl_html = document.getElementById('inventory_table').innerHTML; 
+	var regexp = new RegExp("</table>",'i');
+	org_inv_tbl_html = org_inv_tbl_html.replace(regexp,'');
+	var regexp = new RegExp("</tbody>",'i');
+	org_inv_tbl_html = org_inv_tbl_html.replace(regexp,'');
+</script>
+<?php jsITButtonsDisplayCorrect(); ?>
+<?php jsLoadFirstInvPage(); ?>
+
+  	</td>
+  </tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

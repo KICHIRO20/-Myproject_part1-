@@ -1,0 +1,174 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" src="templates/modules/users/md5.js"></script>
+<script type="text/javascript" src="js/uspss.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function validateForm(formId)
+{
+    var form = document.forms[formId];
+    var email = form.elements['AdminEmail'].value;
+    var new_password = form.elements['New_Password'].value;
+    var verify_new_password = form.elements['Verify_New_Password'].value;
+    if (!isEqNewAndVerifyPasswords(new_password, verify_new_password))
+    {
+        alert("<?php PSWUPD_002(); ?>");
+        return false;
+    }
+    if (!isAllFieldsFilled(new Array(new_password, verify_new_password)))
+    {
+        alert("<?php PSWUPD_008(); ?>");
+        return false;
+    }
+    if (!isValidNewPasswordLength(new_password))
+    {
+        alert("<?php PSWUPD_004(); ?>");
+        return false;
+    }
+    if (!isComplicatedNewPassword(new_password))
+    {
+        alert("<?php PSWUPD_005(); ?>");
+        return false;
+    }
+    if (!isDifferentFromEmail(email, new_password))
+    {
+        alert("<?php PSWUPD_007(); ?>");
+        return false;
+    }
+    return true;
+}
+
+function formSubmit(formId, formIdHidden)
+{
+    var form = document.forms[formId];
+    var formHidden = document.forms[formIdHidden];
+    if(validateForm(formId))
+    {
+        formHidden.elements["AdminEmail"].value = form.elements["AdminEmail"].value;
+        if (form.elements["SendByEmail"].checked)
+        {
+            formHidden.elements["SendByEmail"].value = true;
+            formHidden.elements["New_Password_Open"].value = form.elements["New_Password"].value;
+        }
+        else
+        {
+            formHidden.elements["SendByEmail"].value = false;
+            formHidden.elements["New_Password_Open"].value = "";
+        }
+        formHidden.elements["New_Password"].value = hex_md5(form.elements["New_Password"].value);
+        formHidden.elements["Verify_New_Password"].value = hex_md5(form.elements["Verify_New_Password"].value);
+        formHidden.submit();
+        disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));
+        return true;
+    }
+    return false;
+}
+//-->
+</SCRIPT>
+
+<FORM <?php FORM(); ?> id="PasswordChangeForm">
+<?php HiddenArrayViewState(); ?>
+<INPUT TYPE="hidden" <?php Email(); ?>>
+<div class="portlet light">
+    <!-- title -->   
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg("ADMIN_PSWD_CHANGE_PAGE_SUBTITLE"); ?> <?php FirstName(); ?> <?php LastName(); ?></span>
+			<span class="caption-helper text-lowercase"></span>
+		</div>
+		<div class="actions">
+        <button  id="SaveButton1"  title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('PasswordChangeForm', 'PasswordChangeFormHidden');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVE'); ?></span></button>
+			<button id="CancelButton1" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onClick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php msg('BTN_CANCEL'); ?></span></button>
+		</div>
+	</div>
+	<!-- End title -->
+		<!-- Group 1 -->  
+	<div class="table-container form">				
+  			<h4 class="form-section"><?php Msg("ADMIN_PSWD_CHANGE_PAGE_TITLE"); ?></h4>  		
+  			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+					<!-- Begin - Row -->
+					<div class="row margin-bottom-10">
+						<div class="col-md-1"></div>
+						<div class="col-md-3 required" style="float:left;width:40%">
+						<?php Msg("ADMIN_PSWD_CHANGE_FIELD_001"); ?> *
+						</div>
+						<div class="col-md-8" style="float:left;">	
+						<input class="form-control form-filter input-sm input-medium" type="password" value="" size="25" name="New_Password">					
+						</div>
+					</div>
+					<!-- End - Row -->	
+					<!-- Begin - Row -->
+					<div class="row margin-bottom-10">
+						<div class="col-md-1"></div>
+						<div class="col-md-3 required" style="float:left;width:40%">
+						<?php Msg("ADMIN_PSWD_CHANGE_FIELD_002"); ?> *
+						</div>
+						<div class="col-md-8" style="float:left;">					
+						<input class="form-control form-filter input-sm input-medium" type="password" value="" size="25" name="Verify_New_Password">
+						</div>
+					</div>
+					<!-- End - Row -->	
+					<!-- Begin - Row -->
+					<div class="row margin-bottom-10">
+						<div class="col-md-1"></div>
+						<div class="col-md-3" style="float:left;width:40%">
+						<?php Msg("ADMIN_PSWD_CHANGE_FIELD_003"); ?>
+						</div>
+						<div class="col-md-8" style="float:left;">					
+						<input type="checkbox" value="" style="border: 0px;" id="SendByEmail">
+						</div>
+					</div>
+					<!-- End - Row -->						
+					</div>
+				</div>
+			</div>
+	</div>
+	<!-- Group 1 End--> 
+		<!-- Group 1 -->  
+	<div class="table-container form">				
+  			<h4 class="form-section required"><?php Msg("REQUIRED_FIELD_LABEL"); ?></h4>  		
+  			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+					<!-- Begin - Row -->
+					<div class="row margin-bottom-10">
+						<div class="col-md-1"></div>
+						<div class="col-md-3" style="float:left;width:40%">
+						</div>
+						<div class="col-md-8" style="float:left;">	
+							<?php Msg('SIGN_IN_PASSWD_UPDATE_003'); ?><br/>
+							<?php Msg('SIGN_IN_PASSWD_UPDATE_004'); ?><br/>
+							<?php Errors(); ?>							
+						</div>
+					</div>
+					<!-- End - Row -->												
+					</div>
+				</div>
+			</div>
+	</div>
+	<!-- Group 1 End--> 
+	<!-- Begin -Buttons Bottom Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"></lable>
+			</div>
+			<div class="col-md-8" style="text-align:center">			  		        
+			<button  id="SaveButton2"  title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('PasswordChangeForm', 'PasswordChangeFormHidden');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVE'); ?></span></button>
+			<button id="CancelButton2" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onClick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php msg('BTN_CANCEL'); ?></span></button>
+			</div>
+		</div>
+    <!-- End - Buttons Bottom Row -->
+</div>
+</FORM>
+<FORM <?php FORM(); ?> id="PasswordChangeFormHidden" style="margin: 0px;">
+<INPUT TYPE="hidden" name="AdminEmail">
+<INPUT TYPE="hidden" name="SendByEmail">
+<INPUT TYPE="hidden" name="New_Password_Open">
+<INPUT TYPE="hidden" name="New_Password">
+<INPUT TYPE="hidden" name="Verify_New_Password">
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

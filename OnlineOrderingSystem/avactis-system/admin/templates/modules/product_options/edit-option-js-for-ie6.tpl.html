@@ -1,0 +1,23 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+
+window.onload = function () {
+
+var update_button = document.getElementById('UpdateButton');
+var abs_top = update_button.offsetTop;
+obj = update_button;
+while(obj.offsetParent)
+{
+	obj=obj.offsetParent;
+	abs_top+=obj.offsetTop;
+};
+
+var sort_form_div = document.getElementById('sort_form_div');
+
+sort_form_div.style.position='absolute';
+sort_form_div.style.top=abs_top;
+sort_form_div.style.left='30%';
+
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

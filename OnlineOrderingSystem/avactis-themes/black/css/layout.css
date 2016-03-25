@@ -1,0 +1,159 @@
+/* Page Header Box ************************************************ */
+.box.page_header {
+    margin-bottom: 0px;
+}
+
+.box.page_header .content {
+    height: 93px;
+    background: url('../images/bg-page-header.gif') no-repeat top right;
+}
+
+/* Page Header corners */
+.box.page_header  .cn {
+    background: none;
+}
+/* Page Header Box ************************************************ */
+
+
+
+/* Page Top Menu ************************************************ */
+.box.page_top_menu .content {
+    height: 47px;
+    border: none;
+    background: #F1F1F1 url('../images/menubackground.gif') repeat-x 0 0;
+}
+
+.box.page_top_menu .cn {
+    background: none;
+}
+/* Page Top Menu ************************************************ */
+
+
+
+/* Page Layout: Columns ************************************************ */
+.page_container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.page_container .left_column {
+    float: left;
+    width: 200px;
+    margin-right: 7px;
+    overflow: hidden;
+}
+
+.page_container .right_column {
+    float: right;
+    width: 200px;
+    margin-left: 7px;
+    overflow: hidden;
+}
+
+.page_container .center_column {
+    width: auto;
+    overflow: hidden;
+}
+
+.page_container.columnsLC .right_column {
+    display: none
+}
+
+.page_container.columnsLC .center_column {
+}
+
+.page_container.columnsCR .left_column {
+    display: none
+}
+
+.page_container.columnsCR .center_column {
+}
+
+.page_container.columnsC .left_column {
+    display: none
+}
+
+.page_container.columnsC .right_column {
+    display: none
+}
+
+.page_container.columnsC .center_column {
+}
+
+.page_footer {
+    height: 90px;
+    clear: both;
+    width: 100%;
+    padding-top: 20px;
+}
+/* Page Layout: Columns ************************************************ */
+
+
+/* BLOCK position  ************************************************ */
+.logo_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url('../images/back-logo-header.gif') no-repeat scroll left top;
+    width: 203px;
+    height: 94px;
+}
+.logo_img {
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    background: url('../images/logo.png') no-repeat scroll left top;
+    width: 204px;
+    height: 48px;
+	display: block;
+    outline: none 0px;
+}
+
+.page_header .top_user1 {
+    position: absolute;
+    top: 20px;
+    right: 400px;
+}
+
+.page_header .top_user2 {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+
+.page_header .top_user3 {
+    position: absolute;
+    top: 60px;
+    right: 25px;
+}
+
+/* BLOCK position  ************************************************ */
+
+
+.box.page_footer  {
+    margin-bottom: 0px;
+}
+
+.page_footer img.cc_icon {
+    margin-bottom: -20px;
+    margin-left: 10px;
+}
+
+.page_footer img.w3c_icon {
+    float: right;
+}
+
+.page_footer hr {
+    width: auto;
+    color: #969ea4;
+    background-color: #969ea4;
+}
+
+.page_footer .copyright {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    font-size: 8pt;
+    text-align: center;
+    padding-top: 10px;
+}

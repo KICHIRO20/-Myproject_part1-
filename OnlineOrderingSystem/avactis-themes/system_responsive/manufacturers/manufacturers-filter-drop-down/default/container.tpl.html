@@ -1,0 +1,17 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box manufacturer nogradient">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("MANUFACTURERS_MANUFACTURER"); ?></h1>
+            <form name="manufacturer_select" action="">
+            <input type="hidden" name="asc_action" value="SetCurrMnf" />
+            <select name="mnf_id" id="manufacturers_list" onchange="document.manufacturer_select.submit();">
+              <?php Local_Items(); ?>
+            </select>
+            </form>
+     </div><!-- class="content" -->
+</div><!-- class="box manufacturer" -->
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scripts>
+	<script>
+		<name>Products from DB to CSV</name>
+		<code>Products_DB_CSV</code>
+		<steps>2</steps>
+		<step>
+			<number>1</number>
+			<reader>DataReaderProductsDB</reader>
+			<filter>DataFilterDefault</filter>
+			<writer>DataWriterDefault</writer>
+		</step>
+		<step>
+			<number>2</number>
+			<reader>DataReaderProductsDB</reader>
+			<filter>DataFilterProductsDBCSV</filter>
+			<writer>DataWriterDynamicCSV</writer>
+		</step>
+	</script>
+	<script>
+		<name>Products from CSV to DB</name>
+		<code>Products_CSV_DB</code>
+		<steps>2</steps>
+		<step>
+			<number>1</number>
+			<reader>DataReaderCSV</reader>
+			<filter>DataFilterProductsCSVDB</filter>
+			<writer>DataWriterCache</writer>
+		</step>
+		<step>
+			<number>2</number>
+			<reader>DataReaderCache</reader>
+			<filter>DataFilterProductsCSVDB</filter>
+			<writer>DataWriterProductsDB</writer>
+		</step>
+	</script>
+	<script>
+		<name>Products from DB to Froogle</name>
+		<code>Products_DB_Froogle</code>
+		<steps>1</steps>
+		<step>
+			<number>1</number>
+			<reader>DataReaderProductsDB</reader>
+			<filter>DataFilterDefault</filter>
+			<writer>DataWriterProductsFroogle</writer>
+		</step>
+	</script>
+	<script>
+		<name>Orders from DB to QuickBooks(IIF)</name>
+		<code>Orders_DB_IIF</code>
+		<steps>1</steps>
+		<step>
+			<number>1</number>
+			<reader>DataReaderOrdersDB</reader>
+			<filter>DataFilterDefault</filter>
+			<writer>DataWriterOrdersIIF</writer>
+		</step>
+	</script>
+	<script>
+		<name>Customers from DB to CSV</name>
+		<code>Customers_DB_CSV</code>
+		<steps>1</steps>
+		<step>
+			<number>1</number>
+			<reader>DataReaderCustomersDB</reader>
+			<filter>DataFilterCustomersDBCSV</filter>
+			<writer>DataWriterCSV</writer>
+		</step>
+	</script>
+	<script>
+        <name>Orders from DB to CSV</name>
+	    <code>Orders_DB_CSV</code>
+	    <steps>1</steps>
+	    <step>
+	        <number>1</number>
+	        <reader>DataReaderOrdersDB</reader>
+	        <filter>DataFilterOrdersCSV</filter>
+	        <writer>DataWriterDynamicCSV</writer>
+	    </step>
+	</script>
+    <script>
+        <name>Tax Rates From CSV To DB</name>
+        <code>TaxRates_CSV_DB</code>
+        <steps>2</steps>
+        <step>
+            <number>1</number>
+            <reader>DataReaderCSV</reader>
+            <filter>DataFilterCSVTaxRatesToClean</filter>
+            <writer>DataWriterCleanTaxRatesToCSV</writer>
+        </step>
+        <step>
+            <number>2</number>
+            <reader>DataReaderCSV</reader>
+            <filter>DataFilterDefault</filter>
+            <writer>DataWriterCleanTaxRatesToDB</writer>
+        </step>
+    </script>
+    <script>
+        <name>Subscribers Emails from DB to CSV</name>
+        <code>Emails_DB_CSV</code>
+        <steps>1</steps>
+        <step>
+            <number>1</number>
+            <reader>DataReaderTopicsEmailsDB</reader>
+            <filter>DataFilterDefault</filter>
+            <writer>DataWriterDynamicCSV</writer>
+        </step>
+    </script>
+    <script>
+        <name>Subscribers Emails from DB to Plain-text file</name>
+        <code>Emails_DB_Text</code>
+        <steps>1</steps>
+        <step>
+            <number>1</number>
+            <reader>DataReaderEmailsDB</reader>
+            <filter>DataFilterDefault</filter>
+            <writer>DataWriterText</writer>
+        </step>
+    </script>
+    <script>
+        <name>Labels from DB to CSV</name>
+        <code>Labels_DB_CSV</code>
+        <steps>1</steps>
+        <step>
+            <number>1</number>
+            <reader>DataReaderLabelsDB</reader>
+            <filter>DataFilterDefault</filter>
+            <writer>DataWriterLabelsCSV</writer>
+        </step>
+    </script>
+    <script>
+        <name>Labels from CSV to DB</name>
+        <code>Labels_CSV_DB</code>
+        <steps>2</steps>
+        <step>
+            <number>1</number>
+            <reader>DataReaderLabelsCSV</reader>
+            <filter>DataFilterDefault</filter>
+            <writer>DataWriterCache</writer>
+        </step>
+        <step>
+            <number>2</number>
+            <reader>DataReaderCache</reader>
+            <filter>DataFilterDefault</filter>
+            <writer>DataWriterLabelsDB</writer>
+        </step>
+    </script>
+    <script>
+        <name>Changing Default Language</name>
+        <code>ML_Records_DB_DB</code>
+        <steps>1</steps>
+        <step>
+            <number>1</number>
+            <reader>DataReaderRecordsDB</reader>
+            <filter>DataFilterDefault</filter>
+            <writer>DataWriterRecordsDB</writer>
+        </step>
+    </script>
+</scripts>

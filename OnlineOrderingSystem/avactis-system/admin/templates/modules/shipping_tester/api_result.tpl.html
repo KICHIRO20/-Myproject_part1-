@@ -1,0 +1,50 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<br/>
+<div id="appinfo" class="panel-group accordion scrollable">
+	<!-- Begin Panel -->
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a href="#group_1" data-parent="#" data-toggle="collapse" class="accordion-toggle collapsed">
+					<?php ModuleName(); ?>
+				</a>
+			</h4>
+		</div>
+		<div class="panel-collapse collapse" id="group_1">
+			<div class="panel-body">
+				<!--Responsive Table Start -->
+				<div class="table-responsive">
+					<table class="table table-bordered borderless table-striped table-hover table-condensed">
+						<thead>
+							<tr class="bg-info">
+								<th colspan="2"><?php DebugInfo_Header(); ?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php DebugInfo(); ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered borderless table-striped table-hover table-condensed">
+						<thead>
+							<tr class="bg-info">
+								<th class="text-center"><?php lbl_MethodName(); ?></th>
+								<th class="text-center"><?php lbl_TransitTime(); ?></th>
+								<th class="text-center"><?php lbl_DeliveryCost(); ?></th>
+								<th class="text-center"><?php lbl_TotalShippingCharge(); ?></th>
+								<th class="text-right"><?php lbl_ShippingCost(); ?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php Methods(); ?>
+						</tbody>
+					</table>
+				</div>
+				<!--Responsive Table End -->
+			</div>
+		</div>
+	</div>
+	<!-- END Panel -->
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

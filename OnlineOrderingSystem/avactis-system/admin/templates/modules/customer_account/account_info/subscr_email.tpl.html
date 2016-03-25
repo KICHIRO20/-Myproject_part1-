@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<thead>
+	<tr>
+		<th class="text-left" colspan="6">
+			<?php xmsg('SUBSCR', 'TITLE_EMAIL'); ?>: {Email}
+			<input type="hidden" name="emails[{Email}]" value="1" />
+		</th>
+	</tr>
+	<tr class="bg-grey">
+		<th class="text-center">
+			<input id="SelectAll_{Email}" type="checkbox" onclick="selectItems('subscriptions','select_topic_{Email}_', this.id);" {SelectedAllTopics} />
+		</th>
+		<th class="text-center"><?php xmsg('SUBSCR', 'HEADER_TOPIC_NAME'); ?></th>
+		<th class="text-center"><?php xmsg('SUBSCR', 'HEADER_TOPIC_EMAILS'); ?></th>
+		<th class="text-center"><?php xmsg('SUBSCR', 'HEADER_TOPIC_ACCESS'); ?></th>
+		<th class="text-center"><?php xmsg('SUBSCR', 'HEADER_TOPIC_STATUS'); ?></th>
+		<th class="text-center"><?php xmsg('SUBSCR', 'HEADER_TOPIC_AUTOSUBSCRIBE'); ?></th>
+	</tr>
+</thead>
+<!-- END TPL (DO NOT REMOVE!) -->

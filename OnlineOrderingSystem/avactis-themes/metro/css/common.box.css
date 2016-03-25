@@ -1,0 +1,78 @@
+
+.right_column .box  select,
+.left_column .box select {
+    display: block;
+    margin: 16px auto 0px auto;
+    width: 85%;
+}
+
+.box h1 span, .box h2 span {
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box h1 span a, .box h2 span a {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box .toolbar {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box hr {
+    width: 95%;
+    height: 1px;
+    color: #DEDEDE;
+    border: 0px;
+    background-color: #DEDEDE;
+    margin: 0px auto;
+    padding: 0px;
+}
+/* BOX in .page_container ***************************** */
+
+
+/* BOX inside BOX in .page_container ****************** */
+.box .box {
+    margin: 20px;
+    width: auto;
+}
+
+.box .box .cn {
+    background: none;
+}
+
+.box .box .content {
+    background: none;
+    border: 1px solid #ccd9e6;
+}
+
+.box .box h1, .box .box h2,
+.box .box .header {
+    color: #404040;
+    background: #d2e0ed;
+    font-size: 9pt;
+    font-weight: normal;
+    height: 20px;
+}
+
+.box .wishlist_send {
+    margin-top: 5px;
+}
+
+/* BOX inside BOX in .page_container ****************** */
+
+.page_container .box.welcome {
+    height: 374px;
+}
+
+.page_container .box.welcome .content {
+    background: white url('../images/main_banner.png') no-repeat 0px 0px;
+    border: none;    
+    padding: 240px 20px 0px 20px;
+}
+

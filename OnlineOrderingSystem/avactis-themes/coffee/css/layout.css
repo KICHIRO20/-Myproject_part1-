@@ -1,0 +1,192 @@
+/* Page Header Box ************************************************ */
+.box.page_header .content {
+    height: 193px;
+    background-color: #ECCC77;
+    border-left: 1px #AD6D34 solid;
+    border-right: 1px #AD6D34 solid;
+    border-bottom: 1px #AD6D34 solid;
+}
+
+.box.page_header .welcome .content {
+    height: 100%;
+    background-color: white;
+    border: none;
+    font-size: 8pt;
+}
+
+/* Page Header Box ************************************************ */
+
+
+
+/* Page Top Menu ************************************************ */
+.box.page_top_menu .content {
+    height: 34px;
+    border: 1px #AD6D34 solid;
+    background-color: #35140A;
+}
+/* Page Top Menu ************************************************ */
+
+
+
+/* Page Layout: Columns ************************************************ */
+.page_container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.page_container .left_column {
+    float: left;
+    width: 200px;
+    margin-right: 7px;
+    overflow: hidden;
+}
+
+.page_container .right_column {
+    float: right;
+    width: 200px;
+    margin-left: 7px;
+    overflow: hidden;
+}
+
+.page_container .center_column {
+    width: auto;
+    overflow: hidden;
+}
+
+.page_container.columnsLC .right_column {
+    display: none
+}
+
+.page_container.columnsLC .center_column {
+}
+
+.page_container.columnsCR .left_column {
+    display: none
+}
+
+.page_container.columnsCR .center_column {
+}
+
+.page_container.columnsC .left_column {
+    display: none
+}
+
+.page_container.columnsC .right_column {
+    display: none
+}
+
+.page_container.columnsC .center_column {
+}
+
+.page_footer {
+    height: 90px;
+    clear: both;
+    width: 100%;
+    padding-top: 20px;
+}
+/* Page Layout: Columns ************************************************ */
+
+
+/* BLOCK position  ************************************************ */
+.logo_bg {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    background: url('../images/back-logo.gif') no-repeat scroll left top;
+    width: 206px;
+    height: 200px;
+}
+.logo_img {
+    position: absolute;
+    top: 20px;
+    left: 4px;
+    background: url('../images/logo.png') no-repeat scroll left top;
+    width: 204px;
+    height: 48px;
+    display: block;
+    outline: none 0px;
+}
+
+.page_header .top_user1 {
+    background-color: white;
+    clear: both;
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 86%;
+    padding-left: 4%;
+    padding-right: 4%;
+    height: 155px;
+    overflow: hidden;
+}
+
+.page_header .top_user2 {
+    background-color: white;
+    margin-left: 3%;
+    width: 88%;
+    height: 27px;
+    padding-top: 10px;
+    margin-bottom: 1px;
+    float: left;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-bottom: 1px;
+}
+
+.page_header .top_user2 .menu {
+    float: left;
+}
+
+/* BLOCK position  ************************************************ */
+
+
+.box.page_footer  {
+    margin-bottom: 0px;
+}
+
+.page_footer img.cc_icon {
+    margin-bottom: -20px;
+    margin-left: 10px;
+}
+
+.page_footer img.w3c_icon {
+    float: right;
+}
+
+.page_footer hr {
+    width: auto;
+    color: #969ea4;
+    background-color: #969ea4;
+}
+
+.page_footer .copyright {
+    margin: 0px;
+    padding: 0px;
+    color: #404040;
+    font-size: 8pt;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.logo_header {
+    clear: both;
+    width: 100%;
+    height: 200px;
+}
+
+.box.page_header {
+    float: right;
+    width: 767px;
+    margin-bottom: 0px;
+}
+
+.box.welcome {
+    height: 100%;
+    background-color: white;
+    float: left;
+    width: 63%;
+}
+
+.top_user1 .search {
+    margin-top: 20px;
+    float: right;
+}

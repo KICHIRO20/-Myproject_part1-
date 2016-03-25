@@ -1,0 +1,78 @@
+---
+- 
+  name: user1
+  title: Search form
+  description: Search form
+  template: '<?php SearchForm(); ?>'
+- 
+  name: top_menu
+  title: CMS top menu
+  description: CMS top menu
+  template: '<?php CMSMenu('top_menu'); ?>'
+- 
+  name: main_menu
+  title: CMS main menu
+  description: CMS main menu
+  template: '<?php CMSMenu('main_menu'); ?>'
+- 
+  name: SelectLanguage
+  title: Select language
+  description: Select language
+  template: '<?php SelectLanguage(); ?>'
+- 
+  name: NavigationBarCustom1
+  title: Navigation bar (Home)
+  description: >
+    Navigation bar always displays content
+    of 'Home' category
+  template: '<?php NavigationBarCustom(1); ?>'
+- 
+  name: SubscribeBox
+  title: Subscribe box
+  description: Subscribe box
+  template: '<?php SubscribeBox(); ?>'
+- 
+  name: FeaturedProducts1
+  title: Featured products (Home)
+  description: >
+    Featured products from 'Home' category
+    (category_id = 1)
+  template: '<?php FeaturedProducts(1); ?>'
+- 
+  name: block1308725967330
+  title: Sheet of category
+  description: |
+    Sheet of category which allow display the categories and products related with them. Description of parameters CategorySheet([category_id],[show products],[amount of cols]). Category_id - any ID of category which exists(default '1'), show products - flag which is responsible for displaying products (default 'true'), amount of cols - amount of columns in the sheet.
+  template: '<?php CategorySheet(1,true,3); ?>'
+- 
+  name: RightBanner
+  title: Right Banner
+  description: Right Banner
+  template: >
+    '<?php CMSPageContent('right_banner');
+    ?>'
+- 
+  name: CurrencySelector
+  title: Currency Selector
+  description: Currency Selector
+  template: '<?php CurrencySelector(); ?>'
+- 
+  name: MiniCart
+  title: Mini cart
+  description: Mini cart
+  template: '<?php MiniCart(); ?>'
+- 
+  name: CustomerSignInBox
+  title: Customer sign in box
+  description: Customer sign in box
+  template: '<?php CustomerSignInBox(); ?>'
+- 
+  name: footer_menu
+  title: CMS footer menu
+  description: CMS footer menu
+  template: '<?php CMSMenu('footer_menu'); ?>'
+- 
+  name: copyright
+  title: Copyright
+  description: Copyright string
+  template: '<?php CMSPageContent('copyright'); ?>'

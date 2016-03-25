@@ -1,0 +1,7 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php if(getOpenInNewWindow()) {?>
+		<li style="padding: 7px; width: 90%;"><A HREF="javascript: void(0);" onclick="javascript:openURLinNewWindow('<?php MenuURL(); ?>', '<?php WindowName(); ?>');"><?php MenuName(); ?></a> - <?php MenuDescription(); ?></li>
+		<?php } else {?>
+		<li style="padding: 7px; width: 90%;"><A HREF="<?php MenuURL(); ?>" ><?php MenuName(); ?></a> - <?php MenuDescription(); ?></li>
+		<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->

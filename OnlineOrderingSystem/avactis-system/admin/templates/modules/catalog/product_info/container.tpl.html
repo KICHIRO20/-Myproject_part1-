@@ -1,0 +1,44 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<table class="form" cellspacing="0" cellpadding="0" width="100%">
+  <tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;"><?php msg('MNG_PRD_CURR_CTGR'); ?> <?php Breadcrumb(); ?></td>
+  </tr>
+  <tr style="height: 3px;">
+   <td width="100%" class="popup_dialog_header_left_right_padded" style="background: #CED4DD;"></td>
+  </tr>
+  <tr>
+   <td width="100%" style="padding: 0px 2px 0px 2px;"><?php Local_ProductBookmarks(); ?></td>
+  </tr>
+  <tr>
+    <td width="100%" style="padding: 0px 2px 0px 2px;">
+      <table class="buttons_block" width="100%" cellpadding="4" cellspacing="0">
+        <tr>
+          <td width="80%" class="section_title"><?php msg('MNG_PRD_PAGE_NAME'); ?></td>
+          <td nowrap><?php PageHelpLink('catalog_info_product'); ?></td>
+          <td nowrap><?php VideoTutorialLink('catalog_info_product'); ?></td>
+          <?php Button(); ?>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table class="form" cellspacing="1" cellpadding="5" width="100%">
+<?php Items(); ?>
+  <tr>
+    <td colspan="3" align="center">
+      <table class="clear" cellpadding="0" cellspacing="0">
+        <tr>
+          <?php Button(); ?>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<script language="javascript">
+$(function () { 
+    setVisible('group_1');
+    <?php additionalJS(); ?>
+});
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" src="/avactis-extensions/banner/views/frontend/templates/js/module.customslider.js"></script>
+<link rel="stylesheet" type="text/css" href="avactis-extensions/banner/views/frontend/templates/css/module.custom_slider.css" />
+
+<div id="slideshow_content<?php ContentID();?>" >
+<?php if (getHeight() != '' || getWidth() != '') { ?>
+<div class="content" style="height: <?php Height();?>px; width: <?php Width();?>px;">
+     <?php HtmlContent(); ?>
+</div>
+<?php } ?>
+
+<?php if (getHeight()=='' || getWidth()=='') { ?>
+<div class="content" style="height: <?php DefaultHeight();?>px; width: <?php DefaultWidth();?>px;">
+     <?php HtmlContent(); ?>
+</div>
+<?php }  ?>
+
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

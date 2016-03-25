@@ -1,0 +1,43 @@
+{StoreOwnerName}. Your order shipped #{OrderID}
+Greetings from {StoreOwnerName},
+
+Please be informed that we have shipped your items, and that this completes your order.
+
+The following items have been shipped to you by {StoreOwnerName}:
+
+-----------------------------------------------------
+Order Summary:
+-----------------------------------------------------
+Order #: {OrderID}
+Payment Method: {OrderPaymentMethod}
+Shipping Method: {OrderShippingMethod}
+Tracking Number: {TrackingNumber}
+
+Items:
+----------
+{OrderContentBlock}
+Subtotal of Items: {OrderSubtotal}
+{OrderDiscountsBlock}
+Shipping & Handling: {OrderTotalShippingAndHandlingCost}
+{OrderTax}
+--------------
+Total for this Order: {OrderTotal}
+
+This shipment was sent to:
+--------------------------
+{ShippingFirstname} {ShippingLastname}
+{ShippingStreetline1}
+{ShippingStreetline2}
+{ShippingCity}, {ShippingState}, {ShippingPostcode}
+{ShippingCountry}
+{ShippingPhone}
+
+Comment:
+{ShippingCommentLine}
+
+Please note: This e-mail was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.
+
+Thank you for shopping with us.
+
+{StoreOwnerName}
+{StoreOwnerWebsite}

@@ -1,0 +1,151 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+document.title = '<?php xmsg('CA','CA_CUSTOMER_GROUPS'); ?>';
+</script>
+
+<script language="JavaScript">
+
+function isOneChecked(name)
+{
+    var els = document.getElementsByName(name);
+    var one_checked = false;
+    
+    for(i=0; i<els.length; i++)
+    {
+        if(els[i].checked)
+        {
+            one_checked = true;
+            break;
+        };
+    };
+    
+    return one_checked;
+};
+
+function getCheckedCustomerGroups()
+{
+    var els = document.getElementsByName('customer_group_selected');
+    var customers_ids = new Array();
+    
+    for(i=0; i<els.length; i++)
+    {
+        if(els[i].checked)
+        {
+            customers_ids[customers_ids.length] = els[i].id.replace('customer_group_','');
+        };
+    };
+    
+    return customers_ids;
+};
+
+function OnAddClick()
+{
+    String.prototype.trim = function(){return this.replace(/^\s*/,'').replace(/\s*$/,'').replace(/(\s+)/g,' ');}
+    var frm = document.forms['CustomerGroupsActionsForm'];
+    frm.elements['asc_action'].value = 'add_customer_group';
+    frm.elements['new_customer_group'].value = document.getElementById("new_group").value;
+
+    var gr_name = frm.elements['new_customer_group'].value;
+    if(gr_name.match(/<|>|&|#|@/)) {
+        alert('<?php addslashes(xmsg('CA','WRN_BAD_CHARS_CUSTOMER_GROUP')); ?>');
+        return;
+    }
+    if(!gr_name.trim()){
+        alert('<?php addslashes(xmsg('CA','WRN_EMPTY_CUSTOMER_GROUP')); ?>');
+        return;
+    }
+    if(gr_name) {
+        var same_name = false;
+        jQuery.each(jQuery(".customer_group_name_td"), function(n,gname){
+            if($(gname).text().trim() == gr_name.trim()) same_name = true; 
+        });
+        if(same_name) alert('<?php addslashes(xmsg('CA','WRN_ADD_SAME_CUSTOMER_GROUP')); ?>');
+        else { 
+            frm.elements['new_customer_group'].value = gr_name.trim();
+            frm.submit(); 
+            document.getElementById("new_group").disabled = true;
+            disableButtons(new Array('AddGroupButton','DeleteButton2')); 
+        }
+    }
+    else alert('<?php addslashes(xmsg('CA','WRN_ADD_CUSTOMER_GROUP')); ?>');
+}
+
+function OnDeleteClick()
+{
+    if(!isOneChecked('customer_group_selected'))
+    {
+        alert('<?php addslashes(xmsg('CA','WRN_SELECT_CUSTOMER_GROUP')); ?>');
+        return;
+    };
+    
+    bootbox.confirm('<?php addslashes(xmsg('CA','CNFR_DEL_CUSTOMER_GROUPS')); ?>',function(result){
+    if(result){
+    var frm = document.forms['CustomerGroupsActionsForm'];
+    frm.elements['asc_action'].value = 'delete_customer_groups';
+    frm.elements['customer_group_ids'].value = getCheckedCustomerGroups().join('|');
+    frm.submit();
+    disableButtons(new Array('AddGroupButton','DeleteButton2'));
+    } });
+};
+
+function initHandlers(){
+    jQuery('#new_group').keypress(function(e){ if(e.keyCode == 13 || e.keyCode == 10) OnAddClick(); }).focus();
+}
+
+</script>
+
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-users"></i><span class="hidden-480">&nbsp;<?php xmsg('CA','CA_CUSTOMER_GROUPS'); ?></span>
+			</span>
+		</div>
+		<div class="actions">
+			
+			<div id="AddGroupButton" class="btn btn-primary btn-circle" onClick="OnAddClick();">
+				<i class="fa fa-plus-circle"></i><span class="hidden-480">&nbsp;<?php xmsg('CA', 'BTN_ADD'); ?></span>
+			</div>
+			
+			<div class="btn btn-default btn-circle" onClick="javascript: closeAndFocusParent();">
+				<i class="fa fa-times-circle"></i><span class="hidden-480">&nbsp;<?php msg('BTN_CLOSE'); ?></span>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<?php ResultMessage(); ?>
+		
+		<?php CustomerGroupsTable(); ?>
+		
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+
+<script language="JavaScript">
+    window.onunload = function(){
+        if(!(!window.opener || window.opener.closed)) { 
+            window.opener.focus(); 
+            window.opener.location.href = window.opener.location.href; 
+        }
+    }
+    initHandlers();
+</script>
+
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

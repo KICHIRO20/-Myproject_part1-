@@ -1,0 +1,56 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" language="javascript">
+<!--
+var defaultURL = '<?php DefaultURL(); ?>';
+var URLs = new Array();
+<?php URLs(); ?>
+function getReturnURL(lng)
+{
+    if (URLs[lng])
+        return URLs[lng];
+
+    return defaultURL;
+}
+
+
+function DropDown(el) {
+	this.dd = el;
+	this.initEvents();
+}
+DropDown.prototype = {
+	initEvents : function() {
+		var obj = this;
+
+		obj.dd.on('click', function(event){
+			$(this).toggleClass('active');
+			event.stopPropagation();
+		});	
+	}
+}
+
+$(function() {
+
+	var dd = new DropDown( $('#dd') );
+
+	$(document).click(function() {
+		// all dropdowns
+		//$('.wrapper-dropdown-5').removeClass('active');
+	});
+
+});
+
+
+// -->
+</script>
+<!-- div class="wrapper-demo">
+		<div id="dd" class="wrapper-dropdown-5" tabindex="1">-->
+      
+        <!-- <ul class="dropdown">-->
+        
+        <select class="dropdown" onchange="<?php OnChangeAction(); ?>">
+        <?php Languages(); ?>
+        </select>
+        <!-- </ul>
+     </div>
+</div>-->
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,24 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- Begin Panel -->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<a href="#group_<?php GroupID(); ?>" data-parent="#<?php GroupName(); ?>" data-toggle="collapse" class="accordion-toggle collapsed">
+				<?php GroupName(); ?>
+			</a>
+		</h4>
+	</div>
+	<div class="panel-collapse collapse <?php echo getGroupID()==1?'in':''; ?>" id="group_<?php GroupID(); ?>">
+		<div class="panel-body">
+			<div class="row table-responsvie">
+				<table class="table table-hover table-striped borderless">
+					<tbody>
+						<?php AttributesList(); ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END Panel -->
+<!-- END TPL (DO NOT REMOVE!) -->

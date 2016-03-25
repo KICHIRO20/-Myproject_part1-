@@ -1,0 +1,35 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="<?php Local_FormActionURL(); ?>" name="OrdersSearchForm" method="post">
+<div class="form_view">
+    <div class="form_row">
+        <div class="form_descr"><label><?php Label('ACCOUNT_FROM_LABEL'); ?></label></div>
+        <div class="form_field date">
+            <?php Local_SelectDate_Day_From(); ?>
+            <?php Local_SelectDate_Month_From(); ?>
+            <?php Local_SelectDate_Year_From(); ?>
+        </div>
+    </div>
+    <div class="form_row">
+        <div class="form_descr"><label><?php Label('ACCOUNT_TO_LABEL'); ?></label></div>
+        <div class="form_field date">
+            <?php Local_SelectDate_Day_To(); ?>
+            <?php Local_SelectDate_Month_To(); ?>
+            <?php Local_SelectDate_Year_To(); ?>
+        </div>
+    </div>
+    <div class="form_row">
+        <div class="form_descr"><label><?php Label('ACCOUNT_ORDERS_LABEL'); ?></label></div>
+        <div class="form_field">
+            <?php Local_Select_OrderStatus(); ?>
+        </div>
+    </div>
+    <div class="form_row">
+        <div class="form_descr"><label><?php Label('ACCOUNT_PAYMENTS_LABEL'); ?></label></div>
+        <div class="form_field">
+            <?php Local_Select_OrderPaymentStatus(); ?>
+        </div>
+    </div>
+</div>    
+<input type="submit" class="<?php lang(); ?> text_buttons button_order_search button_add_to_cart" value="<?php Label('ACCOUNT_SEARCH_LABEL'); ?>" />
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,67 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+  	global $application;
+    $mr = &$application->getInstance('MessageResources');
+?>
+<div class="box myaccount nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("ACCOUNT_MY_ACCOUNT"); ?></h1>
+        <div class="subheader"><?php Label("ACCOUNT_SIGN_IN_OR_CREATE_NEW"); ?></div>
+        <div class="registr_invitation">
+            <div class="subheader"><?php Label("ACCOUNT_NEW_CUSTOMERS"); ?></div>
+            <p><?php Label("ACCOUNT_TAKE_A_MOMENT"); ?></p>
+            <ul>
+                <li><?php Label("ACCOUNT_CHECKOUT_FASTER"); ?></li>
+                <li><?php Label("ACCOUNT_BUILD_AN_ADDRESS_BOOK"); ?></li>
+                <li><?php Label("ACCOUNT_ACCESS_YOUR_ORDER_HISTORY"); ?></li>
+                <li><?php Label("ACCOUNT_VIEW_ORDER_STATUSES"); ?></li>
+            </ul>
+            <a href="<?php PageURL('Registration'); ?>"><span class="<?php lang(); ?> button_register"><?php echo $mr->getMessage('REGISTER'); ?></span></a>
+        </div>
+        <div class="signin_form">
+            <div class="subheader"><?php Label("ACCOUNT_RETURNING_CUSTOMERS"); ?></div>
+            <?php MessageBox(); ?>
+            <p><?php Label("ACCOUNT_IF_YOU_HAVE_AN_ACCOUNT"); ?></p>
+            <form action="<?php Local_FormActionURL(); ?>" name="SignInForm" method="post">
+                <div class="form_view">
+                    <div class="form_row">
+                        <div class="form_descr"><label for="account_sign_in_form_email_id"><?php Label('ACCOUNT_EMAIL_LABEL'); ?></label></div>
+			<div class="form_field">
+			
+			<input type="text" name="email" id="account_sign_in_form_email_id" />
+			
+			 
+			</div>
+		    </div>
+                    <div class="form_row">
+                        <div class="form_descr"><label for="account_sign_in_form_passwd_id"><?php Label('ACCOUNT_PASSWORD_LABEL'); ?></label><br/><?php Label("ACCOUNT_CASE_SENSITIVE"); ?></div>
+			<div class="form_field">
+			
+			<input type="password" name="passwd" id="account_sign_in_form_passwd_id" />
+			
+			 
+
+			<br>
+                            <a href="<?php PageURL('CustomerForgotPassword'); ?>"><?php Label("ACCOUNT_FORGOT_YOUR_PASSWORD"); ?></a>
+                        </div>
+                    </div>
+                    <?php if (getLocal_RememberMeOptionEnabled() === "TRUE") { ?>
+                    <div class="form_row">
+                        <div class="form_field">
+                            <input type='checkbox' name='remember_me' value='save' checked="checked" />&nbsp;<?php Label('ACCOUNT_KEEP_ME_SIGNED_MESSAGE'); ?>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+                <input type="submit" value="<?php echo $mr->getMessage('SIGN_IN'); ?>" class="<?php lang(); ?> buttons button_signin" />
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+

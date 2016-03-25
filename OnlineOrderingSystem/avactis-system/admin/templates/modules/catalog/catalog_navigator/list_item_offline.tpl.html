@@ -1,0 +1,9 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+    <tr style="height: 25px;">
+        <td width="50%"  align="left" style="padding: 0px 5px 0px 5px;"><INPUT TYPE="radio" value="<?php CategoryID(); ?>" name="category_id" onclick="selectRowDeselectOther(this);" <?php Checked(); ?>><A HREF="<?php CategoryLink(); ?>" style="color: rgb(175, 175, 175);"><span style="color: rgb(175, 175, 175);"><b><?php CategoryName(); ?></b></span></A></td>
+        <td STYLE="text-align: left;"><span class="categoryListInfo" style="color: <?php CategoryOfflineStatusColor(); ?>;"><b><u><?php CategoryStatus(); ?></u></b></span>&nbsp;<span style="color: rgb(175, 175, 175);"><b><u><?php CategoryOfflineStatusReason(); ?></u></b></span></td>
+        <td STYLE="text-align: center;"><span class="categoryListInfo" style="color: rgb(175, 175, 175);"><?php CategoryID(); ?></span></td>
+        <td STYLE="text-align: center;"><span class="categoryListInfo" style="color: rgb(175, 175, 175);"><?php CategoryProductsNumber(); ?></span></td>
+        <td STYLE="text-align: center;"><span class="categoryListInfo" style="color: rgb(175, 175, 175);"><?php CategoryOfflineAndOnlineSubcategoriesNumber(); ?></span></td>
+    </tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

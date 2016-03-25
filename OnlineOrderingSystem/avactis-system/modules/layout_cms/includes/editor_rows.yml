@@ -1,0 +1,22 @@
+- header:
+    type: fixed
+    placeholders: 
+        header:
+- main_menu:
+    type: fixed
+    placeholders: 
+        main_menu:
+- main_content:
+    type: list
+    placeholders: 
+        left_column:
+        center_column:
+        right_column:
+- footer:
+    type: fixed
+    placeholders: 
+        footer:
+- custom:
+    type: list
+    placeholders: 
+        custom:

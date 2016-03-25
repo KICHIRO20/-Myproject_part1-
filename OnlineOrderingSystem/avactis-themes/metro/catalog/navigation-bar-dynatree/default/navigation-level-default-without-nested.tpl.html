@@ -1,0 +1,10 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php if(getLocal_NestedCategories() == ""){ ?> 
+<li class="list-group-item clearfix"><a href="<?php CategoryLink(); ?>" title=""><i class="cat_space"></i><?php CategoryName(); ?></a></li>
+
+<?php } else { ?>
+
+<li class="list-group-item clearfix"><a href="<?php CategoryLink(); ?>" title=""><i class="fa fa-angle-right"></i><?php CategoryName(); ?></a></li>
+
+<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,81 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php JavascriptSynchronizeCountriesAndStatesLists(); ?>
+<script type="text/javascript">
+function flip(id)
+{
+	var tr = document.getElementById(id);
+	if (tr != undefined)
+	{
+		if (tr.style.display == 'none')
+		{
+			tr.style.display = '';
+		}
+		else
+		{
+			tr.style.display = 'none';
+		}
+	}
+}
+
+function submitForm(form_id, action)
+{
+    form_el = document.getElementById(form_id);
+    if (form_el == undefined)
+    {
+        return;
+    }
+
+    subaction_el = document.getElementById('subaction_id');
+    if (subaction_el == undefined)
+    {
+        return;
+    }
+
+    subaction_el.value = action;
+    form_el.submit();
+}
+</script>
+
+<div class="box shipping_calculator nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("SCC_ESTIMATE_SHIPPING_COSTS_LABEL"); ?></h1>
+            <form method="post" action="<?php Local_FormAction(); ?>" id="ShippingCalculatorForm_id" name="ShippingCalculatorForm">
+            <input type="hidden" name="subaction" id="subaction_id" value="calculate" />
+            <div class="ship_to_address">
+                <h3><?php Label("SCC_SHIP_TO_COLON"); ?></h3>
+                <div class="form_view">
+                <?php Local_InfoFields(); ?>
+                </div>
+                <a href='#' onclick="flip('SC_DestAddress_Form');return false;"><?php Label("SCC_ANOTHER_ADDRESS_LABEL"); ?></a>
+            </div>
+            <div class="chosen_method">
+                <h3><?php Label("SCC_CHOSEN_METHOD_LABEL"); ?></h3>
+                <div class="form_view">
+                    <div class="form_row">
+                        <div class="form_descr"><?php Local_ChosenMethodName(); ?></div>
+                        <div class="form_field"><?php Local_ChosenMethodCost(); ?></div>
+                    </div>
+                </div>
+                <a href='#' onclick="flip('SC_AvailableMethods_Form');return false;"><?php Label("SCC_PICK_ANOTHER_SHIPPING_METHOD_LABEL"); ?></a>
+            </div>
+            <div id="SC_AvailableMethods_Form" style="display: none" class="shipping_method_form">
+                <h3><?php Label("SCC_AVAILABLE_METHODS_LABEL"); ?></h3>
+                <div class="form_view">
+                    <?php Local_Results(); ?>
+                </div>
+            </div>
+            <div id="SC_DestAddress_Form" style="display: none" class="dest_address_form">
+                <h3><?php Label("SCC_SELECT_DESTINATION_ADDRESS"); ?></h3>
+                <div class="form_view">
+                    <?php Local_DestinationFields(); ?>
+                    <input type="submit" class="<?php lang(); ?> text_buttons button_calculate" value="<?php Label("SCC_CALCULATE_BUTTON"); ?>"  />
+                </div>
+            </div>
+            </form>
+     </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,28 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="JavaScript" type="text/javascript" src="js/shuttle.js"></script>
+<form action="popup_window.php?asc_action=update_cr_rates_settings" method="post" name="CRRatesSortForm">
+<?php SortModeField() ?>
+<table class="form" cellpadding="4" cellspacing="1" align="center" border="0" width="100%">
+<tr>
+    <td valign="bottom" align="center" width="10%">
+        <img src="images/arrow_up.gif" onClick="javascript: moveItemUp('cr_rates_sort_order');">
+    </td>
+    <td rowspan="2">
+        <select id="cr_rates_sort_order" name="cr_rates_sort_order" style="width: 250px; height: 250px" size="8">
+            <?php SortItems(); ?>
+        </select>
+        <?php SortResultField(); ?>
+    </td>
+</tr>
+<tr>
+    <td valign="top" align="center">
+        <img src="images/arrow_down.gif" onClick="javascript: moveItemDown('cr_rates_sort_order');">
+    </td>
+</tr>
+<tr>
+    <td colspan="2" align="center"><a class="btn btn-default btn-circle margin-top-10" onClick="javascript: document.forms['CRRatesSortForm'].submit();"><?php msg('BTN_UPDATE'); ?></a></td>
+</tr>
+</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

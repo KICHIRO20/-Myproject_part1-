@@ -1,0 +1,89 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form method="post" action="<?php FormAction(); ?>" name="BackupInfoForm">
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center" border=0>
+<tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;"><?php Msg("BCP_INFO_PAGE_NAME"); ?>&nbsp;<?php BackupName(); ?></td>
+</tr>
+<tr class="subtitle" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+        <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="80%"><?php Msg("BCP_INFO_PAGE_SUBTITLE"); ?></td>
+            <td nowrap style="padding-right: 8px;"><?php PageHelpLink('admin_backup_info'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('admin_backup_info'); ?></td>
+            <td nowrap style="padding-right: 6px;"><div id="SaveButton1" class="button button_5em" onclick="BackupInfoForm.submit();"><?php Msg("BTN_SAVE"); ?></div></td>
+            <td nowrap style="padding-right: 10px;"><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg("BTN_CLOSE"); ?></div></td>
+        </tr>
+        </table>
+    </td>
+</tr>
+    <?php ResultMessage(); ?>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_001"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php BackupName(); ?>/dump.sql</td>
+</tr>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_002"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php BackupSQLSize(); ?></td>
+</tr>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_003"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php BackupName(); ?>/img/</td>
+</tr>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_004"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php BackupImgSize(); ?></td>
+</tr>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_005"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php BackupCreationDate(); ?></td>
+</tr>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_006"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php BackupCreationStartTime(); ?></td>
+</tr>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_007"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php BackupCreationFinishTime(); ?></td>
+</tr>
+
+<tr class="group">
+    <td colspan="3" class="popup_dialog_body_left_padded popup_dialog_body_right_padded">
+        <table class="clear" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td><?php Msg("BCP_INFO_HEADER_001"); ?></td></tr>
+        </table>
+    </td>
+</tr>
+
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_008"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><?php History(); ?></td>
+</tr>
+<tr>
+    <td width="20%" class="label popup_dialog_body_left_padded" colspan="2"><?php Msg("BCP_INFO_FIELD_009"); ?></td>
+<!--     <td class="help"><div onclick="" style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="75%" class="value popup_dialog_body_right_padded"><TEXTAREA NAME="comment" ROWS="5" COLS="75"><?php Comments(); ?></TEXTAREA><INPUT TYPE="hidden" name="comment_hash" value="<?php CommentsHash(); ?>"></td>
+</tr>
+
+<tfoot>
+    <tr>
+        <th colspan=3 align="center">
+            <table width="100%" class="clear" >
+                <tr>
+                    <td align=right style="padding-right: 4px;"><div id="SaveButton2" class="button button_5em" onclick="BackupInfoForm.submit();"><?php Msg("BTN_SAVE"); ?></div></td>
+                    <td align=left ><div id="CancelButton2" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg("BTN_CLOSE"); ?></div></td>
+                </tr>
+            </table>
+        </th>
+    </tr>
+</tfoot>
+</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

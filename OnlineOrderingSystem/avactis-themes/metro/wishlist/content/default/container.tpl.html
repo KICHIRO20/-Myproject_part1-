@@ -1,0 +1,44 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main">
+    <div class="container">
+    <div class="row margin-bottom-40"> 
+
+<h1><?php Label('WL_WISHLIST_LABEL'); ?><span style="float:right;font-size:15px;"><?php CustomerSignInOutHint(); ?></span></h1>
+<div class="shoppingcart <?php ViewClassName(); ?> goods-page">
+   <div class="goods-data clearfix content">
+        <form method="post" action="<?php Local_FormAction(); ?>" id="Wishlist_Content" name="Wishlist_Content">
+        <input type="hidden" name="asc_action" value="SendWishlist" />
+        <?php if ( ($m=getLocal_WishlistResultMessage()) != ''): ?><div class="success_message"><?php echo $m; ?></div><?php endif; ?>
+        <?php if ( ($m=getLocal_WishlistErrorMessage()) != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+
+        <div class="order_items_margin table-wrapper-responsive" style="padding-bottom: 14px;">
+            <table class="order_items with_images" summary="Shopping cart">
+                <tr>
+                    <th class="product_img goods-page-image">Image</th>
+                    <th class="product_data goods-page-description"><?php Label("CATALOG_ITEM"); ?></th>
+                    <th class="product_quantity_selector"><?php Label("CATALOG_QUANTITY"); ?></th>
+                    <th class="product_sale_price goods-page-price" style="width: 15%;padding: 0px 26px 8px;"><?php Label("CATALOG_ITEM_PRICE"); ?></th>
+                    <th class="product_total_price goods-page-price">Total</th>
+                    <th class="del-goods-col"></th>
+                </tr>
+                <?php Local_Items(); ?>
+            </table>
+</div>
+            <div class="wishlist_send row"> <div class="col-lg-1"></div>
+              <div class="col-lg-2">
+                <?php Label('WL_SEND_BY_EMAIL'); ?>:
+               </div> 
+    <div class="col-lg-5"> <input type="text" class="form-control input-large" name="wl_send_email" value="" /></div>
+     <div class="col-lg-2"><input type="button" class="<?php lang(); ?> btn btn-primary button_send" name="send_button" value="<?php Label('BTN_SEND'); ?>" onclick="if (checkEmail(this.form.wl_send_email.value)) {this.form.asc_action.value='SendWishlist'; this.form.submit();} else {alert('<?php Label('WL_INCORRECT_EMAIL_SPECIFIED'); ?>')}" /></div>
+            </div>
+<div class="cart_buttons row">
+                <a href="<?php PageURL('ProductList'); ?>"><input class="btn btn-default" type="button" value="<?php Msg('CONTINUE_CHECKOUT'); ?>"></a>
+            </div>
+        </div>
+
+        </form>
+    </div>
+</div>
+</div></div></div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

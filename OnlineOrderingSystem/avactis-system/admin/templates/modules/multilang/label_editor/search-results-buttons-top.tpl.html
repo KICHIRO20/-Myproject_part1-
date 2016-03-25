@@ -1,0 +1,4 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<a id="UpdateButton1" class="btn btn-default btn-circle" onclick="updateLabels();"><i class="fa fa-refresh"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_UPDATE_LABELS') ?></span></a>
+<a id="DeleteButton1" class="btn btn-default btn-circle <?php DisabledButton(); ?>" onclick="<?php if (!getDisabledButton()) { ?>removeTranslation();<?php } else { ?>void(0);<?php } ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_REMOVE_TRANSLATION') ?></span></a>
+<!-- END TPL (DO NOT REMOVE!) -->

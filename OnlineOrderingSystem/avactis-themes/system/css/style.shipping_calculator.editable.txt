@@ -1,0 +1,57 @@
+[Shipping Calculator - Label]
+.box.shipping_calculator .form_descr {
+    text;
+}
+
+[Shipping Calculator - Field]
+.box.shipping_calculator .form_field {
+    text;
+}
+
+[Shipping Calculator - Address Label]
+.box.shipping_calculator .ship_to_address .form_descr,
+.box.shipping_calculator .dest_address_form .form_descr {
+    text;
+    width;
+}
+
+[Shipping Calculator - Address Field]
+.box.shipping_calculator .ship_to_address .form_field,
+.box.shipping_calculator .dest_address_form .form_field {
+    text;
+    margin;
+    width;
+}
+
+[Shipping Calculator - Method Label]
+.box.shipping_calculator .chosen_method .form_descr,
+.box.shipping_calculator .shipping_method_form .form_descr {
+    text;
+    width;
+}
+
+[Shipping Calculator - Method Field]
+.box.shipping_calculator .chosen_method .form_field,
+.box.shipping_calculator .shipping_method_form .form_field {
+    text;
+    margin;
+    width;
+}
+
+[Shipping Calculator Section]
+.box.shipping_calculator .ship_to_address,
+.box.shipping_calculator .chosen_method,
+.box.shipping_calculator .shipping_method_form,
+.box.shipping_calculator .dest_address_form {
+    padding;
+    width;
+}
+
+[Shipping Calculator Header]
+.box.shipping_calculator h3 {
+    background;
+    border;
+    text;
+    margin;
+    padding;
+}

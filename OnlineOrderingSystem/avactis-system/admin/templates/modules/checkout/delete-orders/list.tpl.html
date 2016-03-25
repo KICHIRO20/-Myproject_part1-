@@ -1,0 +1,53 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+window.focus();
+
+    function submitDelCatForm(formID)
+    {
+        var form = document.forms[formID];
+        form.elements['ViewState[hasCloseScript]'].value = 'true';
+        form.submit();
+    }
+//-->
+</SCRIPT>
+<FORM METHOD=POST ACTION="<?php DeleteOrdersAction(); ?>" id="DelOrdersForm" name="DelOrdersForm" style="margin: 0px;">
+<?php HiddenArrayViewState(); ?>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-users font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold"><?php Msg('ORDER_DEL_PAGE_HEADER'); ?> : </span>
+			<span class="caption-subject font-blue-sharp"><?php Msg('ORDER_DEL_PAGE_SUBTITLE'); ?></span>
+
+		</div>
+	</div>
+	<div class="alert alert-warning"><?php Msg('ORDER_DEL_WARNING'); ?></div>
+	<div class="table-responsive">
+	<table class="table">
+		<thead>
+		<tr role="row" class="heading">
+			<th align="left" width="10%"><?php Msg('ORDERS_RESULTS_ORDER_ID'); ?></th>
+			<th align="left" width="25%"><?php Msg('ORDERS_RESULTS_CUSTOMER'); ?></th>
+			<th align="left" width="20%"><?php Msg('ORDERS_RESULTS_ORDER_DATE'); ?></th>
+			<th align="left" width="10%"><?php Msg('ORDERS_RESULTS_AMOUNT'); ?></th>
+			<th align="left" width="15%"><?php Msg('ORDERS_RESULTS_ORDER_STATUS'); ?></th>
+			<th align="left" width="20%"><?php Msg('ORDERS_RESULTS_PAYMENT_STATUS'); ?></th>
+		</tr>
+		</thead>
+		<tbody>
+			<?php Items(); ?>
+		</tbody>
+	</table>
+	</div>
+	<div align="center" class="actions">
+		<div class="actions btn-set">
+			<button id="DeleteButton1" class="btn blue" type="button" onclick="submitDelCatForm('DelOrdersForm'); disableButtons(new Array('DeleteButton1', 'DeleteButton2', 'CancelButton1', 'CancelButton2'));" title="<?php Msg('BTN_DELETE'); ?>"><i class="fa fa-check"></i> <span class="hidden-480"><?php Msg('BTN_DELETE'); ?></span></button>
+			<button id="CancelButton1" class="btn btn-default" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+		</div>
+	</div>
+</div>
+<INPUT TYPE="hidden" name="OrdersId" value="<?php HiddenFieldOrdersId(); ?>">
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,98 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+function onDBRecordOver(el)
+{
+  el.className = 'db_record_hover';
+};
+function onDBRecordOut(el)
+{
+  el.className = 'db_record';
+};
+function onDirClick(fld)
+{
+  requestToDirContent(db_current_dir+fld);
+};
+var db_current_dir = '<?php StartFolder(); ?>';
+function requestToDirContent(folder_path)
+{
+        disableBlock('dbrowser',7);
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'dummy': '<?php ParentField(); ?>',
+            	'asc_action': 'get_folder_content',
+            	'folder_path': folder_path
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+            	fillDBrowserSide(result["folder_content"]);
+            	db_current_dir = result["folder_content"]["folder_path"];
+            	document.getElementById('db_selected_dir').value = db_current_dir;
+                enableBlock('dbrowser');
+            },
+            'json'
+        );
+};
+function fillDBrowserSide(content)
+{
+  document.getElementById('db_folders').innerHTML = '';
+  var _html = '<table class="dirs_list" cellspacing="0" cellpadding="1" width="100%">';
+  _html += '<colgroup><col width="17"><col width="98%"></colgroup>';
+  for(i=0;i<content["folders"].length;i++)
+  {
+    if(content["folders"][i]!='.')
+    {
+        record_img = (content["folders"][i] == '..') ? 'fld_up.gif' : 'folder.gif';
+		record_html = '<tr class="db_record" onMouseOver="onDBRecordOver(this);" onMouseOut="onDBRecordOut(this);" onClick="onDirClick(\''+content["folders"][i]+'\')">';
+		record_html += '<td><img src="images/fsicons/'+record_img+'"></td>';
+		record_html += '<td nowrap>'+content["folders"][i]+'</td></tr>';
+	    _html += record_html;
+	};
+  };
+  _html += '</table>';
+  document.getElementById('db_folders').innerHTML = _html;
+};
+function DBonOKClick()
+{
+    document.getElementById('<?php ParentField(); ?>').value = document.getElementById('db_selected_dir').value;
+    enableBlock('<?php ParentBlock(); ?>');
+    hideBlock('dbrowser');
+    <?php PostChoiceJScode(); ?>
+}
+</script>
+<div class="dirs_browser" id="dbrowser" style="display: none;">
+	<!-- BEGIN Portlet PORTLET-->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onClick="hideBlock('dbrowser'); enableBlock('<?php ParentBlock(); ?>')"></button>
+				<h4 class="modal-title"><i class="fa fa-folder-open"></i> <?php xmsg('SH','FOLDERS_BROWSER'); ?></h4>
+			</div>
+			<div class="modal-body">
+				<p class="bold"><?php xmsg('SH','SELECTED_FOLDER'); ?>:</p>
+
+				<textarea id="db_selected_dir" class="form-control input-sm input-xlarge" readonly disabled></textarea>
+
+				<div id="db_folders" class="db_side"></div>
+
+				<div class="modal-footer">
+					<a id="btn_ok" title="<?php msg('BTN_OK'); ?>" onClick="DBonOKClick();" type="button" data-dismiss="modal" class="btn blue"><i class="fa fa-check"></i> <span class="hidden-480"><?php msg('BTN_OK'); ?></span></a>
+
+			        <a id="btn_cancel" title="<?php msg('BTN_CANCEL'); ?>" onClick="hideBlock('dbrowser'); enableBlock('<?php ParentBlock(); ?>')" type="button" data-dismiss="modal" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php msg('BTN_CANCEL'); ?></span></a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<script language="JavaScript">
+db_win_onload_back = window.onload;
+window.onload = function() {
+    if(db_win_onload_back)
+        db_win_onload_back();
+    setTimeout("requestToDirContent(db_current_dir)",window_onload_timeout);
+};
+window_onload_timeout += 10;
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

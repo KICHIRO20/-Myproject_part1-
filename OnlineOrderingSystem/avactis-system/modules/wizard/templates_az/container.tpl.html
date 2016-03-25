@@ -1,0 +1,175 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php
+	asc_enqueue_style('components');
+	asc_enqueue_style('plugins');
+	asc_enqueue_style('admin-layout');
+	asc_enqueue_style('admin-default');
+	asc_enqueue_style('admin-custom');
+
+	do_action( 'admin_print_styles' );
+?>
+				<!-- BEGIN PAGE CONTENT-->
+						<div class="portlet box blue" id="form_setup_guide_wizard">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-gift"></i> <?php xmsg('WZ','STORE_SETUP_GUIDE_NAME'); ?> - <span class="step-title">
+									Step 1 of 4 </span>
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="expand" title="Collapse/Expand">
+									</a>
+									<a href="#" onclick="javascript:openURLinNewWindow('popup_window.php?page_view=SettingParamList&group=WIZARD_SETTINGS', 'SettingGroupEditor');" data-toggle="modal" class="config" title="Wizard Settings">
+									</a>
+									<a href="javascript:;" class="remove" title="Close">
+									</a>
+								</div>
+							</div>
+							<div class="portlet-body display-hide form">
+								<form action="#" class="form-horizontal" id="submit_form" method="POST">
+									<div class="form-wizard">
+										<div class="form-body">
+											<ul class="nav nav-pills nav-justified steps">
+												<li>
+													<a href="#tab1" data-toggle="tab" class="step">
+													<span class="number">
+													1 </span>
+													<span class="desc">
+													<i class="fa fa-check"></i> Profile Setup </span>
+													</a>
+												</li>
+												<li>
+													<a href="#tab2" data-toggle="tab" class="step">
+													<span class="number">
+													2 </span>
+													<span class="desc">
+													<i class="fa fa-check"></i> Storefront Logo </span>
+													</a>
+												</li>
+												<li>
+													<a href="#tab3" data-toggle="tab" class="step active">
+													<span class="number">
+													3 </span>
+													<span class="desc">
+													<i class="fa fa-check"></i> Add Products </span>
+													</a>
+												</li>
+												<li>
+													<a href="#tab4" data-toggle="tab" class="step">
+													<span class="number">
+													4 </span>
+													<span class="desc">
+													<i class="fa fa-check"></i> Billing &amp; Shipping </span>
+													</a>
+												</li>
+											</ul>
+											<div id="bar" class="progress progress-striped" role="progressbar">
+												<div class="progress-bar progress-bar-success">
+												</div>
+											</div>
+											<div class="tab-content">
+												<div class="alert alert-danger display-none">
+													<button class="close" data-dismiss="alert"></button>
+													You have some form errors. Please check below.
+												</div>
+												<div class="alert alert-success display-none">
+													<button class="close" data-dismiss="alert"></button>
+													Your form validation is successful!
+												</div>
+												<div class="tab-pane active" id="tab1">
+													<h3 class="block">Update your profile</h3>
+													<div class="form-group">
+														<div class="col-md-1"></div>
+														<label class="col-md-9">
+<span class="help-block"> The Store Owner's Profile is used to customize the contact information for the online store. These details are used in automated notifications sent to customers following order placement and during order processing. Store information can also be used when sending newsletters, offers, notices, etc to active customers.<br /><br />
+<a class="btn blue" href="store_settings_store_owner.php" target="_blank"><strong>Update Your Profile</strong></a></span>
+
+														</label>
+													</div>
+												</div>
+												<div class="tab-pane" id="tab2">
+													<h3 class="block">Change your Storefront Logo</h3>
+													<div class="form-group">
+														<div class="col-md-1"></div>
+														<label class="col-md-9">
+<span class="help-block"> You can read this document on <a target="_blank" href="http://wiki.avactis.com/index.php?title=How_to_replace_the_Avactis_logo_in_the_header"> <strong>How to replace the Avactis logo in the header</strong></a> <br /><br />
+
+<a class="btn blue" href="edit.php" target="_blank"><strong> Change Storefront Logo</strong></a></span>
+
+														</label>
+													</div>
+												</div>
+												<div class="tab-pane" id="tab3">
+													<h3 class="block">Add Products and Categories</h3>
+													<div class="form-group">
+														<div class="col-md-1"></div>
+														<label class="col-md-9">
+<span class="help-block"> 
+<p>Categories offer a convenient way to separate different groups of products, and put similar products together. Customers can browse through different categories and see different products.</p>
+<a class="btn blue" target="_blank" href="catalog_manage_categories.php"><strong>Add Categories</strong></a>
+<br /><br />
+<p>You can manage the product catalog that is available to your online store visitors. The product catalog can contain an unlimited number of products, which are stored in a category structure. This allows you to create complex store structures with hundreds and thousands of products for sale.</p>
+<a class="btn blue" target="_blank" href="catalog_manage_products.php"><strong>Add Products</strong></a>
+<br /><br />
+</span>
+														</label>
+													</div>
+												</div>
+												<div class="tab-pane" id="tab4">
+													<h3 class="block">Setup Information for Billing and Shipping</h3>
+													<div class="form-group">
+														<div class="col-md-1"></div>
+														<label class="col-md-9">
+<span class="help-block">
+<p> The Payment Methods page lets you manage the payment methods that you intend to offer for your store's customers.<br />
+Availability of payment methods from which you can choose depends on the version of shopping cart software. To select one or more payment methods and/or payment gateways, select them in the list and move them to the Selected Payment Methods box by clicking the Right Arrow button.</p>
+<a class="btn blue" target="_blank" href="payment_modules.php"><strong>Setup Billing Info</strong></a>
+<br /><br />
+<p>The Shipping Methods page lets you manage the shipping methods that you intend to offer for your store.<br />
+Under Selected Shipping Methods, the order of shipping methods is identical to your customers will see when placing an order for a product. Click the Up and Down arrows to define the order in which these shipping methods will be displayed to customers. To save any changes click Save.
+</p>
+<a class="btn blue" target="_blank" href="shipping_modules.php"><strong>Setup Shipping Info</strong></a></span>
+
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-actions">
+											<div class="row">
+												<div class="col-md-offset-3 col-md-9">
+													<a href="javascript:;" class="btn default button-previous">
+													<i class="m-icon-swapleft"></i> Back </a>
+													<a href="javascript:;" class="btn blue button-next">
+													Continue <i class="m-icon-swapright m-icon-white"></i>
+													</a>
+													<a href="javascript:;" class="btn green button-submit">
+													Close <i class="m-icon-swapright m-icon-white"></i>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+				<!-- END PAGE CONTENT-->
+<?php
+	asc_enqueue_script('asc-admin');
+	asc_enqueue_script('select2');
+	asc_enqueue_script('admin-layout');
+	asc_enqueue_script('jquery.validate');
+	asc_enqueue_script('validate-additional-methods');
+	asc_enqueue_script('jquery-bootstrap-wizard');
+	asc_enqueue_script('form-wizard');
+
+	do_action( 'admin_print_scripts' );
+
+?>
+
+<script>
+jQuery(document).ready(function() {       
+   // initiate layout and plugins
+	FormWizard.init();
+});
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

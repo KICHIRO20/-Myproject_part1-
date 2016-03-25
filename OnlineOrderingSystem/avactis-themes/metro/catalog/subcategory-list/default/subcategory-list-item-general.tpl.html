@@ -1,0 +1,28 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="subcategory_item product-item">
+    <?php 
+        $src = getCategorySmallImageSrc();
+        if (!empty($src))
+        {
+            $w = getCategorySmallImageWidth();
+            if ($w>110) $w=110;
+        }
+        else {
+            $src = 'avactis-images/no-image.gif';
+            $w = 100;
+        }
+        if (!empty($src)):
+    ?>
+    <div class="subcategory_img pi-img-wrapper">
+<a href="<?php CategoryLink(); ?>"><img class="img-responsive" src="<?php echo $src; ?>" width="100%" alt="<?php CategoryName(); ?>" /></a>
+    </div>
+    <?php endif; ?>
+    <div class="subcategory_name" style="text-align:center ;">
+       
+           <h3> <a href="<?php CategoryLink(); ?>"><?php CategoryName(); ?></a></h3> 
+       
+    </div>
+</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

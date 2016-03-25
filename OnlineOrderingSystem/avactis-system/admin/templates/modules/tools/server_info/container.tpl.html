@@ -1,0 +1,207 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-info-circle"></i>&nbsp;<?php Msg("ADMIN_AS_INFO_HEADER_001"); ?>
+					</span>
+				</div>
+			</div>		
+			<div class="portlet-body">
+				<div class="panel-group accordion scrollable" id="appinfo">
+					<!-- Begin Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#summery" href="#close_open">
+								<?php Msg("ADMIN_AS_INFO_SUBTITLE_001"); ?></a>
+							</h4>
+						</div>
+						<div style="height: 0px;" id="close_open" class="panel-collapse collapse">
+							<div class="panel-body">
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg("ADMIN_AS_INFO_FIELD_001"); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php ProductVersion(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg("ADMIN_AS_INFO_FIELD_002"); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php ProductVersionType(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg("ADMIN_AS_INFO_FIELD_003"); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php ProductReleaseDate(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							</div>
+						</div>
+					</div>
+					<!-- End Panel -->			
+					<!-- Begin Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#module_info" href="#module_info">
+								<?php Msg("ADMIN_AS_INFO_SUBTITLE_003"); ?></a>
+							</h4>
+						</div>
+						<div style="height: 0px;" id="module_info" class="panel-collapse collapse">
+							<div class="panel-body">
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg('ADMIN_AS_INFO_FIELD_010'); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php CoreVersion(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+								<?php ModulesList(); ?>
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg("ADMIN_AS_INFO_FIELD_003"); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php ProductReleaseDate(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							</div>
+						</div>
+					</div>
+					<!-- End Panel -->			
+					<!-- Begin Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#server_info" href="#server_info">
+								<?php Msg("ADMIN_AS_INFO_HEADER_002"); ?></a>
+							</h4>
+						</div>
+						<div style="height: 0px;" id="server_info" class="panel-collapse collapse">
+							<div class="panel-body">
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg('ADMIN_AS_INFO_FIELD_011'); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php phpVersion(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg("ADMIN_AS_INFO_FIELD_012"); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php MySQLVersion(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg("ADMIN_AS_INFO_FIELD_013"); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php ServerOS(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+										<lable class="help-block"><?php Msg("ADMIN_AS_INFO_FIELD_014"); ?></lable>
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<?php WebServerVersion(); ?>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							</div>
+						</div>
+					</div>
+					<!-- End Panel -->
+					<!-- Begin Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#php_info" href="#php_info">
+								<?php Msg("ADMIN_AS_INFO_SUBTITLE_005"); ?></a>
+							</h4>
+						</div>
+						<div style="height: 0px;" id="php_info" class="panel-collapse collapse">
+							<div class="panel-body">
+							<!-- Begin - Row -->
+								<div class="row margin-bottom-10">
+									<div class="col-md-1"></div>
+									<div class="col-md-4">
+									</div>
+									<div class="col-md-6">
+										<span style="display:inline;">
+											<a href="javascript:openURLinNewWindow('<?php PHPInfoLink(); ?>', 'PHPInfo');" style="cursor: pointer; text-decoration: underline;"><?php Msg("ADMIN_AS_INFO_PHP_INFO_LINK"); ?>
+											</a>
+										</span>
+									</div>
+								</div>
+							<!-- End - Row -->	
+							</div>
+						</div>
+					</div>
+					<!-- End Panel -->			
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,241 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+document.title = '<?php xmsg('PI','PI_SETTINGS_LINK'); ?>';
+</script>
+
+<div class="portlet light">
+  
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-gears font-green-sharp"></i>
+        <span class="caption-subject font-green-sharp bold uppercase"><?php Msg('GNRL_SET_PAGE_TITLE'); ?></span>
+        <span class="caption-subject font-green-sharp"><?php xmsg('PI','PI_SETTINGS_LINK'); ?></span>
+      </div>
+    </div>
+
+
+
+    <div class="portlet-body">
+          <div class="table-container form">
+            <?php ResultMessage(); ?>
+              <form action="" method="post" name="PISettingsForm">
+              <input type="hidden" name="asc_action" value="update_pi_settings">
+
+                
+              <div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption"><?php xmsg('PI','PI_SETTINGS_LINK'); ?></div>
+                    </div>
+              </div>
+
+                <div class="row margin-bottom-10">
+                  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_RESIZE_DETAILED_LARGE_IMAGE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_RESIZE_DETAILED_LARGE_IMAGE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                   	<?php detailedFullImageResizeField(); ?>
+                  </div>
+                </div>
+                
+
+
+                <div class="row margin-bottom-10">
+                  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_DETAILED_LARGE_IMAGE_SIDE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_DETAILED_LARGE_IMAGE_SIDE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <input type="text" class="form-control form-filter input-large" <?php dfirField(); ?>>                    
+                  </div>
+                  <div class="col-md-1 col-sm-2">
+                    <lable class="help-block"><?php xmsg('PI','PXLS'); ?></lable>
+                  </div>
+                  
+                </div>
+                
+                <div class="row margin-bottom-10">
+                  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_THUMB_SIDE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_THUMB_SIDE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                      <input type="text" class="form-control form-filter input-large" <?php TSField(); ?>>
+                  </div>
+                  <div class="col-md-1 col-sm-2">
+                    <lable class="help-block"><?php xmsg('PI','PXLS'); ?></lable>
+                  </div>
+
+                </div>
+                
+                <?php if (getTPLSetting() != "yes") { ?>
+                
+                      <div class="row margin-bottom-10">
+                        <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('PI','SETS_THUMBS_PER_LINE'); ?></lable>
+                        </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_THUMBS_PER_LINE','product-images-messages'); ?>
+                    </a>
+		</div>
+                        <div class="col-md-3 col-sm-5">
+                          <input type="text" class="form-control form-filter input-large" <?php TPLField(); ?>>
+                        </div>
+                      </div>
+                
+                <?php } ?>
+                
+
+                <div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption"><?php xmsg('PI','MAIN_IMAGE_SETS_SECTION'); ?></div>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-10">
+                  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_RESIZE_LARGE_IMAGE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_RESIZE_LARGE_IMAGE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                   	<?php fullImageResizeField(); ?>
+                  </div>
+                </div>
+                
+                <div class="row margin-bottom-10">
+                  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_LARGE_IMAGE_SIDE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_LARGE_IMAGE_SIDE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <input type="text" class="form-control form-filter input-large" <?php firField(); ?>>                    
+                  </div>
+                  <div class="col-md-1 col-sm-2">
+                    <lable class="help-block"><?php xmsg('PI','PXLS'); ?></lable>
+                  </div>
+                  
+                </div>
+
+                <div class="row margin-bottom-10">
+                  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_AUTO_GEN_MAIN_SMALL_IMAGE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_AUTO_GEN_MAIN_SMALL_IMAGE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <?php AGField(); ?>
+                  </div>
+                </div>
+                
+                <div class="row margin-bottom-10">
+                  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_MAIN_IMAGE_SIDE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_MAIN_IMAGE_SIDE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <input type="text" class="form-control form-filter input-large" <?php MISField(); ?>>                    
+                  </div>
+                  <div class="col-md-1 col-sm-2">
+                    <lable class="help-block"><?php xmsg('PI','PXLS'); ?></lable>
+                  </div>
+                  
+                </div>
+
+
+
+
+
+                <div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption"><?php xmsg('PI','CAT_IMAGE_SETS_SECTION'); ?></div>
+                    </div>
+                </div>
+                
+                <div class="row margin-bottom-10">  
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_AUTO_GEN_CAT_SMALL_IMAGE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_AUTO_GEN_CAT_SMALL_IMAGE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                      <?php CatAGField(); ?>
+                  </div>
+                </div>
+                
+                <div class="row margin-bottom-10">
+                  <div class="col-md-3 col-sm-4">
+                    <lable class="help-block"><?php xmsg('PI','SETS_CAT_IMAGE_SIDE'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_CAT_IMAGE_SIDE','product-images-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <input type="text" class="form-control form-filter input-large" <?php CatMISField(); ?>>                    
+                  </div>
+                  <div class="col-md-1 col-sm-2">
+                    <lable class="help-block"><?php xmsg('PI','PXLS'); ?></lable>
+                  </div>
+                </div>
+                <?php !function_exists('gd_info') ? '<tr><td colspan="3" style="padding-left: 12px; color: red;">'.xmsg('PI','WARN_GDLIB_NOT_FOUND').'</td></tr>' : ''; ?>
+              
+
+          </div>
+
+
+
+
+    <div class="actions">
+      <div class="col-md-4 col-sm-4"></div>
+      <div class="actions btn-set">
+        <button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="document.forms['PISettingsForm'].submit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span>
+        </button>
+      </div>
+    </div>
+
+
+
+</form>
+
+  </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

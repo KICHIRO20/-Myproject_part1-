@@ -1,0 +1,23 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.fixed_height_menu_tab_page img {width:100%;}
+</style>
+<?php 
+    	$getcontent = getNewsContent();
+		if(strpos($getcontent,'<img')!==FALSE)
+		{
+		?>
+		<div style="margin-bottom:10px";> 
+		<a href="<?php NewsLink(); ?>" target="_blank"><?php NewsContent(); ?></a>
+	<?php }
+	else{
+	?>   
+<div> 
+<b><?php NewsTitle(); ?></b>
+    <br>
+    <span style="font-size: 10px; color: gray;"><?php NewsDate(); ?></span>
+    <BR>
+    <?php NewsContent(); ?>&nbsp;<a href="<?php NewsLink(); ?>" target="_blank"><span style="font-size: 10px; color: gray;"><?php msg('NEWS_005'); ?></span></a>
+     <?php  } ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr> 

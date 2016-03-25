@@ -1,0 +1,7 @@
+- FeaturedProducts:
+    title: Featured products
+    description: Featured products
+- FeaturedProducts1:
+    title: Featured products (Home)
+    description: Featured products from 'Home' category (category_id = 1)
+    template: '<?php FeaturedProducts(1); ?>'

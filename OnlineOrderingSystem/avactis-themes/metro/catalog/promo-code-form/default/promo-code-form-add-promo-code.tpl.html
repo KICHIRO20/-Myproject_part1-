@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php if (($m=getLocal_AddPromoCode_Error()) != ''): ?><div class="note note-danger"><?php echo $m; ?></div><?php endif; ?>
+<?php Label('CATALOG_IF_YOU_HAVE_PROMOCODE_MESSAGE'); ?>
+<form method="post" action="<?php Local_AddPromoCode_URL(); ?>">
+<div class="form-group">
+<label class="control-label col-lg-2"><?php Label('CATALOG_ENTER_PROMOCODE_LABEL'); ?></label>
+<div class="col-lg-3"><input type="text" class="form-control input-medium" id="input_promo_code" name="promo_code" value="" /></div>
+<div class="col-lg-3"><input type="submit" value="<?php Label('CATALOG_APPLY_LABEL'); ?>" class="btn" /></div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

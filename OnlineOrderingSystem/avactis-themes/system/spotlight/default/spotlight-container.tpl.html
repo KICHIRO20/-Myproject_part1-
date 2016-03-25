@@ -1,0 +1,46 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="sliderinner">
+  <a class="slideprev"><?php xmsg('SL','BUTTON_PREVIOUS'); ?></a><a class="slidenext"><?php xmsg('SL','BUTTON_NEXT'); ?></a>
+  <ul>
+   <?php SpotlightProductList(); ?>
+  </ul>
+</div>
+ <ul class="ftrd">
+   <?php SpotlightThumbList(); ?>
+ </ul>
+<?php if (getshow_thumb()=='Y') { ?>
+<div class="sliderout">
+ <div class="thingy"><img alt="" class="handle" src="<?php thumbsliderimage() ?>" /></div>
+
+</div>
+<?php } ?>
+<script type="text/javascript">
+  var spotlight=
+  {
+    nitems:<?php number_of_products(); ?>,
+    citems:0,
+    show: function (actn,ci)
+    {      
+      if (typeof spf==='undefined') var spf = -940;
+      if (typeof thf==='undefined') var thf = 765 / (spotlight.nitems);
+      if (spotlight.nitems > 0)
+      {
+        if (typeof ci==='undefined')
+        {        
+          spotlight.citems=(actn > 0) ? spotlight.citems+1:spotlight.citems-1;
+          spotlight.citems=(spotlight.citems>spotlight.nitems)?spotlight.nitems:spotlight.citems;
+          spotlight.citems=(spotlight.citems<0)?0:spotlight.citems;
+        } else spotlight.citems=ci;
+        $('.sliderinner ul').animate({left: (spotlight.citems*spf)});
+        $('.handle').animate({left:(spotlight.citems*thf)});
+      }
+    }
+  };
+  $(document).ready(function () 
+  {
+    $(".slideprev, .slidenext").click(function(){spotlight.show((($(this).hasClass('slidenext'))?1:0));});
+    $('.ftrd-lbl1').click(function(){spotlight.show(0,$(this).index());});
+  });
+</script>
+<div class="clear"></div>
+<!-- END TPL (DO NOT REMOVE!) -->

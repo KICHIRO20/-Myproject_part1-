@@ -1,0 +1,95 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function submitLicenseInfoForm()
+{
+    var key = document.getElementById('NewLicenseKey');
+    formatLicenseKey(key);
+
+    if (key.value.length < 20 || key.value.length >24)
+    {
+        alert('<?php msg("LICENSE_WARNING_010"); ?>');
+        return;
+    }
+    document.forms['LicenseInfo'].submit();
+}
+
+function formatLicenseKey(element)
+{
+    key = element.value.toUpperCase();
+    key = key.replace(/ /g, '').replace(/[^a-zA-Z0-9\-]/g, ''); 
+    element.value = key;
+}
+
+function updateRegistration()
+{
+    bootbox.confirm('Are you sure to update registration data for current store?',function(result){
+    if(result){
+        document.forms["LicenseInfo"].asc_action.value = "UpdateStoreRegistration";
+        document.forms["LicenseInfo"].submit();
+    } });
+}
+//-->
+</SCRIPT>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-info-circle"></i>&nbsp;<?php msg('LICENSE_PAGE_SUBTITLE'); ?>
+			</span>
+		</div>
+	</div>		
+	<div class="portlet-body">
+		<form action="" name="LicenseInfo" id="LicenseInfo" method="post"> 
+			<input type="hidden" name="asc_action" value="UpdateLicenseKey">
+			<div class="row margin-bottom-20">
+				<div class="col-sm-3">
+					<?php msg('LICENSE_FIELD_001'); ?>
+					<a class="pull-right" href="<?php hinttext('LICENSE_FIELD_001'); ?>">
+				<i class="fa fa-question-circle"></i>&nbsp;</a>
+				</div>
+				<div class="col-sm-5">
+					<?php LicenseKey(); ?>
+				</div>
+			</div>
+			<div class="row margin-bottom-20">
+				<div class="col-sm-3">
+					<?php msg('LICENSE_FIELD_005'); ?>
+					<a class="pull-right" href="<?php hinttext('LICENSE_FIELD_005'); ?>">
+				<i class="fa fa-question-circle"></i>&nbsp;</a>
+				</div>
+				<div class="col-sm-5">
+					<?php CurrentURL(); ?>
+				</div>
+			</div>
+			<div class="row margin-bottom-20">
+				<div class="col-sm-3">
+					<?php msg('LICENSE_FIELD_010'); ?>
+					<a class="pull-right" href="<?php hinttext('LICENSE_FIELD_010'); ?>">
+				<i class="fa fa-question-circle"></i>&nbsp;</a>
+				</div>
+				<div class="col-sm-5">
+					<?php CurrentVersionType(); ?>
+				</div>
+			</div>
+			<div class="row margin-bottom-20">
+				<div class="col-sm-3">
+					<?php msg('LICENSE_FIELD_009'); ?>
+					<a class="pull-right" href="<?php hinttext('LICENSE_FIELD_009'); ?>">
+				<i class="fa fa-question-circle"></i>&nbsp;</a>
+				</div>
+				<div class="col-sm-5">
+					<INPUT TYPE="text" NAME="NewLicenseKey" id="NewLicenseKey" size="30"  value="<?php NewLicenseKey(); ?>">&nbsp;
+					<a class="btn btn-circle btn-default" href="javascript:submitLicenseInfoForm();">
+						<i class="fa fa-refresh">
+							<?php Msg("BTN_UPDATE"); ?>
+						</i>
+					</a>
+				</div>
+			</div>
+		</form>
+		<br />
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,61 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    disableButtons(new Array('UpdateRowsButton'));
+}
+
+function formDataIsValid(stringToTrim) {
+    return true;
+}
+//-->
+</script>
+
+<?php ResultMessageRow(); ?>
+
+<form <?php EditTransactionTrackingSettingsForm(); ?> style="padding: 0px; margin: 0px;" id="EditTransactionTrackingSettingsForm">
+<input type="hidden" name="asc_action" value="UpdateTransactionTrackingSettings">
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-group font-green-sharp"></i>
+					<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('TT', 'MRKTNG_LABEL_TRANSACTION_TRACKING'); ?></span>
+					<span class="caption-helper text-lowercase"><?php xMsg('SYS','MRKTNG_TAB_TRANSACTION_TRACKING_TITLE'); ?>...</span>
+				</div>
+				<div class="actions">
+					<div class="actions btn-set">
+						<a id="UpdateRowsButton" title="<?php msg('BTN_UPDATE'); ?>" href="javascript:if(formDataIsValid()){EditTransactionTrackingSettingsForm.submit(); disableButtonsInForm();}" class="btn btn-circle btn-default"><i class="fa fa-refresh"></i> <span class="hidden-480"><?php msg('BTN_UPDATE'); ?></span></a>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-hover" id="datatable_tt">
+						<thead>
+							<tr role="row" class="heading">
+								<th width="20%" align="center" style="text-align: center;">
+									<?php xmsg('TT', 'TRANSACTION_TRACKING_MODULE_NAME'); ?>
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<?php xmsg('TT', 'TRANSACTION_TRACKING_MODULE_SETTINGS'); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('TT', 'TRANSACTION_TRACKING_MODULE_ACTIVE_LABEL'); ?>
+								</th>
+    </tr>
+						</thead>
+						<tbody>
+    <?php Items(); ?>
+						</tbody>
+</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

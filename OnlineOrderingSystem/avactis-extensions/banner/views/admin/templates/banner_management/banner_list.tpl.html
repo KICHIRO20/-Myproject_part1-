@@ -1,0 +1,115 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+ <link rel="stylesheet" href="../../avactis-extensions/banner/views/admin/styles/jquery-ui.css">
+<script type="text/javascript" src="../../avactis-extensions/banner/views/admin/js/jquery-ui.js"></script>
+<script>
+	jQuery(document).ready(function($){
+		/* 	$("#date_start,#date_end").datepicker({minDate:-1,maxDate:-2}).attr('readonly','readonly'); */
+		/* $('#banner-effect').attr("disabled", true);
+		$('#pageselect').attr("disabled", true); */
+		var myDate = new Date();
+		var prettyDate = (myDate.getFullYear()) + '-' + (myDate.getMonth() + 1)
+				+ '-' + myDate.getDate();
+		$("#date_start,#date_end").datepicker({
+			yearRange : '-1:+4',
+			dateFormat : 'yy-mm-dd',
+			altFormat : 'yy-mm-dd',
+			changeMonth : true,
+			changeYear : true,
+			buttonText : "Calendar",
+			showOn : 'both',
+			buttonImage : "../../avactis-extensions/banner/views/admin/styles/images/calendar.png",
+			buttonImageOnly : true
+		});
+
+	});
+</script>
+
+</script>
+</head>
+<body>
+
+	<form>
+		<table class="form" cellspacing="1" cellpadding="0" width="100%"
+			align="center">
+			<tr>
+				<td colspan="3"
+					style="padding-left: 0px; padding-right: 0px; font-size: 8pt; color: rgb(102, 102, 102); text-align: center; font-weight: normal;">
+					<div class="help error_msg"
+						style="padding: 0px 5px 0px 5px; text-align: left;"></div>
+					<table id="banners" border="0" cellpadding="1" cellspacing="1"
+						width="100%">
+						<tr height="25" bgcolor="#CED4DD" style="height: 25px;">
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								width="5%">Delete.</th>
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								align="center" width="20%">Pages to modify</th>
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								width="8%">Banner width</th>
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								align="center" width="8%">Banner height</th>
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center">Start
+								Date</th>
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								align="center">End Date</th>
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								align="center" width="10%">Banner Effect</th>
+							<th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								align="center" width="5%">Navigation</th>
+						</tr>
+
+						<tr bgcolor="#FFFAFC";>
+
+							<td align="center" style="text-align: center;"><input
+								type="checkbox" class="<?php DelCheckboxCssClass(); ?>"
+								id="select_<?php BannerN(); ?>"
+								name="selected_banners[<?php BannerID(); ?>]"
+								onclick="selectRow(this); formDelete(this);"
+								value="<?php BannerID(); ?>" type="checkbox"></td>
+							<td><input type="hidden" name="banner_location" value=<?php
+								Location(); ?>> <select
+								style="width: 374px; min-width: 200px; resize: none; position: relative; display: block; height: 95px;"
+								size="7" multiple="multiple" name="categoryids[]"
+								id="pageselect" class="ui-resizable">
+									<?php PagesList(); ?>
+							</select></td>
+
+							<td align="center" style="text-align: center;" valign="top"><input
+								type="text" size="3" value=<?php BannerWidth(); ?>
+								name="banner_width" ></td>
+
+							<td align="center" style="text-align: center;" valign="top"><input
+								type="text" size="3" value=<?php BannerHeight(); ?>
+								name="banner_height" ></td>
+							<td align="center" style="text-align: center;" valign="top">
+								<input type="text" size="15" id="date_start" name="start_date"
+								value=<?php BannerStartDate();?>>
+							</td>
+							<td align="center" style="text-align: center;" valign="top">
+								<input type="text" size="15" id="date_end" name="end_date"
+								value=<?php BannerEndDate();?>>
+							</td>
+							<td align="center" style="text-align: center;" valign="top">
+								<?php BannerEffect(); ?>
+							</td>
+							<td align="center" style="text-align: center;" valign="top"><input
+								type="checkbox" name="nav" value="Y" <?php BannerNavigation(); ?>></td>
+     						</tr>
+						<tr>
+							<td class=" TableSubHead" style="padding: 5px 0px 8px 12px;"
+								colspan="11"><a
+								href="banner_content.php?bannerid=<?php BannerID();?>&amp;type=<?php Location() ;?>"><strong>Edit
+										banner content</strong></a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+
+	</form>
+</body>
+</html>
+<!-- END TPL (DO NOT REMOVE!) -->

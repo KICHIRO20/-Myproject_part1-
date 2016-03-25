@@ -1,0 +1,234 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.pb_cats_tree_header {
+    border: solid 1px black;
+    border-bottom: 0px;
+    background: #CED4DD;
+    padding: 3px;
+}
+.pb_plist_header {
+    border: solid 1px black;
+    border-bottom: 0px;
+    background: #CED4DD;
+    padding: 3px;
+}
+.pb_cats_tree_box {
+    border: solid 1px black;
+    border-top: 0px;
+    height: 280px;
+    overflow: auto;
+    padding-top: 2px;
+}
+.pb_plist_box {
+    border: solid 1px black;
+    border-top: 0px;
+    height: 280px;
+    overflow: auto;
+    white-space: nowrap;
+    font-weight: normal;
+    cursor: default;
+    padding-top: 2px;
+}
+.pb_list_item {
+}
+.pb_list_item_not_choosed {
+    font-weight: normal;
+}
+.pb_list_item_choosed {
+    font-weight: bold;
+}
+.pb_list_item_selected {
+    font-weight: bold;
+    background-color: #C0D2EC;
+}
+.pbli_mover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.pb_box_td {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.pb_loading_block {
+    border: solid 1px black;
+    background: #F0F0F0;
+    width: 100px;
+    font-weight: bold;
+    padding-top: 2px;
+    padding-bottom: 4px;
+}
+</style>
+<!--[if lt IE 7]>
+<style type="text/css">
+.pb_cats_tree_box {
+    border: solid 1px black;
+    height: 280px;
+    width: 308px;
+    overflow: scroll;
+}
+.pb_plist_box {
+    border: solid 1px black;
+    width: 308px;
+    height: 280px;
+    overflow: scroll;
+    white-space: nowrap;
+    font-weight: normal;
+    cursor: default;
+}
+.pb_box_td {
+    padding-left: 0px;
+    padding-right: 16px;
+}
+</style>
+<![endif]-->
+<div class="margin-bottom-10" id="{UnqPrefix}_block">
+	{CategoryPath}
+	<div class="row" align="left">
+		<div class="col-sm-6 pb_box_td margin-bottom-10">
+		    <div class="pb_cats_tree_header"><?php xmsg('CTL','PB_CAT_TREE_HEADER'); ?></div>
+			<div id="{UnqPrefix}_cats_tree_box" class="pb_cats_tree_box"></div>
+		</div>
+		<div class="col-sm-6 pb_box_td margin-bottom-10">
+		    <div class="pb_cats_tree_header"><?php xmsg('CTL','PB_PLIST_HEADER'); ?></div>
+			<div id="{UnqPrefix}_prods_list_box" class="pb_plist_box"></div>
+		</div>
+	</div>
+	{Buttons}
+</div>
+
+<div id="{UnqPrefix}_loading_block" class="pb_loading_block" style="position: absolute; display: none;">
+<center>
+	<?php xmsg('CTL','PB_PL_LOADING'); ?><br>
+	<img src="images/process_green_01.gif" border="0">
+</center>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+var {UnqPrefix}_d;
+jQuery(function () {
+	{UnqPrefix}_d = new dTree('{UnqPrefix}_d');
+	{UnqPrefix}_d.icon.node = 'dtree/img/folder.gif';
+	{initDtreeByCats}
+	document.getElementById('{UnqPrefix}_cats_tree_box').innerHTML = {UnqPrefix}_d.toString();
+});
+
+var {UnqPrefix}_selected_pl = 0;
+
+function {UnqPrefix}_loadProductsList(cat_id)
+{
+        disableBlock('{UnqPrefix}_block',2);
+        showBlock('{UnqPrefix}_loading_block',3);
+        repositionBlockForShowOver('{UnqPrefix}_loading_block', '{UnqPrefix}_block');
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'ajax_get_plist',
+            	'category_id': cat_id
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                {UnqPrefix}_fillProductsList(result["products"]);
+                {UnqPrefix}_redrawCategoryPath(cat_id);
+                {UnqPrefix}_selected_pl = 0;
+                {UnqPrefix}_setButtonsState();
+                hideBlock('{UnqPrefix}_loading_block');
+                enableBlock('{UnqPrefix}_block');
+            },
+            'json'
+        );
+};
+
+function {UnqPrefix}_fillProductsList(products)
+{
+    var plist_block = document.getElementById('{UnqPrefix}_prods_list_box');
+    var _html = '<table cellpadding="0" cellspacing="0" width="100%" class="pb_plist_table"><colgroup><col width="2%"><col width="98%"></colgroup>';
+
+    for(i=0;i<products.length;i++)
+    {
+        var pli_class_name ="pb_list_item_not_choosed";
+        {jsControlPListItem}
+        _html += '<tr class="pb_list_item" id="{UnqPrefix}_pl_'+products[i]["id"]+'" onClick="{UnqPrefix}_changeSelectedPL('+products[i]["id"]+')">';
+        _html += '<td style="padding-left: 2px;"><img src="dtree/img/page.gif"></td>';
+        _html += '<td class="'+pli_class_name+'" id="{UnqPrefix}_pname_'+products[i]["id"]+'" onMouseOver="{UnqPrefix}_OnMouseOverPlist(this);" onMouseOut="{UnqPrefix}_OnMouseOutPlist(this);">'+products[i]["name"]+'</td></tr>'
+    };
+    
+    plist_block.innerHTML = '';
+    plist_block.innerHTML = _html;
+};
+
+function {UnqPrefix}_redrawCategoryPath(cat_id)
+{
+    var el = document.getElementById('{UnqPrefix}_cat_path');
+    if(el)
+    {
+        el.innerHTML = '';
+        el.innerHTML = {UnqPrefix}_categories_paths[cat_id];
+    };
+};
+
+function {UnqPrefix}_changeSelectedPL(new_pl)
+{
+  if({UnqPrefix}_selected_pl != 0)
+  {
+    el = document.getElementById('{UnqPrefix}_pl_'+{UnqPrefix}_selected_pl);
+    el.className = el.className.replace(' pb_list_item_selected','');
+  };
+  
+  el2 = document.getElementById('{UnqPrefix}_pl_'+new_pl);
+  el2.className += ' pb_list_item_selected';
+  {UnqPrefix}_selected_pl = new_pl;
+
+  {UnqPrefix}_setButtonsState();
+};
+
+function {UnqPrefix}_OnMouseOverPlist(el)
+{
+    el.className += ' pbli_mover';
+};
+
+function {UnqPrefix}_OnMouseOutPlist(el)
+{
+    el.className = el.className.replace(' pbli_mover','');
+};
+
+function {UnqPrefix}_setButtonsState()
+{
+    var node_id = {UnqPrefix}_d.selectedNode;
+    var cat_id = {UnqPrefix}_d.aNodes[node_id].id + 1;
+    var cat_name = '';
+   
+    var el = document.getElementById('s{UnqPrefix}_d'+node_id);
+    if (el)
+        cat_name = el.innerHTML;
+
+    var prod_id = {UnqPrefix}_selected_pl;
+    var prod_name = '';
+
+    if(prod_id != 0)
+        prod_name = document.getElementById('{UnqPrefix}_pname_'+prod_id).innerHTML;
+
+    {jsSetButtonsStates}
+};
+
+function {UnqPrefix}_controlPlist(product_id)
+{
+    if({jsPlistControlCondition})
+    {
+        el = document.getElementById('{UnqPrefix}_pname_'+product_id);
+        if(el)
+        {
+	        if(in_array({choosed_control_array}, product_id, false))
+	        {
+	            el.className = el.className.replace('pb_list_item_not_choosed','pb_list_item_choosed');
+	        }
+	        else
+	        {
+	            el.className = el.className.replace('pb_list_item_choosed','pb_list_item_not_choosed');
+	        };
+	    };
+    };
+};
+
+</script>
+
+<!-- END TPL (DO NOT REMOVE!) -->

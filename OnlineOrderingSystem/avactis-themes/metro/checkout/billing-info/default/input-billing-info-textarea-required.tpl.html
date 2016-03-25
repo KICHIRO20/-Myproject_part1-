@@ -1,0 +1,13 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form-group">
+    <?php $local_id = getLocal_FormFieldID(); ?>
+ <label for="textarea_req_<?php echo $local_id; ?>" class="required"><?php Local_FieldLabel(); ?><?php Label('CHECKOUT_ASTERISK'); ?></label>
+        <span id="<?php echo $local_id; ?>">
+            <textarea name="<?php Local_FormFieldName(); ?>"
+                   id="textarea_req_<?php echo $local_id; ?>"
+                   rows="<?php Local_FormFieldRows(); ?>"
+                   cols="<?php Local_FormFieldCols(); ?>"
+                   class="Normal form-control"><?php Local_FormFieldValue(); ?></textarea>
+        </span>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

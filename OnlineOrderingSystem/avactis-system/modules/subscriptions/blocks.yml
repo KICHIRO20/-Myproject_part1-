@@ -1,0 +1,11 @@
+- SubscribeBox:
+    title: Subscribe box
+    description: Subscribe box
+- SubscribeFormProfile:
+    title: Subscribe form profile
+    description: Subscribe form profile
+    page: subscriptions.php
+- UnsubscribeByLink:
+    title: Unsubscribe by link
+    description: Unsubscribe by link
+    page: unsubscribe.php

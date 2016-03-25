@@ -1,0 +1,39 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-arrow-circle-up"></i>&nbsp;Upgrade Available (BETA Feature)&nbsp;:
+			</span>
+		</div>
+	</div>		
+	<div class="portlet-body">
+		<?php Local_ErrorMessage();?>
+		<!-- BEGIN Info Message -->
+		<div class="note note-warning note-bordered font-green-sharp">
+			<?php XMsg("ExtManager","INF_BACKUP_MESG");?>
+		</div>
+		<!-- END Info Message -->
+		<div class="alert alert-info">
+			<?php XMsg("ExtManager","INF_CURRENT_VERSION");?>&nbsp;<strong><?php echo PRODUCT_VERSION_NUMBER;?></strong><br />
+			<?php XMsg("ExtManager","INF_NEW_VERSION");?>&nbsp;<strong><?php LatestCoreVersion();?>&nbsp;
+			<?php XMsg("ExtManager","INF_UPGRADE_TO_NEW_1");?></strong><br /><br />
+			<?php XMsg("ExtManager","INF_UPGRADE_STEPS")?><br />
+			<?php XMsg("ExtManager","INF_UPGRADE_STEP_1")?>&nbsp;
+			<a target="_new" href = "store_settings_general.php" class="bold"><?php Msg("MSG_HERE")?> </a><br />
+			<?php XMsg("ExtManager","INF_UPGRADE_STEP_2")?>&nbsp;
+			<a target="_new" href = "admin_backup.php" class="bold"><?php Msg("MSG_HERE")?></a><br />
+			<?php XMsg("ExtManager","INF_UPGRADE_STEP_3")?>&nbsp;
+			<a class="bold" href="<?php Local_CoreUpgradeAction();?>" >
+				<?php Msg("MSG_HERE")?>
+			</a>&nbsp;
+			<?php XMsg("ExtManager","INF_UPGRADE_TO_NEW_2");?><br />
+			<?php XMsg("ExtManager","INF_UPGRADE_STEP_4")?>&nbsp;
+			<a target="_new" href = "store_settings_general.php" class="bold"><?php Msg("MSG_HERE")?></a><br />	
+			<?php XMsg("ExtManager","INF_UPGRADE_STEP_5")?>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,46 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td style="padding: 5px 0px 0px 5px"><span style="color: #ACA899"><?php xmsg("CC", "RATES_FROM_ONLINE_SERVER2"); ?></span>
+<tr>
+    <td style="padding: 10px 3px 3px 3px;">
+        <div id="DeleteButton1" class="button button_small button_disabled"><?php msg('BTN_DELETE'); ?></div>
+        <form action="popup_window.php?asc_action=del_ccrates" name="DeleteCCRatesForm" method="post" style="margin: 0px;">
+        <input type="hidden" name="rates_ids" value="">
+        </form>
+    </td>
+</tr>
+<script language="JavaScript">
+function getCheckedElements(els_name)
+{
+  var els = document.getElementsByName(els_name);
+  var checked = new Array();
+  for(i=0;i<els.length;i++)
+  {
+    if(els[i].checked)
+    {
+      checked[checked.length] = els[i].id.replace(els_name+'_','');
+    };
+  };
+  return checked;
+};
+function setDeleteButton()
+{
+  var checked = getCheckedElements('ccrate');
+  if(checked.length == 0)
+  {
+    disableButton('DeleteButton1');
+  }
+  else
+  {
+    enableButton('DeleteButton1', function() { submitDeleteForm(); });
+  };
+};
+function submitDeleteForm()
+{
+    var frm = document.forms['DeleteCCRatesForm'];
+    var checked = getCheckedElements('ccrate');
+    frm.rates_ids.value = checked.join('|');
+    frm.submit();
+};
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

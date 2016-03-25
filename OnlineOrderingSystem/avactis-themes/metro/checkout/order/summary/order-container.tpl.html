@@ -1,0 +1,38 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="order_items_margin goods-data">
+	<table class="order_items without_images">
+	    <tr>
+	        <th class="product_data"><?php Label("CHECKOUT_ITEM"); ?></th>
+	        <th class="product_quantity_selector">Qty</th>
+	        <th class="product_sale_price">Price</th>
+	        <th class="product_total_price">Total</th>
+	    </tr>
+        
+	    <?php Local_Items(); ?>	  
+	</table>
+<div class="shoppingcart_total shopping-total">
+<ul>
+<li><em><?php Label('CHECKOUT_SUBTOTAL_LABEL'); ?></em><strong class="price"><?php Local_Subtotal(); ?></strong></li>
+<?php if (getValLocal_GlobalDiscount()!=0): ?><li><em><?php Label('CHECKOUT_GLOBAL_DISCOUNT_LABEL'); ?></em><strong class="price">
+<?php Local_GlobalDiscount(); ?></strong></li><?php endif; ?>
+
+
+<?php if (getValLocal_PromoCodeDiscount()!=0): ?><li><em><?php Label('CHECKOUT_COUPON_DISCOUNT_LABEL'); ?></em><strong class="price"><?php Local_PromoCodeDiscount(); ?></strong></li><?php endif; ?>
+
+<?php if (getValLocal_QuantityDiscount()!=0): ?><li><em><?php Label('CHECKOUT_QUANTITY_DISCOUNT_LABEL'); ?></em><strong class="price"><?php Local_QuantityDiscount(); ?></strong></li><?php endif; ?>
+
+<li><em><?php Label('CHECKOUT_SHIPPING_AND_HANDLING_LABEL'); ?></em><strong class="price"><?php Local_ShippingCost(); ?></strong></li>
+
+<?php Local_Taxes(); ?>
+<li><em><?php Label('CHECKOUT_ORDER_TOTAL_LABEL'); ?></em><strong class="price"><?php Local_Total(); ?></strong></li>
+
+<?php if (getValLocal_GiftCertificatePrepaidAmount()!=0): ?><li><em><?php Label('CHECKOUT_GIFT_CERTIFICATE_PREPAID_AMOUNT_LABEL'); ?></em>
+<strong class="price"><?php Local_GiftCertificatePrepaidAmount(); ?></strong></li><?php endif; ?>
+
+<?php if (getValLocal_GiftCertificatePrepaidAmount()!=0): ?><li><em><?php Label('CHECKOUT_ORDER_TOTAL_TO_PAY_LABEL'); ?></em>
+<strong class="price"><?php Local_TotalToPay(); ?></strong></li><?php endif; ?>
+</ul>
+</div>
+
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

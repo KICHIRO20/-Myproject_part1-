@@ -1,0 +1,52 @@
+{StoreOwnerName}. Your order (#{OrderID}) status has been changed to {OrderStatus}
+Greetings from {StoreOwnerName},
+
+We thought you'd like to know that the status of your order has been changed from {OrderOldStatus} to {OrderStatus}.
+
+-----------------------------------------------------
+Purchasing Information: 
+-----------------------------------------------------
+E-mail Address: {CustomerEmail}
+
+Billing Address:
+----------------
+{BillingFirstname} {BillingLastname}
+{BillingStreetline1}
+{BillingStreetline2}
+{BillingCity}, {BillingState}, {BillingPostcode}
+{BillingCountry}
+{BillingPhone}
+
+Shipping Address:
+-----------------
+{ShippingFirstname} {ShippingLastname}
+{ShippingStreetline1}
+{ShippingStreetline2}
+{ShippingCity}, {ShippingState}, {ShippingPostcode}
+{ShippingCountry}
+{ShippingPhone}
+
+Comment:
+{ShippingCommentLine}
+
+-----------------------------------------------------
+Order Summary:
+-----------------------------------------------------
+Order #: {OrderID}
+Payment Method: {OrderPaymentMethod}
+Shipping Method: {OrderShippingMethod}
+
+Items:
+----------
+{OrderContentBlock}
+Subtotal of Items: {OrderSubtotal}
+{OrderDiscountsBlock}
+Shipping & Handling: {OrderTotalShippingAndHandlingCost}
+{OrderTax}
+--------------
+Total for this Order: {OrderTotal}
+
+Thanks again for shopping with us.
+
+{StoreOwnerName}
+{StoreOwnerWebsite}

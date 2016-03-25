@@ -1,0 +1,82 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.cb_cats_tree_header {
+    border: solid 1px black;
+    border-bottom: 0px;
+    background: #CED4DD;
+    padding: 3px;
+    color: black;
+    font-weight: bold;
+}
+.cb_cats_tree_box {
+    border: solid 1px black;
+    border-top: 0px;
+    height: 330px;
+    overflow: auto;
+    padding-top: 2px;
+}
+.cb_box_td {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.cb_loading_block {
+    border: solid 1px black;
+    background: #F0F0F0;
+    width: 100px;
+    font-weight: bold;
+    padding-top: 2px;
+    padding-bottom: 4px;
+}
+</style>
+<table width="100%" id="{UnqPrefix}_block">
+	<colgroup>
+		<col width="50%">
+		<col width="50%">
+	</colgroup>
+	{CategoryPath}
+	<tr>
+		<td class="cb_box_td" width="100%">
+		    <div class="cb_cats_tree_header"><?php xmsg('CTL','PB_CAT_TREE_HEADER'); ?></div>
+			<div id="{UnqPrefix}_cats_tree_box" class="cb_cats_tree_box"></div>
+		</td>
+	</tr>
+	{Buttons}
+</table>
+
+<script type="text/javascript" language="JavaScript">
+var {UnqPrefix}_d;
+jQuery(function () {
+	{UnqPrefix}_d = new dTree('{UnqPrefix}_d');
+	{UnqPrefix}_d.icon.node = 'dtree/img/folder.gif';
+	{initDtreeByCats}
+	document.getElementById('{UnqPrefix}_cats_tree_box').innerHTML = {UnqPrefix}_d.toString();
+	{UnqPrefix}_d.openAll();
+});
+
+function {UnqPrefix}_redrawCategoryPath(cat_id)
+{
+    var el = document.getElementById('{UnqPrefix}_cat_path');
+    if(el)
+    {
+        el.innerHTML = '';
+        el.innerHTML = {UnqPrefix}_categories_paths[cat_id];
+    };
+};
+
+function {UnqPrefix}_setButtonsState()
+{
+    var node_id = {UnqPrefix}_d.selectedNode;
+    var cat_id = {UnqPrefix}_d.aNodes[node_id].id + 1;
+
+    {jsSetButtonsStates}
+};
+
+function {UnqPrefix}_OnCategoryClick(category_id)
+{
+    {UnqPrefix}_redrawCategoryPath(category_id);
+    {UnqPrefix}_setButtonsState();
+};
+
+</script>
+
+<!-- END TPL (DO NOT REMOVE!) -->

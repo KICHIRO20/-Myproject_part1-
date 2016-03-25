@@ -1,0 +1,24 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr height="25">
+    <td align="center" style="text-align: center;">
+        <select class="form-control form-filter input-small" id="active_<?php RateID(); ?>" name="active_rates[<?php RateID(); ?>]" onchange="selectRowAlways(this);"><option value="1" <?php StatusActive(); ?>><?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_DISCOUNT_ACTIVE'); ?></option><option value="2" <?php StatusDisabled(); ?>><?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_DISCOUNT_DISABLED'); ?></option></select>
+    </td>
+
+    <td align="center" style="text-align: center;" class="<?php RateCssClass(); ?>">
+        <?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_LABEL_005'); ?> <span class="<?php FromCssClass(); ?>"><?php RateValueFrom(); ?></span>
+        <?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_LABEL_006'); ?> <span class="<?php ToCssClass(); ?>"><?php RateValueTo(); ?></span>
+    </td>
+
+    <td align="center" style="text-align: center;">
+        <?php Cost(); ?>
+    </td>
+
+    <td align="center" style="text-align: center;">
+        <?php CustomerGroup(); ?>
+    </td>
+
+    <td align="center" style="text-align: center;">
+        <input type="checkbox" class="<?php DelCheckboxCssClass(); ?>" id="select_<?php RateN(); ?>" name="selected_rates[<?php RateID(); ?>]" onclick="selectRow(this);" value="<?php RateID(); ?>" type="checkbox">
+    </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<body>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+<!--
+
+//======================//
+//== System functions ==//
+//======================//
+
+function array_key_exists ( key, search )
+{
+    // http://kevin.vanzonneveld.net
+    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // *     example 1: array_key_exists('kevin', {'kevin': 'van Zonneveld'});
+    // *     returns 1: true
+ 
+    // input sanitation
+    return search[key] !== undefined;
+}
+
+//======================//
+//=== AJAX functions ===//
+//======================//
+//image_id      ,                                                                         .
+function requestImageInputUploadLocalFile(image_input_id, alt_text, input_file, image_id)
+{
+	jQuery.ajax(this.action, {
+        url: 'jquery_ajax_handler.php', // backend
+		type: 'POST',
+		dataType:'json',
+        data:{
+			'__ASC_FORM_ID__': __ASC_FORM_ID__,
+            'asc_action': 'images_upload_local_file',
+            'alt_text'  : alt_text,
+            'mod_id': jQuery("#mod_id").val(),
+            'image_id'  : image_id
+        },
+		files: input_file,
+		iframe: true,
+		processData: false,
+        // Function is called when an answer arrives. 
+        success:function(result, output) {
+		handle_upload_results(image_input_id, result, output);
+        }
+    });
+}
+
+//image_id      ,                                                                         .
+function requestImageInputUploadServerFile(image_input_id, alt_text, input_file, image_id)
+{
+	jQuery.post(
+        'jquery_ajax_handler.php', // backend
+        {
+            'asc_action': 'images_upload_server_file',
+            'alt_text'  : alt_text,
+            'input_file': input_file,
+            'image_id'  : image_id
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            //                         ,  . . image_id        null,                       image_id = null,
+            //                      image_id                              .
+            handle_upload_results(image_input_id, result, output);
+        },
+        'json'  // disable caching
+    );
+};
+
+
+//image_id      ,                                                                         .
+function requestImageInputUploadURL(image_input_id, alt_text, input_control_id, image_id)
+{
+	jQuery.post(
+	        'jquery_ajax_handler.php', // backend
+        {
+            'asc_action': 'images_upload_url',
+            'alt_text'  : alt_text,
+            'input_text': document.getElementById(input_control_id).value,
+            'image_id'  : image_id
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            handle_upload_results(image_input_id, result, output);
+        },
+        'json'  // disable caching
+    );
+}
+
+function requestImageInputDelete(image_input_id, image_id)
+{
+	jQuery.post(
+	        'jquery_ajax_handler.php', // backend
+        {
+            'asc_action': 'images_delete_image',
+            'image_id': image_id
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            handle_upload_results(image_input_id, result, output);
+        },
+        'json'  // disable caching
+    );
+};
+
+function requestImageInputUpdateImageAltText(image_input_id, alt_text, image_id)
+{
+	jQuery.post(
+	        'jquery_ajax_handler.php', // backend
+        {
+            'asc_action': 'images_update_alt_text',
+            'image_id'  : image_id,
+            'alt_text'  : alt_text
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            handle_upload_results(image_input_id, result, output);
+        },
+        'json'  // disable caching
+    );
+};
+
+//        ajax       .              .             .
+function handle_upload_results(image_input_id, result, output)
+{
+    //Check returned data structure
+    if(!array_key_exists('image_data', result) ||
+       !array_key_exists('image_thumbnail_data', result) ||
+       !array_key_exists('image_obj', result))
+    {
+        //Error happened in server side ajax code.
+        reset_image_source_input_controls(image_input_id);
+        set_image_error(image_input_id, 'ERR_INVALID_AJAX_OUTPUT_FORMAT', '<?php xmsg('IMG', 'ERR_INVALID_AJAX_OUTPUT_FORMAT'); ?>', output);
+        enableButton('ii_btn_preview_'+image_input_id, (function() { image_input_btn_preview_onclick(image_input_id); }));
+        return;
+    }
+
+    old_image_id = document.getElementById('ii_image_id_' + image_input_id).value;
+    if(old_image_id != '' && 
+       result['image_obj']['image_id'] == null &&
+       result['image_obj']['error_code'] != null)
+    {
+        //                         .                          ,                  .
+        set_image_error(image_input_id, result['image_obj']['error_code'], result['image_obj']['error_msg']);
+        enableLink('ii_btn_delete_'+image_input_id, (function() { image_input_btn_delete_onclick(image_input_id); }));
+        enableButton('ii_btn_preview_'+image_input_id, (function() { image_input_btn_preview_onclick(image_input_id); }));
+    }
+    else if(old_image_id != '' && 
+       result['image_obj']['image_id'] == null &&
+       result['image_obj']['error_code'] == null)
+    {
+        //                ,                   .                       ,                       .
+        load_image_input(image_input_id, result, output);
+    }
+    else if(old_image_id != '' && 
+       result['image_obj']['image_id'] != null)
+    {
+        //                         .
+        load_image_input(image_input_id, result, output);
+    }
+    else if(old_image_id == '')
+    {
+        //                     .                  .
+        load_image_input(image_input_id, result, output);
+    }
+    else
+    {
+    }
+}
+//==========================//
+//=== GUI event handlers ===//
+//==========================//
+function image_input_btn_delete_onclick(image_input_id)
+{
+    image_id = document.getElementById('ii_image_id_' + image_input_id).value;
+    if(image_id != '')
+    {
+        disableButtons(new Array('ii_btn_preview_'+image_input_id));
+        disableLinks(new Array('ii_btn_delete_'+image_input_id));
+        requestImageInputDelete(image_input_id, image_id);
+    }
+}
+
+function image_input_get_source_type(image_input_id)
+{
+    values = ['local_file', 'server_file', 'url'];
+    for(i=0; i< values.length; i++)
+    {
+        el = document.getElementById('ii_source_' + image_input_id + '_' + values[i]);
+        if(el.checked == true)
+        {
+            return el.value;
+        }        
+    }
+    //Report error
+    return null;
+}
+
+function image_input_btn_preview_onclick(image_input_id)
+{
+    source_type = image_input_get_source_type(image_input_id);
+    alt_text = document.getElementById('ii_alt_text_' + image_input_id).value;
+    image_id = document.getElementById('ii_image_id_' + image_input_id).value;
+    switch(source_type)
+    {
+        case 'local_file':
+        {
+            el = document.getElementById('ii_input_file_'+image_input_id);
+            if(el.value != '')
+            {
+                disableButtons(new Array('ii_btn_preview_'+image_input_id));    
+                disableLinks(new Array('ii_btn_delete_'+image_input_id));
+
+                requestImageInputUploadLocalFile(image_input_id, alt_text, el, image_id);
+            }
+            else if(image_id != '')
+            {
+                requestImageInputUpdateImageAltText(image_input_id, alt_text, image_id);
+            }
+            break;
+        }
+        case 'server_file':
+        {
+            el = document.getElementById('server_only_server_file_ii_server_file_'+image_input_id);
+            if(el.value != '')
+            {
+                disableButtons(new Array('ii_btn_preview_'+image_input_id));    
+                disableLinks(new Array('ii_btn_delete_'+image_input_id));
+
+                requestImageInputUploadServerFile(image_input_id, alt_text, el.value, image_id);
+            }
+            else if(image_id != '')
+            {
+                requestImageInputUpdateImageAltText(image_input_id, alt_text, image_id);
+            }
+            break;
+        }
+        case 'url':
+        {
+            el = document.getElementById('ii_url_'+image_input_id);
+            if(el.value != '' && 
+               el.value != '<?php xmsg("IMG", "EMPTY_URL"); ?>')
+            {
+                disableButtons(new Array('ii_btn_preview_'+image_input_id));    
+                disableLinks(new Array('ii_btn_delete_'+image_input_id));
+
+                requestImageInputUploadURL(image_input_id, alt_text, 'ii_url_'+image_input_id, image_id);
+            }
+            else if(image_id != '')
+            {
+                requestImageInputUpdateImageAltText(image_input_id, alt_text, image_id);
+            }
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+//============================//
+//=== GUI update funcitons ===//
+//============================//
+function set_img(image_input_id, img_src, image_alt_text)
+{
+    el = document.getElementById('ii_image_preview_' + image_input_id);
+    el.src = img_src;
+    el.alt = image_alt_text;
+}
+
+function set_img_size(image_input_id, image_width, image_height)
+{
+    el = document.getElementById('ii_image_preview_' + image_input_id);
+    if(image_width != "")
+        el.width  = image_width;
+    if(image_height != "")
+        el.height = image_height;
+}
+
+function set_img_href(image_input_id, value)
+{
+    el = document.getElementById('ii_image_preview_href_' + image_input_id); 
+    el.href = value;
+}
+
+function set_image_alt_text(image_input_id, image_alt_text)
+{
+    document.getElementById('ii_alt_text_' + image_input_id).value = image_alt_text;
+}
+
+function set_image_id(image_input_id, image_id)
+{
+    el = document.getElementById('ii_image_id_' + image_input_id);
+    el.value = ((image_id === null) ? '' : image_id);
+}
+
+function set_image_error(image_input_id, error_code, error_msg, output)
+{
+    el_code = document.getElementById('ii_error_code_' + image_input_id);
+    el_msg = document.getElementById('ii_error_msg_' + image_input_id);
+    el_ajax_output = document.getElementById('ii_error_ajax_output_' + image_input_id);
+    el_row = document.getElementById('ii_error_row_' + image_input_id);
+    if(error_code !== null)
+    {
+        el_code.value = error_code;
+        el_msg.innerHTML = error_msg;
+        el_ajax_output.innerHTML = output;
+        if(output !== undefined)
+        {
+            el_ajax_output.style.display = '';
+        }
+        else
+        {
+            el_ajax_output.style.display = 'none';
+        }
+        el_row.style.display = '';
+    }
+    else
+    {
+        el_code.value = '';
+        el_msg.innerHTML = '';
+        el_row.style.display = 'none';
+    }
+}
+
+function on_select_source(image_input_id, source)
+{
+    document.getElementById('ii_source_' + image_input_id + '_' + source).checked = 'true';
+}
+
+function set_image_empty(image_input_id)
+{
+    empty_image_src = '<?php EMPTY_IMAGE_SRC(); ?>';
+    empty_image_alt_text = '<?php EMPTY_IMAGE_ALT_TEXT(); ?>';
+    empty_image_width = '<?php EMPTY_IMAGE_WIDTH(); ?>';
+    empty_image_height = '<?php EMPTY_IMAGE_HEIGHT(); ?>';
+
+    set_img(image_input_id, empty_image_src, empty_image_alt_text);
+    set_img_size(image_input_id, empty_image_width, empty_image_height);
+    set_img_href(image_input_id, empty_image_src);
+    set_image_id(image_input_id, '');
+}
+
+function reset_input_file(image_input_id, parent_id, id)
+{
+    var parent = document.getElementById(parent_id),
+    newFileInput = document.createElement('input');
+    newFileInput.setAttribute('type', 'file');
+    newFileInput.setAttribute('id', id);
+    newFileInput.setAttribute('name', id);
+    newFileInput.onfocus= function() { on_select_source(image_input_id, 'local_file'); };
+
+    parent.removeChild(document.getElementById(id));
+    parent.appendChild(newFileInput);
+}
+
+function reset_image_source_input_controls(image_input_id)
+{
+    //         radio-                                    .
+    //         alt-text.
+    document.getElementById('ii_source_' + image_input_id + '_local_file').selected = true;
+    document.getElementById('ii_source_' + image_input_id + '_server_file').selected = false;
+    document.getElementById('ii_source_' + image_input_id + '_url').selected = false;
+    resetURL(image_input_id);
+    //IE                                      .
+    reset_input_file(image_input_id, 'ii_input_file_container_' + image_input_id, 'ii_input_file_' + image_input_id);
+
+    //                              
+    document.getElementById('ii_btn_browse_server_file_' + image_input_id).onclick = function() { on_select_source(image_input_id, 'server_file'); showBlock('fbrowser_server_only_server_file_' + 'ii_server_file_' + image_input_id, 6); };
+
+    document.getElementById('server_only_server_file_ii_server_file_'+image_input_id).value = '';
+}
+
+function resetURL(image_input_id)
+{
+    document.getElementById('ii_url_' + image_input_id).value = '<?php xmsg("IMG", "EMPTY_URL"); ?>';
+}
+
+//                         .                  .
+function load_image_input(image_input_id, result, output)
+{
+    //         radio-                                    .
+    //         alt-text.
+    reset_image_source_input_controls(image_input_id);
+
+    image_data           = result['image_data'];
+    image_thumbnail_data = result['image_thumbnail_data'];
+    image_obj            = result['image_obj'];
+    set_image_error(image_input_id, image_obj['error_code'], image_obj['error_msg'], output)
+    //                         .       ajax                     .
+    if(image_obj['image_id'] !== null)
+    {
+        set_img(image_input_id, image_thumbnail_data['image_src'], image_thumbnail_data['image_alt_text']);
+        set_img_size(image_input_id, image_thumbnail_data['image_width'], image_thumbnail_data['image_height']);
+        set_img_href(image_input_id, image_data['image_src']);
+        set_image_id(image_input_id, image_data['image_id']);
+        set_image_alt_text(image_input_id, image_data['image_alt_text']);
+
+        //                  ,                 (        )
+        enableLink('ii_btn_delete_'+image_input_id, (function() { image_input_btn_delete_onclick(image_input_id); }));
+        enableButton('ii_btn_preview_'+image_input_id, (function() { image_input_btn_preview_onclick(image_input_id); }));
+    }
+    else
+    {
+        set_image_error(image_input_id, image_obj['error_code'], image_obj['error_msg'])
+        set_image_empty(image_input_id);
+
+        //                  ,                 (        )
+        disableLinks(new Array('ii_btn_delete_'+image_input_id));
+        enableButton('ii_btn_preview_'+image_input_id, (function() { image_input_btn_preview_onclick(image_input_id); }));
+    }
+}
+//-->
+</script>
+
+<script language="JavaScript">
+<!--
+//=====================================//
+//=== called just after page.onload ===//
+//=====================================//
+var onload_bak_image_input_<?php IIId(); ?> = window.onload;
+window.onload = function()
+{
+    if(onload_bak_image_input_<?php IIId(); ?>){onload_bak_image_input_<?php IIId(); ?>();}
+    load_image_input('<?php IIId(); ?>', <?php IIimage_data(); ?>);
+}
+//-->
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</body>
+</html>

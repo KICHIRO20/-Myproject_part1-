@@ -1,0 +1,65 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="po_options_list.php?asc_action=update_options_settings" method="post" name="OSForm" id="OSForm" style="margin: 0px;">
+	<input type="hidden" name="parent_entity" value="<?php _parent_entity(); ?>">
+	<input type="hidden" name="entity_id" value="<?php _entity_id(); ?>">
+	<table class="table table-striped table-hover borderless">
+		<tbody>
+			<tr>
+				<td class="text-left"><?php xmsg('PO','SETTING_AAWD'); ?></td>
+				<td><a class="pull-right" style="cursor:pointer;"><?php hinttext('SETTING_AAWD','product-options-messages'); ?></a></td>
+				<td class="text-center"><?php setAAWDfield(); ?></td>
+			</tr>				
+			<tr>
+				<td class="text-left"><?php xmsg('PO','SETTING_AANIC'); ?></td>
+				<td><a class="pull-right" style="cursor:pointer;"><?php hinttext('SETTING_AANIC','product-options-messages'); ?></a></td>
+				<td class="text-center"><?php setAANICfield(); ?></td>
+			</tr>				
+			<tr>
+				<td class="text-left"><?php xmsg('PO','SETTING_AANIS'); ?></td>
+				<td>
+					<a class="pull-right" style="cursor:pointer;"><?php hinttext('SETTING_AANIS','product-options-messages'); ?></a>
+				</td>
+				<td class="text-center"><?php setAANISfield(); ?></td>
+			</tr>				
+			<tr>
+				<td class="text-left"><?php xmsg('PO','SETTING_LL_NTF'); ?></td>
+				<td>
+					<a class="pull-right" style="cursor:pointer;"><?php hinttext('SETTING_LL_NTF','product-options-messages'); ?></a>
+				</td>
+				<td class="text-center">
+					<input type="text" name="os[LL_NTF]" value="<?php LL_NTF_value(); ?>" class="form-control input-sm input-xsmall" />
+				</td>
+			</tr>				
+			<tr>
+				<td class="text-left"><?php xmsg('PO','SETTING_WRN_ONS'); ?></td>
+				<td><a class="pull-right" style="cursor:pointer;"><?php hinttext('SETTING_WRN_ONS','product-options-messages'); ?></a></td>
+				<td class="text-center">
+					<textarea name="os[WRN_ONS]" class="form-control"><?php WRN_ONS_text(); ?></textarea>
+				</td>
+			</tr>				
+			<tr>
+				<td class="text-left"><?php xmsg('PO','SETTING_WRN_CI_CR'); ?></td>
+				<td><a class="pull-right" style="cursor:pointer;"><?php hinttext('SETTING_WRN_CI_CR','product-options-messages'); ?></a></td>
+				<td class="text-center">
+					<textarea name="os[WRN_CI_CR]" class="form-control"><?php WRN_CI_CR_text(); ?></textarea>
+				</td>
+			</tr>				
+			<tr style="display: <?php inv_sets_display(); ?>">
+				<td class="text-letf"><?php xmsg('PO','SETTING_WRN_CI_INV'); ?></td>
+				<td><a class="pull-right" style="cursor:pointer;"><?php hinttext('SETTING_WRN_CI_INV','product-options-messages'); ?></a></td>
+				<td class="text-center">
+					<textarea name="os[WRN_CI_INV]" class="form-control"><?php WRN_CI_INV_text(); ?></textarea>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="3" class="text-center">
+					<div class="btn btn-circle btn-default" onclick="document.forms['OSForm'].submit();">
+						<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

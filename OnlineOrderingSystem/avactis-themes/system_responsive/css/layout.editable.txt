@@ -1,0 +1,117 @@
+[Page Header Box]
+.box.page_header .content {
+    height;
+    background;
+}
+
+[Page Header Corner Image]
+.box.page_header  .cn {
+    background;
+}
+
+[Logo Background]
+.logo_bg {
+    background;
+    position;
+    size;
+}
+
+[Logo]
+.logo_img {
+    background;
+    position;
+    size;
+}
+
+
+[Page Top Menu Box]
+.box.page_top_menu .content {
+    height;
+    border;
+    background;
+}
+
+[Page Top Menu Box Corner Image]
+.box.page_top_menu .cn {
+    background;
+}
+
+[Page Container]
+.page_container {
+    width;
+}
+
+[Left Column]
+.page_container .left_column {
+    width;
+    margin;
+}
+
+[Right Column]
+.page_container .right_column {
+    width;
+    margin;
+}
+
+[Center Column]
+.page_container .center_column {
+    margin;
+}
+
+[Center Column with Left]
+.page_container.columnsLC .center_column {
+    margin-left;
+}
+
+[Center Column with Right]
+.page_container.columnsCR .center_column {
+    margin;
+}
+
+[Center Column Alone]
+.page_container.columnsC .center_column {
+    margin;
+}
+
+[Page Footer]
+.page_footer {
+    height;
+    width;
+    padding;
+    margin;
+}
+
+[Top User Image 1]
+.page_header .top_user1 {
+    position;
+}
+
+[Top User Image 2]
+.page_header .top_user2 {
+    position;
+}
+
+[Page Footer - CC Icon]
+.page_footer img.cc_icon {
+    position;
+}
+
+[Page Footer - W3C Icon]
+.page_footer img.w3c_icon {
+    position;
+}
+
+[Page Footer - Horizontal Rule]
+.page_footer hr {
+    size;
+    border;
+    background;
+    margin;
+}
+
+[Page Footer - Copyright]
+.page_footer .copyright {
+    margin;
+    padding;
+    text;
+}

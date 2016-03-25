@@ -1,0 +1,19 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+  <tr id="group_<?php GroupID(); ?><?php Counter(); ?>">
+    <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+      <table class="clear form" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="100%" style="padding: 6px 0px 5px 0px;"><span id="group_<?php GroupID(); ?>_decryption_message" name="group_<?php GroupID(); ?>_decryption_message"><?php msg('CHECKOUT_ORDER_INFO_DECRYPTION_KEY'); ?></span></td>
+        </tr>
+        <tr>
+            <td class="value" style="padding: 2px 0px 4px 0px;">
+                <input class="input-large" name="rsa_private_key_<?php GroupID(); ?>" id="rsa_private_key_<?php GroupID(); ?>" size="96" type="file"></input>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%" style="padding: 4px 0px 5px 0px;"><div align="center"><div class="button button_5em" onclick="if(!checkPrivateKeyFileIsSelected('<?php GroupID(); ?>')){ alert('<?php msg('CHECKOUT_ORDER_INFO_PRIVATE_KEY_FILE_NOT_SELECTED_MSG'); ?>'); return false;} if(<?php GroupCVVPurged(); ?> == false)prepareSubmitPurgeCVV('<?php GroupPersonInfoVariantId(); ?>', '<?php GroupID(); ?>'); prepareSubmitLogDecryptedCreditCardInfoReview(); decryptGroupJavascript(<?php GroupID(); ?>, 'CustomerInfo', 'asc_action', 'EncryptedDataIndex', 'IframeCustomerInfo');"><?php msg('DECRYPT_LABEL'); ?></div></div></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

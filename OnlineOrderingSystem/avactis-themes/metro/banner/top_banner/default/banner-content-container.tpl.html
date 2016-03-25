@@ -1,0 +1,34 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<div style="overflow: hidden; position: relative;">
+  <div id="slideshow<?php BannerID() ;?>" class="banner-system" style="height: <?php BannerWidth();?>px; width: <?php BannerHeight();?>px; ">
+     <?php Content();?>
+  </div>
+  
+<?php if(getNavigation()=='Y') { ?>
+     <div id="banner_system_navigation">
+          <div id="slideshow_page_info<?php BannerID() ;?>" class="banner_system_navigation"></div>
+          <div class="clearing"></div>
+     </div>
+<?php } ?>
+       
+</div>
+<div id="banner-system-code-<?php Loc(); ?>">
+<pre>
+        <code class="mix">
+        <span class="jquery">$</span>(<span class="string">'#slideshow<?php BannerID() ;?>'</span>).cycle({ 
+          <br />
+          fx: <span class="string">'<?php Effect();?>'</span>
+                      ,<br />
+          timeout: <span class="numbers">4000</span>
+                                ,<br />
+           <?php if(getNavigation()=='Y') { ?>
+          pager: <span class="pager">'#slideshow_page_info<?php BannerID() ;?>'</span>
+                    <br />
+                    <?php } ?>
+        });
+        </code>
+</pre>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

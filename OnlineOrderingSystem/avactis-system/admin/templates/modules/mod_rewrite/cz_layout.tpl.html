@@ -1,0 +1,84 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+<?php xmsg('MR','LBL_STOREFRONT'); ?><A HREF="<?php sfLink(); ?>" target="_blank">
+<span style="color: white"><?php sfLink(); ?></span></A>
+</div></div>
+</div>
+<!-- Begin - Row -->
+<input type="hidden" name="layouts[<?php FormID(); ?>]" value="<?php sfLayoutPath();?>">
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php xmsg('MR','LBL_MR_STATUS'); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php sfMRstatus(); ?></span>
+			</div>
+		</div>
+<!-- End - Row -->
+<br/>
+<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php xmsg('MR','LBL_MR_ACTION'); ?></lable>
+			</div>
+			<div class="col-md-8">
+		      <span style="display:inline;display:inline;color: rgb(51, 51, 51);font-size: 14px;" class="radio-inline"><input type="radio" name="mr_act[<?php FormID(); ?>]" value="on" <?php OnValChacked(); ?>><?php xmsg('MR','MR_ACT_ON'); ?></span><br/>
+                      <span style="display:inline;color: rgb(51, 51, 51);font-size: 14px;" class="radio-inline">
+   <input id="optionsRadios1" type="radio" name="mr_act[<?php FormID(); ?>]" value="off" <?php OffValChecked(); ?>><?php xmsg('MR','MR_ACT_OFF'); ?></span>
+			</div>
+		</div>
+<!-- End - Row -->
+<!-- END TPL (DO NOT REMOVE!) -->
+
+<tr class="group" style="height: 20px;">
+      <td width="100%" class="popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;">
+          <?php xmsg('MR','LBL_STOREFRONT'); ?>&nbsp;<A HREF="<?php sfLink(); ?>" target="_blank"><span style="color: #4945E8"><?php sfLink(); ?></span></A>
+      </td>
+  </tr>
+
+  <tr>
+  	<td width="100%">
+  		<table class="form" cellspacing="1" cellpadding="4" width="100%">
+  			<tr>
+  				<td class="label popup_dialog_body_left_padded" width="30%"><?php xmsg('MR','LBL_MR_STATUS'); ?></td>
+  				<td class="help" width="5%">&nbsp;</td>
+  				<td class="value popup_dialog_body_right_padded" width="65%"><?php sfMRstatus(); ?></td>
+  			</tr>
+  			<!-- tr>
+  				<td class="label popup_dialog_body_left_padded" width="30%"><?php xmsg('MR','LBL_INT_STAT'); ?></td>
+  				<td class="help" width="5%">&nbsp;</td>
+  				<td class="value popup_dialog_body_right_padded" width="65%"><?php sfINTstatus(); ?></td>
+  			</tr -->
+  			<tr>
+  				<td class="label popup_dialog_body_left_padded" width="30%"><?php xmsg('MR','LBL_MR_ACTION'); ?></td>
+  				<td class="help" width="5%">&nbsp;</td>
+  				<td class="value popup_dialog_body_right_padded" width="65%">
+  				    <table class="form" width="100%" border="0" cellspacing="1">
+  				        <colgroup>
+  				            <col width="5%">
+  				            <col width="80%">
+  				            <col width="15%">
+  				        </colgroup>
+  				        <tr>
+  				            <td class="value"><input type="radio" name="mr_act[<?php FormID(); ?>]" value="on" <?php OnValChacked(); ?>></td>
+  				            <td class="value" colspan="2"><?php xmsg('MR','MR_ACT_ON'); ?></td>
+  				        </tr>
+  				        <tr>
+  				            <td class="value"><input type="radio" name="mr_act[<?php FormID(); ?>]" value="off" <?php OffValChecked(); ?>></td>
+  				            <td class="value" colspan="2"><?php xmsg('MR','MR_ACT_OFF'); ?></td>
+  				        </tr>
+  				        <!-- tr>
+  				            <td colspan="2"><a href="javascript: void(0);" onClick="" style="color: #6A94DF;"><?php xmsg('MR','LBL_CLEAR_SELECTION'); ?></a></td>
+  				            <td><div id="UpdateSF_<?php FormID(); ?>" class="button button_small button_disabled" onClick=""><?php msg('BTN_UPDATE'); ?></div></td>
+  				        </tr -->
+  				    </table>
+  				</td>
+  			</tr>
+  		</table>
+  	</td>
+  </tr>
+

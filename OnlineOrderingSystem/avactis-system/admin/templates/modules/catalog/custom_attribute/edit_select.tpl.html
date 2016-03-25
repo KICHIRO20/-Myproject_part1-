@@ -1,0 +1,134 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript">
+function addFieldForInputTypeValues()
+{
+    $('<div><input type="text" name="input_type_values[]" size="75" maxlength="128" /></div>').appendTo("#field_box");
+}
+</script>
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-edit"></i>&nbsp;<?php msg('PRDTYPE_CUST_ATTR_PAGE_HEADER'); ?>
+			</span>
+			<span class="caption-subject font-blue"><?php ProductTypeName(); ?></span>
+		</div>
+		<div class="actions">	
+			<?php PageHelpLink('edit_custome_attr_big_text'); ?>&nbsp;<?php VideoTutorialLink('edit_custome_attr_big_text'); ?>
+			<div id="SaveButton1" class="btn btn-default btn-circle" onclick="CatalogEditCustomAttribute.submit(); return true; disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));">
+				<i class="fa fa-save"></i><span class="hidden-480">&nbsp;<?php msg('BTN_SAVE'); ?></span>
+			</div>
+			<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();">
+				<i class="fa fa-times-circle"></i><span class="hidden-480">&nbsp;<?php msg('BTN_CANCEL'); ?></span>
+			</div>
+			
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<?php Errors(); ?>
+		<form action="catalog_edit_custom_attribute.php" method="post" name="CatalogEditCustomAttribute">
+			<input type="hidden" name="asc_action" value="UpdateCustomAttribute">
+			<input type="hidden" name="form_id" value="<?php FormID(); ?>">
+			<input type="hidden" name="view_tag" id="view_tag" value="<?php AttributeTag(); ?>">
+			<input type="hidden" name="input_type_id" value="<?php InputTypeID(); ?>">
+			<input type="hidden" name="input_type_name" value="<?php InputTypeName(); ?>">
+			<input type="hidden" name="product_type_id" value="<?php ProductTypeID(); ?>">
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover table-condensed">
+					<thead>
+						<tr class="bg-info">
+							<th colspan="3"><?php msg('PRDTYPE_CUST_ATTR_PAGE_NAME_SEL'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td style="vertical-align: middle;"><?php msg('CUSTSL_TAG_NAME'); ?>&nbsp;<span class="font-red inline">*</span></td>
+						<td style="vertical-align: middle;">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeTag', 'custsl_attr'); ?>
+							</a>
+						</td>
+						<td style="vertical-align: middle;"><div id="tag_preview"></div></td>
+						<script>show_tag_preview();</script>
+					</tr>
+					<tr>
+						<td style="vertical-align: middle;"><?php msg('CUSTSL_NAME_NAME'); ?>&nbsp;<span class="font-red inline">*</span></td>
+						<td style="vertical-align: middle;">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeName', 'custsl_attr'); ?>
+							</a>
+						</td>
+						<td style="vertical-align: middle;">
+							<input type="text" class="form-control input-sm input-medium" name="name" value="<?php AttributeName(); ?>" maxlength="128" onBlur="formatInput(this);" patternType="string128">
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align: middle;"><?php msg('CUSTSL_DESCR_NAME'); ?>&nbsp;<span class="font-red inline">*</span></td>
+						<td style="vertical-align: middle;">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeDescr', 'custsl_attr'); ?>
+							</a>
+						</td>
+						<td style="vertical-align: middle;">
+							<textarea name="descr" class="form-control input-medium" rows="6" cols="73" onBlur="formatInput(this);"  onkeyup="formatInput(this);" patternType="string512"><?php AttributeDescr(); ?></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align: middle;"><?php msg('CUSTSL_VALUES_NAME'); ?></td>
+						<td style="vertical-align: middle;">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeValues', 'custsl_attr'); ?>
+							</a>
+						</td>
+						<td style="vertical-align: middle;">
+							<input type="hidden" name="input_type_values[<?php IdInputTypeValueNotSelected(); ?>]" value="<?php Msg('PRTYPE_VALUE_NOT_SELECTED')?>"/>
+							<input type="text" class="form-control input-sm input-medium" value="<?php Msg('PRTYPE_VALUE_NOT_SELECTED')?>" disabled/>
+							<div id="field_box" class="form-group">
+								<?php AttributeInputTypeValues();?>
+							</div>
+							<div class="btn btn-default btn-circle" onclick="addFieldForInputTypeValues()">
+								<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('BTN_ADD_FIELD'); ?>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+						<tr>
+							<td colspan="3"><span class="font-red"><?php msg('REQUIRED_FIELD_LABEL'); ?></span></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="text-center"  style="vertical-align: middle;">
+								<div id="SaveButton1" class="btn btn-default btn-circle" onclick="CatalogEditCustomAttribute.submit(); return true; disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));">
+									<i class="fa fa-save"></i><span class="hidden-480">&nbsp;<?php msg('BTN_SAVE'); ?></span>
+								</div>
+								<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();">
+									<i class="fa fa-times-circle"></i><span class="hidden-480">&nbsp;<?php msg('BTN_CANCEL'); ?></span>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+		</form>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

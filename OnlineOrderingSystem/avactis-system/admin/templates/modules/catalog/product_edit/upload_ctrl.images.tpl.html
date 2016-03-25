@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<body>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="row">
+<div class="col-sm-2">
+				
+						</div>
+						
+									
+						<div class="col-sm-2">
+							
+						</div>
+						<div class="col-sm-4">  
+						<div class ="row">
+						<div class="col-sm-2">
+						<button id="UploadButton"  type="button" class="btn btn-circle btn-default" id="EnableEditorButton" <?php SubmitUploadImagesScript(); ?> ><i class="fa fa-edit"></i> <?php msg('BTN_PREVIEW'); ?></button>
+						</div>
+						
+						</div>
+						
+						</div>
+</div>
+
+
+
+    
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+<tr id="group_<?php GroupID(); ?><?php Counter(); ?>">
+        <td class="label popup_dialog_body_left_padded"></td>
+        <td class="help"></td>
+        <td class="value popup_dialog_body_right_padded"><table cellpadding="0" cellspacing="0" border="0" align="center"><tr><td><div id="UploadButton" class="button button_5em" <?php SubmitUploadImagesScript(); ?> ><?php msg('BTN_PREVIEW'); ?></div></table></td>
+    </tr>
+</body>
+</html>

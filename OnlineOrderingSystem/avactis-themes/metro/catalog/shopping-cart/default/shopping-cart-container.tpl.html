@@ -1,0 +1,62 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main">
+    <div class="container">
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-12 col-sm-12">
+        <h1><?php Label('CATALOG_SHOPPING_CART_LABEL'); ?></h1>
+        <?php if ( ($m=getLocal_ShoppingCartResultMessage()) != ''): ?>
+        <div class="error_message"><?php echo $m; ?></div>
+        <?php endif; ?>
+         <div class="goods-page">
+              <div class="goods-data clearfix">
+            
+             <div class="table-wrapper-responsive"> 
+            <form method="post" action="<?php Local_FormAction(); ?>" id="<?php Local_FormId(); ?>" name="<?php Local_FormId(); ?>">
+            <input type="hidden" name="<?php Local_FormActionFieldName(); ?>" value="<?php Local_FormActionFieldValue(); ?>" />
+                    <table summary="Shopping cart">
+                      <tr>
+                        <th class="goods-page-image"><?php Msg('MNG_PRD_COL_HDR_002'); ?></th>
+                        <th class="goods-page-description">Description</th>
+                        <th class="goods-page-quantity"><?php Label('ACCOUNT_QUANTITY'); ?></th>
+                        <th class="goods-page-price"><?php Label('ACCOUNT_ITEM_PRICE'); ?></th>
+                        <th class="goods-page-total" colspan="2"><?php Label('ACCOUNT_ITEM_TOTAL'); ?></th>
+                      </tr>
+                    <?php Local_Items(); ?>
+                    </table>
+                </div>
+                </form>
+                 <div class="shopping-total">
+                  <ul><?php Local_ShoppingCartPrices(); ?></ul>
+                </div>  
+             </div>
+           <div class="goods-data clearfix">
+            <div class="promo_code_form" style="overflow:hidden;">
+                <?php PromoCodeForm(); ?>
+            </div>
+             <div class="gift_certificate">
+                
+                 <?php Label('CATALOG_IF_YOU_HAVE_GIFTCERTIFICATE_MESSAGE'); ?>
+                    <?php GiftCertificateForm(); ?>
+                
+            </div>
+           </div>
+           <div class="form-group">
+            <a href="<?php PageURL('ProductList'); ?>" class="btn btn-default" ><?php Label('BUTTON_CONTINUE_SHOPPING'); ?></a>
+            <a href="<?php PageURL('CheckoutView'); ?>" class="btn btn-primary" ><?php Label('CATALOG_CHECKOUT'); ?> </a>
+           </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+
+        <?php ShippingCalculator(); ?>
+        <div class="new-promo-gift">
+        </div>
+     </div>   
+</div>
+<!-- END SIDEBAR & CONTENT -->
+
+<!-- END TPL (DO NOT REMOVE!) -->
+

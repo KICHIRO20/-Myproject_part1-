@@ -1,0 +1,92 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box product_info nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Breadcrumb(); ?></h1>
+        <div class="detailed_product_info detailed_product_info_<?php Local_ProductID() ?>">
+	        <script language="JavaScript">$(function () { 
+	            $('.detailed_product_info_<?php Local_ProductID() ?>').DetailedProductInfo(<?php Local_ProductSettingsJSON() ?>);
+	        })</script>
+            <?php Local_ProductFormStart(); ?>
+            <div class="product_name"><?php ProductName(); ?></div><?php echo apply_filters("social_links_after_productname",""); ?>
+            <?php $m = getProductOptionsWarnings(); if ( $m != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+            <?php $m = getLocal_ProductStockWarnings(); if ( $m != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+            <div id="colsw_msg" class="error_message" style="display:none;"></div>
+            <div class="product_img">
+                <!-- Preview block -->
+                <div><?php
+                if (getProductLargeImageWidth() == '') {
+                    if (getProductSmallImageWidth() == '') {
+                        ?><div class="noimage"></div><?php
+                    }
+                    else {
+                        ?><img src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<170) { ProductSmallImageWidth(); } else { echo '170'; } ?>" /><?php
+                    }
+                }
+                else {
+                    if (getProductSmallImageWidth() == '') {
+                        ?><a class="color_box" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>" alt="<?php ProductName(); ?>" /></a><?php
+                    }
+                    else {
+                        ?><a class="color_box" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<170) {ProductSmallImageWidth();} else {echo '170';}; ?>" alt="<?php ProductName(); ?>" /></a><?php
+                    }
+                } 
+                ?></div>
+                <!-- Icons -->
+                <div class="product_detailed_img">
+                    <?php ProductDetailedImages(); ?>
+                </div>
+            </div>
+              <input id="colorname" class="input_hidden" type="hidden" value="" name="colorname" />
+<?php ProductColorSwatchImages(); ?>
+            <div class="product_sale_price"><span class="label"><?php Label("CATALOG_SALE_PRICE_COLON"); ?></span><span class="value"><?php ProductSalePrice(); ?></span></div>
+            <?php
+                    if (getProductListPrice() != '')
+                    {
+                        $lp = getValProductListPrice();
+                        $sp = getValProductSalePrice();
+                        if ($lp!=0 && $lp>$sp)
+                        {
+                            $d = round(($lp-$sp)*100/$lp);
+            ?>
+                            <div class="product_list_price"><span class="label"><?php Label("CATALOG_LIST_PRICE_COLON"); ?></span><span class="value"><?php ProductListPrice(); ?></span></div>
+                            <div class="discount_star"><span class="label"><?php Label("CATALOG_YOU_SAVE"); ?></span><span class="value"><?php echo $d; ?><?php Label("CATALOG_PERCENT"); ?></span></div>
+            <?php       }
+                    }
+            ?>
+            <div class="product_add_quantity">
+                <?php Label('CATALOG_QUANTITY_LABEL'); ?>
+                <select name="<?php Local_FormQuantityFieldName(); ?>">
+                    <?php Local_ProductQuantityOptions(); ?>
+                </select>
+            </div>
+
+	    <!-- Filter to display before buttons -->
+            <?php echo apply_filters("cz_productinfo_b4_buttons","",getLocal_ProductId()); ?>
+            
+	    <?php AddToWishlistButton(); ?>
+	   
+            <div class="product_buttons"><input type="submit"  value="" class="<?php lang(); ?> buttons button_add_to_cart"></div>
+             <div class="options_error" style="display:none"></div>
+            <?php if (getProductStockMessage() != ''): ?><div class="limited_inventory"><?php ProductStockMessage(); ?></div><?php endif; ?>
+
+            <div class="product_detailed_description">
+                <?php ProductDetailedDescription(); ?>
+            </div>
+            <?php ProductDetailedRating(); ?>
+            
+            <?php ProductOptionsForm(); ?>
+            
+            <?php Local_ProductFormEnd(); ?>
+
+        </div>
+    </div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->
+
+
+

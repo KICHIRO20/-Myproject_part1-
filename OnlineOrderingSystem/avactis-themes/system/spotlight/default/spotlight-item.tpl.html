@@ -1,0 +1,49 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php
+		  $d=null;
+          if (getProductListPrice() != '')
+          {
+              $lp = getValProductListPrice();
+              $sp = getValProductSalePrice();
+              if ($lp!=0 && $lp>$sp)
+              {
+                  $d = round(($lp-$sp)*100/$lp);
+              }
+          }
+?>
+   <li>
+    <?php if (getshow_image()=='Y') {?>
+      <div class="leftpart">
+        <div class="slimg"><a href="<?php ProductInfoLink(); ?>"><img src="<?php ProductLargeImageSrc(); ?>" alt="<?php ProductName(); ?>" /></a></div>
+      </div>
+    <?php } ?>
+    <div class="rightpart">
+     <?php if (getshow_price()=='Y') {?>
+       <div class="discount">
+         <?php if ($d)
+              {
+         ?>
+              <div><div class="old"><?php ProductListPrice(); ?></div><div class="new"><?php ProductSalePrice(); ?></div></div>
+              <?php }
+              else
+              {
+         ?>
+              <div class="new"><?php ProductSalePrice(); ?></div>
+         <?php } ?>
+       </div>
+     <?php } ?>
+     <?php if (getshow_title()=='Y') {?><h1><?php Spotlighttitle() ?></h1><?php } ?>
+     <?php if (getshow_descr()=='Y') {?><div class="pdesc"><?php SpotlightDescr() ?></div><?php } ?>
+     <?php if (getshow_button()=='Y') {?>
+       <?php 
+        $options = modApiFunc("Product_Options","getOptionsWithValues",'product', getProductId());
+        if (empty($options)) {           
+       ?>
+         <a class="padd" href="<?php SpotlightAddToCart(); ?>"><?php xmsg('SL','BUTTON_ADDTOCART'); ?></a>
+       <?php } else {?>
+         <a class="padd" href="<?php ProductInfoLink(); ?>"><?php xmsg('SL','BUTTON_DETAILINFO'); ?></a>
+       <?php } ?>
+     <?php } ?>
+    </div>
+   </li>
+<!-- END TPL (DO NOT REMOVE!) -->

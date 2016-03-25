@@ -1,0 +1,83 @@
+<table>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+    <tr>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;"><INPUT TYPE="checkbox" id="select_<?php i(); ?>" name="selected_products[<?php i(); ?>]" onclick="UncheckAll('ProductListing'); selectRow (this);" value="<?php ProductID(); ?>" <?php Checked(); ?>></td>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;"><A HREF="<?php ProductInfoLink(); ?>"><b><?php ProductID(); ?></b></A></td>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;"><A HREF="<?php ProductInfoLink(); ?>"><?php ProductThumbnail(); ?></A>&nbsp;</td>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;"><A HREF="<?php ProductInfoLink(); ?>"><b><?php ProductSKU(); ?></b></A>&nbsp;</td>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;">
+            <?php xmsg('CTL','LBL_STATUS'); ?> <?php ProductAvailable(); ?>
+            <br />
+            <a href="javascript:void(0);" 
+               onmouseover="return overlib('<span style=\'color: gray;\'><?php xmsg('CTL','LBL_THIS_PRODUCT_IS_LOCATED_IN'); ?></span><br><?php ProductCatsList(); ?>');" 
+               onmouseout="return nd();" 
+               style="color: #666666; text-decoration: none">
+               <?php xmsg('CTL','LBL_LOCATION_IN'); ?> <?php ProductCatsCount(); ?>&nbsp;<?php (getProductCatsCount()>1 ? xmsg('CTL','LBL_CATEGORIES') : xmsg('CTL','LBL_CATEGORY')); ?>
+            </a>
+        </td>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;"><A HREF="javascript: void(0);" onclick="javascript:go('<?php ProductInfoLink(); ?>', 'ViewProduct');"><b><?php ProductName(); ?></b></A></td>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;">
+		<?php 
+				/******************** For category dropdown display ****************/
+				
+				$catid = modApiFunc('CProductListFilter','getCurrentCategoryId');
+			
+
+								
+		?>
+        	<select name="cat_id" id="catval_id_<?php i(); ?>" onchange="autocheck(<?php i(); ?>);" class="form-control input-sm input-small input-inline">
+        		<?php 
+        		
+        				$categorylist =  modApiFunc("Catalog", "getSubcategoriesFullListWithParent", 1, false);
+        				
+							foreach($categorylist as $val=>$data)
+							{
+							
+								$catvalid = $data["id"];
+								if(($data['level'] == 2))
+								{
+							 		
+							?>
+							<option value="<?php echo $catvalid; ?>"
+								<?php 
+									
+										if($catid == $catvalid)
+										{ 
+								?>
+										selected="selected"
+										<?php
+										}else {}
+								?>
+							><?php echo "&nbsp;&nbsp;&nbsp;".$data['name']; ?></option>
+							<?php 
+							 	}
+							 	else{
+								?>
+								<option value="<?php echo $catvalid; ?>"
+								<?php 
+									if($catid == $catvalid)
+									{ 
+								?>
+								selected="selected"
+										<?php
+										}else {}
+								?>
+								
+								><?php echo $data['name']; ?></option>
+								<?php
+							 		
+							 	}
+							}
+							
+        		?>
+        		
+        	</select>
+        	<input type="hidden" id="selected_category" name="selected_category" value="" />
+        	
+        </td>
+        <td style="display:table-cell;vertical-align:middle;" class="text-center"><span class="categoryListInfo"><?php ProductSalePrice(); ?></span></td>
+        <td style="display:table-cell;vertical-align:middle;" class="text-center"><span class="categoryListInfo"><?php ProductQuantityInStock(); ?></span></td>
+        
+    </tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</table>

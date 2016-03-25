@@ -1,0 +1,37 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) --><br/>
+<form action="<?php Local_FormActionURL(); ?>" name="OrdersSearchForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-lg-1 control-label"><?php Label('ACCOUNT_FROM_LABEL'); ?></label>
+        <div class="col-lg-11 date">
+            <div class="col-lg-4"><?php Local_SelectDate_Day_From(); ?></div>
+            <div class="col-lg-4"><?php Local_SelectDate_Month_From(); ?></div>
+            <div class="col-lg-4"><?php Local_SelectDate_Year_From(); ?></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-1 control-label"><?php Label('ACCOUNT_TO_LABEL'); ?></label>
+        <div class="col-lg-11 date">
+            <div class="col-lg-4"><?php Local_SelectDate_Day_To(); ?></div>
+            <div class="col-lg-4"><?php Local_SelectDate_Month_To(); ?></div>
+            <div class="col-lg-4"><?php Local_SelectDate_Year_To(); ?></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-1 control-label"><?php Label('ACCOUNT_ORDERS_LABEL'); ?></label>
+        <div class="col-lg-11">
+            <div class="col-lg-6"><?php Local_Select_OrderStatus(); ?></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-1 control-label"><?php Label('ACCOUNT_PAYMENTS_LABEL'); ?></label>
+        <div class="col-lg-11">
+            <div class="col-lg-6"> <?php Local_Select_OrderPaymentStatus(); ?></div>
+        </div>
+    </div>
+    <div class="form-group">
+    <div class="col-lg-8">
+    <input type="submit" class="<?php lang(); ?> btn blue button_order_search" value="<?php Label('ACCOUNT_SEARCH_LABEL'); ?>" />
+    </div>
+    </div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

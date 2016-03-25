@@ -1,0 +1,57 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="popup_window.php?asc_action=update_hl_edate" name="EDForm_<?php HotlinkID(); ?>" method="post" style="margin: 0px;">
+<input type="hidden" name="edate" id="edate_<?php HotlinkID(); ?>" value="<?php jsHotlinkED(); ?>">
+<input type="hidden" name="hl_id" value="<?php HotlinkID(); ?>">
+<input type="hidden" name="opid" value="<?php OPID(); ?>">
+</form>
+<div class="row margin-bottom-20">
+	<div class="col-sm-9"><?php xmsg('PF','LBL_FILE'); ?>: <?php FileName(); ?></div>
+	<div class="col-sm-3"><?php getHotlinkStatus()=='U' ? xmsg('PF','HL_UNLOCKED') : '<span style="color: red;">'.xmsg('PF','HL_LOCKED').'</span>'; ?></div>
+</div>
+
+<div class="row margin-bottom-20">
+	<div class="col-sm-3"><?php xmsg('PF','LBL_HOTLINK'); ?></div>
+	<div class="col-sm-6"><a href="<?php HotlinkValue(); ?>" target="_blank"><?php HotlinkKey(); ?></a></div>
+	<div class="col-sm-3"><a class="btn btn-default yellow" onClick="go('popup_window.php?asc_action=change_hotlink_status&opid=<?php OPID(); ?>&hl_id=<?php HotlinkID(); ?>')"><?php getHotlinkStatus()=='U' ? xmsg('PF','BTN_LOCK') : xmsg('PF','BTN_UNLOCK'); ?></a></div>
+</div>
+
+<div class="row margin-bottom-20">
+	<div class="col-sm-3"><?php xmsg('PF','LBL_EXPIRE_DATE'); ?></div>
+	<div class="col-sm-6" id="edate_show_<?php HotlinkID(); ?>"><?php HotlinkExpireDate(); ?></div>
+	<div class="col-sm-3"><a class="btn btn-default blue" id="edate_trig_<?php HotlinkID(); ?>"><?php xmsg('PF','LBL_CHANGE'); ?></a></div>
+</div>
+
+<div class="row margin-bottom-20">
+	<div class="col-sm-3"><?php xmsg('PF','LBL_TRIES'); ?></div>
+	<div class="col-sm-6"><?php HotlinkTries(); ?></div>
+	<div class="col-sm-3"><?php ZeroTriesButton(); ?></div>
+</div>
+
+<script language="JavaScript">
+Calendar.setup(
+  {
+   inputField: "edate_<?php HotlinkID(); ?>",
+   button : "edate_trig_<?php HotlinkID(); ?>",
+   displayArea: "edate_show_<?php HotlinkID(); ?>",
+   showsTime : true,
+   daFormat: "%d %b %Y, %H:%M",
+   ifFormat: "%Y/%m/%d/%H/%M",
+   singleClick: false,
+   weekNumbers: false,
+   onClose: function(cal) { 
+       cal.hide();
+       if(document.getElementById('edate_<?php HotlinkID(); ?>').value != '<?php jsHotlinkED(); ?>')
+           if(confirm('<?php xmsg('PF','WRN_CHANGE_EDATE'); ?>'))
+               document.forms['EDForm_<?php HotlinkID(); ?>'].submit();
+           else
+           {
+               cal.date = new Date('<?php jsHotlinkED(); ?>');
+               document.getElementById('edate_<?php HotlinkID(); ?>').value = '<?php jsHotlinkED(); ?>';
+               document.getElementById('edate_show_<?php HotlinkID(); ?>').innerHTML = '<?php HotlinkExpireDate(); ?>';
+           };
+      }
+ }
+);
+</script>
+<br>
+<!-- END TPL (DO NOT REMOVE!) -->

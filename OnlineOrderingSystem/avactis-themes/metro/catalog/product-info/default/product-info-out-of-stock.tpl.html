@@ -1,0 +1,185 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="product_info nogradient <?php ViewClassName(); ?> product-page">
+    <div class="content row">
+        <div class="detailed_product_info detailed_product_info_<?php Local_ProductID() ?>">
+	        <script language="JavaScript">$(function () { 
+	            $('.detailed_product_info_<?php Local_ProductID() ?>').DetailedProductInfo(<?php Local_ProductSettingsJSON() ?>);
+	        })</script>
+            <?php Local_ProductFormStart(); ?>
+            <?php $m = getProductOptionsWarnings(); if ( $m != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+            <?php $m = getLocal_ProductStockWarnings(); if ( $m != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+            <div class="col-md-6 product_img">
+            
+                <!-- Preview block -->
+                <div class="product-main-image" style="overflow: hidden; position: relative;">
+              <?php
+                if (getProductLargeImageWidth() == '') {
+                    if (getProductSmallImageWidth() == '') {
+                        ?><div class="noimage"></div><?php
+                    }
+                    else {
+                        ?><img class="img-responsive" data-bigimgsrc="<?php ProductLargeImageSrc(); ?>" src="<?php ProductLargeImageSrc(); ?>"/><?php
+                    }
+                }
+                else {
+                    if (getProductSmallImageWidth() == '') {
+                        ?><a class="color_box img-responsive" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>" alt="<?php ProductName(); ?>" data-bigimgsrc="<?php ProductLargeImageSrc(); ?>" class="img-responsive"/></a><?php
+                    }
+                    else {
+                        ?><a class="color_box img-responsive" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img class="img-responsive" src="<?php ProductLargeImageSrc(); ?>" data-bigimgsrc="<?php ProductLargeImageSrc(); ?>" alt="<?php ProductName(); ?>" /></a><?php
+                    }
+                } 
+                ?></div>
+                <!-- Icons -->
+                <div class="product_detailed_img product-other-images">
+                    <?php ProductDetailedImages(); ?>
+                </div>
+           </div>
+
+   <div class="col-md-6 col-sm-6">
+   <div class="product_name"><h1><?php ProductName(); ?></h1></div>
+              <div class="price-availability-block clearfix">
+               <div class="price">
+                      <strong class="product_sale_price"><?php ProductSalePrice(); ?></strong>
+                     <?php
+                    if (getProductListPrice() != '')
+                    {
+                        $lp = getValProductListPrice();
+                        $sp = getValProductSalePrice();
+                        if ($lp!=0 && $lp>$sp)
+                        {
+                            $d = round(($lp-$sp)*100/$lp);
+            ?>
+                       <em><span class="product_list_price"><?php ProductListPrice(); ?></span></em>
+                           
+            <?php       }
+                    }
+            ?>
+                    </div>
+   
+              <div class="availability limited_inventory">
+                <?php if (getProductStockMessage() != ''): ?>Availability:<strong><?php ProductStockMessage(); ?></strong><?php endif; ?>
+                       
+                    </div>
+              </div>
+        <div class="description product_detailed_description">
+                 <?php ProductShortDescription(); ?>
+                  </div>
+                 <div class="product-page-options">
+                  <?php ProductOptionsForm(); ?>
+                <div class="options_error" style="display:none"></div>
+                 </div>
+                <div class="product-page-cart">
+                    <div class="product-quantity">
+                       <select name="<?php Local_FormQuantityFieldName(); ?>">
+                        <?php Local_ProductQuantityOptions(); ?>
+                        </select>
+                    </div>
+                             <!-- Filter to display before buttons -->
+  	    <?php echo apply_filters( "cz_productinfo_outofstock_b4_buttons","",getLocal_ProductId()); ?>           
+            <div class="product_buttons">
+            <input type="button"  value="<?php Msg('OUT_OF_STOCK'); ?>" class="<?php lang(); ?> btn btn-primary button_out_of_stock" />
+             <?php AddToWishlistButton(); ?>
+            </div>
+                  </div>
+                  <div class="review">
+                   <?php ProductDetailedRating(); ?>
+                  </div>
+</div>
+
+ <?php
+                    if (getProductListPrice() != '')
+                    {
+                        $lp = getValProductListPrice();
+                        $sp = getValProductSalePrice();
+                        if ($lp!=0 && $lp>$sp)
+                        {
+                            $d = round(($lp-$sp)*100/$lp);
+            ?>
+              <div class="sticker sticker-sale"></div>
+                          
+            <?php       }
+                    }
+            ?>
+            <?php Local_ProductFormEnd(); ?>
+        </div>
+<div class="product-page-content">
+	<ul id="tabs" class="nav nav-tabs">
+		<li id="product_tabs_description" class="selected active"><a href="javascript:void(0)" data-toggle="tab"><?php xMsg('CHCKT', 'DESCRIPTION'); ?></a></li>
+		<li id="product_tabs_product_additional_data" class="" name="cust_review"><a href="javascript:void(0)" data-toggle="tab"><?php Msg('CUSTOMER_REVIEWS_HEADER_001'); ?></a></li>
+		<li id="product_tabs_add_review" class="" href="javascript:void(0)"><a href="javascript:void(0)" data-toggle="tab"><?php Label('CUSTOMER_REVIEWS_ADD_REVIEW_LABEL'); ?></a></li>
+
+	</ul>
+     	<div class="tab-content" id="product_tabs_description_contents" style="display:block;">      
+     		<?php ProductDetailedDescription(); ?>    
+    	</div>
+      	<div class="tab-content" id="product_tabs_product_additional_data_contents" style="display:none;">
+      		<?php ProductReviewList(); ?>                                
+     	</div>
+      	<div class="tab-content" id="product_tabs_add_review_contents" style="display:none;">
+                <?php ProductAddReviewForm(); ?>
+     	</div>
+</div>   
+
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#product_tabs_description").click(function()
+    {
+      $("#product_tabs_description_contents").show();
+      $(this).addClass('active');
+      $("#product_tabs_product_additional_data_contents").hide();
+      $("#product_tabs_add_review_contents").hide();
+      $("#product_tabs_product_additional_data").removeClass('active');
+      $("#product_tabs_add_review").removeClass('active');
+    });
+
+    $("#product_tabs_product_additional_data").click(function()
+    {
+      $("#product_tabs_product_additional_data_contents").show();
+      $(this).addClass('active');
+      $("#product_tabs_description_contents").hide();
+      $("#product_tabs_add_review_contents").hide();
+      $("#product_tabs_description").removeClass('active');
+      $("#product_tabs_add_review").removeClass('active');
+    });
+
+    $("#product_tabs_add_review").click(function()
+    {
+
+      $("#product_tabs_add_review_contents").show();
+      $(this).addClass('active');
+      $("#product_tabs_description_contents").hide();
+      $("#product_tabs_product_additional_data_contents").hide();
+      $("#product_tabs_description").removeClass('active');
+      $("#product_tabs_product_additional_data").removeClass('active');
+    });
+    
+    $(".add_review_link").click(function()
+    {
+      $("#product_tabs_add_review_contents").show();
+      $("#product_tabs_add_review").addClass('active');
+      $("#product_tabs_description_contents").hide();
+      $("#product_tabs_product_additional_data_contents").hide();
+      $("#product_tabs_description").removeClass('active');
+      $("#product_tabs_product_additional_data").removeClass('active');
+    });
+    
+    $(".ReviewNumber").click(function()
+    {
+      $("#product_tabs_product_additional_data_contents").show();
+      $("#product_tabs_product_additional_data").addClass('active');
+      $("#product_tabs_description_contents").hide();
+      $("#product_tabs_add_review_contents").hide();
+      $("#product_tabs_description").removeClass('active');
+      $("#product_tabs_add_review").removeClass('active');
+    });
+    
+}); 
+</script>		
+
+<!-- END TPL (DO NOT REMOVE!) -->
+
+
+

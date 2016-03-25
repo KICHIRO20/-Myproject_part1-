@@ -1,0 +1,70 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+    function submitHandler(formname) 
+    {
+      var form = document.getElementById(formname);
+      form.submit();
+    }
+</script> 
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-search font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php msg('ORDERS_SEARCH_ORDERS'); ?></span>
+			<span class="caption-helper text-lowercase"></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<FORM name="SearchById" id="SearchById" action="orders.php" method="get">
+		        <INPUT type="hidden" name="asc_action" value="OrdersSearchById">
+		        <input placeholder="<?php msg('ORDERS_SEARCH_ORDER_ID'); ?>" type="text" name="order_id" class="form-control input-sm input-small input-inline" value="<?php SearchingOrderId(); ?>">
+		        <a class="btn btn-default input-sm" onclick="submitHandler('SearchById')"><i class="fa fa-search font-blue-sharp"></i></a>
+		        </FORM>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<FORM name="SearchByDate" id="SearchByDate" action="orders.php" method="get" style="margin: 0px;">
+		<INPUT type="hidden" name="asc_action" value="OrdersSearchByDate">
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<h4 class="font-blue-sharp">Date range</h4><br />
+				<div class="row">
+					<div class="col-xs-3"><?php msg('ORDERS_SEARCH_FROM'); ?>:</div>
+					<div class="col-xs-9">
+						<?php SearchFromDaySelector(); ?>
+				        <?php SearchFromMonthSelector(); ?>
+				        <?php SearchFromYearSelector(); ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-3"><?php msg('ORDERS_SEARCH_TO'); ?>:</div>
+					<div class="col-xs-9">
+				        <?php SearchToDaySelector(); ?>
+				        <?php SearchToMonthSelector(); ?>
+				        <?php SearchToYearSelector(); ?>
+					</div>
+				</div>
+				<h5><?php xmsg('SYS','LBL_ORDERS_INFO_AFFILIATE_ID'); ?></h5>
+					<?php AffiliateIDSearch(); ?>
+			</div>
+			<div class="col-sm-4">
+				<h4 class="font-blue-sharp"><?php msg('ORDERS_SEARCH_STATUSES'); ?></h4>
+				<?php SearchStatusSelector(); ?>
+			</div>
+			<div class="col-sm-4">
+				<h4 class="font-blue-sharp"><?php msg('ORDERS_PAYMENT_SEARCH_STATUSES'); ?></h4>
+				<?php SearchPaymentStatusSelector(); ?>
+			</div>
+		</div>
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<a class="btn btn-default btn-circle" onclick="submitHandler('SearchByDate')"><?php msg('ORDERS_SEARCH_OK'); ?></a>
+			</div>
+		</div>
+		</FORM>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

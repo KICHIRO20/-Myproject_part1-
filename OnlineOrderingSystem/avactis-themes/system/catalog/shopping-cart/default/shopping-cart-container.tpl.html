@@ -1,0 +1,49 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box shoppingcart nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <form method="post" action="<?php Local_FormAction(); ?>" id="<?php Local_FormId(); ?>" name="<?php Local_FormId(); ?>">
+        <input type="hidden" name="<?php Local_FormActionFieldName(); ?>" value="<?php Local_FormActionFieldValue(); ?>" />
+        <h1><?php Label('CATALOG_SHOPPING_CART_LABEL'); ?><?php CustomerSignInOutHint(); ?></h1>
+        <?php if ( ($m=getLocal_ShoppingCartResultMessage()) != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+
+	        <div class="order_items_margin">
+		        <table class="order_items with_images" cellspacing="0">
+		            <tr>
+		                <th>&nbsp;</th>
+		                <th class="product_data"><?php Label("CATALOG_ITEM"); ?></th>
+		                <th class="product_quantity_selector"><?php Label("CATALOG_QUANTITY"); ?></th>
+		                <th class="product_sale_price"><?php Label("CATALOG_ITEM_PRICE"); ?></th>
+		                <th class="product_total_price"><?php Label("CATALOG_ITEM_TOTAL"); ?></th>
+		            </tr>
+		            <?php Local_Items(); ?>
+		        </table>
+	        </div>
+
+            <div class="shoppingcart_total">
+                <?php Local_ShoppingCartPrices(); ?>
+            </div>
+        </form>
+
+        <div class="promo_code_form">
+            <?php PromoCodeForm(); ?>
+        </div>
+
+        <div class="box gift_certificate">
+            <div class="content">
+                <div class="header"><?php Label('CATALOG_IF_YOU_HAVE_GIFTCERTIFICATE_MESSAGE'); ?></div>
+                <?php GiftCertificateForm(); ?>
+            </div>
+        </div>
+
+        <div class="cart_buttons">
+            <a href="<?php PageURL('ProductList'); ?>"><span class="<?php lang(); ?> button_continue_shopping_back"></span></a>
+            <a href="<?php PageURL('CheckoutView'); ?>"><span class="<?php lang(); ?> button_proceed_to_checkout"></span></a>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<FORM style="margin: 0px; padding: 0px;" ACTION="<?php Local_SearchFormAction(); ?>" METHOD="POST" name="<?php Local_SearchFormName(); ?>" id="<?php Local_SearchFormName(); ?>">
+<INPUT TYPE="hidden" name="<?php Local_ActionName(); ?>" value="<?php Local_ActionValue(); ?>">
+    <TABLE width="180" cellpadding="0" cellspacing="0" style="text-align: left;" border=0  class="form">
+        <TR>
+            <TD colspan="3" style="border-bottom: 0px; /* overwrite 'list' class */ padding-left: 5px; padding-top: 3px;" class="value popup_dialog_body_right_padded"><INPUT TYPE="text" NAME="<?php Local_SearchTextFieldName(); ?>" VALUE="<?php Local_SearchText(); ?>" SIZE="50" style="font-size: 1.1em;"></TD>
+        <TR>
+            <TD width="40%"></TD>
+            <TD width="10%" style="border-bottom: 0px; /* overwrite 'list' class */ padding-bottom: 3px; padding-top: 5px;"><div class="button button_5em" onclick="<?php Local_SearchFormName(); ?>.submit();"><?php msg('CTLG_TAB_SEARCH_BUTTON'); ?></div></TD>
+            <TD width="40%"></TD>
+        </TR>
+    </TABLE>
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) -->

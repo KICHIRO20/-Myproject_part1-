@@ -1,0 +1,31 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr class="subtitle" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;">
+        <?php xmsg('CC','NEW_RATE'); ?>
+    </td>
+</tr>
+<tr>
+    <td class="popup_dialog_header_left_right_padded value" style="padding: 4px">
+        <form action="<?php add_form_action_url(); ?>" name="AddCCRateForm" method="post" style="margin: 0px;">
+        <table cellpadding="0" cellspacing="0" width="100%" border="0">
+            <colgroup>
+                <col width="95%">
+                <col width="5%">
+            </colgroup>
+            <tr>
+                <td valign="middle">
+                                <table width="1%" border="0" cellspacing="0" cellpadding="0">
+ 			        <tr><td><b>1&nbsp;</b><td><?php to_currency_select(); ?><td>  <b>&nbsp;=&nbsp;</b>
+			        <td><input type="text" name="base_rate" id="base_rate" size="9" maxlength="20" value="1" style="height: 1.4em;">  <td style="padding-left: 5px;"><?php from_currency_select(); ?>
+                                </table>
+			            
+                </td>
+                <td style="padding-right: 4px;">
+                    <div id="AddButton1" class="button button_small button_disabled" onClick=""><?php msg('BTN_ADD'); ?></div>
+                </td>
+            </tr>
+        </table>
+        </form>
+    </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

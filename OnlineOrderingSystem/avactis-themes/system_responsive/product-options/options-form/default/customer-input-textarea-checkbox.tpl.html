@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form_row checkbox_text">
+    <div class="form_descr"><label><?php Local_OptionDisplayText(); ?><!-- ?php Local_OptionValueSalePriceModifier(); ? --></label></div>
+    <div class="form_field">
+        <input type="checkbox" name="po[<?php Local_OptionID(); ?>][cb]" <?php Local_OptionValueIsChecked(); ?> /> <?php Local_OptionCheckBoxText(); ?>
+               <br/>
+		<textarea rows="20" cols="20" name="po[<?php Local_OptionID(); ?>][val]"><?php Local_OptionValueName(); ?></textarea>
+    </div>
+    <div class="form_hint"><?php Local_OptionDescription(); ?></div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

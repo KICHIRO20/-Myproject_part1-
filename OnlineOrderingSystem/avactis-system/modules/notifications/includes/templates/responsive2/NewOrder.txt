@@ -1,0 +1,92 @@
+<table width="100%" cellspacing="0" cellpadding="0" class="table">
+      <tr>
+	<td width="10" bgcolor="#00436d" class="td">&nbsp;
+      </td>
+      <td valign="middle" align="left" height="35" bgcolor="#00436d" class="td1">
+            <div class="div">{StoreOwnerName}</div>
+	</td>
+     </tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="0" class="tablebody">
+<tr bgcolor="#D8D8D8">
+<td align="left" valign="top" class="tdbody" bgcolor="#F9F9F9">
+<b>Greetings from {StoreOwnerName}</b>,
+<br><br>
+We thought you'd like to know that the status of your order has been changed from {OrderOldStatus} to {OrderStatus}.<br><br>
+
+<b>Purchasing Information:</b><br><br>
+E-mail Address: {CustomerEmail}<br>
+<hr/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="49%">
+ <tr>
+   <td>
+      <div><b>Billing Address:</b></div>
+      <div style="font-size: 12px;font-family:Arial;">
+{BillingFirstname} {BillingLastname}<br>
+{BillingStreetline1},
+{BillingStreetline2}<br>
+{BillingCity}, {BillingState}, {BillingPostcode}<br>
+{BillingCountry}<br>
+{BillingPhone}<br>
+</div>
+</td></tr></table>
+<table border="0" cellpadding="0" cellspacing="0" width="49%">
+ <tr><td>
+      <div>
+<b>Shipping Address:</b></div>
+<div style="font-size: 12px;font-family:Arial;">{ShippingFirstname} {ShippingLastname}<br>
+{ShippingStreetline1},
+{ShippingStreetline2}<br>
+{ShippingCity}, {ShippingState}, {ShippingPostcode}<br>
+{ShippingCountry}<br>
+{ShippingPhone}<br>
+Comment:<br>
+{ShippingCommentLine}<br></div>
+</td></tr></table>
+<br>
+<b>Order Summary:</b><br><hr/>
+
+Order #: {OrderID}<br>
+Payment Method: {OrderPaymentMethod}<br>
+Shipping Method: {OrderShippingMethod}<br><br>
+
+<b>Items:</b><br><hr/>
+{OrderContentBlock}<br>
+Subtotal of Items: {OrderSubtotal}<br>
+{OrderDiscountsBlock}<br>
+Shipping & Handling: {OrderTotalShippingAndHandlingCost}<br>
+{OrderTax}
+<b>Total for this Order: {OrderTotal}</b><br><br>
+
+Thanks again for shopping with us.<br>
+
+{StoreOwnerName}<br>
+{StoreOwnerWebsite}<br>							
+   </td>                                  		
+ </tr>
+</table>
+
+<style>
+.table {
+        max-width:600px;
+        border-left:solid 1px #484848 ;
+        border-right:solid 1px #484848 ;
+       }
+.tablebody {
+       max-width:600px;border-left:solid 1px #e6e6e6;border-right:solid 1px #e6e6e6;
+     }
+.td {
+     width:10px;
+     background:linear-gradient(to bottom,#484848  0%,#484848  89%);
+     background-color:#484848 ;
+   }
+.td1 {
+       background:linear-gradient(to bottom,#484848  0%,#484848  89%);background-color:#484848 ;padding:0;margin:0;
+     }
+.tdbody{
+  color:#2c2c2c;display:block;line-height:20px;font-family:arial;font-weight:300;margin:0 auto;clear:both;border-bottom:1px solid #e6e6e6;background-color:#f9f9f9;padding:20px;
+}
+.div {
+      color:#FFFFFF;font-weight:bold;font-family:arial;line-height:20px;font-size:20px;
+     }
+</style>

@@ -1,0 +1,53 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+            <form id="checkout_1" name="checkout_1" action="<?php Local_FormAction(); ?>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="asc_action" value="JSSetCurrStep" />
+            <input type="hidden" name="step_id" value="2" />
+            <input type="hidden" name="previous_step_id" value="1" />
+            <input type="hidden" name="CHECKOUT_CZ_BLOWFISH_KEY" value="<?php Local_BlowFishKey(); ?>" />
+            <div class="checkout_rule step_1_active">
+	            <span class="step_1"><?php Label("CHECKOUT_STEP_1"); ?></span>
+	            <span class="step_1_2"></span>
+            </div>
+            <div id="step_1_errors" class="error_message<?php if (!getLocal_Errors_1()) { ?> invisible<?php } ?>"><?php Local_Errors_1(); ?></div>
+            <div class="box">
+                <div class="content content-page">
+                    <div class="header">
+                        <h3 class="shipping_form"><?php Label("CHECKOUT_SHIPPING_ADDRESS"); ?></h3>
+                        <h3 class="billing_form"><?php Label("CHECKOUT_BILLING_ADDRESS"); ?></h3>
+                    </div>
+                    <div class="shipping_form col-lg-6"><?php CheckoutShippingInfoInput(); ?></div>
+                    <div class="billing_form col-lg-6"><?php CheckoutBillingInfoInput(); ?></div>
+                    <div class="clear_both"></div>
+                    
+                    <div class="shipping_same_as_billing checkbox">
+                       <label style="margin: 12px 38px 2px;">
+                       <div class=""><span> 
+ <input type="checkbox" name="checkbox_shipping_same_as_billing" onclick="if(document.checkout_1.checkbox_shipping_same_as_billing.checked == true){copyPersonInfo('checkout_1','billingInfo','shippingInfo');};" />
+                   </span></div>
+                            <?php Label("CHECKOUT_CHECK_THIS_BOX"); ?>
+                        </label>
+                    </div>
+                    <div class="tax_exempt checkbox" style="margin: 12px 38px 2px;">
+                        <?php FullTaxExemptForm(); ?>
+                    </div>
+                    <div class="cart_summary">
+                        <?php PaypalProExpressCheckout(); ?>
+                        <?php PaypalProUKExpressCheckout(); ?>
+                    </div>
+                </div>
+            </div>
+            <?php SubscribeOnCheckout(); ?>
+            <div class="checkout_buttons">
+                <a class="btn btn-default" href="<?php PageURL('ProductList'); ?>"><?php Msg('CONTINUE_SHOPPING'); ?></a>
+                <input type="button" value="<?php Msg('CONTINUE_CHECKOUT'); ?>" class="<?php lang(); ?> btn btn-primary button_continue_checkout" onclick="submitStep(1);" />
+            </div>
+             <div class="checkout_rule">
+	            <span class="step_2"><?php Label("CHECKOUT_STEP_2"); ?></span>
+	            
+            </div>
+            <div class="checkout_rule">
+	            <span class="step_3"><?php Label("CHECKOUT_STEP_3"); ?></span>
+            </div>
+
+            </form>
+<!-- END TPL (DO NOT REMOVE!) -->

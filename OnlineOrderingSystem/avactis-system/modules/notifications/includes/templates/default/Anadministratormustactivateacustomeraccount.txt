@@ -1,0 +1,15 @@
+{StoreOwnerName}. Important Notice: An account needs to be activated.
+Dear Administrator,
+
+A customer has registered with your website.
+
+Their account needs to be activated.
+
+Account Name: {AccountName}
+First Name: {CustomerFirstname}
+Last Name: {CustomerLastname}
+
+-------------------------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}
+-------------------------------------------------------------

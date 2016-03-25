@@ -1,0 +1,815 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php CountriesStatesArrays(); ?>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var FormulaArray = new Array();
+var FormulaViewArray = new Array();
+var PrevOperandsArray = new Array();
+var TaxFormulaView = '<?php FormulaView(); ?>';
+var TaxFormula = '<?php Formula(); ?>';
+var areTaxZipSetsAvailable = <?php areTaxZipSetsAvailable(); ?>;
+var isSubmitPossible = true;
+
+var prev_operand = '<?php PrevOperand(); ?>';
+var buttons = new Array('but_pl', 'but_mn', 'but_mp', 'but_dv', 'but_ob', 'but_cb', 'but_a1', 'but_a2', 'but_a3');
+var avail_operands = new Array();
+avail_operands['_'] = new Array('(', '+', '-', 'value');
+avail_operands['('] = new Array('(', '+', '-', 'value');
+avail_operands[')'] = new Array(')', '+', '-', '*', '/');
+avail_operands['+'] = new Array('(', 'value');
+avail_operands['-'] = new Array('(', 'value');
+avail_operands['*'] = new Array('(', 'value');
+avail_operands['/'] = new Array('(', 'value');
+avail_operands['value'] = new Array(')', '+', '-', '*', '/');
+
+var open_brackets_quan = 0;
+
+function disableAllButtons(state)
+{
+    for (i=0; i<buttons.length; i++)
+    {
+        document.getElementById(buttons[i]).className = "btn blue button button_4em button_"+state;
+    }
+    document.getElementById("but_undo").className = "btn blue button button_4em button_"+state;
+    document.getElementById("but_clear").className = "btn blue button button_4em button_"+state;
+}
+
+function disableUndoButton()
+{
+    var btn = document.getElementById("but_undo");
+    if (FormulaArray.length == 0)
+    {
+        btn.className = "btn blue button button_4em button_disabled";
+    }
+    else
+    {
+        btn.className = "btn blue button button_4em button_enabled";
+    }
+}
+
+function disableFormulaButtons()
+{
+    for (i=0; i<buttons.length; i++)
+    {
+        var btn = document.getElementById(buttons[i]);
+        btn.className = "btn blue button button_4em button_enabled";
+    }
+    switch(prev_operand)
+    {
+        case '_':
+        case '(':
+            btn = document.getElementById('but_cb');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_mp');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_dv');
+            btn.className = "btn blue button button_4em button_disabled";
+            break;
+        case ')':
+        default:
+            btn = document.getElementById('but_ob');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_a1');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_a2');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_a3');
+            btn.className = "btn blue button button_4em button_disabled";
+            break;
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            btn = document.getElementById('but_cb');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_pl');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_mn');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_mp');
+            btn.className = "btn blue button button_4em button_disabled";
+            btn = document.getElementById('but_dv');
+            btn.className = "btn blue button button_4em button_disabled";
+            break;
+    }
+    if (open_brackets_quan == 0)
+    {
+        btn = document.getElementById('but_cb');
+        btn.className = "btn blue button button_4em button_disabled";
+    }
+}
+
+function addCondition(Element, value, str_value)
+{
+    if (Element.className.indexOf('button_disabled') != -1) return;
+    if (value == '') return;
+    if (value == '(') open_brackets_quan++;
+    if (value == ')') open_brackets_quan--;
+    var formulaView = document.getElementById('FormulaView');
+    var formula = document.getElementById('Formula');
+
+    if (formula.value == '')
+    {
+        formulaView.innerHTML = str_value;
+        formula.value = value;
+//        prev_value = value;
+//        prev_str_value = str_value;
+    }
+    else 
+    {
+        formulaView.innerHTML += ' ' + str_value;
+        formula.value += ' ' + value;
+//        prev_value = ' ' + value;
+//        prev_str_value = ' ' + str_value;
+    }
+    FormulaViewArray.push(formulaView.innerHTML);
+    FormulaArray.push(formula.value);
+    PrevOperandsArray.push(value);
+    prev_operand = value;
+    disableFormulaButtons();
+    disableUndoButton();
+}
+
+function clearCondition() 
+{
+    if (document.getElementById("but_clear").className.indexOf('button_disabled') != -1) return;
+    var formulaView = document.getElementById('FormulaView');
+    var formula = document.getElementById('Formula');
+    formulaView.innerHTML = '&nbsp;';
+    formula.value = '';
+    prev_operand = '_';
+    open_brackets_quan = 0;
+    FormulaViewArray.length = 0;
+    FormulaArray.length = 0;
+    PrevOperandsArray.length = 0;
+    disableFormulaButtons();
+    disableUndoButton();
+}
+
+function undoCondition()
+{
+    if (FormulaArray.length == 0) return;
+    var btn = document.getElementById("but_undo");
+    if (btn.className.indexOf('button_disabled') != -1) return;
+    var formulaView = document.getElementById('FormulaView');
+    var formula = document.getElementById('Formula');
+    FormulaViewArray.pop();
+    FormulaArray.pop();
+    prev_operand = PrevOperandsArray.pop();
+    if (prev_operand == '(') open_brackets_quan--;
+    if (prev_operand == ')') open_brackets_quan++;
+    if (FormulaArray.length > 0)
+    {
+        formulaView.innerHTML = FormulaViewArray[FormulaViewArray.length-1];
+        formula.value = FormulaArray[FormulaArray.length-1];
+        prev_operand = PrevOperandsArray[PrevOperandsArray.length-1];
+    }
+    else
+    {
+        formulaView.innerHTML = TaxFormulaView;
+        formula.value = TaxFormula;
+        prev_operand = '_';
+    }
+    disableFormulaButtons();
+    disableUndoButton();
+}
+
+/*
+function backSpace()
+{
+    var formulaView = document.getElementById('FormulaView');
+    var formula = document.getElementById('Formula');
+
+}
+*/
+
+function refreshStatesList(countriesListId, statesListId)
+{
+    countriesList = document.getElementById(countriesListId);
+    statesList = document.getElementById(statesListId);
+
+    selectedCountryId = countriesList.options[countriesList.selectedIndex].value;
+    if (countriesList.options[0].value == 0)
+    {
+        if (countriesList.selectedIndex == 1)
+            countriesList.selectedIndex -= 1;
+        countriesList.remove(0);
+    }
+
+    statesList.length = 0;
+    statesList.options[0] = new Option('<?php Msg("SELECT_STATE_LABEL"); ?>', -1);
+    statesList.options[1] = new Option('<?php Msg("STATE_ALL_LABEL"); ?>', 0);
+    i=0;
+    if (countryIdToStatesIdArray[selectedCountryId] != undefined)
+    {
+        for (i=0; i<countryIdToStatesIdArray[selectedCountryId].length; i++)
+        {
+            statesList.options[i+2] = new Option(statesArray[countryIdToStatesIdArray[selectedCountryId][i]], countryIdToStatesIdArray[selectedCountryId][i]);
+        }
+    }
+/*
+    if (allOtherStatesArray[selectedCountryId] == undefined)
+    {
+        statesList.options[i+1] = new Option('<?php Msg("ALL_OTHER_STATES_LABEL"); ?>', selectedCountryId+'_0');
+    }
+*/
+}
+
+function removeSelectStateOption(statesListId)
+{
+    statesList = document.getElementById(statesListId);
+    if (statesList.options[0].value == -1)
+        statesList.remove(0);
+}
+
+function removeSelectOption(element)
+{
+    if (element.options[0].value == 0)
+        element.remove(0);
+}
+
+
+function TaxRateFormSubmit()
+{
+    if (!isSubmitPossible)
+        return;
+         
+    var el = document.getElementById('CountryId');
+    var el_country_state = document.getElementById('country_state');
+
+    if (el.value == 0 &&
+        el_country_state.style.display == '')
+    {
+        alert('<?php Msg("ADD_TAX_RATE_WRN_001"); ?>');
+        return;
+    }
+    el = document.getElementById('StateId');
+    if (el.value == -1 &&
+        el_country_state.style.display == '')
+    {
+        alert('<?php Msg("ADD_TAX_RATE_WRN_002"); ?>');
+        return;
+    }
+    /*
+    el = document.getElementById('ProductTaxClassId');
+    if (el.value == 0)
+    {
+        alert('<?php Msg("ADD_TAX_RATE_WRN_007"); ?>');
+        return;
+    }
+    */
+    el = document.getElementById('TaxNameId');
+    if (el.value == 0)
+    {
+        alert('<?php Msg("ADD_TAX_RATE_WRN_008"); ?>');
+        return;
+    }
+    if (!document.getElementById('applicable_cb').checked)
+    {
+        el = document.getElementById('Rate');
+        radio = document.getElementsByName("RateMethod");
+        if (el.value == '' && radio.value == 1)
+        {
+            alert('<?php Msg("ADD_TAX_RATE_WRN_003"); ?>');
+            return;
+        }
+        el = document.getElementById('Formula');
+        if (el.value == '')
+        {
+            alert('<?php Msg("ADD_TAX_RATE_WRN_004"); ?>');
+            return;
+        }
+        switch (prev_operand)
+        {
+            case '(':
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                alert('<?php Msg("ADD_TAX_RATE_WRN_006"); ?>');
+                return;
+        }
+    }
+    var formulaView = document.getElementById('FormulaView');
+    var FormulaViewHidden = document.getElementById('FormulaViewHidden');
+    var formula = document.getElementById('Formula');
+    if (open_brackets_quan != 0)
+    {
+        for (i=0; i<open_brackets_quan; i++)
+        {
+            formulaView.innerHTML += ' )';
+            formula.value += ' )';
+        }
+    }
+    FormulaViewHidden.value = formulaView.innerHTML;
+    var form = document.forms['TaxRateForm'];
+    form.submit();
+}
+
+function addOperator(element, operator)
+{
+    addCondition(element, operator, operator);
+}
+function addTag(element, input_id, pref)
+{
+    var el = document.getElementById(input_id);
+    addCondition(element, '{'+pref+'_'+el.value+'}', el.options[el.selectedIndex].getAttribute('str_value'));
+}
+function addNumber(element, input_id)
+{
+    var el_hid = document.getElementById(input_id+'_hidden');
+    var el = document.getElementById(input_id);
+    formatFloat(el_hid, '', el.getAttribute('decimals'), '.');
+    if (prev_operand == '/' && el_hid.value == 0)
+    {
+        alert('<?php Msg("ADD_TAX_RATE_WRN_005"); ?>');
+    }
+    else
+    {
+        addCondition(element, el_hid.value, el.value);
+    }
+    el.value = '';
+    el_hid.value = '';
+}
+
+function addRateToFormula(element)
+{
+    var ob = document.getElementById("FormulaViewOB");
+    var cb = document.getElementById("FormulaViewCB");
+    if (element.value == "")
+    {
+        ob.innerHTML = "";
+        cb.innerHTML = "";
+    }
+    else
+    {
+        ob.innerHTML = element.value + " % * ( ";
+        cb.innerHTML = " )";
+    }
+}
+
+function addZipSetToFormula(value)
+{
+    var ob = document.getElementById("FormulaViewOB");
+    var cb = document.getElementById("FormulaViewCB");
+    if (value == "")
+    {
+        ob.innerHTML = "";
+        cb.innerHTML = "";
+    }
+    else
+    {
+        ob.innerHTML = '[' + value + "] % * ( ";
+        cb.innerHTML = " )";
+    }
+}
+
+function ManualRateSet()
+{
+    RadioEl = document.getElementById("RateMethod_id");
+    RadioEl.checked = true;
+//        return;    
+    
+    RateEl = document.getElementById("Rate");
+    ZipsetEl = document.getElementById("TaxRateByZipSetName_id");
+    ZipsetTr = document.getElementById("RatesSetTr_id");
+    
+    RateEl.disabled = "";
+    ZipsetEl.disabled = "DISABLED";
+    formatInput(RateEl); 
+    addRateToFormula(RateEl);
+    ZipsetTr.style.display = "none";
+    
+    if (!areTaxZipSetsAvailable)
+        enableAddButton();
+}
+
+function BasedOnZipRateSet()
+{
+    RadioEl = document.getElementById("RateMethod_id");
+    RadioEl.checked = false;
+        
+    RateEl = document.getElementById("Rate");
+    ZipsetEl = document.getElementById("TaxRateByZipSetName_id");
+    ZipsetTr = document.getElementById("RatesSetTr_id");
+    
+    RateEl.disabled = "DISABLED";
+    ZipsetEl.disabled = "";
+    
+    if (areTaxZipSetsAvailable)
+        addZipSetToFormula(ZipsetEl.options[ZipsetEl.selectedIndex].innerHTML);
+        
+    ZipsetTr.style.display = "";
+    
+    if (!areTaxZipSetsAvailable)
+        disableAddButton();
+}
+
+function AutoRateSet()
+{
+    RadioEl = document.getElementById("RateMethod_id");
+    if (RadioEl.checked)
+        ManualRateSet(); 
+    else
+        BasedOnZipRateSet();
+}
+
+function disableAddButton()
+{
+    add_btn = document.getElementById("EditButton2");
+    add_btn.className = add_btn.className.replace("button_enabled", "button_disabled");
+    isSubmitPossible = false;
+}
+
+function enableAddButton()
+{
+    add_btn = document.getElementById("EditButton2");
+    add_btn.className = add_btn.className.replace("button_disabled", "button_enabled");
+    isSubmitPossible = true;
+}
+
+function addTaxNameToFormula(element)
+{
+    var tn = document.getElementById("FormulaViewTaxName");
+    if (element.options[element.selectedIndex].value == 0)
+    {
+        tn.innerHTML = "";
+    }
+    else
+    {
+        tn.innerHTML = element.options[element.selectedIndex].innerHTML+" = ";
+    }
+}
+
+function disableElements(cb_el)
+{
+    toggleRows('tax_rate_options_');
+    ManualRateSet();
+    if (cb_el.checked)
+    {
+        disabled = true;
+        backgroundColor = "#cccccc";
+        color = "#888888";
+        disableAllButtons("disabled");
+    }
+    else
+    {
+        disabled = false;
+        backgroundColor = "#ffffff";
+        color = "#000000";
+        disableAllButtons("enabled");
+        disableUndoButton();
+        disableFormulaButtons();
+        setVisible('tax_rate_options_');
+        AutoRateSet();
+    }
+    document.getElementById("Rate").disabled = disabled;
+    document.getElementById("Rate").style.backgroundColor = backgroundColor;
+    document.getElementById("Rate").style.color = color;
+    document.getElementById("price_selector").disabled = disabled;
+    document.getElementById("price_selector").style.backgroundColor = backgroundColor;
+    document.getElementById("price_selector").style.color = color;
+    document.getElementById("tax_selector").disabled = disabled;
+    document.getElementById("tax_selector").style.backgroundColor = backgroundColor;
+    document.getElementById("tax_selector").style.color = color;
+    document.getElementById("number_condition").disabled = disabled;
+    document.getElementById("number_condition").style.backgroundColor = backgroundColor;
+    document.getElementById("number_condition").style.color = color;
+    document.getElementById("formula_input_field").style.backgroundColor = backgroundColor;
+    document.getElementById("formula_input_field").style.color = color;
+}
+
+function selectTaxNameOnChange()
+{
+    el = document.getElementById('TaxNameId');
+    //tax_name_address_required_array
+    //tax_name_included_array
+    <?php TaxNameAddressArray(); ?>;
+    selected_tax_name_id = el.options[el.selectedIndex].value;
+    setVisibleCountryState(tax_name_address_required_array[selected_tax_name_id]);
+    setVisibleTaxCostAndTaxNamesForFormula(tax_name_included_array[selected_tax_name_id]);
+//    clearCondition();
+}
+
+function setVisibleCountryState(b_visible)
+{
+    el = document.getElementById('country_state');
+    div1 = document.getElementById('DivRate1_id');
+    div2 = document.getElementById('DivRate2_id');
+    tr = document.getElementById('RatesSetTr_id');
+    radio = document.getElementsByName("RateMethod");
+    
+    if(b_visible == true)
+    {
+        el.style.display = '';
+        div1.style.display = "inline";
+        div2.style.display = "inline";
+        
+        if (radio[1].checked)
+        {
+            BasedOnZipRateSet();
+        }
+        else
+        {
+            ManualRateSet();
+        }
+    }
+    else
+    {
+        el.style.display = 'none';
+        div1.style.display = "none";
+        div2.style.display = "none";
+        tr.style.display = "none";
+        ManualRateSet();
+    }
+}
+
+function copySelectControl(id_from, id_to)
+{
+    el_from = document.getElementById(id_from);
+    el_to = document.getElementById(id_to);
+    el_to_new = el_from.cloneNode(true);
+    el_to_new.id = id_to;
+    el_to_new.style['display'] = '';
+    el_to_parent = document.getElementById('parent_' + id_to);
+    el_to_parent.removeChild(el_to);
+    el_to_parent.appendChild(el_to_new);
+}
+//                TaxCost (Sales Price, Shipping, Discount, ...)  
+//  TaxNamesForFormula                            "included"           ,
+//                              .
+function setVisibleTaxCostAndTaxNamesForFormula(b_tax_included)
+{
+    if(b_tax_included == true)
+    {
+        copySelectControl('price_selector_2', 'price_selector');
+        copySelectControl('tax_selector_2', 'tax_selector');
+    }
+    else
+    {
+        copySelectControl('price_selector_1', 'price_selector');
+        copySelectControl('tax_selector_1', 'tax_selector');
+    }
+}
+
+//-->
+</SCRIPT>
+<FORM METHOD=POST ACTION="<?php FormAction(); ?>" NAME="TaxRateForm" ID="TaxRateForm">
+<?php HiddenArrayViewState(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('ADD_TAX_RATE_PAGE_NAME'); ?></span>
+			<span class="caption-helper text-lowercase"><?php Subtitle(); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">            	
+            	<button id="EditButton1" title="<?php Button(); ?>"  onclick="TaxRateFormSubmit();" type="button" name="<?php Button(); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Button(); ?></span></button>
+				<button id="CancelButton1" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+            </div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+                                  <a class="pull-left" style="cursor:pointer;"><?php hinttext('ADD_TAX_RATE_FIELD_002'); ?></a>
+				<lable><?php Msg('ADD_TAX_RATE_FIELD_002'); ?></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">				
+				<?php ProductTaxClassName(); ?><INPUT TYPE="hidden" name="ProductTaxClassId" value="<?php ProductTaxClassId(); ?>">
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10" id="country_state">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+				<lable class="help-block"><a  style="cursor:pointer;" onclick="<?php hinttext('ADD_TAX_RATE_FIELD_001'); ?>"><i class="fa fa-question-circle"></i></a>&nbsp;<?php Msg('ADD_TAX_RATE_FIELD_001'); ?>&nbsp;*</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">				
+                <select class="form-control form-filter input-sm input-medium" name="CountryId" id="CountryId" onchange="refreshStatesList('CountryId', 'StateId');">
+            		<?php CountriesList(); ?>
+        		</select>
+        		<select class="form-control form-filter input-sm input-medium" name="StateId" id="StateId" onchange="removeSelectStateOption('StateId');">
+            		<?php StatesList(); ?>
+        		</select>
+        		<INPUT TYPE="hidden" name="Id" value="<?php Id(); ?>">
+			</div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+                                  <a class="pull-left" style="cursor:pointer;"><?php hinttext('ADD_TAX_RATE_FIELD_003'); ?></a>
+				<lable><?php Msg('ADD_TAX_RATE_FIELD_003'); ?>&nbsp;*</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">	
+			        <select class="form-control form-filter input-sm input-medium" name="TaxNameId" id="TaxNameId" onchange="selectTaxNameOnChange(); addTaxNameToFormula(this); removeSelectOption(this); ">
+            <?php TaxNamesList(); ?>
+        </select>
+        <INPUT TYPE="checkbox" NAME="NotApplicable" id="applicable_cb" onclick="disableElements(this);" <?php Applicable(); ?>><?php Msg('ADD_TAX_RATE_FIELD_003_NA'); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+                                  <a class="pull-left" style="cursor:pointer;"><?php hinttext('ADD_TAX_RATE_FIELD_004'); ?></a>
+				<lable>&nbsp;<?php Msg('ADD_TAX_RATE_FIELD_004'); ?>&nbsp;*</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">	
+			     <div id="DivRate1_id" style="display: none">
+            			<input <?php ManualChecked(); ?> type=radio name="RateMethod" id="RateMethod_id" value="1" onClick="ManualRateSet();"/>
+        			</div>
+        			<input type="text" name="Rate" id="Rate" value="<?php Rate(); ?>" style="width: 60px" onBlur="formatInput(this); addRateToFormula(this);" patterntype="weight" <?php Format(); ?>>
+        			<div id="DivRate2_id" style="display: none">
+	        			<input <?php ZipSetChecked(); ?> type=radio name="RateMethod" value="2" onClick="BasedOnZipRateSet();"/><?php Msg('Select_Zip_Code_Based_Rates'); ?>
+        			</div>
+				</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10" id="RatesSetTr_id" style="display: none">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+                                  <a class="pull-left" style="cursor:pointer;"><?php hinttext('ADD_TAX_RATE_TAX_ZIP_SET'); ?></a>
+				<lable>&nbsp;<?php Msg('Select_Zip_Code_Based_Rates'); ?>&nbsp;*</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">	
+			     <select disabled class="form-control form-filter input-sm input-medium" name="TaxRateByZipSetName" id="TaxRateByZipSetName_id" onChange="addZipSetToFormula(this.options[this.selectedIndex].innerHTML);">
+            <?php TaxRateByZipSetsList(); ?>
+        </select>
+			</div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10" id="tax_rate_options_2">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+                                  <a class="pull-left" style="cursor:pointer;"><?php hinttext('ADD_TAX_RATE_FIELD_005'); ?></a>
+				<lable>&nbsp;<?php Msg('ADD_TAX_RATE_FIELD_005'); ?>&nbsp;*</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">	
+			 	<div class="form-control form-filter input-sm input-medium" id="formula_input_field"><span id="FormulaViewTaxName"></span><span id="FormulaViewOB"></span><span id="FormulaView"><?php FormulaView(); ?></span><span id="FormulaViewCB"></span></div><INPUT TYPE="hidden" name="FormulaView" id="FormulaViewHidden" value="<?php FormulaView(); ?>">
+                <INPUT TYPE="hidden" name="Formula" id="Formula" value="<?php Formula(); ?>">               
+			</div>  
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			</div>
+			<div class="col-md-8" style="float:left;">			       			
+             <button id="but_undo" title="<?php Msg('BTN_UNDO'); ?>" onclick="javascript:undoCondition();" type="button" name="<?php Msg('BTN_UNDO'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_UNDO'); ?></span></button>
+                	<button id="but_clear" title="<?php Msg('BTN_CLEAR'); ?>" onclick="javascript:clearCondition();"  type="button" name="<?php Msg('BTN_CLEAR'); ?>" class="btn blue"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLEAR'); ?></span></button>
+             </div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+				<lable class="help-block"><i class="fa fa-question-circle"></i></a>&nbsp;</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">	
+				<!--<div class="clearfix">
+					<a onclick="javascript:addOperator(this, '+');"  name="+"  class="btn btn-sm red">+</a>
+					<a href="#" onclick="javascript:addOperator(this, '-');"  class="btn btn-sm blue">-</a>
+					<a href="#" onclick="javascript:addOperator(this, '*');" class="btn btn-sm green">*</a>
+					<a href="#" onclick="javascript:addOperator(this, '/');" class="btn btn-sm yellow">/</a>
+					<a href="#" onclick="javascript:addOperator(this, '(');" class="btn btn-sm purple">(</a>
+					<a href="#" onclick="javascript:addOperator(this, ')');" class="btn btn-sm green">)</a>
+				</div>			     -->
+				<table cellpadding=0 cellspacing=2 border=0>
+                <tr>
+                    <td align=left style="10%"><button id="but_pl" onclick="javascript:addOperator(this, '+');" type="button" name="+" class="btn blue"><span class="hidden-480">+</span></button>&nbsp;</td>
+                    <td align=left style="10%"><button id="but_mn" onclick="javascript:addOperator(this, '-');" type="button" name="-" class="btn blue"><span class="hidden-480">-</span></button>&nbsp;</td>
+                    <td align=left style="10%"><button id="but_mp" onclick="javascript:addOperator(this, '*');" type="button" name="*" class="btn blue"><span class="hidden-480">*</span></button>&nbsp;</td>
+                    <td align=left style="10%"><button id="but_dv" onclick="javascript:addOperator(this, '/');" type="button" name="/" class="btn blue"><span class="hidden-480">/</span></button>&nbsp;</td>
+                    <td align=left style="10%"><button id="but_ob" onclick="javascript:addOperator(this, '(');" type="button" name="(" class="btn blue"><span class="hidden-480">(</span></button>&nbsp;</td>
+                    <td align=left style="10%"><button id="but_cb" onclick="javascript:addOperator(this, ')');" type="button" name=")" class="btn blue"><span class="hidden-480">)</span></button>&nbsp;</td>
+                </tr>
+                </table>
+			</div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			<lable class="help-block"><?php Msg('ADD_TAX_RATE_FIELD_006'); ?></lable>
+			</div>
+			<div class="col-md-8" id='parent_price_selector' style="float:left;">				 	       			
+             <select class="form-control form-filter input-sm input-medium"  id="price_selector">
+                    <?php TaxCostsList(); ?>
+                </select>
+                <select class="form-control form-filter input-sm input-medium"  id="price_selector_1" style="display: none;">
+                    <?php TaxCostsList(); ?>
+                </select>
+                <select class="form-control form-filter input-sm input-medium"  id="price_selector_2" style="display: none;">
+                    <?php TaxCostsListForIncludedTaxName(); ?>
+                </select> 
+             </div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			<lable class="help-block"></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">				 	       			        
+              <button id="but_a1" title="<?php Msg('BTN_ADD'); ?>"   onclick="javascript:addTag(this, 'price_selector', 'p');" type="button" name="<?php Msg('BTN_ADD'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+             </div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			<lable class="help-block"><?php Msg('ADD_TAX_RATE_FIELD_007'); ?></lable>
+			</div>
+			<div class="col-md-8" id='parent_tax_selector' style="float:left;">				 	       			            
+                <select class="form-control form-filter input-sm input-medium" id="tax_selector">
+                    <?php TaxNamesListForCondition(); ?>
+                </select>
+                <select class="form-control form-filter input-sm input-medium" id="tax_selector_1" style="display: none;">
+                    <?php TaxNamesListForCondition(); ?>
+                </select>
+                <select class="form-control form-filter input-sm input-medium" id="tax_selector_2" style="display: none;">
+                    <?php TaxNamesListForConditionForIncludedTaxName(); ?>
+                </select>
+             </div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			<lable class="help-block"></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">				 	       			            
+                <button id="but_a2" title="<?php Msg('BTN_ADD'); ?>"  onclick="javascript:addTag(this, 'tax_selector', 't');" type="button" name="<?php Msg('BTN_ADD'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+             </div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			<lable class="help-block"><?php Msg('ADD_TAX_RATE_FIELD_008'); ?></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">				 	       			            
+                <INPUT TYPE="text" id="number_condition" class="form-control form-filter input-sm input-medium" onblur="formatInput(this); document.getElementById('number_condition_hidden').value = document.getElementById('number_condition').value;" patterntype="weight" <?php Format(); ?>><INPUT TYPE="hidden" id="number_condition_hidden" value="">
+             </div>
+		</div>
+		<!-- End - Row -->	
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			<lable class="help-block"></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">			 	       			            
+                <button id="but_a3" title="<?php Msg('BTN_ADD'); ?>"  onclick="javascript:addNumber(this, 'number_condition');" type="button" name="<?php Msg('BTN_ADD'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+             </div>
+		</div>
+		<!-- End - Row -->
+		<?php Errors(); ?>
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">			
+			<lable class="help-block"></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">			 	       			            
+                <button id="EditButton2" title="<?php Button(); ?>"  onclick="TaxRateFormSubmit();" type="button" name="<?php Button(); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Button(); ?></span></button>
+				<button id="CancelButton2" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+             </div>
+		</div>
+		<!-- End - Row -->
+</FORM>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+jQuery(function () { 
+	setVisible('tax_rate_options_');
+	disableFormulaButtons();
+	disableUndoButton();
+	
+	var RateEl = document.getElementById("Rate");
+	formatInput(RateEl); 
+	addRateToFormula(RateEl);
+	
+	addTaxNameToFormula(document.getElementById("TaxNameId"));
+	disableElements(document.getElementById("applicable_cb"));
+});
+//-->
+</SCRIPT>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

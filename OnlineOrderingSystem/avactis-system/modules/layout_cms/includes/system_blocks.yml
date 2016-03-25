@@ -1,0 +1,21 @@
+## - BlockId        // unique block identifier
+##   title          // visible block title in Layout manager 
+##   description    // block description
+##   template       // optional param. Block micro-template. 
+##                      If not specified it will be set to '<?php BlockId(); ?>' 
+##   page           // optional param. Block is available only for specified page.
+
+- RightBanner2:
+    title: Right Banner
+    description: Right Banner
+    template: '<a href="http://www.avactis.com/hosting.php"><img src="<?php echo getTemplateFileURL('images/rightbanner.gif'); ?>" alt="" style="margin-bottom: 7px;" /></a>'
+
+- BoxedCategoryLargeImage:
+    title: Category Large Image
+    description: Category Large Image
+    template: '<?php if (getCategoryLargeImageSrc() != \'\'): ?><div class='box'><?php CategoryLargeImage(); ?></div><?php endif; ?>'
+- BoxedCategoryLargeImage1:
+    title: Home Category Image
+    description: Category Large Image
+    template: '<?php if (getCategoryLargeImageSrc(1) != \'\'): ?><div class='box'><?php CategoryLargeImage(1); ?></div><?php endif; ?>'
+

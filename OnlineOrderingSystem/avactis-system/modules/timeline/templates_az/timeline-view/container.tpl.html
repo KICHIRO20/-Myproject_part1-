@@ -1,0 +1,64 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function submitFilter(formID)
+    {
+        var form = document.forms[formID];
+        form.submit();
+    }
+//-->
+</SCRIPT>
+<style>
+A#timeline_link
+{
+    text-decoration: underline;
+    color: blue;
+}
+</style>
+
+<div class="row">
+	<div class="col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-book"></i>&nbsp;<?php xmsg('TL','VIEW_PAGE_SUBTITLE'); ?>
+					</span>
+				</div>
+				<div class="actions">
+					<a class="btn btn-circle btn-default" href="javascript:openURLinNewWindow('popup_window.php?page_view=SettingParamList&group=TIMELINE', 'SettingGroupEditor');">
+					<i class="fa fa-gears"></i> <?php Msg('BTN_SETTINGS'); ?> </a>
+				</div>
+			</div>
+			<div class="portlet-body"> 
+				<form id="ApplyFilterForm" method="get">					
+					<input type="hidden" name="asc_action" value="SetTimelineFilter">				
+					<strong><?php xmsg('TL','FILTER'); ?></strong><br /><br />					
+					<div class="row static-info ">
+						<div class="col-md-6">
+							{FILTER} 
+						</div>
+						<div class="col-md-6 value">
+							<input type="text" value="" name="tl_filter_text" class="form-control form-filter input-sm input-large margin-bottom-10 margin-top-10" placeholder="<?php xmsg('TL','SEARCH_TEXT'); ?>" style="display:inline">
+							<button onclick="submitFilter('ApplyFilterForm'); disableButtons(new Array('ApplyFilterButton'));" class="btn btn-circle btn-sm blue"><?php Label('CATALOG_APPLY_LABEL'); ?>&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+						</div>
+					</div>
+				</form>				
+			</div>
+			<hr />
+			<div class="portlet-body">
+				{CONTENT}
+			</div>
+		</div>
+		<table cellspacing="0" cellpadding="5" width="100%">
+    			<tr>
+        			<td style="text-align: center" width="100%"><?php PaginatorLine(); ?></td>
+    			</tr>
+    			<tr>
+        			<td style="text-align: center" width="100%"><?php PaginatorRows(); ?></td>
+    			</tr>
+		</table>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

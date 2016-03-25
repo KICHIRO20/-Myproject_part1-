@@ -1,0 +1,76 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("ACCOUNT_MY_ACCOUNT"); ?></h1>
+        <div class="subheader"><?php Label("ACCOUNT_MANAGE_ACCOUNT_LABEL"); ?></div>
+
+        <?php MessageBox(); ?>
+
+        <div class="box myaccount_home">
+            <p><?php Label("ACCOUNT_YOU_CAN_MODIFY"); ?></p>
+            <div class="content">
+                <div class="header">
+                    <div class="account_settings"><?php Label("ACCOUNT_ACCOUNT_SETTINGS_CAPITAL"); ?></div>
+                </div>
+                <div class="account_settings">
+                    <a href="<?php PageURL('CustomerPersonalInfo'); ?>"><?php Label('STOREFRONT_MANAGE_PERSONAL_INFO_LABEL'); ?></a>
+                    <a href="<?php PageURL('CustomerChangePassword'); ?>"><?php Label('STOREFRONT_CHANGE_PASSWORD_LABEL'); ?></a>
+                    <?php if (modApiFunc('Configuration', 'getValue', SYSCONFIG_STORE_ENABLE_WISHLIST) == 1): ?>
+                        <a href="<?php PageURL('Wishlist'); ?>"><?php Label('WL_WISHLIST_LABEL'); ?></a>
+                    <?php endif; ?>
+                    <?php if (getSubscriptionActive() == 'TRUE'): ?>
+                    	<a href="<?php PageURL('CustomerSubscription'); ?>"><?php Label('SUBSCRIPTION_MANAGE'); ?></a><?php  ?>
+                   	<?php endif; ?>
+
+		   <!-- Filter for adding new links for customer account -->
+                   <?php echo apply_filters("ca_b4_signout"); ?>
+
+                </div>
+                <div class="clear_both"></div>
+
+                <div class="header">
+                    <div class="orders_search"><?php Label("ACCOUNT_ORDERS"); ?></div>
+                </div>
+                <div class="orders_search">
+                    <div class="by_statuses">
+                        <span class="label"><a href="<?php PageURL('CustomerOrdersHistory',array('filter'=>'new')); ?>"><?php Label('STOREFRONT_NEW_ORDERS_LABEL'); ?></a></span>
+                        <span class="value"><?php CustomerOrdersQuantity('new'); ?></span>
+
+                        <span class="label"><a href="<?php PageURL('CustomerOrdersHistory',array('filter'=>'in_progress')); ?>"><?php Label('STOREFRONT_IN_PROGRESS_LABEL'); ?></a></span>
+                        <span class="value"><?php CustomerOrdersQuantity('in_progress'); ?></span>
+
+                        <span class="label"><a href="<?php PageURL('CustomerOrdersHistory',array('filter'=>'ready_to_ship')); ?>"><?php Label('STOREFRONT_READY_TO_SHIP_LABEL'); ?></a></span>
+                        <span class="value"><?php CustomerOrdersQuantity('ready_to_ship'); ?></span>
+
+                        <span class="label"><a href="<?php PageURL('CustomerOrdersHistory',array('filter'=>'all')); ?>"><?php Label('STOREFRONT_ALL_LABEL'); ?></a></span>
+                        <span class="value"><?php CustomerOrdersQuantity('all'); ?></span>
+                    </div>
+	                
+                    <div class="by_form">
+                        <?php OrderSearchForm(); ?>
+                    </div>
+                    <div class="by_id">
+                        <?php OrderSearchByIdForm(); ?>
+                    </div>
+                </div>
+                <div class="clear_both"></div>
+                <?php OrderList(); ?>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+
+
+<?php Label('STOREFRONT_WELCOME_LABEL'); ?> <?php CustomerFirstName(); ?> <?php CustomerLastName(); ?>
+
+<a href="<?php CustomerSignOutURL(); ?>"><img src="storefront-files/images/sign-out-button.gif" border="0"></a>
+
+
+

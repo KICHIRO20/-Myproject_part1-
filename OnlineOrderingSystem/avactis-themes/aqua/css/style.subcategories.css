@@ -1,0 +1,54 @@
+.page_container .box.subcategories .content {
+	border-radius: 5px 5px 0 0;
+    padding-bottom: 0px;
+}
+
+.page_container .subcategory_list {
+    overflow: hidden;
+    padding: 15px 15px 0px 15px;
+}
+
+.page_container .subcategory_list .subcategory_item {
+    overflow: hidden;
+    padding-bottom: 30px;
+    float: left;
+    width: 33%;
+    height: 145px;
+}
+
+.page_container .subcategory_item .subcategory_img {
+    padding-top: 6px;
+    padding-right: 8px;
+    float:right;
+}
+
+.page_container .subcategory_item .subcategory_name {
+	float: left;
+	height: auto;
+    left: -90px;
+    margin-left: 105px;
+    position: relative;
+    top: -83px;
+    width: 151px;
+}
+
+.right_column .subcategory_list .subcategory_item {
+    float: none;
+    width: 100%;
+} 
+
+.subcat_inner_div{
+ 	background-color: #FCFCFC;
+    border: 1px solid #FCFCFC;
+    border-radius: 4px 4px 4px 4px;
+    height: 144px;
+    margin: 8px;
+    border: 1px solid #EDEDED;
+}
+.subcat_inner_div:hover{
+	background-color: #FAFAFA;
+    box-shadow: 0 0 10px #111111;
+}
+.catname{
+	font-size: 15pt;
+}

@@ -1,0 +1,63 @@
+/* LAYOUT */
+.product_info .detailed_product_info {
+    float: none;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* by default they are hidden, so show them */
+.product_info .product_sale_price .label,
+.product_info .product_list_price .label {
+    display: inline;
+}
+
+.product_info .product_rating .rating-box {
+    margin: auto auto;
+}
+
+.product_info .discount_star {
+    float: left;
+    width: 69px;
+    clear: left;
+    text-align: center;
+    position: static;
+    padding: 0px;
+    margin-left: 80px;
+    margin-top: 10px;
+}
+
+/* STYLE */
+
+.product_info .product_list_price .value {
+    text-decoration: line-through;
+}
+
+.product_info .product_detailed_description p {
+    margin: 0px;
+    padding: 0px 0px 10px 0px;
+}
+.noimage {
+	width: 95px;
+	height: 95px;
+	background: transparent url('../images/noimage.png') no-repeat scroll left top;
+	margin: auto;
+}
+
+.noimageicon {
+	width: 30px;
+	height: 30px;
+	background: transparent url('../images/noimageicon.png') no-repeat scroll left top;
+	margin: auto;
+}
+.rating-box {
+width: 69px;
+height: 13px;
+background: url(../images/star_blank.gif) repeat-x;
+margin: -14px auto auto 57px;
+}
+.rating-box .rating {
+width: 69px;
+height: 13px;
+background: url(../images/star_full.gif) repeat-x;
+}

@@ -1,0 +1,15 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php
+    if (getProductSmallImageWidth() == '') {
+        if (getProductLargeImageWidth() == '') {
+            ?><img src="<?php Local_NoImageSrc() ?>" width="50" border="0" /><?php
+        }
+        else {
+            ?><img src="<?php ProductLargeImageSrc() ?>" width="50" border="0" /><?php
+        }
+    }
+    else {
+        ProductSmallImage();
+    }
+?>
+<!-- END TPL (DO NOT REMOVE!) -->

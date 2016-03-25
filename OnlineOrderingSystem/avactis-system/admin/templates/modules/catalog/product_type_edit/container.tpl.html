@@ -1,0 +1,190 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<!-- tinyMCE -->
+<SCRIPT language="javascript">
+  function reloadForm() {
+    document.forms['CatalogEditProductType'].FormSubmitValue.value='Reload';
+    document.forms['CatalogEditProductType'].submit();
+    return true;
+  }
+  
+    // For showing tag preview on add custom attribute
+  function show_tag_preview() {
+  var tag_preview = document.getElementById("tag_preview");
+  var tag = document.getElementById("view_tag");
+  if (tag_preview == null || tag == null) return;
+  if (tag.value == "") {
+      tag_preview.innerHTML = "<div id=\"tag_preview\"></div>";
+      return;
+  }
+  value = tag.value;
+  value = value.substring(0, 1).toUpperCase() + value.substring(1).toLowerCase();
+  tag_preview.innerHTML = "<div id=\"tag_preview\">&lt;?php Product<font color=\"blue\">" + value + "</font>Custom(); ?&gt;</div>";
+  tag_preview.style.visibility='visible';
+}
+
+  </SCRIPT>
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var form = document.getElementById(formname);
+      form.submit();
+    }
+    
+    function deleteCustomAttribute(tag) {
+        bootbox.confirm('<?php Msg('DELCUSTOM_006'); ?>',function(result){
+        if(result){
+        form = document.forms['CatalogEditProductType'];
+        form.FormSubmitValue.value='DeleteCustomAttribute';
+        form.custom_attribute.value=tag;
+        form.submit();
+        return true;
+        } });
+    }
+</script>
+<div class="row">
+	<div class="col-sm-12 col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-tags"></i>&nbsp;<?php msg('PRTYPE_EDIT_PAGE_NAME'); ?>
+					</span>
+					
+				</div>
+				<div class="actions">
+				<a id="DeleteButton1" class="btn btn-circle btn-default" href="<?php OptionsLink(); ?>" >
+					<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('PRD_OPTIONS'); ?> 
+        			</a>
+        		<div id="DeleteButton1" class="btn btn-circle btn-default" onclick="submitHandler('CatalogEditProductType'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" >
+				<i class="fa fa-check"><?php msg('BTN_SAVE'); ?></i> 
+        		</div>
+				</div>
+			</div>
+			
+			<div class="portlet-body"> 
+			<div class="alert alert-info" >
+			<?php msg('PRTYPE_ADD_PAGE_DESCR'); ?>
+			</div>
+			<div class="alert alert-info" >
+			Use checkboxes to control visibility of attributes
+			</div>
+			
+<form action="catalog_edit_product_type.php" method="post" id="CatalogEditProductType" name="CatalogEditProductType">
+  <input type="hidden" name="asc_action" value="UpdateProductTypeAction">
+  <input type="hidden" name="FormSubmitValue" value="Save">
+  <input type="hidden" name="custom_attribute" value="">
+  <input type="hidden" name="form_id" value="<?php FormID(); ?>">
+  <input type="hidden" name="type_id" value="<?php TypeID(); ?>">
+<!--   <div class="row">
+						<div class="col-sm-2">
+							<span class="required"><b><?php msg('PRTYPE_ADD_COL_HDR_001'); ?></b></span>
+						</div>
+						<div class="col-sm-2">
+								<lable class="help-block"><b><?php msg('PRTYPE_ADD_COL_HDR_002'); ?></b></lable>
+						</div>
+						
+						<div class="col-sm-4">
+								<lable class="help-block"><b><?php msg('PRTYPE_ADD_COL_HDR_003'); ?></b></lable>
+						</div>
+ </div> -->
+ <br>
+ <div class="row">
+ <div class="col-sm-2">
+  <?php Errors(); ?>
+ </div>
+ </div>
+
+ <div class="row">
+						<div class="col-sm-2">
+							<span class="required"><?php msg('PT_TYPEID_NAME'); ?>&nbsp;*</span>
+						</div>
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','ProductTypeId'); ?>
+							</a>
+						</div>
+						<div class="col-sm-4">
+							<?php TypeID(); ?>
+							<br>
+						</div>
+</div>
+<br>
+<div class="row">
+						<div class="col-sm-2">
+							<span class="required"><?php msg('PT_TYPENAME_NAME'); ?>&nbsp;*</span>
+						</div>
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','ProductType'); ?>
+							</a>
+						</div>
+						<div class="col-sm-4">  
+						    <input class=" form-control input-sm input-medium" value="<?php TypeName(); ?>" type="text" patterntype="string128" onblur="formatInput(this);" value="" size="75" name="TypeName" maxlength="128">
+					          <?php Error(); ?>
+							<br>
+						</div>
+</div>
+<div class="row">
+						<div class="col-sm-2">
+							<span class="required"><?php msg('PT_TYPEDESCR_NAME'); ?>&nbsp;*</span>
+						</div>
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','ProductTypeDescr'); ?>
+							</a>
+						</div>
+						<div class="col-sm-4">  
+						    <input  name="TypeDescr" class=" form-control input-sm " value="<?php TypeDescr(); ?>" type="text" patterntype="string128" onblur="formatInput(this);"  size="75" maxlength="512">
+					         <?php Error(); ?>
+							<br>
+						</div>
+</div>
+
+<?php Items(); ?>
+<div class="row">
+              
+					<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+<?php msg('PRTYPE_ADD_NEW_CUST_ATTR'); ?></div></div>
+</div>
+</div>
+ 
+<br>
+<div class="row">
+						<div class="col-sm-2">
+							<span class="required"><?php msg('PRTYPE_CUST_ATTR_FRM_LABEL'); ?></span>
+						</div>
+						<div class="col-sm-3">
+							<select class="form-control input-xmedium input-sm input-inline" id="custom_type_id">
+              <option value="1"><?php msg('PRTYPE_CUST_ATTR_SNGLLN'); ?></option>
+              <option value="2"><?php msg('PRTYPE_CUST_ATTR_BGTXT'); ?></option>
+						<div class="col-sm-4">  
+              <option value="3"><?php msg('PRTYPE_CUST_ATTR_SELECT'); ?></option>
+            </select>
+						</div>
+						<a id="DeleteButton1" class="btn btn-circle btn-default" onclick="openURLinNewWindow('catalog_new_custom_attribute.php?form_id=<?php FormID(); ?>&product_type_id=<?php TypeID(); ?>&type_id=' + CatalogEditProductType.custom_type_id.value, ''); return false;" >
+				<i class="fa fa-plus"> <?php msg('BTN_ADD'); ?></i> 
+        		</a>
+						
+						</div>
+</div>
+<br>
+<hr>
+<p class="text-danger"><strong><?php msg('REQUIRED_FIELD_LABEL'); ?></strong></p>
+				<div class="actions text-center">
+					<div class="actions btn-set">
+						<a id="DeleteButton1" class="btn btn-circle btn-default" onclick="submitHandler('CatalogEditProductType'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" >
+				<i class="fa fa-save"> <?php msg('BTN_SAVE'); ?></i> 
+        		</a>
+				</div>
+			</div>
+  </form>
+			</div>
+			<hr />
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="js/validate.js"></script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

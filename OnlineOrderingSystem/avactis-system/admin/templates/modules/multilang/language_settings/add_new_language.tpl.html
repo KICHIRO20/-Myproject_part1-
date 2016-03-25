@@ -1,0 +1,15 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr class="group">
+    <td colspan="5" style="text-align: left;"><h4><?php xMsg('ML', 'MNG_LNGS_ADD_NEW_LANGUAGE'); ?></h4></td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td width="10%" style="text-align: center;" class="popup_dialog_body_left_padded"><div id="new_lng_code"><?php NewCode(); ?></div></td>
+    <td style="text-align: center;"><?php NewLanguage(); ?></td>
+    <td width="10%" style="text-align: center;"><?php NewActiveStatus(); ?></td>
+    <td width="10%" style="text-align: center;"><?php NewDefaultStatus(); ?></td>
+</tr>
+<tr>
+    <td colspan="5" align="right"><a id="AddButton" class="btn btn-default btn-circle" onclick="document.language_settings.mode.value='add_new'; document.language_settings.submit();"><i class="fa fa-plus"></i> <?php Msg('BTN_ADD'); ?></a></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

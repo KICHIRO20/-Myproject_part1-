@@ -1,0 +1,75 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function TaxClassFormSubmit()
+{
+    var name = document.getElementById('name');
+    if (name.value == "")
+    {
+        alert("<?php Msg('ADD_TAX_CLASS_WRN_001'); ?>");
+        return;
+    }
+    var form = document.forms['TaxClassForm'];
+    form.submit();
+}
+//-->
+</SCRIPT>
+<FORM name="TaxClassForm" id="TaxClassForm" action="<?php FormAction(); ?>" method="POST">
+<?php HiddenArrayViewState(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('ADD_TAX_CLASS_PAGE_NAME'); ?></span>
+			<span class="caption-helper text-lowercase"><?php Subtitle(); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">            	
+            	<button id="EditButton1" title="<?php Button(); ?>"  onclick="TaxClassFormSubmit();" type="button" name="<?php Button(); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Button(); ?></span></button>
+				<button id="CancelButton1" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+            </div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+				<lable class="help-block"><?php Msg('ADD_TAX_CLASS_FIELD_001'); ?>&nbsp;*</lable>
+			</div>
+			<div class="col-md-8" style="float:left;">				
+			<INPUT TYPE="text" NAME="name" id="name" class="form-control form-filter input-sm input-medium" value="<?php TaxClassName(); ?>"><INPUT TYPE="hidden" name="id" value="<?php id(); ?>">				
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+				<lable class="help-block"><?php Msg('ADD_TAX_CLASS_FIELD_002'); ?></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">					
+			<INPUT TYPE="text" NAME="descr" id="descr" class="form-control form-filter input-sm input-medium"  value="<?php TaxClassDescr(); ?>">			
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;width:30%;">
+			</div>
+			<div class="col-md-8" style="float:left;">					
+			<?php Msg("REQUIRED_FIELD_LABEL"); ?>			
+			</div>
+		</div>
+		<!-- End - Row -->
+	</div>
+	<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button id="EditButton2" title="<?php Button(); ?>"  onclick="TaxClassFormSubmit();" type="button" name="<?php Button(); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Button(); ?></span></button>
+				<button id="CancelButton2" class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+		</div>
+	</div>
+</div>
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

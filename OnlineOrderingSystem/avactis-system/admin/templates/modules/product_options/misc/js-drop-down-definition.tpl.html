@@ -1,0 +1,186 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.js_drop_down_outer {
+	border-left: solid 1px #808080;
+	border-top: solid 1px #808080;
+	border-right: solid 1px #FFFFFF;
+	border-bottom: solid 1px #FFFFFF;
+	height: 20px;
+	cursor: default;
+	font-weight: normal;
+}
+.js_drop_down_inner {
+	border-left: solid 1px #000000;
+	border-top: solid 1px #000000;
+	border-right: solid 1px #D4D0C8;
+	border-bottom: solid 1px #D4D0C8;
+	background-color: #FFFFFF;
+	height: 18px;
+	width: 50px;
+}
+.js_drop_down_text {
+	font-size: 8pt;
+	font-family: courier new;
+	padding-left: 3px;
+	border: solid 1px white;
+	font-weight: normal;
+}
+.js_drop_down_text_down {
+	font-size: 8pt;
+	font-family: courier new;
+	padding-left: 3px;
+	border: dotted 1px black;
+	font-weight: normal;
+}
+.js_drop_down_arrow {
+	background: url("images/js_dd_arrow.png");
+	width: 16px;
+	height: 16px;
+}
+.js_drop_down_arrow_down {
+	background: url("images/js_dd_arrow_md.png");
+	width: 16px;
+	height: 16px;
+}
+.js_drop_down_options {
+	background-color: #FFFFFF;
+	border-left: solid 1px #B2B2B2;
+	border-top: solid 1px #B2B2B2;
+	border-right: solid 1px #000000;
+	border-bottom: solid 1px #000000;
+	width: 52px;
+	font-size: 8pt;
+	font-family: courier new;
+	font-weight: normal;
+	cursor: default;
+}
+.js_drop_down_option {
+	color: #000000;
+	background-color: #FFFFFF;
+	padding-left: 3px;
+}
+.js_drop_down_option_hover {
+	color: #FFFFFF;
+	background-color: #0A246A;
+	padding-left: 3px;
+}
+</style>
+<script language="JavaScript">
+var js_dd_state = 'none';
+var click_on_js_dd = false;
+var js_dd_init_value = 'js_dd_option_<?php initValue(); ?>';
+var js_dd_value = 'js_dd_option_<?php initValue(); ?>';
+function js_dd_onMdown(el)
+{
+  el.rows[0].cells[0].className = "js_drop_down_text_down";
+  if(js_dd_state!='opened')
+  {
+    el.rows[0].cells[1].className = "js_drop_down_arrow_down";
+    js_dd_state = 'opened';
+    open_js_dd('js_dd_select','js_dd_options');
+  }
+  else if(js_dd_state=='opened')
+  {
+    js_dd_state = 'closed';
+    close_js_dd('js_dd_options');
+  }
+  click_on_js_dd = true;
+}
+function js_dd_onMup(el)
+{
+  el.rows[0].cells[1].className = "js_drop_down_arrow";
+}
+
+function onDocClick()
+{
+  if(click_on_js_dd)
+  {
+    click_on_js_dd = false;
+    return;
+  };
+  el = document.getElementById('js_dd_container');
+  if(js_dd_state=='opened')
+  {
+    js_dd_state = 'closed';
+    close_js_dd('js_dd_options');
+  }
+  else if(js_dd_state=='pre-closed')
+  {
+    js_dd_state = 'closed';
+  }
+  else if(js_dd_state=='closed')
+  {
+    el.rows[0].cells[0].className = "js_drop_down_text";
+    js_dd_state = 'none';
+  };
+}
+
+document.onclick = onDocClick;
+
+function open_js_dd(dd_main_id,dd_options_id)
+{
+  var dd_main_el = document.getElementById(dd_main_id);
+  
+  abs_top = dd_main_el.offsetTop;
+  abs_left = dd_main_el.offsetLeft;
+  obj = dd_main_el;
+  while(obj.offsetParent)
+  {
+    obj=obj.offsetParent;
+    abs_top += obj.offsetTop;
+    abs_left += obj.offsetLeft;
+  };
+  
+  document.getElementById(dd_options_id).style.top=abs_top + dd_main_el.offsetHeight + 'px';
+  document.getElementById(dd_options_id).style.left=abs_left + 'px';
+  document.getElementById(dd_options_id).style.display='';
+}
+
+function close_js_dd(dd_options_id)
+{
+  document.getElementById(dd_options_id).style.display='none';
+}
+
+function js_dd_option_onMover(el)
+{
+  if(el.id!=js_dd_value)
+  {
+  	document.getElementById(js_dd_value).className = "js_drop_down_option";
+  	el.className = "js_drop_down_option_hover";
+  	js_dd_value = el.id;
+  }
+}
+
+function js_dd_option_onMout(el)
+{
+  if(el.id!=js_dd_value)
+  {
+    el.className = "js_drop_down_option";
+  }
+}
+
+function js_dd_option_onMdown()
+{
+  el = document.getElementById('js_dd_container');
+  el.rows[0].cells[1].className = "js_drop_down_arrow_down";
+}
+
+function js_dd_option_onMup()
+{
+  el = document.getElementById('js_dd_container');
+  el.rows[0].cells[1].className = "js_drop_down_arrow";
+  el.rows[0].cells[0].innerHTML = document.getElementById(js_dd_value).innerHTML;
+  close_js_dd('js_dd_options');
+  setTimeout("js_dd_onChange()",10);
+}
+
+function js_dd_onChange()
+{
+  if(js_dd_value!=js_dd_init_value)
+  {
+    js_dd_init_value = js_dd_value;
+    <?php callbackName(); ?>(js_dd_value.replace("js_dd_option_",""));
+  };
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

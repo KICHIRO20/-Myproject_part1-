@@ -1,0 +1,22 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="row">
+	<div class="col-sm-1">
+		<lable class="help-block"><?php Vanishing(); ?></lable>		
+	</div>
+	<div class="col-sm-2">
+		<lable class="help-block"><?php AttributeName(); ?></lable>		
+	</div>
+	<div class="col-sm-1">
+		<?php AttributeHelpIcon(); ?>		
+	</div>
+	<div class="col-sm-2">
+		<lable class="help-block"><?php AttributeCustomControls(); ?></lable>		
+	</div>
+</div>
+
+<div class="row margin-bottom-20">
+	<div class="col-sm-12">
+		<textarea class="form-control <?php AttributeInputClass(); ?>" id="<?php AttributeTag(); ?>" name="<?php AttributeTag(); ?>[default]" cols="74" rows="5" onBlur="formatInput(this);"  onkeyup="formatInput(this);" patternType="string1024" ><?php AttributeDefault(); ?></textarea>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

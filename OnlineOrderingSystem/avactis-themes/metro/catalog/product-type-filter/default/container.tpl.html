@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box product_type_filter">
+    <form action="<?php Local_ProductTypeFormLink(); ?>" method="post">
+    <div class="content">
+        <h1><?php Label("CATALOG_SHOP_BY"); ?></h1>
+        <h2><?php Label("CATALOG_PRODUCT_TYPE"); ?></h2>
+        <ul class="tree">
+            <?php Local_Items(); ?>
+        </ul>
+        <input type="submit" class="<?php lang(); ?> text_buttons button_product_filter" value="<?php Label('CATALOG_FILTER'); ?>" />
+     </div><!-- class="content" -->
+    </form>
+</div><!-- class="box product_type_filter" -->
+<!-- END TPL (DO NOT REMOVE!) -->

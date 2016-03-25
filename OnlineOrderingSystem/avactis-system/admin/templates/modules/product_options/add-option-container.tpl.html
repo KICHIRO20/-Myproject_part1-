@@ -1,0 +1,197 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+<?php JS_OnOptionTypeChanged();  ?>
+<?php JS_OnDiscardAvailChanged(); ?>
+<?php JS_OnShowTypeChanged(); ?>
+
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'AddButton',
+                            'CancelButton'
+                            );
+    disableButtons(buttons);
+}
+
+
+function tryToSubmitForm()
+{
+	add_form=document.forms['AddOption_Form'];
+	
+	if(add_form.elements['NewOption[OptionName]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_001'); ?>');
+		add_form.elements['NewOption[OptionName]'].focus();
+		return;
+	}
+	if(add_form.elements['NewOption[DisplayName]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_002'); ?>');
+		add_form.elements['NewOption[DisplayName]'].focus();
+		return;
+	}
+	if(add_form.elements['NewOption[OptionType]'].value=='SS' && add_form.elements['NewOption[DiscardAvail]'].value=='YES' && add_form.elements['NewOption[DiscardValue]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_003'); ?>');
+		add_form.elements['NewOption[DiscardValue]'].focus();
+		return;
+	}
+	if(add_form.elements['NewOption[OptionType]'].value=='CI'
+		&& (add_form.elements['NewOption[ShowType][CI]'].value=='CBSI' || add_form.elements['NewOption[ShowType][CI]'].value=='CBTA')
+		&& add_form.elements['NewOption[CheckBoxText]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_004'); ?>');
+		add_form.elements['NewOption[CheckBoxText]'].focus();
+		return;
+	}
+	
+	disableButtonsInForm();
+	add_form.submit();
+}
+
+</script>
+
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="font-green-sharp bold uppercase">
+				<i class="fa fa-plus-circle"></i>&nbsp;<?php xmsg('PO','ADD_NEW_OPTION'	); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div id="AddButton"  class="btn btn-circle btn-default" onClick="javascript:tryToSubmitForm();">
+				<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('BTN_ADD'); ?>
+			</div>
+			<div id="CancelButton" class="btn btn-circle btn-default" onClick="javascript:window.location='<?php CancelLink(); ?>'">
+				<i class="fa fa-undo"></i>&nbsp;<?php Msg('BTN_RETURN'); ?>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="caption">
+			<?php ActualHeader(); ?>
+		</div>
+		<br />
+		<div class="table-responsvie">
+	 		<form action="po_new_option.php?asc_action=add_option_to_entity" method="post" name="AddOption_Form">
+		  		<input type="hidden" name="parent_entity" value="<?php _parent_entity(); ?>">
+		  		<input type="hidden" name="entity_id" value="<?php _entity_id(); ?>">
+				<table class="table table-striped table-hover boderless">
+					<tbody>
+						<tr>
+							<td><?php xmsg('PO','OPTION_NAME'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('OPTION_NAME','product-options-messages'); ?></a></td>
+							<td class="text-left"><input type="text" <?php OptionNameField(); ?> class="form-control input-sm"></td>
+						</tr>
+						<tr>
+							<td><?php xmsg('PO','DISPLAY_NAME'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('DISPLAY_NAME','product-options-messages'); ?></a></td>
+							<td class="text-left"><input type="text" class="form-control input-sm" <?php DisplayNameField(); ?>></td>
+						</tr>
+						<tr>
+							<td><?php xmsg('PO','DISPLAY_DESCR'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('DISPLAY_DESCR','product-options-messages'); ?></a></td>
+							<td class="text-left">
+								<textarea class="tiny_mce form-control" id="OptionDescription" <?php OptionDescription(); ?> style="overflow: hidden; padding: 0px;">
+									<?php DescriptionText(); ?>
+								</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td><?php xmsg('PO','OPTION_TYPE'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('OPTION_TYPE','product-options-messages'); ?></a></td>
+							<td class="text-left"><?php OptionTypeField(); ?></td>
+						</tr>
+						<tr id="show_type_for_SS">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('SHOW_TYPE','product-options-messages'); ?></a></td>
+							<td class="text-left"><?php ShowTypeSSField(); ?></td>
+						</tr>
+						<tr id="show_type_for_MS">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('SHOW_TYPE','product-options-messages'); ?></a></td>
+							<td class="text-left"><?php ShowTypeMSField(); ?></td>
+						</tr>
+							<tr id="show_type_for_CI">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('OPTION_NAME','product-options-messages'); ?></a></td>
+							<td class="text-left"><?php ShowTypeCIField(); ?></td>
+						</tr>
+						<tr id="show_type_for_UF">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('SHOW_TYPE','product-options-messages'); ?></a></td>
+							<td><a href="<?php HintLink_ShType(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php ShowTypeUFField(); ?></td>
+						</tr>
+						<tr id="additional_fields_for_SS_01">
+							<td><?php xmsg('PO','DISCARD_AVAIL'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('DISCARD_AVAIL','product-options-messages'); ?></a></td>
+							<td class="text-left"><?php DiscardAvailField(); ?></td>
+						</tr>
+						<tr id="additional_fields_for_SS_02">
+							<td><?php xmsg('PO','DISCARD_VALUE'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('DISCARD_VALUE','product-options-messages'); ?></a></td>
+							<td class="text-left">
+								<input type="text" class="form-control input-sm" <?php DiscardValueField(); ?> >
+							</td>
+						</tr>
+						<tr id="additional_fields_for_CI_01">
+							<td><?php xmsg('PO','CHECKBOX_TEXT'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('CHECKBOX_TEXT','product-options-messages'); ?></a></td>
+							<td class="text-left">
+								<input type="text" class="form-control input-sm" <?php CheckBoxTextField(); ?> >
+							</td>
+						</tr>
+						<tr id="additional_fields_for_SSMS_01">
+							<td><?php xmsg('PO','USE_FOR_IT'); ?></td>
+							<td><a class="pull-left" style="cursor:pointer;"><?php hinttext('USE_FOR_IT','product-options-messages'); ?></a></td>
+							<td class="text-left"><?php UseForITField(); ?></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3" class="text-center">
+								<div id="AddButton"  class="btn btn-circle btn-default" onClick="javascript:tryToSubmitForm();">
+									<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('BTN_ADD'); ?>
+								</div>
+								<div id="CancelButton" class="btn btn-circle btn-default" onClick="javascript:window.location='<?php CancelLink(); ?>'">
+									<i class="fa fa-undo"></i>&nbsp;<?php Msg('BTN_RETURN'); ?>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<script language="JavaScript">
+	onOptionTypeChanged();
+	onDiscardAvailChanged();
+	onShowTypeChanged();
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

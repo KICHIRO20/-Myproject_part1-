@@ -1,0 +1,16 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<h1><?php CMSPageName(); ?></h1>
+<div class="cmspage <?php ViewClassName(); ?> content-page">
+    <div class="content">
+        <div class="cmspage_content">
+        <?php CMSPageContent(); ?> 
+        <?php CMSPageTree(); ?>
+        
+        <?php if (getCMSPageParentPage() > 0) { ?>
+        <br>
+        <a href="<?php CMSPageLink(getCMSPageParentPage()) ?>"><?php Label('CMS_BACK_TO_PARENT_PAGE'); ?></a>
+        <?php } ?>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,24 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label('ACCOUNT_REGISTRATION_FORM_LABEL'); ?></h1>
+        <div class="subheader"><?php Label("ACCOUNT_CREATE_NEW_ACCOUNT"); ?></div>
+        <div class="registration_form">
+            <?php MessageBox(); ?>
+            <p><?php Label("ACCOUNT_PLEASE_FILL_OUT_MESSAGE"); ?></p>
+            <form action="<?php Local_FormActionURL(); ?>" name="RegForm" method="post">
+            <div class="form_view">
+                <?php Local_Form(); ?>
+            </div>
+            <input type="submit" value="" class="<?php lang(); ?> buttons button_register" />
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+

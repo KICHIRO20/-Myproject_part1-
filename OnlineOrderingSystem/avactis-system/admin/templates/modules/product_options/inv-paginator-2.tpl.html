@@ -1,0 +1,29 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<table class="form" cellpadding="1" cellspacing="1" border="0" width="220">
+<tr>
+    <td style="font-weight: normal; color: #666666; text-align: center;"><?php msg('PGNTR_PG'); ?></td>
+</tr>
+<tr>
+  <td width="100%">
+      <table class="paginator" cellpadding="0" cellspacing="0" align="center" border="0">
+      <tr>
+          <td align="right"><a href="javascript: void(0);" onClick="<?php firstOnClick(); ?>" <?php leftStyle(); ?>><?php msg('PGNTR_PREV'); ?></a></td>
+          <td align="center"><?php SectorPages(); ?></td>
+          <td align="left"><a href="javascript: void(0);" onClick="<?php lastOnClick(); ?>" <?php rightStyle(); ?>><?php msg('PGNTR_NEXT'); ?></a></td>
+      </tr>
+      </table>
+  </td>
+</tr>
+<tr>
+ <td align="center" style="padding-top: 7px;">
+  <table class="clear" border="0" cellpadding="0" cellspacing="1" align="center">
+   <tr>
+    <td align="center">
+    <?php SectorSizeChoiser(); ?>
+    </td>
+   </tr>
+  </table>
+ </td>
+</tr>
+</table>
+<!-- END TPL (DO NOT REMOVE!) -->

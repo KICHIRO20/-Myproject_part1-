@@ -1,0 +1,334 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script type="text/javascript">
+<?php JS_Code(); ?>
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold uppercase">
+				<i class="fa fa-info-circle fa-lg"></i>&nbsp;<?php PageName(); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<?php  if (getMode() != "add") {?>
+				<div id="AddNewButton" class="btn btn-circle btn-default" onclick='javascript:addNew();'>
+					<i class="fa fa-plus-circle"></i><span class="hidden-480">&nbsp;<?php xmsg('SYS','LBL_ADD_NEW_FIELD');?></span>
+				</div>
+            		<?php  }elseif (getFldNumber() > 0) { ?>
+            			<div id="BackButton" class="btn btn-circle btn-default" onclick="javascript:gotoList();">
+					<i class="fa fa-undo"></i><span class="hidden-480">&nbsp;<?php xmsg('SYS','LBL_BTN_BACK');?></span>
+				</div>
+            		<?php  }?>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!-- Message -->
+		<?php ResultMessage(); ?>
+		<!-- /Message -->
+		<form name="customFieldEditorForm" action="" method="POST">
+			<input type='hidden' name='asc_action' value="AddCustomField_action">
+			<input type='hidden' name='variant_id' value="<?php Variant_id(); ?>">
+			<input type='hidden' name='attribute_id' value="<?php Attribute_id(); ?>">
+			<input type='hidden' name='mode' value="<?php Mode(); ?>">
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover">
+					<thead>
+						<tr class="bg-info">
+							<th colspan="2">
+								<?php TxtFldName(); ?>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php if (getMode() != "add") {?>
+							<tr>
+								<?php CustomFieldsList(); ?>
+							</tr>
+							<tr>
+								<td class="text-left">
+									<span class="bold"><?php xmsg('SYS','LBL_VISIBLE_FLD_VIEWTAG_NAME');?></span><br />
+									<?php xmsg('SYS','LBL_VISIBLE_FLD_VIEWTAG_DESCR');?>
+								</td>
+								<td style="vertical-align: middle;"><?php CFldViewTag(); ?></td>
+							</tr>
+						<?php } ?>
+						<tr>
+							<td class="text-left">
+								<span class="bold"><?php xmsg('SYS','LBL_VISIBLE_FLD_NAME');?></span><br />
+								<?php xmsg('SYS','LBL_VISIBLE_FLD_NAME_DESCR');?>
+							</td>
+							<td style="vertical-align: middle;">
+								<?php CFldVisibleName(); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								<span class="bold"><?php xmsg('SYS','LBL_FLD_DESCRIPTION');?></span><br />
+								<?php xmsg('SYS','LBL_FLD_DESCRIPTION_DESCR');?>
+							</td>
+							<td style="vertical-align: middle;">
+								<?php CFldDescription(); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								<span class="bold"><?php xmsg('SYS','LBL_FLD_VISIBLE');?></span><br />
+								<?php xmsg('SYS','LBL_FLD_VISIBLE_DESCR');?>
+							</td>
+							<td style="vertical-align: middle;">
+								<?php CFldVisible(); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								<span class="bold"><?php xmsg('SYS','LBL_FLD_REQUIRED');?></span><br />
+								<?php xmsg('SYS','LBL_FLD_REQUIRED_DESCR');?>
+							</td>
+							<td style="vertical-align: middle;">
+								<?php CFldRequired(); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								<span class="bold"><?php xmsg('SYS','LBL_FLD_FLD_TYPE');?></span><br />
+								<?php xmsg('SYS','LBL_FLD_FLD_TYPE_DESCR');?>
+							</td>
+							<td style="vertical-align: middle;">
+								<?php CFldType(); ?>
+							</td>
+						</tr>
+						<tr id="values_section" style="visibility:hidden;display:none;">
+							<td class="text-left" style="vertical-align: middle;">
+								<span class="bold"><?php xmsg('SYS','LBL_FLD_AVAIL_VALUES');?></span><br />
+								<?php xmsg('SYS','LBL_FLD_AVAIL_VALUES_DESCR');?>
+							</td>
+							<td style="vertical-align: middle;">
+								<?php CFldValues(); ?>
+							</td>
+						</tr>
+						<tr id="parameters" style="visibility:hidden;display:none;">
+							<td class="text-left" style="vertical-align: middle;">
+								<span class="bold"><?php xmsg('SYS','LBL_FLD_FLD_PARAMS');?></span><br />
+								<?php xmsg('SYS','LBL_FLD_FLD_PARAMS_DESCR');?>
+							</td>
+							<td style="vertical-align: middle;">
+								<?php CFldParams(); ?>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td class="text-center" colspan="2">
+								<div id="SaveButton" class="btn btn-default btn-circle" onclick="javascript:saveAction();">
+									<i class="fa fa-save"></i>&nbsp;<?php xmsg('SYS','LBL_BTN_SAVE');?>
+								</div>
+								<div id="CancelButton" class="btn btn-default btn-circle" onclick="javascript:closeAndFocusParent();">
+									<i class="fa fa-times-circle"></i>&nbsp;<?php xmsg('SYS','LBL_BTN_CLOSE');?>
+								</div>
+								<?php if (getMode() != "add") {?>
+									<div id="RemoveButton" class="btn btn-default btn-circle" onclick="javascript:removeAction();">
+										<i class="fa fa-trash-o"></i>&nbsp;<?php xmsg('SYS','LBL_BTN_DELETE');?>
+									</div>
+								<?php }elseif (getFldNumber() > 0){ ?>
+									<div id="BackButton" class="btn btn-default btn-circle" onclick="javascript:gotoList();">
+										<i class="fa fa-undo"></i>&nbsp;<?php xmsg('SYS','LBL_BTN_BACK');?>
+									</div>
+								<?php }?>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+		</form>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<script type="text/javascript">
+
+var t = document.getElementById('customTypeChoice').value;
+
+document.getElementById('type_'+t).style.visibility="visible";
+document.getElementById('type_'+t).style.display="inline";
+
+if (document.getElementById('customTypeChoice').value == 'CUSTOM_FIELD_TYPE_SELECT')
+{
+    document.getElementById('customFieldValues').disabled=false;
+    document.getElementById('values_section').style.visibility = 'visible';
+    document.getElementById('values_section').style.display = 'table-row';
+    document.getElementById('parameters').style.visibility = 'hidden';
+    document.getElementById('parameters').style.display = 'none';
+
+}
+else
+{
+    document.getElementById('customFieldValues').disabled=true;
+    document.getElementById('values_section').style.visibility = 'hidden';
+    document.getElementById('values_section').style.display = 'none';
+    document.getElementById('parameters').style.visibility = 'visible';
+    document.getElementById('parameters').style.display = 'table-row';
+}
+
+function saveAction()
+{
+    document.forms[0].asc_action.disabled = false; 
+
+    if (document.forms[0].mode.value == "edit")
+        document.forms[0].asc_action.value='EditCustomField_action';
+
+    else if (document.forms[0].mode.value == "add")
+        document.forms[0].asc_action.value='AddCustomField_action';
+
+    var status = document.getElementById('customTypeChoice');
+
+    for (j=0;j<document.forms[0].elements.length;j++)
+    {
+        var e = document.forms[0].elements[j];
+        var rg = new RegExp(status.value+"_");
+        var rg1 = new RegExp("params");
+
+        if (rg.test(e.id) == true)
+        {
+            e.disabled = false;
+        }
+        else if (rg1.test(e.name) == true)
+        {
+            e.disabled = true;
+        }
+
+    }
+
+    if (document.forms[0].customFieldVisibleName.value.split(' ').join('') == "")
+    {
+        alert("<?php xmsg('SYS','LBL_NO_EMPTY_NAME'); ?>");
+        return false;
+    }
+
+    document.forms[0].submit();
+}
+
+function removeAction()
+{
+    var confirm_text = "<?php DeleteConfirmMsg(); ?>";
+
+
+    if (document.forms[0].mode.value == "add") return false;
+    
+    bootbox.confirm(confirm_text,function(result){
+    if(result){
+       document.forms[0].asc_action.disabled = false;  
+       document.forms[0].asc_action.value = "RemoveCustomField_action";
+       document.forms[0].submit();
+    } });
+}
+
+
+function changeField()
+{
+    var fld = document.getElementById('customFieldsList');
+    document.forms[0].attribute_id.value = fld.value;
+    document.forms[0].asc_action.disabled = true;
+    document.forms[0].submit();
+}
+
+function addNew()
+{
+    document.forms[0].asc_action.disabled = true;
+    document.forms[0].mode.value = "add";
+    document.forms[0].submit();
+}
+
+function validateNum(id,def)
+{
+    var e = document.getElementById(id);
+    var v = e.value;
+    var check = /^\d*$/;
+    if (check.test(v) == false)
+    {
+       alert('<?php msg("INVALID_PARAM_FORMAT_NOT_NUMBER"); ?>'); 
+       e.value = def;
+    }
+}
+
+function gotoList()
+{
+    var confirm_text = "<?php msg('LBL_GO_TO_LIST');?>";
+    
+    bootbox.confirm(confirm_text,function(result){
+    if(result){
+       window.location.href = 'popup_window.php?page_view=ManageCustomFields&variant_id=<?php Variant_Id(); ?>';
+       //window.history.go(-1);
+    } });
+}
+
+function changeStatus()
+{
+var status = document.getElementById('customTypeChoice');
+var l=sections.length;
+                    
+if (status.value == 'CUSTOM_FIELD_TYPE_SELECT')
+{
+    document.getElementById('customFieldValues').disabled=false;
+    document.getElementById('values_section').style.visibility = 'visible';
+    document.getElementById('values_section').style.display = 'table-row';
+    document.getElementById('parameters').style.visibility = 'hidden';
+    document.getElementById('parameters').style.display = 'none';
+}
+else
+{
+    document.getElementById('customFieldValues').disabled=true;
+    document.getElementById('values_section').style.visibility = 'hidden';
+    document.getElementById('values_section').style.display = 'none';
+    document.getElementById('parameters').style.visibility = 'visible';
+    document.getElementById('parameters').style.display = 'table-row';
+}
+
+for (i=0;i<l;i++)
+{
+    var s = document.getElementById('type_'+sections[i]);
+    if (sections[i] == status.value)
+    {
+       s.style.visibility='visible';
+       s.style.display='inline';
+    }
+    else
+    {
+       s.style.visibility='hidden';
+       s.style.display='none';
+    }
+
+    for (j=0;j<document.forms[0].elements.length;j++)
+    {
+        var e = document.forms[0].elements[j];
+        var rg = new RegExp(status.value+"_");
+        var rg1 = new RegExp("params");
+        if (rg.test(e.id) == true)
+        {
+            e.disabled = false;
+        }
+        else if (rg1.test(e.name) == true)
+        {
+            e.disabled = true;
+        }
+    }
+
+}
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

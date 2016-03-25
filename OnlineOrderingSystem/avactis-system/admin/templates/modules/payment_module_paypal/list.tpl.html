@@ -1,0 +1,249 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- tinyMCE -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2'
+                            );
+    disableButtons(buttons);
+}
+
+function isValidEmail(email)
+{
+    var supported = 0;
+    if (window.RegExp)
+    {
+        var tempStr = "a";
+        var tempReg = new RegExp(tempStr);
+        if (tempReg.test(tempStr))
+            supported = 1;
+    }
+    if (!supported) 
+        return (email.indexOf(".") > 1) && (email.indexOf("@") > 1);
+    var r1 = new RegExp("(@.*@)|(\\.\\.)|(@\\.)|(^\\.)");
+    var r2 = new RegExp("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,6}|[0-9]{1,3})(\\]?)$");
+    return (!r1.test(email) && r2.test(email));
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    if (formAction == 'save')
+    {
+        if (form.ModuleName.value == "")
+        {
+            alert('<?php Alert_001(); ?>');
+            return;
+        }
+
+        if (form.ModuleEmail.value == "")
+        {
+            alert('<?php Alert_002(); ?>');
+            return;
+        }
+        if (!isValidEmail(form.ModuleEmail.value))
+        {
+            alert('<?php Alert_003(); ?>');
+            return;
+        }
+    }
+
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+function toggleAdditionalBenefits()
+{
+    var el = document.getElementById('AdditionalBenefitsDivId');
+
+    if (el.style.display == 'none')
+    {
+        el.style.display = '';
+    }
+    else
+    {
+        el.style.display = 'none';
+    }
+}
+
+//-->
+jQuery(document).ready(function($){
+	$("#SaveButton2").click(function(){
+	var mode = $("#MODULE_MODE").val();
+
+		if(mode == 1)
+		{
+			alert("Test Mode is On!");
+		}
+	});
+});
+</script>
+
+<form <?php EditPayPalForm(); ?> method="post" id="EditPayPalForm">
+<?php HiddenArrayViewState(); ?>
+<?php Errors(); ?>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php ModuleType(); ?> </span>
+			<span class="caption-subject font-blue-sharp"><?php ModuleName(); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditPayPalForm', 'save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php ModuleStatusFieldName(); ?></span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_STATUS_FIELD_NAME', 'payment-module-paypal-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<?php ModuleStatusField(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php xmsg('PM_PP_CC', 'MODULE_CERT_MORE_FIELD_NAME'); ?></span>
+				<span class="pull-right"></span>
+			</div>
+			<div class="col-sm-8">
+				<?php xmsg('PM_PP_CC', 'MODULE_CERT_MORE_FIELD_DESCR'); ?>
+    	        <br /><br />
+	            <div id="AdditionalBenefitsDivId" style="display: none">
+                	<?php xmsg('PM_PP_CC', 'MODULE_CERT_ADDITIONAL_FIELD_DESCR_1'); ?>
+                	<?php xmsg('PM_PP_CC', 'MODULE_CERT_ADDITIONAL_FIELD_DESCR_2'); ?>
+                	<?php xmsg('PM_PP_CC', 'MODULE_CERT_ADDITIONAL_FIELD_DESCR_3'); ?>
+            	</div>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php xmsg('PM_PP_CC', 'MODULE_SEE_DEMO_FIELD_NAME'); ?></span>
+				<span class="pull-right"></span>
+			</div>
+			<div class="col-sm-8">
+				<a target="blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/demo/wpstandard/WPStandardDemo-outside">Click Here</a>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+			<?php PmSmAcceptedCurrencies(); ?>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleMethodNameFieldName(); ?> *</span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_METHOD_NAME_FIELD_NAME', 'payment-module-paypal-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<input class="form-control input-sm input-large" type="text" <?php ModuleNameField(); ?>>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleEmailFieldName(); ?> *</span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_EMAIL_FIELD_NAME', 'payment-module-paypal-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<input class="form-control input-sm input-large" type="text" <?php ModuleEmailField(); ?>>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php ModuleBillingInfoFieldName(); ?></span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_BILLING_INFO_FIELD_NAME', 'payment-module-paypal-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<select class="form-control input-sm input-small" name="ModuleBillingInfo">
+                	<?php ModuleBillingInfoOptions(); ?>
+            	</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php ModuleAddressOverrideFieldName(); ?></span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_ADDRESS_OVERRIDE_FIELD_NAME', 'payment-module-paypal-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<select class="form-control input-sm input-small" name="ModuleAddressOverride">
+                	<?php ModuleAddressOverrideOptions(); ?>
+            	</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php ModuleCartFieldName(); ?></span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_CART_FIELD_NAME', 'payment-module-paypal-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<select class="form-control input-sm input-small" name="ModuleCart">
+               		<?php ModuleCartOptions(); ?>
+            	</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php ModuleModeFieldName(); ?></span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_MODE_FIELD_NAME', 'payment-module-paypal-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<select class="form-control input-sm input-small" name="ModuleMode" id="MODULE_MODE">
+                	<?php ModuleModeOptions(); ?>
+            	</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+
+		<span class="required alert-danger"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span>
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="SaveButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditPayPalForm', 'save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

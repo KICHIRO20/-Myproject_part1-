@@ -1,0 +1,47 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<li>
+        <?php
+            if (getProductLargeImageWidth() == '1')
+            {
+                    if (getProductSmallImageWidth() == '1')
+                    { ?>
+                        <div class="noimageicon"></div>
+            <?php   }
+        
+                    else { ?>
+                <img src="<?php ProductSmallImageSrc(); ?>" width="50" height="50" />
+                <?php    }
+  
+            }
+                else {
+                        if (getProductSmallImageWidth() == '1') 
+                        { ?>
+                <a href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>">
+                    <img src="<?php ProductLargeImageSrc(); ?>" width="50" height="50" alt="<?php ProductName(); ?>" />
+                </a>
+                <?php   }
+                        
+                        else
+                        { ?>
+                          <a href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>">
+                            <img src="<?php ProductSmallImageSrc(); ?>" width="50" height="50" alt="<?php ProductName(); ?>" />
+                          </a>
+                <?php   }
+                    
+                    } 
+        ?>
+
+                  <span class="cart-content-count">x <?php Local_ProductQuantity(); ?></span>
+                  
+                  <strong><a href="<?php ProductInfoLink(); ?>"><?php ProductName(); ?></a></strong>
+                  
+                  <em><?php Local_CartItemSalePrice(); ?></em>         
+                   <form method="post">
+            <a class="del_mini_prod del-goods cart-content-count"></a>
+            <input type="hidden" name="asc_action" value="RemoveProductFromCart">
+            <input type="hidden" name="cart_id" value="<?php CartID(); ?>">
+        </form>     
+
+</li>
+
+<!-- END TPL (DO NOT REMOVE!) -->

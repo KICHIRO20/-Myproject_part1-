@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+ <li class="<?php bmClass(); ?>">
+	<a data-toggle="tab" href="#" onClick="<?php bmOnClick(); ?>" onMouseOver="bmOver(event,this,'<?php bmName(); ?>');" onMouseOut="bmOut(event,this);"><i class="fa <?php bmIcon(); ?>"></i>  <?php bmText(); ?> </a>
+</li>  
+<!-- END TPL (DO NOT REMOVE!) -->
+
+
+ <td class="bookmark_<?php bmClass(); ?>_left"><img src="images/bookmarks/bm-<?php bmClass(); ?>-l.gif"></td>
+    <td class="bookmark_<?php bmClass(); ?>_icon" onClick="<?php bmOnClick(); ?>" onMouseOver="bmOver(event,this,'<?php bmName(); ?>');" onMouseOut="bmOut(event,this);"><img src="images/icons/<?php bmIcon(); ?>.gif"></td>
+    <td class="bookmark_<?php bmClass(); ?>_main" onClick="<?php bmOnClick(); ?>" onMouseOver="bmOver(event,this,'<?php bmName(); ?>');" onMouseOut="bmOut(event,this);"><?php bmText(); ?></td>
+  <td class="bookmark_<?php bmClass(); ?>_right"><img src="images/bookmarks/bm-<?php bmClass(); ?>-r.gif"></td>

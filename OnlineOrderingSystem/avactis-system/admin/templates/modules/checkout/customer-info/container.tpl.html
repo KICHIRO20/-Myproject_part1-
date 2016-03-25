@@ -1,0 +1,168 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+    function prepareSubmitLogDecryptedCreditCardInfoReview()
+    {
+        form_action_id = 'asc_action2';
+        el = document.getElementById(form_action_id);
+        old_form_action = el.value;
+        el.value = 'log_decrypted_credit_card_info_review';
+
+//        el = document.getElementById('LogDecryptedCreditCardInfoReview');
+//        el.submit();
+    }
+
+    function SubmitRemovePersonInfoGroup(order_id, group_person_info_variant_id)
+    {
+        //              . OrderId                                        , 
+        //                                                           php           .
+        //              !
+        ////set parameters
+        el_from = document.getElementById('order_id');
+        el_to = document.getElementById('RemovePersonInfoGroup_order_id');
+        el_to.value = el_from.value;
+
+        el = document.getElementById('RemovePersonInfoGroup_person_info_variant_id');
+        el.value = group_person_info_variant_id;
+
+        //submit form
+        el = document.getElementById('RemovePersonInfoGroup');
+        el.submit();
+    }
+
+    function prepareSubmitPurgeCVV(person_info_variant_id, group_id)
+    {
+        //group_id is needed to determine the RSA private key input field name.
+        //person_info_variant_id should be equal to group_id almost always (?).
+
+        //set parameters
+        el = document.getElementById('PurgeCVV_person_info_variant_id');
+        el.value = person_info_variant_id;
+
+        form_action_id = 'asc_action1';
+        el = document.getElementById(form_action_id);
+        old_form_action = el.value;
+        el.value = 'PurgeCVVFromStoredCreditCardInfo';
+
+        el = document.getElementById('EncryptedDataIndex1');
+        el.value = group_id;
+
+//        form_id = 'CustomerInfo';
+//        el = document.getElementById(form_id);
+//        old_form_target = el.target;
+//        el.target = "IframePurgeCVV";
+//        el.submit();
+
+//        setTimeout('restoreFormParams("'+form_id+'","'+old_form_target+'","'+form_action_id+'","'+old_form_action+'");', 500); //0.5 s - wait a little; form.submit and other function calls may be asynchronious.
+    }
+
+    /**
+     * Check if <input type="file> was filled by user
+     */
+    function checkPrivateKeyFileIsSelected(group_id)
+    {
+        el = document.getElementById('rsa_private_key_' + group_id);
+        if(el.value == '')
+            return false;
+        else
+            return true;
+    }
+</script>
+
+<iframe style="" name="IframeCustomerInfo" id="IframeCustomerInfo" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="admin.php" name="CustomerInfo" id="CustomerInfo" method="post" enctype="multipart/form-data" target="IframeCustomerInfo">
+<input type="hidden" name="asc_action" id="asc_action" value="DecryptRsaBlowfishJavascript">
+<input type="hidden" name="FormSubmitValue" value="Decrypt"> 
+<input type="hidden" name="EncryptedDataIndex" id="EncryptedDataIndex" value="">
+
+<!--                     CVV                -->
+<input type="hidden" name="person_info_variant_id" id="PurgeCVV_person_info_variant_id" value="">
+
+<!--                     CVV               .            '1'. -->
+<input type="hidden" name="asc_action1" id="asc_action1" value="">
+<input type="hidden" name="EncryptedDataIndex1" id="EncryptedDataIndex1" value="">
+
+<!--                                                   .            '2'. -->
+<input type="hidden" name="asc_action2" id="asc_action2" value="">
+
+
+<table class="form" cellspacing="1" cellpadding="5" width="100%">
+  <tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+      <table width="100%">
+        <tr>
+          <td><?php msg('CUSTOMERS_INFO'); ?></td>
+          <td style="text-align: right;">
+      <table class="clear" cellpadding="0" cellspacing="0" align="right">
+        <tr>
+          <td noWrap style="padding-right: 8px;"><?php PageHelpLink('customer_info'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('customer_info'); ?></td>
+          <td><div id="CancelButton" class="button button_5em" onclick="closeAndFocusParent();"><?php msg('BTN_CANCEL_CUSTOMER_INFO'); ?></div></td>
+        </tr>
+      </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+<?php CustomerInfo(); ?>
+<?php BillingInfo(); ?>
+<?php ShippingInfo(); ?>
+<?php CreditCardInfo(); ?>
+  <tr class="group" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+      <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><?php msg('CUSTOMERS_INFO_ORDERS'); ?></td>
+          <td style="text-align: right;"><div onclick="toggleRows('order_');" style="cursor: pointer;"><img id="img_order_" src="images/plus.gif">&nbsp;<?php msg('SHOW_HIDE_LABEL'); ?></div></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr id="order_0">
+    <td colspan="3" style="padding: 0px 0px 0px 1px">
+      <table cellpadding="3" cellspacing="1" width="100%">
+        <tr>
+          <td style="background-color: #eef2f8"><?php msg('CUSTOMERS_INFO_ORDER_ID'); ?></td>
+          <td style="background-color: #eef2f8"><?php msg('CUSTOMERS_INFO_ORDER_NAME'); ?></td>
+          <td style="background-color: #eef2f8"><?php msg('CUSTOMERS_INFO_ORDER_DATE'); ?></td>
+          <td style="background-color: #eef2f8"><?php msg('CUSTOMERS_INFO_ORDER_AMOUNT'); ?></td>
+          <td style="background-color: #eef2f8"><?php msg('CUSTOMERS_INFO_ORDER_STATUS'); ?></td>
+          <td style="background-color: #eef2f8"><?php msg('CUSTOMERS_INFO_ORDER_PAYMENT_STATUS'); ?></td>
+        </tr>
+<?php Orders(); ?>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">
+      <table class="clear" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><div id="CancelButton" class="button button_5em" onclick="closeAndFocusParent();"><?php msg('BTN_CANCEL_CUSTOMER_INFO'); ?></div></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <script language="javascript">$(function () { setFromState('order_'); });</script> 
+</table>
+
+<!--                     CVV                -->
+<input type="hidden" name="order_id" id="order_id" value="<?php LastOrderId(); ?>">
+</form>
+
+<!--                                  decrypted credit card info -->
+<iframe style="" name="IframeLogDecryptedCreditCardInfoReview" id="IframeLogDecryptedCreditCardInfoReview" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="orders_info.php" name="LogDecryptedCreditCardInfoReview" id="LogDecryptedCreditCardInfoReview" method="post" target="IframeLogDecryptedCreditCardInfoReview">
+<input type="hidden" name="asc_action" id="LogDecryptedCreditCardInfoReview_asc_action" value="log_decrypted_credit_card_info_review">
+<input type="hidden" name="order_id" id="LogDecryptedCreditCardInfoReview_order_id" value="<?php OrderId(); ?>">
+</form>
+
+<!--                           credit card info (          )                -->
+<iframe style="" name="IframeRemovePersonInfoGroup" id="IframeRemovePersonInfoGroup" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="orders_info.php" name="RemovePersonInfoGroup" id="RemovePersonInfoGroup" method="post" target="IframeRemovePersonInfoGroup">
+<input type="hidden" name="asc_action" id="RemovePersonInfoGroup_asc_action" value="RemovePersonInfoOrderData">
+<input type="hidden" name="order_id" id="RemovePersonInfoGroup_order_id" value="<?php OrderId(); ?>">
+<input type="hidden" name="person_info_variant_id" id="RemovePersonInfoGroup_person_info_variant_id" value="">
+</form>
+
+<!--                           CVV    credit card info                -->
+<iframe style="" name="IframePurgeCVV" id="IframePurgeCVV" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

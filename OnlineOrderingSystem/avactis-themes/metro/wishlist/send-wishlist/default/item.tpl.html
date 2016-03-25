@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php Local_Index(); ?>. <?php Local_ProductName(); ?>
+
+<?php if (getLocal_ProductOptions()) { Local_ProductOptions(); } ?>
+
+<?php Label('CATALOG_ITEM_PRICE'); ?>:  <?php Local_WLItemSalePrice(); ?> 
+<?php Label('CATALOG_QUANTITY'); ?>: <?php Local_ProductQuantity(); ?> 
+<?php Label('CATALOG_ITEM_TOTAL'); ?>: <?php Local_ProductSubtotal(); ?> 
+
+<?php Label('CATALOG_ITEM_ORDERLINK'); ?>:
+<?php Local_ProductOrderLink(); ?>
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

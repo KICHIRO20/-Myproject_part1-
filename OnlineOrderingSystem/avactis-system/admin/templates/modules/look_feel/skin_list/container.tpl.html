@@ -1,0 +1,22 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script>
+jQuery(document).ready(function($){
+	$(".color_box").colorbox({rel:'color_box', transition:"fade"});
+});
+</script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gift font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('SYS','LOOKNFEEL_PAGE_TITLE'); ?></span>
+			<span class="caption-helper text-lowercase"><?php xMsg('LF', 'LF_DESIGN_MANAGEMENT'); ?>...</span>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<h4 class="form-section"><?php xMsg('LF', 'LF_CURRENT_SKIN'); ?></h4>
+		<div class="row margin-bottom-10"><?php CurrentSkinInfo(); ?></div>
+		<h4 class="form-section"><?php xMsg('LF', 'LF_ACTIVE_SKINS'); ?></h4>
+		<div class="row margin-bottom-10"><?php SkinList(); ?>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

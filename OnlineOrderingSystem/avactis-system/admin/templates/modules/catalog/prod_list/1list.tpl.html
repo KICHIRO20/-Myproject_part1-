@@ -1,0 +1,544 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+	global $application;
+    $mr = &$application->getInstance('MessageResources');
+?>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function submitFormProdList(formId, asc_action_name, formAction, formTarget)
+{
+    var form = document.forms[formId];
+    var is_selected = false;
+    var selected_count = 0;
+    var selected_index = null;
+    var i=0;
+    var elem = document.getElementById('select_'+i);
+    while (elem)
+    {
+        if (elem.checked)
+        {
+            is_selected = true;
+            selected_count++;
+            selected_index = i;
+            if (formTarget != 'Edit_Product')
+                break;
+        }
+        i++;
+        elem = document.getElementById('select_'+i);
+    }
+    if(!is_selected)
+    {
+        if(formTarget == 'Edit_Product')
+        {
+            alert('<?php Msg("PRDLST_010"); ?>');
+        }
+        else
+        {
+            alert('<?php AlertMessage(); ?>');
+        }
+        return; 
+    }
+
+    if(formTarget == 'Edit_Product')
+    {
+        if (selected_count != 1)
+        {
+
+            asc_action_name = "SetProductGroup";
+            formTarget = "";
+            form.action = formAction;
+        }
+        else
+        {
+            form.action = formAction+document.getElementById('select_'+selected_index).value;
+        }
+    }
+    else
+    {
+        form.action = formAction;
+    }
+
+
+    form.elements['act'].value = asc_action_name;
+
+    if (formTarget != "")
+    {
+//        var newwindow = _openURLinNewWindow("", formTarget);
+//        form.target = formTarget;
+    }
+
+    form.submit();
+}
+
+
+
+
+function sort(alert_message)
+{
+    if (alert_message == '')
+    {
+        NewWindow('SortCat', '<?php SortProdHref(); ?>', 'SortProd', true, '');
+    }
+    else
+    {
+        alert(alert_message);
+        return;
+    }
+}
+//For adding the selected cat id to Move/Copy functions
+
+function getSelectedCategories()
+{
+    var i=0;
+    var selected = new Array();
+    catvalues = document.getElementById('catval_id_'+i);
+    prodvalues = document.getElementById('select_'+i);
+      
+    
+    while(catvalues && prodvalues)
+    {
+     	if(prodvalues.checked)
+        {
+			
+			selected.push(catvalues.value);
+    	}
+        i++;
+      	catvalues = document.getElementById('catval_id_'+i);
+    	prodvalues = document.getElementById('select_'+i);
+    };
+    
+    return selected;
+};
+
+function selectedcatid()
+{
+	 var i=0;
+	el = document.getElementById('catval_id_'+i);
+    while(el)
+    {
+            
+        i++;
+        el = document.getElementById('catval_id_'+i);
+    };
+	
+	return el; 
+	
+	
+}
+
+function autocheck(selectid)
+{
+	checkbox = document.getElementById('select_'+selectid);
+    checkbox.checked = true;
+}
+
+   
+
+//-->
+/* For sliding search content */
+jQuery(document).ready(function(){
+	 jQuery(".flipsearch").click(function(){
+	 jQuery('.flipsearch').removeClass('on');
+	 jQuery('#searchpanel').slideUp('normal');
+   
+            if(jQuery(this).next().is(':hidden') == true) {
+                            
+                    jQuery(this).addClass('on');
+                      
+                    jQuery(this).next().slideDown('normal');
+            } 
+                                  
+	         
+  });
+  
+  
+});
+</SCRIPT>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+
+// ********************************
+// application-specific functions *
+// ********************************
+
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		curleft = obj.offsetLeft
+		curtop = obj.offsetTop
+		while (obj = obj.offsetParent) {
+			curleft += obj.offsetLeft
+			curtop += obj.offsetTop
+		}
+	}
+	return new Array(curleft,curtop);
+}
+
+function preShowMenu()
+{
+    
+    return true;
+}
+
+function showMenu(menuNumber, eventObj)
+{
+    hideAllMenus();
+    var menuId = 'search_menu1';// + menuNumber;
+    this_el  = document.getElementById(menuId);
+    this_el.style.visibility = 'visible';
+    eventObj.cancelBubble = true;
+    return true;
+}
+
+
+function hideAllMenus()
+{
+    //changeObjectVisibility('search_menu1', 'hidden');
+    //var menuTitle = getStyleObject('search_menuTitle1');
+}
+
+function stopEventProparation(e)
+{
+    /* Don't allow document.onclick event handler to close popup DIV
+       if click is on DIV itself.
+    */
+    if (!e) var e = window.event
+    // handle event
+    e.cancelBubble = true;
+    if (e.stopPropagation) 
+        e.stopPropagation();
+}
+
+document.onclick = hideAllMenus;
+
+// -->
+</SCRIPT>
+<style>
+.flipsearch {
+    background: url("../images/arrow-toggle.png") no-repeat scroll 0 3px #eee !important;
+    color: #0B3861;
+    cursor: pointer;
+    font-size: 9pt;
+    font-weight: bold;
+    line-height: 17px;
+    padding-left: 19px;
+    padding-bottom: 1px;
+}
+</style>
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-search"></i> <?php xmsg('CTL','CTL_SEARCH_PRODUCTS'); ?>
+		</div>
+		<div class="tools">
+			<a class="expand" href="javascript:;"></a>
+		</div>
+	</div>
+	<div class="portlet-body display-hide" style="display: none;">
+		<?php ProductSearchForm(); ?>
+	</div>
+</div>
+<FORM METHOD=POST name="ProductListing" ACTION="" ID ="ProductListing" target="" style="margin: 0px;">
+        <INPUT TYPE="hidden" name="act" value="SetCurrCat">
+       
+                   <div class="portlet light">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-gift font-green-sharp"></i>
+									<span class="caption-subject font-green-sharp bold uppercase"><?php msg('MENU_PRODUCTS'); ?></span>
+									<span class="caption-helper"><?php msg('MNG_PRD_PAGE_NAME'); ?>...</span>
+								</div>
+								<div class="actions">
+			<div onclick="javascript:go('<?php Add_Product_Link(); ?>', 'AddProduct');"  class="btn btn-circle btn-default" id="DeleteButton1">
+				<i class="fa fa-plus"></i> 
+				<span class="hidden-480"> <?php msg('BTN_ADDPRD'); ?> </span>
+			</div>
+
+			<div onclick="submitFormProdList('ProductListing','SetCurrentProduct','<?php Edit_Product_Link(); ?>', 'Edit_Product');"  class="btn btn-circle btn-default" id="UpdateButton1">
+				<i class="fa fa-edit"></i> 
+				<span class="hidden-480"> <?php msg('BTN_EDIT_PRD'); ?> </span>
+		     </div>
+		     <div onclick="OnDeleteClick();"  class="btn btn-circle btn-default" id="DeleteButton1">
+				<i class="fa fa-times"></i> 
+				<span class="hidden-480"> <?php msg('BTN_DELETE_PRD'); ?> </span>
+			</div>
+			<div onclick="OnMoveButtonClick(selectedcatid());"  class="btn btn-circle btn-default" id="DeleteButton1">
+				<i class="fa fa-arrows"></i> 
+				<span class="hidden-480">active</span>
+			</div>
+			<div onclick="OnCopyButtonClick(selectedcatid())"  class="btn btn-circle btn-default" id="DeleteButton1">
+				<i class="fa fa-copy"></i> 
+				<span class="hidden-480"> <?php msg('BTN_COPY_PRD'); ?> </span>
+			</div>
+			<div onclick="<?php if (!getIfSearchFormActive()) { ?>sort('<?php SortAlertMessage(); ?>');<?php } ?>"  class="btn btn-circle btn-default" id="DeleteButton1">
+				<i class="fa  fa-sort"></i> 
+				<span class="hidden-480"> <?php msg('BTN_SORT_PRD'); ?> </span>
+			</div>
+									<div class="btn-group">
+										<a data-toggle="dropdown" href="#" class="btn btn-default btn-circle">
+										<i class="fa fa-share"></i> Tools <i class="fa fa-angle-down"></i>
+										</a>
+										<ul class="dropdown-menu pull-right">
+											<li>
+												<a href="product_import.php"><span><?php xmsg('CTL','PRODUCTS_IMPORT'); ?></span></a>
+											</li>
+											<li>
+												<a href="product_export.php"><span><?php xmsg('CTL','PRODUCTS_EXPORT'); ?></span></a>
+											</li>
+											
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="table-container" style="">
+									
+									<div id="datatable_products_wrapper" class="dataTables_wrapper dataTables_extended_wrapper no-footer">
+									<div class="row">
+										<?php HeaderData(); ?>
+									</div>
+
+								<div class="table-responsive"><table id="datatable_products" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="datatable_products_info" role="grid">
+								<thead>
+									<tr class="heading" role="row">
+										<th class="text-center">
+									<span><INPUT TYPE="checkbox" onclick="selectItems('ProductListing');" id="SelectAll"></span>
+										</th>
+										<th class="text-center sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Category
+										: activate to sort column ascending">
+											<?php msg('MNG_PRD_COL_HDR_003'); ?>
+										</th><th class="text-center sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Product&amp;nbsp;Name
+										: activate to sort column ascending">
+											<?php msg('MNG_PRD_COL_HDR_002'); ?>
+										</th><th class="text-center sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Price
+										: activate to sort column ascending">
+											 <?php Local_SortBySKU(); ?>
+										</th><th class="text-center sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Quantity
+										: activate to sort column ascending">
+											<?php msg('MNG_PRD_COL_HDR_008'); ?>
+										</th><th class="sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Date&amp;nbsp;Created
+										: activate to sort column ascending">
+											 <?php Local_SortByName(); ?>
+										</th><th class="text-center sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Status
+										: activate to sort column ascending">
+											<?php Label('CATALOG_CATEGORIES'); ?>
+										</th><th class="text-center sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Actions
+										: activate to sort column ascending">
+											<?php Local_SortBySalePrice(); ?>
+										</th>
+										<th class="text-center sorting" aria-controls="datatable_products" rowspan="1" colspan="1" aria-label="
+											 Actions
+										: activate to sort column ascending">
+											<?php Local_SortByQuantityInStock(); ?>
+										</th>
+										</tr>
+								
+									</thead>
+									<tbody>
+									<?php Items(); ?>
+									</tbody>
+									</table></div><div class="row">
+									
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                    
+    </FORM>
+        </td>
+    </tr>
+
+
+</table>
+
+<table cellspacing="0" cellpadding="5" width="100%">
+    <tr>
+        <td style="text-align: center" width="100%"><?php PaginatorLine(); ?></td>
+    </tr>
+    <tr>
+        <td style="text-align: center" width="100%"><?php PaginatorRows(); ?></td>
+    </tr>
+</table>
+
+<form style="margin: 0px;" name="setCurrCatForm" action="catalog_manage_products.php" method="get">
+<input name="act" value="SetCurrCat" type="hidden">
+<input type="hidden" name="category_id" value="">
+</form>
+<!-- ##end Categories Browser for 'GoTo' -->
+
+<!-- ##begin Advanced Search -->
+<div id="advanced_search" style="position: absolute; display: none; left: 20px; top: 0px; width: 875px;">
+      <table class="form" cellpadding="0" cellspacing="0" align="center" style="border: solid 1px black" border="0">
+	  <tr style="background-color: #2b7dc7; height: 20px;">
+	  	  <td align="left" style="padding-left: 4px; color: white; font-weight: bold;"><?php xmsg('CTL','CTL_SEARCH_PRODUCTS'); ?></td>
+	  	  <td width="1%" align="right" style="text-align: right;"><a href="javascript: void(0);" onClick="hideBlock('advanced_search');"><img src="images/close.gif" border="0"></a></td>
+	  </tr>
+	  <tr style="background-color: #FFFFFF;">
+	      <td colspan="2" style="padding: 4px;">
+                  <?php ProductSearchForm(); ?>
+              </td>
+          </tr>
+      </table>
+</div>
+<!-- ##end Advanced Search -->
+
+<form style="margin: 0px;" name="MoveCopyProductsForm" action="catalog_manage_products.php" method="post">
+<input type="hidden" name="act" value="">
+<input type="hidden" name="to_category_id" value="">
+<input type="hidden" name="products_ids" value="">
+</form>
+<!-- Form for deletion -->
+<form action="catalog_manage_products.php" name="DeleteActionForm" method="post">
+<input type="hidden" name="asc_action" value="">
+<input type="hidden" name="product_ids" value="">
+</form>
+
+
+<script language="JavaScript">
+function showCategoriesBrowser(cb_suffix, check_selected)
+{
+
+    if(check_selected && !checkSelectedProducts())
+    {
+        alert('<?php addslashes(msg('PRDLST_006')); ?>');
+        return;
+    };
+    
+    hideBlock('advanced_search');
+    showBlock('categories_browser_'+cb_suffix,3);
+    document.getElementById('categories_browser_'+cb_suffix).style.top = document.documentElement.scrollTop + 'px';
+};
+
+function showAdvancedSearch()
+{
+    hideBlock('categories_browser_goto');
+    hideBlock('categories_browser_moveto');
+    hideBlock('categories_browser_copyto');
+    showBlock('advanced_search', 3);
+    document.getElementById('advanced_search').style.top = document.documentElement.scrollTop + 'px';
+}
+
+function OnGoButtonClick(category_id)
+{
+    document.forms['setCurrCatForm'].elements['category_id'].value = category_id;
+    document.forms['setCurrCatForm'].submit();
+};
+
+function gotoCategory()
+{
+	var catid = document.getElementById('categoryval_id').value;	
+	OnGoButtonClick(catid);
+};
+
+function checkSelectedProducts()
+{
+    var i=0;
+    var one_selected = false;
+    el = document.getElementById('select_'+i);
+    while(el)
+    {
+        if(el.checked)
+        {
+            one_selected = true;
+            break;
+        };
+        i++;
+        el = document.getElementById('select_'+i);
+    };
+    
+    return one_selected;
+};
+
+function getSelectedProducts()
+{
+    var i=0;
+    var selected = new Array();
+    el = document.getElementById('select_'+i);
+    while(el)
+    {
+        if(el.checked)
+        {
+            selected.push(el.value);
+        };
+        i++;
+        el = document.getElementById('select_'+i);
+    };
+    
+    return selected;
+};
+
+function OnMoveButtonClick(category_id)
+{
+	 if( !checkSelectedProducts())
+	    {
+	        alert('<?php addslashes(msg('PRDLST_006')); ?>');
+	        return;
+	    }
+	 else
+	 {
+	    document.forms['MoveCopyProductsForm'].elements['act'].value = 'MoveToProducts';
+	    document.forms['MoveCopyProductsForm'].elements['to_category_id'].value = getSelectedCategories().join('|'); 
+	    document.forms['MoveCopyProductsForm'].elements['products_ids'].value = getSelectedProducts().join('|');
+	    document.forms['MoveCopyProductsForm'].submit();
+    }
+   
+};
+
+function OnCopyButtonClick(category_id)
+{
+	if( !checkSelectedProducts())
+    {
+        alert('<?php addslashes(msg('PRDLST_006')); ?>');
+        return;
+    }
+	else
+	{
+	    document.forms['MoveCopyProductsForm'].elements['act'].value = 'CopyToProducts';
+	    document.forms['MoveCopyProductsForm'].elements['to_category_id'].value = getSelectedCategories().join('|');
+	    document.forms['MoveCopyProductsForm'].elements['products_ids'].value = getSelectedProducts().join('|');
+	    document.forms['MoveCopyProductsForm'].submit();
+	}
+};
+
+
+//30 aug
+function OnDeleteClick()
+{
+	if( !checkSelectedProducts())
+    {
+        alert('<?php addslashes(msg('PRDLST_006')); ?>');
+        return;
+    }
+	else
+	{
+    	bootbox.confirm(('<?php addslashes(msg('DEL_PROD_LBL')); ?>'),function(result){
+       	if(result){
+         var frm = document.forms['DeleteActionForm'];
+         frm.elements['asc_action'].value = 'ConfirmDeleteProducts';
+         frm.elements['product_ids'].value = getSelectedProducts().join('|');
+         frm.submit();
+         } });
+    }
+    
+           
+}; 
+//30 aug end
+
+
+</script>
+<script type="text/javascript" src="js/overlib.js"></script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+
+
+

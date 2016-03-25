@@ -1,0 +1,14 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="payment_method_list_row">
+    <div class="payment_method_name">
+        <input <?php Local_PaymentMethodIsChecked(); ?> type="radio" name="<?php Local_FormMethodIdFieldName(); ?>" value="<?php Local_PaymentMethodID(); ?>" />
+        <?php Local_PaymentMethodName(); ?>
+    </div>
+    <?php $v = getLocal_ErrorMessage(); if ($v != '') { ?><div class="error_message"><?php echo $v; ?></div><?php } ?>
+    <div class="payment_method_form">
+        <?php Local_CreditCardInfoInput(); ?>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+

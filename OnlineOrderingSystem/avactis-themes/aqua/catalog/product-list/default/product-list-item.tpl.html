@@ -1,0 +1,70 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+  	global $application;
+    $mr = &$application->getInstance('MessageResources');
+?>
+<div class="product_item_single">
+    <?php Local_ProductFormStart(); ?>
+    <div class="product_img"><a href="<?php ProductInfoLink(); ?>">
+    <?php
+    if (getProductLargeImageWidth() == '') {
+        if (getProductSmallImageWidth() == '') {
+            ?><div class="noimage"></div><?php
+        }
+        else {
+            ?><img alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<170) { ProductSmallImageWidth(); } else { echo '170'; } ?>" /><?php
+        }
+    }
+    else {
+        if (getProductSmallImageWidth() == '') {
+            ?><img alt="<?php ProductName(); ?>" src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>" /><?php
+        }
+        else {
+            ?><img alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<170) {ProductSmallImageWidth();} else {echo '170';}; ?>" alt="" /><?php
+        }
+    } 
+    ?>
+    </a></div>
+    <div class="product_name"><a href="<?php ProductInfoLink(); ?>"><?php ProductName(); ?></a></div>
+    <div class="product_rating"><?php ProductRating(); ?></div>
+    <div class="product_sale_price"><span class="label"><?php Label("CATALOG_SALE_PRICE_COLON"); ?></span><span class="value"><?php ProductSalePrice(); ?></span></div>
+    <?php
+            if (getProductListPrice() != '')
+            {
+                $lp = getValProductListPrice();
+                $sp = getValProductSalePrice();
+                if ($lp!=0 && $lp>$sp)
+                {
+                    $d = round(($lp-$sp)*100/$lp);
+    ?>
+                    <div class="product_list_price"><span class="label"><?php Label("CATALOG_LIST_PRICE_COLON"); ?></span><span class="value"><?php ProductListPrice(); ?></span></div>
+                    <div class="discount_star"><span class="label"><?php Label("CATALOG_YOU_SAVE"); ?></span><span class="value"><?php echo $d; ?><?php Label("CATALOG_PERCENT"); ?></span></div>
+    <?php       }
+            }
+    ?>
+    <div class="limited_inventory"><?php ProductStockMessage(); ?></div>
+
+<?php 
+        $options = modApiFunc("Product_Options","getOptionsWithValues",'product', getProductId());
+        if (empty($options)):
+    ?>
+            <div class="product_buttons"><input type="submit" value="<?php echo $mr->getMessage('ADD_TO_CART'); ?>" class="<?php lang(); ?> buttons button_add_to_cart" /></div>
+    <?php else: ?>
+            <div class="product_buttons"><a href="<?php ProductInfoLink(); ?>"><span class="<?php lang(); ?> button_details"><?php echo $mr->getMessage('DETAILS'); ?></span></a></div>
+    <?php endif; ?>
+ 
+    <?php Local_ProductFormEnd(); ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+<?php Label("CATALOG_OPTIONS"); ?>
+<?php ProductOptionsForm(); ?>
+
+
+<?php Label("CATALOG_QUANTITY_SELECT"); ?>
+<?php Label('CATALOG_QUANTITY_LABEL'); ?>
+<select name="<?php Local_FormQuantityFieldName(); ?>">
+    <?php Local_ProductQuantityOptions(); ?>
+</select>
+
+onClick="<?php Local_ProductAddToCart(); ?>" 

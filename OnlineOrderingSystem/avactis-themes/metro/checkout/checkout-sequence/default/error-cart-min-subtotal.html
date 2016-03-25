@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="checkout nogradient">
+    <div class="content-page">
+        <h1><?php Label('CATALOG_SHOPPING_CART_LABEL'); ?><?php CustomerSignInOutHint(); ?></h1>
+        <div class="product_list_items empty">
+            <?php Label('CHECKOUT_MIN_SUBTOTAL_MESSAGE', getLocal_CartMinSubtotal()); ?>
+        </div>
+        <div class="checkout_buttons">
+    <a href="<?php PageURL('ProductList'); ?>"><span class="<?php lang(); ?> btn button_back"><?php Label('CHECKOUT_BACK_TO_PREVIOUS_STEP'); ?></span></a>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

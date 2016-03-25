@@ -1,0 +1,141 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+function tryToDelteOption(option_id)
+{
+	bootbox.confirm('<?php xmsg('PO','QST_DELETE_OPTION'); ?>',function(result){
+	if(result){
+		document.forms['DeleteOptionForm'].option_id.value=option_id;
+		document.forms['DeleteOptionForm'].submit();
+	} });
+	return;
+};
+
+function tryToDelteOptionWithInventory(option_id)
+{
+	bootbox.confirm('<?php xmsg('PO','QST_DELETE_OPTION_WITH_INVENTORY'); ?>',function(result){
+	if(result){
+		document.forms['DeleteOptionForm'].option_id.value=option_id;
+		document.forms['DeleteOptionForm'].submit();
+	} });
+	return;
+};
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<?php ResultMessage(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-gift font-green-sharp"></i>&nbsp;<?php xmsg('PO','MNG_PRODUCT_OPTIONS'); ?>
+			</span>
+			<span class="caption-helper uppercase"> <?php msg('PRD_EDIT_PAGE_TITLE'); ?></span>
+		</div>
+		<div class="actions">
+			<a class="btn btn-circle btn-default" href="javascript: void(0);" onClick="document.getElementById('sort_form_div').style.display='block'">
+				<i class="fa fa-sort"></i>&nbsp;<?php xmsg('PO','SORT_ORDER'); ?>
+			</a>
+			<a class="btn btn-default btn-circle" href="javascript: void(0);" onClick="document.getElementById('settings_form_div').style.display='block'">
+				<i class="fa fa-gear"></i>&nbsp;<?php xMsg('BS', 'SETTINGS_HEADER'); ?>
+			</a>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<?php ActualHeader(); ?>
+		<form action="po_options_list.php?asc_action=del_option_from_entity" method="post" name="DeleteOptionForm">
+			<input type="hidden" name="parent_entity" value="<?php _parent_entity(); ?>">
+			<input type="hidden" name="entity_id" value="<?php _entity_id(); ?>">
+			<input type="hidden" name="option_id" value="">
+		</form>
+		
+		<div class="table-responsive">
+			<table class="table borderless">
+				<tbody>
+					<tr>
+						<td class="text-center">
+							<?php OptionsList(); ?>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-center">
+							<div id="AddNewOptionButton" class="btn btn-default btn-circle" onClick="javascript: window.location='<?php AddNewOptionLink(); ?>'">
+								<i class="fa fa-plus-circle"></i>&nbsp;<?php xmsg('PO','BTN_ADD_NEW_OPTION'); ?>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><?php CRulesSection(); ?></td>
+					</tr>
+					<tr>
+						<td><?php InventorySection(); ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+</div>
+<!-- END Portlet PORTLET-->		
+<div id="sort_form_div" style="position: absolute; left: 17%; top: 10%; z-index: 10; display: none;">
+	<!-- BEGIN Portlet PORTLET-->
+	<div class="portlet box blue-hoki">
+		<div class="portlet-title">
+			<div class="caption">
+				<span class="caption-subject bold uppercase">
+					<i class="fa fa-sort"></i>&nbsp;<?php xmsg('PO','SORT_ORDER'); ?>
+				</span>
+			</div>
+			<div class="actions">
+				<a href="javascript: void(0);" onClick="document.getElementById('sort_form_div').style.display='none'" class="btn btn-default btn-circle">
+					<i class="fa fa-times"></i>
+				</a>
+			</div>	
+		</div>		
+		<div class="portlet-body">
+			<div class="table-responsive">
+				<?php OptionsSortForm(); ?>
+			</div>
+		</div>
+	</div>
+	<!-- END Portlet PORTLET-->
+</div>
+
+<div id="settings_form_div" style="position: absolute; left: 10%; top: 5%; z-index: 10; display: none;">
+	<!-- BEGIN Portlet PORTLET-->
+	<div class="portlet box blue-hoki">
+		<div class="portlet-title">
+			<div class="caption">
+				<span class="caption-subject bold uppercase">
+					<i class="fa fa-gear"></i>&nbsp;<?php xMsg('BS', 'SETTINGS_HEADER'); ?>
+				</span>
+			</div>
+			<div class="actions">
+				<a href="javascript: void(0);" onClick="document.getElementById('settings_form_div').style.display='none'" class="btn btn-default btn-circle">
+					<i class="fa fa-times"></i>
+				</a>
+			</div>	
+		</div>		
+		<div class="portlet-body">
+			<div class="table-responsive">
+				<?php SettingsForm(); ?>
+			</div>
+		</div>
+	</div>
+	<!-- END Portlet PORTLET-->
+ </div>
+<?php JSforIE6(); ?>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

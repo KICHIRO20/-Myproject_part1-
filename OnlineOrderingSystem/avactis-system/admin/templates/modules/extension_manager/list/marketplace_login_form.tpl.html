@@ -1,0 +1,83 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+ <script type="text/javascript" language="javascript">
+  $(document).ready(function() {
+
+   $('.form_error').hide();
+   $("#market_submit_btn").click(function (event) {
+	var marketplace_usr = $("#marketplace_usr").val();
+	var marketplace_pwd = $("#marketplace_pwd").val();
+    var template_dir = $("#template_dir").val();
+   
+	// Validate Form - start 
+  	$("#validate_msg").show();
+	 if(IsEmail(marketplace_usr)==false)
+	 {
+	       $('#invalid_email').show();
+	           return false;
+	 }
+	 
+	 if(marketplace_pwd == '')
+	 {
+	 	  $('#invalid_pwd').show();
+	           return false;
+	 }
+	 // Validate Form - end 
+		
+
+        $.ajax({
+            type: "post",
+            url: template_dir,
+            data: {
+            	marketplace_usr: marketplace_usr,
+            	marketplace_pwd: marketplace_pwd,    
+            },
+            success: function (response) {
+
+            },
+        });
+         
+    });
+
+  
+});   
+
+
+   function IsEmail(email) {
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test(email)) {
+           return false;
+        }else{
+           return true;
+        }
+      }
+   
+   </script>
+   <?php
+   		global $application;   		
+   		$template_dir = AVACTIS_URL."avactis-system/admin/templates/modules/modules_manager/list/browse_list_item.tpl.html";
+   ?>
+   
+<div class="marketlogin">
+	<div id="login_header"><?php Msg('EXT_FORM_HEADER'); ?></div>
+	<form method="post" id="form_market" action="">
+	<input type="hidden" name="asc_action" value="SaveMarketPlaceDetails" />
+	<input type="hidden" name="template_dir" id="template_dir" value="<?php echo $template_dir; ?>" />
+		<label class="lbl_market"><?php xMsg('UPS', 'LABEL_USERNAME'); ?>:</label>&nbsp;
+		<?php 
+			$getUserDetails = json_decode(getFetchUserDetails());
+			$current_marketplace_usr = $getUserDetails[0];
+		?>
+		<input type="text" id="marketplace_usr" name="marketplace_usr" value="<?php echo $current_marketplace_usr; ?>" />
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
+		<div class="form_error" id="invalid_email"><?php xMsg('SUBSCR', 'ERROR_SUBSCR_INVALID_EMAIL'); ?></div>
+		<label class="lbl_market"><?php Label('ACCOUNT_PASSWORD_LABEL'); ?></label>&nbsp;&nbsp;&nbsp;
+		<input type="password" id="marketplace_pwd" name="marketplace_pwd" value="" />
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
+		<div class="form_error" id="invalid_pwd"><?php Label('CHECKOUT_ERR_FORM_FIELD_SHORT_001'); ?></div>
+		<div id="register_link"><a target="_blank" href="http://marketplace.avactis.com/register.php"><?php xMsg('PO', 'DT_LSL'); ?></a>&nbsp;<?php msg('TO_REGISTER_ON_MARKETPLACE'); ?></div>
+        <input style="margin-left:90px"  type="submit" id="market_submit_btn" class="btn btn-success" name="submit" value="Submit" />
+	</form>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

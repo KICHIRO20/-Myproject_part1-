@@ -1,0 +1,35 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+var del_checked = 0;
+function onDelCBclick(el)
+{
+    if(el.checked)
+        del_checked++;
+    else
+        del_checked--;
+        
+    if(del_checked > 0) {
+        enableButton('DelImagesButton1',function() { if(confirm('<?php xmsg('PI','WRN_DELETE_IMAGES'); ?>')) { document.forms['DelImagesForm'].asc_action.value = 'del_images_from_product'; document.forms['DelImagesForm'].delete_from_server.value = 'yes'; document.forms['DelImagesForm'].submit();};});
+        enableButton('RemoveImagesButton1',function() { if(confirm('<?php xmsg('PI','WRN_DELETE_IMAGES'); ?>')) { document.forms['DelImagesForm'].asc_action.value = 'del_images_from_product'; document.forms['DelImagesForm'].submit();};});
+	}
+    else {
+        disableButton('DelImagesButton1');
+        disableButton('RemoveImagesButton1');
+	}
+}
+
+function onUpdateClick()
+{
+    document.forms['DelImagesForm'].asc_action.value = 'update_images_of_product';
+    document.forms['DelImagesForm'].submit();
+}
+
+</script>
+<form action="pi_images_list.php" name="DelImagesForm" method="post" style="margin: 0px; padding: 0px;">
+<input type="hidden" name="asc_action" value="">
+<input type="hidden" name="product_id" value="<?php ProductID(); ?>">
+<input type="hidden" name="delete_from_server" id ="delete_from_server" value="no">
+<?php ListByOne(); ?>
+		<?php Buttons(); ?>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

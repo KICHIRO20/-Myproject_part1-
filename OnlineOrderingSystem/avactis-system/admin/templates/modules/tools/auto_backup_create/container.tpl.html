@@ -1,0 +1,32 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function startBackup()
+{
+    document.getElementById('BackupProcess').src = '<?php BackupStartLink(); ?>';
+    document.getElementById('progressBar').style.width = "0px";
+    document.getElementById('progressBarMessage').style.visibility = "visible";
+    document.getElementById('progressBarBorder').style.visibility = "visible";
+}
+//-->
+</SCRIPT>
+<table class="form" cellspacing="0" cellpadding="0" width="100%" align="center" border="0" style="background-color: #b4cadc;">
+<tr style="padding: 0px; border: 0px; margin: 0px">
+      <td colspan="2" class="value popup_dialog_body_left_padded popup_dialog_body_right_padded" style="padding: 0px; border: 0px; margin: 0px">&nbsp;&nbsp;<span id="Message2" style="display: none;"><B><?php Msg('BCP_CREATE_MESSAGE_003'); ?></B></span></td>
+</tr>
+
+<tr>
+    <td nowrap class="value popup_dialog_body_left_padded popup_dialog_body_right_padded" style="padding: 0px; border: 0px; margin: 0px"><span id="progressBarMessage" style="visibility: hidden;">&nbsp;&nbsp;<B><?php Msg('BCP_CREATE_MESSAGE_002'); ?></B></span></td>
+    <td class="value popup_dialog_body_left_padded popup_dialog_body_right_padded" style="padding: 0px; border: 0px; margin: 0px"><div id="progressBarBorder" style="width: 400px; height: 15px; border: 1px solid #b2c2df; visibility: hidden; background-color: #FFFFFF;"><div id="progressBar" style="height: 15px; width: 0px; background-color: #005099;;">&nbsp;</div></div></td>
+</tr>
+
+<tr>
+    <td nowrap class="value popup_dialog_body_left_padded popup_dialog_body_right_padded" style="padding: 0px; border: 0px; margin: 0px">&nbsp;&nbsp;<span id="progressBarMessage2" style="visibility: hidden;"><B><?php Msg('BCP_CREATE_MESSAGE_004'); ?></B></span></td>
+    <td class="value popup_dialog_body_left_padded popup_dialog_body_right_padded" style="padding: 0px; border: 0px; margin: 0px"><div id="progressBarBorder2" style="width: 400px; height: 15px; border: 1px solid #b2c2df; visibility: hidden; background-color: #FFFFFF;"><div id="progressBar2" style="height: 15px; width: 0px; background-color: #005099;">&nbsp;</div></div></td>
+</tr>
+
+<tr>
+      <td colspan="2" style="padding: 0px; border: 0px; margin: 0px"><IFRAME id="BackupProcess" SRC="javascript: void(0);" FRAMEBORDER="0" SCROLLING="no" WIDTH="1" HEIGHT="1"></IFRAME></td>
+</tr>
+ </table>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

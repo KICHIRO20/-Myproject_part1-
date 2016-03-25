@@ -1,0 +1,18 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row margin-bottom-10">
+	<div class="col-sm-2">
+		<label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(), getAttributeTag()); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">  
+		<?php AttributeValue(); ?>
+		<input type="hidden" id="<?php AttributeTag(); ?>" name="<?php AttributeTag(); ?>" patternType="<?php AttributePatternType(); ?>" value="<?php AttributeValue(); ?>">
+		<?php Error(); ?>
+		<INPUT TYPE="hidden" name="<?php AttributeTagHidden(); ?>" value="<?php AttributeDefaultValue(); ?>">
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

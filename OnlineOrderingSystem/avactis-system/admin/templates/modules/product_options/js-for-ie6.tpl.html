@@ -1,0 +1,24 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+
+var sort_form_div = document.getElementById('sort_form_div');
+var settings_form_div = document.getElementById('settings_form_div');
+
+sort_form_div.style.position='absolute';
+sort_form_div.style.top='120';
+sort_form_div.style.left='17%';
+
+settings_form_div.style.position='absolute';
+settings_form_div.style.top='120';
+settings_form_div.style.left='17%';
+
+function scrollHandler()
+{
+  sort_form_div.style.top=document.documentElement.scrollTop + 120;
+  settings_form_div.style.top=document.documentElement.scrollTop + 120;
+}
+
+window.onscroll = scrollHandler;
+
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

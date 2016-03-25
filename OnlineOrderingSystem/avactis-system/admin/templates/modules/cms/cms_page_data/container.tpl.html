@@ -1,0 +1,206 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php PageJSCode(); ?>
+
+<?php ResultMessage(); ?>
+
+<div class="portlet light">
+<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-edit font-green-sharp"></i>
+									<span class="caption-subject font-green-sharp bold uppercase">  <?php EditPageTitle(); ?></span>
+									<span class="caption-helper">...This section allows you to add new articles</span>
+								</div>
+								<div class="actions">
+								    <div id="UpdateButton1" class="btn btn-circle btn-default" onclick="document.forms['CMSPageDataForm'].submit();">
+				<i class="fa fa-check"></i> 
+				<span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span>
+		     </div>
+		    
+			</div>
+							</div>
+							<div class="portlet-body">
+							<form action="cms_pages.php" method="post" name="CMSPageDataForm">
+<input type="hidden" name="asc_action" value="update_page_data" />
+<input type="hidden" name="mode" value="update" />
+<input type="hidden" name="page_data[page_id]" value="<?php PageID(); ?>" />
+<div class="row">
+						<div class="col-sm-5">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_PAGE_INDEX'); ?>&nbsp;*</label>
+						    							
+						</div>
+						<div class="col-md-4">
+							<input class="form-control" type="text" name="page_data[page_index]" value="<?php PageIndex(); ?>" style="width: 99%;" />
+							
+						</div>
+</div>
+<br>
+<div class="row">
+						<div class="col-sm-5">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_PAGE_NAME'); ?>&nbsp;*</label>
+						    							
+						</div>
+						<div class="col-md-4">
+							
+							<input class="form-control" type="text" name="page_data[name]" value="<?php PageName(); ?>" style="width: 99%;" />
+						</div>
+</div>
+<br>
+<div class="row">
+						<div class="col-sm-5">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_PARENT_PAGE'); ?>&nbsp;*</label>
+						    							
+						</div>
+						<div class="col-md-4">
+							<select class="form-control"name="page_data[parent_id]">
+<?php ParentSelectBox(); ?>
+</select>
+							
+						</div>
+</div>
+<br>
+<div class="row">
+						<div class="col-sm-5">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_PAGE_CONTENT'); ?>&nbsp;</label>
+						</div>
+</div>
+<div class="row form-group">
+	<div class="col-sm-12">
+		<textarea class="tiny_mce form-control" name="page_data[descr]" style="width: 99%;" rows="6" id="PageContent"> 
+			<?php PageContent(); ?>
+		</textarea>
+	</div>
+</div>
+
+<div class="col-sm-12 row">
+		<div class="col-md-4"><label class="control-label"><?php xMsg('CMS', 'CMS_PAGE_STATUS'); ?>&nbsp;</label></div>
+		
+<div class="radio-list col-md-8">			    
+<label>
+						<span>
+							<input type="radio" name="page_data[status]" value="A" id="StatusEnabled"<?php if (getPageStatus() == 'A') { ?> checked="checked"<?php } ?> />
+						</span>
+			<span class="control-label"><?php xMsg('CMS', 'CMS_ACTIVE_STATUS'); ?></span>
+						<span>
+						&nbsp;&nbsp;<?php xMsg('CMS', 'CMS_ACTIVE_STATUS_DESCR'); ?>
+                                               </span>
+</label>
+<label>
+						
+						<span>
+							<input type="radio" name="page_data[status]" value="H" id="StatusHidden"<?php if (getPageStatus() == 'H') { ?> checked="checked"<?php } ?> />
+						</span>
+						
+							<span class="control-label"><?php xMsg('CMS', 'CMS_HIDDEN_STATUS'); ?></span>
+						<span>
+						&nbsp;&nbsp;<?php xMsg('CMS', 'CMS_HIDDEN_STATUS_DESCR'); ?>
+						</span>
+</label>
+<label>
+						
+						<span>
+							<input type="radio" name="page_data[status]" value="D" id="StatusDisabled"<?php if (getPageStatus() == 'D') { ?> checked="checked"<?php } ?> />
+						</span>
+					        <label class="control-label"><?php xMsg('CMS', 'CMS_DISABLED_STATUS'); ?></label>
+						<span>
+						&nbsp;&nbsp;<?php xMsg('CMS', 'CMS_DISABLED_STATUS_DESCR'); ?>
+						</span>
+</label>
+</div>
+</div>
+<div class="row form-group">
+						<div class="col-sm-4">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_SEO_PREFIX'); ?></label>
+						</div>
+						<div class="col-md-4">
+						    <input class="form-control" type="text" name="page_data[seo_prefix]" value="<?php PageSEOPrefix(); ?>" style="width: 99%;" />
+						</div>
+</div>
+<div class="row form-group">
+						<div class="col-sm-4">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_SEO_TITLE'); ?></label>
+						</div>
+						<div class="col-md-4">
+						    <input  class="form-control" type="text" name="page_data[seo_title]" value="<?php PageSEOTitle(); ?>" style="width: 99%;" />
+						   
+						</div>
+</div>
+<div class="row form-group">
+						<div class="col-sm-4">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_META_DESCRIPTION'); ?></label>
+						</div>
+						<div class="col-md-4">
+						    <textarea class="form-control" name="page_data[seo_keywords]" ">
+                            <?php PageMETADescription(); ?>
+                            </textarea>
+						</div>
+</div>
+<div class="row form-group">
+						<div class="col-sm-4">
+						    <label class="col-md-5 control-label"><?php xMsg('CMS', 'CMS_META_KEYWORDS'); ?></label>
+						</div>
+						<div class="col-md-4">
+						    <textarea class="form-control" name="page_data[seo_keywords]" ">
+                            <?php PageMETAKeywords(); ?>
+                            </textarea>
+						</div>
+</div>
+<div class="col-lg-12 row">
+			<div class="col-md-4"><label class="control-label"><?php xMsg('CMS', 'CMS_PAGE_AVAILABILITY'); ?>*</label></div>
+
+<div class="radio-list col-md-8">					    
+                                <label>		
+						<span>
+						    <input type="radio" name="page_data[availability]" value="C" id="AvailAll"<?php if (getPageAvailability() == 'C') { ?> checked="checked"<?php } ?> />
+							
+						</span>
+						
+						<span>
+						&nbsp;&nbsp;<label for="AvailAll"><?php xMsg('CMS', 'CMS_PAGE_FOR_ALL_CUSTOMERS'); ?></label>
+						</span>						
+                                           </label>
+
+                                         <label>
+						<span>
+						   <input type="radio" name="page_data[availability]" value="R" id="AvailRegistered"<?php if (getPageAvailability() == 'R') { ?> checked="checked"<?php } ?> />
+						</span>
+						
+						<span>
+					&nbsp;&nbsp;<label for="AvailAll"><?php xMsg('CMS', 'CMS_PAGE_FOR_REGISTERED_CUSTOMERS'); ?></label>
+						</span>
+						
+</label>
+<label>
+						<span>
+						  <input type="radio" name="page_data[availability]" value="A" id="AvailAnonymous"<?php if (getPageAvailability() == 'A') { ?> checked="checked"<?php } ?> />
+						</span>
+						<span>
+					&nbsp;&nbsp;<label for="AvailAll"><?php xMsg('CMS', 'CMS_PAGE_FOR_ANONYMOUS_CUSTOMERS'); ?></label>
+						</span>
+</label>						
+</div>
+</div>
+<br>
+<hr>
+<div class="row">
+<div class="col-sm-12">
+							<p class="text-danger"><strong>* = Required Field</strong></p>
+					</div>
+					<div class="col-sm-2 col-sm-offset-5">
+						<div onclick="document.forms['CMSPageDataForm'].submit();" class="btn btn-circle btn-default" id="DeleteButton1">
+				<i class="fa fa-check">Save</i> 
+        		</div>    	
+        		   						
+					</div>
+				</div>
+
+							</div>
+</div>
+</form>
+<script language="javascript" type="text/javascript">
+document.title = '<?php xMsg('CMS', 'CMS_PAGE_DATA'); ?>';
+</script>
+
+
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

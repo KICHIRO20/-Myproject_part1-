@@ -1,0 +1,17 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr class="group">
+    <td width="35%" style="text-align: left; padding-left: 5px;">
+        <span id="<?php AttrID(); ?>_text" onMouseOver="return overlib('<?php addslashes(xmsg('CA','MSG_DBL_CLICK_TO_EDIT')); ?>');" onMouseOut="return nd();" ondblclick="startAttrNameEdit(<?php AttrID(); ?>);"><?php Name(); ?></span>
+        <input type="text" name="<?php AttrName(); ?>[visible_name]" id="<?php AttrID(); ?>_input" style="display: none; border: solid 1px #b2c2df; font-family: Verdana, Arial, sans-serif; font-size: 11px;" value="<?php Name(); ?>" onblur="endAttrNameEdit(<?php AttrID(); ?>);">
+    </td>
+    <td width="35%" style="text-align: left; padding-left: 5px;">
+        <?php Descr(); ?>
+    </td>
+    <td width="15%" style="text-align: center;">
+         <?php IsVisible(); ?>         
+    </td>
+    <td width="15%" style="text-align: center;">
+        <?php IsRequiered(); ?>
+    </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

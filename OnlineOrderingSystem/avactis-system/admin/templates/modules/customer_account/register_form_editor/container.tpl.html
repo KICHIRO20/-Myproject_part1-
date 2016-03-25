@@ -1,0 +1,407 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+
+function startAttrNameEdit(attr_id)
+{
+	document.getElementById(attr_id+'_text').style.display = 'none';
+	document.getElementById(attr_id+'_input').style.display = '';
+	document.getElementById(attr_id+'_input').focus();
+};
+
+function endAttrNameEdit(attr_id)
+{
+	input_el = document.getElementById(attr_id+'_input');
+	text_el = document.getElementById(attr_id+'_text');
+
+	if(input_el.value.replace(/ /g,'') == '')
+	{
+		alert('<?php echo addslashes(getMsg('CA','WRN_EMPTY_VISIBLE_NAME')); ?>');
+		input_el.focus();
+		return;
+	};
+
+	text_el.innerHTML = input_el.value;
+	input_el.style.display = 'none';
+	text_el.style.display = '';
+};
+
+function onChange_is_visible(attr_id)
+{
+	visible_el = document.getElementById(attr_id+'_is_visible');
+	required_el = document.getElementById(attr_id+'_is_required');
+
+	if(visible_el.value == 'N')
+	{
+		required_el.value = 'N';
+	};
+
+	if(attr_id == login_attr_id)
+		onChangeLogin_is_visible();
+
+	if(attr_id == email_attr_id)
+		onChangeEmail_is_visible();
+
+	setAuthSchemeDisabled();
+	setAuthSchemeFieldRequired();
+	setCountryStateFileds();
+	correctActivationScheme();
+};
+
+function onChange_is_required(attr_id)
+{
+	visible_el = document.getElementById(attr_id+'_is_visible');
+	required_el = document.getElementById(attr_id+'_is_required');
+
+	if(required_el.value == 'Y')
+	{
+		visible_el.value = 'Y';
+	};
+
+	setAuthSchemeDisabled();
+	setAuthSchemeFieldRequired();
+	setCountryStateFileds();
+	correctActivationScheme();
+};
+
+function onChangeLogin_is_visible()
+{
+	login_vis_el = document.getElementById(login_attr_id+'_is_visible');
+	email_vis_el = document.getElementById(email_attr_id+'_is_visible');
+
+	if(login_vis_el.value == 'N')
+	{
+		email_vis_el.value = 'Y';
+	};
+};
+
+function onChangeEmail_is_visible()
+{
+	login_vis_el = document.getElementById(login_attr_id+'_is_visible');
+	email_vis_el = document.getElementById(email_attr_id+'_is_visible');
+
+	if(email_vis_el.value == 'N')
+	{
+		login_vis_el.value = 'Y';
+	};
+};
+
+function setAuthSchemeDisabled()
+{
+	return;
+
+	login_vis_el = document.getElementById(login_attr_id+'_is_visible');
+	email_vis_el = document.getElementById(email_attr_id+'_is_visible');
+	auth_scheme_el = document.getElementById('AuthScheme');
+
+	if(login_vis_el.value == email_vis_el.value)
+	{
+		auth_scheme_el.disabled = false;
+		changeHint('auth_scheme',auth_scheme_el.value);
+		return;
+	};
+
+	if(login_vis_el.value == 'Y')
+	{
+		auth_scheme_el.value = <?php echo AUTH_SCHEME_BY_LOGIN; ?>;
+		auth_scheme_el.disabled = true;
+		changeHint('auth_scheme',auth_scheme_el.value);
+		return;
+	};
+
+	if(email_vis_el.value == 'Y')
+	{
+		auth_scheme_el.value = <?php echo AUTH_SCHEME_BY_EMAIL; ?>;
+		auth_scheme_el.disabled = true;
+		changeHint('auth_scheme',auth_scheme_el.value);
+		return;
+	};
+};
+
+function setAuthSchemeFieldRequired()
+{
+	return;
+
+	auth_scheme_el = document.getElementById('AuthScheme');
+	login_req_el = document.getElementById(login_attr_id+'_is_required');
+	email_req_el = document.getElementById(email_attr_id+'_is_required');
+
+	if(auth_scheme_el.value == <?php echo AUTH_SCHEME_BY_LOGIN; ?>)
+	{
+		login_req_el.value = 'Y';
+		return;
+	};
+
+	if(auth_scheme_el.value == <?php echo AUTH_SCHEME_BY_EMAIL; ?>)
+	{
+		email_req_el.value = 'Y';
+		return;
+	};
+};
+
+function setCountryStateFileds()
+{
+	country_vis_el = document.getElementById(country_attr_id+'_is_visible');
+	country_req_el = document.getElementById(country_attr_id+'_is_required');
+	state_vis_el = document.getElementById(state_attr_id+'_is_visible');
+	state_req_el = document.getElementById(state_attr_id+'_is_required');
+
+	if(country_vis_el.value == 'N')
+	{
+		state_vis_el.value = 'N';
+		state_req_el.value = 'N';
+	};
+
+	if(state_vis_el.value == 'Y')
+	{
+		country_vis_el.value = 'Y';
+	};
+};
+
+function setActivationSchemeField()
+{
+	act_scheme_el = document.getElementById('ActivationScheme');
+	if(act_scheme_el.value == <?php echo ACCOUNT_ACTIVATION_SCHEME_BY_CUSTOMER; ?>)
+	{
+		email_req_el = document.getElementById(email_attr_id+'_is_required');
+		email_req_el.value = 'Y';
+		onChange_is_required(email_attr_id);
+	};
+};
+
+function correctActivationScheme()
+{
+	act_scheme_el = document.getElementById('ActivationScheme');
+	email_req_el = document.getElementById(email_attr_id+'_is_required');
+	if(email_req_el.value != 'Y' && act_scheme_el.value == <?php echo ACCOUNT_ACTIVATION_SCHEME_BY_CUSTOMER; ?>)
+	{
+		act_scheme_el.value = <?php echo ACCOUNT_ACTIVATION_SCHEME_NONE; ?>;
+	};
+
+	changeHint('activation_scheme',act_scheme_el.value);
+};
+
+function submitRegForm()
+{
+	if (document.getElementById('AuthScheme')) document.getElementById('AuthScheme').disabled = false;
+	document.forms['RegForm'].elements['sets[AUTO_CREATE_ACCOUNT]'].disabled = false;
+	document.forms['RegForm'].elements['sets[MERGE_ORDERS_BY_EMAIL]'].disabled = false;
+	document.forms['RegForm'].submit();
+};
+
+function repositionByParent(div_id, parent_id)
+{
+	parent_el = document.getElementById(parent_id);
+	div_el = document.getElementById(div_id);
+
+	div_el.style.left = (( parent_el.clientWidth - div_el.clientWidth ) / 2) + 'px';
+	div_el.style.top = (( parent_el.clientHeight - div_el.clientHeight ) / 2 + 85) + 'px';
+};
+
+function showSortForm()
+{
+	if(navigator.userAgent.indexOf("MSIE") == -1)
+		disableBlock('RegFormBlock',2);
+
+	showBlock('SortRegForm',3);
+	repositionByParent('SortRegForm','RegFormBlock');
+};
+
+function hideSortForm()
+{
+	hideBlock('SortRegForm');
+
+	if(navigator.userAgent.indexOf("MSIE") == -1)
+		enableBlock('RegFormBlock');
+};
+
+function changeHint(set_name, set_value)
+{
+	var hint_message = '';
+
+	switch(set_name)
+	{
+		case 'auth_scheme':
+			switch(set_value)
+			{
+				case '<?php echo AUTH_SCHEME_BY_LOGIN; ?>': hint_message = '<?php echo addslashes(getMsg('CA','HINT_AUTH_SCHEME_BY_LOGIN')); ?>'; break;
+				case '<?php echo AUTH_SCHEME_BY_EMAIL; ?>': hint_message = '<?php echo addslashes(getMsg('CA','HINT_AUTH_SCHEME_BY_EMAIL')); ?>'; break;
+			};
+			break;
+		case 'activation_scheme':
+			switch(set_value)
+			{
+				case '<?php echo ACCOUNT_ACTIVATION_SCHEME_NONE; ?>': hint_message = '<?php echo addslashes(getMsg('CA','HINT_ACTIVATION_SCHME_NONE')); ?>'; break;
+				case '<?php echo ACCOUNT_ACTIVATION_SCHEME_BY_ADMIN; ?>': hint_message = '<?php echo addslashes(getMsg('CA','HINT_ACTIVATION_SCHEME_BY_ADMIN')); ?>'; break;
+				case '<?php echo ACCOUNT_ACTIVATION_SCHEME_BY_CUSTOMER; ?>': hint_message = '<?php echo addslashes(getMsg('CA','HINT_ACTIVATION_SCHEME_BY_CUSTOMER')); ?>'; break;
+			};
+			break;
+	};
+
+	document.getElementById(set_name+'_hint').innerHTML = hint_message;
+};
+
+function switchFormDisplay(form_type)
+{
+	if(form_type == 'single')
+	{
+		hideBlock('full_form_settings_title');
+		hideBlock('full_form_settings');
+		hideBlock('full_form_title');
+		hideBlock('full_form_header');
+		hideBlock('full_form_attrs');
+		hideBlock('form_buttons_full');
+		showBlock('form_buttons_single',0);
+	}
+	else
+	{
+		showBlock('full_form_settings_title',0);
+		showBlock('full_form_settings',0);
+		showBlock('full_form_title',0);
+		showBlock('full_form_header',0);
+		showBlock('full_form_attrs',0);
+		showBlock('form_buttons_full',0);
+		hideBlock('form_buttons_single');
+	};
+}
+
+</script>
+<form action="<?php RegFormAction(); ?>" name="RegForm" method="post" class="form-group">
+	<div class="portlet light">
+		<div class="portlet-body">
+			<div class="table-container form" id="RegFormBlock">
+				<?php ResultMessage(); ?>
+				<div class="portlet box blue-hoki tabbable">
+					<div class="portlet-title">
+						<div class="caption"><?php xmsg('CA','CHECKOUT_TYPE'); ?></div>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-10 col-sm-10">
+						<input type="radio" name="sets[CHECKOUT_TYPE]" value="<?php echo CHECKOUT_TYPE_QUICK; ?>" onClick="javascript: document.forms['RegForm'].elements['sets[AUTO_CREATE_ACCOUNT]'].disabled = true; document.forms['RegForm'].elements['sets[MERGE_ORDERS_BY_EMAIL]'].disabled = true; switchFormDisplay('single');" <?php CheckoutTypeQuickChecked(); ?> style="vertical-align: text-bottom;">
+<?php xmsg('CA','CHECKOUT_TYPE_QUICK'); ?>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-10 col-sm-10">
+						<span><input type="radio" name="sets[CHECKOUT_TYPE]" value="<?php echo CHECKOUT_TYPE_AUTOACCOUNT; ?>" onClick="javascript: document.forms['RegForm'].elements['sets[AUTO_CREATE_ACCOUNT]'].disabled = false; document.forms['RegForm'].elements['sets[MERGE_ORDERS_BY_EMAIL]'].disabled = false; switchFormDisplay('full');" <?php CheckoutTypeAutoAccountChecked(); ?> style="vertical-align: text-bottom;">
+<?php xmsg('CA','CHECKOUT_TYPE_AUTOACCOUNT'); ?>
+						</span>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-1 col-sm-2"></div>
+					<div class="col-md-10 col-sm-10">
+						<input type="checkbox" name="sets[AUTO_CREATE_ACCOUNT]" <?php SetsAutoCreateAccountState(); ?>>
+						<?php xmsg('CA','SETS_AUTO_CREATE_ACCOUNT'); ?>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-1 col-sm-2"></div>
+					<div class="col-md-10 col-sm-10">
+						<input type="checkbox" name="sets[MERGE_ORDERS_BY_EMAIL]" <?php SetsMergeState(); ?>>
+						<?php xmsg('CA','SETS_MERGE_ORDERS_BY_EMAIL'); ?>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-10 col-sm-10">
+						<input type="radio" name="sets[CHECKOUT_TYPE]" value="<?php echo CHECKOUT_TYPE_ACCOUNT_REQUIRED; ?>" onClick="javascript: document.forms['RegForm'].elements['sets[AUTO_CREATE_ACCOUNT]'].disabled = true; document.forms['RegForm'].elements['sets[MERGE_ORDERS_BY_EMAIL]'].disabled = true; switchFormDisplay('full')" <?php CheckoutTypeAccountRequiredChecked(); ?> style="vertical-align: text-bottom;">
+						<?php xmsg('CA','CHECKOUT_TYPE_ACCOUNT_REQUIRED'); ?>
+					</div>
+				</div>
+				<div class="portlet box blue-hoki tabbable" id="full_form_settings_title">
+					<div class="portlet-title">
+						<div class="caption" ><?php xmsg('CA','CA_SETTINGS'); ?></div>
+					</div>
+				</div>
+				<div id="full_form_settings" style="display: <?php FullFormDisplay(); ?>">
+					<div class="row margin-bottom-10" style="display: none;">
+						<div class="col-md-3 col-sm-4">
+							<lable class="help-block"><?php xmsg('CA','AUTH_SCHEME'); ?></lable>
+						</div>
+						<div class="col-md-3 col-sm-5">
+							<span style="display:inline;"><?php AuthSchemeSelect(); ?></span>
+						</div>
+						<div class="col-md-5 col-sm-5">
+							<div id="activation_scheme_hint"><?php AuthSchemeHint(); ?></div>
+						</div>
+					</div>
+					<div class="row margin-bottom-10">
+						<div class="col-md-3 col-sm-4">
+							<lable class="help-block"><?php xmsg('CA','ACCOUNT_ACTIVATION_SCHEME'); ?></lable>
+						</div>
+						<div class="col-md-3 col-sm-5">
+							<span style="display:inline;"><?php AccountActivationSchemeSelect(); ?></span>
+						</div>
+						<div class="col-md-5 col-sm-5">
+							<div id="activation_scheme_hint"><?php ActivationSchemeHint(); ?></div>
+						</div>
+					</div>
+				</div>
+				<div id="full_form_title" style="display: <?php FullFormDisplay(); ?>">
+					<div class="portlet box blue-hoki tabbable">
+						<div class="portlet-title">
+							<div class="caption"><?php xmsg('CA','RF_TITLE_NAME'); ?></div>
+						</div>
+					</div>
+					<div class="row margin-bottom-20">
+						<div class="col-md-10 col-sm-10"></div>
+						<div class="col-md-2 col-sm-2">
+							<div class="actions btn-set">
+								<button id="SortButton2" onclick="showSortForm();" type="button" name="<?php msg('BTN_SORT'); ?>" class="btn blue"><?php msg('BTN_SORT'); ?></button>
+							</div>
+						</div>
+					</div>
+				</div>   
+				<div class="table-responsive" id="full_form_header" style="display: <?php FullFormDisplay(); ?>" >
+					<table class="table" >
+						<thead >
+							<tr>
+								<th width="35%" style="padding: 6px;"><?php xmsg('CA','RF_HEADER_FIELD_NAME'); ?></th>
+								<th width="35%" style="padding: 6px;"><?php xmsg('CA','RF_HEADER_FIELD_DESCR'); ?></th>
+								<th width="15%" style="text-align: center; padding: 6px;"><?php xmsg('CA','RF_HEADER_VISIBLE'); ?></th>
+								<th width="15%" style="text-align: center; padding: 6px;"><?php xmsg('CA','RF_HEADER_REQUIRED'); ?></th>
+							</tr>
+						</thead>
+						<tbody id="full_form_attrs" style="display: <?php FullFormDisplay(); ?>">
+							<?php Attributes(); ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="actions" align="center">
+				<div class="actions btn-set">
+					<span id="form_buttons_full" style="display: <?php FullFormDisplay(); ?>" >
+						<button id="UpdateButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="submitRegForm();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span>
+						</button>
+					</span>
+					<span id="form_buttons_single" style="display: <?php SingleFormDisplay(); ?>">
+						<button id="UpdateButton3" title="<?php Msg('BTN_SAVE'); ?>" onclick="submitRegForm();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<?php SortOrderBlock(); ?>
+
+<script language="JavaScript">
+var login_attr_id = "<?php LoginAttrID(); ?>";
+var email_attr_id = "<?php EmailAttrID(); ?>";
+var country_attr_id = "<?php CountryAttrID(); ?>";
+var state_attr_id = "<?php StateAttrID(); ?>";
+
+win_onload_bak = window.onload;
+
+window.onload = function()
+{
+	if(win_onload_bak)
+		win_onload_bak();
+
+	setAuthSchemeDisabled();
+	setAuthSchemeFieldRequired();
+	setCountryStateFileds();
+};
+
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

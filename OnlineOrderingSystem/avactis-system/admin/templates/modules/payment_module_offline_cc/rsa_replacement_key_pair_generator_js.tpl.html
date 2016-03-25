@@ -1,0 +1,80 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!--              "                          "        Save/Cancel                 . -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var onload_bak_replace_rsa_keys_js = window.onload;
+window.onload = function()
+{
+    if(onload_bak_replace_rsa_keys_js){onload_bak_replace_rsa_keys_js();}
+    show_save_cancel_buttons();
+}
+//-->
+</SCRIPT>
+<?php javascript_onload(); ?>
+
+<div id="step1">
+	<div class="alert alert-warning">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_005(); ?>&nbsp;
+		<a href="javascript: void(0);" onclick="hide_all_steps(); switch_to_step('step2');" style="color: blue;">
+			<b><?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_006(); ?></b>
+		</a>
+	</div>
+</div>
+
+<div id="step2" style="display: none;">
+	<input type="hidden" name="replacement_rsa_key_generator_random_data" id="replacement_rsa_key_generator_random_data" value="<?php RSAKeyPairGeneratorRandomData(); ?>">
+	<input type="hidden" name="replacement_rsa_key_generator_public_key_asc_format"  id="replacement_rsa_key_generator_public_key_asc_format"  value="<?php replacement_rsa_key_generator_public_key_asc_format(); ?>">
+	<input type="hidden" name="replacement_rsa_key_generator_private_key_asc_format" id="replacement_rsa_key_generator_private_key_asc_format" value="<?php replacement_rsa_key_generator_private_key_asc_format(); ?>">
+	<div class="alert alert-warning">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_JS_001(); ?><br>
+	</div>
+	<div align="center">
+		<a id="ReplacementGenerateRSAKeyPairInJSButton" class="btn blue" onclick=""><?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_BUTTON(); ?></a></div>
+</div>
+
+<div id="step3" style="display: none;">
+	<div class="alert alert-warning">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_002(); ?><br><br>
+	</div>
+	<div align="center">
+		<input class="input_file" name="UploadOldPrivateKeyInJSInput" id="UploadOldPrivateKeyInJSInput" size="96" type="file"></input>
+	</div><br><br>
+	<!-- reencryption progress bar -->
+	<div align="center"><div align="left" id="progress_bar_border_1" style="width: 95%; height: 15px; border: 1px solid #b2c2df; visibility: visible; background-color: #FFFFFF;"><div id="progress_bar_content_1" style="height: 15px; width: 0px; background-color: #005099;">&nbsp;</div></div></div><br><br>
+	<div align="center">
+		<a id="UploadOldPrivateKeyInJSButton" class="btn blue" style="width: 125px" onclick ="">
+			<?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_START_REENCRYPTION_BUTTON(); ?>
+		</a>
+	</div><br>
+</div>
+
+<div id="step4" style="display: none;">
+	<div class="alert alert-danger">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_003(); ?><br><br>
+	</div>
+	<div align="center">
+		<input class="input_file" name="UploadNewPrivateKeyInJSInput" id="UploadNewPrivateKeyInJSInput" size="96" type="file"></input>
+	</div><br>
+	<div align="center">
+		<a id="DownloadNewRSAPrivateKeyInJSDIVConfirmButton" class="btn blue" onclick ="">
+			<?php MODULE_PAYMENT_OFFLINE_CC_MSG_SAVE_KEY_CONFIRMATION_BUTTON(); ?>
+		</a>
+	</div><br>
+	<div class="alert alert-danger">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_004(); ?>
+	</div>
+	<a href="javascript: void(0);" style="color: blue;" onclick="hide_all_steps(); switch_to_step('step2');"><b><?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_005(); ?></b></a>
+</div>
+
+<div id="step5" style="display: none;">
+	<div class="alert alert-success">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_007(); ?>
+	</div>
+</div>
+
+<div id="step6" style="display: none;">
+	<div class="alert alert-success">
+		<div align="center"><?php MODULE_PAYMENT_OFFLINE_CC_MSG_REPLACE_KEY_006(); ?></div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

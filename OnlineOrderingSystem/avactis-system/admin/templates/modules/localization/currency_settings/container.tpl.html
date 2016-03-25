@@ -1,0 +1,221 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var CurrencySigns = new Array();
+<?php CurrencySignsArray(); ?>
+
+<?php JSData(); ?>
+
+function selectCurrency()
+{
+    var currency_el = document.getElementById('currency');
+    var currency_id = currency_el.options[currency_el.selectedIndex].value;
+    var sign = document.getElementById('currency_sign');
+    sign.value = CurrencySigns[currency_id];
+
+    currency_exploded = c_list[currency_id]['CURRENCY'].split("|");
+    currency_format_exploded = c_list[currency_id]['CURRENCY_FORMAT'].split("|");
+    currency_positive_format = c_list[currency_id]['CURRENCY_POSITIVE_FORMAT'];
+    currency_negative_format = c_list[currency_id]['CURRENCY_NEGATIVE_FORMAT'];
+
+    var digits_el = document.getElementById('digits');
+    digits_el.selectedIndex = currency_format_exploded[0];
+
+    var dec_point_el = document.getElementById('decimal_sep');
+    dec_point_el.value = currency_format_exploded[1];
+
+    var thousands_sep_el = document.getElementById('digit_sep');
+    thousands_sep_el.value = currency_format_exploded[2];
+
+    var positive_el = document.getElementById('positive_currency');
+    positive_el.value = currency_positive_format;
+
+    var negative_el = document.getElementById('negative_currency');
+    negative_el.value = currency_negative_format;
+
+    showExamples();
+}
+
+function showExamples()
+{
+    var sign = document.getElementById('currency_sign');
+    var digits_el = document.getElementById('digits');
+    var digits = parseInt(digits_el.options[digits_el.selectedIndex].value);
+    var dec_point_el = document.getElementById('decimal_sep');
+    var dec_point = dec_point_el.options[dec_point_el.selectedIndex].value;
+    var thousands_sep_el = document.getElementById('digit_sep');
+    var thousands_sep = thousands_sep_el.options[thousands_sep_el.selectedIndex].value;
+    var positive_el = document.getElementById('positive_currency');
+    var positive = positive_el.options[positive_el.selectedIndex].value;
+    var negative_el = document.getElementById('negative_currency');
+    var negative = negative_el.options[negative_el.selectedIndex].value;
+
+    for (i=0; i<positive_el.options.length; i++)
+    {
+        var pos_ex = positive_el.options[i].value;
+        positive_el.options[i].innerHTML = pos_ex.replace(/({v})/, number_format(23.95, digits, dec_point, thousands_sep));
+        positive_el.options[i].innerHTML = positive_el.options[i].innerHTML.replace(/({s})/, sign.value);
+    }
+    for (i=0; i<negative_el.options.length; i++)
+    {
+        var neg_ex = negative_el.options[i].value;
+        negative_el.options[i].innerHTML = neg_ex.replace(/({v})/, number_format(23.95, digits, dec_point, thousands_sep));
+        negative_el.options[i].innerHTML = negative_el.options[i].innerHTML.replace(/({s})/, sign.value);
+    }
+    for (i=1; i<=5; i++)
+    {
+        var el = document.getElementById('ex_'+i);
+        var elHid = document.getElementById('ex_hid_'+i);
+        var num = parseFloat(elHid.value);
+        if (num<0)
+        {
+            num *= -1;
+            el.innerHTML = negative.replace(/({v})/, number_format(num, digits, dec_point, thousands_sep));
+            el.innerHTML = el.innerHTML.replace(/({s})/, sign.value);
+        }
+        else
+        {
+            el.innerHTML = positive.replace(/({v})/, number_format(num, digits, dec_point, thousands_sep));
+            el.innerHTML = el.innerHTML.replace(/({s})/, sign.value);
+        }
+    }
+}
+
+//-->
+</SCRIPT>
+<FORM <?php FORM(); ?>>
+    <?php ResultMessage(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg("CRNCY_FORMAT_PAGE_TITLE"); ?></span>
+			<span class="caption-helper text-lowercase"><?php Msg("CRNCY_FORMAT_PAGE_SUBTITLE"); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="EditButton1" class="btn btn-circle btn-default" name="settings" type="button" onclick="javascript: CurrencyForm.submit();"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_001"); ?></lable>
+			</div>
+			<div class="col-md-8">
+        		 <SELECT class="form-control form-filter input-medium" name="currency" id="currency" onchange="javascript: selectCurrency();">
+          <?php CurrenciesList(); ?>
+        </SELECT>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_002"); ?></lable>
+			</div>
+			<div class="col-md-8">
+        		<INPUT class="form-control form-filter input-medium" TYPE="text" NAME="currency_sign" id="currency_sign" value="<?php CurrencySign(); ?>" onblur="javascript: showExamples();">
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_003"); ?></lable>
+			</div>
+			<div class="col-md-8">        	
+        		<select class="form-control form-filter input-medium"  name="decimal_sep" id="decimal_sep" onchange="javascript: showExamples();">
+            <?php DecimalSeparators(); ?>
+        </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_004"); ?></lable>
+			</div>
+			<div class="col-md-8">        	
+        		<select class="form-control form-filter input-medium" name="digit_sep" id="digit_sep" onchange="javascript: showExamples();">
+            <?php DigitSeparators(); ?>
+        </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_005"); ?></lable>
+			</div>
+			<div class="col-md-8">        	
+        		<select class="form-control form-filter input-medium" name="digits" id="digits" onchange="javascript: showExamples();">
+            <?php Digits(); ?>
+        </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_006"); ?></lable>
+			</div>
+			<div class="col-md-8">        	
+        		 <select class="form-control form-filter input-medium" name="positive_currency" id="positive_currency" onchange="javascript: showExamples();">
+            <?php PositiveCurrency(); ?>
+        </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_007"); ?></lable>
+			</div>
+			<div class="col-md-8">        	
+        		<select class="form-control form-filter input-medium" name="negative_currency" id="negative_currency" onchange="javascript: showExamples();">
+            <?php NegativeCurrency(); ?>
+        </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("CRNCY_FORMAT_FIELD_008"); ?></lable>
+			</div>
+			<div class="col-md-8">        	
+        		<div style="width: 140px;text-align: right;">
+      <div id="ex_1"></div><INPUT TYPE="hidden" id="ex_hid_1" value="5.00">
+      <div id="ex_2"></div><INPUT TYPE="hidden" id="ex_hid_2" value="23456.55">
+      <div id="ex_3"></div><INPUT TYPE="hidden" id="ex_hid_3" value="34543234.95">
+      <div id="ex_4"></div><INPUT TYPE="hidden" id="ex_hid_4" value="-15.75">
+      <div id="ex_5"></div><INPUT TYPE="hidden" id="ex_hid_5" value="-238.00">
+      </div>
+			</div>
+		</div>
+		<!-- End - Row -->
+	</div>
+	<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript: CurrencyForm.submit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+		</div>
+	</div>
+</div>
+</FORM>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+showExamples();
+//-->
+</SCRIPT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

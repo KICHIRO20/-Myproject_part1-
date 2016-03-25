@@ -1,0 +1,41 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-trash-o "></i>&nbsp;<?php Msg("ADMIN_DELETE_MEMBER_PAGE_TITLE"); ?> :
+			</span>
+		</div>
+		<div class="actions">
+			<div id="DeleteButton1" class="btn btn-default btn-circle" onclick="DeleteAdminsForm.submit();">
+				<i class="fa fa-trash-o "></i>&nbsp;<?php Msg("BTN_DELETE"); ?>
+			</div>
+			<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();">
+				<i class="fa fa-times-circle "></i>&nbsp;<?php Msg("BTN_CANCEL"); ?>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!-- BEGIN Warning Message -->
+		<div class="note note-warning note-bordered font-red">
+			<i class="fa fa-warning"></i>&nbsp;<?php Msg("ADMIN_DELETE_MEMBER_WARNING_001"); ?>
+		</div>
+		<!-- END Warning Message -->
+		<span class="font-green-sharp uppercase bold"><?php Msg("ADMIN_DELETE_MEMBER_PAGE_SUBTITLE"); ?>&nbsp;:&nbsp;</span>
+		<form <?php FORM(); ?> id="DeleteAdminsForm">
+			<?php HiddenArrayViewState(); ?>
+			<?php Items(); ?>
+		</form>
+		<div class="text-center">
+			<div id="DeleteButton1" class="btn btn-default btn-circle" onclick="DeleteAdminsForm.submit();">
+				<i class="fa fa-trash-o "></i>&nbsp;<?php Msg("BTN_DELETE"); ?>
+			</div>
+			<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();">
+				<i class="fa fa-times-circle "></i>&nbsp;<?php Msg("BTN_CANCEL"); ?>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

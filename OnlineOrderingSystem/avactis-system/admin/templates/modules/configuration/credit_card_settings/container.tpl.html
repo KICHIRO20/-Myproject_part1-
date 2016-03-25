@@ -1,0 +1,126 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<!-- tinyMCE -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    disableButtons(new Array('SortRowsButton', 'UpdateRowsButton', 'AddRowButton'));
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+
+    form.FormSubmitValue.value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+
+function trim(stringToTrim) {
+	return stringToTrim.replace(/^\s+|\s+$/g,"");
+}
+
+function checkUpdateNamesNotEmpty()
+{
+    var i = 1;
+    var el = document.getElementById('cc_type_name_id_'+i);
+
+    while (el)
+    {
+        var text = el.value;
+        text = trim(text);
+        if(text == '')
+        {
+            alert("<?php Msg('CONFIGURATION_EDIT_CREDIT_CARD_WARNING_001'); ?>");
+            return false;
+        }        
+        i++;
+        el = document.getElementById('cc_type_name_id_'+i);
+    }
+    return true;
+}
+
+function checkNewNameNotEmpty()
+{
+    var el = document.getElementById('add_cc_type_name');
+    var text = el.value;
+    text = trim(text);
+    if (text == '')
+    {
+        alert("<?php Msg('CONFIGURATION_EDIT_CREDIT_CARD_WARNING_001'); ?>");
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+//-->
+</script>
+<?php ResultMessageRow(); ?>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-outdent"></i>&nbsp;<?php msg('CONFIG_CREDIT_CARDS_EDITOR'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div id="SortRowsButton" class="btn btn-circle btn-default" onclick="NewWindow('SortCreditCardTypes', '<?php SortCreditCardTypesHref(); ?>', 'SortCreditCardTypes', true, '');">
+				<i class="fa fa-sort"></i>&nbsp;<?php msg('BTN_SORT'); ?>
+			</div>
+			<div id="UpdateRowsButton" class="btn btn-circle btn-default" onclick="if(checkUpdateNamesNotEmpty()){EditCreditCardSettingsForm.FormSubmitValue.value = 'UpdateRows'; EditCreditCardSettingsForm.submit(); disableButtonsInForm();}">
+				<i class="fa fa-save"></i>&nbsp;<?php msg('BTN_SAVE'); ?>
+			</div>
+		</div>
+	</div>		
+	<div class="portlet-body">
+		<div class="table-responsive">
+			<form <?php EditCreditCardSettingsForm(); ?> method="post" id="EditCreditCardSettingsForm" style="padding: 0px; margin: 0px;">
+				<input type="hidden" name="asc_action" value="UpdateCreditCardSettings">
+				<?php HiddenArrayViewState(); ?>
+				<table class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th colspan="2" class="text-center"><?php msg('CREDIT_CARDS_TAG'); ?></th>
+							<th class="text-center"><?php msg('CONFIG_CARDS_ATTRIBUTES_TITLE'); ?></th>
+							<th></th>							
+						</tr>
+					</thead>
+					<tbody>
+						<?php Items(); ?>
+						<tr>
+							<td colspan="1" style="border:none;">
+								<input type="text" name="add_cc_type_name" id="add_cc_type_name" class="form-control input-sm" />
+							</td>
+							<td colspan="3" class="text-left" style="border:none;">
+								<div id="AddRowButton" class="btn btn-circle btn-default" onclick="if(checkNewNameNotEmpty()){el=document.getElementById('add_cc_type_name'); if(el.value != ''){ EditCreditCardSettingsForm.FormSubmitValue.value = 'AddRow'; EditCreditCardSettingsForm.submit(); disableButtonsInForm(); }}">
+									<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('BTN_ADD'); ?>
+								</div>
+                                    				<input type='hidden' name='FormSubmitValue'></input>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

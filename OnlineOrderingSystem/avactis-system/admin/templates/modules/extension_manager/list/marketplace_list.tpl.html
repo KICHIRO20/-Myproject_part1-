@@ -1,0 +1,60 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	// If signed in show form for updating credentials - start
+		$(".signed_in_market_user").click(function(){
+		
+			$(".marketlogin").show();
+			$.colorbox({inline:true, href:".marketlogin",maxheight:"80%",maxwidth:"80%",height:"400px",width:"500px"});
+		});
+	// If signed in show form for updating credentials - end
+	});
+</script>
+<div class="tabdesc">
+HELLO
+	<div id="login_cont" style="display:none;"><?php MarketPlaceLogin(); ?></div>
+	<div id="ext_filter"><span style="font-weight:bold;"><?php xMsg('CA', 'LBL_FILTER_BY'); ?>:</span>&nbsp;<?php SelectExtensionType(); ?> 
+	<div style="float:right">
+	<span class="market_cred"><?php Msg('MARKETPLACE_CREDENTIALS'); ?></span>&nbsp;
+	<?php 	
+			$configure_ext_url = AVACTIS_URL."avactis-system/admin/configure_extensions.php";
+			
+			$getUserDetails = json_decode(getFetchUserDetails());
+
+			$marketplace_username = $getUserDetails[0];
+			
+			if($marketplace_username != '')
+			{
+	?>
+			<span class="market_cred signed_in_market_user" style="float:right;cursor:pointer;text-decoration:underline;" title="<?php Msg('UPDATE_CREDS'); ?>"><?php echo $marketplace_username; ?></span>
+	<?php } 
+		  else
+		  {
+	?>
+			<span class="signed_in_market_user" style="cursor:pointer;text-decoration:underline;color:#000000;"><?php Label('ACCOUNT_SIGN_IN'); ?></span>|
+			<span class="market_cred"><a target="_blank" href="http://marketplace.avactis.com/register.php"><?php Label('ACCOUNT_REGISTER_LABEL'); ?></a></span>
+	<?php
+		  }
+	?>
+	</div>
+	</div>
+	<div id="ext_header_img"></div>
+	<div id="fade"></div>
+        <div id="modal">
+            <div id="loader">&nbsp;</div>
+    </div> 
+	<!-- For messages - start -->
+	 <div id="parent_msg_div">
+		 <div class="slidediv" id="verify_msg"></div>
+		 <div class="slidediv" id="download_msg"></div>
+		 <div class="slidediv" id="extracting_msg"></div>
+		 <div class="slidediv" id="installing_msg"></div>
+		 <div class="slidediv" id="installed_ext_msg"></div>
+         <div class="slidediv" id="configure_ext_msg" style="display:none;"><?php Msg('CONFIGURE_EXT_LINK_MSG'); ?>&nbsp;<a target="_blank" href="<?php echo $configure_ext_url; ?>"><?php xMsg('PO', 'DT_LSL'); ?></a>&nbsp;</div>
+         <div id="user_msg" style="display:none;"></div>
+	</div>
+	<!-- For messages - end -->
+	
+  	<?php BrowseExtensions(); ?>
+</div> 
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,40 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php ResultMessage(); ?>
+<FORM <?php UpdateStatesForm(); ?> id="UpdateStatesForm">
+<?php HiddenArrayViewState(); ?>
+<div class="portlet-body">
+	<div class="text-center margin-bottom-20">
+		<lable class="bold margin-right-10"><?php Msg('MNG_STATE_CNTR_LABEL'); ?></lable>
+		<select class="form-control form-filter input-sm input-inline input-small"  name="c_id" onchange="UpdateStatesFormSubmit('UpdateStatesForm', 'changeCountry');"><?php CountriesList(); ?></select>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped table-hover dataTable no-footer" aria-describedby="datatable_orders_info" role="grid">
+			<thead>
+				<tr role="row" class="heading">
+					<th width="10%" style="text-align: center;">
+						<?php Msg("MNG_STATE_TABLE_HEADER_001"); ?>
+					</th>
+					<th width="50%" style="text-align: center;">
+						<?php Msg("MNG_STATE_TABLE_HEADER_002"); ?>
+					</th>
+					<th width="20%" style="text-align: center;">
+						<?php Msg("MNG_STATE_TABLE_HEADER_003"); ?>
+					</th>
+					<th width="20%"  style="text-align: center;">
+						<?php Msg("MNG_STATE_TABLE_HEADER_004"); ?>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php Items(); ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="actions" align="center">
+		<div class="actions btn-set">
+            <button id="UpdateButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="UpdateStatesFormSubmit('UpdateStatesForm', 'update');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn btn-default btn-circle"><i class="fa fa-save"></i> <span class=""><?php Msg("BTN_SAVE"); ?></span></button>		
+		</div>
+	</div>
+</div>
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

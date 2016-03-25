@@ -1,0 +1,81 @@
+<table width="100%" cellspacing="0" cellpadding="0" class="table">
+      <tr>
+	<td width="10" bgcolor="#00436d" class="td">&nbsp;
+      </td>
+      <td valign="middle" align="left" height="50" bgcolor="#00436d" class="td1">
+            <div class="div">{StoreOwnerName}</div>
+	</td>
+     </tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="0" class="tablebody">
+<tr bgcolor="#D8D8D8">
+<td align="left" valign="top" class="tdbody" bgcolor="#F9F9F9">
+<p>{StoreOwnerName}. Your order shipped #{OrderID}</p>
+<b>Greetings from {StoreOwnerName}</b>,<br/><br/>
+
+Please be informed that we have shipped your items, and that this completes your order.<br/><br/>
+
+The following items have been shipped to you by {StoreOwnerName}:<br/><br/>
+
+<b>Order Summary:</b><br/><hr/>
+
+Order #: {OrderID}<br/>
+Payment Method: {OrderPaymentMethod}<br/>
+Shipping Method: {OrderShippingMethod}<br/>
+Tracking Number: {TrackingNumber}<br/><br/>
+
+<b>Items:</b><br><hr/>
+
+{OrderContentBlock}
+Subtotal of Items: {OrderSubtotal}<br/>
+{OrderDiscountsBlock}<br/>
+Shipping & Handling: {OrderTotalShippingAndHandlingCost}<br/>
+{OrderTax}<br/><br/>
+<b>Total for this Order: {OrderTotal}</b><br/><br/>
+
+<b>This shipment was sent to:</b><br/><hr/>
+
+{ShippingFirstname} {ShippingLastname}<br/>
+{ShippingStreetline1}<br/>
+{ShippingStreetline2}<br/>
+{ShippingCity}, {ShippingState}, {ShippingPostcode}<br/>
+{ShippingCountry}<br/>
+{ShippingPhone}<br/>
+
+Comment:
+{ShippingCommentLine}<br/><br/><hr/>
+
+Please note: This e-mail was sent from a notification-only address that cannot accept incoming e-mail. Please do not reply to this message.<br/><br/>
+
+Thank you for shopping with us.<br/><br/>
+
+{StoreOwnerName}<br/>
+{StoreOwnerWebsite}<br/>
+</td>                                  		
+ </tr>
+</table>
+
+<style>
+.table {
+        max-width:600px;
+        border-left:solid 1px #e6e6e6;
+        border-right:solid 1px #e6e6e6;
+       }
+.tablebody {
+       max-width:600px;border-left:solid 1px #e6e6e6;border-right:solid 1px #e6e6e6;
+     }
+.td {
+     width:10px;
+     background:linear-gradient(to bottom,#005587 0%,#00436d 89%);
+     background-color:#00436d;
+   }
+.td1 {
+       background:linear-gradient(to bottom,#005587 0%,#00436d 89%);background-color:#00436d;padding:0;margin:0;
+     }
+.tdbody{
+  color:#2c2c2c;display:block;line-height:20px;font-family:arial;font-weight:300;margin:0 auto;clear:both;border-bottom:1px solid #e6e6e6;background-color:#f9f9f9;padding:20px;
+}
+.div {
+      color:#FFFFFF;font-weight:bold;font-family:arial;line-height:20px;font-size:20px;
+     }
+</style>

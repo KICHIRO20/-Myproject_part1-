@@ -1,0 +1,27 @@
+- OrderHistory:
+    title: Order history
+    description: Order history
+    page: orders.php
+- OrderInfo:
+    title: Order info
+    description: Order info
+    page: order-info.php
+- OrderInvoice:
+    title: Order invoice
+    description: Order invoice
+    page: order-invoice.php
+- OrderDownloadLinks:
+    title: Order download links
+    description: Order download links
+    page: order-download-links.php
+
+- Checkout:
+    title: Checkout
+    description: Checkout
+- OneStepCheckout:
+    title: One-step checkout
+    description: One-step checkout
+- LastPlacedOrder:
+    title: Last Placed Order
+    description: shows information of last placed order
+

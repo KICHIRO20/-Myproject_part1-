@@ -1,0 +1,180 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2'
+                            );
+    disableButtons(buttons);
+}
+
+function onVisibleClick()
+{
+//    alert("Vsible Click");
+//    return false;
+    
+    if (!form.IsVisible.checked)
+    {
+        form.IsRequired.checked = false;
+    }
+}
+
+function onRequiredClick()
+{
+    if (form.IsRequired.checked)
+    {
+        form.IsVisible.checked = true;
+    }
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    
+    if (formAction == 'Save')    
+    {
+        if (form.VisibleName.value == "")
+        {
+            alert("<?php Alert_001(); ?>");
+            return;
+        }
+
+        if (form.Description.value == "")
+        {
+            alert("<?php Alert_002(); ?>");
+            return;
+        }
+
+        if (!form.IsVisible.checked && form.IsRequired.checked)
+        {
+            alert("<?php Alert_003(); ?>");
+            return;
+        }
+
+        if (form.AttributeIsDependent.value == "1")
+        {
+
+            if (form.AttributeIsState.value == "1")
+            {
+                if (form.CountryIsVisible.value == "0" && form.IsVisible.checked)
+                {
+                    alert("<?php Msg( 'CHECKOUT_INFO_ALERT_CANT_VISIBLE', CountryVisibleName() ); ?>");
+                    return;
+                }
+            }
+            if (form.AttributeIsCountry.value == "1")
+            {
+                if (form.StateIsVisible.value == "1" && !form.IsVisible.checked)
+                {
+                    alert("<?php Msg( 'CHECKOUT_INFO_ALERT_MUST_INVISIBLE', StateVisibleName() ); ?>");
+                }
+            }
+        }
+    }
+ 
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+//-->
+</script>
+
+
+<form action="<?php UpdateInfoHref(); ?>" id="FieldForm" name="FieldForm" method="post">
+<?php HiddenArrayViewState(); ?>
+
+<input type="hidden" name="VariantId" value="<?php VariantId(); ?>" >
+<input type="hidden" name="AttributeId" value="<?php AttributeId(); ?>" >
+
+<input type="hidden" name="AttributeIsDependent" value="<?php AttributeIsDependent(); ?>" >
+<input type="hidden" name="AttributeIsCountry" value="<?php AttributeIsCountry(); ?>" >
+<input type="hidden" name="AttributeIsState" value="<?php AttributeIsState(); ?>" >
+<input type="hidden" name="CountryIsVisible" value="<?php CountryIsVisible(); ?>" >
+<input type="hidden" name="StateIsVisible" value="<?php StateIsVisible(); ?>" >
+
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center">
+    <colgroup>
+      <col width="45%">
+   
+
+    <tr class="title">
+        <td class="title popup_dialog_header_left_right_padded" colspan="3"><?php PageHeader(); ?><?php GroupName(); ?></td>
+    </tr>
+    <tr class="subtitle" style="height: 25px;">
+        <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+            <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="80%"><?php PageName(); ?></td>
+                    <td nowrap style="padding-right: 8px;">&nbsp;</td>
+                    <td nowrap style="padding-right: 8px;"></td>
+                    <td style="padding-right: 6px;"><div id="SaveButton1" class="button button_5em" onclick="formSubmit('FieldForm', 'Save');"><?php Msg('BTN_SAVE'); ?></div></td>
+                    <td style="padding-right: 9px;"><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg('BTN_CANCEL'); ?></div></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr style="height: 25px;">
+        <td width="20%" class="label popup_dialog_body_left_padded"><span class="required"><?php VisibleName_FieldName(); ?>&nbsp;*</span></td>
+        <td><a class="pull-right" style="cursor:pointer;"><?php hinttext('CHECKOUT_INFO_FIELD_001'); ?></a></td>
+        <td width="75%" class="value popup_dialog_body_right_padded" nowrap style="background-color: #eef2f8;"><input type="text" name="VisibleName" value="<?php VisibleName_FieldValue(); ?>"  size="80" onBlur="formatInput(this);"></td>
+    </tr>
+    
+    <tr style="height: 25px;">
+        <td width="20%" class="label popup_dialog_body_left_padded"><span class="required"><?php Description_FieldName(); ?>&nbsp;*</span></td>
+        <td><a class="pull-right" style="cursor:pointer;"><?php hinttext('CHECKOUT_INFO_FIELD_002'); ?></a></td>
+        <td width="75%" class="value popup_dialog_body_right_padded" nowrap style="background-color: #eef2f8;"><input type="text" name="Description" value="<?php Description_FieldValue(); ?>"  size="80" onBlur="formatInput(this);"></td>
+    </tr>
+
+    <tr style="height: 25px;">
+        <td width="20%" class="label popup_dialog_body_left_padded"><?php Visibility_FieldName(); ?></td>
+        <td><a class="pull-right" style="cursor:pointer;"><?php hinttext('CHECKOUT_INFO_FIELD_003'); ?></a></td>
+        <td width="75%" class="value popup_dialog_body_right_padded" nowrap style="background-color: #eef2f8;">
+            <?php HintHead(); ?><INPUT TYPE="checkbox" name="IsVisible" value="IsVisible" style="border: 0;" onclick="onVisibleClick();"<?php Visibility_IsChecked(); ?> <?php Unremovable(); ?>  ><?php HintTail(); ?>
+        </td>
+
+    </tr>
+
+    <tr style="height: 25px;">
+        <td width="20%" class="label popup_dialog_body_left_padded"><?php Required_FieldName(); ?> </td>
+        <td><a class="pull-right" style="cursor:pointer;"><?php hinttext('CHECKOUT_INFO_FIELD_004'); ?></a></td>
+        <td width="75%" class="value popup_dialog_body_right_padded" nowrap style="background-color: #eef2f8;">
+        <?php HintHead(); ?><INPUT TYPE="checkbox" name="IsRequired" value="IsRequired" style="border: 0;" onclick="return onRequiredClick();" <?php Required_IsChecked(); ?> <?php Unremovable(); ?>><?php HintTail(); ?>
+        </td>
+    </tr>
+
+    
+
+    <tr>
+        <td colspan="3" style="padding-left: 10px;padding-right: 10px; font-size: 8pt; color: rgb(102,102,102); text-align: center; font-weight: normal;">
+            <div class="help error_msg" style="text-align: left; padding: 5px;"><?php Errors(); ?></div>            
+		</td>
+	</tr>
+	
+<tr>
+    <td class="value popup_dialog_body_left_padded"><span class="required"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span></td>
+</tr>
+<tfoot>
+    <tr>
+        <th colspan=3 align="center">
+            <table width="100%" class="clear" >
+                <tr>                    
+                    <td align=right style="padding-right: 4px;"><div id="SaveButton2" class="button button_5em" onclick="formSubmit('FieldForm', 'Save');"><?php Msg('BTN_SAVE'); ?></div></td>
+                    <td align=left ><div id="CancelButton2" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg('BTN_CANCEL'); ?></div></td>
+                </tr>
+            </table>
+        </th>
+    </tr>
+</tfoot>
+    
+</table>    
+
+</form>
+
+<!-- END TPL (DO NOT REMOVE!) -->

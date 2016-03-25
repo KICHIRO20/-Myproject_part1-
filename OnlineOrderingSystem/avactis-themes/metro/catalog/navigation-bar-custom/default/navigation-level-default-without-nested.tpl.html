@@ -1,0 +1,13 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<?php if(getLocal_NestedCategories() == ""){ ?> 
+<li>
+<a href="<?php CategoryLink(); ?>" title=""><?php CategoryName(); ?></a>
+</li>
+ <?php } else { ?>
+<li class="dropdown dropdown-megamenu">
+<a href="<?php CategoryLink(); ?>" title="" data-toggle="dropdown" class="dropdown-toggle"><?php CategoryName(); ?></a>
+<ul class="dropdown-menu"><?php Local_NestedCategories(); ?></ul>
+</li>
+<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->

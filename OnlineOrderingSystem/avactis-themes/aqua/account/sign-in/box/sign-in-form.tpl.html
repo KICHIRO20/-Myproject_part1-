@@ -1,0 +1,44 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h2><?php Label("ACCOUNT_SIGN_IN"); ?></h2>
+        <div class="signin_box">
+            <?php MessageBox(); ?>
+            <form action="<?php Local_FormActionURL(); ?>" name="SignInForm" method="post">
+                <div class="form_view">
+                    <div class="form_row">
+                        <div class="form_descr"><label for="sign_in_box_email"><?php Label('ACCOUNT_EMAIL_LABEL'); ?></label></div>
+                        <div class="form_field">
+                        
+                            <input type="text" id="sign_in_box_email" name="email" />
+                        
+                        
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="form_descr"><label for="sign_in_box_password"><?php Label('ACCOUNT_PASSWORD_LABEL'); ?></label></div>
+                        <div class="form_field">
+                        
+                            <input type="password" id="sign_in_box_password" name="passwd" />
+                        
+                        
+                        </div>
+                    </div>
+                    <?php if (getLocal_RememberMeOptionEnabled() === "TRUE") { ?>
+                    <label class="account_remember_me_option"><input type='checkbox' name='remember_me' value='save' checked="checked" />&nbsp;<?php Label('ACCOUNT_KEEP_ME_SIGNED_MESSAGE'); ?></label>
+                    <?php } ?>
+                </div>
+                <a href="<?php PageURL('CustomerForgotPassword'); ?>"><?php Label("ACCOUNT_FORGOT_YOUR_PASSWORD"); ?></a>
+                <br/>
+                <a href="<?php PageURL('Registration'); ?>"><?php Label('ACCOUNT_REGISTER_LABEL'); ?></a>
+                <input type="submit" value="" class="<?php lang(); ?> buttons button_signin" />
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

@@ -1,0 +1,303 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+document.title = '<?php xmsg('CC','CC_RATE_EDITOR'); ?>';
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold uppercase">
+				<i class="fa fa-edit"></i>&nbsp;<?php xmsg('CC','CC_RATE_EDITOR'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<?php PageHelpLink('store_currencies'); ?>
+			<div id="CancelButton1" class="btn btn-default btn-circle" onClick="javascript: closeAndFocusParent();">
+				<i class="fa fa-times-circle"></i><span class="hidden-480">&nbsp;<?php msg('BTN_CLOSE'); ?></span>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<?php MSC_ResultMessage(); ?>
+		<?php MSC_ErrorsMessage(); ?>
+		<?php NewAC_ResultMessage(); ?>
+		<?php NewAC_ErrorsMessage(); ?>
+		<div class="table-responsive">
+			<form action="<?php FormActionUrl(); ?>" name="form_MSC" id="form_MSC_id" method="post">
+				<input type="hidden" value="setMSC" name="ViewState[FormSubmitValue]"/>
+				<table class="table table-bordered borderless table-striped table-hover table-condensed" id="ChangeLabel">
+					<thead>
+						<tr class="bg-info">
+							<th class="text-left" colspan="2"><?php xmsg('CC','CC_MAIN_STORE_CURRENCY_LABEL'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="text-center"><?php MainStoreCurrencyName(); ?></td>
+							<td class="text-center">
+								<a href="#" onclick="FlipChange();" class="btn btn-default btn-circle">
+									<i class="fa fa-exchange"></i>&nbsp;<?php xmsg('CC','CHANGE_LINK_LABEL'); ?>
+								</a>
+							</td>
+						</tr>					
+					</tbody>
+				</table>
+				<table class="table table-bordered borderless table-striped table-hover table-condensed" id="ChangeForm" style="display:none;">
+					<thead>
+						<tr class="bg-info">
+							<th class="text-left" colspan="2"><?php xmsg('CC','CC_MAIN_STORE_CURRENCY_LABEL'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td align="center" valign="middle">
+								<input name="new_msc_name" id="new_msc_name_id" type=text class="form-control input-sm input-medium">
+							</td>
+							<td align="center" valign="middle">
+								<select name="new_msc" id="new_msc_id" style="input_value" onChange="MSC_NameChange();" class="form-control input-sm input-medium">
+									<?php CurrenciesSelectMSC(); ?>
+								</select>
+							</td>
+						</tr>					
+					</tbody>
+					<tfoot>
+						<tr>
+							<td class="text-center" colspan="2">
+								<div id="NewMSCButton_id" class="btn btn-default btn-circle" onClick="NewMainSC();">
+									<i class="fa fa-save"></i>&nbsp;<?php xmsg('CC','SAVE_LINK_LABEL'); ?>
+								</div>
+								<div id="CancelMSCButton_id" class="btn btn-default btn-circle" onClick="FlipChange();">
+									<i class="fa fa-times-circle"></i>&nbsp;<?php xmsg('CC','CANCEL_LINK_LABEL'); ?>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+			<?php CC_AdditionalCurrenciesPart(); ?>
+			<form action="<?php FormActionUrl(); ?>" name="AddNewACForm" id="AddNewACForm_id" method="post">
+				<input type="hidden" value="newAC" name="ViewState[FormSubmitValue]"/>
+				<table class="table table-bordered borderless table-striped table-hover">
+					<thead>
+						<tr class="bg-info">
+							<th colspan="2">
+								<?php xmsg('CC','CC_ADD_CURRENCY_LABEL'); ?>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td align="center" valign="middle" rowspan=2>
+								<select name="new_currency_select" class="form-control input-sm input-medium" id="new_currency_select_id" onChange="NewCurrencyDivChange();">
+									<?php CurrenciesSelect(); ?>
+								</select>
+								<br/><input type=checkbox name="new_currency_visible" checked>&nbsp;
+								<?php xmsg('CC','VISIBLE_LABEL'); ?>
+							</td>    
+							<td>
+								<input type=radio name="rate_method" checked value="1">&nbsp;Manual rate
+								<br/>1 <?php MainStoreCurrencyCode(); ?> = 
+								<input type=text name="new_rate" value="1" class="form-control input-sm input-xsmall inline" />
+								<div id="new_currency_div_id" style="display: inline">CAD</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type=radio name="rate_method" value="2">&nbsp;<?php xmsg('CC','CC_TRY_GET_RATE_FROM_WEB_LABEL'); ?>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+						<td class="text-center" colspan="2">
+							<div id="AddRateButton" class="btn btn-default btn-circle enabled" onClick="AddNewAC();">
+								<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('BTN_ADD'); ?>
+							</div>
+						
+							<div id="CancelButton2" class="btn btn-default btn-circle" onClick="javascript: closeAndFocusParent();">
+								<i class="fa fa-times-circle"></i>&nbsp;<?php msg('BTN_CLOSE'); ?>
+							</div>
+						</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<script language="JavaScript">
+
+function FlipChange()
+{
+    change_label = document.getElementById("ChangeLabel");
+    change_form = document.getElementById("ChangeForm");
+    new_msc_select = document.getElementById("new_msc_id");
+    update_btn = document.getElementById("UpdateButton1");
+    add_btn = document.getElementById("AddRateButton");
+    
+    if (change_label.style.display == "")
+    {
+        change_label.style.display = "none";
+        change_form.style.display = "";
+        if (update_btn) 
+            update_btn.className = update_btn.className.replace(" enabled", " disabled");
+        add_btn.className = add_btn.className.replace(" enabled", " disabled");
+        
+    }
+    else
+    {
+        change_label.style.display = "";
+        change_form.style.display = "none";
+        new_msc_select.value = <?php MainStoreCurrencyId(); ?>;
+        if (update_btn)
+            update_btn.className = update_btn.className.replace(" disabled", " enabled");
+        add_btn.className = add_btn.className.replace(" disabled", " enabled");
+    }
+    MSC_NameChange();
+}
+
+function setAddButton()
+{
+    var to_cc = document.getElementById('to_currency_code').value;
+    var from_cc = document.getElementById('from_currency_code').value;
+
+    if(to_cc == from_cc)
+    {
+        disableButton('AddButton1');
+    }
+    else
+    {
+        enableButton('AddButton1', function() { submitAddForm(); });
+    };
+};
+
+function submitAddForm()
+{
+    document.forms['AddCCRateForm'].submit();
+};
+
+function NewCurrencyDivChange()
+{
+    var new_cur = document.getElementById('new_currency_select_id');
+    var new_cur_div = document.getElementById('new_currency_div_id');
+    
+    if (new_cur_div)
+    {
+        new_cur_div.innerHTML = currencies[new_cur.value];
+    }
+    else
+    {
+    //    alert('!');
+    }
+}
+
+function MSC_NameChange()
+{
+    var msc_select = document.getElementById('new_msc_id');
+    var msc_name = document.getElementById('new_msc_name_id');
+    
+    msc_name.value = currencies[msc_select.value];
+}
+
+function NewMainSC()
+{
+    var msc_id = <?php MainStoreCurrencyId(); ?>;
+    var msc_select = document.getElementById('new_msc_id');
+    
+    if (msc_id != msc_select.value)
+    {
+        if (!confirm("<?php xmsg('CC','CC_ON_MSC_CHANGE_WARNING'); ?>"))
+            return false;
+    }
+        
+    form_id = document.getElementById("form_MSC_id");
+    if (form_id)
+    {
+        form_id.submit();
+    }
+}
+
+function UpdateAC()
+{
+    form_id = document.getElementById("AdditionalCurrenciesForm_id");
+    update_btn = document.getElementById("UpdateButton1");
+    if (update_btn.className.match("button_disabled") != null)
+    {
+       return false;
+    }
+    if (form_id)
+    {
+        form_id.submit();
+    }
+}
+
+function DeleteAC(cur_id)
+{
+    if (!confirm("<?php xmsg('CC','CC_ON_AC_DELETE_WARNING'); ?>"))
+        return false;
+        
+    form_element = document.getElementById("AdditionalCurrenciesForm_id");
+    currency_element = document.getElementById("currency_id_id");
+    action_id = document.getElementById("form_submit_value_id");
+    
+    if (form_element && currency_element && action_id)
+    {
+        currency_element.value = cur_id;
+        action_id.value = "deleteAC";
+        form_element.submit();
+    }
+    return false;
+}
+
+function UpdateRateAC(cur_id)
+{
+    form_element = document.getElementById("AdditionalCurrenciesForm_id");
+    currency_element = document.getElementById("currency_id_id");
+    action_id = document.getElementById("form_submit_value_id");
+    
+    if (form_element && currency_element && action_id)
+    {
+        currency_element.value = cur_id;
+        action_id.value = "updateRateAC";
+        form_element.submit();
+    }
+    return false;
+}
+
+function AddNewAC()
+{
+    form_id = document.getElementById("AddNewACForm_id");
+    add_btn = document.getElementById("AddRateButton");
+    if (add_btn.className.match("button_disabled") != null)
+	{
+	   return false;
+	}
+    if (form_id)
+    {
+        form_id.submit();
+    }
+}
+
+<?php CurrenciesJSList(); ?>
+
+NewCurrencyDivChange();
+MSC_NameChange();
+
+</script>
+
+<!-- END TPL (DO NOT REMOVE!) -->

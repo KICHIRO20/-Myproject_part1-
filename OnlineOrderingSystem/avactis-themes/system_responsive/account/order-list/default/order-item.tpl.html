@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="order_id"><a title="Order Info" href="<?php Local_OrderInfoLink(); ?>" ><?php Local_OrderID(); ?></a></td>
+    <td class="order_invoice"><a title="Order Info" target="_blank" href="<?php Local_OrderInvoiceLink(); ?>" ><?php Label("ACCOUNT_INVOICE_ORDER_LIST"); ?></a></td>
+    <td class="order_date"><?php Local_OrderDate(); ?></td>
+    <td class="order_amount"><?php Local_OrderAmount(); ?></td>
+    <td class="order_tax"><?php Label("ACCOUNT_TAX_ORDER_LIST"); ?></td>
+    <td class="order_status"><?php Local_OrderStatus(); ?></td>
+    <td class="order_payment_status"><?php Local_OrderPaymentStatus(); ?></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

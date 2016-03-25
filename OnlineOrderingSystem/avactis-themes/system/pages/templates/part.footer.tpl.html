@@ -1,0 +1,60 @@
+<?php
+global $application;
+echo $application->combineJS(array(
+    'js/jquery.jcarousel.pack.js',
+    'js/jquery.jcarousel.config.pack.js',
+    'js/jquery.cookie.js',
+    'js/jquery.dynatree.js',
+    'js/productinfo.js',
+    'js/productoptionschoice.js',
+    'js/module.*.js',
+    'js/jquery.colorbox-min.js'
+));
+?>
+
+<!--[if lte IE 6]>
+<script src="<?php echo getTemplateFileURL('js/jquery.pngfix.js'); ?>" type="text/javascript" charset="utf-8"></script> 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("input, .discount_star, span, .logo img").pngfix(); 
+    });
+</script>
+<![endif]-->
+
+<div class="ajax_message_box">
+    <div class="ajax_message_box_cross"><?php Label('CATALOG_AJAX_MESSAGE_CLOSE'); ?></div>
+    <div class="ajax_message_box_text"></div>
+</div>
+
+<div class="ajax_loader">
+    <div class="ajax_loader_image"></div>
+    <div class="ajax_loader_text"><?php Label('CATALOG_AJAX_LOADING'); ?></div>
+</div>
+
+<div class="ajax_coverlet"></div>
+
+<script type='text/javascript'>
+	$(function(){
+		$("#catalog_dynatree").dynatree({
+			fx: { height: "toggle", duration: 200 },
+			autoCollapse: false,
+			onActivate: function(){},
+			onDeactivate: false
+		});
+	});
+    
+    $(document).ready(function(){
+				$(".color_box").colorbox({rel:'color_box', transition:"fade"});
+    });
+
+    $(document).ready(function() {
+        $("input[type='checkbox']").addClass("input_checkbox");
+        $("input[type='radio']").addClass("input_radio");
+        $("input[type='hidden']").addClass("input_hidden");
+        $("input[type='password']").addClass("input_password");
+        $("input[type='file']").addClass("input_file");
+        $("input[type='text']").addClass("input_text");
+        $("input[type='submit']").addClass("input_submit");
+    });
+</script>
+<?php VisitorTrackingCode( 'footer' ); ?>

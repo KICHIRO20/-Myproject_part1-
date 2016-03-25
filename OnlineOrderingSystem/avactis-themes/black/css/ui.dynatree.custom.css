@@ -1,0 +1,13 @@
+div.ui-dynatree-container
+{
+    color: #575757;
+}
+
+div.ui-dynatree-container a
+{
+    color: #575757;
+}
+
+span.item_selected {
+    color: #575757;
+}

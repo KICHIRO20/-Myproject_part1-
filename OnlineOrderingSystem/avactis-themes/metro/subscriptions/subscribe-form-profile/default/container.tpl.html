@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main"><div class="container"><div class="row margin-bottom-40">
+<div class="myaccount <?php ViewClassName(); ?> col-md-12">
+ <h2><?php Label("SUBSCRIPTION_MANAGE_SUBSCRIPTIONS"); ?></h2>
+    <div class="content-page">
+    	<a name="subscribe_box"></a>
+        <div class="subscribe_form">
+            <?php Local_Messages(); ?>
+            <h3><?php Label("SUBSCRIPTION_YOUR_CURRENT_SUBSCRIPTIONS"); ?></h3>
+            <p><?php Label("SUBSCRIPTION_YOU_CAN_MODIFY"); ?></p>
+        	<?php Local_SubscriptionFormsList(); ?>
+        </div>
+        <div class="subscribe_form_buttons">
+            <a href="home.php"><span class="<?php lang(); ?> button_back"></span></a>
+        </div>
+     </div>
+</div>
+</div></div></div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

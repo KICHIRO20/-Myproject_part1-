@@ -1,0 +1,152 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+<!--
+    var default_language = '<?php DefLanguage(); ?>';
+
+    function checkLanguage(lng_field)
+    {
+        if (!DOM) return;
+        if (lng_field.value == default_language)
+        {
+            lng_field.form.status.value = "all";
+            lng_field.form.status.disabled = "disabled";
+        }
+        else
+        {
+            lng_field.form.status.disabled = "";
+        }
+    }
+
+    function submitHandler(formname, mode) 
+    {
+        var form = document.getElementById(formname);
+
+        if (mode != '' && form.elements['mode'])
+            form.elements['mode'].value = mode;
+        form.submit();
+    }
+
+// -->
+</script>
+<div class="row margin-bottom-10">
+	<div class="col-sm-4">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-bookmark"></i>
+					<span class="caption-subject uppercase"><?php xMsg('ML', 'ML_QUICK_LABEL_NAVIGATION') ?></span>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">
+                		<tr><td><a href="label_editor.php?asc_action=ShowAllLabels"><?php xMsg('ML', 'ML_ALL_LABELS') ?></a>:</td><td><?php CountAll(); ?></td></tr>
+		                <tr><td><a href="label_editor.php?asc_action=ShowStorefrontLabels"><?php xMsg('ML', 'ML_STOREFRONT_LABELS') ?></a>:</td><td><?php CountSF(); ?></td></tr>
+		                <tr><td><a href="label_editor.php?asc_action=ShowCustomLabels"><?php xMsg('ML', 'ML_CUSTOM_LABELS') ?></a>:</td><td><?php CountC(); ?></td></tr>
+		                <?php if (getDefLanguage() != getLanguage()) { ?>
+		                <tr><td><a href="label_editor.php?asc_action=ShowNonTranslatedLabels"><?php xMsg('ML', 'ML_NON_TRANSLATED_LABELS') ?></a>:</td><td><?php CountNT(); ?></td></tr>
+                		<tr><td><a href="label_editor.php?asc_action=ShowTranslatedLabels"><?php xMsg('ML', 'ML_TRANSLATED_LABELS') ?></a>:</td><td><?php CountT(); ?></td></tr>
+                		<?php } ?>
+            		</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-8">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-filter"></i>
+					<span class="caption-subject uppercase"><?php xMsg('ML', 'ML_LABEL_FILTER') ?></span>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-responsive">
+					<form name="FilterLabels" id="FilterLabels" action="label_editor.php" method="post">
+						<?php ActionField(); ?>
+						<table class="table table-striped table-hover">
+						    <tr>
+						<th valign="middle" align="right">
+						<span style='<?php HLLanguage(); ?>'><?php xMsg('ML', 'ML_LANGUAGE'); ?>:</span>
+						</th>
+						<td valign="top">
+						            <table border="0" align="left">
+						            <tr>
+							<td><?php LangSelect(); ?></td>
+						</tr>
+						</table>
+						</td>
+						    </tr>
+
+						    <tr>
+						<th valign="middle" align="right">
+						<span style='<?php HLLabel(); ?>'><?php xMsg('ML', 'ML_LABEL_NAME'); ?>:</span>
+						</th>
+						<td valign="top">
+						            <table border="0" align="left">
+						            <tr>
+							<td><?php LabelField(); ?></td>
+							<TD>&nbsp;</TD>
+							<TD><?php LabelCheckBox(); ?></TD>
+							<TD><label for="label_exactly"><?php xMsg('ML', 'ML_EXACTLY'); ?></label></TD>
+						</tr>
+						</table>
+						</td>
+						    </tr>
+
+						    <tr>
+						<th valign="middle" align="right">
+						<span style='<?php HLLPattern(); ?>'><?php xMsg('ML', 'ML_LABEL_PATTERN'); ?>:</span>
+						</th>
+						<td valign="top">
+						            <table border="0" align="left">
+						            <tr>
+							<td><?php ValueField(); ?></td>
+							<TD>&nbsp;</TD>
+							<TD><?php ValueCheckBox(); ?></TD>
+							<TD><label for="label_pattern_exactly"><?php xMsg('ML', 'ML_EXACTLY'); ?></label></TD>
+						</tr>
+						</table>
+						</td>
+						    </tr>
+
+						    <tr>
+						<th valign="middle" align="right">
+						<span style='<?php HLLType(); ?>'><?php xMsg('ML', 'ML_LABEL_TYPE'); ?>:</span>
+						</th>
+						<td valign="top">
+						            <table border="0" align="left">
+						            <tr>
+							<td><?php TypeSelect(); ?></td>
+						</tr>
+						</table>
+						</td>
+						    </tr>
+
+						    <tr>
+						<th valign="middle" align="right">
+						<span style='<?php HLLStatus(); ?>'><?php xMsg('ML', 'ML_LABEL_STATUS'); ?>:</span>
+						</th>
+						<td valign="top">
+						            <table border="0" align="left">
+						            <tr>
+							<td><?php StatusSelect(); ?></td>
+							<td align="right" width="50%"><a class="btn btn-default btn-circle" onclick="submitHandler('FilterLabels')"><i class="fa fa-filter"></i> <span class=""><?php xMsg('ML', 'ML_LABEL_FILTER') ?></span></a></td>
+						</tr>
+						</table>
+						</td>
+						    </tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script language="javascript" type="text/javascript">
+<!--
+jQuery(function() { checkLanguage(document.FilterLabels.lng) });
+// -->
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

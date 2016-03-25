@@ -1,0 +1,44 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+    function submitHandler(formname)
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+    
+document.title = "Advanced Settings";
+</script>
+
+<form action="" name="ApplicationSettings" id="ApplicationSettings" method="post"> 
+<input type="hidden" name="asc_action" value="UpdateApplicationSettings">
+<input type="hidden" name="group" value="<?php GroupName(); ?>">
+<input type="hidden" name="page_view" value="SettingParamList">
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php msg('ADMIN_MENU_ADVANCED_SETTINGS'); ?>: </span>
+			<span class="caption-subject font-blue-sharp"><?php GroupLinkName(); ?></span>
+		</div>
+               <div class="actions btn-set">
+ <button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="submitHandler('ApplicationSettings');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+               </div> 
+
+	</div>
+	<?php MessageBox(); ?>
+	<div class="portlet-body">
+		<div class="table-container form">
+				<?php Items(); ?>
+		</div>
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="submitHandler('ApplicationSettings');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

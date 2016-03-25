@@ -1,0 +1,367 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<?php JavascriptSynchronizeCountriesAndStatesLists(); ?>
+
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2',
+                            'DeleteFsRuleButton_id',
+                            'AddFsRuleButton_id'
+                            );
+    disableButtons(buttons);
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    
+    if (formAction == 'Save')
+    {
+        if (parseFloat(form.FS_OO.value) <= 0)
+        {
+            alert("<?php Msg('GSS_001'); ?>");
+            return;
+        }
+
+        if (parseFloat(form.FH_OO.value) <= 0)
+        {
+            alert("<?php Msg('GSS_001'); ?>");
+            return;
+        }
+
+        if (form.sce_country_hide.value == 1
+            && form.sce_state_hide.value == 1
+            && form.sce_zip_hide.value == 1)
+        {
+            alert('<?php xmsg("SCC", "SCE_ALL_HIDDEN_WARNING"); ?>');
+            return;
+        }
+    }
+
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+function checkFsDiv()
+{
+    var div_el = document.getElementById('fs_mode_add_div_id');
+    var select_el = document.getElementById('fs_mode_id');
+    
+    if (div_el && select_el)
+    {
+        if (select_el.value == 0)
+        {
+            div_el.style.display = 'none';
+        }
+        else
+        {
+            div_el.style.display = '';
+        }
+    }
+}
+
+//-->
+</script>
+            <div class="portlet light">
+              
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-gears font-blue-sharp"></i>
+                    <span class="caption-subject font-blue-sharp bold uppercase"><?php Msg('GSS_PAGE_NAME'); ?></span>
+                  </div>
+                </div>
+                
+                <div class="portlet-body">
+                    <div class="table-container form">
+                      <form action="<?php SaveSelectedShippingSettingsHref(); ?>" id="SCC_Form" name="SCC_Form" method="post">
+                        <?php HiddenArrayViewState(); ?>  
+                    <div class="portlet box blue-hoki tabbable">
+                        <div class="portlet-title">
+                            <div class="caption"><?php Msg('GSS_PAGE_HEADER'); ?></div>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-3 col-sm-4">
+                             <lable class="help-block"><?php POSC_FieldName(); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_001', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-3 col-sm-5">
+                            <input type="text" name="PO_SC" class="form-control form-filter input-large" value="<?php POSC_FieldValue(); ?>"  size="15" onBlur="formatInput(this);" patternType="currency" <?php CostFormat(); ?>>                    
+                        </div>
+                        <div class="col-md-1 col-sm-2">
+                            <?php POSC_Type(); ?>
+                        </div>
+                  
+                    </div>
+
+                    <div class="row margin-bottom-10">
+                  
+                        <div class="col-md-3 col-sm-4">
+                             <lable class="help-block"><?php POHC_FieldName(); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_002', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-3 col-sm-5">
+                             
+                            <input type="text" class="form-control form-filter input-large" name="PO_HC" value="<?php POHC_FieldValue(); ?>"  size="15" onBlur="formatInput(this);" patternType="currency" <?php CostFormat(); ?>>               
+                            
+                        </div>
+                      <div class="col-md-1 col-sm-2">
+                        <lable class="help-block"><?php CurrecySign(); ?></lable>
+                      </div>
+                    </div>
+
+                    <div class="row margin-bottom-10">
+                  
+                        <div class="col-md-3 col-sm-4">
+                             <lable class="help-block"><?php MINSC_FieldName(); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_003', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-3 col-sm-5">
+                            <input type="text" class="form-control form-filter input-large" name="MIN_SC" value="<?php MINSC_FieldValue(); ?>"  size="15" onBlur="formatInput(this);" patternType="currency" <?php CostFormat(); ?>>
+                        </div>
+                      <div class="col-md-1 col-sm-2">
+                        <lable class="help-block"><?php CurrecySign(); ?></lable>
+                      </div>
+                    </div>
+
+                    <div class="row margin-bottom-10">
+                  
+                        <div class="col-md-3 col-sm-4">
+                             <lable class="help-block"><?php FSOO_FieldName(); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_004', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-3 col-sm-5">
+                            <input type="text" class="form-control form-filter input-large" name="FS_OO" value="<?php FSOO_FieldValue(); ?>"  size="15" onBlur="formatInput(this);" patternType="currency" <?php CostFormat(); ?>>               
+                        </div>
+                      <div class="col-md-1 col-sm-2">
+                        <lable class="help-block"><?php CurrecySign(); ?></lable>
+                      </div>
+                    </div>
+
+                    <div class="row margin-bottom-10">
+                  
+                        <div class="col-md-3 col-sm-4">
+                             <lable class="help-block"><?php FHOO_FieldName(); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_005', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-3 col-sm-5">
+                             <input type="text" class="form-control form-filter input-large" name="FH_OO" value="<?php FHOO_FieldValue(); ?>"  size="15" onBlur="formatInput(this);" patternType="currency" <?php CostFormat(); ?>>               
+                       </div>
+                      <div class="col-md-1 col-sm-2">
+                        <lable class="help-block"><?php CurrecySign(); ?></lable>
+                      </div>
+                    </div>
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'FS_MODE_LABEL'); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_006', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-4 col-sm-6">
+                          <select name="FS_MODE" class="form-control" id='fs_mode_id' onChange='checkFsDiv();'><?php FS_MODE_OPTIONS(); ?></select>
+                        </div>
+                    </div>
+            <div id='fs_mode_add_div_id' style='display: none'>
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'FS_METHOD_LABEL'); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_007', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-3 col-sm-5">
+                          <input type="text" class="form-control form-filter input-large" name="FS_METHOD_LABEL_VALUE" value="<?php FS_METHOD_LABEL_VALUE(); ?>">
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'FS_PLACING_LABEL'); ?></lable>
+                        </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_008', ''); ?>
+                                </a>
+			</div>
+                        <div class="col-md-4 col-sm-6">
+                         <select name="FS_PLACING" class="form-control"><?php FS_PLACING_OPTIONS(); ?></select>
+                        </div>
+                    </div>
+            </div>
+<script type="text/javascript">
+    checkFsDiv();
+</script>
+
+<script type="text/javascript">
+function flipHideTr(val, id)
+{
+    var tr = document.getElementById(id);
+    if (tr == undefined)
+        return;
+
+    if (val == 1)
+    {
+        tr.style.display = '';
+    }
+    else if (val == 0)
+    {
+        tr.style.display = 'none';
+        if (id == 'tr_country_id')
+        {
+            var cs = document.getElementById('DstCountry');
+            cs.selectedIndex = 0;
+            refreshStatesList('DstCountry', 'DstState_menu_select', 'stub_state_text_input');
+        }
+    }
+}
+</script>
+                <div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption"><?php xmsg('SCC', 'SCE_TITLE'); ?></div>
+                    </div>
+                </div>
+                
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'SCE_COUNTRY'); ?></lable>
+                    </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_007', ''); ?>
+                                </a>
+			</div>
+                    <div class="col-md-4 col-sm-6">
+                       <select class="form-control" name="sce_country_hide" id="sce_country_hide_id" onChange="flipHideTr(this.value, 'tr_country_id');">
+                          <option value="0" <?php CountryDoNotHideSelected(); ?>><?php xmsg('SCC', 'SCE_DO_NOT_HIDE'); ?>
+                          <option value="1" <?php CountryHideSelected(); ?>><?php xmsg('SCC', 'SCE_HIDE'); ?>
+                       </select>
+                          
+                    </div>
+                </div>
+                
+                <div class="row margin-bottom-10" id="tr_country_id" <?php TrCountryDisplay(); ?> >
+                    <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'SCE_AND_ASSUME'); ?></lable>
+                    </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_007', ''); ?>
+                                </a>
+			</div>
+                    <div class="col-md-4 col-sm-6">
+                          <select class="form-control"  name="DstCountry" id="DstCountry" onChange="refreshStatesList('DstCountry', 'DstState_menu_select', 'stub_state_text_input');"><?php CountriesOptions(); ?>
+                          </select>
+                          
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'SCE_STATE'); ?></lable>
+                    </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_007', ''); ?>
+                                </a>
+			</div>
+                    <div class="col-md-4 col-sm-6">
+                          <select class="form-control" name="sce_state_hide" id="sce_state_hide_id" onChange="flipHideTr(this.value, 'tr_state_id');">
+                            <option value="0" <?php StateDoNotHideSelected(); ?>><?php xmsg('SCC', 'SCE_DO_NOT_HIDE'); ?>
+                            <option value="1" <?php StateHideSelected(); ?>><?php xmsg('SCC', 'SCE_HIDE'); ?>
+                          </select>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-10" id="tr_state_id" <?php TrStateDisplay(); ?>>
+                    <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'SCE_AND_ASSUME'); ?></lable>
+                    </div>	
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_007', ''); ?>
+                                </a>
+			</div>
+                    <div class="col-md-4 col-sm-6">
+                          <select class="form-control"  name="DstState_menu_select" id="DstState_menu_select"><?php StatesOptions(); ?>
+                          </select>
+                    </div>
+                </div>
+
+
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'SCE_ZIP'); ?></lable>
+                    </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_007', ''); ?>
+                                </a>
+			</div>
+                    <div class="col-md-4 col-sm-6">
+                         <select class="form-control" name="sce_zip_hide" id="sce_zip_hide_id" onChange="flipHideTr(this.value, 'tr_zip_id');"><option value="0" <?php ZipDoNotHideSelected(); ?>><?php xmsg('SCC', 'SCE_DO_NOT_HIDE'); ?><option value="1" <?php ZipHideSelected(); ?>><?php xmsg('SCC', 'SCE_HIDE'); ?></select>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-10" id="tr_zip_id" <?php TrZipDisplay(); ?>>
+                    <div class="col-md-3 col-sm-4">
+                          <lable class="help-block"><?php xmsg('SCC', 'SCE_AND_ASSUME'); ?></lable>
+                    </div>
+			<div class="col-md-1">
+                                <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('GSS_FIELD_007', ''); ?>
+                                </a>
+			</div>
+                    <div class="col-md-4 col-sm-6">
+                          <input type="text" class="form-control input-large" name="zip_assume" value="<?php ZipValue(); ?>">
+                    </div>
+                </div>
+
+                <div class="actions" align="center">
+                  <div class="actions btn-set">
+                    <button id="SaveButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('SCC_Form', 'Save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span>
+                    </button>
+
+                  </div>
+                </div>
+
+
+
+                </form>
+                </div>
+            </div>
+        </div>
+<!-- END TPL (DO NOT REMOVE!) -->

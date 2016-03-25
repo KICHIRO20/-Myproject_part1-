@@ -1,0 +1,135 @@
+[Common Box]
+.box { margin; }
+
+[Left Top Corner Box]
+.box .cn.lt { position; }
+
+[Right Top Corner Box]
+.box .cn.rt { position; }
+
+[Left Bottom Corner Box]
+.box .cn.lb { position-bottom; }
+
+[Right Bottom Corner Box]
+.box .cn.rb { position-bottom; }
+
+[Corner Image]
+.page_container .box .cn {
+    background-image;
+    size;
+}
+
+[Common Box Content]
+.page_container .box .content {
+    background;
+    padding-bottom;
+    border-left;
+    border-right;
+    border-bottom;
+}
+
+[Common Box Content Alt Bg]
+.page_container .box.nogradient .content {
+   background;
+}
+
+[Dropdown in Side Column]
+.right_column .box select, .left_column .box select {
+    margin;
+    width;
+}
+
+[Common Box Header]
+.box h1, .box .header {
+    text;
+    height;
+    padding;
+    margin;
+    border-bottom;
+    background;
+}
+ 
+[Common Box Header Link]
+.box h1 a {
+    text;
+}
+
+[Common Box Subheader]
+.box h2, .box .subheader {
+    text;
+    height;
+    padding;
+    margin;
+    border-bottom;
+    background;
+}
+
+[Common Box Subheader Link]
+.box h2 a, .box .subheader a {
+    text;
+    background;
+    color;
+}
+
+[Toolbar inside Common Box]
+.box .toolbar {
+    height;
+    text;
+    padding;
+    margin;
+}
+
+[Element inside Box Header]
+.box h1 span {
+    top;
+    right;
+    text;
+}
+
+[Link inside Box Header]
+.box h1 span a {
+    text;
+}
+
+[Horizontal Rule inside Box]
+.box hr {
+    size;
+    border;
+    background;
+    margin;
+}
+
+[Box inside another Box]
+.box .box {
+    margin;
+}
+
+[Box inside Box Content]
+.box .box .content {
+    background: none;
+    border: 1px solid #ccd9e6;
+}
+
+[Box inside Box Header 1]
+.box .box h1, .box .box .header {
+    text;
+    background-color;
+    height;
+    padding;
+}
+
+
+[Main Banner Box]
+.page_container .box.welcome {
+    height;
+}
+
+[Main Banner Background]
+.page_container .box.welcome .content {
+    background;
+    padding;
+    border;
+}
+
+
+

@@ -1,0 +1,39 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row">
+	<div class="col-sm-2">
+		 <label class="control-label"><?php AttributeName(); ?></label>
+	</div><br>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(), 'LargeImage'); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">
+		<img id="cat-LargeImage" src="<?php ViewStateLargeImage(); ?>" width="100px">
+		<span id="buttons-LargeImage">
+			<a href="javascript:;" onclick="javascript:LargeImage_togglebuttons();" class="btn yellow" title="<?php xmsg('SH','FILE_ON_LOCAL_PC'); ?>"><i class="fa fa-upload"></i></a>
+			<a href="javascript:;" onclick="javascript:openURLinNewWindow('tinymce/plugins/image/image.php?catalog=yes&for=LargeImage','Image Manager')" class="btn blue" title="<?php xmsg('SH','FILE_ON_SERVER'); ?>"><i class="fa fa-check"></i></a>
+			<a href="javascript:;" onclick="javascript:LargeImage_deletebuttons();" class="btn red" title="Remove Image"><i class="fa fa-times"></i></a>
+		</span>
+		<div class="alert alert-warning" style="display:none;" id="upload-LargeImage">
+			<span class="pull-right"><a href="javascript:;" onclick="javascript:LargeImage_togglebuttons()"><i class="fa fa-times"></i></a></span>
+			<input type="file" onkeydown="return false;" onkeypress="return false;" size="65" name="LargeImage"><br />
+			<?php AutoGenSmallImageComment(); ?>
+		</div>
+		<INPUT TYPE="hidden" name="<?php AttributeTagHidden(); ?>" value="<?php AttributeDefaultValue(); ?>">
+	</div>
+</div><br>
+<script>
+function LargeImage_togglebuttons()
+{
+	jQuery("#buttons-LargeImage").toggle();
+	jQuery("#upload-LargeImage").toggle();
+}
+
+function LargeImage_deletebuttons()
+{
+    jQuery("#ViewState_LargeImage").val('<?php NoImagePath(); ?>');
+	jQuery("#cat-LargeImage").attr('src', '<?php NoImagePath(); ?>');
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

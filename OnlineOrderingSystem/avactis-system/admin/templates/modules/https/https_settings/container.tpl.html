@@ -1,0 +1,223 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function submitHTTPSSettingsForm()
+{
+    document.forms['HTTPSSettings'].submit();
+}
+
+function selectSections(element)
+{
+    var all = document.getElementById('field_1');
+    if (element == all)
+    {
+        if (element.checked)
+        {
+            for (var i=2; i<=4; i++)
+            {
+                document.getElementById('field_'+i).checked = false;
+            }
+        }
+    }
+    else
+    {
+        all.checked = false;
+    }
+}
+
+function formatURL(URL)
+{
+    if (URL.indexOf('https://') == 0)
+    {
+        URL = URL.substring(8);
+    }
+    if (URL.indexOf('http://') == 0)
+    {
+        URL = URL.substring(7);
+    }
+    if (URL.indexOf('avactis-system') >= 0)
+    {
+        URL = URL.substring(0, (URL.indexOf('avactis-system')));
+    }
+    var last_char = URL.substring(URL.length-1);
+    if (last_char != '/')
+    {
+        URL+= '/';
+    }
+    URL = URL.replace(/[^a-z0-9~:@\.\-_\/]/gi, '');
+    return URL;
+}
+
+function checkHTTPSConnection()
+{
+    var URLInputField = document.getElementById('HTTPSURL');
+    URLInputField.value = formatURL(URLInputField.value);
+    var URL = URLInputField.value;
+    URL = 'https://'+URL+'avactis-system/admin/test_connection.php?request=is_connection_available';
+
+    document.getElementById('checkFrame').src = URL;
+    document.getElementById('checkDiv').style.display = "inline";
+}
+
+function answerSelected(element, ans)
+{
+    if (element.checked)
+    {
+        if (ans == "Yes")
+        {
+            document.getElementById('msg_on_answer').innerHTML = "<?php msg('HTTPS_WRN_009'); ?>";
+        }
+        if (ans == "No")
+        {
+            document.getElementById('msg_on_answer').innerHTML = "<?php msg('HTTPS_WRN_010'); ?>";
+        }
+    }
+}
+
+function closeCheckDiv()
+{
+    if (document.getElementById('answer_yes').checked)
+    {
+        document.getElementById('SaveButton1').style.display = 'block';
+        document.getElementById('CheckButton1').style.display = 'none';
+        document.getElementById('SaveButton2').style.display = 'block';
+        document.getElementById('CheckButton2').style.display = 'none';
+        document.getElementById('checkDiv').style.display = 'none';
+    }
+    else
+    if (document.getElementById('answer_no').checked)
+    {
+        document.getElementById('answer_no').checked = false;
+        document.getElementById('checkDiv').style.display = 'none';
+    }
+    else
+    {
+        document.getElementById('answer_yes').checked = false;
+        alert("<?php msg('HTTPS_WRN_011'); ?>");
+    }
+}
+
+//-->
+</SCRIPT>
+<form action="<?php FormAction(); ?>" name="HTTPSSettings" id="HTTPSSettings" method="post"> 
+<input type="hidden" name="asc_action" value="UpdateHTTPSSettings">
+<?php Message(); ?>
+<div class="portlet light">
+<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php msg('HTTPS_PAGE_SUBTITLE_001'); ?></span>
+			
+		</div>
+<div class="actions">
+		<div class="actions btn-set">
+			<button id="SaveButton2" class="btn btn-circle btn-default" name="settings" type="button" onclick="submitHTTPSSettingsForm();"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+		</div>
+	</div>
+
+	</div>
+
+  <div class="portlet-body form">
+  <?php ResultMessageRow(); ?>
+ <!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('HTTPS_FIELD_001'); ?>
+                                 </a>
+				<lable class="help-block"><?php msg('HTTPS_FIELD_001'); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<label>https://</label> <INPUT class="form-control input-medium input-inline" TYPE="text" id="HTTPSURL" NAME="HTTPSURL" value="<?php HTTPSURL(); ?>" onblur="this.value = formatURL(this.value);"></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+<!-- Begin - Row -->
+<div class="row margin-bottom-10">
+		 <INPUT TYPE="hidden" name="SSLAvailable" value="<?php SSLAvailable(); ?>">
+          <div class="col-md-1"></div>
+        <div id="checkDiv" style=" display: none;" class="col-md-8">
+              <?php msg('HTTPS_WRN_008'); ?>
+              <B><INPUT TYPE="radio" id="answer_yes" NAME="answer" value="Yes" onClick="answerSelected(this, 'Yes');">Yes&nbsp;&nbsp;&nbsp;
+                 <INPUT TYPE="radio" id="answer_no" NAME="answer" value="No" onClick="answerSelected(this, 'No');">No<BR></B>
+              <div id="msg_on_answer" style="height: 13px;">&nbsp;</div>
+              <IFRAME id="checkFrame" src="" frameborder="0" scrolling="no" width="400" height="25"></IFRAME>
+                <center>
+                <div class="btn btn-circle btn-default" onclick="closeCheckDiv();"><?php Msg("BTN_CLOSE"); ?></div>
+                </center>
+        </div>
+</div>
+		<!-- End - Row -->
+<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+<?php msg('HTTPS_PAGE_SUBTITLE_002'); ?>
+</div></div>
+</div>
+               <!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('HTTPS_FIELD_002'); ?>
+                                 </a><lable class="help-block"><?php msg('HTTPS_FIELD_002'); ?></lable>
+			</div>
+			<div class="col-md-8">
+				 <INPUT TYPE="checkbox" NAME="All" <?php All(); ?> id="field_1" onclick="selectSections(this);">
+			</div>
+		</div>
+		<!-- End - Row -->
+         <!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('HTTPS_FIELD_003'); ?>
+                                 </a><lable class="help-block"><?php msg('HTTPS_FIELD_003'); ?></lable>
+			</div>
+			<div class="col-md-8">
+	<INPUT TYPE="checkbox" NAME="SignIn_AdminMembers" <?php SignIn_AdminMembers(); ?> id="field_2" onclick="selectSections(this);">
+			</div>
+		</div>
+		<!-- End - Row -->
+<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('HTTPS_FIELD_004'); ?>
+                                 </a><lable class="help-block"><?php msg('HTTPS_FIELD_004'); ?></lable>
+			</div>
+			<div class="col-md-8">
+      
+	<INPUT TYPE="checkbox" NAME="Orders_Customers" <?php Orders_Customers(); ?> id="field_3" onclick="selectSections(this);">
+			</div>
+		</div>
+		<!-- End - Row -->
+<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('HTTPS_FIELD_005'); ?>
+                                 </a><lable class="help-block"><?php msg('HTTPS_FIELD_005'); ?></lable>
+			</div>
+			<div class="col-md-8">
+	<INPUT TYPE="checkbox" NAME="Payment_Shipping" <?php Payment_Shipping(); ?> id="field_4" onclick="selectSections(this);">
+			</div>
+		</div>
+		<!-- End - Row -->
+<INPUT TYPE="hidden" name="FirstTimeSettings" value="<?php FirstTimeSettings(); ?>">
+<?php CZHTTPSSettings(); ?>
+</div><!---- portlet-body form -->
+<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button id="SaveButton2" class="btn btn-circle btn-default" name="settings" type="button" onclick="submitHTTPSSettingsForm();"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+<div id="CheckButton2"  style="display: <?php CheckButton(); ?>;" class="button button_5em" onclick="checkHTTPSConnection();"><?php Msg("BTN_CHECK"); ?></div>
+		</div>
+	</div>
+</div><!------- portlet light ---->
+</form>
+<!--------------------------------------------------------------------------------------------->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

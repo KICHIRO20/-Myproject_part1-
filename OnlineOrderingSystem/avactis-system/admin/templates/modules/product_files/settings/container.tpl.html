@@ -1,0 +1,78 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="JavaScript">
+document.title = '<?php xmsg('PF','PF_SETTINGS_LINK'); ?>';
+</script>
+
+
+
+<div class="portlet light">
+  
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-gears font-blue-sharp"></i>
+      <span class="caption-subject font-blue-sharp bold uppercase"><?php Msg('GNRL_SET_PAGE_TITLE'); ?></span>
+      <span class="caption-subject font-blue-sharp"><?php xmsg('PF','PF_SETTINGS_HEADER'); ?></span>
+    </div>
+  </div>
+
+  
+
+  
+    <div class="portlet-body">
+      <div class="table-container form">
+        <?php ResultMessage(); ?>
+        <form action="popup_window.php?asc_action=update_pf_settings" method="post" name="PFSettingsForm">
+        <div class="row margin-bottom-10">
+          <div class="col-md-7 col-sm-10"></div>
+          <div class="col-md-2 col-sm-2"><span style="cursor:pointer;" class="fa fa-info-circle ">&nbsp;<?php PageHelpLink('St-Digital_Products_E-Goods'); ?></span></div>
+        </div>
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('PF','SETS_HL_TL'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_HL_TL','product-files-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php HLTLField(); ?> >
+            </div>
+            <div class="col-md-1 col-sm-2">
+              <lable class="help-block"><?php xmsg('PF','HRS'); ?></lable>
+            </div>
+        </div>
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('PF','SETS_HL_MAX_TRY'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_HL_MAX_TRY','product-files-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php HLMaxTryField(); ?> >
+            </div>
+        </div>
+
+      </form>
+      </div>
+  
+
+    <div class="actions" align="center">
+      <div class="actions btn-set">
+        <button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="document.forms['PFSettingsForm'].submit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+        <button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="javascript: closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+      </div>
+    </div>
+  
+  </div>
+
+</div>
+
+
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

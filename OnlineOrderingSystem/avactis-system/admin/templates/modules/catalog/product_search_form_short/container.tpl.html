@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form class="search-form search-form-expanded" action="catalog_manage_products.php" method="post" name="ProductSearchFormLeftBox">
+				<input type="hidden" name="asc_action" value="SetSearchProductFormFilter" />
+	<input type="hidden" name="active" value="<?php isFormActive(); ?>" /> 
+				<div class="input-group">
+					<input type="text"   id="search_text_box" class="form-control" placeholder="Search..." name="filter[pattern]"
+					value="<?php PatternValue(); ?>"> 
+					<span class="input-group-btn"> 
+						<a href="javascript:void(0);"  onclick="document.ProductSearchFormLeftBox.submit();" class="btn submit"><i class="icon-magnifier"></i></a>
+					</span>
+				</div>
+				<?php OverFlowText(); ?>
+			</form>
+<!-- END TPL (DO NOT REMOVE!) -->

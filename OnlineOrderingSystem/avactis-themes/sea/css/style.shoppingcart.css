@@ -1,0 +1,211 @@
+.cart_preview {
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    height: 21px;
+    color: white;
+    font-size: 9pt;
+    background: url("../images/icon-cart.gif") no-repeat top left;
+    padding: 2px 0 0 35px;
+}
+
+.page_top_menu .button_checkout {
+    float: right;
+    margin: -3px 0 0 16px;
+}
+
+/* SHOPPING CART ************************************************* */
+.box.shoppingcart .content {
+    padding-bottom: 0px;
+    overflow: hidden;
+}
+
+.shoppingcart .cart_buttons {
+    overflow: hidden;
+    margin: 20px 20px 20px 20px;
+    padding-top: 20px;
+    border-top: 1px solid #0C9EEE;
+}
+
+.shoppingcart .cart_buttons .button_continue_shopping_back {
+    float: left;
+}
+
+.shoppingcart .cart_buttons .button_proceed_to_checkout {
+    float: right;
+}
+
+.shoppingcart .promo_code_form {
+    padding: 20px 30% 20px 20px;
+    line-height: 20px;
+}
+
+.shoppingcart .shoppingcart_total {
+    width: 28%;
+    float: right;
+}
+
+/* *************************************************************** */
+
+/* SHOPPING CART HEADER ****************************************** */
+.shoppingcart .box .content {
+    border-top: none;
+    padding-bottom: 0px;
+}
+
+.shoppingcart .header {
+    padding: 2px 0px 0px 0px;
+}
+
+.shoppingcart .header .product_item {
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+
+.shoppingcart .header .product_name,
+.shoppingcart .header .product_options,
+.shoppingcart .header .product_quantity_selector,
+.shoppingcart .header .product_sale_price,
+.shoppingcart .header .product_total_price,
+.shoppingcart .header .product_img {
+    padding-top: 0px;
+}
+
+.shoppingcart .header .product_name {
+    width: 30%;
+}
+
+.shoppingcart .header .product_name {
+    font-size: 9pt;
+    font-weight: normal;
+}
+/* *************************************************************** */
+
+
+.checkout .shoppingcart .product_name {
+    width: 50%;
+}
+
+.checkout .shoppingcart .header .product_name {
+    width: 50%;
+}
+
+/* MINI SHOPPING CART *************************************************************** */
+.minishoppingcart .content {
+    overflow: hidden;
+}
+
+.minicart_item {
+    float: none;
+    width: 90%;
+    padding: 10px 20px 5px 10px;
+    clear: both;
+}
+
+.minicart_item .product_name {
+    font-weight: normal;
+    width: 80%;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 40px;
+}
+
+.minicart_item .product_name a {
+    font-weight: normal;
+    color: #0C9EEE;
+}
+
+.minicart_item .product_name .del_mini_prod {
+    color: red;
+    cursor: pointer;
+    float: right;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.minishoppingcart .shoppingcart_total {
+    padding-left: 20px;
+}
+
+.minishoppingcart .shoppingcart_total .total_name {
+    width: 40%;
+    text-align: left;
+}
+
+.minishoppingcart .shoppingcart_total .total_value {
+    width: 50%;
+}
+
+.minishoppingcart .cart_buttons {
+    padding: 0px 20px 0px 20px;
+}
+
+.minishoppingcart .cart_buttons  a {
+    display: block;
+    padding-bottom: 5px;
+}
+
+.minishoppingcart  .product_img {
+    float: left;
+    width: 30px;
+    padding: 0;
+    margin: 0px 0px 0px 0px;
+}
+
+/* GIFT CERTIFICATE FORM **************************************************** */
+
+.box.shoppingcart .box.gift_certificate .content {
+    border-bottom: 1px solid #0C9EEE;
+}
+
+.box.shoppingcart .box.gift_certificate .content .header {
+    padding: 2px 12px;
+}
+
+.gift_certificate_applied_list, .gift_certificate_form {
+    padding: 10px;
+    overflow: hidden;
+}
+
+.gift_certificate_applied_list {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.gift_certificate_applied_list .gift_certificate_code {
+    float: left;
+    width:200px;
+}
+
+.gift_certificate_applied_list .gift_certificate_amount {
+    float: left;
+    width:200px;
+}
+
+.gift_certificate_applied_list .gift_certificate_remainder {
+    float: left;
+    width:200px;
+}
+
+.gift_certificate_applied_list .gift_certificate_removelink {
+    float: left;
+    width:200px;
+}
+
+.create_gc_form {
+    padding: 15px;
+}
+
+.create_gc_form form{
+    width:50%;
+    margin:auto;
+}
+
+.create_gc_form .form_view .form_field {
+    width:50%;
+}
+
+.create_gc_form .buttons {
+    margin-left:18%;
+    margin-top: 3px;
+}

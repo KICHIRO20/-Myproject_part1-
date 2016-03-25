@@ -1,0 +1,331 @@
+/* CHECKOUT ****************************************************** */
+.checkout .box {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+
+.checkout .payment_methods,
+.checkout .shipping_methods,
+.checkout .billing_form,
+.checkout .key_order_details,
+.checkout .selected_payment_shipping_methods,
+.checkout .cart_summary,
+.checkout .shipping_form {
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+.checkout .cart_summary {
+    width: 29%;
+    color: #004a7f;
+    font-weight: bold;
+    font-size: 8pt;
+}
+
+.checkout .billing_form {
+    float: left;
+    width: 48%;
+    line-height: 17px;
+}
+
+.checkout .shipping_form {
+    float: right;
+    width: 48%;
+    line-height: 17px;
+    padding-left: 0px;
+}
+
+.checkout .payment_methods {
+	float:left;
+    width: 40%
+}
+
+.checkout .shipping_methods {
+	float:right;
+    width: 48%
+}
+
+.checkout .box .content .header {
+    padding: 0px;
+}
+
+#step_1_errors,#step_2_errors,#step_3_errors
+ {
+     color: rgb(224, 34, 34);
+     margin-left: 15px;
+     margin-bottom: 9px;
+ }
+.checkout .shoppingcart_total {
+    padding: 0px;
+    line-height: 20px;
+}
+
+.checkout .shoppingcart_total hr {
+    float: left;
+}
+
+.checkout .shoppingcart_total .total_value,
+.checkout .shoppingcart_total .total_name {
+    text-align: left;
+}
+
+.checkout .cart_summary .note {
+    padding-top: 20px;
+}
+
+.checkout .box.checkout_addresses .content {
+    border-bottom: none;
+}
+
+.checkout .selected_payment_shipping_methods .label {
+    color: black;
+    font-weight: bold;
+    font-size: 8pt;
+    display: block;
+}
+.checkout .selected_payment_shipping_methods .selected_payment_method {
+    padding-bottom: 20px;
+}
+/* *************************************************************** */
+
+/* *************************************************************** */
+/
+
+
+/* *************************************************************** */
+
+
+.checkout .shipping_same_as_billing, .checkout .tax_exempt {
+     margin: 23px 37px 12px;
+}
+
+
+.checkout .checkout_buttons {
+    overflow: hidden;
+    margin: 20px 20px 5px 20px;
+    padding-top: 0px;
+}
+
+.checkout .checkout_buttons .button_back,
+.checkout .checkout_buttons .button_continue_shopping_back {
+    float: left;
+}
+
+.checkout .checkout_buttons .button_continue_checkout,
+.checkout .checkout_buttons .button_place_order {
+    float: right;
+}
+
+
+/* *************************************************************** */
+.checkout_rule {
+    height: 35px;
+    margin: 6px 0px;
+    padding: 0px;
+    position: relative;
+    font: 17px 'PT Sans Narrow',sans-serif;
+    color: rgb(255, 255, 255);
+    background: none repeat scroll 0% 0% rgb(167, 176, 184);
+}
+
+
+.checkout_rule > * {
+    display: block;
+    height: 25px;
+    padding: 5px 14px;
+    text-align: left;
+    top: 0;
+}
+
+.checkout_rule span.step_1 {
+    left: 0;
+    width: 237px;
+    background-position: left 0;
+}
+.checkout_rule span.step_1_2 {
+	left: 237px;
+	width: 15px;
+    background-position: -237px 0;
+}
+
+.checkout .payment_method_list .note {
+	padding: 10px;
+}
+
+.checkout .payment_method_list .payment_method_list_row,
+.checkout .shipping_method_list .shipping_method_list_row {
+    padding-bottom: 5px;
+}
+
+.checkout .payment_method_list .input_radio,
+.checkout .shipping_method_list .input_radio {
+    vertical-align: top;
+}
+
+.shipping_method_list_row .shipping_method_name {
+    float: left;
+    width: 63%;
+}
+
+.shipping_method_list_row .shipping_method_days {
+    float: left;
+    width: 100%;
+	margin-left:20px;
+}
+
+.shipping_method_list_row .shipping_method_cost {
+    float: right;
+    width: 20%;
+}
+
+/* *************************************************************** */
+
+
+.checkout .payment_method_form .form_descr {
+    text-align: right;
+}
+
+
+.checkout .box.shoppingcart .product-item {
+    border-bottom: none;
+    padding-bottom: 0px;
+    padding-top: 3px;
+}
+
+.checkout .box.shoppingcart .product-item .product_name,
+.checkout .box.shoppingcart .product-item .product_total_price,
+.checkout .box.shoppingcart .product-item .product_sale_price,
+.checkout .box.shoppingcart .product-item .product_quantity_selector {
+    padding-top: 5px;
+}
+
+.checkout .box.shoppingcart .header .product-item .product_name,
+.checkout .box.shoppingcart .header .product-item .product_total_price,
+.checkout .box.shoppingcart .header .product-item .product_sale_price,
+.checkout .box.shoppingcart .header .product-item .product_quantity_selector {
+    color: #004a7f;
+    font-weight: bold;
+    font-size: 8pt;
+    padding-top: 0px;
+}
+
+.checkout .box.shoppingcart .product-item .product_name {
+    padding-left: 20px;
+}
+
+.checkout .box.shoppingcart .product-item .product_name a {
+    font-size: 10pt;
+}
+
+.checkout .box.shoppingcart .content {
+    padding-bottom: 10px;
+}
+
+.one_step_checkout .shoppingcart_total,
+.checkout.step_4_active .shoppingcart_total,
+.checkout.step_3_active .shoppingcart_total {
+    margin-left: 62%;
+    clear: both;
+    padding-top: 10px;
+}
+
+.checkout.step_4_active h1 {
+    margin-bottom: 20px;
+}
+
+/*.checkout.step_4_active .note {
+    padding: 0px 20px 20px 20px;
+    font-size: 8pt;
+    color: #004A7F;
+    font-weight: bold;
+}
+*/
+.checkout.step_4_active .key_order_details .value,
+.checkout.step_4_active .key_order_details .label {
+    display: block;
+    line-height: 20px;
+}
+
+.checkout.step_4_active .key_order_details .label {
+    float: left;
+    width: 45%;
+    text-align: right;
+}
+
+.checkout.step_4_active .key_order_details .value {
+    width: 45%;
+    margin-left: 50%;
+    text-align: left;
+}
+
+.checkout .box.shoppingcart .product-item .product_name .product_files_link {
+    display: block;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.checkout .box.shoppingcart .product-item .product_name .product_files_link a {
+    font-weight: normal;
+    display: block;
+}
+
+.checkout .payment_method_list .form_view.credit_card_output {
+    padding-top: 10px;
+}
+
+.checkout .payment_method_list .form_view.credit_card_output .form_row {
+    font-size: 8pt;
+    line-height: 10pt;
+}
+
+.payment_method_list_row .payment_method_form .form_view .form_row .form_descr {
+    width: 50%;
+}
+
+.form_view.credit_card_output .form_row .form_descr {
+    width: 45%;
+}
+
+.form_view.credit_card_output .form_row .form_field {
+}
+
+.checkout .paypalpro_expresscheckout {
+    width:280px;
+}
+
+.checkout .paypalpro_expresscheckout .paypalpro_uk_expresscheckout div {
+    padding-bottom: 5px;
+}
+
+.checkout .paypalpro_expresscheckout .paypalpro_uk_expresscheckout .error_message {
+    margin-left:0px;
+    width:85%;
+}
+
+.checkout .paypalpro_uk_expresscheckout {
+    /*position: absolute;
+    top: 250px;
+    left:20px;*/
+    width:280px;
+    z-index:10;
+}
+
+.invisible {
+    display: none;
+}
+
+.checkout_loading_img {
+    background-image: url("../images/loading.gif");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
+    margin: 0;
+    width: 100%;
+    z-index: 100;
+    position: relative;
+    opacity: 0.7;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+}
+

@@ -1,0 +1,126 @@
+/* css for payment and shipping module */
+#paymentlist{
+	padding-left:40px;
+	display:none;
+}
+
+#shippinglist{
+	padding-left:40px;
+	display:none;
+}
+
+#alert_msg{
+	font-family:Arial;
+	font-size: 1.2rem;
+	padding-top:10px;
+}
+
+#show-details{
+	box-sizing: border-box;
+	display: block;
+	padding-left: 40px;
+}
+
+#shipping_opt{
+	color: #12799a;
+	cursor: pointer;
+    	display: inline-block;
+    	outline: 0 none;
+	border: solid 1px;
+	border-color: #d9d9d9 #d9d9d9 #d0d0d0;
+	border-radius: 4px;
+	line-height: 1;
+    	padding: 8px 10px;
+	font-weight: 400;
+}
+
+#payment_opt{
+	color: #12799a;
+	cursor: pointer;
+    	display: inline-block;
+    	outline: 0 none;
+	border: solid 1px;
+	border-color: #d9d9d9 #d9d9d9 #d0d0d0;
+	border-radius: 4px;
+	line-height: 1;
+    	padding: 8px 10px;
+	font-weight: 400;
+}
+
+#recommended-providers{
+	line-height: 1.2 !important;
+	padding: 15px 30px !important;
+	vertical-align: middle;
+	width:100%;
+}
+#description, #name{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 1.2rem !important;
+	color: #777; 
+	margin-bottom:0px;
+	 line-height: 1.5 !important;
+}
+#message{
+	position: relative;
+    	text-align: center;
+	color:green;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 1.2rem !important;
+	margin-bottom:0px;
+	 line-height: 1.5 !important;
+}
+#settings{
+	width: 100px;
+	color: #12799a;
+	border-color: #e1e6eb;
+    	box-shadow: none;
+ 	font-weight: 400;
+	border-style: solid;
+ 	border-width: 1px;
+	padding: 8px 10px;
+}
+#AvailableSelect_Merged{
+	border: 1px solid #d5d5d5;
+    	box-shadow: none;
+	padding: 8px 10px;
+	height: 170px !important;
+    	max-height: 230px !important;
+    	width: 340px !important;
+    	overflow: auto;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 1.2rem !important;
+}
+
+#module-name {
+	font-weight: 300;
+	font-size: 13px;
+}	
+#isSelect{
+	margin-left: 0 !important;
+	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+    	cursor: default;
+    	line-height: 20px;
+    	padding-bottom: 4px;
+    	padding-left: 4px;
+    	padding-top: 2px;overflow: auto;
+}
+
+#sortable { 
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0;
+}
+
+#sortable li { 
+	margin: 0 3px 3px 3px; 
+	padding: 0.4em; 
+	padding-left: 1.5em;
+}
+
+.ui-state-default {
+    background-color: #F5F5F5;
+    border: 1px solid lavender;
+	width: 109%;
+}
+/* end of css payment and shipping module */

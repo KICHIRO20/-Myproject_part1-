@@ -1,0 +1,106 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var form = document.getElementById(formname);
+      form.target = "";
+      form.submit();
+      return true;
+    }
+</script>
+
+<?php Errors(); ?>
+
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<?php Subtitle(); ?>
+	</div>
+	<div class="portlet-body">
+		<form <?php AddManufacturerForm(); ?> enctype="multipart/form-data" id="AddManufacturer" name="AddManufacturer">
+			<?php HiddenArrayViewState(); ?>
+			<?php HiddenArrayViewStateConstants(); ?>
+			<input type="hidden" <?php HiddenFormSubmitValue(); ?>>
+
+			<div class="row">
+				<div class="col-sm-2"><span class="required"> <?php xmsg('MNF', 'MANUFACTURER_ID_NAME'); ?>&nbsp;*</span></div>
+				<div class="col-md-1">
+                                           <a class="pull-right" style="cursor:pointer;">
+                                                    <?php hinttext('MNF_NAME_NAME', 'manufacturers-messages'); ?>
+                                           </a>
+				</div>
+				<div class="col-sm-7"><strong> <?php ManufacturerId(); ?> </strong></div></div>
+
+			<div class="row">
+				<div class="col-sm-2">
+					<span class="required"><?php xmsg('MNF', 'MNF_NAME_NAME'); ?>&nbsp;*</span>
+				</div>
+				<div class="col-md-1">
+                                           <a class="pull-right" style="cursor:pointer;">
+                                                    <?php hinttext('MNF_NAME_NAME', 'manufacturers-messages'); ?>
+                                           </a>
+				</div>
+				<div class="col-sm-7">
+					<input type="text" class="<?php ManufacturerNameInputStyleClass();?> form-control input-sm input-medium" <?php ManufacturerName(); ?> onBlur="formatInput(this);" patternType="string128"> 
+					<br/><?php ManufacturerNameError(); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<span class=""><?php xmsg('MNF', 'MNF_IMAGE_NAME'); ?>&nbsp;</span>
+				</div>
+				<div class="col-md-1">
+                                           <a class="pull-right" style="cursor:pointer;">
+                                                    <?php hinttext('MNF_IMAGE_NAME', 'manufacturers-messages'); ?>
+                                           </a>
+				</div>
+				<div class="col-sm-7">
+					<?php ManufacturerImage(); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<span class=""><?php xmsg('MNF', 'MNF_URL_NAME'); ?>&nbsp;</span>
+				</div>
+				<div class="col-md-1">
+                                           <a class="pull-right" style="cursor:pointer;">
+                                                    <?php hinttext('MNF_URL_NAME', 'manufacturers-messages'); ?>
+                                           </a>
+				</div>
+				<div class="col-sm-7">
+					<input type="text" <?php ManufacturerUrl(); ?> class="form-control input-sm input-medium">
+					 <br /> <?php ManufacturerUrlError(); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<span class=""><?php xmsg('MNF', 'MNF_DESC_NAME'); ?>&nbsp;</span>
+				</div>
+				<div class="col-md-1">
+                                           <a class="pull-right" style="cursor:pointer;">
+                                                    <?php hinttext('MNF_DESC_NAME', 'manufacturers-messages'); ?>
+                                           </a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<textarea class="tiny_mce form-control input-large" id="ManufacturerDescription" class="<?php ManufacturerDescInputStyleClass(); ?>" <?php ManufacturerDesc(); ?> style="overflow: hidden; padding: 0px;"><?php ManufacturerDescText(); ?></textarea><br/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<p class="text-danger"><strong><?php Msg('REQUIRED_FIELD_LABEL'); ?></strong></p>
+				</div>
+			</div>
+		</form>
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<a class="btn btn-circle btn-default" href="javascript:if(submitHandler('AddManufacturer')){disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2', 'UploadButton'));}" data-original-title="" title="">
+					<i class="fa fa-save"></i>&nbsp;<?php Msg('BTN_SAVE'); ?>
+				</a>						
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

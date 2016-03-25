@@ -1,0 +1,138 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+ <style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+table._form td {
+    font-size: 8pt;
+    color: #666;
+    text-align: left;
+    font-weight: normal;
+}
+table._form th {
+    font-size: 8pt;
+    color: black;
+    text-align: left;
+    font-weight: bold;
+}
+</style>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold uppercase">
+				<i class="fa fa-users"><?php msg('CUSTOMERS_INFO'); ?></i>
+			</span>
+		</div>
+		<div class="actions">
+			<div id="CancelButton" class="btn btn-default" onclick="closeAndFocusParent();">
+				<i class="fa fa-times"></i><span class="hidden-480">&nbsp;<?php msg('BTN_CANCEL_CUSTOMER_INFO'); ?></span>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<?php MessageBox(); ?>
+		<div class="table-responsive">
+			<table class="table table-bordered table-condensed">
+				<tbody>
+					<tr>
+						<td>
+							<div id="appinfo" class="panel-group accordion scrollable">
+								<?php GroupsList(); ?>
+								<!-- Begin Panel -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a href="#_order" data-parent="#order" data-toggle="collapse" class="accordion-toggle collapsed">
+												<?php msg('CUSTOMERS_INFO_ORDERS'); ?>
+											</a>
+										</h4>
+									</div>
+									<div class="panel-collapse collapse" id="_order">
+										<div class="panel-body">
+											<div class="row table-responsvie">
+												<table class="table table-hover table-striped borderless">
+													<thead>
+														<tr class="bg-grey">
+															<th class="text-center"><?php msg('CUSTOMERS_INFO_ORDER_ID'); ?></th>
+															<th class="text-center"><?php msg('CUSTOMERS_INFO_ORDER_DATE'); ?></th>
+															<th class="text-center"><?php msg('CUSTOMERS_INFO_ORDER_AMOUNT'); ?></th>
+															<th class="text-center"><?php msg('CUSTOMERS_INFO_ORDER_STATUS'); ?></th>
+															<th class="text-center"><?php msg('CUSTOMERS_INFO_ORDER_PAYMENT_STATUS'); ?></th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php OrdersList(); ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- END Panel -->
+								<!-- Begin Panel -->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a href="#_subscription" data-parent="#subscription" data-toggle="collapse" class="accordion-toggle collapsed">
+												<?php msg('CUSTOMERS_INFO_SUBSCRIPTIONS'); ?>
+											</a>
+										</h4>
+									</div>
+									<div class="panel-collapse collapse" id="_subscription">
+										<div class="panel-body">
+											<form name="subscriptions" action="<?php ActionUpdateSubscriptions(); ?>" method="POST">
+												<input type="hidden" name="asc_action" value="update_customer_subscriptions" />
+												<input type="hidden" name="page_view" value="CustomerAccountInfo" />
+												<input type="hidden" name="customer_id" value="<?php CustomerId(); ?>" />												<div class="row table-responsvie">
+													<table class="table table-hover table-striped borderless">
+														<?php SubscriptionsList(); ?>
+													</table>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- END Panel -->
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="text-center">
+							<div id="CancelButton" class="btn btn-default" onclick="closeAndFocusParent();">
+								<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_CANCEL_CUSTOMER_INFO'); ?>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<script language="javascript">
+jQuery(function () { 
+   setFromState('order_');
+   setFromState('subscr_');
+});
+function updateSubscriptions(btn)
+{
+    if (document.forms['subscriptions']) {
+        var form = document.forms['subscriptions'];
+        disableButton(btn.id);
+        form.submit(); 
+    }
+}
+</script> 
+<!-- END TPL (DO NOT REMOVE!) -->

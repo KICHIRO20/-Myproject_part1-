@@ -1,0 +1,65 @@
+<meta http-equiv="Content-type" content="text/html; charset=<?php Charset(); ?>" />
+
+<script type='text/javascript'>
+    window.AjaxManagerInstances = {};
+</script>
+
+<?php
+global $application;
+echo $application->combineCSS(array(
+    'css/ui.dynatree.css',
+    'css/ui.dynatree.custom.css',
+    'css/common.default.css',
+    'css/common.box.css',
+    'css/layout.css',
+    'css/style.menu.css',
+    'css/style.search.css',
+    'css/style.buttons.css',
+    'css/style.navigation_bar.css',
+    'css/style.product_list.css',
+    'css/style.product_info.css',
+    'css/style.shoppingcart.css',
+    'css/style.checkout.css',
+    'css/style.myaccount.css',
+    'css/style.subscribe.css',
+    'css/style.shipping_calculator.css',
+    'css/style.subcategories.css',
+    'css/style.product_type_filter.css',
+    'css/jquery.jcarousel.css',
+    'css/jquery.jcarousel.skin.css',
+    'css/jquery.jcarousel.skin.custom.css',
+    'css/ajax_manager.css',
+	'css/module.*.css',
+    'css/style.category_sheet.css',
+    'css/colorbox.css',
+	'css/main_menu.css',
+	//'css/style_select_box.css'
+));
+
+$url = modApiStaticFunc('Look_Feel', 'getActiveThemeURL');
+if ($url) {
+    echo '<link href="'.$url.'" rel="stylesheet" type="text/css" id="CurrentThemeStylesheet" />';
+}
+
+echo $application->combineJS(array(
+    'js/jquery-1.10.2.min.js',
+    'js/jquery-migrate-1.1.1.min.js',     
+    'js/lib.js',
+    'js/ajax-manager.js',
+    'js/ui.core.js',
+    'js/javascript.js',
+	'js/modernizr.custom.79639.js'
+));
+
+VisitorTrackingCode( 'header' );
+?>
+
+<!--[if lt IE 8]>
+<link href="<?php echo getTemplateFileURL('css/style.ie7.css'); ?>" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!--[if lte IE 6]>
+<link href="<?php echo getTemplateFileURL('css/style.ie6.css'); ?>" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+

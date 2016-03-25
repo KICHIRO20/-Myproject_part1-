@@ -1,0 +1,202 @@
+[Cart Preview]
+.cart_preview {
+    position-right;
+    text;
+    background;
+    padding;
+}
+
+[Top Checkout Button Margin]
+.page_top_menu .button_checkout {
+    margin;
+} 
+
+[Shopping Cart Content]
+.box.shoppingcart .content {
+    padding;
+}
+
+[Shopping Cart - Buttons]
+.shoppingcart .cart_buttons {
+    margin;
+    padding;
+    border;
+}
+
+[Shopping Cart - Promo Code Form]
+.shoppingcart .promo_code_form {
+    padding;
+    line-height;
+    text;
+}
+
+[Shopping Cart - Total]
+.shoppingcart .shoppingcart_total {
+    width;
+    padding;
+}
+
+[Shopping Cart - Box]
+.shoppingcart .box .content {
+    border;
+    padding;
+}
+
+[Shopping Cart - Header]
+.shoppingcart .header {
+    padding;
+}
+
+[Shopping Cart - Product Items - Header]
+.shoppingcart .header .product_item {
+    border;
+    padding;
+}
+
+[Shopping Cart - Product Items - Header Cell]
+.shoppingcart .header .product_name,
+.shoppingcart .header .product_options,
+.shoppingcart .header .product_quantity_selector,
+.shoppingcart .header .product_sale_price,
+.shoppingcart .header .product_total_price,
+.shoppingcart .header .product_img {
+    padding;
+}
+
+[Shopping Cart - Header - Product Name]
+.shoppingcart .header .product_name {
+    width;
+    text;
+}
+
+[Checkout - Shopping Cart - Product Name]
+.checkout .shoppingcart .product_name {
+    width;
+}
+
+[Checkout - Shopping Cart - Header - Product Name] 
+.checkout .shoppingcart .header .product_name {
+    width;
+}
+
+[Minicart - Product Item]
+.minicart_item {
+    width;
+    padding;
+}
+
+[Minicart - Item Image]
+.minicart_item .product_img {
+    width;
+    padding;
+    margin;
+    text-align;
+}
+
+[Minicart - Item Name]
+.minicart_item .product_name {
+    text;
+    width;
+    padding;
+    margin;
+}
+
+[Minicart - Item Link]
+.minicart_item .product_name a {
+    text;
+    padding;
+}
+
+[Minicart - Item Link Hovered]
+.minicart_item .product_name a:hover {
+    text;
+    background;
+}
+
+[Minicart - Total]
+.minishoppingcart .shoppingcart_total {
+    padding;
+}
+
+[Minicart - Value Name]
+.minishoppingcart .shoppingcart_total .total_name {
+    width;
+    text;
+}
+
+[Minicart - Value]
+.minishoppingcart .shoppingcart_total .total_value {
+    width;
+    text;
+}
+
+[Minicart - Links]
+.minishoppingcart .cart_buttons {
+    padding;
+}
+
+[Minicart - Link]
+.minishoppingcart .cart_buttons  a {
+    padding;
+}
+
+[Shopping Cart - Gift Certificate Content]
+.box.shoppingcart .box.gift_certificate .content {
+}
+
+[Shopping Cart - Gift Certificate Header]
+.box.shoppingcart .box.gift_certificate .content .header {
+    padding;
+}
+
+[Gift Certificate Form]
+.gift_certificate_applied_list, .gift_certificate_form {
+    padding;
+}
+
+[Gift Certificate Applied List]
+.gift_certificate_applied_list {
+    padding;
+}
+
+[Gift Certificate Code]
+.gift_certificate_applied_list .gift_certificate_code {
+    width;
+}
+
+[Gift Certificate Amount]
+.gift_certificate_applied_list .gift_certificate_amount {
+    width;
+}
+
+[Gift Certificate Code]
+.gift_certificate_applied_list .gift_certificate_remainder {
+    width;
+}
+
+[Gift Certificate Remove Link]
+.gift_certificate_applied_list .gift_certificate_removelink {
+    width;
+}
+
+[Create Gift Certificate Form]
+.create_gc_form {
+    padding;
+}
+
+[Create Gift Certificate Form - Form]
+.create_gc_form form {
+    width;
+    margin;
+}
+
+[Create Gift Certificate Form - Field]
+.create_gc_form .form_view .form_field {
+    width;
+}
+
+[Create Gift Certificate Form - Buttons]
+.create_gc_form .buttons {
+    margin;
+}
+

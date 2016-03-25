@@ -1,0 +1,113 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript">
+var names = new Array();
+var cc_attrs = new Array();
+var marks = new Array();
+<?php Local_CreditCardInfoJSAttrRules(); ?>
+
+function disableInput(iEl){iEl.disabled = "DISABLED";}
+function enableInput(iEl){iEl.disabled = "";}
+function hideTr(trEl){trEl.style.display = "none";}
+function showTr(trEl){trEl.style.display = "";}
+function transferValue(srcEl, dstEl)
+{
+	if (srcEl == undefined || dstEl == undefined)
+		return;
+
+	if (srcEl.type == 'text' && dstEl.type == 'text')
+		transferText(srcEl, dstEl);
+	else if (srcEl.type == 'select-one' && dstEl.type == 'select-one')
+		transferSelect(srcEl, dstEl);
+}
+function transferSelect(srcEl, dstEl)
+{
+	dstEl.selectedIndex = srcEl.selectedIndex;
+}
+function transferText(srcEl, dstEl)
+{
+	if (srcEl.value != '')
+		dstEl.value = srcEl.value;
+}
+function turnOff(trEl, iEl){hideTr(trEl);disableInput(iEl);}
+function turnOn(trEl, iEl){showTr(trEl);enableInput(iEl);}
+function cntr(req, i, pre){return 'tr_' + req + 'id_' + i + '_' + pre;}
+function cni(req, i, pre){return 'input_' + req + 'id_' + i + '_' + pre;}
+
+function onCreditCardTypeChange(value, suffix)
+{
+	if (suffix == '')
+		return;
+
+	if (value == undefined)
+	{
+		return;
+		for (var key in names) 
+		{
+			value = key;
+			break;
+		}
+	}
+
+    if (names[value] == undefined)
+        return;
+
+    if (cc_attrs[names[value]] == undefined)
+        return;
+	
+	var card = names[value];
+	var len = cc_attrs[card].length;
+	for (i=0; i < len; i++)
+	{
+		if (i == 12 || cc_attrs[card][i] == undefined)
+			continue;
+
+		var trEl = document.getElementById(cntr('', i, suffix));
+		var iEl = document.getElementById(cni('', i, suffix));
+
+		var trEl_req = document.getElementById(cntr('req_', i, suffix));
+		var iEl_req = document.getElementById(cni('req_', i, suffix));
+
+		if (cc_attrs[card][i][0] == 0) 
+		{
+			// attr is not visible, turn both off
+			turnOff(trEl, iEl);
+			turnOff(trEl_req, iEl_req);
+		}
+		else // visible, check if required
+		{
+			// not required
+			if (cc_attrs[card][i][1] == 0)
+			{ 
+				turnOn(trEl, iEl);
+				turnOff(trEl_req, iEl_req);
+				transferValue(iEl_req, iEl)
+			}
+			else // required
+			{
+				turnOff(trEl, iEl);
+				turnOn(trEl_req, iEl_req);
+				transferValue(iEl, iEl_req);
+			}
+		}
+	}
+}
+</script>
+
+<div class="payment_method_list">
+    <?php Local_PaymentMethods(); ?>
+</div>
+    
+<script type="text/javascript">
+var input_el;
+for (i in marks)
+{
+	input_el = document.getElementById("input_id_12_" + marks[i]);
+	if (input_el != undefined)
+	{
+         onCreditCardTypeChange(input_el.value, marks[i]);
+	}
+}
+</script>
+
+<input type="hidden" name="SubmitedCheckoutStoreBlocksList[payment-method-list-input]" />
+<!-- END TPL (DO NOT REMOVE!) -->

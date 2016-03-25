@@ -1,0 +1,109 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<table class="form" cellspacing="1" cellpadding="5" width="100%">
+  <tr class="title" style="height: 25px;">
+    <td width="100%" colspan="4" style="color: #000000; background: #FFFFFF;">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr><td class="title popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px; color: #000000; background: #FFFFFF;" width="90%"><?php msg('PACKING_SLIP_FOR_ORDERS_INFO_ORDER_NUMBER'); ?>: <?php OrderId(); ?></td><td width="10%" align="right" class="do_not_print" style="text-align: right; color: #000000; background: #FFFFFF;"><form align="right"><input id="print_button" type="button" value="<?php msg('INVOICE_PRINT'); ?>" onclick="this.style.visibility='hidden'; window.print(); return false;" /></form></td>
+            </tr>
+        </table> 
+    </td>
+    
+  </tr>
+
+  <tr>
+      <td width="50%" style="padding-bottom: 2px;">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr class="subtitle" style="height: 25px;">
+                <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;background: #FFFFFF;">
+                  <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="80%" style="background: #FFFFFF;"><?php msg('ORDERS_INFO_KEY_DETAILS'); ?></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr> <!-- Order ID -->
+                <td nowrap width="25%" class="label popup_dialog_body_left_padded" style="background: #FFFFFF;"><?php msg('ORDERS_INFO_ORDER_ID'); ?></td>
+                <td class="help" nowrap style="background: #FFFFFF;"><div style="width: 1em;"></div></td>
+                <td class="value popup_dialog_body_right_padded" width="75%"><?php OrderId(); ?></td>
+              </tr>
+              <tr> <!-- Order Date -->
+                <td nowrap  width="25%" class="label popup_dialog_body_left_padded" style="background: #FFFFFF;"><?php msg('ORDERS_INFO_ORDER_DATE'); ?></td>
+                <td class="help" style="background: #FFFFFF;"></td>
+                <td class="value popup_dialog_body_right_padded" width="75%"><?php OrderDate(); ?></td>
+              </tr>
+
+          </table>
+      </td>
+      <td width="50%" style="padding:0 15px 2px">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr> <!-- Store Name -->
+                <td colspan="3" class="value popup_dialog_body_right_padded" style="text-align: right;"><B><?php StoreOwnerName(); ?></B></td>
+              </tr>
+              <tr> <!-- Store Order Department Email -->
+                <td colspan="3" class="value popup_dialog_body_right_padded" style="text-align: right;"><?php StoreOwnerOrdersDepartmentEmail(); ?></td>
+              </tr>
+              <tr> <!-- Store URL -->
+                <td colspan="3" class="value popup_dialog_body_right_padded" style="text-align: right;"><?php StoreOwnerWebsite(); ?></td>
+              </tr>
+              <tr> <!-- Store PHONES -->
+                <td colspan="3" class="value popup_dialog_body_right_padded" style="text-align: right;"><?php msg('ORDER_INVOICE_PHONES'); ?> : <?php StoreOwnerPhones(); ?></td>
+              </tr>
+              <tr> <!-- Store FAX -->
+                <td colspan="3" class="value popup_dialog_body_right_padded" style="text-align: right;"><?php msg('ORDER_INVOICE_FAX'); ?> : <?php StoreOwnerFax(); ?></td>
+              </tr>
+              <tr> <!-- Store Address -->
+                <td colspan="3" class="value popup_dialog_body_right_padded" style="text-align: right;"><?php StoreOwnerStreetLine1(); ?>,<br> <?php StoreOwnerStreetLine2(); ?>,<br> <?php StoreOwnerCity(); ?>, <?php StoreOwnerState(); ?> <?php StoreOwnerPostcode(); ?>,<br> <?php StoreOwnerCountry(); ?></td>
+              </tr>
+          </table>
+      </td>
+  </tr>
+
+<!-- Payment Details -->
+<!--  <tr> 
+    <td width="25%" class="label popup_dialog_body_left_padded" width="20%"><?php msg('ORDERS_INFO_ORDER_PAYMENT_DETAILS'); ?></td>
+    <td class="help" width="5%"><img border="0" src="images/question.gif" width="12" height="12"></td>
+    <td class="value popup_dialog_body_right_padded" width="75%"><?php OrderPaymentMethodDetail(); ?></td>
+  </tr>
+-->
+  <tr><td width="50%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                  <td width="50%" style="padding-bottom: 2px;">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <?php PersonInfoShipping(); ?>
+                      </table>
+                  <td width="50%">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <?php PersonInfoBilling(); ?>
+                      </table>
+          </table>
+      </td>
+     
+  <tr class="group" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px; background: #FFFFFF;">
+      <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="80%" style="background: #FFFFFF;font-weight: bold;"><?php msg('ORDERS_INFO_PRODUCTS'); ?></td>
+          <td style="text-align: right;background: #FFFFFF;"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr id="products_0">
+    <td colspan="3" style="padding: 0px 0px 0px 1px">
+      <table cellpadding="3" cellspacing="1" width="100%" border="1">
+        <tr>
+          <td width="10%" style="background: #FFFFFF;font-weight: bold;">Product ID</td>
+          <td width="10%" style="background: #FFFFFF;font-weight: bold;">Product SKU</td>
+          <td style="background: #FFFFFF;font-weight: bold;">Product Name</td>
+          <td width="10%" style="background: #FFFFFF;font-weight: bold;">Quantity</td>
+        </tr>
+      <?php Products(); ?>
+      </table>
+    </td>
+  </tr>
+</table>
+<div align="center" style="padding-top: 3em;font-size:11pt;">Thank you for your purchase.</div>
+</form>
+<?php PrintCommand(); ?>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

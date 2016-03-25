@@ -1,0 +1,185 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<!-- tinyMCE -->
+<script type="text/javascript">
+	<!--
+function disableButtonsInForm()
+{
+	disableButtons(new Array('AddRowButton', 'SaveButton1', 'CancelButton1', 'SaveButton2', 'CancelButton2', 'DelRowsButton'));
+}
+
+function formSubmit(formId, formAction)
+{
+	var form = document.forms[formId];
+
+	if (formAction == 'DelRows')
+	{
+		isSelected = false;
+		i=1;
+		while (cb = document.getElementById('select_'+i))
+		{
+			if (cb.checked)
+			{
+				isSelected = true;
+				break;
+			}
+			i++;
+		}
+		if (!isSelected)
+		{
+			i=1;
+			while (cb = document.getElementById('select_'+i))
+			{
+				if (cb.checked)
+				{
+					isSelected = true;
+					break;
+				}
+				i++;
+			}
+		}
+		if (!isSelected)
+		{
+			alert('<?php xmsg('DISCOUNTS', 'DISCOUNTS_ALERT_003'); ?>');
+			return;
+		}
+		else
+		{
+			if (!confirm('<?php xmsg('DISCOUNTS', 'DISCOUNTS_ALERT_004'); ?>'))
+				return;
+		}
+	}
+
+	form.FormSubmitValue.value = formAction;
+	disableButtonsInForm();
+	form.submit();
+}
+
+function changeUnitsValue(selectId, elementId)
+{
+	var element = document.getElementById(elementId);
+	var selectel = document.getElementById(selectId);
+	element.innerHTML = selectel.options[selectel.selectedIndex].innerHTML;
+}
+
+function activateRow()
+{
+	//Change style
+}
+
+//                    action
+function activateRate(rate_id, checkbox)
+{
+	active_status = checkbox.checked ? 1 : 2; //YES : NO
+
+	//Save current state
+	//if (!DOM) return;
+	var selectedTableRow = checkbox.parentNode.parentNode;
+	var old_classname = selectedTableRow.className;
+	selectRowAlways(checkbox, 'selected');
+
+	jQuery.post(
+			'jquery_ajax_handler.php', // backend
+			{
+			'asc_action': 'update_global_discounts',
+			'FormSubmitValue': 'SetRowActive',
+			'rate_id': rate_id,
+			'rate_status': active_status
+			},
+			// Function is called when an answer arrives. 
+			function(result) {
+			if(result["ERR_CODE"]=='')
+			{
+			//alert('Status changes successfully.');
+			selectRowAlways(checkbox, old_classname);
+			}
+			else
+			{
+			checkbox.checked = !checkbox.checked;
+			//alert('Error:' + result["ERR_CODE"]);
+			};
+			},
+			'json'
+				);
+}
+//-->
+</script>
+
+<!-- BEGIN PAGE CONTENT-->
+<?php Errors(); ?>
+<?php ResultMessage(); ?>
+<form <?php EditGlobalDiscountForm(); ?> method="post" id="EditGlobalDiscountForm">
+<?php HiddenArrayViewState(); ?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-gift font-green-sharp"></i>
+					<span class="caption-subject font-green-sharp bold uppercase"><?php msg('MRKTNG_TAB_DISCOUNTS_MENU_TITLE'); ?></span>
+					<span class="caption-helper text-lowercase"><?php msg('MRKTNG_TAB_002'); ?>...</span>
+				</div>
+				<div class="actions">
+					<div class="actions btn-set">
+						<button id="UpdateRowsButton" title="<?php xmsg('DISCOUNTS', 'DISCOUNTS_BTN_UPDATE_ROWS'); ?>" onclick="EditGlobalDiscountForm.FormSubmitValue.value = 'UpdateRows'; EditGlobalDiscountForm.submit(); disableButtons(new Array('UpdateRowsButton', 'AddRowButton', 'SaveButton1', 'CancelButton1', 'SaveButton2', 'CancelButton2', 'DelRowsButton'));" class="btn btn-circle btn-default"><i class="fa fa-refresh"></i> <span class="hidden-480"><?php xmsg('DISCOUNTS', 'DISCOUNTS_BTN_UPDATE_ROWS'); ?></span></button>
+						<a id="DelRowsButton" title="<?php xmsg('DISCOUNTS', 'DISCOUNTS_BTN_DEL_ROWS'); ?>" href="javascript:{formSubmit('EditGlobalDiscountForm', 'DelRows');}" class="btn btn-circle btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php xmsg('DISCOUNTS', 'DISCOUNTS_BTN_DEL_ROWS'); ?></span></a>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover" id="datatable_global_discount">
+						<thead>
+							<tr role="row" class="heading">
+								<th width="2%" align="center" style="text-align: center;">
+									<input id="SelectAll" type="checkbox" class="group-checkable" onClick="javascript:selectItems('EditGlobalDiscountForm');">
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<?php xmsg('DISCOUNTS', 'DISCOUNTS_LABEL_ORDER_SUBTOTAL'); ?>
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<?php xmsg('DISCOUNTS', 'DISCOUNTS_LABEL_ORDER_DISCOUNT'); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									Status
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php Items(); ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover" id="datatable_add_global_discount">
+						<thead>
+							<tr role="row" class="heading">
+								<th width="20%" align="center" style="text-align: center;">
+									<b><?php xmsg('DISCOUNTS', 'DISCOUNTS_LABEL_005'); ?></b>&nbsp;<input class="text-lowercase form-control form-filter input-small input-sm" type='text' name='rv_from' value="<?php RvFromValue(); ?>" size="8" maxlength="15" onBlur="formatInput(this);" patternType="<?php RvPatternType(); ?>" <?php RvFormat(); ?> style="display:inline" placeholder="<?php xmsg('SYS','ORDERS_RESULTS_AMOUNT')?>">
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<b><?php xmsg('DISCOUNTS', 'DISCOUNTS_LABEL_006'); ?></b>&nbsp;<input class="text-lowercase form-control form-filter input-small input-sm" type='text' name='rv_to' value="<?php RvToValue(); ?>" size="8" maxlength="15" onBlur="formatInput(this);" patternType="<?php RvPatternType(); ?>" <?php RvFormat(); ?> style="display:inline" placeholder="<?php xmsg('SYS','ORDERS_RESULTS_AMOUNT')?>">
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<b><?php xmsg('DISCOUNTS', 'DISCOUNTS_LABEL_007'); ?></b>&nbsp;<input class="text-lowercase form-control form-filter input-small input-sm" type='text' name='cost' value="<?php CostValue(); ?>" size="8" maxlength="15" onBlur="formatInput(this);" patternType="<?php CostPatternType(); ?>" <?php CostFormat(); ?> style="display:inline" placeholder="<?php xmsg('SYS','ORDERS_RESULTS_AMOUNT')?>">
+								</th>
+								<th width="3%" align="center" style="text-align: center;">
+									<select class="form-control form-filter input-sm input-xsmall" name="CostTypeId" id="CostTypeId" style=""><?php CostTypeOptions(); ?></select>
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<button id="AddRowButton" title="<?php xmsg('DISCOUNTS', 'DISCOUNTS_BTN_ADD_ROW'); ?>" onclick="EditGlobalDiscountForm.FormSubmitValue.value = 'AddRow'; EditGlobalDiscountForm.submit(); disableButtons(new Array('AddRowButton', 'SaveButton1', 'CancelButton1', 'SaveButton2', 'CancelButton2'));" class="btn btn-circle btn-default"><i class="fa fa-plus"></i> <span class="hidden-480"><?php xmsg('DISCOUNTS', 'DISCOUNTS_BTN_ADD_ROW'); ?></span></button>
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type='hidden' name='FormSubmitValue'>
+</form>
+<!-- END PAGE CONTENT-->
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

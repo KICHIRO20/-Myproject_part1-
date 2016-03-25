@@ -1,0 +1,13 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="value" STYLE="padding: 4px 2px 2px 2px; text-align: left; color: black;">&nbsp;Product <?php I(); ?></td>
+    <td class="value" STYLE="padding: 2px; text-align: center; color: black;"><INPUT size="8" TYPE="text" NAME="price[<?php I(); ?>]" id="id_1_<?php I(); ?>" value="<?php price(); ?>" onblur="formatInput(this);" patterntype="currency" <?php Format(); ?>></td>
+    <td class="value" STYLE="padding: 2px; text-align: left; color: black;"><INPUT size="4" TYPE="text" NAME="qty[<?php I(); ?>]" id="id_2_<?php I(); ?>" value="<?php qty(); ?>" onblur="formatInput(this);" patterntype="integer"></td>
+    <td class="value" STYLE="padding: 2px; text-align: center; color: black;"><INPUT size="8" TYPE="text" NAME="shipping_cost[<?php I(); ?>]" id="id_3_<?php I(); ?>" value="<?php shipping_cost(); ?>" onblur="formatInput(this);" patterntype="currency" <?php Format(); ?>></td>
+    <td class="value" STYLE="padding: 2px; xtext-align: left; color: black;">
+    <select style="width: 100px" name="tax_class[<?php I(); ?>]">
+        <?php TaxClassList(); ?>
+    </select>
+    </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

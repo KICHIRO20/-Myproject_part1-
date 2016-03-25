@@ -1,0 +1,105 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function startRestore()
+{
+//    document.getElementById('Step1').style.display = "inline";
+//    document.getElementById('progressBarC').style.width = "0px";
+//    document.getElementById('progressBarMessageC').style.visibility = "visible";
+//    document.getElementById('progressBarBorderC').style.visibility = "visible";
+    document.getElementById('StartButton1').style.display = "none";
+//    document.getElementById('StartButton2').style.display = "none";
+    document.getElementById('CloseButton1').style.display = "none";
+//    document.getElementById('CloseButton2').style.display = "none";
+//    window.opener.location.reload();
+}
+//-->
+</SCRIPT>
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center" border=0>
+<tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" colspan="2" style="padding: 0px 0px 0px 4px;"><?php Msg("BCP_RESTORE_PAGE_NAME"); ?></td>
+</tr>
+<tr class="subtitle" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="2" style="padding: 0px 0px 0px 4px;">
+        <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="80%"><?php Msg("BCP_RESTORE_PAGE_SUBTITLE"); ?></td>
+            <td nowrap style="padding-right: 8px;"><?php PageHelpLink('admin_backup_restore'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('admin_backup_restore'); ?></td>
+            <td align="right">
+              <table class="clear">
+                <tr>
+                  <td nowrap style="padding-right: 6px;"><div id="StartButton1" class="button button_5em" onclick="javascript:document.getElementById('BackupProcess').src = '<?php RestoreStartLink(); ?>'+(document.getElementById('AutoBackup').checked? '1':'0'); startRestore();"><?php Msg("BTN_START"); ?></div></td>
+                  <td nowrap style="padding-right: 10px;"><div id="CloseButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg("BTN_CLOSE"); ?></div></td>
+                </tr>
+              </table>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+
+<tr>
+      <td colspan="2" class="value popup_dialog_body_left_padded popup_dialog_body_right_padded">
+      <span id="Message1" class="required"><?php Msg('BCP_RESTORE_MESSAGE_001'); ?></span><span id="Message2" style="display: none;"><B><?php Msg('BCP_RESTORE_MESSAGE_003'); ?></B></span>
+      </td>
+</tr>
+
+<tr>
+      <td colspan="2" class="value popup_dialog_body_left_padded popup_dialog_body_right_padded">
+      <span id="AutoBackupMessage"><INPUT TYPE="checkbox" id="AutoBackup" checked><?php Msg('BCP_RESTORE_AUTO_BACKUP_MESSAGE'); ?></span>
+      </td>
+</tr>
+
+<tr id="backup_str_1">
+      <td colspan="2" class="value popup_dialog_body_left_padded popup_dialog_body_right_padded">
+      <span id="Step1" style="display: none;"><U><B><?php Msg('BCP_RESTORE_STEP_001'); ?></B></U></span>
+      </td>
+</tr>
+
+<tr id="backup_str_2">
+    <td nowrap class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><span id="progressBarMessageC" style="visibility: hidden;"><B><?php Msg('BCP_CREATE_MESSAGE_002'); ?></B></span></td>
+    <td class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><div id="progressBarBorderC" style="width: 400px; height: 15px; border: 1px solid #b2c2df; visibility: hidden;"><div id="progressBarC" style="height: 15px; width: 0px; background-color: #005099;">&nbsp;</div></div></td>
+</tr>
+
+<tr id="backup_str_3">
+    <td nowrap class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><span id="progressBarMessageC2" style="visibility: hidden;"><B><?php Msg('BCP_CREATE_MESSAGE_004'); ?></B></span></td>
+    <td class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><div id="progressBarBorderC2" style="width: 400px; height: 15px; border: 1px solid #b2c2df; visibility: hidden;"><div id="progressBarC2" style="height: 15px; width: 0px; background-color: #005099;">&nbsp;</div></div></td>
+</tr>
+
+<tr id="backup_str_4">
+      <td colspan="2" class="value popup_dialog_body_left_padded popup_dialog_body_right_padded">
+      <span id="Step2" style="display: none;"><U><B><?php Msg('BCP_RESTORE_STEP_002'); ?></B></U></span>
+      </td>
+</tr>
+
+<tr>
+    <td nowrap class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><span id="progressBarMessage" style="visibility: hidden;"><B><?php Msg('BCP_RESTORE_MESSAGE_002'); ?></B></span></td>
+    <td class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><div id="progressBarBorder" style="width: 400px; height: 15px; border: 1px solid #b2c2df; visibility: hidden;"><div id="progressBar" style="height: 15px; width: 0px; background-color: #005099;">&nbsp;</div></div></td>
+</tr>
+
+<tr>
+    <td nowrap class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><span id="progressBarMessage2" style="visibility: hidden;"><B><?php Msg('BCP_RESTORE_MESSAGE_004'); ?></B></span></td>
+    <td class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><div id="progressBarBorder2" style="width: 400px; height: 15px; border: 1px solid #b2c2df; visibility: hidden;"><div id="progressBar2" style="height: 15px; width: 0px; background-color: #005099;">&nbsp;</div></div></td>
+</tr>
+
+<tr>
+      <td colspan="2">
+        <IFRAME id="BackupProcess" SRC="javascript: void(0);" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></IFRAME>
+      </td>
+</tr>
+
+
+<!-- <tfoot>
+    <tr>
+        <th colspan=2 align="center">
+            <table class="clear">
+                <tr>
+                    <td style="padding-right: 4px;"><div id="StartButton2" class="button button_5em" onclick="javascript:document.getElementById('BackupProcess').src = '<?php RestoreStartLink(); ?>'; startRestore();"><?php Msg("BTN_START"); ?></div></td>
+                    <td><div id="CloseButton2" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg("BTN_CLOSE"); ?></div></td>
+                </tr>
+            </table>
+        </th>
+    </tr>
+</tfoot> -->
+</table>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

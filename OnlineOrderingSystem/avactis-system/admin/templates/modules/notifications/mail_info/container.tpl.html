@@ -1,0 +1,642 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<SCRIPT LANGUAGE="JavaScript" src="js/shuttle.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="js/uspss.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+<?php JavascriptTagArrays(); ?>
+
+var Bodies = new Array();
+Bodies[<?php CurrentAction(); ?>] = '<?php JavascriptBody(); ?>';
+
+function showBody(element)
+{
+    var body = document.getElementById('EmailBody');
+    if (!Bodies[element.options[element.selectedIndex].value])
+    {
+        Bodies[element.options[element.selectedIndex].value] = '';
+    }
+    body.value = Bodies[element.options[element.selectedIndex].value];
+}
+
+function showOptions(element)
+{
+    for (i=0; i<element.length; i++)
+    {
+        j = 0;
+        while (el = document.getElementById('option_'+element.options[i].value+'_'+j))
+        {
+            el.style.display = 'none';
+            j++;
+        }
+    }
+    j = 0;
+    while (el = document.getElementById('option_'+element.options[element.selectedIndex].value+'_'+j))
+    {
+        el.style.display = document.all?'block':'table-row';
+        j++;
+    }
+}
+
+function showTags(element)
+{
+    var infoTagsSelect = document.getElementById('infoTags');
+    var blockTagsSelect = document.getElementById('blockTags');
+    infoTagsSelect.options.length = 0;
+    blockTagsSelect.options.length = 0;
+
+    var actionId = element.options[element.selectedIndex].value;
+    for (i=0; i<infoTags[actionId].length; i++)
+    {
+        var oOption = document.createElement("OPTION");
+        infoTagsSelect.options.add(oOption);
+        oOption.value = infoTags[actionId][i]['tagId'];
+        oOption.text = infoTags[actionId][i]['tagName'];
+    }
+
+    for (i=0; i<blockTags[actionId].length; i++)
+    {
+        var oOption = document.createElement("OPTION");
+        blockTagsSelect.options.add(oOption);
+        oOption.value = blockTags[actionId][i]['tagId'];
+        oOption.text = blockTags[actionId][i]['tagName'];
+    }
+
+    for (i=0; i<element.length; i++)
+    {
+        j = 0;
+        while (el = document.getElementById('blocktag_template_'+element.options[i].value+'_'+j))
+        {
+            el.style.display = 'none';
+            j++;
+        }
+    }
+    j = 0;
+    while (el = document.getElementById('blocktag_template_'+element.options[element.selectedIndex].value+'_'+j))
+    {
+        el.style.display = document.all?'block':'table-row';
+        j++;
+    }
+}
+
+function addEmail(srcWindowId, dstWindowId, customerEmailId)
+{
+    var customerEmail = document.getElementById(customerEmailId);
+    moveItems(srcWindowId, dstWindowId);
+    if (customerEmail.value != "")
+    {
+        if (customerEmail.value.indexOf("<") != -1 && customerEmail.value.charAt(customerEmail.value.length-1) != ">")
+        {
+            customerEmail.value+=">";
+        }
+        if (customerEmail.value.indexOf("<") == -1 && customerEmail.value.charAt(customerEmail.value.length-1) == ">")
+        {
+            customerEmail.value = "<"+customerEmail.value;
+        }
+        if (isValidEmail(customerEmail.value, true))
+        {
+            var dstWindow = document.getElementById(dstWindowId);
+            alreadyExisted = false;
+            for (i = 0; i < dstWindow.options.length; i++)
+            {
+                if (dstWindow.options[i].text == customerEmail.value)
+                {
+                    alreadyExisted = true;
+                }
+            }
+            if (!alreadyExisted)
+            {
+                var oOption = document.createElement("OPTION");
+                dstWindow.options.add(oOption);
+                oOption.value = 'EMAIL_CUSTOM='+customerEmail.value;
+                oOption.text = customerEmail.value;
+                customerEmail.value = "";
+                updateHiddenInput(dstWindow, dstWindow.name + ".hidden");
+            }
+            else
+            {
+                alert('<?php xMsg('NTFCTN',"NTFCTN_WARNING_001"); ?>');
+            }
+        }
+        else
+        {
+            alert('<?php xMsg('NTFCTN',"NTFCTN_WARNING_002"); ?>');
+        }
+    }
+}
+
+function removeEmail(srcWindowId, dstWindowId)
+{
+    var Email = document.getElementById(srcWindowId);
+    if (Email.options.length == 0)
+    {
+        return;
+    }
+    j = 0;
+    for (k=0; k<Email.options.length + j; k++)
+    {
+        if (Email.options[k-j].value.indexOf('EMAIL_CUSTOM=') != -1)
+        {
+            if (Email.options[k-j].selected) 
+            {
+                Email.remove(k-j);
+                j++;
+            }
+            updateHiddenInput(Email, Email.name + ".hidden");
+        }
+    }
+    moveItems(srcWindowId, dstWindowId);
+}
+
+function addFromEmail(srcWindowId, dstInputId, customerEmailId)
+{
+    var customerEmail = document.getElementById(customerEmailId);
+    var srcWindow = document.getElementById(srcWindowId);
+    if (customerEmail.value == "")
+    {
+        document.getElementById(dstInputId).value = srcWindow.options[srcWindow.selectedIndex].text;
+        document.getElementById(dstInputId+'.hidden').value = srcWindow.options[srcWindow.selectedIndex].value;
+    }
+    else
+    {
+        if (customerEmail.value.indexOf("<") != -1 && customerEmail.value.charAt(customerEmail.value.length-1) != ">")
+        {
+            customerEmail.value+=">";
+        }
+        if (customerEmail.value.indexOf("<") == -1 && customerEmail.value.charAt(customerEmail.value.length-1) == ">")
+        {
+            customerEmail.value = "<"+customerEmail.value;
+        }
+        if (isValidEmail(customerEmail.value, true))
+        {
+            document.getElementById(dstInputId).value = customerEmail.value;
+            document.getElementById(dstInputId+'.hidden').value = 'EMAIL_CUSTOM='+customerEmail.value;
+            customerEmail.value = "";
+        }
+        else
+        {
+            alert('<?php xMsg('NTFCTN',"NTFCTN_WARNING_002"); ?>');
+        }
+    }
+}
+
+function insertAtCursor(bodyId, select1Id, select2Id)
+{
+    var value = '';
+
+    var body = document.getElementById(bodyId);
+    var y = body.scrollTop;
+    var s1 = document.getElementById(select1Id);
+    if (s1.options.selectedIndex != -1)
+    {
+        value = s1.options[s1.options.selectedIndex].text;
+        s1.options.selectedIndex = -1;
+    }
+    if (select2Id != '')
+    {
+        var s2 = document.getElementById(select2Id);
+        if (s2.options.selectedIndex != -1)
+        {
+            value = s2.options[s2.options.selectedIndex].text;
+            s2.options.selectedIndex = -1;
+        }
+    }
+
+    //IE support
+    if (document.selection)
+    {
+        body.focus();
+        sel = document.selection.createRange();
+        sel.text = value;
+    }
+    //MOZILLA/NETSCAPE support
+    else if (body.selectionStart || body.selectionStart == 0)
+    {
+        var startPos = body.selectionStart;
+        var endPos = body.selectionEnd;
+        body.value = body.value.substring(0, startPos) + value + body.value.substring(endPos,body.value.length);
+    }
+    else
+    {
+        body.value += value;
+    }
+    body.scrollTop = y;
+}
+
+function NotificationFormSubmit(formId)
+{
+    var form = document.forms[formId];
+    var name = document.getElementById('notification_name');
+    if (name.value == "")
+    {
+        alert("<?php xMsg('NTFCTN','NTFCTN_WARNING_005'); ?>");
+        return;
+    }
+    var subject = document.getElementById('notification_subject');
+    if (subject.value == "")
+    {
+        alert("<?php xMsg('NTFCTN','NTFCTN_WARNING_006'); ?>");
+        return;
+    }
+    var sendTo = document.getElementById('SendToList');
+    if (sendTo.options.length == 0)
+    {
+        alert("<?php xMsg('NTFCTN','NTFCTN_WARNING_007'); ?>");
+        return;
+    }
+
+    var sendFrom = document.getElementById('notification_send_from_radio_input_text');
+    if(sendFrom.checked == true)
+    {
+        var sendFromValue = document.getElementById('notification_send_from_input_text');
+        if(sendFromValue.value == "")
+        {
+            alert("<?php xMsg('NTFCTN','NTFCTN_WARNING_008'); ?>");
+            return;
+        }
+
+        if (sendFromValue.value.indexOf("<") != -1 && sendFromValue.value.charAt(sendFromValue.value.length-1) != ">")
+        {
+            sendFromValue.value+=">";
+        }
+        if (sendFromValue.value.indexOf("<") == -1 && sendFromValue.value.charAt(sendFromValue.value.length-1) == ">")
+        {
+            sendFromValue.value = "<"+sendFromValue.value;
+        }
+        if (isValidEmail(sendFromValue.value, true))
+        {
+        }
+        else
+        {
+            alert('<?php xMsg('NTFCTN',"NTFCTN_WARNING_002"); ?>');
+            return;
+        }
+    }
+
+    var body = document.getElementById('EmailBody');
+    if (body.value == '')
+    {
+        bootbox.confirm("<?php xMsg('NTFCTN','NTFCTN_WARNING_009'); ?>",function(result){
+        if(result){
+          return;
+        }
+    });
+}
+     document.getElementById('hasCloseScript').value = 'true';
+     form.submit();
+}
+
+function disableElement(Element)
+{
+    var object = document.getElementById(Element);
+    object.disabled = true;
+    object.style.backgroundColor ="rgb(215, 215, 215)";
+}
+
+function unDisableElement(Element)
+{
+    var object = document.getElementById(Element);
+    object.disabled = false;
+    object.style.backgroundColor ="#ffffff";
+}
+
+//-->
+</SCRIPT>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-weixin"></i>&nbsp;<?php xMsg('NTFCTN','NTFCTN_INFO_PAGE_NAME'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div id="EditButton1" class="btn btn-primary btn-circle" onclick="NotificationFormSubmit('NotificationForm');">
+				<i class="fa fa-save"></i><span class="hidden-480">&nbsp;<?php SubmitButton(); ?></span>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<?php if (getAscAction() != 'Add') SelectPageLanguage('DEFAULT', '', 'SaveNotification'); ?>
+		<form action="<?php FormAction(); ?>" method="POST" name="NotificationForm" id="NotificationForm">
+			<INPUT TYPE="hidden" name="hasCloseScript" id="hasCloseScript">
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover">
+					<thead>
+						<tr class="text-left bg-blue-hoki">
+							<th colspan="3"><?php xMsg('NTFCTN','NTFCTN_INFO_PAGE_SUBTITLE'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="text-left">
+								<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_001'); ?><span class="font-red">&nbsp;*</span>
+							</td>
+							<td width="1%" class="text-center">
+							    <a class="pull-right" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_001','notifications-messages'); ?>
+							    </a>                                                                
+							</td>
+							<td>
+								<input type="text" name="notification_name" id="notification_name" class="form-control input-sm input-medium" value="<?php Name(); ?>">
+								<input type="hidden" name="notification_id" id="NotificationId" value="<?php Id(); ?>">
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_002'); ?><span class="font-red">&nbsp;*</span>
+							</td>
+							<td width="1%" class="text-center">
+							    <a class="pull-right" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_002','notifications-messages'); ?>
+							    </a> 
+							</td>
+							<td>
+								<input type="text" name="notification_subject" id="notification_subject" class="form-control input-sm" value="<?php Subject(); ?>">
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_007'); ?>
+							</td>
+							<td width="1%" class="text-center">
+							    <a class="pull-right" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_007','notifications-messages'); ?>
+							    </a>
+							</td>
+							<td>
+								<input type="checkbox" class="form-control input-xsmall input-sm" name="notification_active" <?php Active(); ?>>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left"><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_003'); ?></td>
+							<td width="1%" class="text-center">
+							    <a class="pull-right" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_003','notifications-messages'); ?>
+							    </a>
+							</td>
+							<td>
+								<select name="notification_action" id="notification_action" onchange="showOptions(this); showTags(this); showBody(this);" class="form-control input-sm input-xlarge">
+									<?php Actions_List(); ?>
+								</select>
+							</td>
+						</tr>
+						<?php ActionOptions(); ?>
+						<tr>
+							<td>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover">
+					<thead>
+						<tr class="text-left bg-blue-hoki">
+							<th colspan="3"><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_006'); ?>&nbsp;*</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input type="radio" class="inline" <?php SendFrom_Select_Checked(); ?> name="notification_send_from_radio" id="notification_send_from_radio_select" value="select" onclick="disableElement('notification_send_from_input_text');unDisableElement('notification_send_from_select');">
+								&nbsp;&nbsp;<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_013'); ?>
+							</td>
+							<td class="text-center" width="1%">
+							    <a class="pull-right" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_013','notifications-messages'); ?>
+							    </a>								
+							</td>
+							<td>
+								<select name="notification_send_from_select" id="notification_send_from_select" NAME="" id="SendFromSourceList" class="form-control input-sm input-xlarge" <?php SendFrom_Select_Disabled(); ?> >
+									<?php SendFrom_SourceList(); ?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td
+							><input type="radio" name="notification_send_from_radio" id="notification_send_from_radio_input_text" value="input_text" onclick="disableElement('notification_send_from_select');unDisableElement('notification_send_from_input_text');" class="inline" <?php SendFrom_InputText_Checked(); ?>>
+							<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_014'); ?>
+							</td>
+							<td class="text-center" width="1%">
+							    <a class="pull-right" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_014','notifications-messages'); ?>
+							    </a>								
+							</td>
+							<td>
+								<input  class="form-control input-sm input-xlarge" name="notification_send_from_input_text" id="notification_send_from_input_text" type="text" id="SendFromSource" value="<?php SendFrom_InputText_Value(); ?>" <?php SendFrom_InputText_Disabled(); ?> />
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover">
+					<thead>
+						<tr class="text-left bg-blue-hoki">
+							<th colspan="3"><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_005'); ?>&nbsp;*</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="text-left">
+							    <a class="pull-left" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_015','notifications-messages'); ?>
+							    </a>
+								&nbsp;&nbsp;<strong><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_015'); ?>&nbsp;:</strong>
+							</td>
+							<td width="4%" class="text-center">&nbsp;</td>
+							<td class="text-left">
+							    <a class="pull-left" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_016','notifications-messages'); ?>
+							    </a>
+								&nbsp;&nbsp;<strong><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_016'); ?>&nbsp;:</strong>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="3">
+								<SELECT NAME="SendToList" class="form-control input-xlarge" id="SendToList" size="5"  multiple>
+								<?php SendTo_List(); ?>
+								</SELECT>
+								<input id="SendToList.hidden" name="notification_send_to_hidden" value="<?php HiddenSendToList(); ?>" type="hidden">
+							</td>
+							<td rowspan="3" class="text-center" style="vertical-align: middle;">
+								<a href="javascript:removeEmail('SendToList', 'SendToSourceList');">
+									<i class="fa fa-arrow-circle-right"></i>
+								</a>
+								<br /><br />
+								<a href="javascript:addEmail('SendToSourceList', 'SendToList', 'custom_email');">
+									<i class="fa fa-arrow-circle-left"></i>
+								</a>
+							</td>
+							<td class="text-left">
+								<SELECT NAME="SendToSourceList" id="SendToSourceList" class="form-control input-xlarge" multiple size="5">
+								<?php SendTo_SourceList(); ?>
+								</SELECT>
+								<input id="SendToSourceList.hidden" name="SendToSourceList.hidden" value="" type="hidden">
+							</td>
+						<tr>
+							<td class="text-left">
+							    <a class="pull-left" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_017','notifications-messages'); ?>
+							    </a>
+								&nbsp;&nbsp;<strong><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_017'); ?>&nbsp;:</strong>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								<input type="text" name="" id="custom_email" value="" class="form-control input-sm input-xlarge">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover">
+					<thead>
+						<tr class="text-left bg-blue-hoki">
+							<th colspan="3"><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_008'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+							    <a class="pull-left" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_008','notifications-messages'); ?>
+							    </a>
+								&nbsp;&nbsp;<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_008'); ?>
+							</td>
+							<td width="5%"></td>
+							<td>
+							    <a class="pull-left" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_009','notifications-messages'); ?>
+							    </a>
+								&nbsp;&nbsp;<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_009'); ?>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="3">
+								<TEXTAREA class="form-control input-xlarge" NAME="notification_body" style="height: 405px;" id="EmailBody" onchange="Bodies[document.getElementById('notification_action').options[document.getElementById('notification_action').selectedIndex].value] = document.getElementById('EmailBody').value;">
+									<?php Body(); ?>
+								</TEXTAREA>
+                                                               <br/>
+                                                           		<?php ResponsiveTemplates(); ?>
+							      
+						</td>
+							<td rowspan="3" class="text-center" style="vertical-align: middle;">
+								<a href="javascript:insertAtCursor('EmailBody', 'infoTags', 'blockTags');">
+									<i class="fa fa-arrow-circle-left fa-lg"></i>
+								</a>
+							</td>
+							<td>
+								<select class="form-control input-large" size=21 id="infoTags">
+									<?php AvailableInfoTags(); ?>
+								</select>
+							</td>
+						</tr>
+                                               
+						<tr>
+							<td>
+							    <a class="pull-left" style="cursor:pointer;">
+								   <?php hinttext('NTFCTN_INFO_FIELD_010','notifications-messages'); ?>
+							    </a>
+								&nbsp;&nbsp;<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_010'); ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select class="form-control input-large" size=7 id="blockTags">
+									<?php AvailableBlockTags(); ?>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover">
+					<thead>
+						<tr class="bg-blue-hoki text-left">
+							<th colspan="3"><?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_018'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php BlockTemplates(); ?>
+						<tr>
+							<td>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+			<div class="row">
+				<div class="row-sm-12 text-center">
+					<div id="EditButton2" class="btn btn-primary btn-circle" onclick="NotificationFormSubmit('NotificationForm');">
+						<i class="fa fa-save"></i>&nbsp;<?php SubmitButton(); ?>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+jQuery(document).ready(function(){
+	jQuery("input:radio[name=temp]").click(function(){
+		var value = jQuery(this).val();
+        	jQuery.post(
+		'jquery_ajax_handler.php', // backend
+		{
+            	'asc_action': 'IncludeTemplate',
+                'temp':value,
+                'NotificationId' :jQuery('#NotificationId').val()
+		},
+		// Function is called when an answer arrives. 
+		function(result, output) {
+            		jQuery('#EmailBody').val(result);
+		});
+	});
+});
+</script>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

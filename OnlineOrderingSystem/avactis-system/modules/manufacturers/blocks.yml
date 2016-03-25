@@ -1,0 +1,6 @@
+- ManufacturersFilter:
+    title: Manufacturers filter
+    description: Manufacturers filter
+- ManufacturersDropDownFilter:
+    title: Manufacturers dropdown filter
+    description: Manufacturers dropdown filter

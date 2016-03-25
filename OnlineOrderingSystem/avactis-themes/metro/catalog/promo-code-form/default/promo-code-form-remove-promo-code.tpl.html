@@ -1,0 +1,19 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php Label('CATALOG_YOU_ARE_USING_COUPON_PART1_LABEL'); ?>
+<?php Local_PromoCode(); ?>
+<?php Label('CATALOG_YOU_ARE_USING_COUPON_PART2_LABEL'); ?>
+<?php Local_PromoCodeDiscountText(); ?>
+<?php Label('CATALOG_YOU_ARE_USING_COUPON_PART3_LABEL'); ?>
+<?php Local_PromoCodeDiscountedItemsListForCZ(); ?>
+<?php Label('CATALOG_POINT'); ?>
+<br/>
+<?php Local_PromoCodeGlobalDiscountIgnored(); ?>
+<?php Local_PromoCodeMinSubtotal(); ?>
+<?php Local_PromoCodeStrictCartAttitude(); ?>
+<?php Local_PromoCodeShippingAttitude(); ?>
+<?php Local_PromoCodeHandlingAttitude(); ?>
+<br/>
+<form action="<?php Local_RemovePromoCode_URL(); ?>" method="post">
+    <input type="submit" class="btn" value="<?php Label('CHECKOUT_BTN_REMOVE_COUPON'); ?>" />
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

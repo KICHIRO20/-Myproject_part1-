@@ -1,0 +1,13 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+   <td></td>
+   <td><label class="label-control"><?php echo Name(); ?></label></td>
+   <td>
+      <select class="form-control input-medium" id="MenuLocation" name="nav_menu['<?php echo Location(); ?>']">
+         <option value="0">------------- Select -------------</option>
+         <?php FoundMenu(); ?>
+      </select>
+   <td><label class="label-control"><a href="menu_manager.php?menu_id=<?php MenuId(); ?>" > <?php xMsg('CMS', 'CMS_EDIT_MENU'); ?> </a> | <a href="menu_manager.php?menu_id=0"><?php xMsg('CMS', 'CMS_NAV_NEW_MENU'); ?></a></label></td>
+   </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

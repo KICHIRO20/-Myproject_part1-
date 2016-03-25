@@ -1,0 +1,104 @@
+[Page Header Menu]
+.page_header .menu ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+[Page Header Menu Item]
+.page_header .menu li {
+    padding;
+    margin;
+    background;
+}
+
+[Page Header Menu Item w/o Link]
+.page_header .menu li.nolink {
+    text;
+    background;
+    padding;
+}
+
+[Page Header Menu Item Link]
+.page_header .menu li a {
+    text;
+}
+
+[Page Header Menu Item Link Hovered]
+.page_header .menu li a:hover {
+    text;
+    background;
+}
+
+[Page Top Menu Container]
+.page_top_menu .menu {
+    position;
+}
+
+[Page Top Menu]
+.page_top_menu .menu ul {
+    margin;
+    padding;
+}
+
+[Page Top Menu Item]
+.page_top_menu .menu li {
+    margin;
+    background;
+    border;
+}
+
+[Page Top Menu Last Item]
+.page_top_menu .menu li.last {
+    border;
+}
+
+[Page Top Menu Item Link]
+.page_top_menu .menu li a {
+    text;
+    padding;
+}
+
+[Page Top Menu Item Link Hovered]
+.page_top_menu .menu li a:hover {
+    text;
+    background;
+}
+
+[Page Footer Menu Container]
+.page_footer .menublock {
+    text-align;
+    padding;
+}
+
+[Page Footer Menu]
+.page_footer .menublock ul {
+    margin;
+    padding;
+}
+
+[Page Footer Menu Item]
+.page_footer .menublock li {
+    background;
+    border;
+    padding;
+    margin;
+}
+
+[Page Footer Menu Last Item]
+.page_footer .menublock li.last {
+    border;
+}
+
+[Page Footer Menu Item Link]
+.page_footer .menublock li a {
+    text;
+    padding;
+}
+
+[Page Footer Menu Item Link Hovered]
+.page_footer .menublock li a:hover {
+    text;
+    background;
+}
+

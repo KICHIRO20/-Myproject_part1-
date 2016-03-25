@@ -1,0 +1,113 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function submitSaveAttrForm(formID)
+    {
+        var form = document.forms[formID];
+        form.elements['asc_action'].value = 'SaveSortedAttributes';
+        form.elements['ViewState[hasCloseScript]'].value = 'true';
+        form.submit();
+    }
+//-->
+</SCRIPT>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold uppercase">
+				<i class="fa fa-sort"></i>&nbsp;<?php PageName(); ?>&nbsp;:&nbsp;
+			</span>
+			<span class="bold"><?php GroupName(); ?></span>
+		</div>
+		<div class="actions">
+			<?php PageHelpLink('checkout_info_sort_group'); ?>
+			<div id="SaveButton1" class="btn btn-default btn-circle" onclick="submitSaveAttrForm('SaveAttrForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));">
+				<i class="fa fa-save"></i>&nbsp;<?php Msg('BTN_SAVE'); ?>
+			</div>
+			<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();">
+				<i class="fa fa-times-circle"></i>&nbsp;<?php Msg('BTN_CANCEL'); ?>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!-- BEGIN Info Message -->
+		<div class="note note-info note-bordered font-green-sharp">
+			<i class="fa fa-info-circle"></i>&nbsp;<?php PageHeader(); ?><?php GroupName(); ?>
+		</div>
+		<!-- END Info Message -->
+		<form method="post" action="<?php SaveAttrHref(); ?>" id="SaveAttrForm" name="SaveAttrForm">
+			<INPUT TYPE="hidden" <?php HiddenFieldAction(); ?>>
+			<?php HiddenArrayViewState(); ?>
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover table-condensed">
+					<tbody>
+						<tr>
+							<td class="text-left" colspan=2>
+								<?php Msg( 'CHECKOUT_INFO_SORT_001', getGroupName()); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-center" colspan=2>
+								<?php Msg( 'CHECKOUT_INFO_SORT_002', getGroupName() ); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-right">
+								<select name="ObjectList" size="15" id="ObjectList" class="form-control">
+									<?php OptionsList(); ?>
+								</select>
+								<input type="hidden" id="ObjectList.hidden" name="ObjectList.hidden" value="<?php OptionsListHidden(); ?>">
+								<input type="hidden" id="VariantId" name="VariantId" value="<?php VariantId(); ?>">
+							</td>
+							<td style="vertical-align: middle;" class="text-left">
+								<a href="javascript:moveItemUpTop('ObjectList');" title="<?php Msg('SORT_CTGR_004'); ?>">
+									<i class="fa fa-caret-square-o-up fa-2x"></i>
+								</a><br /><br />
+								<a href="javascript:moveItemUp('ObjectList');" title="<?php Msg('SORT_CTGR_005'); ?>">
+									<i class="fa fa-chevron-circle-up fa-2x"></i>
+								</a><br /><br />
+								<a href="javascript:moveItemDown('ObjectList');" title="<?php Msg('SORT_CTGR_006'); ?>">
+									<i class="fa fa-chevron-circle-down fa-2x"></i>
+								</a><br /><br />
+								<a href="javascript:moveItemDownBottom('ObjectList');" title="<?php Msg('SORT_CTGR_007'); ?>">
+									<i class="fa fa-caret-square-o-down fa-2x"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td class="text-center" colspan="2">
+								<div id="SaveButton1" class="btn btn-default btn-circle" onclick="submitSaveAttrForm('SaveAttrForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));">
+									<i class="fa fa-save"></i>&nbsp;<?php Msg('BTN_SAVE'); ?>
+								</div>
+								<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();">
+									<i class="fa fa-times-circle"></i>&nbsp;<?php Msg('BTN_CANCEL'); ?>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+		</form>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

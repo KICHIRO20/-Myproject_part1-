@@ -1,0 +1,173 @@
+input.buttons {
+    background: none no-repeat top left;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+
+    font-size: 0px;
+    line-height: 0px;
+}
+
+input.buttons.disabled {
+    cursor: default;
+}
+
+input.button_search {
+    background-image: url("../images/buttons/button-search-page-header.png");
+    width: 68px;
+    height: 21px;
+    padding-bottom: 2px;
+}
+
+.page_container .search input.button_search {
+    background: transparent url("../images/buttons/button-search-page-header.png") no-repeat top left;
+    border: none 0px;
+    display: inline;
+    margin: -1px 28px 0px 8px;
+    overflow: visible;
+    height: 21px;
+    width: 68px;
+}
+
+input.button_add_to_cart {
+    background-image: url("../images/buttons/button-add-to-cart-yellow.png");
+    width: 95px;
+    height: 25px;
+    padding-bottom: 2px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+input.button_add_to_cart.disabled {
+    background-image: url("../images/buttons/button-add-to-cart-grey.png");
+}
+
+input.button_out_of_stock {
+    background-image: url("../images/buttons/button-out-of-stock.png");
+    width: 95px;
+    height: 25px;
+    padding-bottom: 2px;
+    cursor: default; 
+}
+
+input.button_continue_checkout {
+    background: url("../images/buttons/button-continue-checkout.png") no-repeat top left;
+    width: 137px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.button_place_order {
+    background: url("../images/buttons/button-place-order.png") no-repeat top left;
+    width: 97px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.button_save_changes {
+    background: url("../images/buttons/button-save-changes.png") no-repeat top left;
+    width: 102px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.button_signin {
+    background: url("../images/buttons/button-signin.png") no-repeat top left;
+    width: 82px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.button_register {
+    background: url("../images/buttons/button-register.png") no-repeat top left;
+    width: 82px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.button_continue {
+    background: url("../images/buttons/button-continue.png") no-repeat top left;
+    width: 82px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.add_to_wishlist {
+    background: url("../images/buttons/button-add-to-wishlist.png") no-repeat top left;
+    width: 107px;
+    height: 23px;
+    padding-bottom: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+input.add_to_wishlist.disabled {
+    background-image: url("../images/buttons/button-add-to-wishlist-grey.png");
+}
+
+
+span.button_proceed_to_checkout {
+    background: url("../images/buttons/button-proceed-to-checkout-border.png") no-repeat top left;
+    width: 147px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}
+
+span.button_continue_shopping {
+    background: url("../images/buttons/button-continue-shopping.png") no-repeat top left;
+    width: 142px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}
+
+span.button_continue_shopping_back {
+    background: url("../images/buttons/button-continue-shopping-back.png") no-repeat top left;
+    width: 142px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}
+
+span.button_continue_checkout {
+    background: url("../images/buttons/button-continue-checkout.png") no-repeat top left;
+    width: 137px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}
+
+span.button_back {
+    background: url("../images/buttons/button-back.png") no-repeat top left;
+    width: 67px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}
+
+
+span.button_register {
+    background: url("../images/buttons/button-register.png") no-repeat top left;
+    width: 82px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}
+
+span.button_details {
+    background: url("../images/buttons/button-details.png") no-repeat top left;
+    width: 95px;
+    height: 25px;
+    cursor: pointer;
+    display: block;
+}
+
+span.button_checkout {
+    background: url("../images/buttons/button-checkout-yellow.png") no-repeat scroll left top;
+    width: 82px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}

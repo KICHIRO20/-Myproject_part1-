@@ -1,0 +1,171 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="JavaScript" type="text/javascript">
+<!--
+
+// ********************************
+// application-specific functions *
+// ********************************
+
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		curleft = obj.offsetLeft
+		curtop = obj.offsetTop
+		while (obj = obj.offsetParent) {
+			curleft += obj.offsetLeft
+			curtop += obj.offsetTop
+		}
+	}
+	return new Array(curleft,curtop);
+}
+
+function stopEventProparation(e)
+{
+    /* Don't allow document.onclick event handler to close popup DIV
+       if click is on DIV itself.
+    */
+    if (!e) var e = window.event
+    // handle event
+    e.cancelBubble = true;
+    if (e.stopPropagation) 
+        e.stopPropagation();
+}
+
+function DelPromoCodeInfoOnSubmit(alert_message, windowURL)
+{
+    var i=0
+    var elem = document.promoCodeListForm.promo_code_id;
+    var elem_id = '';
+    if (elem)
+    {
+        URL = windowURL;
+        if (!elem.length)
+        {
+            URL = windowURL+elem.value;
+            elem_id = elem.value;
+        }
+        else
+        {
+            while (elem[i])
+            {
+                if (elem[i].checked)
+                {
+                    URL = windowURL+elem[i].value;
+                    elem_id = elem[i].value;
+                    break;
+                }
+                i++;
+            }
+        }
+        if (URL == windowURL)
+        {
+            alert(alert_message);
+            return;
+        }
+    }
+    else
+    {
+        alert(alert_message);
+        return;
+    }
+
+    var PromoCodePromoCode = document.getElementById("PromoCodePromoCode_"+elem_id).value;
+    var warning = new String('<?php xmsg("PROMOCODES", "PROMOCODES_PAGE_WRN_001"); ?>');
+    warning = warning.replace('{PromoCodePromoCode}', PromoCodePromoCode);
+
+    if (!confirm(warning))
+        return false;
+    go(URL);
+    return true;
+}
+
+// -->
+</SCRIPT>
+
+<!-- BEGIN PAGE CONTENT-->
+				<div class="row">
+					<div class="col-md-12">
+						<!-- Begin: life time stats -->
+						<div class="portlet light">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-gift font-green-sharp"></i>
+									<span class="caption-subject font-green-sharp bold uppercase"><?php msg('MRKTNG_TAB_PROMO_CODES_MENU_TITLE'); ?></span>
+									<span class="caption-helper text-lowercase"><?php msg('MRKTNG_MNG_PROMO_CODES_PAGE_NAME'); ?>...</span>
+								</div>
+								<div class="actions">
+
+	<div class="actions btn-set">
+		<button id="ApplyFilterButton"  class="btn btn-circle btn-default" name="settings" type="button" onclick="javascript:openURLinNewWindow('popup_window.php?page_view=SettingParamList&group=PROMO_CODE_PARAMS', 'SettingGroupEditor');" title="<?php xmsg('SYS','BTN_SETTINGS'); ?>"><i class="fa fa-gears"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SETTINGS'); ?></span></button>
+		<a class="btn btn-circle btn-default" href="<?php AddPromoCodeHref(); ?>" title="<?php xmsg('PROMOCODES', 'BTN_ADD_PROMOCODE_TITLE'); ?>"><i class="fa fa-plus"></i> <span class="hidden-480"><?php xmsg('PROMOCODES', 'BTN_ADD_PROMOCODE'); ?></span></a>
+		<button class="btn btn-circle btn-default" onclick="NewWindowExt('EditPromoCode', '<?php EditPromoCodeHref(); ?>', 'Edit', true, <?php AlertMessage(); ?>, 'promoCodeListForm', 'promo_code_id');" title="<?php xmsg('PROMOCODES', 'BTN_EDIT_PROMOCODE_TITLE'); ?>"><i class="fa fa-edit"></i> <span class="hidden-480"><?php xmsg('PROMOCODES', 'BTN_EDIT_PROMOCODE'); ?></span></button>
+		<button class="btn btn-circle btn-default" onclick="DelPromoCodeInfoOnSubmit(<?php AlertMessage(); ?>, '<?php DelPromoCodeHref(); ?>');" title="<?php xmsg('PROMOCODES', 'BTN_DELETE_PROMOCODE_TITLE'); ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php xmsg('PROMOCODES', 'BTN_DELETE_PROMOCODE'); ?></span></button>
+	</div>
+
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="table-responsive">
+
+
+	<form name="promoCodeListForm">
+		<INPUT TYPE="hidden" name="asc_action">
+					<table class="table table-striped table-bordered table-hover" id="datatable_promo_codes">
+						<thead>
+							<tr role="row" class="heading">
+								<th style="text-align: center;" width="5%">
+								</th>
+								<th style="text-align: center;" width="15%">
+									<?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_001'); ?>
+								</th>
+								<th style="text-align: center;" width="15%">
+									 <?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_002'); ?>
+								</th>
+								<th style="text-align: center;" width="10%">
+									 <nobr><?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_003'); ?></nobr>
+								</th>
+								<th style="text-align: center;" width="5%">
+									 <?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_004'); ?>
+								</th>
+								<th style="text-align: center;" width="5%">
+									 <?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_DISCOUNTED_ITEMS_QTY'); ?>
+								</th>
+								<th style="text-align: center;" width="13%">
+									 <?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_005'); ?>
+								</th>
+								<th style="text-align: center;" width="7%">
+									 <?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_006'); ?>
+								</th>
+								<th style="text-align: center;" width="15%">
+									 <?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_007'); ?>
+								</th>
+								<th style="text-align: center;" width="5%">
+									 <nobr><?php xmsg('PROMOCODES', 'PROMOCODES_PROMO_CODES_COL_HDR_008'); ?></nobr>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php Items(); ?>
+						</tbody>
+					</table>
+				</form>
+								</div>
+							</div>
+						</div>
+						<!-- End: life time stats -->
+					</div>
+				</div>
+				<!-- END PAGE CONTENT-->
+
+<table cellspacing="0" cellpadding="5" width="100%">
+    <tr>
+        <td style="text-align: center" width="100%"><?php PaginatorLine(); ?></td>
+    </tr>
+    <tr>
+        <td style="text-align: center" width="100%"><?php PaginatorRows(); ?></td>
+    </tr>
+</table>
+
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

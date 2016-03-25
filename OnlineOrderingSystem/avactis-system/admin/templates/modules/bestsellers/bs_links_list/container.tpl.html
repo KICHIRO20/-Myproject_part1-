@@ -1,0 +1,383 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<?php ReloadCategoryReview(); ?>
+
+<script language="JavaScript" src="js/utility.js"></script>
+<script language="JavaScript" src="dtree/dtree.js"></script>
+<script language="JavaScript">
+document.title = '<?php xmsg('BS','MNG_BESTSELLERS'); ?>';
+</script>
+<style type="text/css">
+.bs_list_item {
+    cursor: default;
+}
+</style>
+<style type="text/css">
+.pb_cats_tree_header {
+    border: solid 1px black;
+    border-bottom: 0px;
+    background: #CED4DD;
+    padding: 3px;
+}
+.pb_plist_header {
+    border: solid 1px black;
+    border-bottom: 0px;
+    background: #CED4DD;
+    padding: 3px;
+}
+.pb_cats_tree_box {
+    border: solid 1px black;
+    border-top: 0px;
+    height: 280px;
+    overflow: auto;
+    padding-top: 2px;
+}
+.pb_plist_box {
+    border: solid 1px black;
+    border-top: 0px;
+    height: 280px;
+    overflow: auto;
+    white-space: nowrap;
+    font-weight: normal;
+    cursor: default;
+    padding-top: 2px;
+}
+.pb_list_item {
+}
+.pb_list_item_not_choosed {
+    font-weight: normal;
+}
+.pb_list_item_choosed {
+    font-weight: bold;
+}
+.pb_list_item_selected {
+    font-weight: bold;
+    background-color: #C0D2EC;
+}
+.pbli_mover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.pb_box_td {
+    padding-right: 0px;
+    padding-left: 0px;
+    float: left;
+width: 50%;
+}
+.pb_loading_block {
+    border: solid 1px black;
+    background: #F0F0F0;
+    width: 100px;
+    font-weight: bold;
+    padding-top: 2px;
+    padding-bottom: 4px;
+}
+</style>
+
+<div class="portlet light">
+<div class="portlet-title">
+<div class="caption">
+<i class="fa fa-gift font-green-sharp"></i>
+<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('MNG_CTGR_CURR_CTGR'); ?> <?php Breadcrumb(); ?></span>
+<span class="caption-helper"><?php xmsg('BS','MNG_BESTSELLERS'); ?></span>
+</div>
+<div class="actions">
+<div class="actions btn-set">
+		  <div id="SaveButton1" class="btn btn-circle btn-default" onClick="enableSettingsForm(); document.forms['BSForm'].submit();"><i class="fa fa-save"></i><?php msg('BTN_SAVE'); ?></div>
+		  <div class="btn btn-circle btn-default" onClick="javascript: closeAndFocusParent();"><i class="fa fa-times"></i><?php msg('BTN_CLOSE'); ?></div>
+</div>
+</div>
+</div>
+<div class="portlet-body">
+<?php ResultMessage(); ?>
+<?php Local_CategoryBookmarks(); ?>
+<div id="accordion3" class="panel-group accordion scrollable">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title bg-blue-hoki">
+											<a href="#collapse_2_1" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle" aria-expanded="true">
+											<?php xmsg('BS','ADD_PRODUCTS_HEADER'); ?> </a>
+											</h4>
+										</div>
+										<div class="panel-collapse collapse in" id="collapse_2_1" aria-expanded="true" style="">
+											<div class="panel-body">
+												 <?php Local_ProductsBrowser(); ?>
+											</div>
+										</div>
+									</div>
+									
+					
+</div>
+<div class="table-responsive">
+<form action="<?php BSFormAction(); ?>" name="BSForm" method="post" style="display: inline">
+<table class="table borderless">
+				<thead>
+					<tr>
+						<th class="bg-blue-hoki">
+							 <?php xmsg('BS','BESTSELLERS_LIST_HEADER'); ?>
+							<div id="SortButton1" class="btn btn-circle btn-default disabled pull-right" onClick="">
+								<i class="fa fa-sort"></i>&nbsp;<?php msg('BTN_SORT'); ?>
+							</div>
+
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							 <table id="bs_list_table" class="table borderless table-hover">
+	        
+	            <?php BestsellersList(); ?>
+	        </table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<div id="DeleteButton1" class="btn btn-circle btn-default" onClick=""><i class="fa fa-times"></i><?php msg('BTN_DELETE'); ?></div>
+						</td>
+					</tr>
+					<tr>
+			        <td>
+			            <?php SettingsForm(); ?>
+			        </td>
+			    </tr>
+					<tr>
+						<td><span style="color: red;">*</span>&nbsp;<?php xmsg('BS','MSG_PRESS_SAVE_BUTTON'); ?></td>
+					</tr>
+					<tr>
+						<td class="text-center">
+						<div id="SaveButton2" class="btn btn-circle btn-default" onClick="enableSettingsForm(); document.forms['BSForm'].submit();"><i class="fa fa-save"></i><?php msg('BTN_SAVE'); ?></div>
+						<div class="btn btn-circle btn-default" onClick="javascript: closeAndFocusParent();"><i class="fa fa-times"></i><?php msg('BTN_CLOSE'); ?></div>	
+						</td>
+					</tr>					
+				</tbody>
+</table>
+</form>
+</div>
+<div class="table-responsive">
+
+<?php BSSortForm(); ?>
+
+<script language="JavaScript">
+
+function changeBlockVisible(block_id,img_id)
+{
+  var el = document.getElementById(block_id);
+  var img = document.getElementById(img_id);
+  
+  if(el.style.display == 'none')
+  {
+    showBlock(block_id,0);
+    img.src = "images/minus.gif";
+  }
+  else
+  {
+    hideBlock(block_id);
+    img.src = "images/plus.gif";
+  };
+}
+
+<?php jsBestsellersArray(); ?>
+
+function addProductToBSList(product_id, product_name)
+{
+    if(in_array(bestsellers_array, product_id, false))
+    {
+        alert('<?php addslashes(xmsg('BS','WRN_PRODUCT_ALREADY_ADDED')); ?>');
+        return;
+    };
+
+    var tbl = document.getElementById('bs_list_table');
+    var ind = tbl.rows.length;
+    
+    var row = tbl.insertRow(ind);
+    var cell1 = row.insertCell(0)
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    
+    cell1.innerHTML = '<input type="checkbox" onClick="setDeleteBSbutton();">';
+    cell2.innerHTML = product_name;
+    cell2.className = 'bs_list_item';
+    cell3.innerHTML = '<input type="hidden" name="to_save[]" value="'+product_id+'">';
+
+    bestsellers_array[bestsellers_array.length] = product_id;
+    setSortButton();
+};
+
+function removeProductFromBSList(row_index)
+{
+    var tbl = document.getElementById('bs_list_table');
+    var product_id = tbl.rows[row_index].cells[2].childNodes[0].value;
+    var index = array_search(bestsellers_array, product_id, false);
+    
+    if(index !== false)
+    {
+        bestsellers_array.splice(index,1);
+    };
+    
+    tbl.deleteRow(row_index);
+    setSortButton();
+};
+
+function setSortButton()
+{
+    if(bestsellers_array.length > 0)
+    {
+        enableButton('SortButton1',function() { fillSortForm(); disableBlock('BSInterfaceBlock',3); showBlock('SortBSForm',4); repositionBlock('SortBSForm'); });
+    }
+    else
+    {
+        disableButton('SortButton1');
+    };
+};
+
+function fillSortForm()
+{
+    var sf_so = document.getElementById('BSSortOrder');
+    sf_so.selectedIndex = -1;
+    
+    while(sf_so.options.length > 0)
+    {
+        sf_so.remove(0);
+    };
+    
+    var tbl = document.getElementById('bs_list_table');
+    
+    for(i=0;i<tbl.rows.length;i++)
+    {
+        var opt = new Option();
+        opt.text = tbl.rows[i].cells[1].innerHTML.unescapeHTML();
+        opt.value = tbl.rows[i].cells[2].childNodes[0].value;
+        
+        try
+        {
+            sf_so.add(opt,null);
+        }
+        catch(ex) // for IE!
+        {
+            sf_so.add(opt);
+        };
+    };
+    
+};
+
+function repositionBlock(div_id)
+{
+    doc_width = document.documentElement.clientWidth;
+    doc_height = document.documentElement.clientHeight;
+    div_width = document.getElementById(div_id).offsetWidth;
+    div_height = document.getElementById(div_id).offsetHeight;
+    
+    div_left = (doc_width - div_width) / 2;
+    div_top = document.documentElement.scrollTop + (doc_height - div_height) / 2;
+
+    if(div_top < 0)
+        div_top = 0;
+    if(div_left < 0)
+        div_left = 0;
+
+    document.getElementById(div_id).style.left = div_left + 'px';
+    document.getElementById(div_id).style.top = div_top + 'px';
+};
+
+var bs_back = window.onload;
+window.onload = function() {
+    if(bs_back)
+        bs_back();
+    setSortButton();
+};
+
+function resortBSList()
+{
+    var new_sort_order = new Array();
+    var sf_so = document.getElementById('BSSortOrder');
+    var tbl = document.getElementById('bs_list_table');
+    
+    while(tbl.rows.length > 0)
+    {
+        removeProductFromBSList(0);
+    };
+    
+    for(i=0;i<sf_so.options.length;i++)
+    {
+        addProductToBSList(sf_so.options[i].value, sf_so.options[i].text);
+    };
+};
+
+function OnUpdateBSSortOrderClick()
+{
+    resortBSList();
+    hideBlock('SortBSForm');
+    enableBlock('BSInterfaceBlock');
+};
+
+function setDeleteBSbutton()
+{
+    var tbl = document.getElementById('bs_list_table');
+    var one_checked = false;
+    
+    for(i=0;i<tbl.rows.length;i++)
+    {
+        if(tbl.rows[i].cells[0].childNodes[0].checked)
+        {
+            one_checked = true;
+            break;
+        };
+    };
+    
+    if(one_checked)
+    {
+        enableButton('DeleteButton1',function() { bulkDeleteBS(); });
+    }
+    else
+    {
+        disableButton('DeleteButton1');
+    };
+};
+
+function bulkDeleteBS()
+{
+    bootbox.confirm('<?php addslashes(xmsg('BS','WRN_DELETE_BS')); ?>',function(result){
+    if(result){
+    var tbl = document.getElementById('bs_list_table');
+
+    for(i=tbl.rows.length-1; i>=0; i--)
+    {
+        if(tbl.rows[i].cells[0].childNodes[0].checked)
+        {
+            var product_id = tbl.rows[i].cells[2].childNodes[0].value;
+            removeProductFromBSList(i);
+            <?php jsControlPListFunc(); ?>
+        };
+    };
+    } });
+    setDeleteBSbutton();
+};
+
+</script>
+</div>
+</div>
+</div>
+<!-- begin Bookmarks -->
+
+<!-- end Bookmarks -->
+
+
+
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

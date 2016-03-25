@@ -1,0 +1,84 @@
+.ajax_loader {
+    display:none; 
+    position:absolute; 
+    z-index:1000; 
+    top:0px;
+    background: #fff;
+    height: 20px;    
+    border: 1px solid #888;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    padding: 11px 5px 7px 25px;
+    color: black;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    background-color: #FFF2B7;
+    font-weight: bold;
+}
+
+.ajax_coverlet {
+    display:none;
+    position:absolute;
+    z-index:999;
+    left:0px;
+    top:0px;
+    background: #000;
+}
+
+.ajax_loader .ajax_loader_image {
+    float: left;
+    background: url("../images/ajax-loader.gif") no-repeat transparent;
+    width: 16px;
+    height: 11px;
+    margin-top: 3px;
+}
+
+.ajax_loader .ajax_loader_text {
+    margin: 0 7px 0 25px;
+}
+
+.ajax_message_box {
+    display:none; 
+    position:absolute; 
+    z-index:1000; 
+    top:0px;
+    background:#fff;
+    width: 600px;
+    padding: 10px;
+    margin-bottom: 50px;
+    border: 1px solid #888;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
+
+.ajax_message_error {
+    border-color: #f00;
+}
+
+.ajax_message_box_text{
+    margin-left: 30px;
+    padding-bottom: 5px;
+}
+
+.ajax_message_box_text h2{
+    margin: 0 0 6px 0;
+}
+
+.ajax_message_box_cross {
+    float: right;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #FF6A00;
+    text-decoration: underline;
+}
+
+.ajax_message_cart_prod_link {
+    float: left;
+    margin-left: 30px;
+}
+.ajax_message_cart_prod_qty {
+    float: left;
+    margin-left: 20px;
+}

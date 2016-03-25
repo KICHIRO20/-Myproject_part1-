@@ -1,0 +1,328 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script src="js/javascript_sprintf.js"></script>
+<style type="text/css">
+.progress_bar_container {
+  border: solid 1px black;
+  width: 100%;
+  height: 20px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 20px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+<script language="JavaScript">
+var orders_ids = '<?php OrdersIDs(); ?>';
+var orders_count = <?php OrdersCount(); ?>;
+var pixels_count = 100;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = orders_count / start_speed * 10 / (pixels_count / 100);
+var finished = 0;
+var executed = 0;
+var stop_bar = 0;
+
+function increment_bar()
+{
+    if (stop_bar == 0)
+    { 
+        current_progress++;
+        document.getElementById('pbar_bar').style.width = current_progress+'%';
+	document.getElementById('bar_completed').innerHTML=current_progress+'% Completed';
+        if (current_progress < (pixels_count - 1))
+            setTimeout("increment_bar()", increment_speed);
+        else
+            finished++;
+    }
+}
+</script>
+<script language="JavaScript">
+
+function disablePageElements()
+{
+    __disableButton("CloseButton1", null);
+}
+
+function enablePageElements()
+{
+    __enableButton("CloseButton1", requestToInit, null);
+}
+
+function __disableButton(btn_id, btn_new_title)
+{
+    if (btn_new_title)
+        document.getElementById(btn_id).innerHTML = btn_new_title;
+    document.getElementById(btn_id).className = "btn btn-default btn-circle disabled";
+    document.getElementById(btn_id).onclick = function() { };
+}
+
+function __enableButton(btn_id, onclick_handler, btn_new_title)
+{
+    if (btn_new_title)
+        document.getElementById(btn_id).innerHTML = btn_new_title;
+    document.getElementById(btn_id).className = "btn btn-default btn-circle enabled";
+    document.getElementById(btn_id).onclick = onclick_handler;
+}
+
+function requestToInit()
+{
+    document.getElementById("step_text").innerHTML = "<?php xmsg('OECSV','PREPARING'); ?>";
+    document.getElementById("step_percents").style.display = "";
+    __disableButton("CloseButton1", "<i class=\"fa fa-download\"></i><?php xmsg('OECSV', 'BTN_DOWNLOAD'); ?>");
+        
+    jQuery.post(
+        'jquery_ajax_handler.php', // backend
+        {
+            'asc_action': 'DoOrdersExportCSVAction',
+            'sub_action': 'init',
+            'orders_ids': orders_ids,
+            'create_new_file': 'yes'
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            var error = appendToLog("log_container", result);
+	    document.getElementById('log_tr').style.display = "";
+            error = error || appendStringToLog("log_container", '', "gray");
+            if (error == 0)
+            {
+                document.getElementById("step_text").innerHTML = "<?php xmsg('OECSV','PROCESSING'); ?>";
+                setTimeout("requestToDo()", 10);
+                setTimeout("increment_bar()", 10);
+                setTimeout("waitFinish()", 500);
+            }
+        },
+        'json'
+    );
+}
+
+function requestToDo()
+{
+    var d = new Date();
+    var start_time = d.getTime();
+    jQuery.post(
+        'jquery_ajax_handler.php', // backend
+        {
+            'asc_action': 'DoOrdersExportCSVAction',
+            'sub_action': 'do'
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            var error = appendToLog("log_container", result);
+            error = error || appendStringToLog("log_container", '', 'gray');
+            if (error == 0)
+            {
+                var d = new Date();
+                var end_time = d.getTime();
+                var ex = result["process_info"]["items_processing"] - executed;
+                var k = ex * 100 / orders_count;
+                increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+                executed = result["process_info"]["items_processing"];
+                if (result["process_info"]["status"] == "COMPLETED")
+                {
+                    finished++;
+                    increment_speed = 10;
+                    current_progress = pixels_count-1;
+                }
+                else
+                {
+                    setTimeout("requestToDo()",10);
+                }
+            }
+            else
+            {
+                stop_bar = 1;
+            }
+        },
+        'json'
+    );
+}
+
+function waitFinish()
+{
+    if (finished<2)
+    {
+        setTimeout("waitFinish()",500);
+        return;
+    }
+  
+    increment_bar();
+    document.getElementById('step_percents').style.display = "none";
+    document.getElementById('step_text').innerHTML = "<?php xmsg('OECSV','DONE'); ?>";
+    __enableButton('CloseButton1', downloadCSV, null);
+}
+
+function closeWindow()
+{
+    window.close();
+}
+
+function downloadCSV()
+{
+    __enableButton('CloseButton1', closeWindow, '<i class="fa fa-times-circle"></i><?php Msg('BTN_CLOSE'); ?>');
+    document.forms['downloadCSVform'].submit();
+}
+
+function appendToLog(log_id,res)
+{
+    result = 0; // success
+    try 
+    {
+        if (res["errors"])
+        {
+            for(i=0;i<res["errors"].length;i++)
+            {
+                appendStringToLog(log_id,res["errors"][i],'red');
+                result = 1; // failed
+            }
+        }
+        if (res["warnings"])
+        {
+            for(i=0;i<res["warnings"].length;i++)
+            {
+                appendStringToLog(log_id,res["warnings"][i],'blue');
+            }
+        }
+        if (res["messages"])
+        {
+            for(i=0;i<res["messages"].length;i++)
+            {
+                appendStringToLog(log_id,res["messages"][i],'green');
+            }
+        }
+    }
+    catch(e) 
+    {
+        result = 1; // failed
+    }
+    return result;
+}
+
+function appendStringToLog(log_id,str,color)
+{
+    if (str.length < 2)
+    {
+        return 0; // success
+    }
+
+    showBlock(log_id, 10);
+    _time = new Date();
+    _time_str = '['+sprintf("%02d",_time.getHours())+':'+sprintf("%02d",_time.getMinutes())+':'+sprintf("%02d",_time.getSeconds())+']';
+    log_el = document.getElementById(log_id);
+    _html = _time_str+'&nbsp;<span style="color: '+color+'; font-weight: normal;">'+str+'</span><br>';
+    if(navigator.userAgent.indexOf("MSIE")!=-1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+    return 1; // failed
+};
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold uppercase">
+				<i class="fa fa-sign-out fa-lg"></i>&nbsp;<?php xmsg('OECSV','QB_EXPORT'); ?>
+			</span>
+		</div>
+		<div class="actions">
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!--Responsive Table Start -->
+		<div class="table-responsive">
+			<table class="table table-bordered borderless table-striped">
+				<thead>
+					<tr class="bg-info">
+						<th colspan="2"><?php xmsg('OECSV','EXP_INFO'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="bg-info">
+						<td><?php xmsg('OECSV','ORDERS_COUNT'); ?></td>
+						<td id="orders_count" class="text-left"></td>
+					</tr>
+					<!-- Progress bar Starts-->
+					<tr>
+						<td><span id="step_text"><?php xmsg('OECSV','WAIT_START'); ?></span></td>
+						<td class="text-right"><span id="step_percents" style="display: none;"></span></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div id="pbar_container" class="progress">
+								<div id="pbar_bar" class="progress-bar progress-bar-striped active" role="progressbar">
+									<span id="bar_completed" class="">0%<span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<!-- Progress bar Ends-->
+					<tr id="log_tr" style="display:none">
+						<td align="left" style="padding: 10px;" colspan="2">
+							<!-- -------- BEGIN [Logger] --------  -->
+							<style type="text/css">
+								DIV#log_container { 
+									border: 1px solid black;
+									padding:0;
+									margin:0; 
+									color: gray; overflow: auto;
+								}
+							</style>
+							<div id="log_container" style="display: none;"></div>
+							<!-- -------- END [Logger] --------  -->
+						</td>
+					</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="text-center" colspan="2">
+							<div id="CloseButton1" class="btn btn-default btn-circle" onClick="requestToInit();">
+								<i class="fa fa-play"></i>&nbsp;<?php msg('BTN_START'); ?>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<!--Responsive Table End -->
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- Hidden form to download file -->
+<form action="popup_window.php" name="downloadCSVform" method="post">
+<input type="hidden" name="asc_action" value="DoOrdersExportCSVAction">
+<input type="hidden" name="sub_action" value="get">
+</form>
+
+
+<script language="JavaScript">
+document.title = '<?php xmsg('OECSV','QB_EXPORT'); ?>';
+document.getElementById('orders_count').innerHTML = '&nbsp;'+orders_count;
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

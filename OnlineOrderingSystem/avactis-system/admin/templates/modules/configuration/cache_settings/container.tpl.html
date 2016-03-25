@@ -1,0 +1,93 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php
+    $timeline = modApiFunc('Timeline','getTimelineRecsCount');
+    $timeline = ($timeline==0 ? getMsg("SYS","ADMIN_PHP_FILES_NO_LOG_RECORDS") : $timeline . getMsg("SYS","ADMIN_PHP_FILES_LOG_RECORDS"));
+?>
+<script language="javascript" type="text/javascript">
+    function submitHandler(formname) 
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+
+     function clearInstance(instance)
+    {
+        jQuery('#i-'+instance).html('<img src="images/ajax/snake.gif">');
+	log_type = jQuery('#log_type').val();        
+	jQuery.post('jquery_ajax_handler.php',
+                {'asc_action': 'ClearInstanceAjax', 'instance':instance,'log_clear_type':log_type,},
+                function(resp){  jQuery('#i-'+instance).html(resp).parent().find('span').hide(); });
+    }
+   
+</script>
+<?php 
+  	global $application;
+    $mr = &$application->getInstance('MessageResources');
+
+
+?>
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<?php ResultMessageRow(); ?>
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-gears"></i>&nbsp;<?php Msg("ADMIN_PHP_FILES_CACHE_N_LOGS"); ?>
+					</span>
+				</div>
+			</div>		
+			<div class="portlet-body"> 
+				<form action="" name="CacheSettings" id="CacheSettings" method="post"> 
+					<input type="hidden" name="asc_action" value="ClearCache">
+					<div class="row">
+						<div class="col-md-10" id="i-cache">
+							<?php Msg("CACHE_SETTINGS_PAGE_TITLE"); ?>
+						</div>
+						<div class="col-md-2">
+							<a href="javascript:clearInstance('cache');" class="btn btn-circle btn-default">
+								<?php Msg("BTN_CLEAR"); ?>
+							</a>		
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-md-10" id="i-timeline">
+							<?php echo $timeline; ?>
+						</div>
+						<!--	<div class="col-md-2">
+							<a href="javascript:clearInstance('timeline');" class="btn btn-circle btn-default">
+								<?php Msg("BTN_CLEAR"); ?>
+							</a>		
+						</div>-->
+						
+					</div>
+					<br/>				
+					<div class="row">
+					<div class="col-md-10" id="i-timeline"> 
+					<span style="display:inline;"> <?php xMsg('TL','SYSTEM_LOG_CLEAR_TYPE');?></span>
+					<select id="log_type" style="display:inline;" class="form-control input-large input-sm">
+						<option value="<?php xMsg('TL','SYSTEM_LOG_CLER_ALL');?>"><?php xMsg('TL','SYSTEM_LOG_CLER_ALL');?></option>
+						<option value="<?php xMsg('CHCKT', 'TL_ORDER_CREATED_TYPE'); ?>"><?php xMsg('CHCKT', 'TL_ORDER_CREATED_TYPE'); ?></option>
+						<option value="<?php xMsg('TL','SYSTEM_LOG_CLEAR_PAYMENT_MODULE_LOGS');?>"><?php xMsg('TL','SYSTEM_LOG_CLEAR_PAYMENT_MODULE_LOGS');?></option>
+						<option value="<?php Msg('MENU_NEWSLETTERS'); ?>"><?php Msg('MENU_NEWSLETTERS'); ?></option>
+						<option value="<?php xMsg('NTFCTN', 'NTFCTN_TL_TYPE'); ?>"><?php xMsg('NTFCTN', 'NTFCTN_TL_TYPE'); ?></option>
+					        <option value="<?php xMsg('TL', 'TL_CZ_ACCESS'); ?>"><?php xMsg('TL', 'TL_CZ_ACCESS'); ?></option>
+						<option value="<?php xMsg('TL', 'TL_AZ_ACCESS'); ?>"><?php xMsg('TL', 'TL_AZ_ACCESS'); ?></option>
+					</select>	
+					</div>	
+					<div class="col-md-2">
+                                                        <a href="javascript:clearInstance('timeline');" class="btn btn-circle btn-default">
+                                                                <?php Msg("BTN_CLEAR"); ?>
+                                                        </a>
+                                                </div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

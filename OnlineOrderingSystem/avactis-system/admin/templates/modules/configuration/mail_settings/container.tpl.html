@@ -1,0 +1,189 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script>
+    function submitHandler(formname) 
+    {
+        var form = document.forms[formname];
+        var select_el = document.getElementById("mail_type_select_id");
+        var chb_el = document.getElementById("mail_auth_id");
+            
+	    if (select_el.options[select_el.selectedIndex].value == 1)
+        {
+           if (form.mail_host.value == "")
+           {
+              alert('<?php msg("MAIL_SET_ALERT_HOST"); ?>');
+              return;
+           }
+           if (form.mail_port.value == "")
+           {
+              alert('<?php msg("MAIL_SET_ALERT_PORT"); ?>');
+              return;
+           }
+           
+           if (chb_el.checked)
+           {
+               if (form.mail_user.value == "")
+               {
+                  alert('<?php msg("MAIL_SET_ALERT_USER"); ?>');
+                  return;
+               }              
+               if (form.mail_pass.value == "")
+               {
+                  alert('<?php msg("MAIL_SET_ALERT_PASS"); ?>');
+                  return;
+               }              
+           }
+	    }
+	    form.asc_subaction.value = 'update';
+
+	    if (form.onsubmit) form.onsubmit(); 
+	    form.submit();
+    }
+    
+    function send_test_mail()
+    {
+        var form = document.forms['MailSettings'];
+        if (form.mail_subject && 
+                ! form.mail_subject.value.match(/^[a-z0-9_-]+([\.\-][a-z0-9_-]+)*@[a-z0-9]+\-?[a-z0-9]+(\.[a-z0-9]+\-?[a-z0-9]+)*\.([a-z]{2,6})$/i)) {
+            alert('<?php msg("MAIL_SETTINGS_INVALID_EMAIL"); ?>');
+            return false;
+        }
+        form.asc_subaction.value = 'send';
+        if (form.onsubmit) form.onsubmit(); 
+        form.submit();
+    }
+	
+	function toggle_type()
+	{
+	    var area_el   = document.getElementById("mail_setting_type2_id");
+	    var select_el = document.getElementById("mail_type_select_id");
+        var descr1_el = document.getElementById("mail_settings_type1_descr_id");
+        var descr2_el = document.getElementById("mail_settings_type2_descr_id");
+        
+	    if (select_el.options[select_el.selectedIndex].value == 1)
+	    {
+	        if (area_el)
+	            area_el.style.display = 'none';
+            if (descr1_el)
+               descr1_el.style.display = '';
+            if (descr2_el)
+               descr2_el.style.display = 'none';
+	    }
+	    else
+	    {
+	        if (area_el)
+	            area_el.style.display = '';
+            if (descr1_el)
+               descr1_el.style.display = 'none';
+            if (descr2_el)
+               descr2_el.style.display = '';
+	    }
+	}
+	
+	function toggle_auth()
+	{
+	    var chb_el = document.getElementById("mail_auth_id");
+	    var area_el1 = document.getElementById("username_tr_id");    
+	    var area_el2 = document.getElementById("password_tr_id");
+	    if (chb_el && area_el1 && area_el2)
+	    {
+	        if (chb_el.checked)
+	        {
+	            area_el1.style.display = '';
+	            area_el2.style.display = '';
+	        }
+	        else
+	        {
+	            area_el1.style.display = 'none';
+	            area_el2.style.display = 'none';
+	        }
+	    }
+	}
+</script>
+
+<form action="" name="MailSettings" id="MailSettings" method="post"> 
+<input type="hidden" name="asc_action" value="UpdateMailSettings">
+<input type="hidden" name="asc_subaction" value="update">
+<?php MessageBox(); ?>
+<div class="portlet box blue-hoki">
+<div class="portlet-title"><div class="caption">
+<i class="fa fa-send"></i><?php Msg("MAIL_SET_PAGE_TITLE"); ?>
+</div></div>
+
+<div class="portlet-body">
+<div class="form-body">
+
+<!-- ---form-group start -->
+<div class="row margin-bottom-10">
+<div class="col-md-1"></div>
+<div class="col-md-1"></div>
+<label class="col-md-3 control-label"><?php Msg("MAIL_SETTINGS_MAIL_CONFIGURATION_LABEL"); ?></label>
+<div class="col-md-4">
+	<select class="form-control input-sm input-large input-inline" name="mail_type_select" id="mail_type_select_id" onChange="toggle_type();">
+        <option value='1' <?php MailSettings_Type1(); ?>><?php Msg("MAIL_SETTINGS_SERVER_DEFAULTS"); ?></option>
+        <option value='2' <?php MailSettings_Type2(); ?>><?php Msg("MAIL_SETTINGS_SPECIFIC_SETTINGS"); ?></option>
+    </select>
+    <br />
+    <span class="help-block" id="mail_settings_type1_descr_id"><?php Msg("MAIL_SETTINGS_MAIL_CONFIGURATION_TYPE1_DESCR"); ?></span> 
+    <span class="help-block" id="mail_settings_type2_descr_id"><?php Msg("MAIL_SETTINGS_MAIL_CONFIGURATION_TYPE2_DESCR"); ?></span> 														
+</div>
+</div>
+<!------ row margin-bottom-10  end-->
+
+<!-- ---row margin-bottom-10  start -->
+<div class="row margin-bottom-10" id="mail_setting_type2_id">
+<div class="col-md-1"></div>
+<div class="col-md-1"></div>
+<label class="col-md-3 control-label">SMTP Settings</label>
+<div class="col-md-4">
+	<span><label><?php Msg("MAIL_SETTINGS_HOST_LABEL"); ?></label><input class="form-control input-sm input-large input-inline" type=text name="mail_host" value="<?php MailSettings_HostValue(); ?>"></span>
+<span><label><?php Msg("MAIL_SETTINGS_PORT_LABEL"); ?></label><input class="form-control input-sm input-large input-inline" type=text name="mail_port" value="<?php MailSettings_PortValue(); ?>"></span>	
+	<div><input class="form-control input-inline input-sm" type=checkbox name="mail_auth" id="mail_auth_id" onClick="toggle_auth();" <?php MailSettings_AuthValue(); ?>> <?php Msg("MAIL_SETTINGS_AUTH_LABEL"); ?></div>
+
+<span id="username_tr_id"><label><?php Msg("MAIL_SETTINGS_USER_LABEL"); ?></label><input class="form-control input-sm input-large input-inline" type=text name="mail_user" value="<?php MailSettings_UserValue(); ?>"></span>
+
+<span id="password_tr_id"><label><?php Msg("MAIL_SETTINGS_PASS_LABEL"); ?></label><input class="form-control input-sm input-large input-inline" type=text name="mail_pass" value="<?php MailSettings_PassValue(); ?>"></span>
+
+</div>
+</div>
+<!------ row margin-bottom-10  end -->
+
+<div class="actions" style="text-align:center;">
+<div class="actions btn-set">
+<a id="EditButton2" class="btn btn-circle btn-default" onclick="submitHandler('MailSettings');"><i class="fa fa-save"></i> <?php Msg('BTN_SAVE'); ?></a>
+</div>
+</div>
+
+</div><!-- form-body-->
+</div><!--- portlet-body -->
+</div><!--- portlet box blue -->
+
+<div class="portlet box blue-hoki">
+<div class="portlet-title"><div class="caption">
+<i class="fa fa-envelope"></i><?php Msg("MAIL_SETTINGS_TEST_MAIL_LABEL"); ?>
+</div></div>
+
+<div class="portlet-body">
+<div class="form-body">
+<div class="row margin-bottom-10">
+<div class="col-md-1"></div>
+<div class="col-md-8"><span class="help-block"><?php Msg("MAIL_SETTINGS_TEST_MAIL_DESCR"); ?></span></div>
+</div>
+
+<div class="row margin-bottom-10">
+<div class="col-md-1"></div>
+<div class="col-md-4">
+ <input class="form-control input-sm input-large input-inline" type=text name="mail_subject">
+</div>
+<div class="col-md-1"><a class="btn btn-circle btn-default" onClick="send_test_mail();"><i class="fa fa-send"></i> Send</a></div>
+</div>
+
+</div><!-- form-body-->
+</div><!--- portlet-body -->
+</div><!--- portlet box blue -->
+</form>
+<script>
+toggle_type();
+toggle_auth();
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

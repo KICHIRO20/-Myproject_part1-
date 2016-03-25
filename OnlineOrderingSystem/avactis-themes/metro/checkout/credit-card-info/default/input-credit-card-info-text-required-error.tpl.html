@@ -1,0 +1,31 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form-group col-lg-12" id="tr_id_<?php Local_trID(); ?>" style="display: none">
+ <label class="control-label col-lg-3" for="input_id_<?php Local_trID(); ?>"><?php Local_FieldLabel(); ?></label>
+    <div class="col-lg-6">
+        <span id="<?php Local_FormFieldID(); ?>">
+            <input type="text" 
+                   disabled="disabled"
+                   id="input_id_<?php Local_trID(); ?>"
+                   name="<?php Local_FormFieldName(); ?>"
+                   class="error"
+                   value="<?php Local_FormFieldValue(); ?>"
+                   size="<?php Local_FormFieldSize(); ?>"
+                   maxlength="<?php Local_FormFieldMaxlength(); ?>" class="form-control input-medium" />
+        </span>
+    </div>
+</div>
+<div class="form-group col-lg-12" id="tr_req_id_<?php Local_trID(); ?>">
+  <label class="control-label col-lg-3" for="input_req_id_<?php Local_trID(); ?>" class="required"><?php Local_FieldLabel(); ?><?php Label('CHECKOUT_ASTERISK'); ?></label>
+    <div class="col-lg-6">
+        <span id="req_<?php Local_FormFieldID(); ?>">
+            <input type="text" 
+                   id="input_req_id_<?php Local_trID(); ?>"
+                   name="<?php Local_FormFieldName(); ?>"
+                   class="error"
+                   value="<?php Local_FormFieldValue(); ?>"
+                   size="<?php Local_FormFieldSize(); ?>"
+                   maxlength="<?php Local_FormFieldMaxlength(); ?>" class="form-control input-medium" />
+        </span>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

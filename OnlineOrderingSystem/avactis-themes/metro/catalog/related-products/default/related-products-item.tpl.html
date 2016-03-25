@@ -1,0 +1,23 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="item">
+   <a href="<?php ProductInfoLink(); ?>"><img alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>"/></a>
+    <a href="<?php ProductInfoLink(); ?>"> <h3><?php ProductName();?></h3></a>
+    
+    <div class="price"><?php ProductSalePrice(); ?></div>
+     <?php
+            if (getProductListPrice() != '')
+            {
+                $lp = getValProductListPrice();
+                $sp = getValProductSalePrice();
+                if ($lp!=0 && $lp>$sp)
+                {
+                    $d = round(($lp-$sp)*100/$lp);
+    ?>
+               <div class="product_list_price price"><label style="color:rgb(62, 77, 92)"><?php Label("CATALOG_LIST_PRICE_COLON"); ?></label><span class="value"><?php ProductListPrice(); ?></span></div>
+                   
+    <?php       }
+            }
+    ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

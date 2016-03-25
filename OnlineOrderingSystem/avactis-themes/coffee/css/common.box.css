@@ -1,0 +1,180 @@
+/* BOX ************************************************ */
+.box {
+    margin-bottom: 7px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.box .content {
+    padding: 0px;
+}
+
+.box .catalog {
+    padding: 0px;
+}
+
+.box .cn {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    overflow: hidden;
+}
+
+/* BOX ************************************************ */
+
+
+/* BOX in .page_container ***************************** */
+.page_container .box .cn {
+    background: url('../images/bg-box-corners-on-white.gif') no-repeat;
+}
+
+.box .cn.lt {
+    left: -5px;
+    top: -5px;
+    background: url('../images/bg-box-lt-corner-on-white.gif') no-repeat;
+}
+
+.box .cn.rt {
+    left: -5px;
+    top: -5px;
+    margin-left: 100%;
+    background: url('../images/bg-box-rt-corner-on-white.gif') no-repeat;
+}
+
+.box .cn.lb {
+    left: -5px;
+    bottom: -5px;
+    background: url('../images/bg-box-lb-corner-on-white.gif') no-repeat;
+}
+
+.box .cn.rb {
+    bottom: -5px;
+    left: -5px;
+    margin-left: 100%;
+    background: url('../images/bg-box-rb-corner-on-white.gif') no-repeat;
+}
+
+.page_container .box .content {
+    background: white url('../images/bg-box-body.gif') repeat-x 0px 0px;
+    padding-bottom: 16px;
+    border: 1px solid #AD6D34;
+}
+
+.page_container .box .catalog {
+    background: #C5AC6F url('../images/bg-box-catalog-body.gif') repeat-x 0px 0px;
+    padding-bottom: 16px;
+    border: 1px solid #AD6D34;
+}
+
+.page_container .box.manufacturer .content ul.tree li span a {
+    color: #575757;
+}
+
+.page_container .box.nogradient .content {
+   background-image: none;
+}
+
+.right_column .box  select,
+.left_column .box select {
+    display: block;
+    margin: 16px auto 0px auto;
+    width: 85%;
+}
+
+.box h1,
+.box h2,
+.box .header,
+.box .subheader,
+.box .toolbar {
+    display: block;
+    height: 23px;
+    text-align: left;
+    padding: 5px 21px 0px 27px;
+    margin: 0px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.box h1 span, .box h2 span {
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box h1 span a, .box h2 span a {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box h1,.box h2,
+.box .header {
+    color: #AD6D34;
+    background: #ECCC77 url('../images/bg-box-header.gif') no-repeat;
+    border-bottom: 1px #AD6D34 solid;
+    font-family: Tahoma;
+    font-weight: bold;
+}
+
+.box h2,
+.box .subheader,
+.box .subheader a,
+.box h2 a {
+    background-color: #F5EBD2;
+    color: #AD6D34;
+}
+
+.box h1 a, .box h2 a {
+    font-size: 10pt;
+    font-weight: bold;
+    color: #AD6D34;
+}
+
+.box .toolbar {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box hr {
+    width: 95%;
+    height: 1px;
+    color: #AD6D34;
+    border: 0px;
+    background-color: #AD6D34;
+    margin: 0px auto;
+    padding: 0px;
+}
+/* BOX in .page_container ***************************** */
+
+
+/* BOX inside BOX in .page_container ****************** */
+.box .box {
+    margin: 20px;
+    width: auto;
+}
+
+.box .box .cn {
+    background: none;
+}
+
+.box .box .content {
+    background: none;
+    border: 1px solid #AD6D34;
+}
+
+.box .box h1, .box .box h2,
+.box .box .header {
+    color: #AD6D34;
+    background: #F5EBD2;
+    font-size: 9pt;
+    font-weight: bold;
+    height: 20px;
+}
+
+.box .wishlist_send {
+    margin-top: 5px;
+}
+
+/* BOX inside BOX in .page_container ****************** */

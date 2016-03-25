@@ -1,0 +1,13 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form class="form-horizontal" action="<?php Local_FormActionURL(); ?>" name="SearchByIDForm" method="post">
+ <div class="form-group">
+ <label class="col-lg-3"><?php Label('ACCOUNT_ORDER_ID_COLON_LABEL'); ?></label>
+ <div class="col-lg-4">
+<input type="text" class="form-control input-medium" name="order_id" value="<?php Local_SearchedOrderID(); ?>" />
+</div>
+<div class="col-lg-1">
+<input type="submit" class="<?php lang(); ?> btn blue button_order_search" value="<?php Label('ACCOUNT_SEARCH_LABEL'); ?>" />
+</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

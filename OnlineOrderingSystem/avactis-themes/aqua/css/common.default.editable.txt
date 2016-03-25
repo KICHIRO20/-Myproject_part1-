@@ -1,0 +1,492 @@
+[Page Body]
+body {
+    width;
+    background; 
+    text;
+    margin; 
+    padding;
+}
+
+[Page Background]
+.page_background {
+    background;
+    border;
+    padding;
+}
+
+[Text Input Field]
+input[type=text], input[type=password], .input_text, .input_password, textarea {
+    text;
+    border;
+    background;
+    padding;
+}
+[Text Input Field Focused]
+input[type=text]:focus, input[type=password]:focus, .input_text:focus, .input_password:focus, textarea:focus {
+    text;
+    border;
+    background;
+}
+
+[Dropdown]
+select {
+    text;
+    border;
+    background;
+}
+[Dropdown Focused]
+select:focus {
+    text;
+    border;
+    background;
+}
+
+[Button]
+.text_buttons {
+    text;
+    border;
+    background;
+    margin;
+    padding;
+    cursor;
+}
+
+[Check Box]
+input[type=checkbox], input_checkbox {
+    margin;
+    padding;
+}
+[Radio Button]
+input[type=radio], .input_radio {
+    margin;
+    padding;
+}
+
+[Field in Error State]
+.form_field.error input,
+.form_field.error select,
+.form_field.error textarea,
+select.error, textarea.error {
+    border;
+    background;
+}
+
+[Header Level 1 or 2]
+h1, h2 {
+    text;
+}
+
+[Horizontal Rule]
+hr {
+    size;
+    border;
+    background;
+    margin;
+}
+
+[Link]
+a {
+    text;
+}
+
+[Link Hovered]
+a:hover {
+    text;
+}
+
+[Error Message]
+.error_message {
+    text;
+    border;
+    padding;
+    margin;
+}
+
+[Success Message]
+.success_message {
+    text;
+    border;
+    padding;
+    margin;
+}
+
+[Note]
+.note {
+    text;
+}
+
+[Page Paragraph]
+.page_container p {
+    text;
+    margin;
+    padding;
+}
+
+
+[Common Tree]
+ul.tree {
+    padding;
+    margin;
+}
+
+[Common Tree Item Container]
+ul.tree li {
+    padding;
+    margin;
+}
+
+[Common Tree Item]
+ul.tree li span {
+    padding;
+    margin;
+    background;
+}
+
+[Common Tree Item Text]
+ul.tree li span a {
+    text;
+}
+
+[Common Tree Item Selected]
+ul.tree li span.selected {
+    background;
+    border;
+}
+
+[Common Tree Item Text Selected]
+ul.tree li span.selected a {
+    text;
+}
+
+[Common Tree Item Hovered]
+ul.tree li span:hover {
+    background;
+    border;
+}
+
+[Common Tree Item Text Hovered]
+ul.tree li span a:hover {
+    text;
+}
+
+[Common Tree Item Level 2]
+ul.tree li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 3]
+ul.tree li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 4]
+ul.tree li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 5]
+ul.tree li ul li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 6]
+ul.tree li ul li ul li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 7]
+ul.tree li ul li ul li ul li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Product Rating Box]
+.rating-box {
+    width;
+    height;
+    background;
+    margin;
+}
+
+[Product Rating]
+.rating-box .rating {
+    width;
+    height;
+    background;
+}
+
+[Paginator]
+.paginator {
+    text;
+}
+
+[Product List Sorter]
+.product-list-sorter {
+    text;
+    padding;
+}
+
+[Direction]
+.product-list-sorter ul li {
+    margin;
+}
+
+[Direction Link]
+.box .product-list-sorter ul li a {
+    padding;
+    text;
+}
+
+[Direction Link Hovered]
+.product-list-sorter ul li a:hover {
+    text;
+    background;
+}
+
+[Discount Star]
+.discount_star {
+    width;
+    height;
+    top;
+    right;
+    background;
+    text;
+}
+
+[Discount Amount]
+.discount_star span {
+    text;
+}
+
+[Discount Amount Label]
+.discount_star span.label {
+    text;
+    padding;
+    width;
+    margin;
+}
+
+[Discount Amount Value]
+.discount_star span.value {
+    text;
+}
+
+[Form Row]
+.form_view .form_row {
+    padding;
+}
+
+[Field Label]
+.form_view .form_row .form_descr {
+    text;
+    width;
+}
+
+[Field Label in Error State]
+.form_view .form_row .form_descr.error {
+    text;
+    background;
+}
+
+[Common Form Field Container]
+.form_view .form_row .form_field {
+    margin;
+    width;
+}
+
+[Common Input Field]
+.form_view .form_row .form_field textarea,
+.form_view .form_row .form_field select,
+.form_view .form_row .form_field .input_password,
+.form_view .form_row .form_field .input_file,
+.form_view .form_row .form_field .input_text {
+    width;
+    margin;
+}
+
+[Form Field - Text Area]
+.form_view .form_row .form_field textarea {
+    height;
+}
+
+[Form Field Hint]
+.form_view .form_row .form_hint {
+    margin;
+}
+
+[Product Rating Label]
+.product_rating_info .label {
+    width;
+}
+
+[Product Rating Box]
+.product_rating_info .rating-box {
+    margin;
+}
+
+[Product Review]
+.product_review {
+    padding;
+}
+
+[Product Review Text]
+.product_review .review_text {
+    border-bottom;
+    padding;
+}
+
+[Product Review Author Label]
+.product_review .product_review_author .label {
+    text;
+}
+
+[Product Review Author Name]
+.product_review .product_review_author .author {
+    text;
+}
+
+[Product Review Post Date]
+.product_review .product_review_posted_on {
+    text;
+    padding;
+}
+
+[Product Review Rating]
+.product_review .product_rating_info {
+    padding;
+}
+
+[Product Review Text]
+.product_review .review_text {
+    text;
+}
+
+[Add Review]
+.add_review {
+    padding;
+}
+
+[Add Review Form Fields]
+.review_select_rating,
+.review_input_text,
+.review_input_name,
+.review_target {
+    padding;
+}
+
+[Add Review Product Name]
+.review_target .product_name {
+    text;
+}
+
+[Add Review Field Label]
+.review_input_text .label {
+    text;
+}
+
+[Add Review Text]
+.review_input_text textarea {
+    width;
+    height;
+}
+
+
+[Add Review Rating]
+.review_select_rating .ratings_block {
+    padding;
+}
+
+[Add Review Rating Name]
+.review_select_rating .ratings_block .rating_name {
+    text;
+    width;
+}
+
+[Add Review Rating Value]
+.review_select_rating .ratings_block .product_rating_info {
+    padding;
+}
+
+[Add Review Rating Value Box]
+.review_select_rating .ratings_block .product_rating_info .rating-box {
+    margin;
+}
+
+[Product Detailed Image]
+.product_detailed_img img {
+    height;
+}
+
+[Product Image Hovered]
+.product_img img:hover,
+.product_detailed_img img:hover {
+    border;
+}
+
+[Product Image]
+.product_detailed_img img,
+.product_img img {
+    padding;
+    border;
+}
+
+[Cart Total]
+.shoppingcart_total {
+    padding;
+}
+
+[Cart Total Label]
+.shoppingcart_total .total_name {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Cart Total Value]
+.shoppingcart_total .total_value {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Store Closed Box]
+.box.store_closed {
+    margin;
+    size;
+}
+[Store Closed Container]
+.box.store_closed .content {
+    border;
+    background;
+}
+[Store Closed Text]
+.store_closed .empty {
+    padding;
+    text;
+    text-align;
+    background;
+}
+
+[CMS Page Content]
+.cmspage_content {
+    padding;
+}

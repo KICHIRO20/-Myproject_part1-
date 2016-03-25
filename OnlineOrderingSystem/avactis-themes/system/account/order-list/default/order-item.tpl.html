@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="order_id"><a title="Order Info" href="<?php Local_OrderInfoLink(); ?>" ><?php Local_OrderID(); ?></a></td>
+    <td class="order_invoice"> <a title="Order Info" target="_blank" href="<?php Local_OrderInvoiceLink(); ?>" ><?php Label("ACCOUNT_INVOICE_ORDER_HTML"); ?></a> 
+          <?php
+               $moduleexists = modApiFunc('Modules_Manager','isModulePresentInAvactisExtensionsFolder','invoice_in_pdf');
+          	
+		       if($moduleexists == 1)
+		       {
+		 ?>
+        /<a title="Order Info" target="_blank" href="<?php Local_OrderInvoiceLinkPDF(); ?>" ><?php Label("ACCOUNT_INVOICE_ORDER_PDF"); ?></a>
+        <?php } ?></td>
+    <td class="order_date"><?php Local_OrderDate(); ?></td>
+    <td class="order_amount"><?php Local_OrderAmount(); ?></td>
+    <td class="order_tax"><?php Local_OrderTax(); ?></td>
+    <td class="order_status"><?php Local_OrderStatus(); ?></td>
+    <td class="order_payment_status"><?php Local_OrderPaymentStatus(); ?></td>
+    <?php echo apply_filters("cz_orderlist_lastcolval","",getLocal_OrderID());?>	
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,32 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+	<td class="text-center">
+		<input type=hidden name="ac[]" value="<?php AdditionalCurrencyId(); ?>">
+		<?php Msg("WEIGHT_FIELD_001"); ?>
+	</td>
+	<td align="center" valign="middle">
+		<input type=text name="cname_<?php AdditionalCurrencyId(); ?>" value="<?php AdditionalCurrencyName(); ?>" class="form-control input-sm input-medium inline">
+		<input type=checkbox name="visible_<?php AdditionalCurrencyId(); ?>" <?php VisibleChecked(); ?>> <?php xmsg('CC','VISIBLE_LABEL'); ?>
+	</td>
+</tr>
+<tr>
+	<td class="text-center">
+		1&nbsp;<?php AdditionalCurrencyCode(); ?>&nbsp;=&nbsp;
+		<input type=text name="crate_<?php AdditionalCurrencyId(); ?>" value="<?php AdditionalCurrencyRate(); ?>" size=7 class="form-control input-sm input-xsmall inline" />
+		<?php MainStoreCurrencyCode(); ?>
+	</td>
+	<td class="text-center">
+		<a href="#" onClick="return UpdateRateAC('<?php AdditionalCurrencyId(); ?>');"><?php xmsg('CC','CC_GET_RATE_FROM_WEB_LINK_LABEL'); ?></a>
+	</td>
+</tr>
+<tr>
+	<td class="text-center">
+		<a href="#" onClick="<?php DeleteLinkAction(); ?>" class="btn btn-circle btn-default">
+			<i class="fa fa-trash-o"></i>&nbsp;<?php DeleteLinkLabel(); ?>
+		</a>
+	</td>
+	<td class="text-center">100 <?php AdditionalCurrencyCode(); ?> = <?php RateTo(); ?> <?php MainStoreCurrencyCode(); ?>
+         	<br />100 <?php MainStoreCurrencyCode(); ?> = <?php RateFrom(); ?> <?php AdditionalCurrencyCode(); ?>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

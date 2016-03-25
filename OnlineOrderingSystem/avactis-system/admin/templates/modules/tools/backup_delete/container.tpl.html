@@ -1,0 +1,56 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function startDelete()
+{
+    document.getElementById('progressBar').style.width = "0px";
+    document.getElementById('progressBarMessage').style.visibility = "visible";
+    document.getElementById('progressBarBorder').style.visibility = "visible";
+    document.getElementById('DeleteButton1').style.display = "none";
+    document.getElementById('CloseButton1').style.display = "none";
+    document.getElementById('Message1').style.display = "none";
+}
+//-->
+</SCRIPT>
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center" border=0>
+<tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" colspan="2" style="padding: 0px 0px 0px 4px;"><?php Msg("BCP_DELETE_PAGE_NAME"); ?></td>
+</tr>
+<tr class="subtitle" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="2" style="padding: 0px 0px 0px 4px;">
+        <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="80%"><?php Msg("BCP_DELETE_PAGE_SUBTITLE"); ?> "<?php BackupName(); ?>"</td>
+            <td nowrap style="padding-right: 8px;"><?php PageHelpLink('admin_backup_delete'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('admin_backup_delete'); ?></td>
+            <td align="right">
+              <table class="clear">
+                <tr>
+                  <td nowrap style="padding-right: 6px;"><div id="DeleteButton1" class="button button_5em" onclick="javascript:document.getElementById('DeleteProcess').src = '<?php DeleteStartLink(); ?>'; startDelete();"><?php Msg("BTN_DELETE"); ?></div></td>
+                  <td nowrap style="padding-right: 10px;"><div id="CloseButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg("BTN_CLOSE"); ?></div></td>
+                </tr>
+              </table>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+
+<tr>
+      <td colspan="2" class="value popup_dialog_body_left_padded popup_dialog_body_right_padded">
+      <span id="Message1" class="required"><?php Msg('BCP_DELETE_MESSAGE_001'); ?></span><span id="Message2" style="display: none;"><B><?php Msg('BCP_DELETE_MESSAGE_003'); ?></B></span>
+      </td>
+</tr>
+
+<tr>
+    <td nowrap class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><span id="progressBarMessage" style="visibility: hidden;"><B><?php Msg('BCP_DELETE_MESSAGE_002'); ?></B></span></td>
+    <td class="value popup_dialog_body_left_padded popup_dialog_body_right_padded"><div id="progressBarBorder" style="width: 400px; height: 15px; border: 1px solid #b2c2df; visibility: hidden;"><div id="progressBar" style="height: 15px; width: 0px; background-color: #005099;">&nbsp;</div></div></td>
+</tr>
+
+<tr>
+      <td colspan="2">
+        <IFRAME id="DeleteProcess" SRC="javascript: void(0);" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></IFRAME>
+      </td>
+</tr>
+
+</table>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,88 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script>
+function htmlFormSubmit(id,formAction){
+	 var form = document.forms[id];
+
+	    if (formAction == 'DelHtmlContent')
+	    {
+	        isSelected = false;
+	        i=1;
+	        while (cb = document.getElementById('select_html'+i))
+	        {
+	            if (cb.checked)
+	            {
+	                isSelected = true;
+	                break;
+	            }
+	            i++;
+	        }
+	       
+	        if (!isSelected)
+	        {
+	            i=1;
+	            while (cb = document.getElementById('select_html'+i))
+	            {
+	                if (cb.checked)
+	                {
+	                    isSelected = true;
+	                    break;
+	                }
+	                i++;
+	            }
+	        }
+	        if (!isSelected)
+	        {
+	            alert('<?php xmsg('BN', 'BN_ALERT_001'); ?>');
+	            return;
+	        }
+	        else
+	        {
+	            if (!confirm('<?php xmsg('BN', 'BN_ALERT_002'); ?>'))
+	            return;
+	        }
+	    }
+
+	    form.FormSubmitValue.value = formAction;
+	    form.submit(); 
+	     
+}
+</script>
+</head>
+<body>
+<div class="portlet-title"><div class="caption"><?php xMsg('BN','BN_HTML_CONTENT'); ?></div></div>
+<div class="portlet-body"> 
+	<form <?php ActionHtml(); ?> id="UpdateHtmlForm"> <input type='hidden' name='FormSubmitValue' value=''></input>
+		  <input type="hidden" name="mode" value="update_html_content" />
+		  <input type="hidden" name="bannerid" value=<?php BannerID(); ?> />
+	         <input type="hidden" name="type" value=<?php Type(); ?> />
+					<div class="help error_msg"
+						style="padding: 0px 5px 0px 5px; text-align: left;"></div>
+					<table id="banners" class="table table-hover">
+                                            <thead>
+						<tr>
+							<th><?php xMsg('BN','BN_DELETE'); ?></th>
+							<th><?php xMsg('BN','BN_HTML_CODE'); ?></th>
+							<th><?php xMsg('BN','BN_AVAILABILITY'); ?></th>
+							
+						</tr></thead>
+						<?php HtmlItems();?>
+					</table>
+<table>
+			 <tr>
+    <td colspan="5">
+      <input id ="searchHtml" type="button" class="btn blue button button_10em" value="<?php xMsg('BN','BN_UPDATE'); ?>" onclick="{htmlFormSubmit('UpdateHtmlForm','UpdateHtmlContent');}" />&nbsp;&nbsp;&nbsp;
+      <input id ="searchHtml" type="button" class="btn blue button button_10em" value="<?php xMsg('BN','BN_DELETE_SEL'); ?>" onclick="{htmlFormSubmit('UpdateHtmlForm','DelHtmlContent');}"/>
+    </td>
+  </tr>
+		</table>
+	
+	</form>
+</div>
+</body>
+</html>
+
+<!-- END TPL (DO NOT REMOVE!) -->

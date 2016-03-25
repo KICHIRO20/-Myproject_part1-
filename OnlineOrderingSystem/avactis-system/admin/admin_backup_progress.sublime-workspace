@@ -1,0 +1,219 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ec",
+				"echo"
+			],
+			[
+				"glob",
+				"glob"
+			],
+			[
+				"glo",
+				"globals	$GLOBALS['…']"
+			],
+			[
+				"ehc",
+				"echo"
+			],
+			[
+				"ech",
+				"echo	echo \"…\""
+			],
+			[
+				"d",
+				"dcgettext"
+			],
+			[
+				"ar",
+				"array"
+			],
+			[
+				"arr",
+				"array"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/E/xampp/htdocs/BAL TEST/test.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/avactis-system/admin/templates/modules/license/license_mention/container.tpl.html",
+		"/E/xampp/htdocs/OnlineOrderingSystem/avactis-system/admin/templates/modules/checkout/orders/empty.tpl.html",
+		"/E/xampp/htdocs/OnlineOrderingSystem/avactis-system/admin/templates/modules/catalog/product_add/upload_ctrl.images.error.tpl.html",
+		"/E/xampp/htdocs/OnlineOrderingSystem/avactis-system/admin/templates/modules/catalog/product_add/error.tpl.html",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/catalog_edit_product_type.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_member_delete.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_member_add.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_backup_progress.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_backup_info.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_backup_delete_progress.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_backup_delete.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_backup_create.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin_backup.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin.tpl.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/admin.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/add_review.php",
+		"/E/xampp/htdocs/OnlineOrderingSystem/OnlineOrderingSystem/avactis-system/admin/cms_menus.php",
+		"/C/Users/Kichiro/Videos/test.php",
+		"/C/Users/Kichiro/Videos/index.css"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"E:\\xampp\\htdocs\\OnlineOrderingSystem",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"alert alert-danger alert-bordered"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "admin_backup_progress.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

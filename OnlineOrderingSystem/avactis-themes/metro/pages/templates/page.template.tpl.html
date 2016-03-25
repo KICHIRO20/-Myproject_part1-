@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- Head BEGIN -->
+<head>
+  <meta charset="utf-8">
+  <title>#page_title#</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="#page_description#" />
+  <meta name="keywords" content="#page_keywords#" />
+  <meta name="author" content="Avactis Team" />
+  <link rel="shortcut icon" href="favicon.ico">
+  <?php include(getTemplateFileAbsolutePath('pages/templates/part.header.tpl.html')); ?>
+    <script type="text/javascript">
+                $(document).ready(function() {
+                $('select').addClass('form-control'); 
+                });
+ 
+                $(document).ready(function() {
+                $("input[type='text']").addClass('form-control'); 
+                });
+        </script>
+
+  <!-- For multiple Recaptcha start -->
+   <?php  $moduleexists = modApiFunc('Modules_Manager','isModuleInstalled','captcha');
+        	if($moduleexists == 1)
+       		 { ?>
+        <script type="text/javascript">
+
+/*remember to include jquery before adding this code*/
+
+                $(document).ready(function() {
+            // Duplicate our reCapcha
+                $('.myraterecap').html($('#myrecap').clone(true,true));
+                });
+
+        </script>
+    <?php } ?>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+<!-- For multiple Recaptcha end -->
+</head>
+<body class="ecommerce">
+
+<!-- BEGIN TOP BAR -->
+    <div class="pre-header">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN TOP BAR LEFT PART -->
+                <div class="col-md-6 col-sm-6 additional-shop-info">
+                    <ul class="list-unstyled list-inline">
+                   <li><a href="tel:<?php StoreOwnerPhones(); ?>"><?php StoreOwnerPhones(); ?></a></li>
+                        <!-- BEGIN CURRENCIES -->
+                        <?php CurrencySelector(); ?>
+                        <!-- END CURRENCIES -->
+                        <!-- BEGIN LANGS -->                   
+                      
+                            <?php SelectLanguage(); ?>
+                      
+                        <!-- END LANGS -->
+                    </ul>
+                </div>
+                <!-- END TOP BAR LEFT PART -->
+                <!-- BEGIN TOP BAR MENU -->
+                <div class="col-md-6 col-sm-6 additional-nav">
+                  #top_menu#
+            <?php //asc_nav_menu( array( 'theme_location' => 'header-menu','container_class' => 'menu cmsmenu' ,'menu_class' => 'list-unstyled list-inline pull-right' )); ?>
+                </div>
+                <!-- END TOP BAR MENU -->
+            </div>
+        </div>        
+    </div>
+    <!-- END TOP BAR -->
+
+<!-- BEGIN HEADER -->
+
+    <div class="header">
+      <div class="container">
+        
+        <a class="site-logo" href="<?php PageURL('index.php') ?>">
+        </a>
+        <a href="javascript:void(0);" class="mobi-toggler">
+          <i class="fa fa-bars"></i>
+        </a>
+ <div class="top-cart-block">
+
+        <?php CartPreview(); ?>
+<?php MiniCart(); ?> 
+</div>
+        
+        
+        <!-- BEGIN NAVIGATION -->
+        
+        <div class="header-navigation">
+          <ul>
+            <?php NavigationBarCustom(); ?>
+            <?php SearchForm(); ?>
+          </ul>
+        </div>
+        <!-- END NAVIGATION -->
+      </div>
+    </div>
+     <?php  $moduleexists = modApiFunc('Modules_Manager','isModuleInstalled','banner');
+        	if($moduleexists == 1)
+       		 { ?>
+      <div class="page-slider">
+            <?php   if(basename($_SERVER['PHP_SELF'])=="index.php") {
+                       Banners('T'); 
+                 }          ?>
+      </div>  
+<?php } ?>
+<!-- Header END -->
+<div class="main">
+  <?php 
+        $class = '';
+        if ('[left_column]' != '') { $class .= 'L'; }
+        if ('[center_column]' != '') { $class .= 'C'; }
+        if ('[right_column]' != '') { $class .= 'R'; }
+    ?>
+	<div class="container">
+      <?php  if(basename($_SERVER['PHP_SELF'])=="index.php") {
+              
+                 ProductSet_Carousel();
+        }  ?>
+        <div class="row margin-bottom-40">
+		<?php if ('[left_column]' != ''): ?> <div class="sidebar col-md-3 col-sm-5"> #left_column#</div><?php endif; ?>
+		<?php if ('[center_column]' != ''): ?><div class="col-md-9 col-sm-7">#center_column#</div><?php endif; ?>
+        </div>		
+	</div>
+</div>
+<?php ManufacturersFilter(); ?>
+<?php  $moduleexists = modApiFunc('Modules_Manager','isModuleInstalled','banner');
+        	if($moduleexists == 1)
+       		 { 
+                      Banners('B');
+                 }
+?>
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN BOTTOM ABOUT BLOCK -->
+          <div class="col-md-3 col-sm-6 pre-footer-col">
+          <?php Label('FOOTER-1'); ?>
+          </div>
+          <!-- END BOTTOM ABOUT BLOCK -->
+          <!-- BEGIN BOTTOM INFO BLOCK -->
+          <div class="col-md-3 col-sm-6 pre-footer-col">
+            <?php Label('FOOTER-2'); ?>
+          </div>
+          <!-- END INFO BLOCK -->
+
+          <!-- BEGIN TWITTER BLOCK --> 
+          <div class="col-md-3 col-sm-6 pre-footer-col">
+           <?php Label('FOOTER-3'); ?>
+          </div>
+          <!-- END TWITTER BLOCK -->
+
+          <!-- BEGIN BOTTOM CONTACTS -->
+          <div class="col-md-3 col-sm-6 pre-footer-col">
+           <?php Label('FOOTER-4'); ?>
+          </div>
+          <!-- END BOTTOM CONTACTS -->
+        </div>
+        <hr>
+        <div class="row">
+          <!-- BEGIN SOCIAL ICONS -->
+          <div class="col-md-6 col-sm-6">
+          </div>
+          <!-- END SOCIAL ICONS -->
+          <!-- BEGIN NEWLETTER -->
+          <div class="col-md-6 col-sm-6">
+            <div class="pre-footer-subscribe-box pull-right">
+              <?php SubscribeBox(); ?>
+            </div> 
+          </div>
+          <!-- END NEWLETTER -->
+        </div>
+      </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+<!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+            #copyright#
+          </div>
+          <!-- END COPYRIGHT -->
+          <!-- BEGIN PAYMENTS -->
+          <div class="col-md-6 col-sm-6">
+            <ul class="list-unstyled list-inline pull-right">
+              <li><img src="<?php echo getTemplateFileURL('images/western-union.jpg');?>" alt="We accept Western Union" title="We accept Western Union"></li>
+              <li><img src="<?php echo getTemplateFileURL('images/american-express.jpg'); ?>" alt="We accept American Express" title="We accept American Express"></li>
+              <li><img src="<?php echo getTemplateFileURL('images/MasterCard.jpg'); ?>" alt="We accept MasterCard" title="We accept MasterCard"></li>
+              <li><img src="<?php echo getTemplateFileURL('images/PayPal.jpg'); ?>" alt="We accept PayPal" title="We accept PayPal"></li>
+              <li><img src="<?php echo getTemplateFileURL('images/visa.jpg'); ?>" alt="We accept Visa" title="We accept Visa"></li>
+            </ul>
+          </div>
+          <!-- END PAYMENTS -->
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+
+</div>
+<?php include(getTemplateFileAbsolutePath('pages/templates/part.footer.tpl.html')); ?> 
+</body>
+</html>
+

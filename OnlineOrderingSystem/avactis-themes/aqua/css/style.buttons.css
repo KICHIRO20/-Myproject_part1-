@@ -1,0 +1,280 @@
+input.buttons {
+    background: none no-repeat top left;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+
+    font-size: 0px;
+    line-height: 0px;
+}
+
+input.buttons.disabled {
+    cursor: default;
+}
+
+input.button_search {
+    background-image: url("../images/buttons/button-search-page-header.png");
+    width: 68px;
+    height: 21px;
+    padding-bottom: 2px;
+}
+
+.page_container .search input.button_search {
+    background: transparent url("../images/buttons/button-search-page-header.png") no-repeat top left;
+    border: none 0px;
+    display: inline;
+    margin: -1px 28px 0px 8px;
+    overflow: visible;
+    height: 21px;
+    width: 68px;
+}
+
+input.button_add_to_cart {
+   	background-color: #448AFC;
+    width: 95px;
+    height: 25px;
+    padding-bottom: 2px;
+     border-radius: 2px 2px 2px 2px;
+    border: none;
+   color: #FFFFFF;
+   text-transform: uppercase;
+   font-size: 8pt;
+    cursor: pointer;
+}
+
+input.button_add_to_cart:hover {
+	box-shadow:0 0 7px #448AFC;
+}
+
+input.button_add_to_cart.disabled {
+    background-image: url("../images/buttons/button-add-to-cart-grey.png");
+}
+
+input.button_out_of_stock {
+   background-color:#F4F4F4;
+    width: 95px;
+    height: 25px;
+    padding-bottom: 2px;
+    cursor: default; 
+    border-radius:2px 2px 2px 2px;
+    border: 1px solid #D9D9D9;
+    font-size:8pt;
+    text-transform:uppercase;
+    color: #787878;
+}
+
+input.button_continue_checkout {
+   	background: linear-gradient(to bottom, #FE8F01 0%, #ED8500 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    line-height: 23px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    width: 137px;
+    font-size: 8pt;
+}
+
+input.button_place_order {
+    background: linear-gradient(to bottom, #FE8F01 0%, #ED8500 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    line-height: 23px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    width: 95px;
+    font-size:8pt;
+}
+
+input.button_save_changes {
+    background: url("../images/buttons/button-save-changes.png") no-repeat top left;
+    width: 102px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.button_signin {
+    background-color: #448AFC;
+    border: medium none;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 8pt;
+    height: 25px;
+    padding-bottom: 2px;
+    text-transform: uppercase;
+    width: 82px;
+}
+
+input.button_register {
+   /* background: url("../images/buttons/button-register.png") no-repeat top left;
+    width: 82px;
+    height: 23px;
+    padding-bottom: 2px;*/
+     background: linear-gradient(to bottom, #FE8F01 0%, #ED8500 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    line-height: 23px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    width: 95px;
+    font-size:8pt;
+}
+
+input.button_continue {
+    background: url("../images/buttons/button-continue.png") no-repeat top left;
+    width: 82px;
+    height: 23px;
+    padding-bottom: 2px;
+}
+
+input.add_to_wishlist {
+    background: linear-gradient(to bottom, #8DC03D 0%, #8ABD3A 25%, #8DBC3A 27%, #8ABD3C 29%, #83B437 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #7AA634;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 8pt;
+    height: 25px;
+    padding-bottom: 2px;
+    text-transform: uppercase;
+}
+
+input.add_to_wishlist:hover {
+   	box-shadow:0 0 7px #7AA634;
+}
+
+input.add_to_wishlist.disabled {
+    background-image: url("../images/buttons/button-add-to-wishlist-grey.png");
+}
+
+
+span.button_proceed_to_checkout {
+    background: linear-gradient(to bottom, #FE8F01 0%, #ED8500 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    line-height: 26px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    width: 147px;
+    font-size:8pt;
+}
+
+span.button_continue_shopping {
+    background: linear-gradient(to bottom, #8DC03D 0%, #8ABD3A 25%, #8DBC3A 27%, #8ABD3C 29%, #83B437 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #7AA634;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 8pt;
+    line-height: 24px;
+    height: 21px;
+    text-align: center;
+    padding-bottom: 2px;
+    text-transform: uppercase;
+    width: 142px;
+    padding: 6px;
+}
+
+span.button_continue_shopping_back {
+    background: linear-gradient(to bottom, #8DC03D 0%, #8ABD3A 25%, #8DBC3A 27%, #8ABD3C 29%, #83B437 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #7AA634;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 8pt;
+    line-height: 24px;
+    height: 21px;
+    text-align: center;
+    padding-bottom: 2px;
+    text-transform: uppercase;
+    width: 142px;
+}
+
+span.button_continue_checkout {
+    background: url("../images/buttons/button-continue-checkout.png") no-repeat top left;
+    width: 137px;
+    height: 23px;
+    cursor: pointer;
+    display: block;
+}
+
+span.button_back {
+    background: linear-gradient(to bottom, #8DC03D 0%, #8ABD3A 25%, #8DBC3A 27%, #8ABD3C 29%, #83B437 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #7AA634;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 8pt;
+    height: 21px;
+    line-height: 25px;
+    padding-bottom: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 67px;
+}
+
+
+span.button_register {
+    background: linear-gradient(to bottom, #FE8F01 0%, #ED8500 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    line-height: 23px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    width: 95px;
+    font-size:8pt;
+}
+
+span.button_details {
+    background: linear-gradient(to bottom, #FE8F01 0%, #ED8500 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    line-height: 23px;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    width: 95px;
+}
+
+.product_buttons a{
+	text-decoration:none;
+}
+
+
+span.button_checkout {
+    background: linear-gradient(to bottom, #FE8F01 0%, #ED8500 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-size: 8pt;
+    height: 25px;
+    line-height: 26px;
+    margin: 0 auto;
+    text-align: center;
+    width: 82px;
+    text-transform: uppercase;
+}

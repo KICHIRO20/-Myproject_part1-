@@ -1,0 +1,456 @@
+/* My Account Page ********************************************************** */
+.myaccount .content {
+    overflow: hidden;
+}
+
+.box.myaccount .subheader {
+    padding: 0px 0px 5px 0px;
+    margin: 20px 20px 0px 20px;
+    background-color: white;
+    font-size: 10pt;
+    color: #315d86;
+    text-transform: uppercase;
+    font-family: Arial;
+    font-weight: bold;
+    border-bottom: 1px solid #d8e4ef;
+}
+
+.myaccount .product_download_link {
+    padding-left: 10px;
+}
+
+.myaccount.checkout .product_item .product_name .product_download_link a {
+    font-weight: normal;
+    color: #5B7F9F;
+    font-size: 9pt;
+}
+
+/* My Account Sign In (Full page) ******************************************* */
+.myaccount .signin_form .subheader,
+.myaccount .registr_invitation .subheader {
+    margin-top: 5px;
+    border-bottom: none;
+    margin-left: 0px;
+}
+
+.myaccount .registr_invitation,
+.myaccount .signin_form {
+    width: 47%;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-bottom: 50px;
+    margin-top: 10px;
+}
+
+.myaccount .registr_invitation {
+    float: left;
+    border-right: 1px solid #d8e4ef;
+}
+
+.myaccount .signin_form {
+    float: right;
+}
+
+.myaccount .registr_invitation .button_register {
+    margin: auto auto;
+}
+
+.myaccount .signin_form {
+	padding-right: 0px;
+}
+
+.myaccount .signin_form .form_row {
+    padding-bottom: 20px;
+    width: 80%;
+}
+
+.myaccount .signin_form .form_field {
+}
+
+.myaccount .signin_form .form_descr {
+    width: 27%
+}
+
+.myaccount .signin_form .form_descr label {
+    font-weight: bold;
+}
+
+.myaccount .signin_form .input_submit {
+    display: block;
+    margin: auto auto;
+}
+
+.myaccount .signin_form .success_message,
+.myaccount .signin_form .error_message {
+    margin: 0px 40px 10px 0px;
+}
+
+
+/* My Account Sign In Box (Left-Right colums) ******************************* */
+.myaccount .signin_box {
+    padding: 15px 15px 0px 15px;
+}
+
+.left_column .myaccount .signin_box .form_view .form_row input,
+.right_column .myaccount .signin_box .form_view .form_row input {
+    margin: 0px;
+    width: 95%;
+}
+
+.myaccount .signin_box .form_field {
+}
+
+.myaccount .signin_box .form_descr {
+    width: 40%;
+    margin-right: 10px;
+}
+
+.myaccount .signin_box .input_submit {
+    display: block;
+    margin: auto auto;
+    margin-top: 10px;
+}
+
+.myaccount .signin_box .success_message,
+.myaccount .signin_box .error_message {
+    margin: 0px 0px 10px 0px;
+}
+
+.myaccount .signin_box a {
+    line-height: 20px;
+}
+
+.myaccount .signed_in_box  {
+    padding: 15px 15px 0px 15px;
+}
+
+.myaccount .signed_in_box a {
+    display: block;
+    line-height: 20px;
+}
+
+/* My Account Registration From  ******************************************** */
+.myaccount .registration_form {
+    overflow: hidden;
+    padding: 0px 20px 10px 20px;
+    margin-top: 10px;
+}
+
+.myaccount .registration_form .success_message,
+.myaccount .registration_form .error_message {
+    margin: 0px 0px 10px 0px;
+}
+
+.myaccount .registration_form .form_view {
+    width: 42%;
+    margin: auto auto;
+}
+
+.myaccount .registration_form .form_view .form_row {
+    padding-bottom: 10px;
+}
+
+.myaccount .registration_form .form_view .form_descr {
+    width: 35%;
+}
+
+.myaccount .registration_form .form_view .form_field {
+}
+
+.myaccount .registration_form .input_submit {
+    display: block;
+    margin: auto auto;
+    margin-top: 10px;
+}
+
+
+/* My Account Home Page  **************************************************** */
+/* Common layout */
+.myaccount .box.myaccount_home {
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.box.myaccount_home .content {
+    padding: 0px;
+}
+
+.myaccount_home .content .header {
+    padding: 3px 0px 0px 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+.myaccount_home .content .header * {
+    color: #004a7f;
+    font-weight: bold;
+    font-size: 8pt;
+    padding: 2px 20px 0px 20px;
+    border-right: none;
+}
+
+.myaccount_home .orders_search,
+.myaccount_home .account_settings {
+    padding: 15px 20px 20px  20px;
+    margin: 0px;
+}
+
+.myaccount_home .orders_search {
+    float: left;
+    width: 60%;
+    border-right: 1px solid #CCD9E6;
+}
+
+.myaccount_home .account_settings {
+    float: right;
+    width: 31%;
+}
+
+/* Order List Layout */
+.myaccount_home .order_list {
+    width: 100%;
+    margin: 0px 0 10px 0;
+    border: 0 none;
+}
+.myaccount_home .order_list th {
+    padding: 4px 20px 4px 20px;
+    background: #E0EEF9 none;
+    font-weight: normal;
+    white-space: nowrap;
+}
+.myaccount_home .order_list td {
+    padding: 8px 20px 0px 20px;
+    text-align: center;
+}
+
+.myaccount_home .order_list.empty {
+    text-align: center;
+    padding: 50px 0px;
+}
+
+/* Order Search By Status-Links layout */
+.myaccount_home .orders_search .by_statuses {
+    width: 25%;
+    float: left;
+    overflow: hidden;
+    line-height: 20px;
+}
+
+.myaccount_home .orders_search .by_statuses .label {
+    width: 70%;
+    float: left;
+    clear: left;
+}
+
+.myaccount_home .orders_search .by_statuses .value {
+    float: right;
+    clear: right;
+}
+
+/* Order Search Form layout */
+.myaccount_home .orders_search .by_form {
+    width: 70%;
+    float: right;
+    overflow: visible;
+    position: relative;
+}
+
+.myaccount_home .orders_search .by_form .form_descr {
+    text-align: right;
+}
+
+.myaccount_home .orders_search .by_form .form_field.date select {
+    width: 90px;
+}
+
+.myaccount_home .orders_search .by_form .form_field select {
+    width: 184px;
+}
+
+.myaccount_home .orders_search .by_form .input_submit {
+    display: block;
+    margin: 0px 28px 0px auto;
+    position: absolute;
+    bottom: 0;
+    left: 305px;
+}
+
+.myaccount_home .orders_search .by_id {
+    margin-top: 110px;
+}
+
+/* Account Settings Links layout */
+.myaccount_home .account_settings a {
+    display: block;
+    line-height: 20px;
+}
+
+.myaccount .button_back {
+    margin-left: 20px;
+}
+
+/* Order Invoice layout */
+.myaccount.invoice .cn {
+    background: none;
+}
+
+.myaccount.invoice .content .header,
+.myaccount.invoice .content h1 {
+    background-image: none;
+    background-color: #BBBBBB;
+    color: white;
+}
+
+.myaccount.invoice .order_items th {
+    background-color: #bbb;
+    color: white;
+}
+
+.myaccount.invoice .shoppingcart_total {
+    padding-bottom: 30px;
+}
+
+.myaccount.invoice .content .header .product_item .product_name,
+.myaccount.invoice .content .header .product_item .product_total_price,
+.myaccount.invoice .content .header .product_item .product_sale_price,
+.myaccount.invoice .content .header .product_item .product_quantity_selector,
+.myaccount.invoice .content .header .key_order_details,
+.myaccount.invoice .content .header .shipping_form,
+.myaccount.invoice .content .header .billing_form {
+    color: white;
+}
+
+.myaccount.invoice .content .subheader,
+.myaccount.invoice .content .key_order_details,
+.myaccount.invoice .content .shipping_form,
+.myaccount.invoice .content .billing_form,
+.myaccount.invoice .content .shoppingcart_total,
+.myaccount.invoice .content .product_item {
+    color:black;
+}
+
+/* Change Password Form ***************************************************** */
+.myaccount .change_password {
+    overflow: hidden;
+    padding: 0px 20px 100px 20px;
+    margin-top: 10px;
+}
+
+.myaccount .change_password .success_message,
+.myaccount .change_password .error_message {
+    margin: 0px 0px 10px 0px;
+}
+
+.myaccount .change_password .form_view {
+    width: 42%;
+    margin: auto auto;
+}
+
+.myaccount .change_password .form_view .form_row {
+    padding-bottom: 10px;
+}
+
+.myaccount .change_password .form_view .form_descr {
+    width: 35%;
+}
+
+.myaccount .change_password .form_view .form_field {
+}
+
+.myaccount .change_password .input_submit {
+    display: block;
+    margin: auto auto;
+    margin-top: 10px;
+}
+
+/* Personal Information Form ************************************************ */
+.myaccount .personalinfo_form {
+    overflow: hidden;
+    padding: 0px 20px 10px 20px;
+    margin-top: 10px;
+}
+
+.myaccount .personalinfo_form .form_view .subheader {
+    margin-left: 0px;
+    margin-bottom: 10px;
+    margin-right: 90px;
+}
+
+.myaccount .personalinfo_form .success_message,
+.myaccount .personalinfo_form .error_message {
+    margin: 0px 0px 10px 0px;
+}
+
+.myaccount .personalinfo_form .form_view {
+    width: 50%;
+    margin: auto auto;
+}
+
+.myaccount .personalinfo_form .form_view .form_row {
+    padding-bottom: 10px;
+    width: 85%;
+}
+
+.myaccount .personalinfo_form .form_view .form_descr {
+    width: 35%;
+}
+
+.myaccount .personalinfo_form .form_view .form_field {
+}
+
+.myaccount .personalinfo_form .input_submit {
+    display: block;
+    margin: auto auto;
+    margin-top: 10px;
+}
+
+/* Order Download Link List ************************************************* */
+.myaccount .product_download_links .header.link_list {
+    background-color: #eaf1f7;
+    color: #004a7f;
+    font-weight: bold;
+    font-size: 8pt;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.myaccount .product_download_links .header .attribute,
+.myaccount .product_download_links .header .value {
+    padding: 1px 0px 0px 20px;
+}
+
+.myaccount .product_download_links .attribute,
+.myaccount .product_download_links .value {
+    padding: 4px 0px 4px 20px;
+    float: left;
+    width: 16%;
+    text-align: left;
+}
+
+.myaccount .product_download_links .value {
+    width: 75%;
+}
+
+.myaccount .product_download_links .link_list {
+    overflow: hidden;
+    clear: both;
+}
+
+
+.myaccount .activation_message {
+    padding: 50px 50px 100px 50px;
+}
+
+/* Download Prompt Page ***************************************************** */
+.download_prompt {
+    padding: 110px 20px 110px 20px;
+    text-align: center;
+}
+
+.account_remember_me_option {
+	display: block;
+    font-size: 8pt;
+}
+
+.myaccount .button_continue_shopping {
+    margin-left: 20px;
+}

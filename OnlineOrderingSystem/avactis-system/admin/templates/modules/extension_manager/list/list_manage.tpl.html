@@ -1,0 +1,127 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<div class="note note-info note-bordered">
+	<div class="pull-right">
+		<button type="submit" onclick="window.location.href='<?php ReloadMarketPlace();?>'" 
+			value="<?php xMsg('SYS','RELOAD')?>" class="btn btn-circle btn-default">
+			<i class="fa fa-refresh"></i>&nbsp;<?php xMsg('SYS','RELOAD')?>
+		</button>
+	</div>		
+		<?php xMsg('CA', 'LBL_FILTER_BY'); ?> :&nbsp;&nbsp; <?php SelectExtensionType(); ?>		
+</div>
+<?php 
+	$statusMessage = getStatusMessage();
+	$errorMessage = getErrorMessage();
+	$unInstallMessage = getUninstallMessage();
+
+	if(!empty($statusMessage)|| !empty($errorMessage) || !empty($unInstallMessage)){
+?>
+	 <?php echo $statusMessage;?>
+	<?php echo $errorMessage;?>
+	 <?php echo $unInstallMessage; ?>
+<?php } ?>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-gears"></i>&nbsp;<?php xmsg('SYS','EXTENSION_CNFGR'); ?>
+			</span>
+		</div>
+		<div class="actions">
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!--Responsive Table Start -->
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr class="bg-info">
+						<th width="1%"><!--<input id="chkbox" type="checkbox" />--></th>
+						<th class="text-center"><?php Msg('EXTENSION_MANAGER_NAME'); ?></th>
+						<th><?php Msg('EXTENSION_MANAGER_DESC'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php ListManageExtensionItems(); ?>
+				</tbody>
+			</table>
+		</div>
+		<!--Responsive Table End -->
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<script type="text/javascript">
+	function performAction(name,type){
+		jQuery.post(
+		    'extension_details.php', // backend
+		    {
+			'page_view': 'ExtensionDetails',
+			'asc_action': 'ExtensionDetails',
+			'ext_name': name,
+			'reset'	: 'reset'		
+		    },
+		    // Function is called when an answer arrives. 
+		    function(result, output) {
+		    },
+		    'json'
+		);
+		installForm(name);
+		document.getElementById("refreshContent").value = "1";
+	}
+	function installForm(form_id){
+
+		document.getElementById(form_id).submit();
+
+	}
+	
+	function performLinkAction(url,name){
+		jQuery.post(
+		    'extension_details.php', // backend
+		    {
+			'page_view': 'ExtensionDetails',
+			'ext_name': name,
+			'reset'	: 'reset'		
+		    },
+		    // Function is called when an answer arrives. 
+		    function(result, output) {
+		    },
+		    'json'
+		);
+		openInNewTab(url);
+		document.getElementById("refreshContent").value = "1";
+	}
+	function openInNewTab(url) {
+	  var win = window.open(url, '_blank');
+	  win.focus();
+	}
+	
+	function reloadPage(){
+		var refreshPageValue = document.getElementById("refreshContent").value;
+		if(refreshPageValue == "1" || refreshPageValue == 1){
+			var urlLink=window.location.href;
+			if(urlLink.indexOf("?reload")>-1){
+				window.location.reload();
+			}else if(urlLink.indexOf("?")>-1){
+				window.location.href=window.location.href+"&reload";
+			}else{
+				window.location.href=window.location.href+"?reload";
+			}
+		}
+	}
+</script>
+<input type="hidden" id="refreshContent" value="0"/>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,378 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+document.title = "<?php xMsg('ML', 'ML_EXPORT_LABELS_TITLE'); ?>";
+</script>
+<script src="js/javascript_sprintf.js" language="javascript" type="text/javascript"></script>
+<script src="js/timer.js" language="javascript" type="text/javascript"></script>
+<style type="text/css">
+/* styles for the progress-bar */
+.progress_bar_container {
+  border: solid 1px black;
+  width: 100%;
+  height: 15px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 15px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+
+<script language="javascript" type="text/javascript">
+<!--
+var _log_str = "<?php xMsg('ML', 'ML_EXPORT_PROCESSING_COUNT'); ?>";
+
+var items_count = 0;
+var pixels_count = 100;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+var finished = 0;
+var executed = 0;
+var stop_bar = 0;
+
+function increment_bar()
+{
+    if (stop_bar == 0)
+    { 
+        current_progress++;
+        document.getElementById("export_pbar").style.width = current_progress + "%";
+	document.getElementById('bar_completed').innerHTML=current_progress+'% Completed';
+	
+        if (current_progress < (pixels_count - 1))
+            setTimeout("increment_bar()", increment_speed);
+        else
+            finished++;
+    }
+}
+
+function appendToLog(log_id, res)
+{
+    result = 0; // success
+    try 
+    {
+        if (res["errors"])
+            for(i=0; i < res["errors"].length; i++)
+            {
+                appendStringToLog(log_id, res["errors"][i], "red");
+                result = 1; // failed
+            }
+
+        if (res["warnings"])
+            for(i=0; i < res["warnings"].length; i++)
+                appendStringToLog(log_id, res["warnings"][i], "blue");
+
+        if (res["messages"])
+            for(i=0;i<res["messages"].length;i++)
+                appendStringToLog(log_id, res["messages"][i], "green");
+    }
+    catch(e) 
+    {
+        result = 1; // failed
+    }
+    return result;
+}
+
+function appendStringToLog(log_id, str, color)
+{
+    if (str.length < 2)
+    {
+        return 0; // success
+    }
+
+    showBlock(log_id, 10);
+    _time = new Date();
+    _time_str = "[" + sprintf("%02d", _time.getHours()) + ":" + sprintf("%02d", _time.getMinutes()) + ":" + sprintf("%02d", _time.getSeconds()) + "]";
+    log_el = document.getElementById(log_id);
+    _html = _time_str + '&nbsp;<span style="color: ' + color + '; font-weight: normal;">' + str + '</span><br>';
+    if (navigator.userAgent.indexOf("MSIE") != -1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+    return 1; // failed
+}
+
+function showCSVFields(a)
+{
+    if (a == "csv")
+    {
+        document.getElementById("delimiter").style.display="";
+        document.getElementById("fields").style.display="";
+        __enableButton("StartButton", requestToInit, "button_medium", null);
+    }
+    else
+    {
+        document.getElementById("delimiter").style.display="none";
+        document.getElementById("fields").style.display="none";
+        __disableButton("StartButton", "button_medium", null);
+        alert("Export in XLIFF has not been implemented yet...");
+    }
+    document.getFileForm.format.value = a;
+}
+
+function __disableButton(btn_id, btn_new_width, btn_new_title)
+{
+    if (btn_new_title)
+    {
+        document.getElementById(btn_id).innerHTML = btn_new_title;
+    }
+    document.getElementById(btn_id).className = "btn blue " + btn_new_width + " button_disabled";
+    document.getElementById(btn_id).onclick = function() { };
+}
+
+function __enableButton(btn_id, onclick_handler, btn_new_width, btn_new_title)
+{
+    if (btn_new_title)
+    {
+        document.getElementById(btn_id).innerHTML = btn_new_title;
+    }
+    document.getElementById(btn_id).className = "btn blue " + btn_new_width + " button_enabled";
+    document.getElementById(btn_id).onclick = onclick_handler;
+}
+
+function requestToInit()
+{
+    document.getElementById("step_text").innerHTML = "<?php xMsg('ML', 'ML_EXPORT_STEP_2_TITLE'); ?>";
+    document.getElementById("export_process_text").innerHTML = "<?php xmsg('ML', 'ML_EXPORT_STARTING'); ?>";
+    document.getElementById("export_process_img").style.display = "";
+    document.getElementById("timer_label").style.display = "";
+    document.getElementById("section_1").style.display = "none";
+    document.getElementById("section_2").style.display = "";
+
+    addTimer("export_timer");
+    showTimer("export_timer");
+    startTimer("export_timer");
+    appendStringToLog("export_log", "<?php xMsg('ML', 'ML_EXPORT_STARTING'); ?>", "black");
+
+    var labels = "found";
+    if (document.getElementById("all_labels").type == "hidden" ||
+        document.getElementById("all_labels").checked)
+        labels = "all";
+
+    var languages = "";
+    for(el = 0; el < document.initform.elements.length; el++)
+        if (document.initform.elements[el].name == "lngs[]" 
+            && document.initform.elements[el].checked)
+            languages = languages + "|" + document.initform.elements[el].value;
+    languages = languages.substring(1);
+        
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_export_labels",
+            "el_target": "init",
+            "labels": labels,
+            "format": document.getElementById("format").value,
+            "delimiter": document.getElementById("select_delimiter").value,
+            "languages": languages
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) 
+        {
+            var error = appendToLog("export_log", result);
+            error = error || appendStringToLog("export_log", '', "gray");
+            if (error == 0)
+            {
+                items_count = result["process_info"]["items_count"];
+             	increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+                document.getElementById("export_process_text").innerHTML = "<?php xMsg('ML', 'ML_EXPORT_EXPORTING'); ?>";
+                setTimeout("requestToDo()",10);
+                setTimeout("increment_bar()",10);
+                setTimeout("waitFinish()",500);
+            }
+        },
+        'json'
+    );
+}
+
+function requestToDo()
+{
+    var d = new Date();
+    var start_time = d.getTime();
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_export_labels",
+            "el_target": "do"
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            var error = appendToLog("export_log", result);
+            error = error || appendStringToLog("export_log", '', "gray");
+            if (error == 0)
+            {
+                var d = new Date();
+                var end_time = d.getTime();
+                var ex = result["process_info"]["items_processing"] - executed;
+            	var k = ex * 100 / items_count;
+                increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+                executed = result["process_info"]["items_processing"];
+                if (result["process_info"]["status"] == "COMPLETED")
+                {
+                    finished++;
+                    increment_speed = 10;
+                    current_progress = pixels_count - 2;
+                }
+            	else if (result["process_info"]["status"] == "PROCESSING")
+            	{
+                    __log_str = _log_str.replace("__01__", executed).replace("__02__", items_count);
+            	    appendStringToLog("export_log", __log_str, "black");
+                    setTimeout("requestToDo()",10);
+                }
+            }
+            else
+            {
+                stop_bar = 1;
+            }
+        },
+        'json'
+    );
+}
+
+function waitFinish()
+{
+    if (finished < 2)
+    {
+        setTimeout("waitFinish()",500);
+        return;
+    };
+  
+    increment_bar();
+    document.getElementById("export_process_img").style.display = "none";
+    stopTimer("export_timer");
+    document.getElementById("step_text").innerHTML = "<?php xMsg('ML', 'ML_EXPORT_COMPLETED'); ?>";
+    document.getElementById("export_process_text").innerHTML = "<?php xMsg('ML', 'ML_EXPORT_COMPLETED'); ?>";
+    __log_str = _log_str.replace("__01__", executed).replace("__02__", items_count);
+    appendStringToLog("export_log", __log_str, "black");
+    __log_str = "<?php xMsg('ML', 'ML_EXPORT_COMPLETED'); ?>";
+    appendStringToLog("export_log", __log_str, "black");
+    __enableButton("DownloadButton", downloadFile, "button_medium", null);
+}
+
+function downloadFile()
+{
+    __disableButton("DownloadButton", "button_medium", null);
+    document.getElementById("DownloadButton").style.display="none";
+    __enableButton("CancelButton", closeAndFocusParent, "button_small", "<?php Msg('BTN_CLOSE'); ?>");
+    document.forms["getFileForm"].submit();
+}
+// -->
+</script>
+<form action="popup_window.php" name="getFileForm" method="post">
+<input type="hidden" name="asc_action" value="do_export_labels">
+<input type="hidden" name="el_target" value="get">
+<input type="hidden" name="format" value="csv">
+</form>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-sign-out font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php xMsg('ML', 'ML_EXPORT_LABELS_TITLE'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<?php PageHelpLink('export_labels'); ?>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<h4 class="form-section" id="step_text"><?php xMsg('ML', 'ML_EXPORT_STEP_1_TITLE'); ?></h4>
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+		           <div id="export_process_text"><?php xMsg('ML', 'ML_EXPORT_PREPARING'); ?></div>
+			</div>
+			<div class="col-sm-8">
+			    <div><img id="export_process_img" src="images/ajax/snake.gif" style="display: none;"></div>
+			    <div id="timer_label" style="display: none;"><?php xMsg('ML', 'ML_EXPORT_TIME_ELAPSED'); ?>&nbsp;
+			    	<div id="export_timer" style="display: inline;"></div>
+				</div>
+				<div id="pbar_container" class="progress" >
+					<div id="export_pbar" class="progress-bar progress-bar-striped active" role="progressbar">
+						<span id="bar_completed" class="">0%<span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr/>
+		<div id="section_1">
+		<form name="initform" style="margin: 0;">
+			<div class="row margin-bottom-10">
+				<div class="col-sm-1">
+					<b><?php xMsg('ML', 'ML_EXPORT_QLABEL'); ?>:&nbsp;</b>
+				</div>
+				<div class="col-sm-2">
+					<?php AllLabelField(); ?>
+					&nbsp;<?php if (getTotalCount() != getResultCount()) { AllLabelBegin(); } xMsg('ML', 'ML_EXPORT_ALL_LABELS');?> (<?php TotalCount(); ?> <?php if (getTotalCount() != 1) xMsg('ML', 'ML_ITEMS'); else xMsg('ML', 'ML_ITEM'); ?>)<?php if (getTotalCount() != getResultCount()) { AllLabelEnd(); } ?>
+				</div>
+				<?php if (getTotalCount() != getResultCount()) { ?>
+				<div class="col-sm-2">
+					<?php ResultLabelField(); ?>
+					&nbsp;<?php ResultLabelBegin(); xMsg('ML', 'ML_EXPORT_FOUND_LABELS');?> (<?php ResultCount(); ?> <?php if (getResultCount() != 1) xMsg('ML', 'ML_ITEMS'); else xMsg('ML', 'ML_ITEM'); ?>)<?php ResultLabelEnd(); ?>
+				</div>
+				<?php } ?>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-sm-1">
+					<b><?php xMsg('ML', 'ML_EXPORT_FORMAT'); ?>:&nbsp;</b>
+				</div>
+				<div class="col-sm-11">
+					<input type="hidden" name="format" value="csv" id="format" />
+		            <?php xMsg('ML', 'ML_EXPORT_CSV_FILE'); ?>
+				</div>
+			</div>
+			<div class="row margin-bottom-10" id="delimiter">
+				<div class="col-sm-1">
+					<b><?php xMsg('ML', 'ML_EXPORT_DELIMITER'); ?>:&nbsp;</b>
+				</div>
+				<div class="col-sm-11">
+					<select name="delimiter" id="select_delimiter" class="form-control input-sm input-small">
+						<option value=";"><?php xMsg('ML', 'ML_EXPORT_SEMICOLON'); ?></option>
+						<option value=","><?php xMsg('ML', 'ML_EXPORT_COMMA'); ?></option>
+						<option value="t"><?php xMsg('ML', 'ML_EXPORT_TABULATION'); ?></option>
+					</select>
+				</div>
+			</div>
+			<div class="row margin-bottom-10" id="fields">
+				<div class="col-sm-1">
+					<b><?php xMsg('ML', 'ML_EXPORT_FIELDS'); ?>:&nbsp;</b>
+				</div>
+				<div class="col-sm-11">
+                     <table cellspacing="0" cellpadding="0">
+                    	<?php ShowFields(); ?>
+					</table>
+				</div>
+			</div>
+			<div class="actions" align="center">
+				<div class="actions btn-set">
+					<a id="StartButton" title="<?php xMsg('ML', 'BTN_EXPORT_START'); ?>" onclick="requestToInit();" type="button" class="btn blue button_disabled"><i class="fa fa-arrow-right"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_EXPORT_START'); ?></span></a>
+					<a id="CloseButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></a>
+				</div>
+			</div>
+		</form>
+		</div>
+		<div id="section_2" style="display: none;">
+			<h4 class="form-section"><?php xMsg('ML', 'ML_EXPORT_LOG'); ?></h4>
+			<code id="export_log" style="height: 150px; overflow: auto;"></code>
+			
+			<div class="actions" align="center">
+				<div class="actions btn-set">
+					<a id="DownloadButton" title="<?php xMsg('ML', 'BTN_EXPORT_DOWNLOAD'); ?>" onclick="requestToInit();" type="button" class="btn blue button_disabled"><i class="fa fa-download"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_EXPORT_DOWNLOAD'); ?></span></a>
+					<a id="CancelButton" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

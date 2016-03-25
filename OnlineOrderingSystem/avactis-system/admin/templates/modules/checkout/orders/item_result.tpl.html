@@ -1,0 +1,25 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<tr class="odd" role="row">
+	<td>
+		<input class="group-checkable" id="select_<?php OrderIdInt(); ?>" type="checkbox" name="order_id[]" value="<?php OrderIdInt(); ?>" onclick="selectRow(this)">
+	</td>
+    	<td><a title="<?php OrderIdLinkTitle(); ?>" href="javascript: void(0);" onclick="javascript:openURLinNewWindow('orders_info.php?asc_action=SetCurrentOrder&order_id=<?php OrderIdInt(); ?>', 'ViewOrder');"><?php OrderId(); ?></a></td>
+    	<td><a title="<?php OrderCustomerNameLinkTitle(); ?>" href="javascript: void(0);" onclick="javascript:openURLinNewWindow('popup_window.php?page_view=CustomerAccountInfo&customer_id=<?php OrderCustomerID(); ?>', 'ViewCustomer');"><?php OrderCustomerName(); ?></a></td>
+    	<td><?php OrderCustomerInfoName(); ?></td>
+    	<td><?php OrderDate(); ?></td>
+    	<td><?php OrderPriceTotal(); ?></td>
+    	<td><?php OrderPriceTaxes(); ?></td>
+    	<td><?php OrderStatusSelector(); ?></td>
+    	<td><?php OrderPaymentStatusSelector(); ?></td>
+	<td>
+		<div class="margin-bottom-5">
+			<a class="btn yellow btn-sm" href="<?php PackingSlipLink(); ?>" target="_blank">
+				<?php Msg('ORDERS_INFO_PACKING_SLIP'); ?>
+			</a>
+		</div>
+		<a class="btn yellow btn-sm" href="<?php InvoiceLink(); ?>" target="_blank">
+			<?php Msg('ORDERS_INFO_INVOICE'); ?>
+		</a>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

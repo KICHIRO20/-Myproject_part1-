@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="product_data">
+        <div class="product_name"><?php Local_ProductName(); ?> <?php if (($sku=getLocal_ProductSKU())!='') {echo "($sku)";}; ?></div>
+        <?php Local_ProductOptions(); ?>
+        <div class="product_download_link">
+        <?php Local_ProductFilesLink(); ?>
+        </div>
+    </td>
+    <td class="product_quantity_selector"><?php Local_ProductQuantity(); ?></td>
+    <td class="product_sale_price"><span class="value"><?php Local_ProductSalePrice(); ?></span></td>
+    <td class="product_total_price"><span class="value"><?php Local_ProductAmount(); ?></span></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

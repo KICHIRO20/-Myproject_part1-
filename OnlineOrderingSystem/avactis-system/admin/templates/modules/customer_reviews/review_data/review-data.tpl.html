@@ -1,0 +1,69 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="table-responsive">
+<table class="table" cellspacing="1" cellpadding="4" width="100%">
+<tr>
+<td width="30%" style="text-align: left;">
+<?php xMsg('CR', 'CR_DATE'); ?>
+</td>
+<td>
+<?php ReviewDate(); ?>
+</td>
+</tr>
+<tr>
+<td width="30%" style="text-align: left;">
+<?php xMsg('CR', 'CR_AUTHOR'); ?>
+</td>
+<td>
+<?php ReviewAuthor(); ?>
+</td>
+</tr>
+<tr>
+<td width="30%" style="text-align: left;">
+<?php xMsg('CR', 'CR_IP_ADDRESS'); ?>
+</td>
+<td>
+<?php ReviewIPAddress(); ?>
+</td>
+</tr>
+<tr>
+<td width="30%" style="text-align: left;">
+<?php xMsg('CR', 'CR_PRODUCT'); ?>
+</td>
+<td>
+<?php ReviewProduct(); ?>
+</td>
+</tr>
+<tr>
+<td width="30%" style="text-align: left;">
+<?php xMsg('CR', 'CR_REVIEW'); ReviewDisabled(); ?>
+</td>
+<td>
+<?php ReviewReview(); ?>
+</td>
+</tr>
+<tr>
+<td width="30%" style="text-align: left;">
+<?php xMsg('CR', 'CR_RATING'); RatingDisabled(); ?>
+</td>
+<td>
+<table class="list" cellspacing="0" cellpadding="4" width="95%">
+<tr class="title">
+<th style="height: 20px;"><?php xmsg('CR', 'CR_RATE_NAME'); ?></th>
+<th style="height: 20px; text-align: center; width: 50%"><?php xmsg('CR', 'CR_CURRENT_RATE'); ?></th>
+<th style="height: 20px; text-align: center; width: 20%"><?php xmsg('CR', 'CR_NEW_RATE'); ?></th>
+</tr>
+<?php ReviewRating(); ?>
+</table>
+</td>
+</tr>
+<tr>
+<td width="30%" style="text-align: left;">
+<?php xMsg('CR', 'CR_STATUS'); ?>
+</td>
+<td>
+<?php ReviewStatus(); ?>
+</td>
+</tr>
+</table>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

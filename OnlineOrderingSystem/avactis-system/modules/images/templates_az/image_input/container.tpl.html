@@ -1,0 +1,54 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<input type="hidden" name="ii_image_id_<?php IIId(); ?>" id="ii_image_id_<?php IIId(); ?>" value="">
+<input type="hidden" name="mod_id" id="mod_id" value="<?php IIId(); ?>">
+<table class="table table-condensed" cellspacing="0" cellpadding="0" border="0">
+	<tbody>
+    <tr id="ii_error_row_<?php IIId(); ?>" style="display: none; width: 400px;">
+        <td colspan="2"><input type="hidden" name="ii_error_code_<?php IIId(); ?>" id="ii_error_code_<?php IIId(); ?>" value=""><span id="ii_error_msg_<?php IIId(); ?>" class="error_msg"></span><div class="error_msg" style="width: 460px; height: 70px; border: gray 1px solid; padding:0; margin:0; overflow: auto;" id="ii_error_ajax_output_<?php IIId(); ?>"></div></td>
+    </tr>
+    <tr>
+        <td align="center">
+            <table width="<?php IMAGE_THUMB_SIZE(); ?>" height="<?php IMAGE_THUMB_SIZE(); ?>" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                    <td valign="middle" align="center" width="100%" style="padding: 0px; margin: 0px;"><a id="ii_image_preview_href_<?php IIId(); ?>" name="ii_image_preview_href_<?php IIId(); ?>" href="javascript: void(0);" onclick="" target="_blank" style="color: white;"><img id="ii_image_preview_<?php IIId(); ?>" src="" alt="" style="border: 0px; margin: 0px; padding: 0px;"></a></td>
+                </tr>
+            </table>
+            <br>
+            <span id="ii_btn_delete_<?php IIId(); ?>"  class="no_such_class" style="" onclick="image_input_btn_delete_onclick('<?php IIId(); ?>');"><a class="btn btn-circle btn-warning" href="javascript: void(0);"><?php Msg('BTN_DELETE'); ?></a></span>
+        </td>
+        <td>
+            <table cellspacing="0" cellpadding="2" border="0">
+                <tr>
+                    <td style="padding-right: 10px; padding-left: 10px;"><input type="radio" onfocus="on_select_source('<?php IIId(); ?>', 'local_file');" CHECKED name="ii_source_<?php IIId(); ?>" id="ii_source_<?php IIId(); ?>_local_file" value="local_file" style="border: 0px;vertical-align: middle;">&nbsp;&nbsp;<?php xmsg('IMG', 'SOURCE_LOCAL_FILE'); ?></td>
+                    <td id="ii_input_file_container_<?php IIId(); ?>"><input onfocus="on_select_source('<?php IIId(); ?>', 'local_file');" name="ii_input_file_<?php IIId(); ?>" id="ii_input_file_<?php IIId(); ?>" type="file"></td>
+                </tr>
+                <tr style="/*display: none;*/">
+                    <td style="padding-right: 10px; padding-left: 10px;"><input type="radio" onfocus="on_select_source('<?php IIId(); ?>', 'server_file');" name="ii_source_<?php IIId(); ?>" id="ii_source_<?php IIId(); ?>_server_file" value="server_file"  style="border: 0px; vertical-align: middle;">&nbsp;&nbsp;<?php xmsg('IMG', 'SOURCE_SERVER_FILE'); ?></td>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td name="ii_server_file_container_<?php IIId(); ?>" id="ii_server_file_container_<?php IIId(); ?>"><input type="text" size="20" readonly name="server_only_server_file_ii_server_file_<?php IIId(); ?>" id="server_only_server_file_ii_server_file_<?php IIId(); ?>" value="" class="form-control input-sm input-small"></td>
+                                <td>&nbsp;&nbsp;<div id="ii_btn_browse_server_file_<?php IIId(); ?>" class="btn btn-circle btn-default"><i class="fa fa-globe"></i>&nbsp;<?php msg('BTN_BROWSE'); ?></div><?php ServerFileSelector('ii_server_file_container_'. getIIId(), 'ii_server_file_'. getIIId(), 'alert("FSBrowser Alert.");'); ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr style="display: none;">
+                    <td style="padding-right: 10px; padding-left: 10px;"><input type="radio" onfocus="on_select_source('<?php IIId(); ?>', 'url');" name="ii_source_<?php IIId(); ?>" id="ii_source_<?php IIId(); ?>_url"        value="url"><?php xmsg('IMG', 'SOURCE_URL'); ?></td>
+                    <td><input onfocus="on_select_source('<?php IIId(); ?>', 'url');"        name="ii_url_<?php IIId(); ?>"         id="ii_url_<?php IIId(); ?>"        type="text" class="form-control input-sm input-small"></td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 10px; padding-left: 10px; text-align: center;"><?php xmsg('IMG', 'LABEL_ATL_TEXT'); ?></td>
+                    <td><input name="ii_alt_text_<?php IIId(); ?>" id="ii_alt_text_<?php IIId(); ?>" type="text" class="form-control input-sm input-small"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><br /><div id="ii_btn_preview_<?php IIId(); ?>" class="btn btn-circle btn-default" onclick="image_input_btn_preview_onclick('<?php IIId(); ?>');"><i class="fa fa-upload"></i>&nbsp;<?php xmsg('IMG', 'BTN_UPDATE_IMAGE'); ?></div></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+	</tbody>
+</table>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

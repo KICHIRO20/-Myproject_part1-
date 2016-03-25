@@ -1,0 +1,9 @@
+
+RewriteCond %{REQUEST_URI} !(%category_prefix%/[0-9]+-[0-9]+-?[0-9]*\+?/.*\.html)$
+RewriteRule %category_prefix%/[0-9]+-[0-9]+-?[0-9]*\+?/(.*)$ $1 [L]
+
+RewriteCond %{REQUEST_URI} !(%product_prefix%/[0-9]+-?[0-9]*\+?/.*\.html)$
+RewriteRule %product_prefix%/[0-9]+-?[0-9]*\+?/(.*) $1 [L]
+
+RewriteCond %{REQUEST_URI} !(%cms_prefix%/[0-9]+-?[0-9]*\+?/.*\.html)$
+RewriteRule %cms_prefix%/[0-9]+-?[0-9]*\+?/(.*) $1 [L]

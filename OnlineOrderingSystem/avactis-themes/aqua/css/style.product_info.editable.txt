@@ -1,0 +1,182 @@
+[Detailed Product Info]
+.product_info .detailed_product_info {
+    width;
+    padding;
+    margin;
+}
+
+[Product Name]
+.product_info .product_name {
+    text;
+    padding;
+    margin;
+}
+
+[Product Info - Limited Inventory]
+.product_info .limited_inventory {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Quantity]
+.product_info .product_add_quantity {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Rating ]
+.product_info .product_rating {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Buttons]
+.product_info .product_buttons {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Options Message]
+.product_info .options_error {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - List Price]
+.product_info .product_list_price {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - List Price Value]
+.product_info .product_list_price .value {
+    text;
+}
+
+[Product Info - Sale Price]
+.product_info .product_sale_price {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+
+[Product Info - Sale Price Value]
+.product_info .product_sale_price .value {
+    text;
+}
+
+[Product Info - Product Image]
+.product_info .product_img {
+    width;
+    text-align;
+    padding;
+    margin;
+}
+
+[Product Info - Rating]
+.product_info .product_rating_info {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Options]
+.product_info .product_options {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Short Description]
+.product_info .product_short_description {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Detailed Description]
+.product_info .product_detailed_description {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Rating Box]
+.product_info .product_rating .rating-box {
+    margin;
+}
+
+[Discount Star]
+.product_info .discount_star {
+    width: 69px;
+    text-align;
+    padding: 0px;
+    margin;
+}
+
+
+[Detailed Description Paragraph]
+.product_info .product_detailed_description p {
+    margin;
+    padding;
+}
+
+[Limited Inventory]
+.product_info .limited_inventory {
+    width:  120px;
+    margin: auto auto;
+    padding-left: 50px;
+}
+
+
+[Product Options Row]
+.product_options.form_view .form_row {
+    padding;
+    margin;
+}
+
+[Product Options]
+.product_options.form_view {
+    padding;
+    margin;
+}
+
+[Product Option - Name]
+.product_options.form_view .form_descr {
+    text;
+}
+
+[Product Option - Value Container]
+.product_options.form_view .form_field {
+    margin;
+    width;
+}
+
+[No Image Icon]
+.noimage {
+    background;
+    size;
+    margin;
+}

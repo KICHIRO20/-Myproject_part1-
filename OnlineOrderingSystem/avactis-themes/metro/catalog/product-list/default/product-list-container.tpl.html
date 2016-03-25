@@ -1,0 +1,29 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+            <div class="row list-view-sorting clearfix">
+              <div class="col-md-2 col-sm-2 list-view">
+                <a href="#"><i class="fa fa-th-large"></i></a>
+                <a href="#"><i class="fa fa-th-list"></i></a>
+              </div>
+             <div class="col-md-10 col-sm-10"> 
+                  <?php PaginatorDropdown(); ?>
+                 <?php ProductListSorter(); ?>
+             </div>
+        
+</div>
+<div class="product_list category_products <?php ViewClassName(); ?>">
+    <div class="content">
+        <div class="product_list_items row product-list columns_3">
+            <?php Local_Items(); ?>
+            <div class="clear_both"></div>
+        </div>
+         <div class="toolbar top row">
+            <div class="col-md-4 col-sm-4 items-info"><?php PaginatorProductsShown(); ?></div> 
+           <div class="col-md-8 col-sm-8">
+            <?php PaginatorLine(); ?>
+           </div> 
+        </div>
+
+     </div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

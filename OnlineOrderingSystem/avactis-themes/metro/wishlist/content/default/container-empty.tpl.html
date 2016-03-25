@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<h1><?php Label('WL_WISHLIST_LABEL'); ?><span style="float:right;font-size:15px;"><?php CustomerSignInOutHint(); ?></span></h1>
+<div class="shoppingcart <?php ViewClassName(); ?> goods-page">
+    <div class="goods-data clearfix content">
+        <?php if ( ($m=getLocal_WishlistResultMessage()) != ''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+        <div class="product_list_items empty">
+         <label class="control-label"><?php Label('WL_NO_ITEMS_MESSAGE'); ?> </label>
+        </div>
+        <div class="cart_buttons row">
+                <a href="<?php PageURL('ProductList'); ?>"><input class="btn btn-default" type="button" value="<?php Msg('CONTINUE_CHECKOUT'); ?>"></a>
+            </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

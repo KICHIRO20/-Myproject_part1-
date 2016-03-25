@@ -1,0 +1,29 @@
+[Navigation Bar Item]
+.navigation_bar ul li span {
+    border;
+    background;
+    padding;
+    margin;
+}
+
+[Navigation Bar Item Hovered]
+.navigation_bar ul li span:hover {
+    border;
+    background;
+}
+
+[Navigation Bar Item Text]
+.navigation_bar ul li span a {
+    text;
+}
+
+[Navigation Bar Item Text Hovered]
+.navigation_bar ul li span a:hover {
+    text;
+}
+
+[Navigation Bar Empty]
+.navigation_bar.empty p {
+    padding;
+    text;
+}

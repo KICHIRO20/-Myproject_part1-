@@ -1,0 +1,9 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr style="height: 25px;">
+    <td STYLE="text-align: left; color: black; padding: 0px;">&nbsp;<A HREF="javascript: void(0);" onclick="javascript:go('<?php DownloadLink(); ?>');"><B><?php BackupFileName(); ?>.tar.gz</B></A></td>
+    <td STYLE="text-align: left; color: black; padding: 0px;">&nbsp;<?php BackupFileDate(); ?></td>
+    <td STYLE="text-align: left; color: black; padding: 0px;">&nbsp;<?php BackupFileSize(); ?></td>
+    <td STYLE="text-align: left; color: black; padding: 0px;">&nbsp;</td>
+    <td STYLE="text-align: center; color: black; padding: 0px;"><INPUT TYPE="radio" id="BackupFile_<?php N(); ?>" NAME="BackupFile" onclick="selectRowDeselectOther(this);" value="<?php BackupFileName(); ?>"></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

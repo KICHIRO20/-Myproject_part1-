@@ -1,0 +1,17 @@
+{StoreOwnerName}. New customer review posted.
+A new customer review has been posted
+----------------------------------------------
+Date: {CustomerReviewDate} {CustomerReviewTime} 
+IP: {CustomerReviewIP}
+
+ProductID : {ProductID}
+Product: {ProductName}
+SKU: {ProductSKU}
+
+Average Rating: {CustomerReviewOverallRating}
+Review: 
+{CustomerReviewText}
+
+----------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}

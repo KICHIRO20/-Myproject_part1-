@@ -1,0 +1,22 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<span style="display:inline;"><?php xmsg('RPTS','DATE_RANGE'); ?>&nbsp;
+<select id="{selector_id}_DatetimePeriodSelector" onchange="{selector_id}_DatetimePeriodSelectorOnChangeAction()" class="form-control input-large input-sm" style="display:inline;">
+    {OPTIONS_LIST}
+</select>
+<script type="text/javascript">
+<!--
+	function {selector_id}_DatetimePeriodSelectorOnChangeAction()
+	{
+	   var el_selector = document.getElementById('{selector_id}_DatetimePeriodSelector');
+	   if (el_selector)
+	   {
+	       {callback-js-function}(el_selector.value);
+	   }
+	   else
+	   {
+	       alert('JS-ERROR: datetime period selector element with id \''+'{selector_id}'+'\' not found!');
+	   }
+	}
+//-->
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

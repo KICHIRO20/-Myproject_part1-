@@ -1,0 +1,51 @@
+<table width="100%" cellspacing="0" cellpadding="0" class="table">
+      <tr>
+	<td width="10" bgcolor="#00436d" class="td">&nbsp;
+      </td>
+      <td valign="middle" align="left" height="50" bgcolor="#00436d" class="td1">
+            <div class="div">{StoreOwnerName}</div>
+	</td>
+     </tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="0" class="tablebody">
+<tr bgcolor="#D8D8D8">
+<td align="left" valign="top" class="tdbody" bgcolor="#F9F9F9">
+<p style="font-size:12px;">{StoreOwnerName}. You have successfully activated your account {AccountName}.</p>
+<b>Dear {CustomerFirstname}</b>,<br/><br/>
+
+You have successfully activated your account {AccountName} on our website {StoreOwnerWebsite}<br/><br/>
+
+Thank you for visiting our store!<br/><br/>
+
+-------------------------------------------------------------<br/><br/>
+{StoreOwnerName}<br/>
+{StoreOwnerWebsite}<br/>
+-------------------------------------------------------------
+</td>                                  		
+ </tr>
+</table>
+
+<style>
+.table {
+        max-width:600px;
+        border-left:solid 1px #e6e6e6;
+        border-right:solid 1px #e6e6e6;
+       }
+.tablebody {
+       max-width:600px;border-left:solid 1px #e6e6e6;border-right:solid 1px #e6e6e6;
+     }
+.td {
+     width:10px;
+     background:linear-gradient(to bottom,#005587 0%,#00436d 89%);
+     background-color:#00436d;
+   }
+.td1 {
+       background:linear-gradient(to bottom,#005587 0%,#00436d 89%);background-color:#00436d;padding:0;margin:0;
+     }
+.tdbody{
+  color:#2c2c2c;display:block;line-height:20px;font-family:arial;font-weight:300;margin:0 auto;clear:both;border-bottom:1px solid #e6e6e6;background-color:#f9f9f9;padding:20px;
+}
+.div {
+      color:#FFFFFF;font-weight:bold;font-family:arial;line-height:20px;font-size:20px;
+     }
+</style>

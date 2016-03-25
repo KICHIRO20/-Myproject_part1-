@@ -1,0 +1,199 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+document.title = '<?php xmsg('QB','QB_SETTINGS'); ?>';
+</script>
+
+<div class="portlet light">
+  
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-gears font-blue-sharp"></i>
+        <span class="caption-subject font-blue-sharp bold uppercase"><?php Msg('GNRL_SET_PAGE_TITLE'); ?></span>
+        <span class="caption-subject font-blue-sharp"><?php xmsg('QB','QB_SETTINGS'); ?></span>
+      </div>
+    </div>
+<?php ResultMessage(); ?>	
+     <div class="portlet-body">
+          <div class="table-container form">
+          <form action="popup_window.php?asc_action=update_qb_settings" method="post" name="QBSettingsForm">
+          <input type="hidden" name="page_view" value="<?php echo $_GET['page_view']; ?>" />
+
+          <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','TRNS_CLASS'); ?></lable>
+            </div>
+	     <div class="col-sm-1 col-sm-1"></div>
+            <div class="col-md-8 col-sm-6">
+              <span style="display:inline;">
+              <input type="text" class="form-control form-filter input-large" <?php TrnsClassField(); ?> ></span>
+            </div>
+        </div>          
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_TAX'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_TAX','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php AccTaxField(); ?> >
+            </div>
+        </div>
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_PRODUCT'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_PRODUCT','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+             	<input type="text" class="form-control form-filter input-large" <?php AccProductField(); ?> >
+            </div>
+        </div>
+
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_SHIPPING'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_SHIPPING','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large"  <?php AccShippingField(); ?> >
+            </div>
+        </div>
+
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_INVENTORY'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_INVENTORY','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php AccInventoryField(); ?> >
+            </div>
+        </div>
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_COGS'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_COGS','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php AccCOGSField(); ?> >
+            </div>
+        </div>
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_GLOBAL_DISCOUNT'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_GLOBAL_DISCOUNT','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php AccGlobalDiscountField(); ?> >
+            </div>
+        </div>
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_PROMOCODE_DISCOUNT'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_PROMOCODE_DISCOUNT','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+            	<input type="text" class="form-control form-filter input-large" <?php AccQuantityDiscountField(); ?> >
+            </div>
+        </div>
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','ACC_QUANTITY_DISCOUNT'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('ACC_QUANTITY_DISCOUNT','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php AccQuantityDiscountField(); ?> >
+            </div>
+        </div>
+
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','OP_AS_INV'); ?></lable>
+            </div>
+	     <div class="col-sm-1 col-sm-1"></div>
+            <div class="col-md-3 col-sm-6">
+              <span style="display:inline;"><?php OpAsInvField(); ?></span>
+            </div>
+        </div>
+
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','MIN_QIS'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('MIN_QIS','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php MinQISField(); ?> >
+            </div>
+        </div>
+
+        <div class="row margin-bottom-10">
+             <div class="col-md-3 col-sm-4">
+              <lable class="help-block"><?php xmsg('QB','QB_ORDERS_PREFIX'); ?></lable>
+            </div>
+		<div class="col-sm-1 col-sm-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('QB_ORDERS_PREFIX','quick-books-messages'); ?>
+                    </a>
+		</div>
+            <div class="col-md-8 col-sm-6">
+              <input type="text" class="form-control form-filter input-large" <?php OrdersPrefixField(); ?> >
+            </div>
+        </div>
+
+        </form>
+      </div>
+  
+
+    <div class="actions" align="center">
+      <div class="actions btn-set">
+        <button id="UpdateButton2" title="<?php msg('BTN_UPDATE'); ?>" onclick="document.forms['QBSettingsForm'].submit();" type="button" name="<?php msg('BTN_UPDATE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_UPDATE'); ?></span></button>
+        <button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="javascript: closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

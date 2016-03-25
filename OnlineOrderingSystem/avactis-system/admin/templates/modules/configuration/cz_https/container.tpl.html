@@ -1,0 +1,68 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function selectCZSections(layout_id, section_name)
+{
+    opt = document.forms['HTTPSSettings']['section_el_'+layout_id];
+   
+    //                               whole_cz,                                                           ,
+    //                         .
+
+    //         
+    if(typeof(section_name) != "undefined" &&
+      section_name == 'whole_cz')
+    {
+        whole_cz_checked = true;
+    }
+    else
+    {
+        whole_cz_checked = false;
+    }
+
+    for (var i = 0; i < opt.length; i++)
+    {
+       if(opt[i].value == 'whole_cz' && 
+          whole_cz_checked == false)
+       {
+           whole_cz_checked = opt[i].checked;
+       }
+    }
+
+    //          
+    if(whole_cz_checked == true)
+    {
+        for (var i = 0; i < opt.length; i++)
+        {
+           if(opt[i].value != 'whole_cz')
+           {
+               disabled = opt[i].disabled;
+               opt[i].disabled = !disabled;
+               opt[i].checked = true;
+           }
+        }
+    }
+
+    //                     
+    res = new Array();
+    for (var i = 0; i < opt.length; i++)
+    {
+
+       if(opt[i].checked == true)
+       {
+           res.push(opt[i].value);
+       }
+    }
+    document.forms['HTTPSSettings']['layout_' + layout_id + '_res'].value = res.join('|');
+}
+//-->
+</SCRIPT>
+
+<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+<?php msg('CZ_LAYOUTS_HTTPS_WINDOW_TITLE'); ?>: <a style="text-decoration: underline;color:white" href="<?php CZHTTPSLayoutURL(); ?>" target="_blank"><span><?php CZHTTPSLayoutURL(); ?></span></a>
+</div></div>
+</div>
+<?php CZHTTPSLayouts(); ?>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,25 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <a name="subscribe_box"></a>
+        <h1><?php Label("SUBSCRIPTION_UNSUBSCRIBE"); ?></h1>
+        <div class="subscribe_form">
+            <form action="<?php Local_FormAction(); ?>" method="post">
+                <input type="hidden" name="asc_action" value="unsubscribe_by_link" />
+                <input type="hidden" name="key_unsubscribe" value="<?php Local_KeyUnsubscribe(); ?>" />
+                <p><?php Label("SUBSCRIPTION_YOU_ARE_ONE_STEP_AWAY"); ?></p>
+                <p><?php Label("SUBSCRIPTION_IF_YOU_DO_NOT_WANT"); ?></p>
+                <div class="form_view">
+                <?php Local_TopicsList(); ?>
+                </div>
+                <p><?php Label("SUBSCRIPTION_YOU_WILL_BE_UNSUBSCRIBED"); ?></p>
+                <input type="submit" class="<?php lang(); ?> text_buttons button_update" value="<?php Label('SUBSCRIPTION_UPDATE'); ?>" />
+            </form>
+        </div>
+     </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

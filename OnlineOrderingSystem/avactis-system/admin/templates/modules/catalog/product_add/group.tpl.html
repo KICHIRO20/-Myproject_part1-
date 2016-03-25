@@ -1,0 +1,25 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a href="#collapse_<?php GroupID(); ?>" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle ">
+<?php GroupName(); ?> </a>
+</h4>
+</div>
+<div class="panel-collapse collapse in" id="collapse_<?php GroupID(); ?>" style="">
+<div class="panel-body">
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+ 
+ <tr class="group">
+    <td colspan="3" class="popup_dialog_body_left_padded popup_dialog_body_right_padded">
+      <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><?php GroupName(); ?></td>
+          <td style="text-align: right;"><div onclick="toggleRows('group_<?php GroupID(); ?>');" style="cursor: pointer;"><img id="img_group_<?php GroupID(); ?>" src="images/plus.gif">&nbsp;<?php msg('SHOW_HIDE_LABEL'); ?></div></td>
+        </tr>
+      </table>
+    </td>
+  </tr>

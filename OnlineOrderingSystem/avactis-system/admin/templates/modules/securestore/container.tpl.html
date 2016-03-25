@@ -1,0 +1,86 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->  
+<script type="text/javascript" language="javascript">
+
+function isNumberKey(evt)
+{  
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
+</script>
+<?php
+	$local_error_message=getLocal_ErrorMessage();
+	$local_mail_Error=getLocal_MailResultMessage();
+	if(!empty($local_error_message)||!empty($local_mail_Error)){
+?>
+
+<div class="note note-warning note-bordered">
+	<?php echo $local_error_message;?>
+	<?php echo $local_mail_Error;?>
+</div>
+<?php } ?>
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-shield"></i>&nbsp;<?php xmsg('SS','VIEW_PAGE_SUBTITLE_SS'); ?>
+					</span>
+				</div>
+			</div>		
+			<div class="portlet-body">
+				<div class="row">
+					<form action="<?php Local_FormActionURL(); ?>" name="FindForm" method="post">
+						<div class="col-md-6"><?php xmsg('SS','SS_INPUT_LABEL'); ?></div>
+						<div class="col-md-5">
+							<input type="text" id="find" name="find" onkeypress="return isNumberKey(event)" class="form-control input-medium input-sm" style="display:inline;">&nbsp;&nbsp;
+							<button class="btn btn-circle btn-default" type=submit>
+								<i class="fa fa-check-circle">&nbsp;</i><?php Msg('BTN_SUBMIT'); ?>
+							</button>
+						</div>
+					</form>
+				</div>
+				<br />
+				<div class="row">
+			           	<form action="<?php Local_FormSendMailActionURL(); ?>" name="FindForm" method="post">
+						<div class="col-md-6"><?php xmsg('SS','SS_SEND_MAIL_LABEL'); ?></div>
+						<div class="col-md-5">
+							<button class="btn btn-circle btn-default" type=submit>
+								<i class="fa fa-send">&nbsp;</i><?php Msg('ADMIN_INFO_FIELD_003'); ?>
+							</button>
+						</div>
+					</form>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-md-12">
+						<h4><?php xmsg('SS', 'MODIFIED_FILE'); ?></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<?php Local_ModifiedResultOutput(); ?>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-md-12">
+						<h4><?php xmsg('SS', 'NEWLY_ADDED_FILE'); ?></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<?php Local_NewlyAddedResultOutput(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Portlet PORTLET-->
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

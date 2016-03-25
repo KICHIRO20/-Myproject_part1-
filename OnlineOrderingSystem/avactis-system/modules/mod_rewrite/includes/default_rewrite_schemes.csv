@@ -1,0 +1,7 @@
+SCHEME_NAME;CAT_RULE_TPL;PROD_RULE_TPL;CMS_RULE_TPL
+s1;^%query_cat_prefix%-(%category_id%)-(%page_number%)%parent_cid%-%seo_cat_prefix%\.html;^%query_prod_prefix%-(%product_id%)%parent_cid%-%seo_prod_prefix%\.html;^%query_cms_prefix%-(%page_id%)-%seo_cms_prefix%\.html
+s2;^%seo_cat_prefix%-%query_cat_prefix%-(%category_id%)-(%page_number%)%parent_cid%\.html;^%seo_prod_prefix%-%query_prod_prefix%-(%product_id%)%parent_cid%\.html;^%seo_cms_prefix%-%query_cms_prefix%-(%page_id%)\.html
+s3;^%query_cat_prefix%-(%category_id%)-(%page_number%)%parent_cid%/%seo_cat_prefix%\.html;^%query_prod_prefix%-(%product_id%)%parent_cid%/%seo_prod_prefix%\.html;^%query_cms_prefix%-(%page_id%)/%seo_cms_prefix%\.html
+s4;^%seo_cat_prefix%/%query_cat_prefix%-(%category_id%)-(%page_number%)%parent_cid%\.html;^%seo_prod_prefix%/%query_prod_prefix%-(%product_id%)%parent_cid%\.html;^%seo_cms_prefix%/%query_cms_prefix%-(%page_id%)\.html
+s5;^%query_cat_prefix%/(%category_id%)-(%page_number%)%parent_cid%/%seo_cat_prefix%\.html;^%query_prod_prefix%/(%product_id%)%parent_cid%/%seo_prod_prefix%\.html;^%query_cms_prefix%/(%page_id%)/%seo_cms_prefix%\.html
+s6;^%seo_cat_prefix%/%query_cat_prefix%/(%category_id%)-(%page_number%)%parent_cid%\.html;^%seo_prod_prefix%/%query_prod_prefix%/(%product_id%)%parent_cid%\.html;^%seo_cms_prefix%/%query_cms_prefix%/(%page_id%)\.html

@@ -1,0 +1,82 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var onload_bak_pm_sm_settings = window.onload;
+window.onload = function()
+{
+    if(onload_bak_pm_sm_settings){onload_bak_pm_sm_settings();}
+    accepted_currencies_rule_onchange();
+}
+
+function hide_block(block_id)
+{
+    el = document.getElementById(block_id);
+    if(el)
+    {
+        el.style.display = 'none';
+    }
+}
+
+function show_block(block_id)
+{
+    el = document.getElementById(block_id);
+    if(el)
+    {
+        el.style.display = 'block';
+    }
+}
+
+function accepted_currencies_rule_onchange()
+{
+    rule_el = document.getElementById('pm_sm_accepted_currencies_rule');
+    rule = rule_el.options[rule_el.selectedIndex].value;
+    switch(rule)
+    {
+        case '<?php MAIN_STORE_CURRENCY(); ?>':
+        {
+            hide_block('accepted_currencies_radio');
+            hide_block('accepted_currencies_checkboxes');
+            break;
+        }
+        case '<?php THE_ONLY_ACCEPTED(); ?>':
+        {
+            show_block('accepted_currencies_radio');
+            hide_block('accepted_currencies_checkboxes');
+            break;
+        }
+        case '<?php ACTIVE_AND_ACCEPTED_BY_PM_SM_AND_SELECTED_BY_CUSTOMER(); ?>':
+        {
+            hide_block('accepted_currencies_radio');
+            show_block('accepted_currencies_checkboxes');
+            break;
+        }
+        case '<?php ACTIVE_AND_SELECTED_BY_CUSTOMER(); ?>':
+        {
+            hide_block('accepted_currencies_radio');
+            hide_block('accepted_currencies_checkboxes');
+            break;
+        }
+    }
+}
+//-->
+</SCRIPT>
+<div class="row margin-bottom-10">
+	<div class="col-sm-4">
+		<span class="bold"><?php ModuleAcceptedCurrenciesFieldName(); ?></span>
+		<span class="pull-right"><a onclick="<?php ModuleAcceptedCurrenciesFieldHint(); ?>" href="javascript:void(0);"><i style="cursor:pointer;" class="fa fa-question-circle"></i></a></span>
+	</div>
+	<div class="col-sm-8">
+		<input type="hidden" name="pm_sm_uid" id="pm_sm_uid" value="<?php pm_sm_uid(); ?>"><?php AcceptedCurrenciesRule(); ?>
+		<div style="display: none;" id="accepted_currencies_radio" name="accepted_currencies_radio">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<?php accepted_currencies_radio(); ?>
+			</table>
+		</div>
+		<div style="display: none;" id="accepted_currencies_checkboxes" name="accepted_currencies_checkboxes">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<?php accepted_currencies_checkboxes(); ?>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

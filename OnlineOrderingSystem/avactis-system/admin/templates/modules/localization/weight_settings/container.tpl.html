@@ -1,0 +1,62 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function showWeightUnit()
+{
+    var unit = document.getElementById("WeightUnit");
+    var el = document.getElementById("WeightUnitLabel");
+    el.innerHTML = unit.value;
+}
+//-->
+</SCRIPT>
+<form <?php FORM(); ?>>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php Msg("WEIGHT_PAGE_TITLE"); ?>&nbsp;</span>
+			<span class="caption-helper font-blue-sharp text-lowercase"><?php Msg("WEIGHT_PAGE_SUBTITLE"); ?>...</span>
+		</div>
+		<div class="actions">
+			<?php PageHelpLink('store_settings_weight'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('store_settings_weight'); ?>
+		</div>
+	</div>
+	 <?php ResultMessage(); ?>
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"><?php Msg("WEIGHT_FIELD_001"); ?></lable>
+			</div>
+			<div class="col-md-8" style="float:left;padding-left:86px;">
+				<INPUT TYPE="text" class="form-control form-filter input-sm input-medium"  NAME="WeightUnit" id="WeightUnit" value="<?php WeightUnit(); ?>" onkeyup="showWeightUnit();" onblur="showWeightUnit();">
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"><?php Msg("WEIGHT_FIELD_002"); ?></lable>
+			</div>
+			<div class="col-md-8" style="float:left;">
+				<INPUT TYPE="text" NAME="WeightCoeff" style="display:inline;" class="form-control form-filter input-sm input-medium" value="<?php WeightCoeff(); ?>" size="10" onblur="formatInput(this);" patterntype="weight" <?php CoeffFormat(); ?>><span class="bold uppercase" style="display:inline;">&nbsp;&nbsp;<?php msg('PRDTYPE_VALUE_KG'); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+    </div>
+    <div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript:WeightForm.submit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+			<button id="CancelButton2" class="btn btn-default" name="Close" type="button" onclick="closeAndFocusParent();" title="Close"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg("BTN_CLOSE"); ?></span></button>
+		</div>
+	</div>
+</div>
+</form>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+showWeightUnit();
+//-->
+</SCRIPT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<SCRIPT SRC="js/main.js"></SCRIPT>
+<SCRIPT SRC="js/validate.js"></SCRIPT></HEAD>
+<body>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- tinyMCE -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'CancelButton1',
+                            'CancelButton2',
+                            'AddButton',
+                            'DeleteButton2',
+                            'ReturnButton'
+                            );
+    disableButtons(buttons);
+}
+
+RatesIDs = new Array();
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+
+    if (formAction == 'DeleteRates')
+    {
+        one_selected = false;
+        var i;
+        for(i=0; i < RatesIDs.length; i++)
+        {
+            // check "rates" boxes
+            if(document.getElementById('RD-'+i).checked)
+            {
+                one_selected = true;
+                break;
+            }
+        }
+        
+        if(!one_selected)
+        {
+            alert('<?php Alert_004(); ?>');
+            return;
+        }
+    }
+    
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+//-->
+</script>
+
+<form <?php EditSMForm(); ?> id="EditSMForm">
+<?php HiddenArrayViewState(); ?>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php ModuleType(); ?> </span>
+			<span class="caption-subject font-blue-sharp"><?php ModuleName(); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="ReturnButton" title="<?php Msg('BTN_SAVE'); ?>" onclick="<?php DSR_Return_Link(); ?>" type="button" class="btn blue"><i class="fa fa-rotate-left"></i> <span class="hidden-480"><?php Msg('BTN_RETURN'); ?></span></button>
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+    <?php TopErrors(); ?>
+	<div class="portlet-body">
+		<div class="form">
+    		<?php RatesTable(); ?>
+		</div>
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="ReturnButton" title="<?php Msg('BTN_SAVE'); ?>" onclick="<?php DSR_Return_Link(); ?>" type="button" class="btn blue"><i class="fa fa-rotate-left"></i> <span class="hidden-480"><?php Msg('BTN_RETURN'); ?></span></button>
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</form>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</body>
+</html>

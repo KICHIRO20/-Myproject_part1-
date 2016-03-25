@@ -1,0 +1,114 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+window.focus();
+
+function deleteProdTypeSubmit()
+{
+    var form = document.forms['DelProdTypeForm'];
+    var isSelected = false;
+    i=0;
+    var elem = document.getElementById('ProductType_'+i);
+    while (elem)
+    {
+        if (elem.checked)
+        {
+            isSelected=true;
+            break;
+        }
+        i++;
+        elem = document.getElementById('ProductType_'+i);
+    }
+    if (isSelected)
+    {
+        var confirm_delete = bootbox.confirm('<?php msg("PRTYPE_DEL_CONFIRM"); ?>',function(result){
+        if(result){
+         if (confirm_delete)
+         {
+            form.elements['ViewState[hasCloseScript]'].value = 'true';
+            form.submit();
+            disableButtons(new Array('DeleteButton1', 'DeleteButton2', 'CancelButton1', 'CancelButton2'));
+         }
+        } });
+    }
+    else
+    {
+        alert('<?php msg("PRTYPE_DEL_ALERT"); ?>');
+    }
+}
+
+//-->
+</SCRIPT>
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-gears"></i>&nbsp;<?php msg('PRTYPE_DEL_PAGE_NAME'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<?php PageHelpLink('catalog_delete_'.getDelete_Subject()); ?>&nbsp;&nbsp;<?php VideoTutorialLink('catalog_delete_'.getDelete_Subject()); ?>
+			<div id="DeleteButton1" class="btn btn-default btn-circle" onclick="deleteProdTypeSubmit();" title="<?php msg('BTN_DELETE_PRDTYPE_TITLE');?>">
+				<i class="fa fa-trash-o"></i>&nbsp;<span class="hidden-480"><?php msg('BTN_DELETE_PRDTYPE'); ?></span>
+			</div>
+			<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();" title="<?php msg('BTN_CANCEL_DELETE_PRDTYPE_TITLE'); ?>">
+				<i class="fa fa-times-circle"></i>&nbsp;<span class="hidden-480"><?php msg('BTN_CANCEL_DELETE_PRDTYPE'); ?></span>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!-- BEGIN Info Message -->
+		<div class="note note-info note-bordered font-red">
+			<?php msg('PRTYPE_DEL_COMMON_WARNING'); ?>
+		</div>
+		<!-- END Info Message -->
+		<form METHOD=POST action="<?php DeleteProdTypeHref(); ?>" id="DelProdTypeForm" name="DelProdTypeForm">
+			<?php HiddenArrayViewState(); ?>
+			<INPUT TYPE="hidden" <?php HiddenFieldAction(); ?>>
+			<!--Responsive Table Start -->
+			<div class="table-responsive">
+				<table class="table table-bordered borderless table-striped table-hover table-condensed">
+					<thead>
+						<tr class="bg-info">
+							<th colspan="3"><?php msg('PRTYPE_DEL_HEADER_001'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php Items(); ?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td class="text-center" colspan="3">
+								<div id="DeleteButton1" class="btn btn-default btn-circle" onclick="deleteProdTypeSubmit();" title="<?php msg('BTN_DELETE_PRDTYPE_TITLE');?>">
+									<i class="fa fa-trash-o"></i>&nbsp;<?php msg('BTN_DELETE_PRDTYPE'); ?>
+								</div>
+								<div id="CancelButton1" class="btn btn-default btn-circle" onclick="closeAndFocusParent();" title="<?php msg('BTN_CANCEL_DELETE_PRDTYPE_TITLE'); ?>">
+									<i class="fa fa-times-circle"></i>&nbsp;<?php msg('BTN_CANCEL_DELETE_PRDTYPE'); ?>
+								</div>
+
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<!--Responsive Table End -->
+		</form>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

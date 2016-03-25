@@ -1,0 +1,38 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var contentHasChanged = false;
+function UpdateStatesFormSubmit(formId, formSubmitValue)
+{
+    var form = document.forms[formId];
+   
+    form.elements['ViewState[FormSubmitValue]'].value = formSubmitValue;
+    if (contentHasChanged && formSubmitValue=="changeCountry")
+    {
+        var result = confirm('<?php Msg("MNG_STATE_WRN_003"); ?>');
+      
+        if (result)
+        { 
+		form.elements['ViewState[FormSubmitValue]'].value = "UpdateAndChangeCountry";
+        }
+    }
+    form.submit();
+    disableButtons(new Array('UpdateButton1', 'UpdateButton2', 'CancelButton1', 'CancelButton2'));
+}
+//-->
+</SCRIPT>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('MNG_STATE_PAGE_HEADER'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+            	<button id="UpdateButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="UpdateStatesFormSubmit('UpdateStatesForm', 'update');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn btn-default btn-circle"><i class="fa fa-save"></i> <span class=""><?php Msg("BTN_SAVE"); ?></span></button>		
+			</div>
+		</div>
+	</div>
+	<?php ListItems(); ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,34 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<TABLE cellSpacing=0 cellPadding=5 width="100%" border="0">
+    <TR style="height: 25px;">
+        <TH style="vertical-align: middle; padding: 0px 0px 0px 4px; background: rgb(175,192,222); color: black;"><?php msg('CUSTOMERS_SEARCH_QUICK_NAVIGATION'); ?></TH>
+        <TH colspan="2" style="vertical-align: middle; padding: 0px 0px 0px 4px; background: rgb(175,192,222); color: black;"><?php msg('CUSTOMERS_SEARCH_CUSTOMERS'); ?></TH>
+    </TR>
+    <TR>
+        <TD style="vertical-align: top; width: 40%">
+            <table cellSpacing=0 cellPadding=5 border="0">
+                <tr>
+                    <?php CustomersSearchByLetter(); ?>
+                </tr>
+            </table>
+        </TD>
+        <TD style="vertical-align: top">
+            <FORM style="margin: 0px;" action="customers.php" name="CustomersSearchByField">
+            <INPUT type="hidden" name="asc_action" value="CustomersSearchByField">
+            <TABLE cellSpacing=0 cellPadding=5 border="0">
+                <TR>
+                    <TD nowrap><?php msg('CUSTOMERS_SEARCH_BY'); ?>:</TD>
+                    <TD>
+                        <SELECT size="1" name="field_name">
+                            <?php CustomersSearchByField(); ?>
+                        </SELECT>
+                    </TD>
+                    <TD><INPUT type="text" name="field_value" size="30" style="font-family: Verdana, Arial, sans-serif; font-size: 11px;" value="<?php CustomersSearchByFieldValue(); ?>"></TD>
+                    <TD><div class="button button_5em" onclick="CustomersSearchByField.submit();"><?php msg('CUSTOMERS_SEARCH_OK'); ?></div></TD>
+                </TR>
+            </TABLE>
+            </FORM>
+        </TD>
+    </TR>
+</TABLE>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

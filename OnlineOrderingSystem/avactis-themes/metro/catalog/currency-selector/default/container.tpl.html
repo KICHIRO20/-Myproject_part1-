@@ -1,0 +1,9 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+    <li class="shop-currencies">
+     <?php Local_Items(); ?>
+     </li>
+
+<!-- END TPL (DO NOT REMOVE!) -->
+<h2><?php Label("CATALOG_SELECT_YOUR_CURRENCY"); ?></h2>
+<select id="currency_selector" name="currency_selector" onchange="asc_currency_selector_on_change('<?php Local_SetCurrencyLink(); ?>');">
+</select>

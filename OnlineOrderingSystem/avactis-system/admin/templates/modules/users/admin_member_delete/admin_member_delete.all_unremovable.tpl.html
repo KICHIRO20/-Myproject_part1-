@@ -1,0 +1,56 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<FORM <?php FORM(); ?> id="DeleteAdminsForm">
+<?php HiddenArrayViewState(); ?>
+<table  class="form" cellspacing="1" cellpadding="5" width="100%" align="center">
+    <tr class="title" style="height: 25px;">
+        <td class="popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;">
+            <?php Msg("ADMIN_DELETE_MEMBER_PAGE_TITLE"); ?>
+        </td>
+    </tr>
+
+    <tr class="subtitle" style="height: 25px;">
+        <td class="popup_dialog_header_left_right_padded" style="padding: 0px 0px 0px 4px;">
+            <table class="clear" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td nowrap width="80%"><?php Msg("ADMIN_DELETE_MEMBER_PAGE_SUBTITLE"); ?></td>
+                    <td nowrap style="padding-right: 8px;"><?php PageHelpLink('admin_delete_member'); ?>&nbsp;</td>
+                    <td nowrap style="padding-right: 8px;"><?php VideoTutorialLink('admin_delete_member'); ?>&nbsp;</td>
+                    <td style="padding-right: 6px;"></td>
+                    <td style="padding-right: 9px;"><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg("BTN_CANCEL"); ?></div></td>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="value" style="padding-left: 30px; padding-right: 30px;">
+            <span class="required"><?php Msg("ADMIN_DELETE_MEMBER_WARNING_001"); ?></span>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 30px; padding-right: 30px;">
+            <table class="list">
+            <?php Items(); ?>
+            </table>
+        </td>
+    </tr>
+
+<table  class="form" cellspacing="1" cellpadding="5" width="100%" align="center">
+    <tr>
+        <td style="text-align: center; padding-left: 30px; padding-right: 30px;"><HR style="height: 1px; border: 1px solid #939FC2;"></td>
+    </tr>
+    <tfoot>
+        <tr>
+            <th align="center">
+                <table class="clear">
+                    <tr>
+                        <td style="padding-right: 4px;"></td>
+                        <td><div id="CancelButton2" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg("BTN_CANCEL"); ?></div></td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </tfoot>
+</table>
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

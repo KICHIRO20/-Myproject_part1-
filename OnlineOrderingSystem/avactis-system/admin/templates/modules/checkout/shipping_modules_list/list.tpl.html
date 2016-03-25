@@ -1,0 +1,288 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<link type="text/css" rel="stylesheet" href="styles/jquery.ui.payment_shipping.css">
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+submitHandler = function(formname) 
+{
+  var SelModules = document.getElementById('SelModules');
+  var form = document.getElementById(formname);
+  if(SelModules.value == ''){
+	form.submit();
+   }
+  if (form.onsubmit) form.onsubmit(); 
+  form.submit();
+}
+
+function getShippingModuleGroups()
+{
+    return new Array(
+        <?php getShippingModuleGroupsItemsJS(); ?>
+        );
+}
+
+function getPaymentModuleInfo(module_uid, key)
+{
+    var value = '';
+    switch(module_uid)
+    {
+        <?php getShippingModuleInfoItemsJS(); ?>
+    }
+    return value;
+}
+
+function getShippingModuleGroupByShippingModuleID(module_uid)
+{
+    return getPaymentModuleInfo(module_uid, 'ShippingModulesGroupID');
+}
+
+function getSelectIDByShippingModuleID(module_uid)
+{
+    return 'AvailableSelect_' + getShippingModuleGroupByShippingModuleID(module_uid);
+}
+
+function getSelectsListWithAvailableModules()
+{
+    var ShippingGroups = getShippingModuleGroups();
+    for (var i in ShippingGroups)
+    {
+        ShippingGroups[i] = 'AvailableSelect_' + ShippingGroups[i];
+    }
+    return ShippingGroups;
+}
+
+/*function getDisplayPrefixByListName(AvailableListName)
+{
+//    alert('getDisplayPrefix'+AvailableListName);
+    var SelectsList = getSelectsList();
+
+    for (var i in SelectsList)
+    {
+        if(SelectsList[i][0] == AvailableListName)
+        {
+            return SelectsList[i][1];
+        }
+    }
+//    alert('getDisplayPrefixByListName'+'DisplayPrefix Value Not Found');
+}*/
+
+/*function getListNameByDisplayPrefix(DisplayPrefix)
+{
+//    alert('getDisplayPrefix'+AvailableListName);
+    var SelectsList = getSelectsList();
+
+    for (var i in SelectsList)
+    {
+        if(SelectsList[i][1] == DisplayPrefix)
+        {
+            return SelectsList[i][0];
+        }
+    }
+}*/
+
+function unmark_all_available_modules_selects()
+{
+    var SelectsList = getSelectsListWithAvailableModules();
+
+    if (SelectsList.lenght > 1)
+        for (var i in SelectsList)
+        {
+            clearAll(SelectsList[i]);
+        }
+}
+
+function unmark_selected_modules_select()
+{
+    clearAll("SelectedModules");
+}
+
+function get_number_of_selected_options_in_available_lists()
+{
+    var SelectsList = getSelectsListWithAvailableModules();
+
+    var selectedCount=0;
+
+    for (var i in SelectsList)
+    {
+        oSrcWindow = document.getElementById(SelectsList[i]);
+        for (i = 0; i < oSrcWindow.options.length; i++)
+        {
+            if (oSrcWindow.options[i].selected) 
+            {
+                selectedCount++;
+            }
+        }
+    }    
+
+    return selectedCount;
+}
+
+function get_number_of_selected_options_in_selected_list()
+{
+    var selectedCount = 0;
+    oSrcWindow = document.getElementById("SelectedModules");
+    for (i = 0; i < oSrcWindow.options.length; i++) 
+    {
+        if (oSrcWindow.options[i].selected) 
+        {
+            selectedCount++;
+        }
+    }
+
+    return selectedCount;
+}
+
+function get_first_list_name_with_selected_element()
+{
+    var SelectsList = getSelectsListWithAvailableModules();
+
+    for (var i in SelectsList)
+    {
+        oSrcWindow = document.getElementById(SelectsList[i]);
+        for (j = 0; j < oSrcWindow.options.length; j++) 
+        {
+            if (oSrcWindow.options[j].selected) 
+            {
+                return SelectsList[i];
+            }
+        }
+    }
+    return "";
+}
+
+function get_first_selected_element_value_from_selected()
+{
+    oSrcWindow = document.getElementById("SelectedModules");
+    for (i = 0; i < oSrcWindow.options.length; i++) 
+    {
+        if (oSrcWindow.options[i].selected) 
+        {
+            return oSrcWindow.options[i].value;
+        }
+    }
+}
+
+function onClickMoveToSelectedButton()
+{
+     if(get_number_of_selected_options_in_available_lists() != 1)
+     {
+         //no elements selected, or more than one
+//         alert('onClickMoveToSelectedButton '+get_number_of_selected_options_in_available_lists());
+         return true;
+     }
+     else
+     {
+         //move selected element to "Selected Modules" list
+//alert('222');
+
+         moveItemsExtToSelected(get_first_list_name_with_selected_element(), "SelectedModules");
+         return true;
+     }
+}
+
+function onClickMoveToAvailableButton()
+{
+     if(get_number_of_selected_options_in_selected_list() != 1)
+     {
+         //no elements selected, or more than one
+//         alert('onClickMoveToAvailableButton '+get_number_of_selected_options_in_selected_list());
+         return true;
+     }
+     else
+     {
+         var elem_id = get_first_selected_element_value_from_selected();
+//         re = /(\[.*\])(.*)/;
+//         var DisplayPrefix = elem_name.replace(re, "$1");
+
+         var tgtSelectID = getSelectIDByShippingModuleID(elem_id);
+
+         moveItemsExtToAvailable("SelectedModules", tgtSelectID);
+         return true;
+     }
+}
+
+jQuery(document).ready(function(){
+    jQuery("#shipping_opt").click(function(){
+	var arrows = jQuery(this).find("i");
+        jQuery("#shippinglist").slideToggle(function(){
+        arrows.toggle();
+    	});
+    });
+});
+
+jQuery(document).ready(function () {
+	jQuery(".checkbox-inline").change(function(){
+		var selectedValue = new Array();
+		jQuery('input:checkbox[name="sel_shipping"]:checked').each(function() {
+			selectedValue.push(this.value);
+		});
+		jQuery('#SelModules').val(selectedValue);
+	});
+	jQuery(".ui-state-default").click(function(){
+                var selectedValue = new Array();
+                jQuery('input:checkbox[name="sel_shipping"]:checked').each(function() {
+                        selectedValue.push(this.value);
+                        jQuery('#SelModules').val(selectedValue);
+                });
+	});
+});
+
+jQuery(function() {
+	jQuery( "#sortable" ).sortable();
+	jQuery( "#sortable" ).disableSelection();
+});
+//-->
+</SCRIPT>
+<FORM METHOD=POST ACTION="<?php SaveSelectedShippingModulesListHref(); ?>" id="SaveSelectedShippingModulesListForm" name="SelectedShippingModulesListForm" style="margin: 0px; padding: 0px;">
+<INPUT TYPE="hidden" <?php HiddenFieldAction(); ?>>
+<?php HiddenArrayViewState(); ?>
+
+<?php ResultMessageRow(); ?>
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-check-square"></i>
+			<span class="caption-subject bold"><?php msg('SHIP_METH_HEADER_002'); ?></span>
+		</div>
+		<div class="actions">
+			<a id="ShippingTesterBtn_id" href="shipping_tester_window.php" class="btn btn-primary btn-circle">
+				<i class="fa fa-flask"></i>&nbsp;<?php xmsg('SCC','SHIPPING_TESTER_BUTTON'); ?>
+			</a>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="row margin-bottom-10">
+			<div class="col-sm-11">
+				<ul id="sortable">
+					<input type="hidden" value="" name="SelectedModules[]" id="SelectedModules"  ></input> 
+						<?php Items(); ?>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="row margin-bottom-10">
+			<div class="col-sm-11" id="show-details">
+				<span class="caption-subject" id=shipping_opt><i class="fa fa-chevron-right fa-1g"></i><i class="fa fa-chevron-up fa-1g" style="display:none;"></i>&nbsp;&nbsp;<?php xmsg('SYS','MORE_SHIPPING_METHODS'); ?></span>
+			</div>
+		</div>
+		<div class="row margin-bottom-10" id="shippinglist">
+				<ul name="AvailableSelect_Merged" id="AvailableSelect_Merged">
+					<?php ShippingModuleCheckGroupList_Offline(); ?>
+				</ul>
+				<input type="hidden" id="SelModules" name="SelModules" value="<?php HiddenSelectedModules(); ?>">
+		</div>
+			<div class="actions" style="text-align:center;">
+				<div class="actions btn-set">
+					<button class="btn blue-hoki" name="settings" type="button" onclick="submitHandler('SaveSelectedShippingModulesListForm');">
+						<i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span>
+					</button>
+				</div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-11" id="alert_msg"><b style="color:red;">* </b> <?php msg('SHIP_METH_DESCR_003'); ?></div>
+			</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

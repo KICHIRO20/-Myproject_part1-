@@ -1,0 +1,154 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function showExamples()
+{
+    var digits_el = document.getElementById('digits');
+    var digits = parseInt(digits_el.options[digits_el.selectedIndex].value);
+    var dec_point_el = document.getElementById('decimal_sep');
+    var dec_point = dec_point_el.options[dec_point_el.selectedIndex].value;
+    var thousands_sep_el = document.getElementById('digit_sep');
+    var thousands_sep = thousands_sep_el.options[thousands_sep_el.selectedIndex].value;
+    var negative_el = document.getElementById('negative');
+    var negative = negative_el.options[negative_el.selectedIndex].value;
+    for (i=0; i<negative_el.options.length; i++)
+    {
+        var neg_ex = negative_el.options[i].value;
+        negative_el.options[i].innerHTML = neg_ex.replace(/(%s)/, number_format(23.95, digits, dec_point, thousands_sep));
+    }
+    for (i=1; i<=5; i++)
+    {
+        var el = document.getElementById('ex_'+i);
+        var elHid = document.getElementById('ex_hid_'+i);
+        var num = parseFloat(elHid.value);
+        if (num<0)
+        {
+            num *= -1;
+            el.innerHTML = negative.replace(/(%s)/, number_format(num, digits, dec_point, thousands_sep));
+        }
+        else
+        {
+            el.innerHTML = number_format(num, digits, dec_point, thousands_sep);
+        }
+    }
+}
+
+function number_format(num, digits, dec_point, thousands_sep)
+{
+    nStr = num.toFixed(digits);
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? dec_point + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    if (thousands_sep)
+    {
+        while (rgx.test(x1))
+        {
+            x1 = x1.replace(rgx, '$1' + thousands_sep + '$2');
+        }
+    }
+    return x1 + x2;
+}
+
+//-->
+</SCRIPT>
+<form <?php FORM(); ?>>
+<?php ResultMessage(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg("NUM_FORMAT_PAGE_TITLE"); ?></span>
+			<span class="caption-helper text-lowercase"><?php Msg("NUM_FORMAT_PAGE_SUBTITLE"); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="EditButton1" class="btn btn-circle btn-default" name="settings" type="button" onclick="javascript:NumberForm.submit();"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("NUM_FORMAT_FIELD_001"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<select class="form-control form-filter input-small" name="decimal_sep" id="decimal_sep" onchange="javascript: showExamples();">
+            		<?php DecimalSeparators(); ?>
+        		</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("NUM_FORMAT_FIELD_002"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<select class="form-control form-filter input-small" name="digit_sep" id="digit_sep" onchange="javascript: showExamples();">
+            		<?php DigitSeparators(); ?>
+        		</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("NUM_FORMAT_FIELD_003"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<select class="form-control form-filter input-small" name="digits" id="digits" onchange="javascript: showExamples();">
+            		<?php Digits(); ?>
+        		</select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("NUM_FORMAT_FIELD_004"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<select class="form-control form-filter input-small" name="negative" id="negative" onchange="javascript: showExamples();">
+            		<?php Negative(); ?>
+       			 </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("NUM_FORMAT_FIELD_005"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<div style="width:240px; text-align: right;">
+      								<div id="ex_1"></div><INPUT TYPE="hidden" id="ex_hid_1" value="5.00">
+      								<div id="ex_2"></div><INPUT TYPE="hidden" id="ex_hid_2" value="23456.55">
+      								<div id="ex_3"></div><INPUT TYPE="hidden" id="ex_hid_3" value="34543234.95">
+      								<div id="ex_4"></div><INPUT TYPE="hidden" id="ex_hid_4" value="-15.75">
+      								<div id="ex_5"></div><INPUT TYPE="hidden" id="ex_hid_5" value="-238.00">
+      							</div>
+			</div>
+		</div>
+		<!-- End - Row -->
+	</div>
+	<div class="actions" style="text-align:center;padding-right:250px;">
+		<div class="actions btn-set">
+			<button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript:NumberForm.submit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+		</div>
+	</div>
+</div>
+</form>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+showExamples();
+//-->
+</SCRIPT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

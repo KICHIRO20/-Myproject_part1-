@@ -1,0 +1,105 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.bookmarks {
+    font-family: Tahoma, Sans-serif;
+    font-size: 9pt;
+    white-space: nowrap;
+	font-weight: bold;
+	vertical-align: middle;
+	background-color: #CED4DD;
+	cursor: default;
+    text-align: left;
+}
+.bookmarks_space {
+	border-top-width: 0px;
+	border-bottom: solid 1px #2B7DC7;
+}
+.bookmark_inactive_left {
+	width: 5px;
+	border-bottom: solid 1px #2B7DC7;
+}
+.bookmark_inactive_icon {
+	background-image: url("images/bookmarks/bm-inactive-m.gif");
+	padding: 0px 2px 0px 0px;
+	border-bottom: solid 1px #2B7DC7;
+	cursor: pointer;
+}
+.bookmark_inactive_main {
+	background-image: url("images/bookmarks/bm-inactive-m.gif");
+	padding: 0px 0px 0px 0px;
+	border-bottom: solid 1px #2B7DC7;
+	cursor: pointer;
+}
+.bookmark_inactive_right {
+	width: 0px;
+	border-bottom: solid 1px #2B7DC7;
+}
+.bookmark_active_left {
+	width: 5px;
+}
+.bookmark_active_icon {
+	background-image: url("images/bookmarks/bm-active-m.gif");
+	padding: 0px 2px 0px 0px;
+}
+.bookmark_active_main {
+	background-image: url("images/bookmarks/bm-active-m.gif");
+	padding: 0px 0px 0px 0px;
+}
+.bookmark_active_right {
+	width: 0px;
+}
+.bookmark_notavail_left {
+	width: 0px;
+	border-bottom: solid 1px #2B7DC7;
+}
+.bookmark_notavail_icon {
+	background-image: url("images/bookmarks/bm-notavail-m.gif");
+	padding: 0px 2px 0px 0px;
+	border-bottom: solid 1px #2B7DC7;
+	cursor: default;
+}
+.bookmark_notavail_main {
+	background-image: url("images/bookmarks/bm-notavail-m.gif");
+	padding: 0px 0px 0px 0px;
+	border-bottom: solid 1px #2B7DC7;
+	cursor: default;
+	color: #999CA1;
+}
+.bookmark_notavail_right {
+	width: 0px;
+	border-bottom: solid 1px #2B7DC7;
+}
+
+</style>
+<script src="js/hints.js" charset="CP-1251"></script>
+<script language="JavaScript">
+function bmOver(event,el,bm_name)
+{
+  if(el.className.indexOf('notavail')!=-1)
+  	showHint(event,el,bm_name+'_stop');
+};
+
+function bmOut(event,el)
+{
+  if(el.className.indexOf('notavail')!=-1)
+  	hideHint();
+};
+
+
+
+</script>
+<div class="portlet-body">
+	<div class=" portlet-tabs">
+		<ul class="nav nav-tabs">
+			<?php Bookmarks(); ?>
+		</ul>
+	</div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->
+<table id="ProductBookmarksBlock" class="bookmarks" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+<?php Bookmarks(); ?>
+<?php RightSpace(); ?>
+</tr>
+</table>

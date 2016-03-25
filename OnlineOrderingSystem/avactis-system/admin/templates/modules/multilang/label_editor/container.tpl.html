@@ -1,0 +1,68 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+<!--
+function onStatusChanged (recordId) {
+    if (!DOM) return;
+    checkbox = document.getElementById('select_' + recordId);
+    checkbox.checked = true;
+    selectRow(checkbox);
+}
+
+function isChangedLabels() {
+    for(el = 0; el < document.SearchResults.elements.length; el++)
+        if (document.SearchResults.elements[el].name == "label_id[]"
+            && document.SearchResults.elements[el].checked)
+            return 1;
+
+    return 0;
+}
+
+function updateLabels() {
+    window.onbeforeunload = function() {};
+    submitHandler('SearchResults', 'update');
+}
+
+function removeTranslation() {
+    window.onbeforeunload = function() {};
+    submitHandler('SearchResults', 'delete');
+}
+
+window.onbeforeunload = function(event) {
+    var e = e || window.event;
+    if (typeof(isChangedLabels) == 'function' ) {
+        if (isChangedLabels()) {
+            var msg = "<?php xMsg('ML', 'ML_UNSAVED_LABELS_WARNING') ?>";
+            if (e) {
+                e.returnValue = msg;
+            }
+            return msg;
+        }
+    }
+    return;
+}
+
+// -->
+</script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-language font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php msg('LABEL_EDITOR_PAGE_TITLE'); ?></span>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<?php ConfigurationMessage(); ?>
+		<?php ResultMessage(); ?>
+		<?php LabelFilter(); ?>
+		<?php SearchResults(); ?>
+		<table cellspacing="0" cellpadding="5" width="100%">
+		    <tr>
+		        <td style="text-align: center" width="100%"><?php PaginatorLine(); ?></td>
+    		</tr>
+    		<tr>
+    		    <td style="text-align: center" width="100%"><?php PaginatorRows(); ?></td>
+    		</tr>
+		</table>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

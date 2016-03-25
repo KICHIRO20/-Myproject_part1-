@@ -1,0 +1,55 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+    <div class="portlet box blue-hoki">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gears"></i>
+                    <span class="caption-subject bold"><?php SSC_Header(); ?></span>
+                </div>
+		<div class="actions">
+			<a id="RulesButton" title="<?php LabelEditRules(); ?>" href="<?php SCC_RulesLink(); ?>" class="btn btn-primary"><?php LabelEditRules(); ?>
+                        </a>
+		</div>
+            </div>
+            
+            <div class="portlet-body">
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-sm-3">
+                        <table class="table table-condensed borderless">
+                        <tr><td class="text-right"><?php setsPOSClabel(); ?></td><td>&nbsp;<?php setsPOSCvalue(); ?></td></tr>
+                        <tr><td class="text-right"><?php setsPOHClabel(); ?></td><td>&nbsp;<?php setsPOHCvalue(); ?></td></tr>
+                        <tr><td class="text-right"><?php setsMINSClabel(); ?></td><td>&nbsp;<?php setsMINSCvalue(); ?></td></tr>
+                        <tr><td class="text-right"><?php setsFSOOlabel(); ?></td><td>&nbsp;<?php setsFSOOvalue(); ?></td></tr>
+                        <tr><td class="text-right"><?php setsFHOOlabel(); ?></td><td>&nbsp;<?php setsFHOOvalue(); ?></td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-9 col-sm-4">
+                    <table class="table table-condensed borderless">
+			<thead>
+                        <tr style="background-color:#e0e0e0;">
+                            <th><?php xmsg('SCC', 'FS_FREE_SHIPPING_RULE_NAME_LABEL'); ?></th>
+                            <th class="text-center"><?php xmsg('SCC', 'FS_MIN_SUBTOTAL_LABEL'); ?></th>
+                            <th class="text-center"><?php xmsg('SCC', 'FS_CAT_PROD_LABEL'); ?></th>
+                            <th class="text-center"><?php xmsg('SCC', 'FS_MIXED_CART_LABEL'); ?></th>
+                        </tr>
+			</thead>
+                        <?php setsFsRules(); ?>
+                    </table>
+                    </div>
+                </div>
+            </div>
+    </div>    
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,318 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'TestButton1',
+                            'CancelButton1',
+                            'AddButton1',
+                            'ClearButton1'
+                            );
+    disableButtons(buttons);
+}
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    
+    disableButtonsInForm();
+    form.submit();
+}
+
+var cart_products = new Array();
+var products_count = 0;
+<?php genJSproducts(); ?>
+
+function saveCart()
+{
+	var form = document.forms['ST_Form'];
+	
+	for(var i=0; i < products_count; i++)
+	{
+		cart_products[i][1]=form.elements['Cart[products]['+i+'][qty]'].value;
+		cart_products[i][2]=form.elements['Cart[products]['+i+'][weight]'].value;
+		cart_products[i][3]=form.elements['Cart[products]['+i+'][cost]'].value;
+		cart_products[i][4]=form.elements['Cart[products]['+i+'][ship_charge]'].value;
+		cart_products[i][5]=form.elements['Cart[products]['+i+'][hand_charge]'].value;
+		if(form.elements['Cart[products]['+i+'][free_ship]'].checked)
+			cart_products[i][6]='checked';
+		else
+			cart_products[i][6]='';	
+	}
+}
+
+function buildCart()
+{
+	var new_content='';
+	if(products_count==0)
+		new_content = '<?php LBL_EmptyCart(); ?>';
+	else
+	{
+		new_content+='<table border="0" cellpadding="2" cellsapcing="0" width="100%">';
+        var colgroup = '';
+        if(navigator.userAgent.match(/MSIE\s+8.0/))
+            colgroup = '<colgroup><col width="160px"><col width="67px"><col width="67px"><col width="62px"><col width="70px"><col width="70px"><col width="70px">';
+        new_content += colgroup;
+		for(var i=0; i < products_count; i++)
+		{
+			new_content+='<tr><td class="col-md-2 col-sm-2" style="align:left;">'+cart_products[i][0]+'</td>';
+			new_content+='<td class="col-md-1 col-sm-1" ><input type="text" name="Cart[products]['+i+'][qty]" value="'+cart_products[i][1]+'" size="8" class="form-control input-sm input-xsmall"></td>'
+			new_content+='<td class="col-md-1 col-sm-1" ><input type="text" name="Cart[products]['+i+'][weight]" value="'+cart_products[i][2]+'" size="8" class="form-control input-sm input-xsmall"></td>'
+			new_content+='<td class="col-md-1 col-sm-2" ><input type="text" name="Cart[products]['+i+'][cost]" value="'+cart_products[i][3]+'" size="8" class="form-control input-sm input-xsmall"></td>';
+			new_content+='<td class="col-md-2 col-sm-2" ><input type="text" name="Cart[products]['+i+'][ship_charge]" value="'+cart_products[i][4]+'" size="8" class="form-control input-sm input-small"></td>';
+			new_content+='<td class="col-md-2 col-sm-2" ><input type="text" name="Cart[products]['+i+'][hand_charge]" value="'+cart_products[i][5]+'" size="8" class="form-control input-sm input-small"></td>';
+			new_content+='<td class="col-md-1 col-sm-1" ><input type="checkbox" name="Cart[products]['+i+'][free_ship]" '+cart_products[i][6]+' class="form-control" style="width:15px;"></td></tr>';
+		};	
+		new_content+='</table>';	
+	};
+	document.getElementById('Cart_Content').innerHTML=new_content;
+}
+
+function addProductToCart()
+{
+	saveCart();
+	cart_products[products_count]=new Array();
+	cart_products[products_count][0]='Product #'+(products_count+1);
+	cart_products[products_count][1]='1';
+	cart_products[products_count][2]='1';
+	cart_products[products_count][3]='0';
+	cart_products[products_count][4]='0';
+	cart_products[products_count][5]='0';
+	cart_products[products_count][6]='';
+	products_count++;
+	buildCart();
+}
+
+function clearCart()
+{
+	cart_products = new Array();
+	products_count = 0;
+	buildCart();
+}
+
+//-->
+</script>
+
+<?php JavascriptCountriesAndStates(); ?>
+
+	<div class="portlet light">
+		
+		<div class="portlet-title">
+		    <div class="caption">
+		      <i class="fa fa-gears font-blue-sharp"></i>
+		      <span class="caption-subject font-blue-sharp bold uppercase"><?php xmsg('ST','ST_HEADER'); ?></span>
+		    </div>
+	    </div>
+
+
+		<div class="portlet-body">
+
+			
+
+        	<div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption"><?php OrigAddress(); ?></div>
+                    </div>
+            </div>
+
+            <div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php Msg("OWNER_PROFILE_FIELD_007"); ?>
+          		</div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php OrigCity(); ?>
+          		</div>
+        	</div>
+
+        	<div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php Msg("OWNER_PROFILE_FIELD_010"); ?>
+          		</div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php OrigCountry(); ?>
+          		</div>
+        	</div>
+
+        	<div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php Msg("OWNER_PROFILE_FIELD_008"); ?>
+          		</div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php OrigState(); ?>
+          		</div>
+        	</div>
+
+        	<div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php Msg("OWNER_PROFILE_FIELD_009"); ?>
+          		</div>
+          		<div class="col-md-1 col-sm-2">
+          			<?php OrigZip(); ?>
+          		</div>
+        	</div>
+
+	<form action="shipping_tester_window.php?asc_action=test_ship" id="ST_Form" name="ST_Form" method="post">
+			<?php HiddenArrayViewState(); ?>
+
+        	<div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption"><?php DstAddress(); ?></div>
+                    </div>
+            </div>
+
+            <div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-1">
+          			<?php Msg("OWNER_PROFILE_FIELD_007"); ?>
+          		</div>
+          		<div class="col-md-3 col-sm-3">
+          			<input type="text" <?php DstCity(); ?> class="form-control">
+          		</div>
+        	</div>
+
+        	<div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-1">
+          			<?php Msg("OWNER_PROFILE_FIELD_010"); ?>
+          		</div>
+          		<div class="col-md-3 col-sm-3">
+          			<?php DstCountry(); ?>
+          		</div>
+        	</div>
+
+        	<div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-1">
+          			<?php Msg("OWNER_PROFILE_FIELD_008"); ?>
+          		</div>
+          		<div class="col-md-3 col-sm-3">
+          			<?php DstState(); ?>
+          		</div>
+        	</div>
+
+        	<div class="row margin-bottom-10">
+          		<div class="col-md-4 col-sm-4"></div>
+          		<div class="col-md-1 col-sm-1">
+          			<?php Msg("OWNER_PROFILE_FIELD_009"); ?>
+          		</div>
+          		<div class="col-md-3 col-sm-3">
+          			<input type="text" <?php DstZip(); ?> class="form-control">
+          		</div>
+        	</div>
+
+            <div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption"><?php LBL_ShoppingCart(); ?></div>
+                    </div>
+            </div>
+		<div class="table-responsive">
+		<table class="table table-condensed borderless">
+			<thead>
+			    <tr>
+			        <th  class="col-md-2 col-sm-2" style="text-align:left;padding-left:21px;"><?php LBL_Product(); ?></th>
+			        <th  class="col-md-1 col-sm-1" style="text-align: center;padding-right:30px;"><?php LBL_Qty(); ?></th>
+			        <th  class="col-md-1 col-sm-1" style="text-align: center"><?php LBL_Weight(); ?></th>
+			        <th  class="col-md-1 col-sm-2" style="text-align: center;padding-left:30px;"><?php LBL_Cost(); ?></th>
+			        <th  class="col-md-2 col-sm-2" style="text-align: center;padding-left:30px;"><?php LBL_Shipping_Charge(); ?></th>
+			        <th  class="col-md-2 col-sm-2" style="text-align: center"><?php LBL_Handling_Charge(); ?></th>
+			        <th  class="col-md-1 col-sm-1" style="text-align: center"><?php LBL_Free_Shipping(); ?></th>
+			    </tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="7"><span id="Cart_Content" class="bold"><?php LBL_EmptyCart(); ?></span></td>
+				</tr>
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_Subtotal(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php Cart_Subtotal(); ?></td>
+			    </tr>
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_FHFOO(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php GSS_FHFOO(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_FSFOO(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php GSS_FSFOO(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_MinSC(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php GSS_MinSC(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_PerISCS(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php Cart_PerISCS(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_PerOSF(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php GSS_PerOSF(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_PerIHCS(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php Cart_PerIHCS(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_PerOHF(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php GSS_PerOHF(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_TotalHC(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php Cart_TotalHC(); ?></td>
+			    </tr>
+
+			    <tr>
+			        <td colspan="6" align="right" class="bold"><?php LBL_TotalWeight(); ?>:</td>
+			        <td align="left">&nbsp;&nbsp;<?php Cart_TotalWeight(); ?>&nbsp;<?php WeightSymbol(); ?></td>
+			    </tr>
+			</tbody>
+		</table>
+		</div>
+
+
+			<div class="row actions margin-top-20">
+      			<div class="actions btn-set">
+	      			<div class="col-md-2 col-sm-3 pull-left">
+	        			<button id="AddButton1" title="<?php Msg('BTN_ADD'); ?>" onclick="addProductToCart();" type="button" name="<?php Msg('BTN_ADD'); ?>" class="btn blue"><i class="fa fa-plus"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+	        			<button id="ClearButton1" title="<?php Msg('BTN_CLEAR'); ?>" onclick="clearCart();" type="button" name="<?php Msg('BTN_CLEAR'); ?>" class="btn btn-default"><?php Msg('BTN_CLEAR'); ?></button>
+	        		</div>	
+	        			<div class="col-md-7 col-sm-5"></div>
+	        		<div class="col-md-3 col-sm-4 pull-right">
+	        			<button id="TestButton1" title="<?php Msg('BTN_TEST'); ?>" onclick="formSubmit('ST_Form', 'Test');" type="button" name="<?php Msg('BTN_TEST'); ?>" class="btn blue"><i class="fa fa-eye"></i> <span class="hidden-480"><?php Msg('BTN_TEST'); ?></span></button>
+	        			
+	        		</div>
+      			</div>
+    		</div>
+    	</form>
+		</div>
+	</div>
+<script language="JavaScript">
+	buildCart();
+</script>
+
+<?php Results(); ?>
+
+<!-- END TPL (DO NOT REMOVE!) -->    

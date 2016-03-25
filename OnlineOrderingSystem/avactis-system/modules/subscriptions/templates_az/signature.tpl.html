@@ -1,0 +1,44 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<script language="javascript" type="text/javascript">
+<!--
+function submitForm(formID)
+{
+    var form = document.forms[formID];
+    form.elements['asc_action'].value = 'update_subscr_signature';
+//    form.elements['ViewState[hasCloseScript]'].value = 'true';
+    form.submit();
+}
+//-->
+</script>
+<form action="{FormAction}" method="post" id="EditSubscriptionForm">
+<input type="hidden" name="asc_action" value="" />
+<input type="hidden" name="ViewState[hasCloseScript]" value="false" />
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-pencil font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php xmsg('SUBSCR', 'TITLE_EDIT_SIGNATURE'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" onclick="submitForm('EditSubscriptionForm', 'save'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" type="button" name="save" class="btn btn-circle btn-default"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="alert alert-info"><?php xmsg('SUBSCR', 'FIELD_SIGNATURE_DESCR'); ?></div>
+		<div class="table-responsive"><textarea class="tiny_mce form-control input-xlarge" name="signature_html" cols="60">{SignatureHtml}</textarea></div>
+		<br />
+		<div class="alert alert-success" style="word-wrap:break-word;">{TipUnsubscribe}</div>
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="SaveButton2" onclick="submitForm('EditSubscriptionForm', 'save'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" type="button" name="save" class="btn btn-circle btn-default"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

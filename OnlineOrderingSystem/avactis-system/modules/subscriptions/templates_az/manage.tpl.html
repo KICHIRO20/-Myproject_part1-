@@ -1,0 +1,296 @@
+@todo                        
+@todo javascript         
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+label.big {
+    font-size: 10pt;
+    color: black;
+}
+table.form tr.value td {
+    text-align: left; 
+    color: black;
+    font-weight: normal;
+}
+.titlus {
+    font-weight: bold !important;
+    font-size: 10pt !important; 
+    margin: 0px !important; 
+    color: #000000 !important; 
+    font-family: Tahoma, sans-serif !important;
+}
+</style>
+<script language="JavaScript" type="text/javascript">
+<!--
+var msg_select_topics_to_delete = '<?php xMsg('SUBSCR', 'ALERT_SELECT_TOPICS_TO_DELETE'); ?>';
+var msg_select_topics_to_subscribe = '<?php xMsg('SUBSCR', 'ALERT_SELECT_TOPICS_TO_SUBSCRIBE'); ?>';
+var msg_select_topics_to_unsubscribe = '<?php xMsg('SUBSCR', 'ALERT_SELECT_TOPICS_TO_UNSUBSCRIBE'); ?>';
+var msg_fill_topic_name = '<?php xMsg('SUBSCR', 'ALERT_FILL_TOPIC_NAME'); ?>';
+var msg_select_one_topic = '<?php xMsg('SUBSCR', 'ALERT_SELECT_ONE_TOPIC_TO_EDIT'); ?>';
+var msg_select_emails = '<?php xMsg('SUBSCR', 'ALERT_SELECT_EMAILS'); ?>';
+var msg_confirm_delete_emails = '<?php xMsg('SUBSCR', 'ALERT_DELETE_EMAILS'); ?>';
+var msg_select_topics_to_export = '<?php xMsg('SUBSCR', 'ALERT_SELECT_TOPICS_TO_EXPORT'); ?>';
+
+var subforms = new Array();
+
+function isSelectedTopicId(e)
+{
+    var r =  
+        e.getAttribute('name') &&
+        e.getAttribute('name').indexOf('topic_id') == 0 &&
+        e.getAttribute('type') &&
+        ((e.getAttribute('type') == 'checkbox' && e.checked) || e.getAttribute('type') == 'hidden');
+    return r; 
+}
+
+function checkSelectedTopics(msg)
+{
+return true;
+    var found = false;
+    var form = document.forms['manage_subscriptions'];
+    var n = form.elements.length;
+    for (var i=0; i<n; i++) {
+        var e = form.elements[i];
+        if (isSelectedTopicId(e)) {
+            found = true;
+            break;
+        }
+    }
+    if (! found) {
+        alert(msg);
+    }
+    return found;
+}
+
+function isSelectedEmailId(e)
+{
+    var r =  
+        e.getAttribute('name') &&
+        e.getAttribute('name').indexOf('email_id') == 0 &&
+        e.getAttribute('type') &&
+        ((e.getAttribute('type') == 'checkbox' && e.checked) || e.getAttribute('type') == 'hidden');
+    return r; 
+}
+
+function checkSelectedEmails(form, msg)
+{
+    var found = false;
+    var n = form.elements.length;
+    for (var i=0; i<n; i++) {
+        var e = form.elements[i];
+        if (isSelectedEmailId(e)) {
+            found = true;
+            break;
+        }
+    }
+    if (! found) {
+        alert(msg);
+    }
+    return found;
+}
+
+function getTopicsIds(form)
+{
+    var ids = '';
+    var n = form.elements.length;
+    for (var i=0; i<n; i++) {
+        var e = form.elements[i];
+        if (isSelectedTopicId(e)) {
+            if(ids == '') {
+                ids = e.getAttribute('value');
+            }
+            else {
+                ids += ','+e.getAttribute('value');
+            }
+        }
+    }
+    return ids;
+}
+
+function getEmailsIds(form)
+{
+    var ids = '';
+    var n = form.elements.length;
+    for (var i=0; i<n; i++) {
+        var e = form.elements[i];
+        if (isSelectedTopicId(e)) {
+            if(ids == '') {
+                ids = e.getAttribute('value');
+            }
+            else {
+                ids += ','+e.getAttribute('value');
+            }
+        }
+    }
+    return ids;
+}
+
+function addTopic()
+{
+    openURLinNewWindow('{AddTopicURL}', 'AddTopic');
+}
+
+function editTopicOld()
+{
+    if (document.forms['manage_subscriptions']) {
+        var form = document.forms['manage_subscriptions'];
+        if (form.elements['asc_action']) {
+            var n = form.elements.length;
+            var found = 0;
+            var topic_id = null;
+            for (var i=0; i<n; i++) {
+                var e = form.elements[i];
+                if (isSelectedTopicId(e)) {
+                    found ++;
+                    topic_id = e.getAttribute('value');
+                }
+            }
+            if (found == 1) {
+                openURLinNewWindow('{EditTopicURL}'+topic_id, 'AddTopic');
+            }
+            else {
+                alert(msg_select_one_topic);
+            }
+        }
+    }    
+}
+
+function editTopic(topic_id)
+{
+	openURLinNewWindow('{EditTopicURL}'+topic_id, 'AddTopic');
+}
+
+function sortTopics()
+{
+    openURLinNewWindow('{SortTopicsURL}', 'SortTopics');
+}
+
+function deleteTopics()
+{
+    if (document.forms['manage_subscriptions']) {
+        var form = document.forms['manage_subscriptions'];
+        if (form.elements['asc_action']) {
+            var topics_ids = getTopicsIds(form);
+            if (topics_ids == '') {
+                alert(msg_select_topics_to_delete);
+            }
+            else {
+                openURLinNewWindow('{DeleteTopicsURL}'+topics_ids, 'DeleteTopics');
+            }
+        }
+    }    
+}
+
+function subscribe()
+{
+    if (document.forms['manage_subscriptions']) {
+        var form = document.forms['manage_subscriptions'];
+        if (form.elements['asc_action']) {
+            var topics_ids = getTopicsIds(form);
+            if (topics_ids == '') {
+                alert(msg_select_topics_to_subscribe);
+            }
+            else {
+                go('{SubscribeURL}'+topics_ids, 'Subscribe');
+            }
+        }
+    }    
+}
+
+function unsubscribe()
+{
+    if (document.forms['manage_subscriptions']) {
+        var form = document.forms['manage_subscriptions'];
+        if (form.elements['asc_action']) {
+            var topics_ids = getTopicsIds(form);
+            if (topics_ids == '') {
+                alert(msg_select_topics_to_unsubscribe);
+            }
+            else {
+                go('{UnsubscribeURL}'+topics_ids, 'Unsubscribe');
+            }
+        }
+    }    
+}
+
+function submitDeleteEmails(btn)
+{
+    if (document.forms['manage_subscriptions']) {
+        var form = document.forms['manage_subscriptions'];
+        if (form.elements['asc_action']) {
+            if (checkSelectedEmails(form, msg_select_emails) && confirm(msg_confirm_delete_emails)) {
+                disableButton(btn.id);
+                form.elements['asc_action'].value = 'delete_emails';
+                form.submit(); 
+            }
+        }
+    }
+}
+
+function exportEmails()
+{
+    if (document.forms['manage_subscriptions']) {
+        var form = document.forms['manage_subscriptions'];
+        if (form.elements['asc_action']) {
+            var topics_ids = getTopicsIds(form);
+            if (topics_ids == '') {
+                alert(msg_select_topics_to_export);
+            }
+            else {
+                openURLinNewWindow('{ExportURL}'+topics_ids, 'Export');
+            }
+        }
+    }    
+}
+
+function findPos(obj) {
+    var curleft = curtop = 0;
+    if (obj.offsetParent) {
+        curleft = obj.offsetLeft
+        curtop = obj.offsetTop
+        while (obj = obj.offsetParent) {
+            curleft += obj.offsetLeft
+            curtop += obj.offsetTop
+        }
+    }
+    return new Array(curleft,curtop);
+}
+
+
+
+function stopEventPropagation(e)
+{
+    if (!e) var e = window.event
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+}
+
+function submitSearch(btn)
+{
+    if (document.forms['search_email']) {
+        var form = document.forms['search_email'];
+        disableButton(btn.id);
+        form.submit(); 
+    }
+}
+
+// -->
+</script>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light">
+			<?php
+				FormErrors();
+				ToolbarTop();
+			?>
+			<div class="portlet-body">
+				<?php ItemsList(); ?>
+			</div>
+				<?php
+					ToolbarBottom();
+				?>
+		</div>
+	</div>
+</div>
+<?php EmailsPaginator(); ?>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

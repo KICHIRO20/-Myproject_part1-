@@ -1,0 +1,241 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- tinyMCE -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2',
+                            'AddButton1',
+                            'AddButton2',
+                            'DeleteButton1',
+                            'DeleteButton2',
+                            'CloneButton',
+                            'RenameButton'
+                            );
+    disableButtons(buttons);
+}
+
+RatesIDs = new Array();
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    
+    if (formAction == 'AddMethod' && form.NewMethodName.value=='')
+    {
+    	alert('<?php Alert_001(); ?>');
+    	form.NewMethodName.focus();
+    	return;
+    }
+
+	<?php JSmethodsIDs(); ?>
+
+    if (formAction == 'DeleteMethods' 
+        || formAction == 'CloneMethods')
+    {
+        var one_selected = false;
+        var i;
+                
+        for(i=0; i < MethodsIDs.length; i++)
+        {
+            // method boxes
+            if(document.getElementById('MD-' + MethodsIDs[i]).checked)
+            {
+                one_selected = true;
+                break;
+            };
+        }
+    
+    	if(!one_selected)
+    	{
+	        alert('<?php Alert_003(); ?>');
+	        return;
+	    };    
+    }
+
+    if (formAction == 'DeleteRates')
+    {
+	    one_selected = false;
+	    var i;
+	    for(i=0; i < RatesIDs.length; i++)
+	    {
+            // check "rates" boxes
+	        if(document.getElementById('RD-'+i).checked)
+	        {
+	            one_selected = true;
+	            break;
+	        }
+	    }
+	    
+        if(!one_selected)
+        {
+            alert('<?php Alert_004(); ?>');
+            return;
+        }
+    }
+    
+	if ((formAction == 'Save' || formAction == 'RenameMethods') && form.status[0].checked)
+	{
+		var one_selected = false;
+		var i;
+		
+		for(i=0; i < MethodsIDs.length; i++)
+		{
+			// check "method available" selects
+			select = document.getElementById('MA-' + MethodsIDs[i]);
+			if (!select)
+			{
+			    return;
+			}
+			for (j=0; j < select.length; j++)
+			{
+				if(select.options[j].selected && select.options[j].value == "on")
+				{
+    				one_selected=true;
+				    break;
+				}
+			}
+		}
+		
+		if(!one_selected)
+		{
+			alert('<?php Alert_002(); ?>');
+			return;
+		}
+	}
+    
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+//-->
+</script>
+
+<form <?php EditSMForm(); ?> id="EditSMForm">
+<?php HiddenArrayViewState(); ?>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php ModuleType(); ?> </span>
+			<span class="caption-subject font-blue-sharp"><?php ModuleName(); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditSMForm', 'Save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<?php TopErrors(); ?>
+	<div class="portlet-body">
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleStatusFieldName(); ?> *</span>
+				<span class="pull-right"></span>
+			</div>
+			<div class="col-sm-8">
+				<?php ModuleStatusField(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleNameFieldName(); ?></span>
+				<span class="pull-right"></span>
+			</div>
+			<div class="col-sm-8">
+				<?php ModuleNameField(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleDescrFieldName(); ?></span>
+                                  <a class="pull-right" style="cursor:pointer;">
+                                            <?php hinttext('MODULE_DESCR_FIELD_NAME','shipping-module-dsr-messages'); ?>
+                                  </a>
+			</div>
+			<div class="col-sm-8">
+				<?php ModuleDescrFieldValue(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleRateUnitFieldName(); ?> *</span>
+                                  <a class="pull-right" style="cursor:pointer;">
+                                            <?php hinttext('MODULE_RATE_UNIT_FIELD_NAME','shipping-module-dsr-messages'); ?>
+                                  </a>
+			</div>
+			<div class="col-sm-8">
+        		<INPUT TYPE="hidden" name="UnitType" value="<?php UnitType(); ?>">
+				<SELECT style="display:inline" class="form-control input-sm input-small" name="RateUnit" id="ModuleRateUnitId" onchange="formSubmit('EditSMForm', 'ChangeRateUnit');"><?php RateUnits(); ?></SELECT> <?php RateUnitUnitsValue(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+
+		<div class="table-responsive">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr role="row" class="heading">
+						<th width="5%" align="center" style="text-align: center;">
+							<!-- input id="SelectAll" type="checkbox" class="group-checkable" onClick="javascript:selectItems('EditSMForm');" -->
+						</th>
+            			<th width="80%"><?php LabelSMName(); ?></th>
+            			<th width="18%"><?php LabelSMAvailable(); ?>&nbsp;&nbsp;</th>
+	            	</tr>
+				</thead>
+				<tbody>
+    	        	<?php MethodsList(); ?>
+				</tbody>
+            </table>
+		</div>
+
+		<div class="actions margin-bottom-20" align="right">
+			<div class="actions btn-set">
+				<a id="RenameButton" class="btn btn-default btn-circle" onclick="formSubmit('EditSMForm', 'RenameMethods');" title="<?php lbl_RenameSelected(); ?>"><i class="fa fa-refresh"></i> <span class="hidden-480"><?php lbl_RenameSelected(); ?></span></a>
+				<a id="CloneButton" class="btn btn-default btn-circle" onclick="formSubmit('EditSMForm', 'CloneMethods');" title="<?php lbl_CloneSelected(); ?>"><i class="fa fa-copy"></i> <span class="hidden-480"><?php lbl_CloneSelected();  ?></span></a>
+				<a id="DeleteButton1" class="btn btn-default btn-circle" onclick="formSubmit('EditSMForm', 'DeleteMethods');" title="<?php lbl_DeleteSelected(); ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php lbl_DeleteSelected(); ?></span></a>
+			</div>
+		</div>
+
+		<div class="table-responsive">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr role="row" class="heading">
+						<th width="30%" style="text-align:right"><b><?php lbl_NewMethodName(); ?></b>&nbsp;</th>
+						<th width="60%">
+							<input class="form-control input-sm input-large" type="text" name="NewMethodName" maxlength="125">
+						</th>
+						<th width="10%">
+							<a id="AddButton1" class="btn btn-default btn-circle" onclick="formSubmit('EditSMForm', 'AddMethod');">
+							<?php Msg('BTN_ADD'); ?></a>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+
+		<span class="required alert-danger"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span>
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditSMForm', 'Save');" type="button" name="save" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

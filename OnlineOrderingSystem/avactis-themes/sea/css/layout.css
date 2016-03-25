@@ -1,0 +1,176 @@
+/* Page Header Box ************************************************ */
+.box.page_header .content {
+    height: 193px;
+    background-color: #0C9EEE;
+    border-left: 1px #0C9EEE solid;
+    border-right: 1px #0C9EEE solid;
+    border-bottom: 1px #0C9EEE solid;
+}
+
+.box.page_header .welcome .content {
+    background-color: transparent;
+    border: none;
+    font-size: 8pt;
+    margin-left: 408px;
+    padding-left: 3%;
+    padding-top: 30px;
+    width: 55%;
+}
+
+/* Page Header Box ************************************************ */
+
+
+
+/* Page Top Menu ************************************************ */
+.box.page_top_menu .content {
+    height: 34px;
+    border: 1px #0C9EEE solid;
+    background-color: #0C9EEE;
+}
+/* Page Top Menu ************************************************ */
+
+
+
+/* Page Layout: Columns ************************************************ */
+.page_container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.page_container .left_column {
+    float: left;
+    width: 200px;
+    margin-right: 7px;
+    overflow: hidden;
+}
+
+.page_container .right_column {
+    float: right;
+    width: 200px;
+    margin-left: 7px;
+    overflow: hidden;
+}
+
+.page_container .center_column {
+    width: auto;
+    overflow: hidden;
+}
+
+.page_container.columnsLC .right_column {
+    display: none
+}
+
+.page_container.columnsLC .center_column {
+}
+
+.page_container.columnsCR .left_column {
+    display: none
+}
+
+.page_container.columnsCR .center_column {
+}
+
+.page_container.columnsC .left_column {
+    display: none
+}
+
+.page_container.columnsC .right_column {
+    display: none
+}
+
+.page_container.columnsC .center_column {
+}
+
+.page_footer {
+    height: 90px;
+    clear: both;
+    width: 100%;
+    padding-top: 20px;
+}
+/* Page Layout: Columns ************************************************ */
+
+
+/* BLOCK position  ************************************************ */
+.logo_bg {
+    position: absolute;
+    top: 10px;
+    left: 75px;
+    width: 204px;
+    height: 48px;
+}
+.logo_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url('../images/logo.png') no-repeat scroll left top;
+    width: 204px;
+    height: 48px;
+    display: block;
+    outline: none 0px;
+}
+
+.page_header .top_user2 {
+    background-color: transparent;
+    margin-left: 40%;
+    width: 55%;
+    height: 27px;
+    padding-top: 10px;
+    margin-bottom: 1px;
+    float: left;
+    padding-left: 3%;
+    margin-bottom: 1px;
+}
+
+.page_header .top_user2 .menu {
+    float: left;
+}
+
+/* BLOCK position  ************************************************ */
+
+
+.box.page_footer  {
+    margin-bottom: 0px;
+}
+
+.page_footer img.cc_icon {
+    margin-bottom: -20px;
+    margin-left: 10px;
+}
+
+.page_footer img.w3c_icon {
+    float: right;
+}
+
+.page_footer hr {
+    width: auto;
+    color: #969ea4;
+    background-color: #969ea4;
+}
+
+.page_footer .copyright {
+    margin: 0px;
+    padding: 0px;
+    color: #404040;
+    font-size: 8pt;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.box.page_header {
+    width: 1006px;
+    height: 246px;
+    margin-bottom: 8px;
+    left: -10px;
+    background: url('../images/header.jpg') no-repeat;
+    overflow: hidden;
+}
+
+.welcome {
+    clear: both;
+}
+
+.box.page_header .search {
+    float: right;
+    margin-right: 30px;
+    margin-top: 25px;
+}

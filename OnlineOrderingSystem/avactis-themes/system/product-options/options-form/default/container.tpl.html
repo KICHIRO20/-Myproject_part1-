@@ -1,0 +1,10 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="product_options form_view product_options_<?php ProductID() ?>">
+    <?php Local_jsCheckOptions(); ?>
+    <?php Local_ProductOptionsForm(); ?>
+    <script language="JavaScript">$(function () { 
+        $('.product_options_<?php ProductID() ?>').ProductOptionsChoice(<?php echo Local_ProductOptionsChoice() ?>); 
+    })</script>
+   
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

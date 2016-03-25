@@ -1,0 +1,17 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php Images(); ?>
+<div class="row">
+	<div class="col-sm-2">
+		<label class="control-label"><div><?php msg('CAT_IMGDESCR_NAME'); ?></div></label>
+	</div>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp('0','ImageDescription', 'cat_attr'); ?>
+		</a>
+	</div>
+	<div class="col-sm-5"> 
+		<input class="form-control" type="text" <?php ImageDescription(); ?> onBlur="formatInput(this);" patternType="string256">
+	</div>
+</div>
+<?php UploadControl(); ?>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

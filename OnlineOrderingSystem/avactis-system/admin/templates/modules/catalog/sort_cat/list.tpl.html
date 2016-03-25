@@ -1,0 +1,61 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function submitSaveCatForm(formID)
+    {
+        var form = document.forms[formID];
+        form.elements['ViewState[hasCloseScript]'].value = 'true';
+        form.submit();
+    }
+//-->
+</SCRIPT>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-sort font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php Msg('SORT_CTGR_001'); ?>&nbsp;<?php Sort_Object_CP(); ?></span>
+			<span class="caption-subject font-blue-sharp"><?php Breadcrumb(); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<a class="btn blue" href="javascript:submitSaveCatForm('SaveCatForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" data-original-title="" title=""><i class="fa fa-save"></i>&nbsp;<?php msg('BTN_SAVE'); ?></a>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+			<div class="alert alert-info">
+				<strong><?php Msg( 'SORT_CTGR_002', getSort_Object_P(), getCategoryName(), getSort_Object_S()); ?></strong>
+				<?php Msg( 'SORT_CTGR_003', getSort_Object_P(), getCategoryName() ); ?>
+			</div>
+			<FORM METHOD=POST ACTION="<?php SaveCatHref(); ?>" id="SaveCatForm" name="SaveCatForm">
+				<input type="hidden" <?php HiddenFieldAction(); ?>>
+        		<input type="hidden" id="ObjectList.hidden" name="ObjectList.hidden" value="<?php OptionsListHidden(); ?>">
+				<?php HiddenArrayViewState(); ?>
+				<div class="table-responsive">
+				<table class="form" cellspacing="1" cellpadding="5" width="50%" align="center">
+				<tr>
+    				<td>
+        				<select class="form-control input-medium" name="ObjectList" size="10" style="width: 200px;" id="ObjectList">
+            				<?php OptionsList(); ?>
+        				</select>
+    				</td>
+    				<td valign="middle" width="1">
+						<a ALT="<?php Msg('SORT_CTGR_004'); ?>" title="<?php Msg('SORT_CTGR_004'); ?>" href="javascript:moveItemUpTop('ObjectList');"><i class="fa fa-caret-square-o-up fa-2x"></i></a>
+						<a ALT="<?php Msg('SORT_CTGR_005'); ?>" title="<?php Msg('SORT_CTGR_005'); ?>" href="javascript:moveItemUp('ObjectList');"><i class="fa fa-chevron-circle-up fa-2x"></i></a>
+						<a ALT="<?php Msg('SORT_CTGR_006'); ?>" title="<?php Msg('SORT_CTGR_006'); ?>" href="javascript:moveItemDown('ObjectList');"><i class="fa fa-chevron-circle-down fa-2x"></i></a>
+						<a ALT="<?php Msg('SORT_CTGR_007'); ?>" title="<?php Msg('SORT_CTGR_007'); ?>" href="javascript:moveItemDownBottom('ObjectList');"><i class="fa fa-caret-square-o-down fa-2x"></i></a>
+					</td>
+				</tr>
+				</table>
+				</div>
+			</FORM>
+		</div>
+	</div>
+        <div class="actions" align="center">
+                   <div class="actions btn-set">
+				<a class="btn blue" href="javascript:submitSaveCatForm('SaveCatForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" data-original-title="" title=""><i class="fa fa-save"></i>&nbsp;<?php msg('BTN_SAVE'); ?></a>
+		   </div>
+       </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

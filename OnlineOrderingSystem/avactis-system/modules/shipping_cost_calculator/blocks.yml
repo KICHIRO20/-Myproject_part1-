@@ -1,0 +1,4 @@
+- ShippingCalculator:
+    title: Shipping calculator
+    description: Shipping calculator
+    page: cart.php

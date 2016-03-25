@@ -1,0 +1,10 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="product_rating_info">
+    <div class="label"><input type="radio" name="<?php Local_RateInputName(); ?>" value="<?php Local_RateInputValue(); ?>" <?php Local_RateInputChecked(); ?> /></div>
+    <div class="rating-box">
+        <div class="rating" style="width:<?php echo (intval(getValLocal_RateInputValue())*20); ?>%;"></div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+<?php Local_RateBgColor(); ?>

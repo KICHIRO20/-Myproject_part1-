@@ -1,0 +1,61 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-question-circle"></i>&nbsp;<?php msg('HELP_ATTR_PAGE_NAME'); ?> <?php AttributeName(); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div class="btn btn-default btn-circle" onclick="closeAndFocusParent()">
+				<i class="fa fa-times-circle"></i>
+				<span class="hidden-480">&nbsp;<?php msg('BTN_CLOSE'); ?><span>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<table class="table table-bordered borderless table-striped table-hover table-condensed">
+			<tbody>
+				<tr>
+					<td><?php msg('HELP_ATTR_PAGE_HEADER'); ?></td>
+					<td><?php AttributeName(); ?></td>
+				</tr>
+				<tr>
+					<td><?php msg('HELP_ATTR_FIELD_DESCR'); ?></td>
+					<td><?php AttributeDescr(); ?></td>
+				</tr>
+				<tr>
+					<td><?php msg('HELP_ATTR_TAG'); ?></td>
+					<td>&lt;?php&nbsp;<?php AttributeTag(); ?>();&nbsp;?&gt;</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2" class="text-center">
+						<div class="btn btn-default btn-circle" onclick="closeAndFocusParent()">
+							<i class="fa fa-times-circle"></i>
+							&nbsp;<?php msg('BTN_CLOSE'); ?>
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

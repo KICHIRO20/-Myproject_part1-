@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<notifications_install_data>
+	<infotags>
+		<group name="Product">
+			<tag name="ID" />
+			<tag name="Name" />
+			<tag name="Quantity" />
+			<tag name="SalePrice" />
+			<tag name="ListPrice" />
+			<tag name="SKU" />
+			<tag name="PerItemShippingCost" />
+			<tag name="PerItemHandlingCost" />
+			<tag name="Weight" />
+			<tag name="FreeShipping" />
+			<tag name="Amount" />
+			<tag name="Options" />
+			<tag name="QuantityInStock" />
+			<tag name="Manufacturer" />
+		</group>
+		<group name="Order">
+			<tag name="ID" />
+			<tag name="Date" />
+			<tag name="Status" />
+			<tag name="OldStatus" />
+			<tag name="PaymentStatus" />
+			<tag name="OldPaymentStatus" />
+			<tag name="PaymentMethod" />
+			<tag name="PaymentMethodText" />
+			<tag name="ShippingMethod" />
+			<tag name="Subtotal" />
+			<tag name="GlobalDiscount" />
+			<tag name="PromoCode" />
+			<tag name="PromoCodeDiscount" />
+			<tag name="QuantityDiscount" />
+			<tag name="DiscountedSubtotal" />
+			<tag name="TotalShippingAndHandlingCost" />
+            <tag name="Tax" />
+            <tag name="TaxExptMark" />
+            <tag name="TaxExptAmount" />
+            <tag name="TaxExptInput" />
+			<tag name="Total" />
+			<tag name="TrackingNumber" noprefix="true" />
+		</group>
+		<group name="Customer">
+			<tag name="Firstname" />
+			<tag name="Lastname" />
+			<tag name="Email" />
+			<tag name="Streetline1" />
+			<tag name="Streetline2" />
+			<tag name="City" />
+			<tag name="State" />
+			<tag name="Postcode" />
+			<tag name="Country" />
+			<tag name="Phone" />
+		</group>
+		<group name="Billing">
+			<tag name="Firstname" />
+			<tag name="Lastname" />
+			<tag name="Email" />
+			<tag name="Streetline1" />
+			<tag name="Streetline2" />
+			<tag name="City" />
+			<tag name="State" />
+			<tag name="Postcode" />
+			<tag name="Country" />
+			<tag name="Phone" />
+			<tag name="CommentLine" />
+			<tag name="CommentArea" />
+		</group>
+		<group name="Shipping">
+			<tag name="Firstname" />
+			<tag name="Lastname" />
+			<tag name="Email" />
+			<tag name="Streetline1" />
+			<tag name="Streetline2" />
+			<tag name="City" />
+			<tag name="State" />
+			<tag name="Postcode" />
+			<tag name="Country" />
+			<tag name="Phone" />
+			<tag name="CommentLine" />
+			<tag name="CommentArea" />
+		</group>
+		<group name="StoreOwner">
+			<tag name="Name" />
+			<tag name="Website" />
+			<tag name="Phones" />
+			<tag name="Fax" />
+			<tag name="StreetLine1" />
+			<tag name="StreetLine2" />
+			<tag name="City" />
+			<tag name="State" />
+			<tag name="Postcode" />
+			<tag name="Country" />
+			<tag name="Email" />
+			<tag name="SiteAdministratorEmail" />
+			<tag name="OrdersDepartmentEmail" />
+		</group>
+		<group name="Download">
+			<tag name="Link" />
+			<tag name="LinkExpiryDate" />
+			<tag name="LinkAttempts" />
+			<tag name="Filename" />
+			<tag name="FileDescription" />
+		</group>
+		<group name="Account">
+			<tag name="Name" />
+			<tag name="ActivationLink" />
+			<tag name="NewPasswordLink" />
+		</group>
+		<group name="Combination">
+			<tag name="SKU" />
+			<tag name="QuantityInStock" />
+			<tag name="Description" />
+		</group>
+                <group name="CustomerReview">
+                        <tag name="Author" />
+                        <tag name="Date" />
+                        <tag name="Time" />
+                        <tag name="IP" />
+                        <tag name="Text" />
+                        <tag name="Status" />
+                        <tag name="OverallRating" />
+                </group>
+	</infotags>
+	<blocktags>
+		<blocktag name="OrderContentBlock">
+			<textfile name="order_content_block.txt" />
+			<infotags>
+				<group name="Product" />
+			</infotags>
+		</blocktag>
+		<blocktag name="LowLevelProductsBlock">
+			<textfile name="low_level_products_block.txt" />
+			<infotags>
+				<group name="Product">
+					<except>
+						<infotag name="Quantity" />
+						<infotag name="Amount" />
+						<infotag name="Options" />
+					</except>
+				</group>
+			</infotags>
+		</blocktag>
+		<blocktag name="OrderDiscountsBlock">
+			<textfile name="order_discounts_block.txt" />
+			<infotags>
+				<group name="Order">
+					<only>
+						<infotag name="Subtotal" />
+						<infotag name="GlobalDiscount" />
+						<infotag name="PromoCodeDiscount" />
+						<infotag name="QuantityDiscount" />
+						<infotag name="PromoCode" />
+					</only>
+				</group>
+			</infotags>
+		</blocktag>
+		<blocktag name="OrderDownloadLinksBlock">
+			<textfile name="order_download_links_block.txt" />
+			<infotags>
+				<group name="Download" />
+			</infotags>
+		</blocktag>
+	</blocktags>
+	<actions>
+		<action name="NewOrder" lang_code="NTFCTN_ACT_NAME_001">
+			<infotags>
+				<group name="Order">
+					<except>
+						<infotag name="OldStatus" />
+						<infotag name="OldPaymentStatus" />
+					</except>
+				</group>
+				<group name="Customer" />
+				<group name="Billing" />
+				<group name="Shipping" />
+				<group name="StoreOwner" />
+			</infotags>
+			<blocktags>
+				<blocktag name="OrderContentBlock" />
+				<blocktag name="OrderDiscountsBlock" />
+			</blocktags>
+		</action>
+		<action name="OrderStatusChanged"
+			lang_code="NTFCTN_ACT_NAME_002">
+			<options>
+				<option name="OrderStatusChangedTo"
+					lang_code="NTFCTN_ACTION_OPTION_001" input_type="checkbox">
+					<value name="StatusNew"
+						key="const(ORDER_STATUS_NEW)" lang_code="ORDER_STATUS_001" />
+					<value name="StatusInProgress"
+						key="const(ORDER_STATUS_IN_PROGRESS)"
+						lang_code="ORDER_STATUS_002" />
+					<value name="StatusReadyToShip"
+						key="const(ORDER_STATUS_READY_TO_SHIP)"
+						lang_code="ORDER_STATUS_003" />
+					<value name="StatusShipped"
+						key="const(ORDER_STATUS_SHIPPED)" lang_code="ORDER_STATUS_004" />
+					<value name="StatusCancelled"
+						key="const(ORDER_STATUS_CANCELLED)" lang_code="ORDER_STATUS_005" />
+					<value name="StatusDeclined"
+						key="const(ORDER_STATUS_DECLINED)" lang_code="ORDER_STATUS_006" />
+					<value name="StatusCompleted"
+						key="const(ORDER_STATUS_COMPLETED)" lang_code="ORDER_STATUS_007" />
+				</option>
+			</options>
+			<infotags>
+				<group name="Order" />
+				<group name="Customer" />
+				<group name="Billing" />
+				<group name="Shipping" />
+				<group name="StoreOwner" />
+			</infotags>
+			<blocktags>
+				<blocktag name="OrderContentBlock" />
+				<blocktag name="OrderDiscountsBlock" />
+			</blocktags>
+		</action>
+		<action name="PaymentStatusChanged"
+			lang_code="NTFCTN_ACT_NAME_003">
+			<options>
+				<option name="PaymentStatusChangedTo"
+					lang_code="NTFCTN_ACTION_OPTION_002" input_type="checkbox">
+					<value name="PaymentWaiting"
+						key="const(ORDER_PAYMENT_STATUS_WAITING)"
+						lang_code="ORDER_PAYMENT_STATUS_001" />
+					<value name="PaymentFullyPaid"
+						key="const(ORDER_PAYMENT_STATUS_FULLY_PAID)"
+						lang_code="ORDER_PAYMENT_STATUS_002" />
+					<value name="PaymentDeclined"
+						key="const(ORDER_PAYMENT_STATUS_DECLINED)"
+						lang_code="ORDER_PAYMENT_STATUS_003" />
+				</option>
+			</options>
+			<infotags>
+				<group name="Order">
+					<except>
+						<infotag name="OldPaymentStatus" />
+					</except>
+				</group>
+				<group name="Customer" />
+				<group name="Billing" />
+				<group name="Shipping" />
+				<group name="StoreOwner" />
+			</infotags>
+			<blocktags>
+				<blocktag name="OrderContentBlock" />
+				<blocktag name="OrderDiscountsBlock" />
+			</blocktags>
+		</action>
+		<action name="ProductLowLevelInStock"
+			lang_code="NTFCTN_ACT_NAME_004">
+			<infotags>
+				<group name="Order">
+					<except>
+						<infotag name="OldStatus" />
+						<infotag name="OldPaymentStatus" />
+					</except>
+				</group>
+				<group name="Customer" />
+				<group name="Billing" />
+				<group name="Shipping" />
+				<group name="StoreOwner" />
+			</infotags>
+			<blocktags>
+				<blocktag name="LowLevelProductsBlock" />
+			</blocktags>
+		</action>
+		<action name="DigitalProductsOrdered"
+			lang_code="NTFCTN_ACT_NAME_005">
+			<infotags>
+				<group name="Order">
+					<only>
+						<infotag name="ID" />
+						<infotag name="Date" />
+					</only>
+				</group>
+				<group name="Customer">
+					<only>
+						<infotag name="Firstname" />
+						<infotag name="Lastname" />
+						<infotag name="Email" />
+					</only>
+				</group>
+				<group name="StoreOwner" />
+			</infotags>
+			<blocktags>
+				<blocktag name="OrderDownloadLinksBlock" />
+			</blocktags>
+		</action>
+		<action name="CustomerAccountRegistered"
+			lang_code="NTFCTN_ACT_NAME_006">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<only>
+						<infotag name="Name" />
+					</only>
+				</group>
+			</infotags>
+		</action>
+		<action name="CustomerShouldActivateSelf"
+			lang_code="NTFCTN_ACT_NAME_007">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<except>
+						<infotag name="NewPasswordLink" />
+					</except>
+				</group>
+			</infotags>
+		</action>
+		<action name="AdminShouldActivateCustomer"
+			lang_code="NTFCTN_ACT_NAME_008">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<only>
+						<infotag name="Name" />
+					</only>
+				</group>
+			</infotags>
+		</action>
+		<action name="CustomerActivateSelf"
+			lang_code="NTFCTN_ACT_NAME_009">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<only>
+						<infotag name="Name" />
+					</only>
+				</group>
+			</infotags>
+		</action>
+		<action name="AdminActivateCustomer"
+			lang_code="NTFCTN_ACT_NAME_010">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<only>
+						<infotag name="Name" />
+					</only>
+				</group>
+			</infotags>
+		</action>
+		<action name="AdminDropCustomerPassword"
+			lang_code="NTFCTN_ACT_NAME_011">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<except>
+						<infotag name="ActivationLink" />
+					</except>
+				</group>
+			</infotags>
+		</action>
+		<action name="CustomerDropPassword"
+			lang_code="NTFCTN_ACT_NAME_012">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<except>
+						<infotag name="ActivationLink" />
+					</except>
+				</group>
+			</infotags>
+		</action>
+		<action name="CustomerAccountWasAutoCreated"
+			lang_code="NTFCTN_ACT_NAME_013">
+			<infotags>
+				<group name="Customer" />
+				<group name="StoreOwner" />
+				<group name="Account">
+					<except>
+						<infotag name="ActivationLink" />
+					</except>
+				</group>
+			</infotags>
+		</action>
+        <action name="InventoryLowLevelInStock"
+            lang_code="NTFCTN_ACT_NAME_014">
+            <infotags>
+                <group name="Combination" />
+                <group name="StoreOwner" />
+                <group name="Product">
+                    <only>
+                        <infotag name="Name" />
+                    </only>
+                </group>
+            </infotags>
+        </action>
+        <action name="CustomerReviewPosted"
+            lang_code="NTFCTN_ACT_NAME_015">
+            <infotags>
+                <group name="Product" />
+                <group name="CustomerReview" />
+                <group name="StoreOwner" />
+            </infotags>
+        </action>
+	</actions>
+	<notifications>
+		<notification name="NewOrder" action="NewOrder"
+			textfile="new_order.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="OrderShipped" action="OrderStatusChanged"
+			textfile="order_shipped.txt">
+			<options>
+				<option name="OrderStatusChangedTo"
+					default_value="false">
+					<value name="StatusShipped" value="true" />
+				</option>
+			</options>
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="OrderStatusChanged"
+			action="OrderStatusChanged" textfile="order_status_changed.txt">
+			<options>
+				<option name="OrderStatusChangedTo"
+					default_value="true">
+					<value name="StatusNew" value="false" />
+					<value name="StatusShipped" value="false" />
+				</option>
+			</options>
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="PaymentReceived"
+			action="PaymentStatusChanged" textfile="payment_received.txt">
+			<options>
+				<option name="PaymentStatusChangedTo"
+					default_value="false">
+					<value name="PaymentFullyPaid" value="true" />
+				</option>
+			</options>
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="ProductLowStockLevels"
+			action="ProductLowLevelInStock"
+			textfile="product_low_stock_levels.txt">
+			<recipients>
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="DigitalProductsOrdered"
+			action="DigitalProductsOrdered"
+			textfile="digital_products_ordered.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="CustomerAccountRegistered"
+			action="CustomerAccountRegistered"
+			textfile="customer_account_registered.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="CustomerShouldActivateSelf"
+			action="CustomerShouldActivateSelf"
+			textfile="customer_should_activate_self.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+			</recipients>
+		</notification>
+		<notification name="AdminShouldActivateCustomer"
+			action="AdminShouldActivateCustomer"
+			textfile="admin_should_activate_customer.txt">
+			<recipients>
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="CustomerActivateSelf"
+			action="CustomerActivateSelf"
+			textfile="customer_activate_self.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="AdminActivateCustomer"
+			action="AdminActivateCustomer"
+			textfile="admin_activate_customer.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="AdminDropCustomerPassword"
+			action="AdminDropCustomerPassword"
+			textfile="admin_drop_customer_password.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="CustomerDropPassword"
+			action="CustomerDropPassword"
+			textfile="customer_drop_password.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+			</recipients>
+		</notification>
+		<notification name="CustomerAccountWasAutoCreated"
+			action="CustomerAccountWasAutoCreated"
+			textfile="customer_account_was_autocreated.txt">
+			<recipients>
+				<recipient code="EMAIL_CUSTOMER" />
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="InventoryLowLevelInStock"
+			action="InventoryLowLevelInStock"
+			textfile="inventory_low_stock_levels.txt">
+			<recipients>
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+		<notification name="CustomerReviewPosted"
+			action="CustomerReviewPosted"
+			textfile="customer_review_posted.txt">
+			<recipients>
+				<recipient code="EMAIL_STORE_OWNER" />
+			</recipients>
+		</notification>
+	</notifications>
+</notifications_install_data>

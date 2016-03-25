@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="product_rating_info <?php ViewClassName(); ?>">
+    <div class="label" style="color: rgb(62, 77, 92);"><?php Label('CUSTOMER_REVIEWS_RATING_LABEL'); ?></div>
+    <div class="rating-box">
+        <div class="rating" style="width:<?php ProductReviewsAverageRating(); ?>%;"></div>
+    </div>
+    <a href="<?php ProductReviewsLink(); ?>" class="ReviewNumber"><?php ProductReviewsNumber(); ?> <?php Label('CUSTOMER_REVIEWS_REVIEWS_LABEL'); ?></a>
+    <?php ProductAddReviewLink(0, 'CustomerReviews'); ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

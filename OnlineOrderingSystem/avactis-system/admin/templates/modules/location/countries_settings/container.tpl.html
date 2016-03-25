@@ -1,0 +1,89 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+function checkCountriesOnSubmit()
+{
+    form = document.getElementById('UpdateCountriesForm');
+    if (!form) 
+        return false;
+        
+    last_one = 237;
+    for (i=1; i < last_one + 1; i++)
+    {
+
+        chb = document.getElementById('cb_' + i);
+        if (!chb)
+        {
+          continue;
+        }
+
+        if (chb.checked)
+        {
+            form.submit();
+            return true;
+        }
+    }
+    alert("<?php Msg('MNG_CNTR_NO_SELECTED_ERROR'); ?>");
+    return false;
+}
+</script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('MNG_CNTR_PAGE_NAME'); ?></span>
+			<span class="caption-helper text-lowercase"><?php Msg('MNG_CNTR_PAGE_HEADER'); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+            <button id="UpdateButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="return checkCountriesOnSubmit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>		
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+	<div class="table-container" style="">
+			<div id="datatable_orders_wrapper" class="dataTables_wrapper dataTables_extended_wrapper no-footer">
+				<div class="table-scrollable">
+					<table  id="datatable_promo_codes" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="datatable_orders_info" role="grid">
+						<thead>
+							<tr role="row" class="heading">
+								<th width="10%" style="text-align: center;">
+									<?php Msg("MNG_CNTR_TABLE_HEADER_001"); ?>
+								</th>
+								<th width="50%" style="text-align: center;">
+									<?php Msg("MNG_CNTR_TABLE_HEADER_002"); ?>
+								</th>
+								<th width="20%" style="text-align: center;">
+									<?php Msg("MNG_CNTR_TABLE_HEADER_003"); ?>
+								</th>
+								<th width="20%"  style="text-align: center;">
+									<?php Msg("MNG_CNTR_TABLE_HEADER_004"); ?>
+    							</th>
+</tr>
+						</thead>
+						<tbody>
+						<?php ResultMessage(); ?>
+<FORM <?php UpdateCountriesForm(); ?> id="UpdateCountriesForm">
+<?php HiddenArrayViewState(); ?>
+<?php Items(); ?>
+</FORM>
+						</tbody>
+            </table>
+				</div>				
+			</div>	
+		</div>				
+	</div>	
+			<!-- Begin - Row -->
+	<div class="portlet-body">
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"></lable>
+			</div>
+			<div class="col-md-8">        	
+        <button id="UpdateButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="return checkCountriesOnSubmit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>		
+			</div>
+	</div>
+	</div>
+		<!-- End - Row -->
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,37 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="table-responsive">
+	<table class="table table-hover table-striped table-bordered borderless">
+		<thead>
+			<tr class="bg-info">
+				<th class="text-left"><?php cn_Header(); ?></th>
+				<th class="text-right">
+					<div id="DeleteButton2" class="btn btn-warning btn-circle" onClick="OnDeleteClick();">
+						<i class="fa fa-trash-o"></i>&nbsp;<?php msg('BTN_DELETE'); ?>
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php CustomerGroupsRows(); ?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="text-right bold uppercase">
+					<?php xmsg('CA','LBL_GROUP_NAME'); ?>&nbsp;:&nbsp;
+					<input type="text" id="new_group" maxlength="20" class="form-control input-sm input-medium inline" />
+				</td>
+				<td class="text-left">
+					<div id="AddGroupButton" class="btn btn-primary btn-circle" onClick="OnAddClick();">
+						<i class="fa fa-plus-circle"></i>&nbsp;<?php xmsg('CA', 'BTN_ADD'); ?>
+					</div>
+				</	td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<form action="customers.php" name="CustomerGroupsActionsForm" method="post">
+<input type="hidden" name="asc_action" value="">
+<input type="hidden" name="customer_group_ids" value="">
+<input type="hidden" name="new_customer_group" value="">
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

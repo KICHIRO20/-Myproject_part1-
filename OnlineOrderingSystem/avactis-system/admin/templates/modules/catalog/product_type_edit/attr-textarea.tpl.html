@@ -1,0 +1,32 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+	$vanish_text=getVanishing();
+	$atribute_text_control=getAttributeCustomControls();
+	$attribute_name=getAttributeName();
+
+?>
+<div class="row">
+	 <?php if(!empty($vanish_text)){ ?>
+						<div class="col-sm-1">
+							<label class="help-block"><?php Vanishing(); ?></label>		
+						</div>
+						<?php } if(!empty($atribute_text_control)){ ?>
+						<div class="col-sm-2">
+							<label class="help-block"><?php AttributeCustomControls(); ?></label>		
+						</div>
+						<?php } if(!empty($attribute_name)){ ?>
+						<div class="col-sm-2">
+							<label class="help-block"><?php AttributeName(); ?></label>		
+						</div>
+						<?php } ?>		
+						<div class="col-sm-1">
+							<?php AttributeHelpIcon(); ?>		
+						</div>
+	
+<div class="col-sm-6">
+		<textarea class="form-control <?php AttributeInputClass(); ?> input-xlarge" id="<?php AttributeTag(); ?>" name="<?php AttributeTag(); ?>[default]" cols="74" rows="5" onBlur="formatInput(this);"  onkeyup="formatInput(this);" patternType="string1024" ><?php AttributeDefault(); ?></textarea>
+	</div>
+
+</div>
+&nbsp;
+<!-- END TPL (DO NOT REMOVE!) -->

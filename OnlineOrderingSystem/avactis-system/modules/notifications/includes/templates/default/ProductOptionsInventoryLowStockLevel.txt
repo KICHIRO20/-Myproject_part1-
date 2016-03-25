@@ -1,0 +1,10 @@
+{StoreOwnerName}. Product Options Inventory: Low Stock Level.
+Low stock levels have been registered for the following product.
+----------------------------------------------
+Product: {ProductName}
+Combination SKU: {CombinationSKU}
+Combination: {CombinationDescription}
+Combination Quantity In Stock: {CombinationQuantityInStock}
+----------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}

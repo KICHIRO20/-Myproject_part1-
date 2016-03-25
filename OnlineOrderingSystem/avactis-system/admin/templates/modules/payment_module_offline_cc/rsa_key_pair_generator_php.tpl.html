@@ -1,0 +1,47 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php javascript_onload(); ?>
+
+<div id="step1">
+	<input type="hidden" name="rsa_key_generator_public_key_asc_format"  id="rsa_key_generator_public_key_asc_format"  value="<?php rsa_key_generator_public_key_asc_format(); ?>">
+	<input type="hidden" name="rsa_key_generator_private_key_asc_format" id="rsa_key_generator_private_key_asc_format" value="<?php rsa_key_generator_private_key_asc_format(); ?>">
+
+
+	<div class="alert alert-danger"><?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_PHP_001(); ?></div>
+	<div align="center">
+		<a id="GenerateRSAKeyPairInPHPButton" class="btn blue" onclick=""><?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_BUTTON(); ?></a>
+	</div>
+</div>
+
+<div id="step2" style="display: none;">
+	<div class="alert alert-danger">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_002(); ?><br><br>
+	</div>
+	<div align="center">
+		<input class="input_file" name="UploadNewPrivateKeyInJSInput" id="UploadNewPrivateKeyInJSInput" size="96" type="file"></input>
+	</div><br>
+	<div align="center" id="DownloadNewRSAPrivateKeyInDIV">
+		<a id="GenerateRSAKeyPairDownloadPrivateKeyOnConfirm" class="btn blue" onclick="">
+			<?php MODULE_PAYMENT_OFFLINE_CC_MSG_SAVE_KEY_CONFIRMATION_BUTTON(); ?>
+		</a>
+	</div><br>
+	<div class="alert alert-danger">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_003(); ?>
+	</div>
+	<a href="javascript: void(0);" style="color: blue;" onclick="switch_to_step('step1');">
+		<b><?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_004(); ?></b>
+	</a>
+</div>
+
+<div id="step3" style="display: none;">
+	<div class="alert alert-success">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_007(); ?>
+	</div>
+</div>
+
+<div id="step4" style="display: none;">
+	<div class="alert alert-warning">
+		<?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_005(); ?>&nbsp;
+	</div>
+	<a href="" style="color: blue;"><b><?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_006(); ?></b></a>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

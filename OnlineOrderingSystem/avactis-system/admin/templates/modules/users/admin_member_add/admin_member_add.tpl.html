@@ -1,0 +1,192 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" src="templates/modules/users/md5.js"></script>
+<script type="text/javascript" src="js/uspss.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function validateForm(formId, action)
+{
+    var form = document.forms[formId];
+    var first_name = form.elements['FirstName'].value;
+    var last_name = form.elements['LastName'].value;
+    var email = form.elements['Email'].value;
+    if (action=='Add')
+    {
+        var password = form.elements['Password'].value;
+        var verify_password = form.elements['VerifyPassword'].value;
+        if (!isAllFieldsFilled(new Array(first_name, last_name, email, password, verify_password)))
+        {
+            alert("<?php PSWUPD_009(); ?>");
+            return false;
+        }
+        if (!isValidNewPasswordLength(password))
+        {
+            alert("<?php PSWUPD_004(); ?>");
+            return false;
+        }
+        if (!isComplicatedNewPassword(password))
+        {
+            alert("<?php PSWUPD_005(); ?>");
+            return false;
+        }
+        if (!isDifferentFromEmail(email, password))
+        {
+            alert("<?php PSWUPD_007(); ?>");
+            return false;
+        }
+        if (!isEqNewAndVerifyPasswords(password, verify_password))
+        {
+            alert("<?php PSWUPD_002(); ?>");
+            return false;
+        }
+    }
+    else
+    {
+        if (!isAllFieldsFilled(new Array(first_name, last_name, email)))
+        {
+            alert("<?php PSWUPD_011(); ?>");
+            return false;
+        }
+    }
+    if (!isValidEmail(email))
+    {
+        alert("<?php PSWUPD_000(); ?>");
+        return false;
+    }
+    return true;
+}
+
+function formSubmit(formId, formIdHidden, action)
+{
+    var form = document.forms[formId];
+    var formHidden = document.forms[formIdHidden];
+    if(validateForm(formId, action))
+    {
+        formHidden.elements['FirstName'].value = form.elements['FirstName'].value;
+        formHidden.elements['LastName'].value = form.elements['LastName'].value;
+        formHidden.elements["Email"].value = form.elements["Email"].value;
+        if (action=='Add')
+        {
+            if (form.elements["SendByEmail"].checked)
+            {
+                formHidden.elements["SendByEmail"].value = true;
+                formHidden.elements["Password_Open"].value = form.elements["Password"].value;
+            }
+            else
+            {
+                formHidden.elements["SendByEmail"].value = false;
+                formHidden.elements["Password_Open"].value = "";
+            }
+            formHidden.elements["Password"].value = hex_md5(form.elements["Password"].value);
+            formHidden.elements["VerifyPassword"].value = hex_md5(form.elements["VerifyPassword"].value);
+        }
+        formHidden.elements["FormAction"].value = action;
+        formHidden.submit();
+        disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));
+        return true;
+    }
+    return false;
+}
+//-->
+</SCRIPT>
+<?php Errors(); ?>
+<FORM <?php FORM(); ?> id="AddAdminMemberForm">
+<div class="portlet light">
+    <!-- title -->   
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-user font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php PageTitle(); ?></span>
+			<span class="caption-helper text-lowercase"></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+        		<button  id="SaveButton1"  title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript: formSubmit('AddAdminMemberForm', 'AddAdminMemberFormHidden', '<?php FormAction(); ?>');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<!-- End title -->
+	<!-- Group 1 -->  
+	<div class="table-container form">				
+  			<h4 class="form-section"><?php Msg("ADMIN_ADD_MEMBER_PAGE_SUBTITLE"); ?></h4>  		
+  			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+					<!-- Begin - Row -->
+					<div class="row margin-bottom-10">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-3 bold">
+						<?php Msg("ADMIN_INFO_FIELD_001"); ?>:<span class="font-red">&nbsp;<?php Label('ACCOUNT_ASTERISK'); ?></span>
+						</div>
+						<div class="col-sm-8" style="float:left;">						
+						<input type="text" class="form-control form-filter input-sm input-medium"  <?php FirstName(); ?>>
+						</div>
+					</div>
+					<!-- End - Row -->
+					<!-- Begin - Row -->
+					<div class="row margin-bottom-10">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-3 bold">
+						<?php Msg("ADMIN_INFO_FIELD_002"); ?>:<span class="font-red">&nbsp;<?php Label('ACCOUNT_ASTERISK'); ?></span>
+						</div>
+						<div class="col-sm-8" style="float:left;">						
+						<input type="text" class="form-control form-filter input-sm input-medium"  <?php LastName(); ?>>
+						</div>
+					</div>
+					<!-- End - Row -->
+					<!-- Begin - Row -->
+					<div class="row margin-bottom-10">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-3 bold">
+						<?php Msg("ADMIN_INFO_FIELD_003"); ?>:<span class="font-red">&nbsp;<?php Label('ACCOUNT_ASTERISK'); ?></span>
+						</div>
+						<div class="col-sm-8" style="float:left;">						
+						<input type="text" class="form-control form-filter input-sm input-medium"  <?php Email(); ?>>
+						</div>
+					</div>
+					<!-- End - Row -->
+					<!-- Begin - Row -->
+					<?php PasswordFields(); ?>
+					<!-- End - Row -->	
+					</div>
+				</div>
+			</div>
+	</div>
+	<!-- Group 1 End--> 
+	</FORM>
+<FORM <?php FORM(); ?> id="AddAdminMemberFormHidden">
+<?php HiddenArrayViewState(); ?>
+<!-- Group 1 -->  
+	<div class="table-container form">				
+  			<h4 class="form-section"><?php Msg("ADMIN_INFO_HEADER_002"); ?></h4>  		
+  			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+					<!-- Begin - Row -->
+						<?php PermissionsList(); ?>
+					<!-- End - Row -->			
+					</div>
+				</div>
+			</div>
+	</div>
+	<!-- Group 1 End--> 
+	<h4 class="font-red"><?php Msg("REQUIRED_FIELD_LABEL"); ?></h4>
+	<div class="alert alert-warning"><?php PasswordRequirements(); ?></div>
+	<!-- Begin -Buttons Bottom Row -->
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button  id="SaveButton2"  title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript: formSubmit('AddAdminMemberForm', 'AddAdminMemberFormHidden', '<?php FormAction(); ?>');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+    <!-- End - Buttons Bottom Row -->
+<INPUT TYPE="hidden" name="FirstName">
+<INPUT TYPE="hidden" name="LastName">
+<INPUT TYPE="hidden" name="Email">
+<INPUT TYPE="hidden" name="Password_Open">
+<INPUT TYPE="hidden" name="Password">
+<INPUT TYPE="hidden" name="VerifyPassword">
+<INPUT TYPE="hidden" name="SendByEmail">
+<INPUT TYPE="hidden" name="FormAction">
+</FORM>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

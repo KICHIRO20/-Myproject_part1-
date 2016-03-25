@@ -1,0 +1,552 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+
+var current_nrtpl = 0;
+var current_visible_op_form = '';
+
+function setNRuleTemplate(index)
+{
+  if(current_nrtpl!=0)
+  {
+    clearSingleSide();
+    clearLeftSide();
+    clearRightSide();
+  };
+  
+  document.getElementById('nrule_tpl_'+current_nrtpl).style.display='none';
+  document.getElementById('nrule_tpl_'+index).style.display='';
+  current_nrtpl = index;
+  
+}
+
+function repositionOpForm(div_id)
+{
+    doc_width = document.documentElement.clientWidth;
+    doc_height = document.documentElement.clientHeight;
+    div_width = document.getElementById(div_id).offsetWidth;
+    div_height = document.getElementById(div_id).offsetHeight;
+    
+    div_left = (doc_width - div_width) / 2;
+    div_top = document.documentElement.scrollTop + (doc_height - div_height) / 2;
+
+    if(div_top < 0) div_top = 0;
+
+    document.getElementById(div_id).style.left = div_left + 'px';
+    document.getElementById(div_id).style.top = div_top + 'px';
+};
+
+function hideOpForm(div_id)
+{
+  if(div_id!='')
+    document.getElementById(div_id).style.display='none';
+}
+
+function showOpForm(div_id)
+{
+  if(div_id!='')
+  {
+    document.getElementById(div_id).style.display='';
+    repositionOpForm(div_id);
+  }
+}
+
+function exchangeOpForm(new_op_form)
+{
+  hideOpForm(current_visible_op_form);
+  current_visible_op_form=new_op_form;
+  showOpForm(current_visible_op_form);
+}
+
+var options_ids = new Array();
+var options_values = new Array();
+<?php jsOptionsValuesArray(); ?>
+var options_types = new Array();
+<?php jsOptionsTypesArray(); ?>
+
+var sside = new Array();
+var lside = new Array();
+var rside = new Array();
+
+var sside_cleared = 1;
+var lside_cleared = 1;
+var rside_cleared = 1;
+
+function replaceIntoSingleSide(oid,vid)
+{
+  var found = false;
+  for(i=0;i<sside.length;i++)
+    if(sside[i][0]==oid)
+    {
+      sside[i][1]=vid;
+      found=true;
+    };
+    
+  if(!found)
+  	addToSingleSide(oid,vid);
+}
+
+function addToSingleSide(oid,vid)
+{
+  sside[sside.length]=new Array(oid,vid);
+}
+
+function delFromSingleSide(oid,vid)
+{
+  for(i=0;i<sside.length;i++)
+    if(sside[i][0]==oid && sside[i][1]==vid)
+    {
+      sside.splice(i,1);
+    };
+}
+
+function addToLeftSide(oid,vid)
+{
+  lside[lside.length]=new Array(oid,vid);
+  if(options_types[oid]=='MS')
+    document.getElementById('RightSide_'+oid+'_'+vid).disabled=true;
+  else
+    for(i=0;i<options_values[oid].length;i++)
+      document.getElementById('RightSide_'+oid+'_'+options_values[oid].length).disabled=true;
+}
+
+function delFromLeftSide(oid,vid)
+{
+  for(i=0;i<lside.length;i++)
+    if(lside[i][0]==oid && lside[i][1]==vid)
+    {
+      lside.splice(i,1);
+    };
+  if(options_types[oid]=='MS')
+  {
+    document.getElementById('RightSide_'+oid+'_'+vid).checked=false;
+    document.getElementById('RightSide_'+oid+'_'+vid).disabled=false;
+  }
+  else
+  {
+    var flag=false;
+    for(i=0;i<lside.length;i++)
+      if(lside[i][0]==oid)
+      {
+        flag=true;
+      }
+    if(!flag)
+      for(i=0;i<options_values[oid].length;i++)
+        document.getElementById('RightSide_'+oid+'_'+options_values[oid].length).disabled=false;
+  }  
+}
+
+function addToRightSide(oid,vid)
+{
+  rside[rside.length]=new Array(oid,vid);
+  if(options_types[oid]=='MS')
+    document.getElementById('LeftSide_'+oid+'_'+vid).disabled=true;
+  else
+    for(i=0;i<options_values[oid].length;i++)
+      document.getElementById('LeftSide_'+oid+'_'+options_values[oid].length).disabled=true;}
+
+function delFromRightSide(oid,vid)
+{
+  for(i=0;i<rside.length;i++)
+    if(rside[i][0]==oid && rside[i][1]==vid)
+    {
+      rside.splice(i,1);
+    };
+  if(options_types[oid]=='MS')
+  {
+    document.getElementById('LeftSide_'+oid+'_'+vid).checked=false;
+    document.getElementById('LeftSide_'+oid+'_'+vid).disabled=false;
+  }
+  else
+  {
+    var flag=false;
+    for(i=0;i<rside.length;i++)
+      if(rside[i][0]==oid)
+      {
+        flag=true;
+      }
+    if(!flag)
+      for(i=0;i<options_values[oid].length;i++)
+        document.getElementById('LeftSide_'+oid+'_'+options_values[oid].length).disabled=false;
+  }  
+}
+
+function enableLeftSide()
+{
+  for(i=0;i<options_ids.length;i++)
+//   for(j=0;j<options_values[options_ids[i]].length;j++)
+    document.getElementById('LeftSide_'+options_ids[i]+'_'+options_values[options_ids[i]].length).disabled=false;
+}
+
+function enableRightSide()
+{
+  for(i=0;i<options_ids.length;i++)
+//   for(j=0;j<options_values[options_ids[i]].length;j++)
+    document.getElementById('RightSide_'+options_ids[i]+'_'+options_values[options_ids[i]].length).disabled=false;
+}
+
+function clearSingleSide()
+{
+ for(i=0;i<sside.length;i++)
+ {
+   document.getElementById('SingleSide_'+sside[i][0]+'_'+sside[i][1]).checked=false;
+ }
+ sside.splice(0,sside.length);
+ if(document.getElementById('ta_s_'+current_nrtpl))
+ 	document.getElementById('ta_s_'+current_nrtpl).innerHTML='<?php xmsg('PO','DT_SSL'); ?>'; 
+ sside_cleared=1;
+}
+
+function clearLeftSide()
+{
+ for(i=0;i<lside.length;i++)
+ {
+   document.getElementById('LeftSide_'+lside[i][0]+'_'+lside[i][1]).checked=false;
+ }
+ enableRightSide();
+ lside.splice(0,lside.length);
+ if(document.getElementById('ta_l_'+current_nrtpl))
+   document.getElementById('ta_l_'+current_nrtpl).innerHTML='<?php xmsg('PO','DT_LSL'); ?>'; 
+ lside_cleared=1;
+}
+
+function clearRightSide()
+{
+ for(i=0;i<rside.length;i++)
+ {
+   document.getElementById('RightSide_'+rside[i][0]+'_'+rside[i][1]).checked=false;
+ }
+ enableLeftSide();
+ rside.splice(0,rside.length);
+ if(document.getElementById('ta_r_'+current_nrtpl))
+   document.getElementById('ta_r_'+current_nrtpl).innerHTML='<?php xmsg('PO','DT_RSL'); ?>'; 
+ rside_cleared=1;
+}
+
+function makeSingleSideText()
+{
+  var new_sside_text='';
+  for(i=0;i<sside.length;i++)
+    new_sside_text += document.getElementById('v_'+sside[i][0]+'_'+sside[i][1]).innerHTML+', ';
+
+  if(new_sside_text=='')
+    new_sside_text='<?php xmsg('PO','ANY_WORD'); ?>';
+  else
+    new_sside_text=new_sside_text.substring(0,new_sside_text.length-2);
+    
+  document.getElementById('ta_s_'+current_nrtpl).innerHTML=new_sside_text; 
+  sside_cleared=0;
+}
+
+function makeLeftSideText()
+{
+  var new_lside_text='';
+  for(i=0;i<lside.length;i++)
+    new_lside_text += document.getElementById('v_'+lside[i][0]+'_'+lside[i][1]).innerHTML+', ';
+
+  if(new_lside_text=='')
+    new_lside_text='<?php xmsg('PO','ANY_WORD');; ?>';
+  else
+    new_lside_text=new_lside_text.substring(0,new_lside_text.length-2);
+    
+  document.getElementById('ta_l_'+current_nrtpl).innerHTML=new_lside_text; 
+  lside_cleared=0;
+}
+
+function makeRightSideText()
+{
+  var new_rside_text='';
+  for(i=0;i<rside.length;i++)
+    new_rside_text += document.getElementById('v_'+rside[i][0]+'_'+rside[i][1]).innerHTML+', ';
+
+  if(new_rside_text=='')
+    new_rside_text='<?php xmsg('PO','ANY_WORD'); ?>';
+  else
+    new_rside_text=new_rside_text.substring(0,new_rside_text.length-2);
+    
+  document.getElementById('ta_r_'+current_nrtpl).innerHTML=new_rside_text; 
+  rside_cleared=0;
+}
+
+function areSidesCorrect()
+{
+  if((current_nrtpl==1 || current_nrtpl==2) && sside_cleared==0)
+    return true;
+  if((current_nrtpl==3 || current_nrtpl==4) && lside_cleared==0 && rside_cleared==0)
+    return true;
+  
+  return false;
+}
+
+var to_del = new Array();
+
+function addToDel(crid)
+{
+  to_del[to_del.length] = crid;
+  document.getElementById('DeleteSelectedButton').className = 'btn btn-circle btn-default';
+  document.getElementById('DeleteSelectedButton').onclick = function() { deleteRules(); };
+}
+
+function delFromDel(crid)
+{
+  for(i=0;i<to_del.length;i++)
+  {
+    if(to_del[i]==crid)
+    {
+      to_del.splice(i,1);
+    }
+  };
+  if(to_del.length == 0)
+  {
+    document.getElementById('DeleteSelectedButton').onclick = function() { };
+    document.getElementById('DeleteSelectedButton').className = 'btn btn-circle btn-default disabled';
+  }
+}
+
+function addNewRule()
+{
+		disableCRulesForm();
+        jQuery.post(
+            'po_crules.php', // backend
+            {
+            	'asc_action': 'add_crule_to_entity',
+                'parent_entity': '<?php _parent_entity(); ?>',
+                'entity_id': <?php _entity_id(); ?>,
+                'edit_avail': 'yes',
+                'template_index' : current_nrtpl,
+                'sside': sside,
+                'lside': lside,
+                'rside': rside
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                document.getElementById('crules_list').innerHTML = result;
+                if(result["crules_count"]==0)
+                {
+                  document.getElementById('DeleteSelectedButton').style.display='none';
+                }
+                else
+                {
+                  document.getElementById('DeleteSelectedButton').style.display='';
+                };
+                enableCRulesForm();
+            }
+        );
+}
+
+function refreshRulesList()
+{
+		disableCRulesForm();
+        jQuery.post(
+            'po_crules.php', // backend
+            {
+            	'asc_action': 'get_crules_list',
+                'parent_entity': '<?php _parent_entity(); ?>',
+                'entity_id': <?php _entity_id(); ?>,  
+                'edit_avail': 'yes'
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                document.getElementById('crules_list').innerHTML = result;
+                if(result["crules_count"]==0)
+                {
+                  document.getElementById('DeleteSelectedButton').style.display='none';
+                }
+                else
+                {
+                  document.getElementById('DeleteSelectedButton').style.display='';
+                };
+                enableCRulesForm();
+            }
+        );
+}
+
+function deleteRules()
+{
+        if(to_del.length == 0)
+            return;
+            
+        if(!confirm('<?php xmsg('PO','QST_DEL_CMBS'); ?>'))
+            return;
+        
+		disableCRulesForm();
+        jQuery.post(
+            'po_crules.php', // backend
+            {
+            	'asc_action': 'del_crules_from_entity',
+                'parent_entity': '<?php _parent_entity(); ?>',
+                'entity_id': <?php _entity_id(); ?>,
+                'to_del': to_del,
+                'edit_avail': 'yes'
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                document.getElementById('crules_list').innerHTML = result;
+                if(result["crules_count"]==0)
+                {
+                  document.getElementById('DeleteSelectedButton').style.display='none';
+                }
+                else
+                {
+                  document.getElementById('DeleteSelectedButton').style.display='';
+                };
+                enableCRulesForm();
+            }
+        );
+}
+
+function tryToAddRule()
+{
+  if(areSidesCorrect())
+    addNewRule();
+  else
+    alert('<?php xmsg('PO','E_RULE_INCORRECT'); ?>');
+}
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-tags"></i>&nbsp;<?php xmsg('PO','RULES'); ?>&nbsp;:
+			</span>
+			<span class="caption-helper font-blue-sharp uppercase"> - <?php msg('PRD_EDIT_PAGE_TITLE'); ?></span>
+		</div>
+		<div class="actions">
+			<div id="ReturnButton1" class="btn btn-default btn-circle" onClick="closeAndFocusParent();">
+				<i class="fa fa-undo"></i>&nbsp;<?php msg('BTN_RETURN'); ?>
+			</div>
+		</div>		
+	</div>		
+	<div class="portlet-body">
+		<div class="caption">
+			<?php ActualHeader(); ?>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped borderless" id="CRulesTable">
+				<tbody>
+					<tr>
+						<td>
+							<div id="crules_list"></div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="btn btn-circle btn-default disabled pull-left" id="DeleteSelectedButton" onClick="">
+								<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_DELETE'); ?>
+							</div>
+							<a href="popup_window.php?page_view=PO_CheckCRules&parent_entity=<?php _parent_entity(); ?>&entity_id=<?php _entity_id(); ?>" class="btn btn-circle btn-default pull-right">
+								<i class="fa fa-check-square-o"></i>&nbsp;<?php xmsg('PO','BTN_CHECK'); ?>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td><?php xmsg('PO','NEW_RULE'); ?></td>
+					</tr>
+					<tr>
+						<td><?php xmsg('PO','TEMPLATE'); ?>:<br /><?php CRulesTemplatesRadioGroup(); ?></td>
+					</tr>
+					<tr>
+						<td>
+							<span id="nrule_tpl_0"><?php xmsg('PO','TEMPLATE_NOT_SELECTED'); ?></span>
+  							<?php NRuleTplsSpans(); ?>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="NRuleOKButton" class="btn btn-default btn-circle" onClick="tryToAddRule();">
+								<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('BTN_ADD'); ?>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="text-center">
+							<div id="ReturnButton1" class="btn btn-default btn-circle" onClick="closeAndFocusParent();">
+								<i class="fa fa-undo"></i>&nbsp;<?php msg('BTN_RETURN'); ?>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<?php OptionsDivs(); ?>
+
+<script language="JavaScript">
+onload_bak = window.onload;
+window.onload = function() {
+	if(onload_bak)
+		onload_bak();
+	refreshRulesList();
+};
+</script>
+
+<div id="halftransbox" style="display: none; position: absolute; width: 0px; height: 0px; left: 0px; top: 0px; border: 1px solid black; z-index: 10;">
+</div>
+<img src="images/process_green_01.gif" id="process_img" style="position: absolute; left: 0; top: 0; display: none; z-index: 11;">
+<script language="JavaScript">
+function disableCRulesForm()
+{
+	var tbl_element = document.getElementById('CRulesTable');
+	
+	var tbl_width  = tbl_element.offsetWidth;
+	var tbl_height = tbl_element.offsetHeight;
+	var tbl_left = tbl_element.offsetLeft;
+	obj = tbl_element;
+	while(obj.offsetParent)
+	{
+		tbl_left+=obj.offsetParent.offsetLeft;
+		obj=obj.offsetParent;
+	};
+	var tbl_top = tbl_element.offsetParent.offsetTop+tbl_element.offsetTop;
+	
+	var box_element = document.getElementById('halftransbox');
+	box_element.style.width = tbl_width + 'px';
+	box_element.style.height = tbl_height + 'px';
+	box_element.style.left = tbl_left + 'px';
+	box_element.style.top = tbl_top + 'px';
+	
+	var img_element = document.getElementById('process_img');
+	ileft = tbl_left + (tbl_width / 2) - 38;
+	itop = tbl_top + (tbl_height / 2) - 4;
+	img_element.style.left = ileft + 'px';
+	img_element.style.top = itop + 'px';
+
+	box_element.style.display='';
+	img_element.style.display='';
+
+	//                           
+	if(navigator.userAgent.indexOf("MSIE 6")!=-1)
+	{
+	  box_element.style.backgroundImage='none';
+	  box_element.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/halftranspixel.png', sizingMethod='scale')";
+	}
+	else
+	{
+	  box_element.style.backgroundImage='url("images/halftranspixel.png")';
+	}
+};
+function enableCRulesForm()
+{
+	document.getElementById('halftransbox').style.display='none';
+	document.getElementById('process_img').style.display='none';
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,15 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form_row">
+    <?php $local_id = getLocal_FormFieldID(); ?>
+    <div class="form_descr"><label for="textarea_<?php echo $local_id; ?>"><?php Local_FieldLabel(); ?></label></div>
+    <div class="form_field">
+        <span id="<?php echo $local_id; ?>">
+            <textarea name="<?php Local_FormFieldName(); ?>"
+                   id="textarea_<?php echo $local_id; ?>"
+                   rows="<?php Local_FormFieldRows(); ?>"
+                   cols="<?php Local_FormFieldCols(); ?>"
+                   class="Normal"><?php Local_FormFieldValue(); ?></textarea>
+        </span>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

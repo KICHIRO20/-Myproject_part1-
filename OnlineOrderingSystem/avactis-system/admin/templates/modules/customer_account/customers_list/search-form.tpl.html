@@ -1,0 +1,72 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="portlet-title">
+	<div class="caption">
+		<span class="caption-subject font-green-sharp bold uppercase">
+			<i class="fa fa-user"></i>&nbsp;<?php msg('CUSTOMERS_HEADER_001'); ?>
+		</span>
+	</div>
+	<div class="actions">
+		<div id="CustomerGroupsButton2" class="btn btn-default btn-circle" onClick="openURLinNewWindow('customer_groups.php');">
+			<i class="fa fa-users"></i>&nbsp;<?php xmsg('CA','CA_CUSTOMER_GROUPS'); ?>
+		</div>
+		<div id="ExportButton2" class="btn btn-default btn-circle" onClick="OnExportClick();">
+			<i class="fa fa-sign-out"></i>&nbsp;<?php xmsg('CA','BTN_EXPORT'); ?>
+		</div>
+		<div id="DropPasswdButton2" class="btn btn-default btn-circle" onClick="OnDropPasswdClick();">
+			<i class="fa fa-key"></i>&nbsp;<?php xmsg('CA','BTN_DROP_PASSWD'); ?>
+		</div>
+		<div id="ActivateButton2" class="btn btn-default btn-circle" onClick="OnActivateClick();">
+			<i class="fa fa-check-square"></i>&nbsp;<?php xmsg('CA','BTN_ACTIVATE'); ?>
+		</div>
+		<div id="UpdateButton2" class="btn btn-default btn-circle" onClick="OnUpdateClick();">
+			<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+		</div>
+		<div id="DeleteButton2" class="btn btn-default btn-circle" onClick="OnDeleteClick();">
+			<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_DELETE'); ?>
+		</div>
+	</div>			
+</div>		
+<div class="portlet-body">
+	<div class="table-responsvie">
+		<table class="table table-bordered borderless table-striped">
+			<thead>
+				<tr class="bg-grey">
+					<th class="text-left"><?php xmsg('CA','HDR_QUICK_NAVIGATION'); ?></th>
+					<th class="text-center"><?php xmsg('CA','HDR_SEARCH_CUSTOMERS'); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!-- Filter By Drop-Down Start -->
+					<td class="text-left">
+						<?php xmsg('CA','LBL_FILTER_BY'); ?>:&nbsp;<?php SearchLetterFilterSelect(); ?>
+					</td>
+				
+					<!-- Filter By Drop-Down  End-->
+					<!-- Search Form Start-->
+					<td style="color: <?php SearchFormLabelColor(); ?>" class="text-right">					
+						<form action="customers.php?filter=custom" method="post" name="CustomersSearchForm" style="margin: 0px;">
+							<input type="text" name="search_string" size="20" value="<?php SearchString();  ?>" class="form-control input-sm input-medium inline" placeholder="<?php xmsg('CA','LBL_SEARCH'); ?>" />
+							<div class="btn btn-default btn-circle inline" onClick="document.forms['CustomersSearchForm'].submit();">
+								<i class="fa fa-search"></i>&nbsp;<?php xmsg('CA','LBL_SEARCH'); ?>
+							</div>
+						</form>
+					</td>
+					<!-- Search Form End-->
+				</tr>
+				<!-- All A B C ... Starts-->
+				<tr>
+					<td colspan="2">
+						<nav>
+							<ul class="pagination pagination-sm">
+		                    				<?php SearchLettersList(); ?>
+							</ul>
+						</nav>
+					</td>
+        			</tr>
+				<!-- All A B C ... End-->
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

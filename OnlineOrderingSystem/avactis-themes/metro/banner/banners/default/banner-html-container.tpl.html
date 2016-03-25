@@ -1,0 +1,18 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<div id="slideshow_content<?php ContentID();?>" >
+<?php if (getHeight() != '' || getWidth() != '') { ?>
+<div class="content" style="height: <?php Height();?>px; width: <?php Width();?>px;">
+     <?php HtmlContent(); ?>
+</div>
+<?php } ?>
+
+<?php if (getHeight()=='' || getWidth()=='') { ?>
+<div class="content" style="height: <?php DefaultHeight();?>px; width: <?php DefaultWidth();?>px;">
+     <?php HtmlContent(); ?>
+</div>
+<?php }  ?>
+
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

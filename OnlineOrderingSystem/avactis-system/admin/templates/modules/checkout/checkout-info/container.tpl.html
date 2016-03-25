@@ -1,0 +1,52 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function changeSelectionRow(Element) {
+
+    var elements_with_the_same_name = document.getElementsByName(Element.name); 
+    
+    for (var i = 0; i < elements_with_the_same_name.length; i++) 
+    {        
+        elements_with_the_same_name[i].parentNode.parentNode.className = 'group';
+    }
+
+    Element.parentNode.parentNode.className = (Element.checked ? 'selected' : 'group');
+}
+
+
+function unselect(Name) {
+    var elements_with_the_same_name = document.getElementsByName(Name); 
+    
+    for (var i = 0; i < elements_with_the_same_name.length; i++) 
+    {        
+        elements_with_the_same_name[i].parentNode.parentNode.className = 'group';
+        elements_with_the_same_name[i].checked = false;
+    }
+}
+
+//-->
+</SCRIPT>
+<?php Errors(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-shopping-cart font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php msg('CHECKOUT_INFO_HEADER_001'); ?></span>
+			<span class="caption-helper text-lowercase">...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">				
+				<button id="UpdateButton2" title="<?php Msg('BTN_SETTINGS'); ?>" onclick="javascript:openURLinNewWindow('popup_window.php?page_view=SettingParamList&amp;group=CHECKOUT_PROCESS', 'SettingGroupEditor');" type="button" name="<?php Msg('BTN_SETTINGS'); ?>" class="btn blue"><i class="fa fa-gears"></i> <span class="hidden-480"><?php Msg("BTN_SETTINGS"); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="alert alert-info">
+			<?php msg('CHECKOUT_INFO_DESCR_001'); ?>
+		</div>
+		<?php Groups(); ?>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

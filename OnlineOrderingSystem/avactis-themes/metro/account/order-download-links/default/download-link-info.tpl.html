@@ -1,0 +1,32 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box product_download_links">
+    <div class="content">
+        <div class="header link_list">
+            <div class="attribute"><?php Label('ACCOUNT_FILE_LABEL'); ?></div>
+            <div class="value"><?php Local_FileName(); ?></div>
+        </div>
+        <div class="link_list">
+            <div class="attribute"><?php Label("ACCOUNT_STATUS"); ?></div>
+            <div class="value">
+                <?php if (getLocal_HotlinkStatus()=='U')
+                        Label('ACCOUNT_UNLOCKED_LABEL');
+                    else
+                        Label('ACCOUNT_LOCKED_LABEL');
+                ?>
+            </div>
+        </div>
+        <div class="link_list">
+            <div class="attribute"><?php Label('ACCOUNT_LINK_LABEL'); ?></div>
+            <div class="value"><a href="<?php Local_HotlinkValue(); ?>" target="_blank"><?php echo str_rev_pad(getLocal_HotlinkValue(),100); ?></a></div>
+        </div>
+        <div class="link_list">
+            <div class="attribute"><?php Label('ACCOUNT_EXPIRE_DATE_LABEL'); ?></div>
+            <div class="value"><?php Local_HotlinkExpireDate(); ?></div>
+        </div>
+        <div class="link_list">
+            <div class="attribute"><?php Label('ACCOUNT_ATTEMPTS_LABEL'); ?></div>
+            <div class="value"><?php Local_HotlinkTries(); ?></div>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

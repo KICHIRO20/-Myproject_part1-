@@ -1,0 +1,19 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+	<td class="text-center value">
+		<input type="text" name="cc_type_name[<?php id(); ?>]" id="cc_type_name_id_<?php name_input_id(); ?>" value="<?php name(); ?>" class="form-control input-sm input-medium">
+	</td>
+	<td class="text-center">
+		<?php tag(); ?>
+	</td>
+	<td class="text-center">
+		<a href='#' onclick="javascript:openURLinNewWindow('credit_card_attributes.php?cc_id=<?php id(); ?>', 'CreditCardAttributes');return false;"><?php msg('CONFIG_CARDS_ATTRIBUTES_LABEL'); ?></a>
+	</td>
+	<td class="text-center">
+		<select id="cc_type_status_<?php id(); ?>" name="cc_type_status[<?php id(); ?>]" onchange="selectRowAlways(this);"  class="form-control input-sm input-small">
+			<option value="1" <?php StatusVisible(); ?>><?php msg('GNRL_SET_VISIBLE_LABEL'); ?></option>
+			<option value="2" <?php StatusInvisible(); ?>><?php msg('GNRL_SET_INVISIBLE_LABEL'); ?></option>
+		</select>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

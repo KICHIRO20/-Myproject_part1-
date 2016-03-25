@@ -1,0 +1,25 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="table-responsive">
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr role="row" class="heading">
+				<th width="2%"><?php ResCheckbox(); ?></th>
+				<th width="28%"><?php xMsg('ML', 'ML_LABEL_INFO'); ?></th>
+				<th width="<?php ValueWidth(); ?>"><?php Translation(); ?></th>
+				<th width="35%"><?php OriginalValue(); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php ResultRecords(); ?>
+		</tbody>
+		<thead>
+			<tr role="row" class="heading">
+				<th width="2%">&nbsp;</th>
+				<th width="28%"><?php xMsg('ML', 'ML_LABEL_INFO'); ?></th>
+				<th width="<?php ValueWidth(); ?>"><?php Translation(); ?></th>
+				<th width="35%"><?php OriginalValue(); ?></th>
+			</tr>
+		</thead>
+	</table>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

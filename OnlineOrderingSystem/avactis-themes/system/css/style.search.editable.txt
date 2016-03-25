@@ -1,0 +1,113 @@
+[Top Search Pattern Input Field]
+.page_header .search .input_text {
+    background;
+    border: none;
+    text;
+    padding;
+    width;
+    margin;
+}
+
+[Top Search Button]
+.page_header .search input.button_search {
+    padding;
+    margin;
+}
+
+[Search Results Subheader]
+.product_list.search_result .subheader {
+    border;
+}
+
+[Search Results - Toolbar]
+.product_list.search_result .toolbar {
+    border;
+}
+
+[Search Results - Top Toolbar]
+.product_list.search_result .toolbar.top {
+    border;
+}
+
+[Search Results - Bottom Toolbar]
+.product_list.search_result .toolbar.bottom {
+    border;
+}
+
+[Search Results Content]
+.box.product_list.search_result .content {
+    padding;
+}
+
+[Search Results - Product Items]
+.product_list.search_result .product_list_items {
+    background;
+}
+
+[Search Results Empty]
+.product_list.search_result .product_list_items.empty {
+    background;
+    padding;
+    text;
+}
+
+[Search Results - Product Item]
+.search_result .product_item {
+    width;
+    padding;
+    text;
+}
+
+[Search Results - Product Item Section]
+.search_result .product_item .limited_inventory,
+.search_result .product_item .product_descr,
+.search_result .product_item .product_rating,
+.search_result .product_item .product_buttons,
+.search_result .product_item .product_img,
+.search_result .product_item .product_list_price,
+.search_result .product_item .product_sale_price,
+.search_result .product_item .product_name {
+    width;
+}
+
+[Search Results - Product Rating Box]
+.search_result .product_item .product_rating .rating-box {
+    margin;
+}
+
+[Search Results - Product Item Image]
+.search_result .product_item .product_img {
+    text-align;
+    padding;
+    width;
+}
+
+[Search Results - Product List Price]
+.search_result .product_item .product_list_price {
+    padding;
+}
+
+[Search Results - Search Form]
+.search_result .search_form {
+    padding;
+}
+
+[Search Results - Search Form - Pattern Input Field]
+.search_result .search_form .input_text {
+    width;
+}
+
+[Search Results - Search Form - Button]
+.search_result .search_form input.button_search {
+    background;
+    padding;
+    margin;
+}
+
+[Search Results Empty]
+.search_result .product_list_items.empty {
+    width;
+    margin;
+    text;
+    padding;
+}

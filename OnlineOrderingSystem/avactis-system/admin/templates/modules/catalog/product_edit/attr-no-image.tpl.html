@@ -1,0 +1,38 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row">
+	<div class="col-sm-2">
+		 <label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div><br>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(),getAttributeTag()); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">
+		<img id="cat-<?php AttributeTag(); ?>" src="<?php NoImagePath(); ?>" width="100px">
+		<span id="buttons-<?php AttributeTag(); ?>">
+			<a href="javascript:;" onclick="javascript:<?php AttributeTag(); ?>_togglebuttons();" class="btn yellow" title="<?php xmsg('SH','FILE_ON_LOCAL_PC'); ?>"><i class="fa fa-upload"></i></a>
+			<a href="javascript:;" onclick="javascript:openURLinNewWindow('tinymce/plugins/image/image.php?catalog=yes&for=<?php AttributeTag(); ?>','Image Manager')" class="btn blue" title="<?php xmsg('SH','FILE_ON_SERVER'); ?>"><i class="fa fa-check"></i></a>
+			<a href="javascript:;" onclick="javascript:<?php AttributeTag(); ?>_deletebuttons();" class="btn red" title="Remove Image"><i class="fa fa-times"></i></a>
+		</span>
+		<div class="alert alert-warning" style="display:none;" id="upload-<?php AttributeTag(); ?>">
+			<span class="pull-right"><a href="javascript:;" onclick="javascript:<?php AttributeTag(); ?>_togglebuttons()"><i class="fa fa-times"></i></a></span>
+			<input type="file" onkeydown="return false;" onkeypress="return false;" size="65" name="<?php AttributeTag(); ?>"><br />
+			<?php AutoGenSmallImageComment(); ?>
+		</div>
+	</div>
+</div><br>
+<script>
+function <?php AttributeTag(); ?>_togglebuttons()
+{
+	jQuery("#buttons-<?php AttributeTag(); ?>").toggle();
+	jQuery("#upload-<?php AttributeTag(); ?>").toggle();
+}
+
+function <?php AttributeTag(); ?>_deletebuttons()
+{
+    jQuery("#ViewState_LargeImage").val('<?php NoImagePath(); ?>');
+	jQuery("#cat-<?php AttributeTag(); ?>").attr('src', '<?php NoImagePath(); ?>');
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

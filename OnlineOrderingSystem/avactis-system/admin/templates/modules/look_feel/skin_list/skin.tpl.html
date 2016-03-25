@@ -1,0 +1,21 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+	<div align="center" style="padding:10px;" class="col-md-3 skin <?php if(getS_Skin() == getS_Active()) { echo 'alert-success'; } ?>">
+	<?php if (getS_Thumbnail()) { ?>
+	<?php if (getS_Image()) { ?><a href="<?php S_ImagePath(); ?>" class="color_box"><?php } ?>
+	<img src="<?php S_ThumbnailPath(); ?>" alt="<?php S_Name(); ?>" width="160px" height="120px" border="0" title="<?php if(getS_Skin() == getS_Active()) { xMsg('LF', 'LF_CURRENT_ACTIVE_THEME'); ?> <?php S_Name(); } ?>" />
+	<?php if (getS_Image()) { ?></a><?php } ?>
+	<?php } else { ?>
+	<img src="images/no-image.gif" width="120px" height="120px" alt="<?php S_Name(); ?>" />
+	<?php } ?>
+
+	<div class="name bold"><?php S_Name(); ?></div>
+	<div class="version text-muted"><?php S_Version(); ?></div>
+
+		<div class="actions">
+			<div class="actions btn-set">
+				<a href="<?php S_ImagePath(); ?>" class="btn btn-default preview color_box"><i class="fa fa-search"></i> <span class="hidden-480">Image</span></a>
+				<button class="btn blue" name="edit" type="button" onclick="document.location='look_feel.php?asc_action=Edit_Skin&skin=<?php S_Skin(); ?>';" title="Select theme for Editing" id="EditButton2"><i class="fa fa-search"></i> <span class="hidden-480"><?php xMsg('LF', 'LF_PREVIEW_SKIN_BUTTON') ?></span></button>
+			</div>
+		</div>
+	</div>
+<!-- END TPL (DO NOT REMOVE!) -->

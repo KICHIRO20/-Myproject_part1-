@@ -1,0 +1,51 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<FORM <?php FORM(); ?>>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php Msg("DATE_TIME_PAGE_TITLE"); ?>&nbsp;:</span>
+			<span class="caption-helper font-blue text-lowercase"><?php Msg("DATE_TIME_PAGE_SUBTITLE"); ?>...</span>
+		</div>
+		<div class="actions">
+			<?php PageHelpLink('store_settings_datetime'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('store_settings_datetime'); ?>
+		</div>
+	</div>
+    <?php ResultMessage(); ?>
+	 <div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"><?php Msg("DATE_TIME_FIELD_001"); ?></lable>
+			</div>
+			<div class="col-md-8" style="float:left;padding-left:86px;">
+				<select class="form-control form-filter input-medium" style="width: 150px;" name="date_format">
+            <?php DateFormats(); ?>
+         </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"><?php Msg("DATE_TIME_FIELD_002"); ?></lable>
+			</div>
+			<div class="col-md-8" style="float:left;padding-left:86px;">
+         <select class="form-control form-filter input-medium" style="width: 150px;" name="time_format">
+            <?php TimeFormats(); ?>
+         </select>
+			</div>
+		</div>
+		<!-- End - Row -->
+		</div>
+    <div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript:DateTimeForm.submit();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+			<button id="CancelButton2" class="btn btn-default" name="Close" type="button" onclick="closeAndFocusParent();" title="Close"><i class="fa fa-times"></i><span class="hidden-480"><?php Msg("BTN_CLOSE"); ?></span></button>
+		</div>
+	</div>
+</div>
+</FORM>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

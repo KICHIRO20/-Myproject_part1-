@@ -1,0 +1,34 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div id="OInf_<?php _option_id(); ?>" class="soft_div" style="display: none;">
+<table cellpadding="2" cellspacing="1" width="300" border="0">
+<tr>
+    <td align="right" width="50%"><?php xmsg('PO','OPTION_NAME'); ?>:</td>
+    <td align="left" style="font-weight: normal;"><?php OptionName(); ?></td>
+</tr>
+<tr>
+    <td align="right"><?php xmsg('PO','DISPLAY_NAME'); ?>:</td>
+    <td align="left" style="font-weight: normal;"><?php DisplayName(); ?></td>
+</tr>
+<tr>
+    <td align="right"><?php xmsg('PO','OPTION_TYPE'); ?>:</td>
+    <td align="left" style="font-weight: normal;"><?php OptionType(); ?></td>
+</tr>
+<tr>
+    <td align="right"><?php xmsg('PO','SHOW_TYPE'); ?>:</td>
+    <td align="left" style="font-weight: normal;"><?php OptionShowType(); ?></td>
+</tr>
+<tr style="display: <?php da_display(); ?>">
+    <td align="right"><?php xmsg('PO','DISCARD_AVAIL'); ?>:</td>
+    <td align="left" style="font-weight: normal;"><?php DiscardAvail(); ?></td>
+</tr>
+<tr style="display: <?php cbt_display(); ?>">
+    <td align="right"><?php xmsg('PO','CHECKBOX_TEXT'); ?>:</td>
+    <td align="left" style="font-weight: normal;"><?php CheckBoxText(); ?></td>
+</tr>
+<tr style="display: <?php it_display(); ?>">
+    <td align="right"><?php xmsg('PO','USE_FOR_IT'); ?>:</td>
+    <td align="left" style="font-weight: normal;"><?php UsedForInv(); ?></td>
+</tr>
+</table>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,90 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function submitSaveCCTypesForm(formID)
+    {
+        var form = document.forms[formID];
+        form.elements['ViewState[hasCloseScript]'].value = 'true';
+        form.submit();
+    }
+//-->
+</SCRIPT>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-sort"></i>&nbsp;<?php msg('SORT_CC_TYPES_001'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div id="SaveButton1" class="btn btn-circle btn-default" onclick="submitSaveCCTypesForm('SaveCCTypesForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));">
+				<i class="fa fa-save"></i>&nbsp;<?php Msg('BTN_SAVE'); ?>
+			</div>
+			<div id="CancelButton1" class="btn btn-circle btn-default" onclick="closeAndFocusParent();">
+				<i class="fa fa-times"></i>&nbsp;<?php Msg('BTN_CANCEL'); ?>
+			</div>
+		</div>
+	</div>		
+	<div class="portlet-body">
+		<FORM METHOD=POST ACTION="<?php SaveSortHref(); ?>" id="SaveCCTypesForm" name="SaveCCTypesForm">
+		<INPUT TYPE="hidden" <?php HiddenFieldAction(); ?>>
+		<?php HiddenArrayViewState(); ?>
+			<div class="table-responsive">
+				<table class="table borderless">
+					<tbody>
+						<tr>
+							<td class="text-right" width="30%">
+								<select name="ObjectList" size="10" id="ObjectList" class="form-control input-medium">
+									<?php OptionsList(); ?>
+								</select>
+								<input type="hidden" id="ObjectList.hidden" name="ObjectList.hidden" value="<?php OptionsListHidden(); ?>">
+							</td>
+							<td class="text-left" style="vertical-align: middle;">
+								<a title="<?php Msg('SORT_CTGR_004'); ?>" href="javascript:moveItemUpTop('ObjectList');">
+									<i class="fa fa-angle-double-up fa-2x"></i>
+								</a><br />
+								<a title="<?php Msg('SORT_CTGR_005'); ?>" href="javascript:moveItemUp('ObjectList');">
+									<i class="fa  fa-angle-up fa-2x"></i>
+								</a><br />
+								<a title="<?php Msg('SORT_CTGR_006'); ?>" href="javascript:moveItemDown('ObjectList');">
+									<i class="fa  fa-angle-down fa-2x"></i>
+								</a><br />
+								<a title="<?php Msg('SORT_CTGR_007'); ?>" href="javascript:moveItemDownBottom('ObjectList');">
+									<i class="fa fa-angle-double-down fa-2x"></i>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-center">
+								<div id="SaveButton1" class="btn btn-circle btn-default" onclick="submitSaveCCTypesForm('SaveCCTypesForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));">
+									<i class="fa fa-save"></i>&nbsp;<?php Msg('BTN_SAVE'); ?>
+								</div>
+								<div id="CancelButton1" class="btn btn-circle btn-default" onclick="closeAndFocusParent();">
+									<i class="fa fa-times"></i>&nbsp;<?php Msg('BTN_CANCEL'); ?>
+								</div>							
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

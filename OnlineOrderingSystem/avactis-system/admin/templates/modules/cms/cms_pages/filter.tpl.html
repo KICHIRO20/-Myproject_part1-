@@ -1,0 +1,85 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<tr class="filter" role="row">
+								 <td rowspan="1" colspan="2">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td style="width: 10%; border: 0; white-space: nowrap; color: black;">
+                        <?php xMsg('CMS', 'CMS_SEARCH_FOR'); ?>&nbsp;
+                    </td>
+                    <td style="border: 0; white-space: nowrap; color: black;">
+                        <input type="text" name="filter[name]" value="<?php FilterName(); ?>" class="form-control form-filter input-sm" style="width: 99%;" />
+                    </td>
+                </tr>
+                </table>
+                </td>	
+										<td rowspan="1" colspan="1">
+											<select  class="form-control form-filter input-sm" name="filter[parent_id]" style="width: 100%;">
+                <?php ParentSelectBox(); ?>
+                </select>
+										</td>
+										<td rowspan="1" colspan="1">
+											<select class="form-control form-filter input-sm" name="filter[status]">
+                <option value=""<?php if (getAnyStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ALL_STATUSES'); ?></option>
+                <option value="A"<?php if (getActiveStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ACTIVE_STATUS'); ?></option>
+                <option value="H"<?php if (getHiddenStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_HIDDEN_STATUS'); ?></option>
+                <option value="D"<?php if (getDisabledStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_DISABLED_STATUS'); ?></option>
+                </select>
+										</td>
+										<td rowspan="1" colspan="1">
+											  <select class="form-control form-filter input-sm" name="filter[availability]">
+                <option value=""<?php if (getAnyAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ANY'); ?></option>
+                <option value="C"<?php if (getAllAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ALL_CUSTOMERS'); ?></option>
+                <option value="R"<?php if (getRegAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_REGISTERED_CUSTOMERS'); ?></option>
+                <option value="A"<?php if (getAnonymAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ANONYMOUS_CUSTOMERS'); ?></option>
+                </select>
+										</td>
+										<td rowspan="1" colspan="1" align="center">
+											<div class="margin-bottom-5">
+												<button id="FilterButton" onclick="document.FilterForm.submit();" class="btn btn-sm grey-cascade filter-submit margin-bottom"><i class="fa fa-filter"></i> <?php xMsg('CMS', 'BTN_FILTER') ?></button>
+											</div>
+											
+										</td>
+									
+</tr>
+
+<!-- END TPL (DO NOT REMOVE!) -->
+
+
+            <tr class="filter" role="row">
+                <td style="background: #BBBBBB; color: black; white-space: nowrap; padding: 0; padding-left: 6px;" colspan="2">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td style="width: 10%; border: 0; white-space: nowrap; color: black;">
+                        <?php xMsg('CMS', 'CMS_SEARCH_FOR'); ?>&nbsp;
+                    </td>
+                    <td style="border: 0; white-space: nowrap; color: black;">
+                        <input type="text" name="filter[name]" value="<?php FilterName(); ?>" style="width: 99%;" />
+                    </td>
+                </tr>
+                </table>
+                </td>
+                <td style="background: #BBBBBB; color: black; white-space: nowrap;">
+                <select name="filter[parent_id]" style="width: 100%;">
+                <?php ParentSelectBox(); ?>
+                </select>
+                </td>
+                <td style="background: #BBBBBB; color: black; text-align: center;">
+                <select name="filter[status]">
+                <option value=""<?php if (getAnyStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ALL_STATUSES'); ?></option>
+                <option value="A"<?php if (getActiveStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ACTIVE_STATUS'); ?></option>
+                <option value="H"<?php if (getHiddenStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_HIDDEN_STATUS'); ?></option>
+                <option value="D"<?php if (getDisabledStatus()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_DISABLED_STATUS'); ?></option>
+                </select>
+                </td>
+                <td style="background: #BBBBBB; color: black; text-align: center;">
+                <select name="filter[availability]">
+                <option value=""<?php if (getAnyAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ANY'); ?></option>
+                <option value="C"<?php if (getAllAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ALL_CUSTOMERS'); ?></option>
+                <option value="R"<?php if (getRegAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_REGISTERED_CUSTOMERS'); ?></option>
+                <option value="A"<?php if (getAnonymAvail()) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_ANONYMOUS_CUSTOMERS'); ?></option>
+                </select>
+                </td>
+                <td style="width: 20px; background: #BBBBBB; color: black;">
+                <div id="FilterButton" class="button button_small" onclick="document.FilterForm.submit();"><?php xMsg('CMS', 'BTN_FILTER') ?></div>
+                </td>
+            </tr>

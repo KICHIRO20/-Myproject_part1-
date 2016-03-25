@@ -1,0 +1,95 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 	
+$type = getExtn_Category();
+$button_type = getExtn_type(); 
+if(($_GET['category_filter_by'] == $type) || ($_GET['category_filter_by'] == getMsg('SYS','CUSTOMERS_SEARCH_ALL')) || ($_GET['category_filter_by'] == '')){
+	if(getIsExtnInstalled() == "N"){	
+		$extn_name=getExtn_Name();
+		$count=getCount();
+?>
+<script>
+jQuery("#extension_filter_by").change(function(){
+      if(jQuery('#extension_filter_by').val() == "All") {
+       jQuery("div[data-extension-type]").show();
+     }
+     else{
+      jQuery("div[data-extension-type]").hide();
+      jQuery("div[data-extension-type=" + this.value +"]").show();
+      }
+});
+jQuery("#category_filter_by").change(function(){
+      if(jQuery('#category_filter_by').val() == "All") {
+       jQuery("div[data-category-type]").show();
+     }
+     else{
+      jQuery("div[data-category-type]").hide();
+      jQuery("div[data-category-type=" + this.value +"]").show();
+      }
+});
+</script>
+<div class="col-md-12" data-extension-type="<?php echo $button_type; ?>" data-category-type="<?php echo $type; ?>">
+	<!-- BEGIN Portlet PORTLET -->
+	<div class="portlet box <?php echo $button_type === 'B' ? 'yellow':'green'; ?>" >
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="fa fa-gift"></i><?php Extn_Display_Name(); ?>
+			</div>
+			<div class="actions">
+				<?php if($button_type === "B") { ?>
+				<form id="form-<?php echo $extn_name;?>" target="_blank" method="POST" action="https://marketplace.avactis.com/buy_now.php">
+					<input type="hidden" name="extn_name" value="<?php Extn_Name();?>" />
+					<input type="hidden" name="store_url" value="<?php Store_Url();?>" />
+					<input type="hidden" name="licenseKey" value="<?php License_Key(); ?>" />
+					<button type="submit" class="btn btn-default btn-sm"><i class="fa fa-shopping-cart fa-lg"></i> Buy Now</button>
+				</form>
+				<?php } else { ?>
+				<form name="ext_manager" method="post" id="<?php echo $extn_name; ?>" action="manage-extensions.php">
+					<input type="hidden" name="extn_name" value="<?php Extn_Name();?>" />
+					<input type="hidden" name="extn_type" value="<?php Extn_type();?>" />
+					<input type="hidden" name="asc_action" value="GetMarketPlaceExtension"/>
+					<button type="submit" class="btn btn-default btn-sm">				
+						<i class="fa fa-plus"></i> <?php Msg('INSTALL'); ?> Now	
+					</button>
+				</form>
+				<?php }  ?>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="row">
+				<div class="col-md-1">
+					<img src="<?php if(getExtn_Image() !== ''){ Extn_Image(); }else{ echo 'images/no-image.gif'; } ?>"
+					 style="height:35px;width:35px;">
+				</div>			
+				<div class="col-md-11">
+					<?php Extn_Desc(); ?> <a href="extension_details.php?page_view=ExtensionDetails&ext_name=<?php echo $extn_name;?>" data-target="#ajax<?php echo $count; ?>" data-toggle="modal">Detail</a>
+					<div class="text-muted pull-right">Version : <?php Extn_AVersion(); ?> | By : Avactis</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<!-- END Portlet PORTLET-->
+</div>
+<!-- Model Start-->							
+<div class="modal fade bs-modal-lg" id="ajax<?php echo $count; ?>" tabindex="-1" role="dialog" aria-hidden="true" data-width="400">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal-content"></div> 
+			</div>
+			<div class="modal-footer">
+				<div class="loading-spinner text-center">
+					<div class="progress progress-striped active">
+						<div class="progress-bar" style="width: 100%;">Loading ...</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>						
+<?php
+	}
+}
+?>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

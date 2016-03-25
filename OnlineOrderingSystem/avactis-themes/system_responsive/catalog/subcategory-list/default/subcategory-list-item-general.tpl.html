@@ -1,0 +1,26 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="subcategory_item">
+    <?php 
+        $src = getCategorySmallImageSrc();
+        if (!empty($src))
+        {
+            $w = getCategorySmallImageWidth();
+            if ($w>110) $w=110;
+        }
+        else {
+            $src = 'avactis-images/no-image.gif';
+            $w = 100;
+        }
+        if (!empty($src)):
+    ?>
+    <div class="subcategory_img">
+        <a href="<?php CategoryLink(); ?>"><img src="<?php echo $src; ?>" width="<?php echo $w; ?>" alt="<?php CategoryName(); ?>" /></a>
+    </div>
+    <?php endif; ?>
+    <div class="subcategory_name">
+        <div class="subcategory_name1">
+            <a href="<?php CategoryLink(); ?>"><?php CategoryName(); ?></a>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

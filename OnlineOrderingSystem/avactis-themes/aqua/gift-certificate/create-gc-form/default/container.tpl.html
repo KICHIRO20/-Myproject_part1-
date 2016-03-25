@@ -1,0 +1,170 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php
+    global $application; 
+    echo $application->combineAdminJS(array('js/validate.js'));
+    $mr = &$application->getInstance('MessageResources');
+ 
+?>
+
+<script language="javascript" type="text/javascript">
+
+    submitHandler = function(formname)
+    {
+      var form = document.getElementById(formname);
+      var el = document.getElementById('gc_sendtype_selector');
+      if(el && el.value && el.value == 'E')
+      {
+        var email_field = document.getElementById('field_gc_email');
+        if(email_field && email_field.value 
+            && email_field.value.replace(/(^\s+)|(\s+$)/g, "")!==''
+            && !checkEmail(email_field.value))
+        {
+            alert('<?php Label('WL_INCORRECT_EMAIL_SPECIFIED'); ?>');
+            return false;
+        }
+        
+      }
+      if (form.onsubmit) form.onsubmit();
+      form.submit();
+      return true;
+    }
+
+    function gc_sendtype_changed()
+    {
+        var el = document.getElementById('gc_sendtype_selector');
+        var email_form = document.getElementById('gc_email_form');
+        var addr_form = document.getElementById('gc_address_form')
+        if (el)
+        {
+            if (el.value == 'E')
+            {
+                if (email_form) email_form.style.display = 'block';
+                if (addr_form) addr_form.style.display = 'none';
+            }
+            else
+            {
+                if (email_form) email_form.style.display = 'none';
+                if (addr_form) addr_form.style.display = 'block';
+            }
+        }
+    }
+</script>
+
+<?php Local_JSFunctions(); ?>
+
+<div class="box <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <a name="create_gc_box"></a>
+        <h1><?php Label("GIFTCERTIFICATE_PURCHASE"); ?></h1>
+        <!--div class="subheader"></div-->
+        <div class="create_gc_form">
+        <p><?php Label("GIFTCERTIFICATE_PURCHASE_INFO"); ?></p> 
+            <form action="<?php Local_FormActionURL(); ?>" id="CreateGCForm" name="CreateGCForm" method="post">
+
+    <?php Local_Messages(); ?>
+    <div class="form_view">
+
+    <div class="form_row">
+        <div class="form_descr"><label for="field_gc_from"><span class="required"><?php xmsg('GCT', 'GC_FROM'); ?>*</span></label></div>
+        <div class="form_field"><input type="text" class="input_text" name="gc_from" value="<?php Local_GC_From(); ?>" id="field_gc_from" /></div>
+    </div>
+
+    <div class="form_row">
+        <div class="form_descr"><label for="field_gc_to"><span class="required"><?php xmsg('GCT', 'GC_TO'); ?>*</span></label></div> 
+        <div class="form_field"><input type="text" class="input_text" name="gc_to" value="<?php Local_GC_To(); ?>" id="field_gc_to" /></div> 
+    </div>
+
+    <div class="form_row">
+        <div class="form_descr"><label for="field_gc_amount"><span class="required"><?php xmsg('GCT', 'GC_AMOUNT'); ?>*</span></label></div> 
+        <div class="form_field"><input type="text" dec_point="." decimals="2" patterntype="currency" class="input_text" name="gc_amount" value="<?php Local_GC_Amount(); ?>" id="field_gc_amount" style="width: 50px;" /></div> 
+    </div>
+
+    <div class="form_row">
+        <div class="form_descr"><label for="field_gc_message"><span><?php xmsg('GCT', 'GC_MESSAGE'); ?></span></label></div> 
+        <div class="form_field"><textarea name="gc_message" id="field_gc_message" rows="5" cols="20"><?php Local_GC_Message(); ?></textarea></div>
+    </div>
+
+    <div class="form_row">
+        <div class="form_descr"><label for="gc_sendtype_selector"><span class="required"><?php xmsg('GCT', 'GC_SENDTYPE'); ?>*</span></label></div> 
+        <div class="form_field">
+            <select name="gc_sendtype" id="gc_sendtype_selector" onchange="gc_sendtype_changed();" style="display: block;">
+                <option value="E" <?php Local_GC_SendType_Email_Selected() ?>><?php xMsg('GCT', 'GC_SENDTYPE_EMAIL'); ?></option>
+                <option value="P" <?php Local_GC_SendType_Post_Selected() ?>><?php xMsg('GCT', 'GC_SENDTYPE_POST'); ?></option>
+            </select>
+        </div>
+    </div>
+    
+    <div id="gc_email_form" style="display: none;">
+            <div class="form_row">
+                <div class="form_descr"><label for="field_gc_email"><span class="required"><?php xmsg('GCT', 'GC_EMAIL'); ?>*</span></label></div> 
+                <div class="form_field"><input type="text" class="input_text" name="gc_email" value="<?php Local_GC_Email(); ?>" id="field_gc_email" /></div> 
+           </div>
+     </div>
+     <div id="gc_address_form" style="display: none;"> 
+           <div class="form_row">
+                <div class="form_descr"><label for="field_gc_fn"><span class="required"><?php xmsg('GCT', 'GC_FNAME'); ?>*</span></label></div> 
+                <div class="form_field"><input type="text" class="input_text" name="gc_fname" value="<?php Local_GC_FirstName(); ?>" id="field_gc_fn" /></div> 
+           </div>
+
+           <div class="form_row">
+                <div class="form_descr"><label for="field_gc_ln"><span class="required"><?php xmsg('GCT', 'GC_LNAME'); ?>*</span></label></div> 
+                <div class="form_field"><input type="text" class="input_text" name="gc_lname" value="<?php Local_GC_LastName(); ?>" id="field_gc_ln" /></div> 
+           </div>
+
+           <div class="form_row">
+                <div class="form_descr"><label for="gc_country_list"><span class="required"><?php xmsg('GCT', 'GC_COUNTRY'); ?>*</span></label></div> 
+                <div class="form_field">
+                <select name="gc_country_id" id="gc_country_list" onchange="try {refreshStatesList('gc_country_list', 'gc_state_list', 'state_text_div');} catch(ex) {};">
+                    <?php Local_GC_CountriesList(); ?>
+                </select> 
+                </div> 
+           </div>
+
+           <div class="form_row">
+                <div class="form_descr"><label for="gc_state_list"><span class="required"><?php xmsg('GCT', 'GC_STATE'); ?>*</span></label></div> 
+                <div class="form_field">
+                <select name="gc_state_id" id="gc_state_list">
+                    <?php Local_GC_StatesList(); ?>
+                </select>
+                </div> 
+           </div>
+
+           <div class="form_row">
+                <div class="form_descr"><label for="field_gc_city"><span class="required"><?php xmsg('GCT', 'GC_CITY'); ?>*</span></label></div> 
+                <div class="form_field"><input type="text" class="input_text" name="gc_city" value="<?php Local_GC_City(); ?>" id="field_gc_city" /></div> 
+           </div>
+
+           <div class="form_row">
+                <div class="form_descr"><label for="field_gc_zipcode"><span class="required"><?php xmsg('GCT', 'GC_ZIP'); ?>*</span></label></div> 
+                <div class="form_field"><input type="text" class="input_text" name="gc_zip" value="<?php Local_GC_ZipCode(); ?>" id="field_gc_zipcode" /></div> 
+           </div>
+           <div class="form_row">
+                <div class="form_descr"><label for="field_gc_address"><span class="required"><?php xmsg('GCT', 'GC_ADDRESS'); ?>*</span></label></div> 
+                <div class="form_field"><input type="text" class="input_text" name="gc_address" value="<?php Local_GC_Address(); ?>" id="field_gc_address" /></div> 
+           </div>
+           <div class="form_row">
+                <div class="form_descr"><label for="field_gc_phone"><?php xmsg('GCT', 'GC_PHONE'); ?></label></div> 
+                <div class="form_field"><input type="text" class="input_text" name="gc_phone" value="<?php Local_GC_Phone(); ?>" id="field_gc_phone" /></div> 
+           </div>
+
+
+     </div> 
+
+    </div> <!-- form view -->
+ 
+    <div class="buttons"><input type="button" class="<?php lang(); ?> buttons button_add_to_cart input_submit" value="<?php echo $mr->getMessage('ADD_TO_CART'); ?>" onclick="formatInput(document.getElementById('field_gc_amount')); submitHandler('CreateGCForm');" /></div>  
+
+</form>
+        </div>
+     </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    gc_sendtype_changed();
+    try {refreshStatesList('gc_country_list', 'gc_state_list', 'state_text_div');} catch(ex) {};
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

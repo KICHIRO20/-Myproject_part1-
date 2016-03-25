@@ -1,0 +1,123 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet" href="../../avactis-extensions/banner/views/admin/styles/jquery-ui.css">
+<script type="text/javascript" src="../../avactis-extensions/banner/views/admin/js/jquery-ui.js"></script>
+<script>
+	jQuery(document).ready(function($){
+		var myDate = new Date();
+		var prettyDate = (myDate.getMonth() + 1) + '-' + (myDate.getDate())
+				+ '-' + myDate.getFullYear();
+
+		jQuery("#datepicker_start").val(prettyDate);
+		jQuery("#datepicker_end").val(prettyDate);
+		jQuery("#datepicker_start,#datepicker_end").datepicker({
+			yearRange : '-1:+4',
+			dateFormat : 'mm-dd-yy',
+			altFormat : 'mm-dd-yy',
+			changeMonth : true,
+			changeYear : true,
+			buttonText : "Calendar",
+			showOn : 'both',
+			buttonImage : "../../avactis-extensions/banner/views/admin/styles/images/calendar.png",
+			buttonImageOnly : true
+		});
+
+	});
+</script>
+<script type="text/javascript">
+	function formAdd() {
+		var formAction = jQuery("#AddBannerForm").attr("action");
+		AddBannerForm.submit();
+	};
+</script>
+</head>
+<body>
+
+<div class="row"><div class="col-md-12"><div class="row"><div class="col-md-12">
+<div class="portlet light">
+
+<div class="portlet-title"><div class="caption">
+<span class="caption-subject font-green-sharp bold uppercase"><?php Location(); ?></span>
+<span class="caption-helper location"><a href="index.php"><span><?php xMsg('BN','BN_MAIN'); ?></span></a>&nbsp;::&nbsp;<a
+			href="admin.php?page_view=BannerLocation"><span><?php xMsg('BN','BN_TITLE'); ?></span></a>&nbsp;::&nbsp;
+		<?php Location(); ?></span>
+</div></div>
+
+
+<div class="portlet box blue-hoki">
+<div class="portlet-title"><div class="caption"> <?php xMsg('BN','BN_Banners'); ?></div></div>
+<div class="portlet-body"> 
+<?php Current_Banners(); ?>
+</div>
+</div><!-- row and portlet hoiki-->
+
+
+<div class="portlet box blue-hoki">
+<div class="portlet-title"><div class="caption"> <?php xMsg('BN','BN_ADD'); ?></div></div>
+<div class="portlet-body"> 
+<form <?php FromAction(); ?> id="AddBannerForm">
+			<div class="help error_msg"
+						style="padding: 0px 5px 0px 5px; text-align: left;"></div>
+					<table class="table table-hover form">
+                                           <thead>
+						<tr>
+							
+							<th><?php xMsg('BN','BN_WIDTH'); ?></th>
+							<th><?php xMsg('BN','BN_HEIGHT'); ?></th>
+							<th><?php xMsg('BN','BN_START_DATE'); ?></th>
+							<th><?php xMsg('BN','BN_END_DATE'); ?></th>
+							<th><?php xMsg('BN','BN_EFFECT'); ?></th>
+							<th><?php xMsg('BN','BN_NAVIGATION'); ?></th>
+						</tr>
+                                         </thead>
+						<tr>
+						
+							<td><input
+								type="text" class="form-control input-small" value="" name="banner_width"><input type="hidden" name="banner_location" value=<?php Type(); ?>></td>
+
+							<td><input
+								type="text" class="form-control input-small" value="" name="banner_height"></td>
+							<td>
+								 <input type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229);" id="datepicker_start" name="start_date">
+							</td>
+							<td>
+								 <input type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229);" id="datepicker_end" name="end_date">
+							</td>
+							<td>
+							<select class="form-control input-small" name="banner_effect">
+									<?php BannerEffect(); ?>
+							</select>
+							</td>
+							<td>
+                    <input class="form-control input-small" type="checkbox" name="nav" value="Y" ></td>
+
+						</tr>
+					</table>
+
+<table>
+<tr>
+							<td>
+								
+<div id="AddRowButton" class="btn blue button button_4em" onclick="AddBannerForm.FormSubmitValue.value = 'AddRow'; formAdd();" style="padding: 8px 24px 28px;">
+										<?php xmsg('BN', 'BN_BTN_ADD_ROW'); ?>
+									</div>
+								<input type='hidden' name='FormSubmitValue'></input>
+							</td>
+						</tr>
+</table>
+
+</div></div></div>
+				
+	</form>
+</div>
+</div></div></div><!-- row and portlet hoiki-->
+
+
+</div></div></div>
+
+</body>
+</html>
+<!-- END TPL (DO NOT REMOVE!) -->

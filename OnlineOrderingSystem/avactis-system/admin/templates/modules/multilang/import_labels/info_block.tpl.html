@@ -1,0 +1,15 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+                            <tr id="<?php BlockName(); ?>_container" style="display: none;">
+                                <td bgcolor="#EFEFEF" colspan="3"><?php BlockTitle(); ?></td>
+                            </tr>
+                            <tr id="<?php BlockName(); ?>_new_str" style="display: none;">
+                                <td width="80%"><?php xMsg('ML', 'ML_IMPORT_LABELS_NEW_LABELS'); ?>:&nbsp;<span id="<?php BlockName(); ?>_new" style="color: #888888;"></span></td>
+                                <td><input type="checkbox" name="<?php BlockName(); ?>_new_box" id="<?php BlockName(); ?>_new_box" onclick="checkActionStatus(this, '<?php BlockName(); ?>', 'new')" value="<?php BlockValue(); ?>" /></td>
+                                <td nowrap="nowrap"><label for="<?php BlockName(); ?>_new_box"><?php xMsg('ML', 'ML_IMPORT_LABELS_SKIP_ADDING'); ?></label></td>
+                            </tr>
+                            <tr id="<?php BlockName(); ?>_found_str" style="display: none;">
+                                <td width="80%"><?php xMsg('ML', 'ML_IMPORT_LABELS_FOUND_LABELS'); ?>:&nbsp;<span id="<?php BlockName(); ?>_found" style="color: #888888;"></span></td>
+                                <td><input type="checkbox" name="<?php BlockName(); ?>_found_box" id="<?php BlockName(); ?>_found_box" onclick="checkActionStatus(this, '<?php BlockName(); ?>', 'found')"  value="<?php BlockValue(); ?>" /></td>
+                                <td nowrap="nowrap"><label for="<?php BlockName(); ?>_found_box"><?php xMsg('ML', 'ML_IMPORT_LABELS_SKIP_UPDATING'); ?></label></td>
+                            </tr>
+<!-- END TPL (DO NOT REMOVE!) -->

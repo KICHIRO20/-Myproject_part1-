@@ -1,0 +1,63 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+  	global $application;
+    $mr = &$application->getInstance('MessageResources');
+?>
+<div class="box checkout step_4_active nogradient">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("CHECKOUT_THANK_YOU"); ?><?php CustomerSignInOutHint(); ?></h1>
+        <div class="note">
+            <?php Label("CHECKOUT_YOUR_ORDER_SUCCESSFULLY_CREATED"); ?><?php Local_OrderId(); ?>
+            <br/>
+            <?php Label("CHECKOUT_ORDER_DETAILS_SENT"); ?>
+        </div>
+        <?php if (($m=getLocal_Step4PaymentModuleMessage())!=''): ?>
+            <div class="note">
+            <?php echo $m; ?>
+            </div>
+        <?php endif; ?>
+        <div class="box checkout_addresses">
+            <div class="cn lt"></div>
+            <div class="cn rt"></div>
+            <div class="cn lb"></div>
+            <div class="cn rb"></div>
+            <div class="content">
+                <div class="header">
+                    <div class="key_order_details"><?php Label("CHECKOUT_KEY_ORDER_DETAILS"); ?></div>
+                </div>
+                <div class="key_order_details">
+                    <span class="label"><?php Label("CHECKOUT_ORDER_ID_COLON"); ?></span> <span class="value"><?php Label("CHECKOUT_BARS"); ?><?php Local_OrderId(); ?></span>
+                    <?php if (($m=getLocal_OrderPaymentProcessorOrderId())!=''): ?>
+                    <span class="label"><?php Label("CHECKOUT_PAYMENT_PROCESSOR_ID_COLON"); ?></span> <span class="value"><?php echo $m; ?></span>
+                    <?php endif; ?>
+                    <span class="label"><?php Label("CHECKOUT_ORDER_DATE_COLON"); ?></span> <span class="value"><?php Local_OrderDate(); ?></span>
+                    <span class="label"><?php Label("CHECKOUT_ORDER_STATUS_COLON"); ?></span> <span class="value"><?php Local_OrderStatus(); ?></span>
+                    <span class="label"><?php Label("CHECKOUT_PAYMENT_STATUS_COLON"); ?></span> <span class="value"><?php Local_OrderPaymentStatus(); ?></span>
+                    <span class="label"><?php Label("CHECKOUT_PAYMENT_METHOD_COLON"); ?></span> <span class="value"><?php Local_OrderPaymentMethod(); ?></span>
+                    <span class="label"><?php Label("CHECKOUT_SHIPPING_METHOD_COLON"); ?></span> <span class="value"><?php Local_OrderShippingMethod(); ?></span>
+                    <span class="label">&nbsp;</span>
+                </div>
+                <div class="clear_both"></div>
+                <div class="header">
+                    <div class="shipping_form"><?php Label("CHECKOUT_SHIPPING_ADDRESS"); ?></div>
+                    <div class="billing_form"><?php Label("CHECKOUT_BILLING_ADDRESS"); ?></div>
+                </div>
+                <div class="shipping_form"><?php CheckoutShippingInfoOutput(); ?></div>
+                <div class="billing_form"><?php CheckoutBillingInfoOutput(); ?></div>
+                <div class="clear_both"></div>
+            </div>
+        </div>
+        <?php CheckoutSummary(); ?>
+        <?php TransactionTrackingHtmlCode(); ?>
+        <div class="checkout_buttons">
+            <a href="<?php PageURL('ProductList'); ?>"><span class="<?php lang(); ?> button_continue_shopping"><?php echo $mr->getMessage('CONTINUE_CHECKOUT'); ?></span></a>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+

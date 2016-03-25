@@ -1,0 +1,9 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<tr id="group_<?php GroupID(); ?><?php Counter(); ?>">
+	<td class="text-right" colspan="3">
+		<div class="btn btn-default" title="<?php CHECKOUT_ORDER_INFO_REMOVE_ENCRYPTED_PERSON_INFO_MSG(); ?>" onclick="var x=window.confirm('<?php CHECKOUT_ORDER_INFO_REMOVE_ENCRYPTED_PERSON_INFO_CONFIRM_MSG(); ?>');if (x){SubmitRemovePersonInfoGroup('<?php OrderId(); ?>', '<?php GroupPersonInfoVariantId(); ?>');};">
+			<i class="fa fa-times-circle"></i>&nbsp;<?php msg('BTN_DELETE_ENCRYPTED_PERSON_INFO'); ?>
+		</div>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

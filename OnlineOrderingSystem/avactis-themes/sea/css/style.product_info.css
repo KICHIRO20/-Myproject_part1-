@@ -1,0 +1,145 @@
+/* LAYOUT */
+.product_info .detailed_product_info {
+    float: none;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* to center */
+.product_info .product_name {
+    text-align: left;
+    padding: 15px 20px 0px 20px;
+    margin: 0px;
+}
+
+/* to left */
+.product_info .limited_inventory,
+.product_info .product_add_quantity,
+.product_info .product_rating,
+.product_info .product_buttons,
+.product_info .options_error,
+.product_info .product_list_price,
+.product_info .product_sale_price,
+.product_info .product_img {
+    float: left;
+    width: 180px;
+    clear: left;
+    text-align: center;
+    padding: 15px 0px 0px 20px;
+}
+
+/* to right */
+.product_info .product_rating_info,
+.product_info .product_options,
+.product_info .product_short_description,
+.product_info .product_detailed_description {
+    padding: 15px 20px 0px 0px;
+    margin-left: 205px;
+}
+
+.product_info .product_sale_price {
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Tahoma;
+    color: #c71b31;
+}
+
+.product_info .product_list_price {
+    padding-top: 0px;
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Tahoma;
+    color: #585858;
+}
+
+/* by default they are hidden, so show them */
+.product_info .product_sale_price .label,
+.product_info .product_list_price .label {
+    display: inline;
+}
+
+.product_info .product_rating .rating-box {
+    margin: auto auto;
+}
+
+.product_info .discount_star {
+    float: left;
+    width: 69px;
+    clear: left;
+    text-align: center;
+    position: static;
+    padding: 0px;
+    margin-left: 80px;
+    margin-top: 10px;
+}
+
+
+
+/* STYLE */
+.product_info .product_name {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #0C9EEE;
+}
+
+.product_info .product_list_price {
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Tahoma;
+    color: #585858;
+}
+
+.product_info .product_list_price .value {
+    text-decoration: line-through;
+}
+
+.product_info .product_sale_price {
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Tahoma;
+    color: #c71b31;
+}
+
+.product_info .product_detailed_description p {
+    margin: 0px;
+    padding: 0px 0px 10px 0px;
+}
+
+.product_info .limited_inventory {
+    color: red;
+    font-size: 8pt;
+    width:  120px;
+    margin: auto auto;
+    padding-left: 50px;
+}
+
+
+.product_options.form_view .form_row {
+    padding-bottom: 20px;
+}
+
+.product_options.form_view {
+    padding-top: 30px;
+}
+
+.product_options.form_view .form_descr {
+    font-weight: bold;
+    width: 25%;
+}
+
+.product_options.form_view .form_field {
+}
+
+.noimage {
+    width: 95px;
+    height: 95px;
+    background: transparent url('../images/noimage.png') no-repeat scroll left top;
+    margin: auto;
+}
+
+.noimageicon {
+	width: 30px;
+	height: 30px;
+	background: transparent url('../images/noimageicon.png') no-repeat scroll left top;
+	margin: auto;
+}

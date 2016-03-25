@@ -1,0 +1,8 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr class="odd" role="row">
+	<td class="text-center"><div id="div_<?php StateId(); ?>" style="font-weight: <?php StateCodeStyle(); ?>;"><?php StateCode(); ?></div><INPUT TYPE="hidden" name="hf_<?php StateId(); ?>" value="<?php StateId(); ?>"></td>    
+	<td class="text-center"><INPUT class="form-control form-filter input-large input-sm input-inline" TYPE="text" name="ci_<?php StateId(); ?>" id="ci_<?php StateId(); ?>" value="<?php StateName(); ?>" size=50 <?php StateEnabled(); ?> style="background-color: <?php StateStyle(); ?>;" onchange="contentHasChanged = true;"></td>
+	<td class="text-center"><INPUT  TYPE="checkbox" value="<?php StateId(); ?>" style="border: 0;" <?php StateActive(); ?> onclick="changeCountryStateActivation(this);" name="cb_<?php StateId(); ?>" onchange="contentHasChanged = true;"></td>	
+	<td class="text-center"><INPUT TYPE="radio" value="<?php StateId(); ?>" style="border: 0;" <?php StateDefault(); ?> <?php StateEnabled(); ?> name="default_state" id="default_<?php StateId(); ?>" onchange="contentHasChanged = true;"></td>		
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

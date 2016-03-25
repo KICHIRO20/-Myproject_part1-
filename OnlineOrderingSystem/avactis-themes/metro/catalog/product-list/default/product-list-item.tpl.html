@@ -1,0 +1,65 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="product-item">
+    <?php Local_ProductFormStart(); ?>
+    <div class="product_img pi-img-wrapper"><a href="<?php ProductInfoLink(); ?>">
+    <?php
+    if (getProductLargeImageWidth() == '') {
+        if (getProductSmallImageWidth() == '') {
+            ?><div class="noimage"></div><?php
+        }
+        else {
+            ?>
+<img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>"/><?php
+        }
+    }
+    else {
+        if (getProductSmallImageWidth() == '') {
+            ?><img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>"/><?php
+        }
+        else {
+            ?><img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>" /><?php
+        }
+    } 
+    ?>
+    </a><?php //ProductColorSwatchImages(); ?>
+    <div>
+   <a href="<?php ProductLargeImageSrc(); ?>" class="btn btn-default fancybox-button">Zoom</a>
+  </div></div>
+   <a href="<?php ProductInfoLink(); ?>"> <div class="product_name"><h3><?php $name = getProductName(); $str_len = strlen($name); if($str_len > 25){ echo (substr(getProductName(), 0, 27)); echo " ..."; } else {ProductName();}?></h3></div>
+    <div class="product_rating"><?php ProductRating(); ?></div></a>
+    <div class="product_sale_price pi-price"><span class="value"><?php ProductSalePrice(); ?></span></div>
+    
+	<?php echo apply_filters("cz_productlist_b4_buttons","",getProductId()); ?>
+    <?php
+      $options = modApiFunc("Product_Options","getOptionsWithValues",'product', getProductId());
+      if (empty($options)):
+    ?>
+            <div class="product_buttons"><input type="submit" value="<?php Msg('ADD_TO_CART'); ?>" class="btn btn-primary add2cart button_add_to_cart " /></div>
+    <?php else: ?>
+            <a href="<?php ProductInfoLink(); ?>" class="btn btn-primary detail"><span class="<?php lang(); ?> button_details"></span><?php Msg('DETAILS'); ?></a>
+    <?php endif; ?>
+
+ <?php
+            if (getProductListPrice() != '')
+            {
+                $lp = getValProductListPrice();
+                $sp = getValProductSalePrice();
+                if ($lp!=0 && $lp>$sp)
+                {
+                    $d = round(($lp-$sp)*100/$lp);
+    ?>
+<a href="<?php ProductInfoLink(); ?>"><div class="sticker sticker-sale"></div></a>
+           
+    <?php       }
+            }
+    ?>
+<div class="availability limited_inventory">
+                <?php if (getProductStockMessage() != ''): ?><div class="sticker sticker-new"></div><?php endif; ?>
+                       
+                    </div>
+    <?php Local_ProductFormEnd(); ?>
+</div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

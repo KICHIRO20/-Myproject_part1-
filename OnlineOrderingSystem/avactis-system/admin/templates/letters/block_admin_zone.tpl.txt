@@ -1,0 +1,14 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+Dear Administrator,
+
+We have registered an exceedingly large number of attempts to sign in to Avactis Admin menu 
+({COUNT} is the allowed maximum} within the space of {ACCESS_TIME} from IP address {IP_ADDRESS}. 
+The user's access to the system is blocked for the next {TIME}.
+
+No restrictions are placed on browsing the catalog or placing orders.
+
+If you have reason to suspect an attempt to gain unauthorized access, 
+please take the necessary steps to restrict this user's access to your system.
+
+Avactis Shopping Cart Software
+<!-- END TPL (DO NOT REMOVE!) --><hr>

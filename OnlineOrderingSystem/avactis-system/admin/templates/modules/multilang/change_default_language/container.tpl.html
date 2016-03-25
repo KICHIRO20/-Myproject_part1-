@@ -1,0 +1,416 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+document.title = "<?php xMsg('ML', 'ML_CHANGE_DEFAULT_LANGUAGE'); ?>";
+</script>
+<script src="js/javascript_sprintf.js" language="javascript" type="text/javascript"></script>
+<script src="js/timer.js" language="javascript" type="text/javascript"></script>
+<style type="text/css">
+/* styles for the progress-bar */
+.progress_bar_container {
+  border: solid 1px black;
+  width: 100%;
+  height: 15px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 15px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+
+<script language="javascript" type="text/javascript">
+<!--
+var _log_str = "<?php xMsg('ML', 'ML_CDL_PROCESSING_COUNT'); ?>";
+
+var items_count = 0;
+var pixels_count = 100;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+var finished = 0;
+var executed = 0;
+var stop_bar = 0;
+
+function increment_bar()
+{
+    if (stop_bar == 0)
+    { 
+        current_progress++;
+		document.getElementById('pbar_bar').style.width = current_progress+'%';
+		document.getElementById('bar_completed').innerHTML=current_progress+'% Completed';
+	
+        if (current_progress < (pixels_count - 1))
+            setTimeout("increment_bar()", increment_speed);
+        else
+            finished++;
+    }
+}
+
+function appendToLog(log_id, res)
+{
+    result = 0; // success
+    try 
+    {
+        if (res["errors"])
+            for(i=0; i < res["errors"].length; i++)
+            {
+                appendStringToLog(log_id, res["errors"][i], "red");
+                result = 1; // failed
+            }
+
+        if (res["warnings"])
+            for(i=0; i < res["warnings"].length; i++)
+                appendStringToLog(log_id, res["warnings"][i], "blue");
+
+        if (res["messages"])
+            for(i=0;i<res["messages"].length;i++)
+                appendStringToLog(log_id, res["messages"][i], "green");
+    }
+    catch(e) 
+    {
+        result = 1; // failed
+    }
+    return result;
+}
+
+function appendStringToLog(log_id, str, color)
+{
+    if (str.length < 2)
+    {
+        return 0; // success
+    }
+
+    showBlock(log_id, 10);
+    _time = new Date();
+    _time_str = "[" + sprintf("%02d", _time.getHours()) + ":" + sprintf("%02d", _time.getMinutes()) + ":" + sprintf("%02d", _time.getSeconds()) + "]";
+    log_el = document.getElementById(log_id);
+    _html = _time_str + '&nbsp;<span style="color: ' + color + '; font-weight: normal;">' + str + '</span><br>';
+    if (navigator.userAgent.indexOf("MSIE") != -1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+    return 1; // failed
+}
+
+function requestToInit()
+{
+    disableButton("CloseButton");
+    disableButton("StartButton");
+    document.getElementById("StartButton").style.display = "none";
+    document.getElementById("step_text").innerHTML = "<?php xmsg('ML', 'ML_CDL_STEP_2_TITLE'); ?>";
+    document.getElementById("process_text").innerHTML = "<?php xmsg('ML', 'ML_CDL_STARTING'); ?>";
+    document.getElementById("process_img").style.display = "";
+    document.getElementById("timer_label").style.display = "";
+
+    addTimer("timer");
+    showTimer("timer");
+    startTimer("timer");
+    appendStringToLog("p_log", "<?php xMsg('ML', 'ML_CDL_STARTING'); ?>", "black");
+
+    new_action = "";
+    old_action = "";
+    for(el = 0; el < document.ChangeForm.elements.length; el++)
+    {
+        box = document.ChangeForm.elements[el];
+        if (!box || !box.type)
+            continue;
+        if (box.type == "checkbox" 
+            && box.name.substring(0, 7) == "newBox_"
+            && box.checked)
+        {
+            new_action = new_action + "|" + box.name.substring(7);
+            box.disabled = "disabled";
+        }
+        if (box.type == "checkbox" 
+            && box.name.substring(0, 7) == "oldBox_"
+            && box.checked)
+        {
+            old_action = old_action + "|" + box.name.substring(7);
+            box.disabled = "disabled";
+        }
+    }
+    if (new_action)
+        new_action = new_action.substring(1);
+    if (old_action)
+        old_action = old_action.substring(1);
+
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_change_def_lng",
+            "cdl_target": "init",
+            "new_action": new_action,
+            "old_action": old_action,
+            "lng_target": "<?php DesiredLngCode(); ?>"
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) 
+        {
+            var error = appendToLog("p_log", result);
+            error = error || appendStringToLog("p_log", '', "gray");
+            if (error == 0)
+            {
+                items_count = result["process_info"]["items_count"];
+             	increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+                document.getElementById("process_text").innerHTML = "<?php xMsg('ML', 'ML_CDL_PROCESSING'); ?>";
+                setTimeout("requestToDo()",10);
+                setTimeout("increment_bar()",10);
+                setTimeout("waitFinish()",500);
+            }
+        },
+        'json'
+    );
+}
+
+function requestToDo()
+{
+    var d = new Date();
+    var start_time = d.getTime();
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_change_def_lng",
+            "cdl_target": "do"
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            var error = appendToLog("p_log", result);
+            error = error || appendStringToLog("p_log", '', "gray");
+            if (error == 0)
+            {
+                var d = new Date();
+                var end_time = d.getTime();
+                var ex = result["process_info"]["items_processing"] - executed;
+            	var k = ex * 100 / items_count;
+                increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+                executed = result["process_info"]["items_processing"];
+                if (result["process_info"]["status"] == "COMPLETED")
+                {
+                    finished++;
+                    increment_speed = 10;
+                    current_progress = pixels_count - 2;
+                }
+            	else if (result["process_info"]["status"] == "PROCESSING")
+            	{
+                    __log_str = _log_str.replace("__01__", executed).replace("__02__", items_count);
+            	    appendStringToLog("p_log", __log_str, "black");
+                    setTimeout("requestToDo()",10);
+                }
+            }
+            else
+            {
+                stop_bar = 1;
+            }
+        },
+        'json'
+    );
+}
+
+function waitFinish()
+{
+    if (finished < 2)
+    {
+        setTimeout("waitFinish()",500);
+        return;
+    };
+  
+    increment_bar();
+    document.getElementById("process_img").style.display = "none";
+    stopTimer("timer");
+    document.getElementById("step_text").innerHTML = "<?php xMsg('ML', 'ML_CDL_COMPLETED'); ?>";
+    document.getElementById("process_text").innerHTML = "<?php xMsg('ML', 'ML_CDL_COMPLETED'); ?>";
+    __log_str = _log_str.replace("__01__", executed).replace("__02__", items_count);
+    appendStringToLog("p_log", __log_str, "black");
+    __log_str = "<?php xMsg('ML', 'ML_CDL_COMPLETED'); ?>";
+    appendStringToLog("p_log", __log_str, "black");
+    enableButton("CloseButton", (function() { document.location="store_settings_languages.php"; }));
+}
+
+function showOldDetails()
+{
+    document.getElementById("old_details_data").style.display = "";
+    document.getElementById("old_details_img").src = "images/minus.gif";
+    document.getElementById("old_details").onclick = function() {hideOldDetails();};
+}
+
+function hideOldDetails()
+{
+    document.getElementById("old_details_data").style.display = "none";
+    document.getElementById("old_details_img").src = "images/plus.gif";
+    document.getElementById("old_details").onclick = function() {showOldDetails();};
+}
+
+function showNewDetails()
+{
+    document.getElementById("new_details_data").style.display = "";
+    document.getElementById("new_details_img").src = "images/minus.gif";
+    document.getElementById("new_details").onclick = function() {hideNewDetails();};
+}
+
+function hideNewDetails()
+{
+    document.getElementById("new_details_data").style.display = "none";
+    document.getElementById("new_details_img").src = "images/plus.gif";
+    document.getElementById("new_details").onclick = function() {showNewDetails();};
+}
+
+function updateNumbers(box, type, label)
+{
+    if (box.checked)
+    {
+        document.getElementById(type + "_total").innerHTML = parseInt(document.getElementById(type + "_total").innerHTML) + parseInt(box.value);
+        document.getElementById(type + "Total_" + label).innerHTML = parseInt(document.getElementById(type + "Total_" + label).innerHTML) + parseInt(box.value);
+    }
+    else
+    {
+        document.getElementById(type + "_total").innerHTML = parseInt(document.getElementById(type + "_total").innerHTML) - parseInt(box.value);
+        document.getElementById(type + "Total_" + label).innerHTML = parseInt(document.getElementById(type + "Total_" + label).innerHTML) - parseInt(box.value);
+    }
+}
+
+// -->
+</script>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-language font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xMsg('ML', 'MNG_LNGS_PAGE_HEADER'); ?></span>
+			<span class="caption-helper text-lowercase"><?php xMsg('ML', 'ML_CHANGE_DEFAULT_LANGUAGE'); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+                <a id="StartButton" class="btn btn-default btn-circle" onclick="requestToInit();"><i class="fa fa-refresh"></i> <?php xMsg('ML', 'BTN_EXPORT_START'); ?></a>
+`				<a id="CloseButton" class="btn btn-default btn-circle" onclick="document.location='store_settings_languages.php';"><i class="fa fa-undo"></i> <?php Msg('BACK'); ?></a>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<div class="row margin-bottom-10">
+			<div class="col-sm-12">
+				<h4 id="step_text" class="form-section"><?php xMsg('ML', 'ML_CDL_STEP_1_TITLE'); ?></h4>
+			</div>
+		</div>
+
+		<div class="row margin-bottom-10">
+			<div class="col-sm-6" align="right">
+				<span id="process_text"><?php xMsg('ML', 'ML_CDL_PREPARING'); ?></span>
+	            <span><img id="process_img" src="images/ajax/snake.gif" style="display: none;"></span>
+	            <span id="timer_label" style="display: none;"><?php xMsg('ML', 'ML_EXPORT_TIME_ELAPSED'); ?>&nbsp;</span>
+	            <span id="timer"></span>
+			</div>
+			<div class="col-sm-6" align="left">
+				<div id="pbar_container" class="progress">
+					<div id="pbar_bar" class="progress-bar progress-bar-striped active" role="progressbar">
+						<span id="bar_completed" class="">0%<span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row margin-bottom-10" id="section_1">
+			<div class="col-sm-12" align="center">
+				<form style="margin: 0;" name="ChangeForm">
+				<div class="row margin-bottom-10">
+					<div class="col-sm-6">
+						<div class="table-responsive">
+						    <table class="table table-striped table-bordered table-hover">
+						    <tr>
+						        <td><?php xMsg('ML', 'ML_CDL_INFO'); ?></td>
+						    </tr>
+						    <tr>
+						        <td style="background: white;">
+						            <div id="action_viewer" style="height: 335px; overflow: auto;">
+						                <?php xMsg('ML', 'ML_CDL_TEXT'); ?><br /><br />
+						                <?php xMsg('ML', 'ML_CDL_DESIRED_LNG'); ?>: <span style="color: green;"><?php DesiredDefLng(); ?></span><br />
+						                <?php xMsg('ML', 'ML_CDL_CURRENT_LNG'); ?>: <span style="color: green;"><?php CurrentDefLng(); ?></span><br />
+						                <?php if (getTotalNewRecords() > 0) { ?>
+						                <br />
+						                <table cellspacing="0" cellpadding="0" width="100%">
+						                <tr>
+						                    <td>
+						                        <table>
+						                        <tr>
+						                            <td>
+						                                <div id="new_details" onclick="showNewDetails();" style="cursor: pointer;"><img id="new_details_img" src="images/plus.gif" /></div>
+						                            </td>
+						                            <td>
+						                                <?php xMsg('ML', 'ML_CDL_RECORDS_TO_SAVE', getDesiredDefLng()); ?>: <span id="new_total" style="color: green"><?php TotalNewRecords(); ?></span>
+						                            </td>
+						                        </tr>
+						                        </table>
+						                    </td> 
+						                </tr>
+						                <tr id="new_details_data" style="display: none;">
+						                    <td>
+						                        <table width="100%">
+						                        <?php NewDetails(); ?>
+						                        </table>
+						                    </td>
+						                </tr>
+						                </table>
+						                <?php } ?>
+						                <?php if (getTotalOldRecords() > 0) { ?>
+						                <table cellspacing="0" cellpadding="0" width="100%">
+						                <tr>
+						                    <td>
+						                        <table>
+						                        <tr>
+						                            <td>
+						                                <div id="old_details" onclick="showOldDetails();" style="cursor: pointer;"><img id="old_details_img" src="images/plus.gif" /></div>
+						                            </td>
+						                            <td>
+						                                <?php xMsg('ML', 'ML_CDL_RECORDS_TO_SAVE', getCurrentDefLng()); ?>: <span id="old_total" style="color: green"><?php TotalOldRecords(); ?></span>
+						                            </td>
+						                        </tr>
+						                        </table>
+						                    </td> 
+						                </tr>
+						                <tr id="old_details_data" style="display: none;">
+						                    <td>
+						                        <table width="100%">
+						                        <?php OldDetails(); ?>
+						                        </table>
+						                    </td>
+						                </tr>
+						                </table>
+						                <?php } ?>
+						            </div>
+						        </td>
+						    </tr>
+						    </table>
+						</div>
+					</div>
+					<div class="col-sm-6">
+							<div class="table-responsive">
+						    <table class="table table-striped table-bordered table-hover">
+						    <tr style="height: 15px;">
+						        <td><?php xMsg('ML', 'ML_CDL_LOG'); ?></td>
+						    </tr>
+						    <tr>
+						        <td style="background: white;">
+						            <div id="p_log" style="height: 335px; overflow: auto;"></div>
+						        </td>
+						    </tr>
+						    </table>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

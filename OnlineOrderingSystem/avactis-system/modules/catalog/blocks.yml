@@ -1,0 +1,51 @@
+- user1:
+    title: Search form
+    description: Search form
+    template: '<?php SearchForm(); ?>'
+
+- ProductTypeFilter:
+    title: Product type filter
+    description: Product type filter
+
+- CategorySheet:
+    title: Category sheet
+    description: "This tag displays the category tree and related products on a single page. You can customize the tag output by using the following tag parameters: <?php CategorySheet($category_id, $show_products, $columns); ?> $category_id - [integer: category id] The root category ID. Using this parameter you can display just the subtree of the entire category tree. $show_products - [boolean: true or false] Displays or hides the products of each category. $columns - [integer] Column number. The category and product list will be divided at the specified column number. This lets you display the list more compactly."
+    template: '<?php CategorySheet(1,true,3); ?>'
+
+- NavigationBarCustom:
+    title: Navigation bar
+    description: Navigation bar
+- NavigationBarCustom1:
+    title: Navigation bar (Home)
+    description: Navigation bar always displays content of 'Home' category
+    template: '<?php NavigationBarCustom(1); ?>'
+- NavigationBarDynatree:
+    title: Navigation bar dynatree
+    description: Navigation bar dynatree
+    template: '<?php NavigationBarDynatree(1,false,'select_category_path', 'EXPAND_TREE_NODES'); ?>'
+
+- ProductList:
+    title: Product list
+    description: Product list
+- ProductSet_Carousel:
+    title: Carousel Product Set
+    description: Carousel Product Set
+- ProductSet_Rand:
+    title: Random Product Set
+    description: Random Product Set
+- Subcategories:
+    title: Subcategories
+    description: Subcategories
+- Subcategories1:
+    title: Subcategories (Home)
+    description: Subcategories always displays content of 'Home' category
+    template: '<?php Subcategories(1); ?>'
+- ProductInfo:
+    title: Product info
+    description: Product info
+
+- SearchResult:
+    title: Search result
+    description: Search result
+    page: search-results.php
+

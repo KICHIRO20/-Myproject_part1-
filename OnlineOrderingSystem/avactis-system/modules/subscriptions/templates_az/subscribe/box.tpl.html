@@ -1,0 +1,117 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+table.form tr.value td {
+    text-align: left; 
+    color: black;
+    font-weight: normal;
+}
+td.tip {
+    text-align: left; 
+    color: #666;
+    font-weight: normal;
+    padding: 6px 12px;
+}
+td.titlus {
+    font-weight: bold; 
+    font-size: 10pt; 
+    margin: 0px; 
+    color: #000000; 
+    font-family: Tahoma, sans-serif;
+    padding: 12px 12px 0 12px;
+}
+</style>
+<script language="JavaScript">
+<!--
+function submitForm(btn, formID)
+{
+    disableButton(btn.id);
+    var form = document.forms[formID];
+    form.elements['asc_action'].value = 'subscribe';
+    //form.elements['ViewState[hasCloseScript]'].value = 'true';
+    form.submit();
+}
+function switchFrom(input_name)
+{
+    var els = document.forms['SubscribeForm'].elements;
+    els['typed_emails'].disabled = input_name != 'type';
+    els['emails_plain_file'].disabled = input_name != 'plain';
+    //els['emails_csv_file'].disabled = input_name != 'csv';
+}
+//-->
+</script>
+<form action="{FormAction}" method="post" id="SubscribeForm" enctype="multipart/form-data">
+<input type="hidden" name="asc_action" value="" />
+<input type="hidden" name="ViewState[hasCloseScript]" value="false" />
+<input type="hidden" name="topics" value="{TopicsIds}" />
+<input type="hidden" name="MAX_FILE_SIZE" value="{MaxFileSize}" />
+
+<?php ErrorsBox(); ?>
+
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gift font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('SUBSCR','SUBSCRIPTIONS_TITLE'); ?></span>
+			<span class="caption-helper text-lowercase">{WinTitle}...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" class="btn btn-default btn-circle" onclick="submitForm(this, 'SubscribeForm', '{WinName}');" id="btn_submit_subscribe"><i class="fa fa-check"></i> <?php xMsg('SUBSCR', 'BTN_SUBMIT'); ?></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<h4 class="form-section"><?php xMsg('SUBSCR', 'TITLE_TOPICS'); ?></h4>
+		<div class="alert alert-info">{TipTopics}</div>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr role="row" class="heading">
+						<th width="10%"><?php xmsg('SUBSCR', 'HEADER_TOPIC_NAME'); ?></th>
+						<th width="10%"><?php xmsg('SUBSCR', 'HEADER_TOPIC_EMAILS'); ?></th>
+						<th width="10%"><?php xmsg('SUBSCR', 'HEADER_TOPIC_ACCESS'); ?></th>
+						<th width="10%"><?php xmsg('SUBSCR', 'HEADER_TOPIC_STATUS'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php TopicsList(); ?>
+				</tbody>
+			</table>
+		</div>
+
+		<h4 class="form-section"><?php xMsg('SUBSCR', 'TITLE_EMAILS'); ?></h4>
+		<div class="alert alert-info">{TipEmails}</div>
+
+		<!-- type -->
+		<input type="radio" name="emails_from" value="typed" id="emails_from_type" onmouseup="switchFrom('type')" {TypedEmailsChecked} />
+		<label for="emails_from_type" onmouseup="switchFrom('type')"><?php xMsg('SUBSCR', 'SUBSCR_OPT_TYPE'); ?></label>
+		<textarea class="form-control input-xlarge margin-bottom-20" name="typed_emails" {TypedEmailsDisabled}>{TypedEmails}</textarea>
+
+		<!-- plain file -->
+		<input type="radio" name="emails_from" value="plain" id="emails_from_plain" onmouseup="switchFrom('plain')" {PlainEmailsChecked} />
+        <label for="emails_from_plain" onmouseup="switchFrom('plain')"><?php xMsg('SUBSCR', 'SUBSCR_OPT_IMPORT_PLAIN'); ?></label>
+		<input type="file" name="emails_plain_file" class="margin-bottom-20 input_file"  {PlainEmailsDisabled}/>
+
+		<!-- csv file -->
+		<!-- tr>
+        <td><input type="radio" name="emails_from" value="csv" id="emails_from_csv" onmouseup="switchFrom('csv')" {CSVEmailsChecked} /></td>
+        <td><label for="emails_from_csv" onmouseup="switchFrom('csv')"><?php xMsg('SUBSCR', 'SUBSCR_OPT_IMPORT_CSV'); ?></label></td>
+      	</tr>
+      	<tr>
+        <td>&nbsp;</td>
+        <td class="value" style="padding: 4px 0 16px 0"><input type="file" size="60" style="width:99%" name="emails_csv_file" class="input_file"  {CSVEmailsDisabled}/></td>
+      	</tr -->
+    
+      <!-- customer database -->
+		<input type="radio" name="emails_from" value="db" id="emails_from_db" onmouseup="switchFrom('db')" {DBEmailsChecked} />
+		<label class="margin-bottom-20" for="emails_from_db" onmouseup="switchFrom('db')"><?php xMsg('SUBSCR', 'SUBSCR_OPT_IMPORT_DB'); ?></label>
+	</div>
+	<div class="actions" align="center">
+		<div class="actions btn-set">
+			<button id="SaveButton2" class="btn btn-default btn-circle" onclick="submitForm(this, 'SubscribeForm', '{WinName}');" id="btn_submit_subscribe"><i class="fa fa-check"></i> <?php xMsg('SUBSCR', 'BTN_SUBMIT'); ?></button>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr role="row" class="">
+  <td align="center" style="text-align: center;">
+    <input type="checkbox" name="topic_id[{TopicId}]" id="select_topic_{TopicId}" value="{TopicId}"
+     onclick="UncheckAll('manage_subscriptions'); selectRow(this)" {TopicSelected}>
+  </td>
+  <td align="center" style="text-align: center;"><a href="{EditTopicURL}">{TopicName}</a></td>
+  <td align="center" style="text-align: center;"><a href="{TopicEmailsURL}">{TopicEmails}</a></td>
+  <td align="center" style="text-align: center;"><a href="{EditTopicURL}">{TopicAccessName}</a></td>
+  <td align="center" style="text-align: center;"><a href="{EditTopicURL}">{TopicStatusName}</a></td>
+  <td align="center" style="text-align: center;"><a href="{EditTopicURL}">{TopicAutoSubscribeName}</a></td>
+  <td align="center" style="text-align: center;"><a href="{TopicEmailsURL}"><?php xMsg('SUBSCR', 'MANAGE_SUBSCRIBERS') ?></a></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

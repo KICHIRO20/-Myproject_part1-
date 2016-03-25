@@ -1,0 +1,228 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php CountriesStatesArrays(); ?>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function refreshStatesList(countriesListId, statesListId)
+{
+    countriesList = document.getElementById(countriesListId);
+    statesList = document.getElementById(statesListId);
+
+    if (countriesList.options[0].value == 0)
+    {
+        countriesList.remove(0);
+    }
+
+    selectedCountryId = countriesList.options[countriesList.selectedIndex].value;
+
+    statesList.length = 0;
+    statesList.options[0] = new Option('<?php Msg("SELECT_STATE_LABEL"); ?>', '');
+//    statesList.options[1] = new Option('<?php Msg("STATE_ALL_LABEL"); ?>', 0);
+    i=0;
+    if (countryIdToStatesIdArray[selectedCountryId] != undefined)
+    {
+        for (i=0; i<countryIdToStatesIdArray[selectedCountryId].length; i++)
+        {
+            statesList.options[i+1] = new Option(statesArray[countryIdToStatesIdArray[selectedCountryId][i]], countryIdToStatesIdArray[selectedCountryId][i]);
+        }
+    }
+}
+
+function TaxCalculatorFormSubmit()
+{
+    var requiredField;
+    for (i=1; i<=3; i++)
+    {
+        for (j=1; j<=<?php N(); ?>; j++)
+        {
+            if (document.getElementById("id_"+i+"_"+j).value == "")
+            {
+                alert('<?php Msg("TAX_CALCULATOR_WRN_001"); ?>');
+                return;
+            }
+        }
+    }
+
+    requiredField = document.getElementById("ShippingCost");
+    if (requiredField.value == '')
+    {
+        alert('<?php Msg("TAX_CALCULATOR_WRN_002"); ?>');
+        return;
+    }
+    requiredField = document.getElementById("ShippingMethod");
+    if (!requiredField.value)
+    {
+        alert('<?php Msg("TAX_CALCULATOR_WRN_007"); ?>');
+        return;
+    }
+    requiredField = document.getElementById("ShippingCountryId");
+    if (requiredField.value == '0')
+    {
+        alert('<?php Msg("TAX_CALCULATOR_WRN_003"); ?>');
+        return;
+    }
+    requiredField = document.getElementById("ShippingStateId");
+    if (requiredField.value == '')
+    {
+        alert('<?php Msg("TAX_CALCULATOR_WRN_004"); ?>');
+        return;
+    }
+    requiredField = document.getElementById("BillingCountryId");
+    if (requiredField.value == '0')
+    {
+        alert('<?php Msg("TAX_CALCULATOR_WRN_005"); ?>');
+        return;
+    }
+    requiredField = document.getElementById("BillingStateId");
+    if (requiredField.value == '')
+    {
+        alert('<?php Msg("TAX_CALCULATOR_WRN_006"); ?>');
+        return;
+    }
+
+    var form = document.forms["TaxCalculatorForm"];
+    form.submit();
+}
+
+var oldShippingCost = document.getElementById('ShippingCost').value;
+
+function selectShippingMethod(ShippingMethod)
+{
+    if (!ShippingMethod.options[0].value)
+    {
+        ShippingMethod.remove(0);
+    }
+    el = document.getElementById('ShippingCost');
+    if (ShippingMethod.options[ShippingMethod.selectedIndex].value == 0)
+    {
+        oldShippingCost = el.value;
+        el.value = 0;
+    }
+    else
+    {
+        if (el.value == 0 && oldShippingCost != 0)
+        {
+            el.value = oldShippingCost;
+        }
+    }
+    formatInput(el);
+}
+//-->
+</SCRIPT>
+<FORM METHOD=POST ACTION="<?php FormAction(); ?>" NAME="TaxCalculatorForm" ID="TaxCalculatorForm">
+<?php HiddenArrayViewState(); ?>
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center" border=0>
+<tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;"><?php Msg('TAX_CALCULATOR_PAGE_NAME'); ?></td>
+</tr>
+<tr class="subtitle" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+        <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="90%"><?php Msg('TAX_CALCULATOR_PAGE_SUBTITLE'); ?></td>
+            <td nowrap style="padding-right: 8px;"><?php PageHelpLink('store_settings_taxes_calculator'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('store_settings_taxes_calculator'); ?></td>
+            <td nowrap style="padding-right: 10px;"><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg('BTN_CLOSE'); ?></div></td>
+        </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+  <td class="label popup_dialog_body_left_padded"><span class="required"><?php Msg('TAX_CALCULATOR_FIELD_001'); ?>&nbsp;*</span></td>
+  <td colspan="2">
+    <table class="list" cellspacing="0" cellpadding="5" width="100%" align="center" border=0>
+      <tr style="height: 25px;">
+        <th align="left" style="background: rgb(206,212,221)"><?php Msg('TAX_CALCULATOR_CART_TABLE_HEADER_001'); ?>
+        </th>
+        <th align="left" style="background: rgb(206,212,221)"><?php Msg('TAX_CALCULATOR_CART_TABLE_HEADER_002'); ?><?php CurrencySign(); ?></th>
+        <th align="left" style="background: rgb(206,212,221)"><?php Msg('TAX_CALCULATOR_CART_TABLE_HEADER_003'); ?></th>
+        <th align="left" style="background: rgb(206,212,221)"><?php Msg('TAX_CALCULATOR_CART_TABLE_HEADER_004'); ?><?php CurrencySign(); ?></th>
+        <th align="left" style="background: rgb(206,212,221)"><?php Msg('TAX_CALCULATOR_CART_TABLE_HEADER_005'); ?></th>
+      </tr>
+      <?php Items(); ?>
+    </table>
+</tr>
+
+<tr>
+    <td width="30%" class="label popup_dialog_body_left_padded"><span class="required"><?php Msg('TAX_CALCULATOR_FIELD_002'); ?>&nbsp;*</span></td>
+<!--     <td class="help"><div style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="70%" class="value popup_dialog_body_right_padded" colspan="2">
+        <INPUT TYPE="text" NAME="ShippingCost" id="ShippingCost" value="<?php ShippingCost(); ?>" onblur="selectShippingMethod(document.getElementById('ShippingMethod')); formatInput(this);" patterntype="currency" <?php Format(); ?>>&nbsp;<?php CurrencySign(); ?>
+    </td>
+</tr>
+
+<tr>
+    <td width="30%" class="label popup_dialog_body_left_padded"><span class="required"><?php Msg('TAX_CALCULATOR_FIELD_003'); ?>&nbsp;*</span></td>
+<!--     <td class="help"><div style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="70%" class="value popup_dialog_body_right_padded" colspan="2">
+        <select style="width: 200px" name="ShippingMethod" id="ShippingMethod" onchange="selectShippingMethod(this);">
+          <?php ShippingMethod(); ?>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td width="30%" class="label popup_dialog_body_left_padded"><span class="required"><?php Msg('TAX_CALCULATOR_FIELD_004'); ?>&nbsp;*</span></td>
+<!--     <td class="help"><div  style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="70%" class="value popup_dialog_body_right_padded" colspan="2">
+        <select style="width: 150px" name="ShippingCountryId" id="ShippingCountryId" onchange="refreshStatesList('ShippingCountryId', 'ShippingStateId');">
+            <?php ShippingCountriesList(); ?>
+        </select>
+        <select style="width: 150px" name="ShippingStateId" id="ShippingStateId" onchange="if (!this.options[0].value) this.remove(0);">
+            <?php ShippingStatesList(); ?>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td width="30%" class="label popup_dialog_body_left_padded"><span class="required"><?php Msg('TAX_CALCULATOR_FIELD_005'); ?>&nbsp;*</span></td>
+<!--     <td class="help"><div  style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="60%" class="value popup_dialog_body_right_padded">
+        <select style="width: 150px" name="BillingCountryId" id="BillingCountryId" onchange="refreshStatesList('BillingCountryId', 'BillingStateId');">
+            <?php BillingCountriesList(); ?>
+        </select>
+        <select style="width: 150px" name="BillingStateId" id="BillingStateId" onchange="if (!this.options[0].value) this.remove(0);">
+            <?php BillingStatesList(); ?>
+        </select>
+    </td>
+    <td width="10%" class="value popup_dialog_body_right_padded" align="right">
+        <div align="right" id="EditButton2" class="button button_6em" onclick="TaxCalculatorFormSubmit();"><?php Msg('BTN_CALCULATE'); ?></div>
+    </td>
+</tr>
+<tr>
+    <td width="30%" class="label popup_dialog_body_left_padded"><?php Msg('TAX_CALCULATOR_FIELD_007'); ?></td>
+<!--     <td class="help"><div style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="70%" class="value popup_dialog_body_right_padded" colspan="2">
+        <div id="result" align="left">
+            <?php TaxDisplay(); ?>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td width="30%" class="label popup_dialog_body_left_padded"><?php Msg('TAX_CALCULATOR_FIELD_008'); ?></td>
+<!--     <td class="help"><div style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="70%" class="value popup_dialog_body_right_padded" colspan="2">
+      <?php CalculationResults(); ?>
+    </td>
+</tr>
+<?php TraceInfo(); ?>
+<tr>
+    <td colspan="3" class="value popup_dialog_body_left_padded"><span class="required"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span></td>
+</tr>
+</table>
+</FORM>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+$(function () {
+	formatInput(document.getElementById("ShippingCost"));
+	var ii;
+	var jj;
+	for (ii=1; ii<=3; ii++)
+	{
+	    for (jj=1; jj<=<?php N(); ?>; jj++)
+	    {
+	        formatInput(document.getElementById("id_"+ii+"_"+jj));
+	    }
+	}
+});
+//-->
+</SCRIPT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

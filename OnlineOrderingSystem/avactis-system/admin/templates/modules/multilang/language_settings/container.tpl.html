@@ -1,0 +1,118 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="javascript" type="text/javascript">
+<!--
+var defaultLanguage = '<?php DefaultLanguage(); ?>';
+
+function SelectLanguage(code) {
+    if (!DOM) return;
+    var a = document.getElementById('select_' + code);
+    if (a)
+    {
+        a.selected = 'Y';
+        HighLightLanguage(a);
+    }
+}
+
+function HighLightLanguage(a) {
+    if(!DOM) return;
+
+    var b=a.parentNode.parentNode;
+    if (a.checked)
+    {
+        b.style.backgroundColor="#F5F5F5";
+    }
+    else
+    { 
+        if (a.selected == 'Y')
+            b.style.backgroundColor="#FBEDDE";
+        else
+            b.style.backgroundColor='#EEF2F8';
+    }
+
+    found=0;
+    for(i=0; i<a.form.elements.length; i++)
+        if (a.form.elements[i].id.indexOf("select_") != -1 && a.form.elements[i].checked)
+        {
+            found=1;
+            break;
+        }
+    if (found)
+        enableButton('DeleteButton', DeleteLanguages);
+    else
+        disableButton('DeleteButton');
+}
+
+function DeleteLanguages()
+{
+    bootbox.confirm('<?php xMsg('ML', 'MNG_LNGS_DELETE_LNG_CONFIRMATION') ?>',function(result){
+    if(result){
+        document.language_settings.mode.value='delete'; 
+        document.language_settings.submit();
+    } });
+}
+
+function ChangeDefault(r)
+{
+    if (r.value != defaultLanguage)
+    {
+        SelectLanguage(defaultLanguage);
+        SelectLanguage(r.value); 
+        defaultLanguage = r.value;
+    }
+}
+
+// -->
+</script>
+
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-language font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xMsg('ML', 'MNG_LNGS_PAGE_NAME'); ?></span>
+			<span class="caption-helper text-lowercase"><?php xMsg('ML', 'MNG_LNGS_PAGE_HEADER'); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		
+		<?php ConfigurationMessage(); ?>
+		<?php ResultMessage(); ?>
+		<FORM<?php UpdateLanguagesForm(); ?> id="language_settings">
+		<?php HiddenData(); ?>
+
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr role="row" class="heading">
+						<th width="5%" align="center" style="text-align: center;">
+							<input id="SelectAll" type="checkbox" class="group-checkable" onClick="javascript:selectItems('language_settings');">
+						</th>
+						<th width="20%" align="center" style="text-align: center;">
+							<?php xMsg('ML', 'MNG_LNGS_TABLE_HEADER_001'); ?>
+						</th>
+						<th width="40%" align="center" style="text-align: center;">
+							<?php xMsg('ML', 'MNG_LNGS_TABLE_HEADER_002'); ?>
+						</th>
+						<th width="20%" align="center" style="text-align: center;">
+							<?php xMsg('ML', 'MNG_LNGS_TABLE_HEADER_003'); ?>
+						</th>
+						<th width="5%" align="center" style="text-align: center;">
+							<?php xMsg('ML', 'MNG_LNGS_TABLE_HEADER_004'); ?>
+						</th>
+					</tr>
+				</thead>
+					<?php AvailableLanguages(); ?>
+					<?php if (!getConfigurationMessage()) NewLanguages(); ?>
+				</table>
+			</div>
+		</FORM>
+		
+		
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

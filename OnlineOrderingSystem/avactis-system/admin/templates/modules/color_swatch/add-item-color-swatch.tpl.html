@@ -1,0 +1,58 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript">
+function tryToAddValue()
+{
+	var add_val_form=document.forms['AddValue_Form'];
+	add_val_form.submit();
+}
+</script>
+<tr>
+	<td colspan="2" >
+	<?php $product_id = $_GET['product_id']; ?>
+		<form action="pi_color_swatch_list.php?product_id=<?php echo $product_id; ?>&asc_action=add_color_swatch_image_action" method="POST" name="AddValue_Form">
+		
+		<table class="form" cellspacing="1" cellpadding="4" width="100%" style="padding: 0 3px;">
+		<tr class="group">
+			<td colspan="7"><?php xmsg('PO','ADD_NEW_VALUE'); ?></td>
+		</tr>
+			
+		<tr>
+			<th style="width:29%;background-color:#CED4DD"><?php msg('MNG_PRD_COL_HDR_004'); ?></th>
+                         <!--<th style="width:20%;background-color:#CED4DD">&nbsp;</th>-->
+                        <th style="background-color:#CED4DD"><?php xMsg('CLRSW', 'CLR_SWTCH_MAIN_IMG'); ?></th>
+                         <!--<th style="width:20%;background-color:#CED4DD">&nbsp;</th>-->
+		       <!-- <th style="background-color:#CED4DD"><?php Msg('CLR_SWTCH_CHECKED_IMG'); ?></th>-->
+                         <!--<th style="width:20%;background-color:#CED4DD">&nbsp;</th>-->
+		</tr>
+	    <tr>
+                
+	     	<td class="value" style="background-color:#EEF2F8;width:18%">
+                     <input align="center" size="36" type="text" name="colorname_first" value="" style="margin-left:90px" />
+<img style="cursor:pointer;" onclick="<?php hinttext('Title','This field is used as title for the color swatch image<br>e.g. Red '); ?>" src="images/question.gif"></div>
+               </td>
+                <td class="value" style="background-color:#EEF2F8;width:20%"><input size="52" type="text" name="color_main_image" value="" style="margin-left:39px" />
+<?php  $hint1 = rawurlencode("The complete filepath for main swatch image should be as given below: <br> e.g. <b>http://yoursiteurl.com/avactis-images/color_swatch/red.jpg</b>"); ?>
+<img style="cursor:pointer;" onclick="<?php hinttext('Main Image URL',$hint1); ?>" src="images/question.gif"></td>
+	     	<!--<td class="value" style="background-color:#EEF2F8;width:20%"><input size="43" type="text" name="color_checked_image"  value="" />
+<?php  $hint1 = rawurlencode("The complete filepath for checked swatch image should be as given below: <br> e.g. <b>http://yoursiteurl.com/avactis-images/color_checked/red-check.jpg</b>"); ?>
+<img style="cursor:pointer;" onclick="<?php hinttext('Checked Image URL',$hint1); ?>" src="images/question.gif"></td>-->
+	     	<!--<td class="value" style="background-color:#EEF2F8;width:20%"><input size="20" type="text" name="color_label_text" value="" /></td>
+	     	<td class="value" style="background-color:#EEF2F8;width:20%"><input  size="10" type="text" name="colorweight_first"  value="0" />&nbsp;lb</td>
+	     	<td class="value" style="background-color:#EEF2F8; width:20%"><input size="10" type="text" name="colorshippingcost_first" value="0" />&nbsp;<?php CurrencySign(); ?></td>
+	     	<td class="value" style="background-color:#EEF2F8;width:30%"><input size="10" type="text" name="colorhandlingcost_first" value="0" />&nbsp;<?php CurrencySign(); ?></td>-->
+	    </tr>  
+		<tr>
+			<td colspan="6"><div id="AddValueButton" class="button button_small" onClick="javascript: tryToAddValue();"><?php msg('BTN_ADD'); ?></div></td>
+			
+		</tr>
+		<tr>
+			<td class="popup_dialog_header_left_right_padded" align="center" colspan="6"><div id="CloseButton2" class="button button_small" onclick="closeAndFocusParent();" title="<?php msg('BTN_CLOSE_INFO_PRD_TITLE'); ?>"><?php msg('BTN_CLOSE_INFO_PRD'); ?></div></td>
+		</tr>	
+		</table>
+		 
+		</form>
+	</td>
+	
+</tr>
+
+<!-- END TPL (DO NOT REMOVE!) -->

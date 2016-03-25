@@ -1,0 +1,105 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style>
+
+tr.spaceUnder > td
+{
+  padding-top: 1.5em;
+}
+</style>
+<script>
+function formSubmitImages(formId, formAction)
+{
+	 var form = document.forms[formId];
+
+    if (formAction == 'DelRows')
+    {
+        isSelected = false;
+        i=1;
+        while (cb = document.getElementById('select_'+i))
+        {
+            if (cb.checked)
+            {
+                isSelected = true;
+                break;
+            }
+            i++;
+        }
+        if (!isSelected)
+        {
+            i=1;
+            while (cb = document.getElementById('select_'+i))
+            {
+                if (cb.checked)
+                {
+                    isSelected = true;
+                    break;
+                }
+                i++;
+            }
+        }
+        if (!isSelected)
+        {
+            alert('<?php xmsg('BN', 'BN_ALERT_001'); ?>');
+            return;
+        }
+        else
+        {
+            if (!confirm('<?php xmsg('BN', 'BN_ALERT_002'); ?>'))
+            return;
+        }
+    }
+
+    form.FormSubmitValue.value = formAction;
+    form.submit(); 
+     
+}
+</script>
+
+</head>
+<body>
+
+
+<div class="portlet-title"><div class="caption"><?php xMsg('BN','BN_IMAGES'); ?></div></div>
+<div class="portlet-body"> 
+<form <?php Action(); ?>
+		 id="UpdateImageForm"> <input type='hidden' name='FormSubmitValue' value=''></input>
+		  <input type="hidden" name="mode" value="update_image_content" />
+		     <input type="hidden" name="bannerid" value=<?php BannerID(); ?> />
+	         <input type="hidden" name="type" value=<?php Type(); ?> />
+		     
+					<div class="help error_msg"
+						style="padding: 0px 5px 0px 5px; text-align: left;"></div>
+					<table id="banners" class="table table-hover">
+                                            <thead>
+						<tr>
+							<th><?php xMsg('BN','BN_DELETE'); ?></th>
+							<!-- <th style="padding: 0px 0px 0px 0px;" scope="col" align="center"
+								align="center" width="5%"><?php xMsg('BN','BN_POSITION'); ?></th> -->
+							<th><?php xMsg('BN','BN_IMAGE'); ?></th>
+							<th><?php xMsg('BN','BN_URL'); ?></th>
+							
+							<th><?php xMsg('BN','BN_ALT_TEXT'); ?></th>
+							<th><?php xMsg('BN','BN_AVAILABILITY'); ?></th>
+							
+						</tr>
+                                              </thead>
+						<?php Imageitems(); ?>
+					</table>
+		<table>		
+			 <tr class="spaceUnder">
+    <td>
+      <input id ="searchImage" type="button" class="btn blue button button_10em" value="<?php xMsg('BN','BN_UPDATE'); ?>" onclick="{formSubmitImages('UpdateImageForm', 'UpdateRows');}" />&nbsp;&nbsp;&nbsp;
+      <input id ="searchImage" type="button" class="btn blue button button_10em" value="<?php xMsg('BN','BN_DELETE_SEL'); ?>" onclick="{formSubmitImages('UpdateImageForm', 'DelRows');}"/>
+</td></tr>	</table>
+	</form>
+</div><!-- row and portlet hoiki-->
+
+	
+</body>
+</html>
+
+<!-- END TPL (DO NOT REMOVE!) -->

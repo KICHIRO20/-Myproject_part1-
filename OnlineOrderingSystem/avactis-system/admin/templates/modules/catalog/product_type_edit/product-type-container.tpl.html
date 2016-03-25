@@ -1,0 +1,36 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+  <SCRIPT language="javascript">
+  function reloadForm() {
+    CatalogEditProductType.FormSubmitValue.value='Reload';
+    CatalogEditProductType.submit();
+    return true;
+  }
+  </SCRIPT>
+<div class="row">
+	<div class="col-sm-12 col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-tags"></i>&nbsp;<?php msg('MNG_PRTYPE_PAGE_HEADER'); ?>
+					</span>
+					<span class="caption-helper">...<?php msg('MNG_PRTYPE_PAGE_DESCR'); ?></span>
+				</div>
+				<div class="actions">
+				<div id="DeleteButton1" class="btn btn-circle btn-default" onclick="go('catalog_new_product_type.php')" title="<?php msg('BTN_ADD_PRDTYPE_TITLE'); ?>">
+				<i class="fa fa-plus"><?php msg('BTN_ADD_PRDTYPE'); ?></i> 
+        		</div>
+        		<div id="DeleteButton1" class="btn btn-circle btn-default" onclick="openURLinNewWindow('catalog_delete_product_type.php', 'DeleteProductType');" title="<?php msg('BTN_DELETE_PRDTYPE_TITLE'); ?>">
+				<i class="fa fa-times"><?php msg('BTN_DELETE_PRDTYPE'); ?></i> 
+        		</div>
+				</div>
+			</div>
+			<div class="portlet-body"> 
+				<?php  ProductTypes(); ?>
+			</div>
+			<hr />
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

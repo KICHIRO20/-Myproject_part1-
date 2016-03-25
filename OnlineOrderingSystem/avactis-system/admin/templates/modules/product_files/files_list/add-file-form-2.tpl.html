@@ -1,0 +1,33 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="pf_files_list.php?asc_action=add_file_to_product&product_id=<?php ProductID(); ?>" name="AddFileForm" method="post" id="FormAddNewSet_id" onkeypress="return event.keyCode!=13;">
+		<div class="row margin-bottom-10">
+			<div class="col-md-3" style="float:left;">
+				<lable class="help-block"><?php xmsg('TAX_ZIP','ADD_NEW_SET_SOURCE_FILE'); ?></lable>
+			</div>
+		<div class="col-sm-1">
+                         <a class="pull-right" style="cursor:pointer;">
+                                <?php hinttext('ADD_FILE_SRC','product-files-messages'); ?>
+                         </a>
+                </div>
+			<div class="col-sm-6">				
+                                    <span id="new_file_name"><?php xmsg('TAX_ZIP','ADD_NEW_SET_FILE_NOT_DEFINED'); ?></span>
+           				<button id="EditButton2" title="<?php xmsg('CTL','BTN_CHOOSE'); ?>" onClick="disableBlock('ManageFilesBlock',3); showBlock('fselector_new_file_name',4);" type="button" name="<?php xmsg('TAX_ZIP','BTN_CHOOSE'); ?>" class="btn blue"><i class="fa fa-arrow-circle-down"></i> <span class="hidden-480"><?php xmsg('CTL','BTN_CHOOSE'); ?></span></button>
+			</div>
+		</div>
+         <div class="row">
+	<div class="col-sm-3 name"><?php xmsg('PF','LBL_DESCRIPTION'); ?></div>
+	<div class="col-sm-1">
+                         <a class="pull-right" style="cursor:pointer;">
+                                <?php hinttext('LBL_DESCRIPTION','product-files-messages'); ?>
+                         </a>
+        </div>
+        <div><input class="form-control form-filter input-sm input-large" type="text" name="new_file_descr" size="65" maxlength="255" value=""></div><br/>
+        </div>
+	<div class="actions" align="center">
+		<div class="actions btn-set">
+		<button id="AddButton1" title="<?php msg('BTN_ADD'); ?>" onclick="" type="button" class="btn btn-circle btn-default"><i class="fa fa-plus-square "></i> <?php msg('BTN_ADD'); ?></button>
+	</div>
+    <input type="hidden" id="new_file_name_hidden" name="new_file_name_hidden" value="">
+	</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

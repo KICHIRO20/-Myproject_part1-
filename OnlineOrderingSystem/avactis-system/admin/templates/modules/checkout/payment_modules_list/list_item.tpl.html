@@ -1,0 +1,21 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<li class='ui-state-default'>
+	<span class='ui-icon ui-icon-arrowthick-2-n-s'>
+		<div class="row" id="recommended-providers">
+			<input type="hidden" value="<?php PaymentModuleID();?>" name="SelectedModules[]" id="SelectedModules"  ></input>
+			<div class="col-sm-3">
+				<label class="col-sm-13 control-label" id="name"><b><?php PaymentModuleName(); ?></b></label>
+			</div>
+			<div class="col-sm-5">
+				<label class="col-sm-13 control-label" id="description"><?php PaymentModuleDescription(); ?></label>
+			</div>
+			<div class="col-sm-2" >
+				<label class="col-sm-13 control-label" id="message"><b><?php PaymentModuleStatusMessage(); ?></b></label>
+			</div>
+			<div class="col-sm-2">
+				<a id="settings" href="javascript: void(0);" onclick="javascript:openURLinNewWindow('<?php InfoLink(); ?>', 'EditPaymentModuleSettings');">Settings</a>
+			</div>
+		</div>
+	</span>
+</li>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

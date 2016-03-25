@@ -1,0 +1,139 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript" type="text/javascript">
+document.title = '<?php xmsg('CR','CR_RATES_SETTINGS'); ?>';
+</script>
+<script language="javascript" type="text/javascript">
+<!--
+function onStatusChanged (rateId) {
+    if (!DOM) return;
+    checkbox = document.getElementById('select_'+rateId);
+    checkbox.checked = true;
+    checkRates(checkbox);
+}
+
+function checkAllRates(box)
+{
+    selectItems(box.form.name);
+
+    found = false;
+    for(el in box.form.elements)
+    {
+        tmpbox = box.form.elements[el];
+        if (tmpbox.type == "checkbox" 
+            && tmpbox.name.substring(0, 14) == "selected_rates"
+            && tmpbox.checked)
+        {
+            found = true;
+        }
+        if (tmpbox.type == "checkbox" 
+            && tmpbox.name.substring(0, 14) == "selected_rates"
+            && !tmpbox.checked)
+        {
+            clear_all = true;
+        } 
+    }
+    if (!found)
+        disableButton('DeleteButton1');
+    else
+        enableButton('DeleteButton1', function () {bootbox.confirm('<?php xMsg('CR', 'CR_MSG_RATE_DELETE_CONFIRMATION') ?>',function(result){if(result){document.forms['CRRatesSettingsForm'].mode.value='delete'; document.forms['CRRatesSettingsForm'].submit();} });});
+}
+
+function checkRates(box)
+{
+    if (box.checked)
+        enableButton('DeleteButton1', function () {bootbox.confirm('<?php xMsg('CR', 'CR_MSG_RATE_DELETE_CONFIRMATION') ?>',function(result){if(result){document.forms['CRRatesSettingsForm'].mode.value='delete'; document.forms['CRRatesSettingsForm'].submit();} });});
+
+    found = false;
+    clear_all = false;
+    for(el in box.form.elements)
+    {
+        tmpbox = box.form.elements[el];
+        if (tmpbox.type == "checkbox" 
+            && tmpbox.name.substring(0, 14) == "selected_rates"
+            && tmpbox.checked)
+        {
+            found = true;
+        }
+        if (tmpbox.type == "checkbox" 
+            && tmpbox.name.substring(0, 14) == "selected_rates"
+            && !tmpbox.checked)
+        {
+            clear_all = true;
+        } 
+    }
+    if (!found)
+        disableButton('DeleteButton1');
+    if (clear_all)
+        document.getElementById('SelectAll').checked = '';
+    else
+        document.getElementById('SelectAll').checked = true;
+
+    selectRow(box);
+}
+
+//-->
+</script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php msg('ADMIN_MENU_ADVANCED_SETTINGS'); ?>: </span>
+			<span class="caption-subject font-blue-sharp"><?php xmsg('CR','CR_RATES_SETTINGS'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="CancelButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<?php ResultMessage(); ?>
+	<div class="portlet-body">
+		<div class="table-container form">
+			<form action="popup_window.php?asc_action=update_cr_rates_settings" method="post" name="CRRatesSettingsForm" style="margin: 0;">
+            <?php ModeHiddenField(); ?>
+				<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover" cellspacing="0" cellpadding="2" width="100%">
+  		   			<tr class="group">
+                       <td style="padding-left: 4px;"><?php xmsg('CR', 'CR_RATE_NAME'); ?></td>
+                       <td style="width: 7.2em; text-align: center;"><?php xmsg('CR', 'CR_SHOW_HIDE'); ?></td>
+                       <td style="width: 5.5em; text-align: center; padding-right: 8px;"><input type="checkbox" onclick="checkAllRates(this);" id="SelectAll"></td>
+                   </tr>
+                   <?php Settings(); ?>
+                   <tr class="group">
+                       <td style="padding-left: 4px; height: 20px;"><?php xmsg('CR', 'CR_ADD_RATE'); ?></td>
+                       <td>&nbsp;</td>
+                       <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                       <td><?php NewRateField(); ?></td>
+                       <td align="center"><?php NewVisibleField(); ?></td>
+                       <td align="center" style="padding-right: 4px;"><a id="AddButton1" class="btn btn-default btn-circle" onClick="javascript: document.forms['CRRatesSettingsForm'].mode.value='add'; document.forms['CRRatesSettingsForm'].submit();"><?php msg('BTN_ADD'); ?></a></td>
+                   </tr>
+  				</table>
+  				</div>
+			</form>
+		</div>
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="sort_form_div" style="position: absolute; left: 10px; top: 10px; z-index: 10; display: none;" class="table-responsive">
+    <table class="table table-striped table-bordered table-hover" width="290">
+        <tr>
+            <td align="left"><?php xmsg('CR','CR_SORT_RATE_ORDER'); ?></td>
+            <td align="right"><a href="javascript: void(0);" onClick="document.getElementById('sort_form_div').style.display='none'"><img src="images/close.gif" border="0"></a></td>
+        </tr>
+        <tr>
+            <td valign="top" colspan="2">
+                <?php RateSortForm(); ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

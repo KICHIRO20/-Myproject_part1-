@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_set1" value="name:ss_id;datatype:int,name:ss_company_name;datatype:string,name:ss_company_address;datatype:string,name:ss_tin;datatype:int,name:ss_ssn;datatype:int,name:ss_business_permit;datatype:int,name:ss_contact_no;datatype:int,name:ss_email;datatype:string,name:ss_company_image;datatype:blob" />
+</info>

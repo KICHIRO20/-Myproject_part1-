@@ -1,0 +1,81 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php JavascriptSynchronizeCountriesAndStatesLists(); ?>
+<input type="hidden" name="rates_method_id" value="<?php MethodID(); ?>">
+
+<h4 class="form-section"><?php RatesHeader(); ?></h4>
+
+<div class="alert alert-success" align="center">
+	<?php DSR_Formula(); ?>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-bordered">
+		<thead>
+			<tr role="row" class="heading">
+				<th width="2%" align="center" style="text-align: center;">
+					<!-- input id="SelectAll" type="checkbox" class="group-checkable" onClick="javascript:selectItems('EditSMForm');" -->
+				</th>
+				<th width="5%"><?php lbl_Destination(); ?></th>
+				<th width="20%"><?php lbl_WeightRange(); ?></th>
+				<th width="20%"><?php lbl_BaseCharge(); ?></th>
+				<th width="25%"><?php lbl_AdditionalCharge(); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php RatesList(); ?>
+		</tbody>
+	</table>
+</div>
+<div class="actions" align="right">
+	<div class="actions btn-set">
+		<a id="DeleteButton2" class="btn btn-default btn-circle" onclick="formSubmit('EditSMForm', 'DeleteRates');"><i class="fa fa-times"></i> 				<span class=""><?php lbl_DeleteSelected(); ?></span></a>
+	</div>
+</div>
+
+
+<h4 class="form-section"><?php msg("ADMIN_PHP_FILES_NEW_SHIPPING_RATE"); ?></h4>
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-bordered">
+		<thead>
+			<tr role="row" class="heading">
+				<th width="25%" style="text-align:center"><?php lbl_Destination(); ?></th>
+				<th width="25%" style="text-align:center"><?php lbl_WeightRange(); ?></th>
+				<th width="25%" style="text-align:center"><?php lbl_BaseCharge(); ?></th>
+				<th width="25%" style="text-align:center"><?php lbl_AdditionalCharge(); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr role="row">
+				<td class="value" align="center">
+					<select class="form-control input-sm input-small" name="DstCountry" id="DstCountry" onChange="refreshStatesList('DstCountry', 'DstState_menu_select', 'stub_state_text_input');"><?php CountriesOptions(); ?></select>
+					<select class="form-control input-sm input-small" name="DstState_menu_select" id="DstState_menu_select"><?php StatesOptions(); ?></select>
+				</td>
+				<td class="value" align="center">
+					<div><br />
+						<input style="display:inline" class="form-control input-sm input-xsmall" type="text" <?php WRangeFromField(); ?>> - 
+						<input style="display:inline" class="form-control input-sm input-xsmall" type="text" <?php WRangeToField(); ?>> <?php WeightSymbol(); ?>
+					</div>
+				</td>
+				<td class="value" align="center">
+					&nbsp;<input style="display:inline" class="form-control input-sm input-xsmall" type="text" <?php BChargePercField(); ?>> % <br />
+					<input style="display:inline" class="form-control input-sm input-xsmall" type="text" <?php BChargeAbsField(); ?>> <?php CurrencySymbol(); ?>
+				</td>
+				<td class="value" align="center">
+					<?php lbl_PerItem(); ?> : 
+					<input style="display:inline" class="form-control input-sm input-xsmall" type="text" <?php AChargePerItemAbsField(); ?>>
+					<?php CurrencySymbol(); ?> <br />
+					<?php lbl_PerWeightUnit(); ?> : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input style="display:inline" class="form-control input-sm input-xsmall" type="text" <?php AChargePerWUAbsField(); ?>>
+					<?php CurrencySymbol(); ?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="actions" align="right">
+	<div class="actions btn-set">
+		<a id="AddButton" class="btn btn-default btn-circle" onclick="formSubmit('EditSMForm', 'AddRate');"><i class="fa fa-plus"></i> 				<span class=""><?php Msg('BTN_ADD'); ?></span></a>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

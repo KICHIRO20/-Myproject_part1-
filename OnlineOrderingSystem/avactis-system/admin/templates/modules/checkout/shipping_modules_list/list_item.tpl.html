@@ -1,0 +1,22 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<li class='ui-state-default'>
+	<span class='ui-icon ui-icon-arrowthick-2-n-s'>
+		<div class="row margin-bottom-10" id="recommended-providers">
+			<input type="hidden" value="<?php ShippingModuleID();?>" name="SelectedModules[]" id="SelectedModules"  ></input>
+			<div class="col-sm-3">
+				<label class="col-sm-13 control-label" id="name"><b><?php ShippingModuleName(); ?></b></label>
+			</div>
+			<div class="col-sm-5">
+				<label class="col-sm-13 control-label" id="description"><?php ShippingModuleDescription(); ?></label>
+			</div>
+			<div class="col-sm-2" >
+				<label class="col-sm-13 control-label" id="message"><?php ShippingModuleStatusMessage(); ?></label>
+			</div>
+			<div class="col-sm-2">
+				<a id="settings" href="javascript: void(0);" onclick="javascript:openURLinNewWindow('<?php InfoLink(); ?>', 'EditShippingModuleSettings');">Settings</a>
+			</div>
+	
+		</div>
+	</span>
+</li>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

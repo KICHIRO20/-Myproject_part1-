@@ -1,0 +1,134 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2'
+                            );
+    disableButtons(buttons);
+}
+
+function trim(s)
+{
+    var left = 0;
+    var len = s.length;
+
+    if (s.length == 0) return "";
+
+    while (s.charAt(left) == ' ')
+    {
+        if (left == len - 1) break;
+        left++;
+    }
+
+    if (left == len - 1) return "";
+
+    var right = len - 1;
+    while (s.charAt(right) == ' ')
+    {
+        if (right == 0) break;
+        right--;
+    }
+
+    if (right == 0) return "";
+
+    return s.substring(left, right + 1);
+}
+
+function checkVis(id)
+{
+    var vis = document.getElementById('vis_' + id);
+    var req = document.getElementById('req_' + id);
+
+    if (vis == undefined || req == undefined)
+    {
+        return;
+    }
+
+    if (vis.checked != true)
+        req.checked = false;
+}
+
+function checkReq(id)
+{
+    var vis = document.getElementById('vis_' + id);
+    var req = document.getElementById('req_' + id);
+
+    if (vis == undefined || req == undefined)
+    {
+        return;
+    }
+
+    if (req.checked == true)
+        vis.checked = true;
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    if (formAction == 'save')
+    {
+
+    }
+
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+//-->
+</script>
+<?php Errors(); ?>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-tags"></i>&nbsp;<?php Msg('CONFIG_CARDS_ATTRIBUTES_TITLE'); ?> - <?php CardName(); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div id="SortRowsButton" class="btn btn-circle btn-default" onclick="formSubmit('CreditCardAttributesForm', 'save');">
+				<i class="fa fa-save"></i>&nbsp;<?php msg('BTN_SAVE'); ?>
+			</div>
+			<div id="UpdateRowsButton" class="btn btn-circle btn-default" onclick="closeAndFocusParent();">
+				<i class="fa fa-times"></i>&nbsp;<?php Msg('BTN_CANCEL'); ?>
+			</div>
+		</div>
+	</div>		
+	<div class="portlet-body">
+		<div class="table-responsive">
+			<form <?php CreditCardAttributesAction(); ?> method="post" id="CreditCardAttributesForm">
+				<?php HiddenArrayViewState(); ?>
+				<table class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th class="text-center"><?php Msg('CUSTSL_NAME_NAME'); ?></th>
+							<th class="text-center"><?php Msg('LBL_FLD_VISIBLE'); ?></th>
+							<th class="text-center"><?php Msg('LBL_FLD_REQUIRED'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php Items(); ?>
+						<tr>
+							<td colspan="4" class="text-center">
+								<div id="SortRowsButton" class="btn btn-circle btn-default" onclick="formSubmit('CreditCardAttributesForm', 'save');">
+									<i class="fa fa-save"></i>&nbsp;<?php msg('BTN_SAVE'); ?>
+								</div>
+								<div id="UpdateRowsButton" class="btn btn-circle btn-default" onclick="closeAndFocusParent();">
+									<i class="fa fa-times"></i>&nbsp;<?php Msg('BTN_CANCEL'); ?>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

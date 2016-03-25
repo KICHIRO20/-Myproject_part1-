@@ -1,0 +1,71 @@
+---
+settings: 
+  template: 'page.template.tpl.html'
+  page_title: |
+    '<?php ProductPageTitle(); ?> - <?php StoreOwnerPageTitle(); ?>'
+  page_description: '<?php ProductMetaDescription(); ?>'
+  page_keywords: '<?php ProductMetaKeywords(); ?>'
+placeholders: 
+  header: 
+    visibility: visible
+    blocks: 
+      - 
+        name: user1
+        visibility: visible
+      - 
+        name: top_menu
+        visibility: visible
+  main_menu: 
+    visibility: visible
+    blocks: 
+      - 
+        name: main_menu
+        visibility: visible
+  left_column: 
+    visibility: visible
+    blocks: 
+      - 
+        name: NavigationBarCustom
+        visibility: visible
+      - 
+        name: RelatedProducts
+        visibility: visible
+      - 
+        name: block1389782744218
+        visibility: hidden
+      - 
+        name: block1389782810390
+        visibility: hidden
+  center_column: 
+    visibility: visible
+    blocks: 
+      - 
+        name: ProductInfo
+        visibility: visible
+      - 
+        name: ProductReviewList
+        visibility: visible
+      - 
+        name: ProductAddReviewForm
+        visibility: visible
+  right_column: 
+    visibility: visible
+    blocks: 
+      - 
+        name: MiniCart
+        visibility: visible
+      - 
+        name: block1389782777409
+        visibility: visible
+      - 
+        name: block1389782758401
+        visibility: visible
+  footer: 
+    visibility: visible
+    blocks: 
+      - 
+        name: footer_menu
+        visibility: visible
+      - 
+        name: copyright
+        visibility: visible

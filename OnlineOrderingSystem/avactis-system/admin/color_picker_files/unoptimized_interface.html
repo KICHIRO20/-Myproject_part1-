@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Color Picker</title>
+
+<style>
+body {background-color:#ece9d8;
+	margin:15px;
+	padding:0px;}
+
+* {font-family:Arial, Helvetica, sans-serif;
+	font-size:8pt;}
+	
+#np_cp {width:435px;}
+
+#nogray_logo {width:20px;
+	height:20px;
+	display:block;
+	margin-top:10px;
+	background:url(images/logo.png) no-repeat;
+	text-decoration:none;
+	_background:none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/logo.png', sizingMethod = 'scale');}
+	
+.main_table {text-align:left;}
+
+#hue_color_area {width:256px;
+	height:256px;
+	border:inset #ece9d8 2px;
+	background:#ff0000 url(images/mask.png) no-repeat top left;
+	_background:#ff0000;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/mask.png', sizingMethod = 'scale');}
+	
+#hue_color_area_container {border:solid #ece9d8 3px;}
+	
+#spectrum_slider{width:50px;
+	height:256px;
+	text-align:center;
+	z-index:10;
+	background:url(images/side_slider.jpg) no-repeat top center;}
+	
+.spectrum_img {border:inset #ece9d8 2px;
+	height:256px;}
+	
+#spectrum_arrows {position:absolute;
+	top:auto;
+	left:auto;}
+	
+#circle {position:absolute;
+	top:auto;
+	left:auto;}
+	
+.side_info {margin:15px;
+	margin-left:5px;}
+
+.color_preview {width:90px;
+	height:50px;
+	border:solid #000000 1px;
+	margin-bottom:10px;}
+
+.preview_channel {height:25px;
+	background-color:#ff0000;}
+	
+.button {width:50px;
+	text-align:center;}
+	
+#Error {font-weight:bold;
+	color:#cc0000;}
+</style>
+<script language="javascript" src="../mootools.v1.11.js" type="text/javascript"></script>
+<script language="javascript" src="../nogray_core_vs1_min.js" type="text/javascript"></script>
+<script language="javascript" src="../nogray_color_picker_vs2_min.js" type="text/javascript"></script>
+<script language="javascript">
+	// global variables
+	// colors
+	try {
+		if ($_GET['color'].length < 1) delete $_GET['color'];
+	}
+	catch(e){}
+	try {
+		if ($_GET['pre_color'].length < 1) delete $_GET['pre_color'];
+	}
+	catch(e){}
+	
+	var cur_color = new Color($pick($_GET['color'], "#FF0000"));
+	
+	var pre_color = new Color($pick($_GET['pre_color'], "#FF0000"));
+	var holder_color = new Color($pick($_GET['color'], "#FF0000"));
+	
+	// the coordinates of the hue square
+	var hue_cord;
+	
+	// the specturm slider
+	var spectrum_slider;
+	
+	window.addEvent('load', ini_picker);
+
+	function ini_picker(){
+		hue_cord = $('hue_color_area_container').getCoordinates();
+		
+		spectrum_slider = new Slider($('spectrum_slider'), $('spectrum_arrows'), {steps: 360, mode: 'vertical', offset:3,
+					onChange: function(step){
+						cur_color  = new Color([step, cur_color.hsb[1], cur_color.hsb[2]], "hsb");
+						setColorPicker();
+					},
+					onTick: function(pos){
+						var anim = new Fx.Style(this.knob, this.p,{duration:250, transition:Fx.Transitions.Quart.easeOut});
+						anim.start(pos);
+					}
+				});
+				
+		var ci_drag = new Drag.Move($('circle'), {'container':$('hue_color_area_container'),
+				onDrag: function(){
+						x = $('circle').getStyle("left").toInt()-hue_cord.left;
+						y = $('circle').getStyle("top").toInt()-hue_cord.top;
+						
+						// the 10 is the border width on the hue selection
+						x = ((x/(hue_cord.width-10))*100).toInt();
+						y = ((y/(hue_cord.height-10))*100).toInt();
+						
+						cur_color = new Color([cur_color.hsb[0],checkNum(x),checkNum(100-y)], "hsb");
+						setColorPicker();
+					}
+				});
+				
+		$('circle').addEvent("click", function(e){
+			var e = new Event(e);
+			e.stopPropagation();
+		});
+
+		
+		// assigning events to the picker parts	
+		$('des_button').addEvent("click", function(){
+			cur_color = cur_color.desaturate();
+			setColorPicker();
+			moveSliders();
+		});
+		
+		$('websafe_check').addEvent("click", function(){
+			if ($('websafe_check').checked) {
+				holder_color = cur_color;
+				$('spectrum_slider').setStyle("backgroundImage", "url(images/side_slider_ws.jpg)");
+			}
+			else {
+				cur_color = holder_color;
+				$('spectrum_slider').setStyle("backgroundImage", "url(images/side_slider.jpg)");
+			}
+			setColorPicker();
+			moveSliders();
+		});
+		
+		$('invert_button').addEvent("click", function(){
+			cur_color = cur_color.invert();
+			setColorPicker();
+			moveSliders();
+		});
+		
+		
+		$('previous_preview').addEvent("click", function(){
+			cur_color = pre_color;
+			setColorPicker();
+			moveSliders();
+		});	
+		
+		$('hue_color_area').addEvent("click", function(e){
+			var e = new Event(e);
+			// the 10 is for the image size
+			x = e.client.x-hue_cord.left-5;
+			y = e.client.y-hue_cord.top-5;
+			
+			// the 10 is the border width on the hue selection
+			x = ((x/(hue_cord.width-10))*100).toInt();
+			y = ((y/(hue_cord.height-10))*100).toInt();
+			
+			cur_color = new Color([cur_color.hsb[0],checkNum(x),checkNum(100-y)], "hsb");
+			setColorPicker();
+			
+			var anim = new Fx.Styles($('circle'), {duration:250, transition:Fx.Transitions.Quart.easeOut});
+			anim.start({
+				'top': e.client.y-5,
+				'left': e.client.x-5
+			});
+		});
+		
+		
+		$('h_selector_val').addEvent("keyup", function(){
+			if (this.value != ""){
+				var val = checkNum(this.value.toInt(), 360);
+				cur_color = new Color([val, cur_color.hsb[1], cur_color.hsb[2]], "hsb");
+				setColorPicker();
+				moveSliders();
+			}
+		});
+		
+		$('s_selector_val').addEvent("keyup", function(){
+			if (this.value != ""){
+				var val = checkNum(this.value.toInt());
+				cur_color = new Color([cur_color.hsb[0], val, cur_color.hsb[2]], "hsb");
+				setColorPicker();
+				moveSliders();
+			}
+		});
+		
+		$('l_selector_val').addEvent("keyup", function(){
+			if (this.value != ""){
+				var val = checkNum(this.value.toInt());
+				cur_color = new Color([cur_color.hsb[0],  cur_color.hsb[1], val], "hsb");
+				setColorPicker();
+				moveSliders();
+			}
+		});
+		
+		$('r_selector_val').addEvent("keyup", function(){
+			if (this.value != ""){
+				var val = checkNum(this.value.toInt(), 255);
+				cur_color = new Color([val, cur_color[1], cur_color[2]], "rgb");
+				setColorPicker();
+				moveSliders();
+			}
+		});
+		
+		$('g_selector_val').addEvent("keyup", function(){
+			if (this.value != ""){
+				var val = checkNum(this.value.toInt(), 255);
+				cur_color = new Color([cur_color[0], val, cur_color[2]], "rgb");
+				setColorPicker();
+				moveSliders();
+			}
+		});
+		
+		$('b_selector_val').addEvent("keyup", function(){
+			if (this.value != ""){
+				var val = checkNum(this.value.toInt(), 255);
+				cur_color = new Color([cur_color[0], cur_color[1], val], "rgb");
+				setColorPicker();
+				moveSliders();
+			}
+		});
+		
+		$('hex_val').addEvent("keyup", function(){
+			if (this.value.test(/^#[ABCDEFabcdef0123456789]{6}$/)){
+				cur_color = new Color(this.value);
+				setColorPicker();
+				moveSliders();
+			}
+		});
+		
+		$('cancel_button').addEvent("click", function(){
+			window.opener.$color_picker_object[$_GET['pickerObject']].fireEvent("onCancel", cur_color.hex.toUpperCase());
+			window.close();
+		});
+		
+		$('ok_button').addEvent("click", function(){
+			window.opener.$color_picker_object[$_GET['pickerObject']].fireEvent("onChange", cur_color.hex.toUpperCase());
+			window.close();
+		});
+		
+		setColorPicker();
+		moveSliders();
+	};
+	
+	function setColorPicker(){
+		if ($('websafe_check').checked) cur_color = cur_color.webSafe();
+		$('r_selector_val').value = cur_color[0];
+		$('g_selector_val').value = cur_color[1];
+		$('b_selector_val').value = cur_color[2];
+		$('h_selector_val').value = cur_color.hsb[0];
+		$('s_selector_val').value = cur_color.hsb[1];
+		$('l_selector_val').value = cur_color.hsb[2];
+		$('hex_val').value = cur_color.hex.toUpperCase();
+		
+		$('current_preview').setStyle("background", cur_color);
+		$('hue_color_area').setStyle("backgroundColor", new Color([cur_color.hsb[0],100,100], "hsb"));
+		
+		window.opener.$color_picker_object[$_GET['pickerObject']].fireEvent("onPreview", cur_color.hex.toUpperCase());
+		return false;
+	};
+	
+	function moveSliders(){
+		spectrum_slider.set(cur_color.hsb[0]);
+		var anim = new Fx.Styles($('circle'), {duration:250, transition:Fx.Transitions.Quart.easeOut});
+		anim.start({
+			'top': hue_cord.top+((hue_cord.height-10) - ((cur_color.hsb[2]/100)*(hue_cord.height-10))),
+			'left': hue_cord.left+((cur_color.hsb[1]/100)*(hue_cord.width-10))
+		});
+	};
+	
+	function checkNum(val, maximum, minimum){
+		maximum = $pick(maximum, 100);
+		if (val > maximum) val = maximum;
+		else if(val < 0) val = 0;
+		return val;
+	};
+	
+</script>
+</head>
+<body>
+<div id="np_cp">
+	<table cellpadding="0" cellspacing="0" class="main_table">
+	<tr><td>
+	Select a Color:
+	<div id="hue_color_area_container">
+		<div id="hue_color_area">
+			<img src="images/circle.gif" border="0" alt="" id="circle" />
+		</div>
+	</div>
+	</td><td>
+	&nbsp;
+	<div id="spectrum_slider">
+		<img src="images/arrows.gif" border="0" alt="" id="spectrum_arrows" />
+	</div>
+	</td><td>
+	<div class="side_info">
+		<div class="color_preview">
+			<div class="preview_channel" id="current_preview"> </div>
+			<div class="preview_channel" id="previous_preview"> </div>
+		</div>
+		<table>
+		<tr><td>H:</td>
+		<td><input type="text" name="h_selector_val" id="h_selector_val" size="2" value="0" maxlength="3"/> &deg;</td></tr>
+		
+		<tr><td>S:</td>
+		<td><input type="text" name="s_selector_val" id="s_selector_val" size="2" value="100" maxlength="3" /> %</td></tr>
+		
+		<tr><td>L:</td>
+		<td><input type="text" name="l_selector_val" id="l_selector_val" size="2" value="100" maxlength="3" /> %</td></tr>
+		
+		<tr><td>R:</td>
+		<td><input type="text" name="r_selector_val" id="r_selector_val" size="2" value="255" maxlength="3" /></td></tr>
+		
+		<tr><td>G:</td>
+		<td><input type="text" name="g_selector_val" id="g_selector_val" size="2" value="0" maxlength="3" /></td></tr>
+		
+		<tr><td>B:</td>
+		<td><input type="text" name="b_selector_val" id="b_selector_val" size="2" value="0" maxlength="3" /></td></tr>
+		
+		<tr>
+		<td colspan="2"><input type="text" name="hex_val" id="hex_val" size="6" value="#FF0000" maxlength="7" /></td></tr>
+		</table>
+	</div>
+	</td></tr>
+	<tr><td>
+	<input type="checkbox" name="websafe_check" id="websafe_check" /> <label for="websafe_check" id="websafe_txt">Only Websafe Colors</label>
+	<br />
+	<input type="button" id="invert_button" value="Invert Color" />
+	&nbsp;&nbsp;
+	<input type="button" id="des_button" value="Desaturate" />
+	</td><td colspan="2" align="right">
+	<input type="button" value="OK" id="ok_button" class="button" />
+	&nbsp;
+	<input type="button" value="Cancel" id="cancel_button" class="button" />
+	<a href="http://www.nogray.com" target="_blank" id="nogray_logo" title="NoGray.com Color Picker">&nbsp;</a>
+	</td></tr>
+	</table>
+</div>
+</body>
+</html>

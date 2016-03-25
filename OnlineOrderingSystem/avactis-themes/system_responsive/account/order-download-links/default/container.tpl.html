@@ -1,0 +1,15 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("ACCOUNT_DOWNLOAD_FILES"); ?><?php Label('ACCOUNT_ORDER_NUMBER'); ?> <?php Local_OrderID(); ?></h1>
+        <div class="subheader"><?php Label('ACCOUNT_LINKS_FOR_A_PRODUCT_LABEL'); ?>&nbsp;<?php Local_OrderedProductName(); ?></div>
+        <?php Local_HotlinksList(); ?>
+        <a href="<?php Local_OrderInfoLink(); ?>"><span class="<?php lang(); ?> button_back"></span></a>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

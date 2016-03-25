@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<body>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript"> var javascript_version = 1.0;</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript1.1">  javascript_version = 1.1;</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function NewWindow(windowName, windowURL)
+    {
+        var i=0;
+        var newwin;
+        newwin = window.open(windowURL, windowName);
+        if (javascript_version > 1.0)
+        {
+//                    setTimeout("newwin.focus()", 250);
+            newwin.focus();
+        }
+        else
+        {
+            newwin.focus();
+        }
+    }
+//-->
+</SCRIPT>
+
+<table class="form" cellspacing="1" cellpadding="5" width="100%" align="center">
+    <colgroup>
+      <col width="20%">
+      <col width="0%">
+      <col width="75%">
+
+    <tr class="title" style="height: 25px;">
+        <td class="title popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;"><?php Msg('MNG_CTGR_CURR_CTGR'); ?> <?php Breadcrumb(); ?></td>
+    </tr>
+    <tr class="subtitle" style="height: 25px;">
+        <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+            <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="80%"><?php Msg('INFO_CTGR_PAGE_NAME'); ?></td>
+                    <td nowrap style="padding-right: 8px;"><?php PageHelpLink('catalog_category_info'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('catalog_category_info'); ?></td>
+                    <td nowrap style="padding-right: 6px;"><div id="EditButton1" class="button button_5em" onclick="go('<?php EditCatHref(); ?>'); disableButtons(new Array('EditButton1', 'EditButton2', 'CancelButton1', 'CancelButton2'));"><?php Msg('BTN_EDIT_SUBCTGR'); ?></div></td>
+                    <td nowrap style="padding-right: 10px;"><div id="CancelButton1" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg('BTN_CANCEL'); ?></div></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><span class="required"><?php msg('CAT_ID_NAME'); ?>*</span></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','SubcategoryID', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryId(); ?></td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><span class="required"><?php msg('CAT_NAME_NAME'); ?>*</span></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','Subcategory', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryName(); ?></td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_STATUS_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','CategoryStatus', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryStatus(); ?></td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CATEGORY_PRODUCTS_RECURSIVELY_STATUS_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;"><?php hinttext('CATEGORY_PRODUCTS_RECURSIVELY_STATUS_NAME'); ?></a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryShowProductsRecursivelyStatus(); ?></td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_DESCR_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','CategoryDescription', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryDescription(); ?></td>
+    </tr>
+
+    <tr class="group">
+        <td colspan="3" class="popup_dialog_body_left_padded popup_dialog_body_right_padded">
+            <table class="clear" cellpadding="0" cellspacing="0" width="100%">
+                <tr><td><?php Msg('ADD_CTGR_GRP_001'); ?></td></tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_LRGIMG_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','LargeImage', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td valign="top" class="popup_dialog_body_right_padded">
+          <table width="100%">
+            <tr>
+              <td class="value popup_dialog_body_right_padded" width="75%">
+                <?php LargeImage(); ?>
+              </td>
+            </tr>
+          </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_SMLIMG_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','SmallImage', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td valign="top" class="popup_dialog_body_right_padded">
+          <table width="100%">
+            <tr>
+              <td class="value">
+                <?php SmallImage(); ?>
+              </td>
+            </tr>
+          </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_IMGDESCR_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','ImageDescription', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryImageAltText(); ?></td>
+    </tr>
+
+    <tr class="group">
+        <td colspan="3" class="popup_dialog_body_left_padded popup_dialog_body_right_padded">
+            <table class="clear" cellpadding="0" cellspacing="0" width="100%">
+                <tr><td><?php Msg('ADD_CTGR_GRP_002'); ?></td></tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_PAGETTL_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','PageTitle', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryPageTitle(); ?></td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_METAKWRD_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','MetaKeywords', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryMetaKeywords(); ?></td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php msg('CAT_METADESCR_NAME'); ?></td>
+        <td class="help">
+			<a class="pull-left" style="cursor:pointer;">
+				<?php AttributeHelp('0','MetaDescription', 'cat_attr'); ?>
+			</a>
+		</td>
+        <td class="value popup_dialog_body_right_padded"><?php CategoryMetaDescription(); ?></td>
+    </tr>
+
+    <tr>
+        <td class="label popup_dialog_body_left_padded"><?php xmsg('CTL','CAT_SEO_URL_PREFIX'); ?></td>
+        <td><a class="pull-left" style="cursor:pointer;"><?php hinttext('CAT_SEO_URL_PREFIX','catalog-messages'); ?></a></td>
+        <td class="value popup_dialog_body_right_padded"><?php CategorySEOURLprefix(); ?></td>
+    </tr>
+
+    <tfoot>
+        <tr>
+            <th colspan="3" align="center">
+                <table class="clear">
+                    <tr>
+                        <td style="padding-right: 4px;"><div id="EditButton2" class="button button_5em" onclick="go('<?php EditCatHref(); ?>'); disableButtons(new Array('EditButton1', 'EditButton2', 'CancelButton1', 'CancelButton2'));"><?php Msg('BTN_EDIT_SUBCTGR'); ?></div></A></td>
+                        <td><div id="CancelButton2" class="button button_5em" onclick="closeAndFocusParent();"><?php Msg('BTN_CANCEL'); ?></div></td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</body>
+</html>

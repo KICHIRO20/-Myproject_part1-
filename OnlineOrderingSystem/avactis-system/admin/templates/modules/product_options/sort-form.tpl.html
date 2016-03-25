@@ -1,0 +1,34 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript" src="js/shuttle.js"></script>
+<form action="po_edit_option.php?asc_action=update_<?php WhatSort(); ?>_sort" method="post" name="<?php WhatSort(); ?>SortForm">
+<input type="hidden" name="parent_entity" value="<?php ParentEntityName(); ?>">
+<input type="hidden" name="<?php ParentIdName(); ?>" value="<?php ParentIdValue(); ?>">
+	<table class="table borderless">
+		<tbody>
+			<tr>
+				<td style="vertical-align: middle;">
+					<a href="javascript:moveItemUp('<?php WhatSort(); ?>SortOrder');">
+						<i class="fa fa-chevron-circle-up fa-lg"></i>
+					</a><br />
+					<a href="javascript:moveItemDown('<?php WhatSort(); ?>SortOrder');">
+						<i class="fa fa-chevron-circle-down fa-lg"></i>
+					</a>
+				</td>
+				<td>
+					<select id="<?php WhatSort(); ?>SortOrder" name="<?php WhatSort(); ?>SortOrder" class="form-control" size="8">
+						<?php SortItems(); ?>
+					</select>
+					<input type="hidden" name="<?php WhatSort(); ?>SortOrder.hidden" id="<?php WhatSort(); ?>SortOrder.hidden" value="">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="text-center">
+					<a class="btn btn-circle btn-default" href="javascript: document.forms['<?php WhatSort(); ?>SortForm'].submit();">
+						<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

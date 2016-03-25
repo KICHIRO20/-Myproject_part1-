@@ -1,0 +1,21 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+  <tr>
+  	<td width=100% align="left" valign="middle" style="padding-left: 4px; padding-right: 4px; padding-top: 30px;">
+
+<table class="form" width="100%" cellpadding="4" cellspacing="0">
+	<tr class="group">
+		<td><?php xmsg('PO','INVENTORY'); ?></td>
+		<td align="right"><a class="btn btn-circle btn-default" onClick="window.location='<?php InvEditorLink(); ?>'"><?php xmsg('PO','INVENTORY_MANAGER'); ?></a></td>
+	</tr>
+	<tr>
+    	<td colspan="2">
+	    	<?php xmsg('PO','INV_STAT_RECORDS_COUNT'); ?> <?php InvStat_CountValue(); ?><br>
+		    <?php xmsg('PO','INV_STAT_AANIC'); ?> <?php InvStat_AANICValue(); ?><br>
+		    <?php xmsg('PO','USED_OPTIONS'); ?> <?php InvStat_UsedOptions(); ?>
+    	</td>
+    </tr>
+</table>
+
+  	</td>
+  </tr>
+<!-- END TPL (DO NOT REMOVE!) -->

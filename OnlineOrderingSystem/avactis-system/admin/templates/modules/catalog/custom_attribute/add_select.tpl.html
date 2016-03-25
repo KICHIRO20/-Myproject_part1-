@@ -1,0 +1,118 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript">
+function addFieldForInputTypeValues()
+{
+    jQuery('<div><input class="form-control input-sm input-large" type="text" name="input_type_values[]" size="75" maxlength="128" /></div>').appendTo("#field_box");
+}
+</script>
+<SCRIPT LANGUAGE="JavaScript">
+function show_tag_preview() {
+  var tag_preview = document.getElementById("tag_preview");
+  var tag = document.getElementById("view_tag");
+  if (tag_preview == null || tag == null) return;
+  if (tag.value == "") {
+      tag_preview.innerHTML = "<div id=\"tag_preview\"></div>";
+      return;
+  }
+  value = tag.value;
+  value = value.substring(0, 1).toUpperCase() + value.substring(1).toLowerCase();
+  tag_preview.innerHTML = "<div id=\"tag_preview\">&lt;?php Product<font color=\"blue\">" + value + "</font>Custom(); ?&gt;</div>";
+  tag_preview.style.visibility='visible';
+}
+</SCRIPT>
+  <form action="catalog_new_custom_attribute.php" method="post" name="CatalogAddCustomAttribute" style="margin-bottom: 0px;">
+  <input type="hidden" name="asc_action" value="AddCustomAttributeAction">
+  <input type="hidden" name="form_id" value="<?php FormID(); ?>">
+  <input type="hidden" name="type_id" value="<?php TypeID(); ?>">
+  <input type="hidden" name="product_type_id" value="<?php ProductTypeID(); ?>">
+  <div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php msg('PRDTYPE_CUST_ATTR_PAGE_HEADER'); ?> <?php ProductTypeName(); ?> </span>
+			<span class="caption-subject font-blue-sharp"><?php msg('PRDTYPE_CUST_ATTR_PAGE_NAME_SEL'); ?></span>
+		</div>
+	</div>
+		<div class="portlet-body">
+		<div class="row">
+		<?php Errors(); ?>
+		</div>
+		<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label col-sm-9"><?php msg('CUSTBT_TAG_NAME'); ?>&nbsp;*</label>
+						</div>
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeTag', 'custbt_attr'); ?>
+							</a>
+						</div>
+						<div class="col-sm-5">
+						
+						<input  class="form-control input-sm input-large"  type="text" name="view_tag" id="view_tag" value="<?php AttributeTag(); ?>"  onkeyup="show_tag_preview();"><br/>
+                        <div id="tag_preview"></div>						
+						</div>
+						<script>show_tag_preview();</script>
+         </div>
+         <br>
+         <div class="row">
+						<div class="col-sm-3">
+							<label class="control-label col-sm-9"><?php msg('CUSTBT_NAME_NAME'); ?>&nbsp;*</label>
+						</div>
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeName', 'custbt_attr'); ?>
+							</a>
+						</div>
+						<div class="col-sm-5">
+						
+						<input class="form-control input-sm input-large" type="text" name="name" value="<?php AttributeName(); ?>" maxlength="128" onBlur="formatInput(this);" patternType="string128" >
+                        						
+						</div>
+						
+         </div>
+         <br>
+           <div class="row">
+						<div class="col-sm-3">
+							<label class="control-label col-sm-9"><?php msg('CUSTBT_DESCR_NAME'); ?>&nbsp;*</label>
+						</div>
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeDescr', 'custbt_attr'); ?>
+							</a>
+						</div>
+						<div class="col-sm-5">
+						<textarea class="form-control input-sm input-large" name="descr"  onBlur="formatInput(this);"  onkeyup="formatInput(this);" patternType="string512"><?php AttributeDescr(); ?></textarea>
+                       	</div>
+						
+         </div>
+         <br>
+         <div class="row">
+						<div class="col-sm-3">
+							<label class="control-label col-sm-9"><?php msg('CUSTBT_VALUES_NAME'); ?></label>
+						</div>
+						<div class="col-sm-2">
+							<a class="pull-left" style="cursor:pointer;">
+								<?php AttributeHelp('0','AttributeValues', 'custbt_attr'); ?>
+							</a>
+						</div>
+						<div class="col-sm-5">
+						<input type="hidden" name="input_type_values[]" value="<?php Msg('PRTYPE_VALUE_NOT_SELECTED')?>"/>
+       					<input class="form-control input-sm input-large" type="text" value="<?php Msg('PRTYPE_VALUE_NOT_SELECTED')?>" disabled="disabled"  size="75"/>
+        				<div id="field_box">  
+            			<div><input class="form-control input-sm input-large" type="text" name="input_type_values[]"  size="75" maxlength="128" /></div>
+       				    </div>
+       				    <a onclick="addFieldForInputTypeValues()" class="btn btn-circle btn-default margin-top-20"><i class="fa fa-plus"></i> <?php msg('BTN_ADD_FIELD'); ?></a>
+                       	</div>
+						
+         </div>
+		<p class="text-danger"><strong><?php msg('REQUIRED_FIELD_LABEL'); ?></strong></p>
+		<div class="actions text-center">
+			<div class="actions btn-set">
+				<a onclick="CatalogAddCustomAttribute.submit(); return true; disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" title="Save" id="EditButton2" class="btn btn-circle btn-default" ><i class="fa fa-plus"></i> <?php msg('BTN_ADD'); ?></a>
+	       		<a onclick="closeAndFocusParent();" class="btn btn-circle btn-default" id="CancelButton2"><i class="fa fa-times"></i> <?php msg('BTN_CANCEL'); ?></a>    						
+			</div>
+		</div>
+		</div>
+	</div>
+  </form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

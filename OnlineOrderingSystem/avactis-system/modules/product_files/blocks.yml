@@ -1,0 +1,4 @@
+- DownloadProductFilePrompt:
+    title: Download product file prompt
+    description: Download product file prompt
+    page: download.php

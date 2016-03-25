@@ -1,0 +1,23 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="JavaScript">
+
+function setResultVisible(rid)
+{
+	var cur_vis=document.getElementById(rid+'_result').style.display;
+	var new_vis='';
+	var new_img='minus'
+	if(cur_vis=='')
+	{
+		new_vis='none';
+		new_img='plus';
+	}	
+	document.getElementById(rid+'_result').style.display=new_vis;
+	document.getElementById(rid+'_image').src='images/'+new_img+'.gif';
+}
+
+</script>
+
+<?php ApiResults(); ?>
+
+<!-- END TPL (DO NOT REMOVE!) -->

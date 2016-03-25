@@ -1,0 +1,186 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+<script language="JavaScript">
+document.title = '<?php xmsg('MR','MR_SETTINGS_LINK'); ?>';
+jQuery(function($){
+$( "select" ).removeClass( "form-control " ).addClass( "form-control input-large" );
+});
+</script>
+
+<form action="" name="MRSettingsForm" method="post">
+<input type="hidden" name="asc_action" value="update_mr_settings_and_layouts">
+<?php ResultMessage(); ?>
+<div class="portlet light">
+<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg("MR","MR_SETTINGS_LINK"); ?></span>
+			<span class="caption-helper text-lowercase"><?php xmsg("MR","MR_SETTINGS_LINK_DESCR"); ?>...</span>
+		</div>
+	</div>
+
+  <div class="portlet-body form">
+<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+<?php xmsg('MR','LBL_SETTINGS'); ?>
+</div></div>
+</div>
+ <!--<h3 class="form-section"><?php xmsg('MR','LBL_INFO'); ?></h3>
+     
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php xmsg('MR','LBL_SERVER_SOFTWARE'); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php ServerSoft(); ?></span>
+			</div>
+		</div>
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php xmsg('MR','LBL_SERVER_API'); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php echo php_sapi_name(); ?></span>
+			</div>
+		</div>
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php xmsg('MR','LBL_MR_LOADED'); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php getMRloaded() == 'Y' ? xmsg('MR','LBL_YES') : (getMRloaded() == 'N' ? xmsg('MR','LBL_NO') : xmsg('MR','LBL_NA')); ?></span>
+			</div>
+		</div>
+		 End - Row -->
+  <!-- Begin - Row -->
+<?php
+    $msg=getMRStatusMessage();
+    if(!empty($msg)){ ?>
+  <div class="note note-danger note-bordered"><?php echo $msg; ?></div>
+<?php }?>
+                <div class="row margin-bottom-10">
+		   <div class="col-md-1"></div>
+                  <div class="col-md-2 col-sm-4">
+                    <lable class="help-block"><?php xmsg('MR','SETS_CATEGORY_PREFIX'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_CATEGORY_PREFIX','mod-rewrite-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <input type="text" class="form-control form-filter input-large" <?php setsCatsPrefix(); ?>>                    
+                  </div>
+                </div>
+		<!-- End - Row -->
+               <!-- Begin - Row -->
+                <div class="row margin-bottom-10">
+		   <div class="col-md-1"></div>
+                  <div class="col-md-2 col-sm-4">
+                    <lable class="help-block"><?php xmsg('MR','SETS_PRODUCT_PREFIX'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_PRODUCT_PREFIX','mod-rewrite-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <input type="text" class="form-control form-filter input-large" <?php setsProdsPrefix(); ?>>                    
+                  </div>
+                </div>
+		<!-- End - Row -->
+                <!-- Begin - Row -->
+                <div class="row margin-bottom-10">
+		   <div class="col-md-1"></div>
+                  <div class="col-md-2 col-sm-4">
+                    <lable class="help-block"><?php xmsg('MR','SETS_CMSPAGE_PREFIX'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_CMSPAGE_PREFIX','mod-rewrite-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <input type="text" class="form-control form-filter input-large" <?php setsCMSPrefix(); ?>>                    
+                  </div>
+                </div>
+		<!-- End - Row -->
+                <!-- Begin - Row -->
+                <div class="row margin-bottom-10">
+		   <div class="col-md-1"></div>
+                  <div class="col-md-2 col-sm-4">
+                    <lable class="help-block"><?php xmsg('MR','SETS_REWRITE_SCHEME'); ?></lable>
+                  </div>
+		<div class="col-md-1">
+                    <a class="pull-right" style="cursor:pointer;">
+                           <?php hinttext('SETS_REWRITE_SCHEME','mod-rewrite-messages'); ?>
+                    </a>
+		</div>
+                  <div class="col-md-3 col-sm-5">
+                    <?php setsSchemesSelect(); ?>                    
+                  </div>
+                </div>
+<br><br>
+<!-- End - Row -->
+                <!-- Begin - Row -->
+ <div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+                        <div class="col-md-8">  <?php xmsg('MR','LBL_RS_SAMPLES'); ?><br><br>
+                          <?php xmsg('MR','LBL_CAT_LINK'); ?>&nbsp;<span id="cat_link_sample" style="color: #9798E4;"></span><br/>
+  			  <?php xmsg('MR','LBL_PROD_LINK'); ?>&nbsp;<span id="prod_link_sample" style="color: #9798E4;"></span><br/>
+                          <?php xmsg('MR','LBL_CMS_LINK'); ?>&nbsp;<span id="cms_link_sample" style="color: #9798E4;"></span></div>
+  			        
+</div>
+		<!-- End - Row -->
+<?php LayoutsSettings(); ?>
+  </div><!--portlet-body -->
+<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button class="btn blue" id="UpdateButton2" name="settings" type="button" onclick="document.forms['MRSettingsForm'].submit();"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+		</div>
+	</div>
+</div>
+</form>
+
+<script language="JavaScript">
+
+
+<?php jsLinkSmaplesArray(); ?>
+
+function changeSampleLinks(scheme_id)
+{
+    document.getElementById('cat_link_sample').innerHTML = link_samples[scheme_id][0];
+    document.getElementById('prod_link_sample').innerHTML = link_samples[scheme_id][1];
+    document.getElementById('cms_link_sample').innerHTML = link_samples[scheme_id][2];
+};
+
+changeSampleLinks(<?php currentSchemeID(); ?>);
+
+function disableAllElements()
+{
+    if(<?php disableAllCondition(); ?>)
+    {
+        var frm = document.forms['MRSettingsForm'];
+        for(i=0; i<frm.elements.length; i++)
+        {
+            if(frm.elements[i].tagName == 'INPUT' || frm.elements[i].tagName == 'SELECT')
+            {
+                frm.elements[i].disabled = true;
+            };
+        };
+        disableButton('UpdateButton2');
+    };
+};
+
+mr_win_onload_back = window.onload;
+window.onload = function() {
+    if(mr_win_onload_back)
+        mr_win_onload_back();
+    disableAllElements();
+};
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

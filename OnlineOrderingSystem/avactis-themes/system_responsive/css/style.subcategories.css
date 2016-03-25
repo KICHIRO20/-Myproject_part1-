@@ -1,0 +1,30 @@
+.page_container .box.subcategories .content {
+    padding-bottom: 0px;
+}
+
+.page_container .subcategory_list {
+    overflow: hidden;
+    padding: 15px 15px 0px 15px;
+}
+
+.page_container .subcategory_list .subcategory_item {
+    overflow: hidden;
+    padding-bottom: 30px;
+    float: left;
+    width: 33%;
+    text-align: center;
+    height: 145px;
+}
+
+.page_container .subcategory_item .subcategory_img {
+}
+
+.page_container .subcategory_item .subcategory_name {
+    padding-top: 5px;
+}
+
+.right_column .subcategory_list .subcategory_item {
+    float: none;
+    width: 100%;
+} 
+

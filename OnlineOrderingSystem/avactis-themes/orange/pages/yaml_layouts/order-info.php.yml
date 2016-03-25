@@ -1,0 +1,49 @@
+---
+settings: 
+  template: 'page.template.tpl.html'
+  page_title: '<?php StoreOwnerPageTitle(); ?>'
+  page_description: '<?php CategoryMetaDescription(); ?>'
+  page_keywords: '<?php CategoryMetaKeywords(); ?>'
+placeholders: 
+  header: 
+    blocks: 
+      - 
+        name: user1
+        visibility: visible
+      - 
+        name: top_menu
+        visibility: visible
+      - 
+        name: top_phone
+        visibility: visible
+      - 
+        name: welcome_text
+        visibility: visible
+    visibility: visible
+  main_menu: 
+    blocks: 
+      - 
+        name: main_menu
+        visibility: visible
+    visibility: visible
+  left_column: 
+    blocks: 
+    visibility: hidden
+  center_column: 
+    blocks: 
+      - 
+        name: OrderInfo
+        visibility: visible
+    visibility: visible
+  right_column: 
+    blocks: 
+    visibility: hidden
+  footer: 
+    blocks: 
+      - 
+        name: footer_menu
+        visibility: visible
+      - 
+        name: copyright
+        visibility: visible
+    visibility: visible

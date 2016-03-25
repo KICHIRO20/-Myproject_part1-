@@ -1,0 +1,32 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr bgcolor="#FFFAFC" ;>
+	<td align="center" style="text-align: center;" valign="top"><input
+		type="checkbox" class="<?php DelCheckboxCssClass(); ?>"
+		id="select_html<?php HtmlN(); ?>"
+		name="selected_html_content[<?php HtmlID(); ?>]"
+		onclick="selectRow(this); formDelete(this);"
+		value="<?php HtmlID(); ?>" type="checkbox"></td>
+
+  <!-- <td align="center" style="text-align: center;" valign="top">
+    <input type="text" size="3" maxlength="5" name="code_data[<?php HtmlID(); ?>][order_by]" value="0" />
+  </td>
+ -->
+	<td>
+	
+	   <textarea id="html_code_<?php HtmlID(); ?>" name="code_data[<?php HtmlID(); ?>][html_code]" cols="70" rows="8"  style="width: 99%;">
+	   <?php Code(); ?></textarea>
+	<div class="AELinkBox" style="width: 99%;">
+<a href="javascript:void(0);" style="display: none;" id="html_bannerEditDis<?php HtmlID(); ?>" onclick="javascript: disableHtmlEditor('html_code_<?php HtmlID(); ?>','code_data[<?php HtmlID(); ?>][html_code]', '<?php HtmlID(); ?>');">Default editor</a>
+<b id="html_bannerEditDisB<?php HtmlID(); ?>"><?php xMsg('BN','BN_DEFAULT_EDITOR'); ?></b>&nbsp;&nbsp;
+<a href="javascript:void(0);" id="html_bannerEditEnb<?php HtmlID(); ?>" onclick="javascript: enableHtmlEditor('html_code_<?php HtmlID(); ?>','code_data[<?php HtmlID(); ?>][html_code]','<?php HtmlID(); ?>');">WYSIWYG editor</a>
+<b id="html_bannerEditEnbB<?php HtmlID(); ?>" style="display: none;"><?php xMsg('BN','BN_WYSIWYG'); ?></b></div>
+	</td>
+
+  <td>
+    <select name="code_data[<?php HtmlID(); ?>][avail]">
+     <?php HtmlAvail() ;?>
+    </select>
+	</td>
+</tr>
+
+<!-- END TPL (DO NOT REMOVE!) -->

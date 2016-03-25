@@ -1,0 +1,8 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+	<td style="<?php Local_ManufacturerCSSStyle(); ?>; text-align: center;">&nbsp;<?php Local_ManufacturerImage(); ?></td>
+	<td style="<?php Local_ManufacturerCSSStyle(); ?>; text-align: left;"><input type="hidden" id="Manufacturer_<?php Local_ManufacturerID(); ?>" name="Manufacturer_<?php Local_ManufacturerID(); ?>" value="<?php Local_ManufacturerName(); ?>"><a href="<?php Local_ManufacturerEditManufacturerHref();?>"><b><?php Local_ManufacturerName(); ?></b></a></td>
+	<td style="<?php Local_ManufacturerCSSStyle(); ?>; text-align: left;">&nbsp;<?php Local_ManufacturerUrl(); ?></td>
+	<td style="<?php Local_ManufacturerCSSStyle(); ?>; text-align: center;"><input type="radio" name="manufacturer_id" id="manufacturer_id" value="<?php Local_ManufacturerID(); ?>" onclick="selectRowDeselectOther(this);"></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

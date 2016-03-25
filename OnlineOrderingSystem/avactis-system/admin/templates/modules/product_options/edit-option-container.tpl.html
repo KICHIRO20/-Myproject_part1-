@@ -1,0 +1,215 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+<?php JS_OnOptionTypeChanged();  ?>
+<?php JS_OnDiscardAvailChanged(); ?>
+<?php JS_OnShowTypeChanged(); ?>
+
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'UpdateButton',
+                            'CancelButton'
+                            );
+    disableButtons(buttons);
+}
+
+
+function tryToSubmitForm()
+{
+	var edit_form=document.forms['EditOption_Form'];
+	
+	if(edit_form.elements['Option[OptionName]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_001'); ?>');
+		edit_form.elements['Option[OptionName]'].focus();
+		return;
+	}
+	if(edit_form.elements['Option[DisplayName]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_002'); ?>');
+		edit_form.elements['Option[DisplayName]'].focus();
+		return;
+	}
+	if(edit_form.elements['Option[OptionType]'].value=='SS' && edit_form.elements['Option[DiscardAvail]'].value=='YES' && edit_form.elements['Option[DiscardValue]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_003'); ?>');
+		edit_form.elements['Option[DiscardValue]'].focus();
+		return;
+	}
+	if(edit_form.elements['Option[OptionType]'].value=='CI'
+		&& (edit_form.elements['Option[ShowType][CI]'].value=='CBSI' || edit_form.elements['Option[ShowType][CI]'].value=='CBTA')
+		&& edit_form.elements['Option[CheckBoxText]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_004'); ?>');
+		edit_form.elements['Option[CheckBoxText]'].focus();
+		return;
+	}
+
+	<?php JSchangeToCIwarning(); ?>
+	<?php JSchangeINVwarning(); ?>
+	
+	disableButtonsInForm();
+	edit_form.submit();
+}
+
+</script>
+
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+</script>
+<?php ResultMessage(); ?>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="font-green-sharp bold uppercase">
+				<i class="fa fa-edit"></i>&nbsp;<?php xmsg('PO','EDIT_OPTION'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div id="ReturnButton1" class="btn btn-circle btn-default inline" onClick="javascript: window.location='<?php CancelLink(); ?>'">
+				<i class="fa fa-undo"></i>&nbsp;<?php msg('BTN_RETURN'); ?>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="caption">
+			<?php ActualHeader(); ?>
+		</div>
+		<br />
+		<div class="table-responsvie">
+			<form action="po_edit_option.php?asc_action=update_option_of_entity" method="post" name="EditOption_Form">
+				<input type="hidden" name="option_id" value="<?php _option_id(); ?>">
+				<input type="hidden" name="parent_entity" value="<?php _parent_entity(); ?>">
+				<input type="hidden" name="entity_id" value="<?php _entity_id(); ?>">	 
+				<table class="table borderless">
+					<tbody>
+			 			<tr>
+			  				<td><?php xmsg('PO','OPTION_NAME'); ?></td>
+			  				<td><a href="<?php HintLink_OpName(); ?>"><i class="fa fa-question-circle"></i></a></td>
+			  				<td class="text-left"><input type="text" class="form-control input-sm" <?php OptionNameField();?>></td>
+			  			</tr>
+						<tr>
+							<td><?php xmsg('PO','DISPLAY_NAME'); ?></td>
+							<td><a href="<?php HintLink_DspName(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><input type="text" class="form-control input-sm" <?php DisplayNameField();?>></td>
+						</tr>
+						<tr>
+							<td><?php xmsg('PO','DISPLAY_DESCR'); ?></td>
+							<td><a href="<?php HintLink_DspDescr(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left">
+								<textarea class="tiny_mce" id="OptionDescription" class="form-control" <?php OptionDescription();?> >
+									<?php DescriptionText(); ?>
+								</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td><?php xmsg('PO','OPTION_TYPE'); ?></td>
+							<td><a href="<?php HintLink_OpType(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td clas="text-left"><?php OptionTypeField(); ?></td>
+						</tr>
+						<tr id="show_type_for_SS">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a href="<?php HintLink_ShType(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php ShowTypeSSField(); ?></td>
+						</tr>
+						<tr id="show_type_for_MS">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a href="<?php HintLink_ShType(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php ShowTypeMSField(); ?></td>
+						</tr>
+						<tr id="show_type_for_CI">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a href="<?php HintLink_ShType(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php ShowTypeCIField(); ?></td>
+						</tr>
+						<tr id="show_type_for_UF">
+							<td><?php xmsg('PO','SHOW_TYPE'); ?></td>
+							<td><a href="<?php HintLink_ShType(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php ShowTypeUFField(); ?></td>
+						</tr>
+						<tr id="additional_fields_for_SS_01">
+							<td><?php xmsg('PO','DISCARD_AVAIL'); ?></td>
+							<td><a href="<?php HintLink_DisAvail(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php DiscardAvailField(); ?></td>
+						</tr>
+						<tr id="additional_fields_for_SS_02">
+							<td><?php xmsg('PO','DISCARD_VALUE'); ?></td>
+							<td></td>
+							<td class="text-left"><input type="text" class="form-control input-sm" <?php DiscardValueField(); ?>></td>
+						</tr>
+						<tr id="additional_fields_for_CI_01">
+							<td><?php xmsg('PO','CHECKBOX_TEXT'); ?></td>
+							<td><a href="<?php HintLink_CBText(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><input type="text" class="form-control input-sm" <?php CheckBoxTextField(); ?>></td>
+						</tr>
+						<tr id="additional_fields_for_SSMS_01">
+							<td><?php xmsg('PO','USE_FOR_IT'); ?></td>
+							<td><a href="<?php HintLink_UseForIT(); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php UseForITField(); ?></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3" class="text-center">
+								<div id="UpdateButton" class="btn btn-circle btn-default" onClick="javascript: tryToSubmitForm();">
+									<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+			<?php EditValuesForm(); ?>
+
+			<?php AddNewValueForm(); ?>
+		</div>
+	</div>
+</div>
+<script language="JavaScript">
+	onOptionTypeChanged();
+	onDiscardAvailChanged();
+	onShowTypeChanged();
+</script>
+<div id="sort_form_div" style="position: fixed; left: 27%; top: 20%; z-index: 10; display: none;">
+	<!-- BEGIN Portlet PORTLET-->
+	<div class="portlet box blue-hoki">
+		<div class="portlet-title">
+			<div class="caption">
+				<span class="bold uppercase">
+					<i class="fa fa-sort"></i>&nbsp;<?php xmsg('PO','SORT_ORDER'); ?>
+				</span>
+			</div>
+			<div class="tools">
+				<a href="javascript: void(0);" onClick="document.getElementById('sort_form_div').style.display='none'" class="remove"></a>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="table-responsvie">
+				<?php ValuesSortForm(); ?>
+			</div>
+		</div>
+	</div>
+	<!-- END Portlet PORTLET-->
+</div>
+<?php JSforIE6(); ?>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box cmspage nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php CMSPageName(); ?></h1>
+        <div class="cmspage_content">
+        <?php CMSPageContent(); ?> 
+        <?php CMSPageTree(); ?>
+        
+        <?php if (getCMSPageParentPage() > 0) { ?>
+        <br>
+        <a href="<?php CMSPageLink(getCMSPageParentPage()) ?>"><?php Label('CMS_BACK_TO_PARENT_PAGE'); ?></a>
+        <?php } ?>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

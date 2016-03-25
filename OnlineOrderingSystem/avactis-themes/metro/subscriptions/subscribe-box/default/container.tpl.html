@@ -1,0 +1,19 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="<?php ViewClassName(); ?>">
+    <div class="content">
+        <a name="subscribe_box"></a>
+        <div class="subscribe_form">
+         <?php Local_Messages(); ?>
+ <h2>NEWSLETTER</h2>
+            <form action="<?php Local_FormActionURL(); ?>" name="SubscribeForm" method="post">
+            <div class="input-group">
+            <input type="hidden" name="asc_action" value="customer_subscribe" />
+                <input type="text" name="email" value="<?php Local_SubscribedEmail(); ?>" placeholder="youremail@mail.com" style="background: none repeat scroll 0% 0% transparent; height:31px;" class="form-control"/><?php Local_SubmitButton(); ?>
+         </div>    
+          <?php Local_TopicsList(); ?>
+        </form>
+        </div>
+     </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

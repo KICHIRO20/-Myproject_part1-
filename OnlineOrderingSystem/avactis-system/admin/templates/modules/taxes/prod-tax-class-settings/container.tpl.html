@@ -1,0 +1,255 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+var AddProdTaxClassFromCatalog = '<?php AddProdTaxClassFromCatalog(); ?>';
+if (AddProdTaxClassFromCatalog == 0)
+{
+    if(!(!window.opener || window.opener.closed))
+    {
+        window.opener.location.reload();
+    }
+	parent.location.reload();
+}
+
+function selectTaxClassRow (Element) {
+
+    var buttons_with_the_same_name = document.getElementsByName(Element.name); 
+    
+    for(var i=0; i<buttons_with_the_same_name.length; i++) 
+    {
+        if (Element != buttons_with_the_same_name[i]) 
+        {
+            buttons_with_the_same_name[i].checked = false;
+        }
+        buttons_with_the_same_name[i].parentNode.parentNode.className = '';
+    }
+
+    var selectedTableRow = Element.parentNode.parentNode;
+    if (Element.checked) {
+        selectedTableRow.className = 'selected';
+    } else {
+        selectedTableRow.className = '';
+    }
+}
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function OpenForm(action)
+{
+    var FormTitle = document.getElementById('FormTitle');
+    var AddEditButton = document.getElementById('AddEditButton');
+    var form = document.forms["AddEditProductTaxClass"];
+    var nameElement = document.getElementById("name");
+    var descrElement = document.getElementById("descr");
+    var idElement = document.getElementById("id");
+    if (action == 'Add')
+    {
+        nameElement.value = "";
+        descrElement.value = "";
+        idElement.value = "";
+        FormTitle.innerHTML = "<?php Msg('PRD_TAX_CLS_TITLE_ADD'); ?>";
+        AddEditButton.innerHTML = "<?php Msg('BTN_ADD'); ?>";
+        form.action = "<?php AddAction(); ?>";
+    }
+    else
+    {
+        var i=isSelected();
+        if (i == 0)
+        {
+            alert("<?php Msg('PRD_TAX_CLS_WRN_001'); ?>");
+            return;
+        }
+        nameElement.value = document.getElementById("name_"+i).value;
+        descrElement.value = document.getElementById("descr_"+i).value;
+        idElement.value = document.getElementById("c_"+i).value;
+        FormTitle.innerHTML = "<?php Msg('PRD_TAX_CLS_TITLE_EDIT'); ?>";
+        AddEditButton.innerHTML = "<?php Msg('BTN_UPDATE'); ?>";
+        form.action = "<?php UpdateAction(); ?>";
+    }
+
+    EnableDisableCheckBoxes("c_", true);
+    var hiddenForm = document.getElementById('hiddenForm');
+    hiddenForm.style.display = "inline";
+    var Buttons = document.getElementById('buttons');
+    Buttons.style.display = "none";
+}
+
+function CloseForm()
+{
+    EnableDisableCheckBoxes("c_", false);
+    var hiddenForm = document.getElementById('hiddenForm');
+    hiddenForm.style.display = "none";
+    var Buttons = document.getElementById('buttons');
+    Buttons.style.display = "inline";
+}
+
+function isSelected()
+{
+    var isSelected = 0;
+    var selectElement = document.getElementById("c_1");
+    var i = 1;
+    while (selectElement)
+    {
+        if (selectElement.checked)
+        {
+            isSelected = i;
+            break;
+        }
+        i++;
+        selectElement = document.getElementById("c_"+i);
+    }
+    return isSelected;
+}
+
+function EnableDisableCheckBoxes(elIdPref, disabled)
+{
+    var i = 1;
+    var selectElement = document.getElementById(elIdPref+i);
+    while (selectElement)
+    {
+        selectElement.disabled = disabled;
+        i++;
+        selectElement = document.getElementById(elIdPref+i);
+    }
+}
+
+function confirmDeleteTaxClass()
+{
+    var i=isSelected();
+    if (i == 0)
+    {
+        alert("<?php Msg('PRD_TAX_CLS_WRN_001'); ?>");
+        return;
+    }
+    bootbox.confirm("<?php Msg('PRD_TAX_vCLS_WRN_003'); ?>'"+document.getElementById("name_"+i).value+"'",function(result){
+    if(result)
+    go('<?php DeleteLink(); ?>'+document.getElementById("c_"+i).value);
+    });
+}
+
+function FormSubmit()
+{
+    if (!document.getElementById("name").value)
+    {
+        alert("<?php Msg('PRD_TAX_CLS_WRN_002'); ?>");
+        return;
+    }
+    var form = document.forms["AddEditProductTaxClass"];
+    form.submit();
+}
+//-->
+</SCRIPT>
+<table class="form" cellspacing="0" cellpadding="5" width="100%" align="center" border=0>
+<tr class="title" style="height: 25px;">
+    <td class="title popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;"><?php Msg('PRD_TAX_CLS_PAGE_NAME'); ?></td>
+</tr>
+<tr class="subtitle" style="height: 25px;">
+    <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+        <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="80%"><?php Msg('PRD_TAX_CLS_PAGE_SUBTITLE'); ?></td>
+            <td nowrap style="padding-right: 8px;"><?php PageHelpLink('store_settings_product_tax_classes'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('store_settings_product_tax_classes'); ?></td>
+            <td nowrap style="padding-right: 10px;"><div id="CancelButton1" class="button button_4em" onclick="closeAndFocusParent();"><?php Msg('BTN_CLOSE'); ?></div></td>
+        </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+    <table class="list" cellspacing="0" cellpadding="0" width="100%" border=0>
+    <tr>
+        <td colspan="8" width="100%" style="padding: 0px; margin: 0px; border-bottom: 0px;">
+        <table class="list" cellspacing="0" cellpadding="5" width="100%" border=0>
+            <tr style="height: 25px;">
+                <th STYLE="white-space: nowrap; background: rgb(206,212,221); text-align: left; padding: 0px 3px 0px 3px;"><?php Msg('PRD_TAX_CLS_HEADER_001'); ?></th>
+                <th STYLE="white-space: nowrap; background: rgb(206,212,221); text-align: left; padding: 0px 3px 0px 3px;"><?php Msg('PRD_TAX_CLS_HEADER_002'); ?></th>
+                <th STYLE="white-space: nowrap; background: rgb(206,212,221); text-align: center; padding: 0px 3px 0px 3px;">&nbsp;</th>
+            </tr>
+            <?php Items(); ?>
+        </table>
+    </td>
+    </tr>
+    <tfoot>
+    <tr style="height: 25px;">
+        <th width="50%" colspan="4" style="text-align:left; padding: 0px 0px 0px 4px;">&nbsp;</th>
+        <th colspan="4" style="text-align:right;  padding: 0px 5px 0px 0px;">
+            <div id="buttons" style="display: inline; padding: 0px; margin: 0px;">
+            <table cellspacing="0" cellpadding="0" border="0" class="clear" align="right" >
+                <tr>
+                    <td style="padding: 0px 5px 0px 0px;"><div class="button button_8em" onclick="javascript:OpenForm('Add');">&nbsp;&nbsp;&nbsp;<?php Msg('BTN_ADD'); ?>&nbsp;&nbsp;&nbsp;</div></td>
+                    <td style="padding: 0px 5px 0px 0px;"><div class="button button_8em" onclick="javascript:OpenForm('Edit');">&nbsp;&nbsp;&nbsp;<?php Msg('BTN_EDIT'); ?>&nbsp;&nbsp;&nbsp;</div></td>
+                    <td style="padding: 0px 5px 0px 0px;"><div class="button button_8em" onclick="javascript:confirmDeleteTaxClass();"><?php Msg('BTN_DELETE'); ?></div></td>
+                </tr>
+            </table>
+            </div>
+         </th>
+    </tr>
+    </tfoot>
+    </table>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+        <div id="hiddenForm" style="display: none;">
+        <FORM id="AddEditProductTaxClass" name="AddEditProductTaxClass" method="POST" action="">
+        <table class="form" cellspacing="1" cellpadding="5" width="100%" align="center" border=0>
+        <tr class="title" style="height: 25px;">
+            <td class="popup_dialog_header_left_right_padded" colspan="3" style="padding: 0px 0px 0px 4px;">
+                <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="80%"><div id="FormTitle"></div></td>
+                    <td colspan="2"></td>
+                </tr>
+                </table>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td width="35%" class="label popup_dialog_body_left_padded"><span class="required"><?php Msg('PRD_TAX_CLS_FIELD_001'); ?>&nbsp;*</span></td>
+            <td class="help"><div  style="cursor:pointer;"><img src="images/question.gif"></div></td>
+            <td width="60%" class="value popup_dialog_body_right_padded">
+                <INPUT TYPE="text" NAME="name" id="name" style="width: 150px" value=""><INPUT TYPE="hidden" name="id" id="id">
+            </td>
+        </tr>
+        <tr>
+            <td width="35%" class="label popup_dialog_body_left_padded"><?php Msg('PRD_TAX_CLS_FIELD_002'); ?></td>
+            <td class="help"><div style="cursor:pointer;"><img src="images/question.gif"></div></td>
+            <td width="60%" class="value popup_dialog_body_right_padded">
+                <INPUT TYPE="text" NAME="descr" id="descr" style="width: 350px" value="">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="value popup_dialog_body_left_padded">
+                <span class="required"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span>
+            </td>
+        </tr>
+        <tfoot>
+            <tr>
+                <th colspan=3 align="center">
+                    <table width="100%" class="clear" >
+                        <tr>
+                            <td align=right style="padding-right: 4px;"><div id="AddEditButton" class="button button_4em" onclick="FormSubmit();"><?php Msg('BTN_ADD'); ?></div></td>
+                            <td align=left ><div id="CancelButton2" class="button button_4em" onclick="CloseForm();"><?php Msg('BTN_CANCEL'); ?></div></td>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+        </tfoot>
+        </table>
+        </FORM>
+        </div>
+    </td>
+</tr>
+</table>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+if (AddProdTaxClassFromCatalog == '1')
+{
+    OpenForm('Add');
+}
+//-->
+</SCRIPT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

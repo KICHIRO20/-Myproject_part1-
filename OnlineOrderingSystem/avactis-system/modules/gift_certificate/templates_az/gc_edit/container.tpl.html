@@ -1,0 +1,190 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+submitHandler = function(formname)
+{
+	var form = document.getElementById(formname);
+	if (form.onsubmit) form.onsubmit();
+	form.submit();
+	return true;
+}
+
+function gc_sendtype_changed()
+{
+	var el = document.getElementById('gc_sendtype_selector');
+	var email_form = document.getElementById('gc_email_form');
+	var addr_form = document.getElementById('gc_address_form')
+		if (el)
+		{
+			if (el.value == '{gc_sendtype_value_email}')
+			{
+				if (email_form) email_form.style.display = 'block';
+				if (addr_form) addr_form.style.display = 'none';
+			}
+			else
+			{
+				if (email_form) email_form.style.display = 'none';
+				if (addr_form) addr_form.style.display = 'block';
+			}
+		}
+}
+</script>
+{updateParent}
+
+<form action="{form_action}" method="post" enctype="multipart/form-data" id="GiftCertificateEditForm">
+{message}
+<div class="portlet light">
+	<!-- Begin - portlet title -->
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gift font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('GCT', 'PAGE_TITLE'); ?></span>
+			<span class="caption-helper text-lowercase">
+				<?php if (getLocal_mode() == 'edit'): xmsg('GCT', 'GC_EDIT_FORM_TITLE'); else: xmsg('GCT', 'GC_ADD_FORM_TITLE'); endif; ?>...
+			</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" title="<?php if (getLocal_mode() == 'edit') { msg('BTN_SAVE');} else {msg('BTN_ADD');}; ?>" onclick="submitHandler('GiftCertificateEditForm');disableButtons(new Array('SaveButton1', 'SaveButton2'));" class="btn btn-circle btn-default"><i class="fa <?php if (getLocal_mode() == 'edit') { echo 'fa-save';} else {echo 'fa-plus';}; ?>"></i> <?php if (getLocal_mode() == 'edit') { msg('BTN_SAVE');} else {msg('BTN_ADD');}; ?><span class="hidden-480"> </span></button>
+			</div>
+		</div>
+	</div>
+	<!-- End - portlet title -->
+	<div class="portlet-body">
+		<?php if (getLocal_mode() == 'edit'): ?>
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="help-block"><b><?php xmsg('GCT', 'GC_CODE'); ?></b></span></div>
+			<div class="col-md-8"><b>{gc_code}</b></div>
+		</div>
+		<?php endif; ?>
+
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_FROM'); ?>*</span></div>
+			<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_from" value="{gc_from}" style="width: 250px;" /></div>
+		</div>
+
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_TO'); ?>*</span></div>
+			<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_to" value="{gc_to}" style="width: 250px;" /></div>
+		</div>
+
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_AMOUNT'); ?>*</span></div>
+			<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_amount" value="{gc_amount}" style="width: 70px;display:inline;" />&nbsp;{CurrencySign}</div>
+		</div>
+
+		<?php if (getLocal_mode() == 'edit'): ?>
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_REMAINDER'); ?>*</span></div>
+			<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_remainder" value="{gc_remainder}" style="width: 70px;display:inline;" />&nbsp;{CurrencySign}</div>
+		</div>
+		<?php endif; ?>
+
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="help-block"><?php xmsg('GCT', 'GC_MESSAGE'); ?></span></div>
+			<div class="col-md-8"><textarea class="form-control input-sm" style="width: 250px;height: 100px;" name="gc_message">{gc_message}</textarea></div>
+		</div>
+
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_SENDTYPE'); ?>*</span></div>
+			<div class="col-md-8">
+				<select class="form-control input-sm" style="width: 250px;" name="gc_sendtype" id="gc_sendtype_selector" onchange="gc_sendtype_changed();">
+					<option value="{gc_sendtype_value_email}" {gc_sendtype_email_selected}><?php xMsg('GCT', 'GC_SENDTYPE_EMAIL'); ?></option>
+					<option value="{gc_sendtype_value_post}" {gc_sendtype_post_selected}><?php xMsg('GCT', 'GC_SENDTYPE_POST'); ?></option>
+				</select>
+			</div>
+		</div>
+
+		<div id="gc_email_form" style="display: none;">
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><?php xmsg('GCT', 'GC_EMAIL'); ?></div>
+				<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_email" value="{gc_email}" style="width: 200px;" /></div>
+			</div>
+		</div>
+		<div id="gc_address_form" style="display: none;">
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_FNAME'); ?>*</span></div>
+				<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_fname" value="{gc_fname}" style="width: 200px;" /></div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_LNAME'); ?>*</span></div>
+				<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_lname" value="{gc_lname}" style="width: 200px;" /></div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_COUNTRY'); ?>*</span></div>
+				<div class="col-md-8">
+					<select class="form-control input-sm" style="width: 200px;" name="gc_country_id" id="gc_country_id" onchange="refreshStatesList('gc_country_id', 'gc_state_id', 'stub_state_text_input');">
+						{countries}
+					</select>
+				</div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_STATE'); ?>*</span></div>
+				<div class="col-md-8">
+					<select class="form-control input-sm" name="gc_state_id" id="gc_state_id" style="width: 200px;">
+						{states}
+					</select>
+				</div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_ZIP'); ?>*</span></div>
+				<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_zip" value="{gc_zip}" style="width: 200px;" /></div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_CITY'); ?>*</span></div>
+				<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_city" value="{gc_city}" style="width: 200px;" /></div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_ADDRESS'); ?>*</span></div>
+				<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_address" value="{gc_address}" style="width: 200px;" /></div>
+			</div>
+			<div class="row margin-bottom-10">
+				<div class="col-md-2"></div>
+				<div class="col-md-2"><?php xmsg('GCT', 'GC_PHONE'); ?></div>
+				<div class="col-md-8"><input class="form-control input-sm" type="text" name="gc_phone" value="{gc_phone}" style="width: 200px;" /></div>
+			</div>
+		</div>
+
+		<div class="row margin-bottom-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><span class="required help-block"><?php xmsg('GCT', 'GC_STATUS'); ?>*</span></div>
+			<div class="col-md-8">
+				<select class="form-control input-sm" style="width: 250px;" name="gc_status">
+					<option value="{gc_status_value_pending}" {gc_status_pending_selected}><?php xMsg('GCT', 'GC_STATUS_PENDING'); ?></option>
+					<option value="{gc_status_value_active}" {gc_status_active_selected}><?php xMsg('GCT', 'GC_STATUS_ACTIVE'); ?></option>
+					<option value="{gc_status_value_blocked}" {gc_status_blocked_selected}><?php xMsg('GCT', 'GC_STATUS_BLOCKED'); ?></option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row margin-bottom-10 alert-danger">
+			<div class="col-md-1"></div>
+			<div class="col-md-11"><span class="required help-block"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span></div>
+		</div>
+	</div>
+	<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button id="SaveButton2" title="<?php if (getLocal_mode() == 'edit') { msg('BTN_SAVE');} else {msg('BTN_ADD');}; ?>" onclick="submitHandler('GiftCertificateEditForm');disableButtons(new Array('SaveButton1', 'SaveButton2'));" class="btn btn-circle btn-default"><i class="fa <?php if (getLocal_mode() == 'edit') { echo 'fa-save';} else {echo 'fa-plus';}; ?>"></i> <?php if (getLocal_mode() == 'edit') { msg('BTN_SAVE');} else {msg('BTN_ADD');}; ?><span class="hidden-480"> </span></button>
+		</div>
+	</div>
+</div>
+</form>
+<script language="javascript" type="text/javascript">
+gc_sendtype_changed();
+</script>
+{JavascriptSynchronizeCountriesAndStatesLists}
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,100 @@
+/*
+
+    IE7 STYLE FIXES
+
+*/
+
+.form_view .form_row .form_field select {
+    width: 92%;
+}
+
+/* MY ACCOUNT HOME PAGE ******************************************************** */
+.myaccount_home .orders_search .by_form .form_field             {}
+.myaccount_home .orders_search .by_form .form_field select      { width: 184px; }
+.myaccount_home .orders_search .by_form .form_field.date select { width: 80px; }
+
+.myaccount_home .orders_search .by_id       { margin-top: 150px; }
+.myaccount_home .orders_search .by_statuses { width: 28%; }
+
+.myaccount .personalinfo_form .form_view .form_field { margin-left: 0; }
+.myaccount .change_password .form_view .form_field   { margin-left: 0; }
+/* MY ACCOUNT HOME PAGE ******************************************************** */
+
+
+
+/* SHIPPING CALCULATOR FORM ******************************************************** */
+.box.shipping_calculator .dest_address_form .form_field { margin-left:0; }
+/* SHIPPING CALCULATOR FORM ******************************************************** */
+
+
+/* SIGN IN BOX ******************************************************** */
+.signin_box .form_view              { padding: 0px; margin: 0px; }
+.signin_box .form_view input        { width: 100%; }
+.signin_box .form_view .form_field  {}
+.signin_box .form_view .form_row    { padding-bottom: 5px; }
+.signin_box input.button_signin     { display:block; margin:10px auto auto; }
+/* SIGN IN BOX ******************************************************** */
+
+
+.myaccount .registration_form .form_view .form_field { margin-left: 0px; }
+.myaccount .signin_form .form_field { margin-left: 0px; }
+
+.checkout .payment_method_form .form_view .form_descr {
+    width: 30%;
+}
+
+.checkout .payment_method_form .form_view .form_field {
+    width: 60%;
+}
+
+.signin_box .form_view input {
+    width: auto;
+}
+
+input, select, textarea {
+    vertical-align: middle;
+}
+
+.input_checkbox, .input_radio {
+    vertical-align: middle;
+}
+
+.subscribe_form .form_view .input_checkbox {
+    vertical-align: middle;
+}
+
+.page_header .top_user2 {
+    background-color:white;
+    float:left;
+    height:27px;
+    margin-bottom:1px;
+    padding-right:22px;
+    padding-top: 10px;
+    padding-left: 12px;
+    margin-left: 24px;
+    margin-right: 24px;
+    width: 685px;
+}
+
+.page_header .top_user1 {
+    margin-left: 24px;
+    margin-right: 26px;
+    width: 675px;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+.checkout .shoppingcart_total {
+    text-align: left;
+}
+
+.checkout .shoppingcart_total hr {
+clear: both;
+height: 1px;
+width: 85%;
+}
+
+.cart_preview {
+    width: 240px;
+    text-align: right;
+}

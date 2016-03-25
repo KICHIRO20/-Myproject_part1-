@@ -1,0 +1,81 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+<!--
+var plusimage = 'images/plus.gif';
+var minusimage = 'images/minus.gif';
+
+function showError(id)
+{
+    if (!document.getElementById('error_' + id))
+        return;
+
+    if (document.getElementById('error_' + id).style.display == '')
+    {
+        document.getElementById('error_' + id).style.display = 'none';
+        if (document.getElementById('img_error_' + id))
+            document.getElementById('img_error_' + id).src = plusimage;
+    }
+    else
+    {
+        document.getElementById('error_' + id).style.display = '';
+        if (document.getElementById('img_error_' + id))
+            document.getElementById('img_error_' + id).src = minusimage;
+    }
+}
+// -->
+</script>
+<div class="portlet light">
+<div class="portlet">
+<div class="portlet-title">
+<div class="caption">
+<i class="fa fa-cubes font-green-sharp"></i>
+<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('PRD_GRP_EDIT_PAGE_NAME'); ?></span>
+<span class="caption-helper text-lowercase">Edit multiple products..</span>
+</div>
+<div class="actions">
+<div class="actions btn-set">
+ <?php UpdateButton(); ?>
+<button title="<?php Msg('PRD_GRP_EDIT_BACK_PAGE'); ?>" class="btn btn-circle btn-default" type="button" onclick="javascript:go('catalog_manage_products.php');" ><i class="fa fa-chevron-left"></i> <?php msg('PRD_GRP_EDIT_BTN_BACK'); ?></button>
+
+</div>
+</div>
+</div>
+<div class="portlet-body">
+<?php ResultMessage(); ?>
+ <form action="<?php FormAction(); ?>" method="post" name="productgroupeditform" style="margin: 0;">
+ <input type="hidden" name="asc_action" value="UpdateProductGroup">
+ <div class="table-responsive">
+ <table  class="table table-striped table-bordered table-hover">
+ <thead>
+ <tr class="heading" role="row">
+ <?php EditProductHeader(); ?>
+ </tr>
+ </thead>
+ <tbody>
+   <?php EditProductList(); ?>
+ </tbody>
+ </table>
+ </div>
+ </form>
+ 			<table width="100%" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
+          				  <tr>
+                            <td style="text-align: right; width: 20%;">
+                    <table cellspacing="0" cellpadding="0" align="right">
+                    <tbody><tr>
+                        <td style="padding-right:3px;">
+                        <?php UpdateButton(); ?>
+                                               
+                        </td>
+                        <td>
+                        <button title="<?php Msg('PRD_GRP_EDIT_BACK_PAGE'); ?>" class="btn btn-circle btn-default" type="button" onclick="javascript:go('catalog_manage_products.php');" ><i class="fa fa-chevron-left"></i> <?php msg('PRD_GRP_EDIT_BTN_BACK'); ?></button>
+                         </td>
+                    </tr>
+                    </tbody></table>
+                </td>
+                            </tr>
+          </table>
+</div>
+</div>
+</div>
+<?php // ReloadParentCode(); ?>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,31 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<FORM action="" method="POST" name="ProgressBar" id="ProgressBar">
+</FORM>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+    function deleteComplete()
+    {
+        parent.document.getElementById('Message1').style.display = "none";
+        parent.document.getElementById('Message2').style.display = "inline";
+        parent.document.getElementById('progressBarMessage').style.visibility = "hidden";
+        parent.document.getElementById('progressBarBorder').style.visibility = "hidden";
+        parent.document.getElementById('DeleteButton1').style.display = "none";
+        parent.document.getElementById('CloseButton1').style.display = "block";
+        parent.window.opener.location.reload();
+    }
+    parent.document.getElementById('progressBar').style.width = "<?php ProgressBarWidth(); ?>px";
+
+    if (<?php ProgressBarWidth(); ?> != 400)
+    {
+        var form = document.forms['ProgressBar'];
+        form.action = "<?php ProgressBarFormAction(); ?>";
+        form.submit();
+    }
+    else
+    {
+        parent.document.getElementById('progressBar').style.width = "400px";
+        window.setTimeout("deleteComplete();", 1000);
+    }
+//-->
+</SCRIPT>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

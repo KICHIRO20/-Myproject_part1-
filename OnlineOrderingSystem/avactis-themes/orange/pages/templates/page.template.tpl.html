@@ -1,0 +1,76 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php pagelang(); ?>" lang="<?php pagelang(); ?>">
+<head>
+    <title>#page_title#</title>
+    <meta name="description" content="#page_description#" />
+    <meta name="keywords" content="#page_keywords#" />
+    <meta name="author" content="Avactis Team" />
+    <?php include(getTemplateFileAbsolutePath('pages/templates/part.header.tpl.html')); ?>
+</head>
+<body>
+
+<div class="page_background">     
+
+<?php if ('[user1][top_menu][top_phone][welcome_text]' != ''): ?>
+    <div class="box page_header">
+            <div class="logo_bg"><a class="logo_img" href="<?php PageURL('index.php') ?>"></a></div>
+            <!-- HEADER SMALL MENU -->
+            <div class="top_user2">
+                #top_menu#
+                <div class="top_phone">#top_phone#</div>
+            </div>
+
+            <!-- HEADER SEARCH FORM  -->
+            #user1#
+            #welcome_text#
+    </div>
+<?php endif; ?>
+
+<?php if ('[main_menu]' != ''): ?>
+    <div class="box page_top_menu">
+        <div class="cn lt"></div>
+        <div class="cn rt"></div>
+        <div class="cn lb"></div>
+        <div class="cn rb"></div>
+        <div class="content">
+
+            <!-- MAIN MENU -->
+            #main_menu#
+
+            <!-- CART MINI PREVIEW -->
+            <?php CartPreview(); ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+    <?php 
+        $class = '';
+        if ('[left_column]' != '') { $class .= 'L'; }
+        if ('[center_column]' != '') { $class .= 'C'; }
+        if ('[right_column]' != '') { $class .= 'R'; }
+    ?>
+	<div class="page_container columns<?php echo $class; ?>">
+		<?php if ('[left_column]' != ''): ?><div class="left_column">#left_column#</div><?php endif; ?>
+		<?php if ('[right_column]' != ''): ?><div class="right_column">#right_column#</div><?php endif; ?>
+		<?php if ('[center_column]' != ''): ?><div class="center_column">#center_column#</div><?php endif; ?>
+	</div>
+
+<?php if ('[footer_menu][copyright]' != ''): ?>    
+	<div class="page_footer">
+        <img class="cc_icon" src="<?php echo getTemplateFileURL('images/cc.gif'); ?>" alt="" />
+        <a target="_blank" href="http://validator.w3.org/check?uri=referer"><img class="w3c_icon" src="<?php echo getTemplateFileURL('images/valid-xhtml10.png'); ?>" alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+        <div class="menublock">
+            #footer_menu#
+        </div>
+        <hr/>
+        <div class="copyright">#copyright#</div>
+    </div>
+<?php endif; ?>    
+</div>
+<?php include(getTemplateFileAbsolutePath('pages/templates/part.footer.tpl.html')); ?> 
+</body>
+</html>
+

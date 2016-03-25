@@ -1,0 +1,13 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<tr>
+	<td class="text-center">
+		<a href="javascript: void(0);" onclick="javascript:openURLinNewWindow('orders_info.php?asc_action=SetCurrentOrder&order_id=<?php OrderId(); ?>', 'ViewOrder');">
+			<?php sprintf("%05d",OrderId()); ?>
+		</a>
+	</td>
+	<td class="text-center"><?php OrderDate(); ?></td>
+	<td class="text-center"><?php OrderPriceTotal(); ?></td>
+	<td class="text-center"><?php OrderStatus(); ?></td>
+	<td class="text-center"><?php OrderPaymentStatus(); ?></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

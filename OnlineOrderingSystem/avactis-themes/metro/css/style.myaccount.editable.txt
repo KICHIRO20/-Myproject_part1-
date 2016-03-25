@@ -1,0 +1,458 @@
+[Account Form - Common Subheader]
+.box.myaccount .subheader {
+    padding;
+    margin;
+    background;
+    text;
+    border;
+}
+
+[Product File Download Link Container]
+.myaccount .product_download_link {
+    padding;
+}
+
+[Product File Download Link]
+.myaccount.checkout .product-item .product_name .product_download_link a {
+    text;
+}
+
+[Registration Subheader]
+.myaccount .signin_form .subheader,
+.myaccount .registr_invitation .subheader {
+    margin;
+    border;
+}
+
+[Registration Invitation]
+.myaccount .registr_invitation {
+    text;
+    width;
+    padding;
+    margin;
+    border;
+}
+
+[Sign In Form]
+.myaccount .signin_form {
+    text;
+    width;
+    padding;
+    margin;
+}
+
+[Registration Invitation Button]
+.myaccount .registr_invitation .button_register {
+    margin;
+}
+
+[Sign In Form - Row]
+.myaccount .signin_form .form_row {
+    padding;
+}
+
+[Sign In Form - Field Container]
+.myaccount .signin_form .form_field {
+    width;
+    margin;
+}
+
+[Sign In Form - Field Label]
+.myaccount .signin_form .form_descr {
+    width;
+}
+
+[Sign In Form - Field Label Text]
+.myaccount .signin_form .form_descr label {
+    text;
+}
+
+[Sign In Form - Button]
+.myaccount .signin_form .input_submit {
+    margin;
+}
+
+[Sign In Message]
+.myaccount .signin_form .success_message,
+.myaccount .signin_form .error_message {
+    margin;
+}
+
+[Sign In Box]
+.myaccount .signin_box {
+    padding;
+}
+
+[Sign In Box - Row]
+.left_column .myaccount .signin_box .form_view .form_row input,
+.right_column .myaccount .signin_box .form_view .form_row input {
+    margin;
+}
+
+[Sign In Box - Field Container]
+.myaccount .signin_box .form_field {
+    width;
+    margin;
+}
+
+[Sign In Box - Field Label]
+.myaccount .signin_box .form_descr {
+    width;
+    text;
+}
+
+[Sign In Box - Button]
+.myaccount .signin_box .input_submit {
+    margin;
+}
+
+[Sign In Box - Field Message]
+.myaccount .signin_box .success_message,
+.myaccount .signin_box .error_message {
+    margin;
+}
+
+[Sign In Box - Link]
+.myaccount .signin_box a {
+    margin;
+    padding;
+}
+
+[Signed In Box]
+.myaccount .signed_in_box  {
+    padding;
+}
+
+[Signed In Box - Link]
+.myaccount .signed_in_box a {
+    margin;
+    padding;
+}
+
+[Registration Form]
+.myaccount .registration_form {
+    padding;
+    margin;
+}
+
+[Registration Form - Message]
+.myaccount .registration_form .success_message,
+.myaccount .registration_form .error_message {
+    margin;
+}
+
+[Registration Form - Body]
+.myaccount .registration_form .form_view {
+    width;
+    margin;
+}
+
+[Registration Form - Row]
+.myaccount .registration_form .form_view .form_row {
+    padding;
+}
+
+[Registration Form - Label]
+.myaccount .registration_form .form_view .form_descr {
+    width;
+}
+
+[Registration Form - Field]
+.myaccount .registration_form .form_view .form_field {
+    width;
+    margin;
+}
+
+[Registration Form - Button]
+.myaccount .registration_form .input_submit {
+    margin;
+}
+
+[My Account]
+.myaccount .box.myaccount_home {
+    margin;
+}
+
+[My Account - Content]
+.box.myaccount_home .content {
+    padding;
+}
+
+[My Account - Header]
+.myaccount_home .content .header {
+    padding;
+    margin;
+    text;
+}
+
+[My Account - Section Header]
+.myaccount_home .content .header * {
+    text;
+    padding;
+    border;
+}
+
+[My Account - Section]
+.myaccount_home .orders_search,
+.myaccount_home .account_settings {
+    padding;
+    margin;
+}
+
+[My Account - Orders Search]
+.myaccount_home .orders_search {
+    width;
+    border;
+}
+
+[My Account - Order List Header]
+.myaccount_home .order_list {
+    margin;
+}
+
+[My Account - Order List Header]
+.myaccount_home .order_list th {
+    padding;
+    background;
+    text;
+    text-align;
+}
+
+[My Account - Order List Cell]
+.myaccount_home .order_list td {
+    text;
+    padding;
+    text-align;
+}
+
+[My Account - Empty Order List]
+.myaccount_home .order_list.empty {
+    text;
+    text-align;
+    padding;
+}
+
+[My Account - Search Orders By Status]
+.myaccount_home .orders_search .by_statuses {
+    text;
+    width;
+    line-height;
+}
+
+[My Account - Search Order By Status - Label]
+.myaccount_home .orders_search .by_statuses .label {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters]
+.myaccount_home .orders_search .by_form {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters - Form Row]
+.myaccount_home .orders_search .by_form .form_descr {
+    text-align;
+    padding;
+}
+
+[My Account - Search Orders By Parameters - Date Dropdown]
+.myaccount_home .orders_search .by_form .form_field.date select {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters - Dropdown]
+.myaccount_home .orders_search .by_form .form_field select {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters - Button]
+.myaccount_home .orders_search .by_form .input_submit {
+    margin;
+    position;
+}
+
+[My Account - Search Orders By Id]
+.myaccount_home .orders_search .by_id {
+    text;
+    margin;
+}
+
+[My Account - Account Settings]
+.myaccount_home .account_settings {
+    width;
+}
+
+[My Account - Account Settings - Link]
+.myaccount_home .account_settings a {
+    text;
+    line-height;
+    padding;
+    margin;
+}
+
+[My Account - Back Button]
+.myaccount .button_back {
+    margin;
+}
+
+[Invoice - Invoice Header]
+.myaccount.invoice .content .header,
+.myaccount.invoice .content h1 {
+    background;
+    color;
+}
+
+[Invoice - Invoice Total]
+.myaccount.invoice .shoppingcart_total {
+    padding;
+}
+
+[Invoice Items - Header]
+.myaccount.invoice .order_items th {
+    background;
+    text;
+}
+
+[Change Password Box]
+.myaccount .change_password {
+    text;
+    padding;
+    margin;
+}
+
+[Change Password - Message]
+.myaccount .change_password .success_message,
+.myaccount .change_password .error_message {
+    margin;
+}
+
+[Change Password - Form]
+.myaccount .change_password .form_view {
+    width;
+    margin;
+}
+
+[Change Password - Form Row]
+.myaccount .change_password .form_view .form_row {
+    padding;
+}
+
+[Change Password - Form Field Label]
+.myaccount .change_password .form_view .form_descr {
+    text;
+    width;
+}
+
+[Change Password - Form Field Container]
+.myaccount .change_password .form_view .form_field {
+    text;
+    width;
+    margin;
+}
+
+[Change Password - Form Button]
+.myaccount .change_password .input_submit {
+    margin;
+}
+
+[Personal Info]
+.myaccount .personalinfo_form {
+    padding;
+    margin;
+}
+
+[Personal Info - Subheader]
+.myaccount .personalinfo_form .form_view .subheader {
+    text;
+    margin;
+}
+
+[Personal Info - Message]
+.myaccount .personalinfo_form .success_message,
+.myaccount .personalinfo_form .error_message {
+    text;
+    paddin;
+    margin;
+    border;
+}
+
+[Personal Info - Form]
+.myaccount .personalinfo_form .form_view {
+    width;
+    margin;
+}
+
+[Personal Info - Form Row]
+.myaccount .personalinfo_form .form_view .form_row {
+    padding;
+    margin;
+}
+
+[Personal Info - Form Field Label]
+.myaccount .personalinfo_form .form_view .form_descr {
+    width;
+}
+
+[Personal Info - Form Field Container]
+.myaccount .personalinfo_form .form_view .form_field {
+    text;
+    width;
+    margin;
+}
+
+[Personal Info - Form Button]
+.myaccount .personalinfo_form .input_submit {
+    margin;
+}
+
+[Product File Download - Link List Header]
+.myaccount .product_download_links .header.link_list {
+    background;
+    text;
+    padding;
+}
+
+[Product File Download - Header Cell]
+.myaccount .product_download_links .header .attribute,
+.myaccount .product_download_links .header .value {
+    text;
+    padding;
+}
+
+[Product File Download - Cell]
+.myaccount .product_download_links .attribute,
+.myaccount .product_download_links .value {
+    text;
+    padding;
+    width;
+    text-align;
+}
+
+[Product File Download - Value Column]
+.myaccount .product_download_links .value {
+    width;
+}
+
+[Activation Message]
+.myaccount .activation_message {
+    padding;
+    text;
+}
+
+[Download Prompt]
+.download_prompt {
+    text;
+    padding;
+    text-align;
+}
+
+[Remember Me Option]
+.account_remember_me_option {
+    text;
+    padding;
+    margin;
+}

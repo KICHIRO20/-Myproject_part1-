@@ -1,0 +1,18 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr role="row" class="">
+    <td align="center" style="text-align: center;" width="2%">
+        <input type="checkbox" class="<?php DelCheckboxCssClass(); ?>" id="select_<?php RateN(); ?>" name="selected_rates[<?php RateID(); ?>]" onclick="selectRow(this);" value="<?php RateID(); ?>">
+    </td>
+    <td align="center" style="text-align: center;" class="<?php RateCssClass(); ?>" width="20%">
+        <?php xmsg('DISCOUNTS', 'DISCOUNTS_LABEL_005'); ?> <span class="<?php FromCssClass(); ?>"><?php RateValueFrom(); ?></span>
+        <?php xmsg('DISCOUNTS', 'DISCOUNTS_LABEL_006'); ?> <span class="<?php ToCssClass(); ?>"><?php RateValueTo(); ?></span>
+    </td>
+
+    <td align="center" style="text-align: center;" width="20%">
+        <?php Cost(); ?>
+    </td>
+    <td align="center" style="text-align: center;" width="10%">
+        <select class="form-control form-filter input-sm" id="active_<?php RateID(); ?>" name="active_rates[<?php RateID(); ?>]" onchange="selectRowAlways(this);"><option value="1" <?php StatusActive(); ?>><?php xmsg('DISCOUNTS', 'DISCOUNTS_GLOBAL_DISCOUNT_ACTIVE'); ?></option><option value="2" <?php StatusDisabled(); ?>><?php xmsg('DISCOUNTS', 'DISCOUNTS_GLOBAL_DISCOUNT_DISABLED'); ?></option></select>
+    </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

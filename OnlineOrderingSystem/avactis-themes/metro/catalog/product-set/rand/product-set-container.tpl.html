@@ -1,0 +1,19 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="sidebar-products margin-bottom-25">   
+        <h2><?php Label("CATALOG_RANDOM_PRODUCTS"); ?></h2>
+            <?php 
+            $columns = getLocal_Columns();
+            $col = 1;
+            for($i=1; $i<=getLocal_ProductNumberToDisplay(); $i++)
+            {
+                Local_ProductDetails();
+                $col++;
+                if ($col > $columns)    
+                {
+                   
+                    $col = 1;
+                }
+            }
+            ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

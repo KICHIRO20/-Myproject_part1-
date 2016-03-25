@@ -1,0 +1,107 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- form begin -->
+<script type="text/javascript">
+submitHandler = function(formname) 
+  {
+     
+    var form = document.getElementById(formname);
+  	if (form.onsubmit) form.onsubmit(); 
+  		form.submit();
+  }
+</script>
+<div class="booking-search">
+	<form action="catalog_manage_products.php" method="post" id="ProductSearchForm" name="ProductSearchForm" style="margin: 0;">
+		<input type="hidden" name="asc_action" value="SetSearchProductFormFilter" />
+		<input type="hidden" name="active" value="<?php isFormActive(); ?>"> 
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label class="control-label"><?php xMsg('CTL', 'PSF_SEARCH_PATTERN'); ?></label>
+				<input type="text" name="filter[pattern]" value="<?php PatternValue(); ?>"  class="form-control input-inline input-sm input-medium">
+			</div>
+			<div class="col-sm-6">
+				<div class="radio-list">
+					<label class="radio-inline">
+						<input id="pattern_all" type="radio" name="filter[pattern_type]" value="all" <?php AllChecked(); ?> />
+			    			<?php xMsg('CTL', 'PSF_ALL_WORDS'); ?>
+					</label>
+					<label class="radio-inline">
+					    <input id="pattern_any" type="radio" name="filter[pattern_type]" value="any"<?php AnyChecked(); ?> />
+					    <?php xMsg('CTL', 'PSF_ANY_WORD'); ?>
+					</label>
+					<label class="radio-inline">
+					    <input id="pattern_exactly" type="radio" name="filter[pattern_type]" value="exactly" <?php ExactlyChecked(); ?> />
+					    <?php xMsg('CTL', 'PSF_EXACT_PHRASE'); ?>
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label class="control-label"><?php xMsg('CTL', 'PSF_CATEGORY'); ?></label>
+				 <select name="filter[category]" class="table-group-action-input form-control input-inline input-medium input-sm">
+                     <?php CategoryList(); ?>
+                 </select>
+			</div>
+			<div class="col-sm-6">
+				<div class="checkbox-list">
+					<label class="checkbox-inline">
+					<input id="recursive" type="checkbox" name="filter[recursive]" value="Y"<?php RecursiveChecked(); ?> />
+					<?php xMsg('CTL', 'EXP_RECURS'); ?></label>
+				</div>
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label class="control-label"><?php xMsg('CTL', 'PSF_MANUFACTURER'); ?></label>
+				<select name="filter[manufacturer]" class="table-group-action-input form-control input-inline input-medium input-sm">
+				 <option value="all"><?php xMsg('CTL', 'PSF_ALL_MANUFACTURERS'); ?></option>
+					<?php ManufacturerList(); ?>
+				</select>
+				<br>
+				<br>
+				<br>
+				
+				<div class="input-icon"><label class="control-list"><?php xMsg('CTL', 'PSF_PRICE_RANGE'); ?></label>
+					<input type='text' name="filter[price_min]" size="5" value="<?php PriceMinValue(); ?>" class="form-control input-inline input-sm input-xsmall" />
+					&nbsp;-&nbsp;
+					<input type='text' name="filter[price_max]" size="5" value="<?php PriceMaxValue(); ?>" class="form-control input-inline input-sm input-xsmall" />
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<label class="control-list">Options:</label>
+				<div class="checkbox-list">
+					<label class="checkbox-inline">
+					<input id="in_name" type="checkbox" checked="" name="filter[in_name]" value="Y"<?php InNameChecked(); ?> />
+					<?php Msg('PRD_NAME_NAME'); ?> </label>
+					<label class="checkbox-inline">
+					<input id="in_id" type="checkbox" name="filter[in_id]" value="Y"<?php InIDChecked(); ?> />
+					<?php Msg('PRD_ID_NAME'); ?> </label>
+					<label class="checkbox-inline">
+					<input id="in_sku" type="checkbox" name="filter[in_sku]" value="Y"<?php InSKUChecked(); ?> />
+					<?php Msg('PRD_SKU_NAME'); ?> </label>
+					<label class="checkbox-inline">
+					<input id="in_descr" type="checkbox" name="filter[in_descr]" value="Y"<?php InDescrChecked(); ?> />
+					<?php Msg('PRD_SHRDESCR_NAME'); ?> </label>
+				</div>
+				&nbsp;
+				<div class="checkbox-list">
+					<label class="checkbox-inline">
+					<input id="in_det_descr" type="checkbox" name="filter[in_det_descr]" value="Y"<?php InDetDescrChecked(); ?> />
+					<?php Msg('PRD_DETDESCR_NAME'); ?> </label>
+					<label class="checkbox-inline">
+					<input id="in_title" type="checkbox" name="filter[in_title]" value="Y"<?php InTitleChecked(); ?> />
+					<?php Msg('PRD_PAGETTL_NAME'); ?> </label>
+					<label class="checkbox-inline">
+					<input id="in_keywords" type="checkbox" name="filter[in_keywords]" value="Y"<?php InKeywordsChecked(); ?> />
+					<?php Msg('PRD_METAKWRD_NAME'); ?> </label>
+					<label class="checkbox">
+					<input id="in_meta_descr" type="checkbox" name="filter[in_meta_descr]" value="Y"<?php InMetaDescrChecked(); ?> />
+					<?php Msg('PRD_METADESCR_NAME'); ?> </label>
+				</div>
+			</div>
+		</div>
+		<button onclick="submitHandler('ProductSearchForm');" class="btn blue btn-block margin-top-20"><?php xMsg('CTL', 'BTN_SEARCH'); ?> <i class="m-icon-swapright m-icon-white"></i></button>
+	</form>
+</div>											
+<!-- END TPL (DO NOT REMOVE!) -->

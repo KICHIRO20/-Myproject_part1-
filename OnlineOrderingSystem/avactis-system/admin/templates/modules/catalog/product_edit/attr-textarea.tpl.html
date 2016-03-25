@@ -1,0 +1,21 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row margin-bottom-20">
+	<div class="col-sm-2">
+		 <label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(),getAttributeTag()); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">
+	<?php Error(); ?>
+	</div>
+</div>
+
+<div class="row margin-bottom-20">
+	<div class="col-sm-12">
+	<textarea class="form-control <?php InputStyleClass(); ?>" id="<?php AttributeTag(); ?>" name="<?php AttributeTag(); ?>" onBlur="formatInput(this);" onkeyup="formatInput(this);" patternType="<?php AttributePatternType(); ?>" cols="74" rows="5" ><?php AttributeValue(); ?></textarea>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,282 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/javascript_sprintf.js"></script>
+<style type="text/css">
+DIV#log_container { 
+ width: 640px; height: 300px; border: 1px solid black; padding:0; margin:0; 
+ color: gray; overflow: auto;
+}
+.progress_bar_container {
+  border: solid 1px black;
+  width: 650px;
+  height: 20px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 20px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+<script language="JavaScript">
+var emails_count = {TotalEmailsCount};
+var export_file_format = '';
+var pixels_count = 650;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = emails_count / start_speed * 10 / (pixels_count / 100);
+var finished = 0;
+var executed = 0;
+var stop_bar = 0;
+
+function increment_bar()
+{
+    if (stop_bar == 0)
+    { 
+	   current_progress++;
+	   document.getElementById('pbar_bar').style.width = current_progress+'px';
+	
+	   if(current_progress<(pixels_count-1))
+	   {
+	       setTimeout("increment_bar()",increment_speed);
+	   }
+	   else
+	   {
+	  	   finished++;
+	   }
+	}
+}
+</script>
+<script language="JavaScript">
+
+function disablePageElements()
+{
+	    __disableButton('SaveButton1', null);
+}
+
+function enablePageElements()
+{
+	    __enableButton('SaveButton1', requestToInit, null);
+}
+
+function __disableButton(btn_id, btn_new_title)
+{
+    if (btn_new_title)
+    {
+		document.getElementById(btn_id).innerHTML = btn_new_title;
+	}
+	document.getElementById(btn_id).className = 'button button_medium button_disabled disabled';
+	document.getElementById(btn_id).onclick = function() { };
+}
+function __enableButton(btn_id, onclick_handler, btn_new_title)
+{
+    if (btn_new_title)
+    {
+		document.getElementById(btn_id).innerHTML = btn_new_title;
+	}
+	document.getElementById(btn_id).className = 'button button_medium button_enabled';
+	document.getElementById(btn_id).onclick = onclick_handler;
+}
+function requestToInit()
+{
+		document.getElementById('step_text').innerHTML = '<?php xmsg('OECSV','PREPARING'); ?>';
+		document.getElementById('step_percents').style.display = '';
+        disablePageElements();
+        __disableButton("SaveButton1", "<?php xmsg('OECSV', 'BTN_DOWNLOAD'); ?>");
+
+        export_file_format = document.forms['choose_file_format'].elements['format'][0].checked ? 'plain' : 'csv';
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'emails_export',
+            	'sub_action': 'init',
+            	'topics': '{TopicsIds}',
+            	'create_new_file': 'yes',
+                'export_format': export_file_format
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                var error = appendToLog('log_container', result);
+                error = error || appendStringToLog('log_container', '', 'gray');
+                if (error == 0)
+                {
+           		   document.getElementById('step_text').innerHTML = '<?php xmsg('OECSV','PROCESSING'); ?>';
+           		   setTimeout("requestToDo()",10);
+           		   setTimeout("increment_bar()",10);
+           		   setTimeout("waitFinish()",500);
+           		}
+            },
+            'json'
+        );
+}
+function requestToDo()
+{
+		var d = new Date();
+		var start_time = d.getTime();
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'emails_export',
+            	'sub_action': 'do'
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+                var error = appendToLog('log_container', result);
+                error = error || appendStringToLog('log_container', '', 'gray');
+                if (error == 0)
+                {
+					var d = new Date();
+	            	var end_time = d.getTime();
+	            	var ex = result["process_info"]["items_processing"] - executed;
+	            	var k = ex * 100 / emails_count;
+	            	increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+					executed = result["process_info"]["items_processing"];
+	            	if(result["process_info"]["status"]=='COMPLETED')
+	            	{
+	            		finished++;
+	            		increment_speed = 10;
+	            		current_progress = pixels_count-2;
+	            	}
+	            	else
+	                {
+		           		setTimeout("requestToDo()",10);
+		            }
+		        }
+	            else
+	            {
+	               stop_bar = 1;
+	            }
+            },
+            'json'
+        );
+}
+function waitFinish()
+{
+  if(finished<2)
+  {
+  	setTimeout("waitFinish()",500);
+  	return;
+  }
+  
+  increment_bar();
+  document.getElementById('step_percents').style.display = 'none';
+  document.getElementById('step_text').innerHTML = '<?php xmsg('OECSV','DONE'); ?>';
+  __enableButton('CloseButton1', downloadCSV, null);
+}
+
+function downloadCSV()
+{
+    export_file_format = document.forms['choose_file_format'].elements['format'][0].checked ? 'plain' : 'csv';
+    document.forms['downloadCSVform'].elements['export_format'].value = export_file_format;
+    document.forms['downloadCSVform'].submit();
+}
+
+function appendToLog(log_id,res)
+{
+    result = 0; // success
+    try 
+    {
+	    if (res["errors"])
+	    {
+		    for(i=0;i<res["errors"].length;i++)
+		    {
+		        appendStringToLog(log_id,res["errors"][i],'red');
+		        result = 1; // failed
+		    }
+		}
+	    if (res["warnings"])
+	    {
+		    for(i=0;i<res["warnings"].length;i++)
+		    {
+		        appendStringToLog(log_id,res["warnings"][i],'blue');
+		    }
+		}
+	    if (res["messages"])
+	    {
+		    for(i=0;i<res["messages"].length;i++)
+		    {
+		        appendStringToLog(log_id,res["messages"][i],'green');
+		    }
+		}
+	}
+	catch(e) 
+	{
+	   result = 1; // failed
+	}
+	return result;
+}
+
+function appendStringToLog(log_id,str,color)
+{
+    if (str.length < 2)
+    {
+        return 0; // success
+    }
+
+    showBlock(log_id, 10);
+    _time = new Date();
+    _time_str = '['+sprintf("%02d",_time.getHours())+':'+sprintf("%02d",_time.getMinutes())+':'+sprintf("%02d",_time.getSeconds())+']';
+    log_el = document.getElementById(log_id);
+    _html = _time_str+'&nbsp;<span style="color: '+color+'; font-weight: normal;">'+str+'</span><br>';
+    if(navigator.userAgent.indexOf("MSIE")!=-1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+    return 1; // failed
+}
+</script>
+
+<!-- Hidden form to download file -->
+<form action="popup_window.php" name="downloadCSVform" method="post">
+<input type="hidden" name="asc_action" value="emails_export" />
+<input type="hidden" name="sub_action" value="get" />
+<input type="hidden" name="topics" value="{TopicsIds}" />
+<input type="hidden" name="export_format" value="" />
+</form>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-external-link  font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php xmsg('SUBSCR','TITLE_EMAILS_EXPORT'); ?> </span>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<div>
+			<h4 class="form-section"><?php xmsg('SUBSCR','FIELD_TOPICS'); ?></h4>
+			{TopicsNames}
+		</div>
+{MessageNoEmails}
+		<h4 class="form-section"><?php xmsg('SUBSCR','FIELD_EXPORT_FORMAT'); ?></h4>
+		<form name="choose_file_format" method="post" action="popup_window.php" style="padding:0; margin:0">
+		<div class="table-container">
+			<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td><input type="radio" name="format" value="plain" id="format_plain" checked /></td>
+				<td><label for="format_plain"><?php xMsg('SUBSCR', 'OPTION_FORMAT_PLAIN'); ?> (<?php xMsg('SUBSCR', 'TIP_RECORDS'); ?> {UniqueEmailsCount})</label></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="format" value="csv" id="format_csv" /></td>
+				<td><label for="format_csv"><?php xMsg('SUBSCR', 'OPTION_FORMAT_CSV'); ?> (<?php xMsg('SUBSCR', 'TIP_RECORDS'); ?> {TotalEmailsCount})</label></td>
+			</tr>
+		</table>
+	</div>
+	</form>
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="SaveButton1" onclick="{OnClickDownload}" type="button" name="save" class="btn blue"><i class="fa fa-download"></i> <span class="hidden-480"><?php msg('BTN_DOWNLOAD'); ?></span></button>
+				<button id="CancelButton1" onclick="closeAndFocusParent();" type="button" name="cancel" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

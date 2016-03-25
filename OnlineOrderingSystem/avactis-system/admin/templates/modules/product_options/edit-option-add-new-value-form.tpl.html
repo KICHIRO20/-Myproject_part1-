@@ -1,0 +1,58 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="JavaScript">
+
+function tryToAddValue()
+{
+	var add_val_form=document.forms['AddValue_Form'];
+	<?php JSModifiersArray(); ?>
+	
+	if(add_val_form.elements['NewValue[Name]'].value=='')
+	{
+		alert('<?php xmsg('PO','ALERT_005'); ?>');
+		add_val_form.elements['NewValue[Name]'].focus();
+		return;
+	}
+	
+	for(var i=0; i<modifiers.length; i++)
+	{
+		if(add_val_form.elements['NewValue['+modifiers[i]+'_modifier]'].value=='')
+		{
+			alert('<?php xmsg('PO','ALERT_006'); ?>');
+			add_val_form.elements['NewValue['+modifiers[i]+'_modifier]'].focus();
+			return;
+		}
+	}
+	
+	add_val_form.submit();
+}
+
+</script>
+<form action="po_edit_option.php?asc_action=add_value_to_option" method="POST" name="AddValue_Form">
+	<input type="hidden" name="option_id" value="<?php _option_id(); ?>">
+	<table class="table table-bordered table-striped table-hover">
+		<thead>
+			<tr>
+				<th colspan="7" class="bg-info"><?php xmsg('PO','ADD_NEW_VALUE'); ?></th>
+			</tr>
+			<?php ValueHeader(); ?>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-left"><input type="text" class="form-control input-sm" <?php ValueNameField(); ?>></td>
+				<td class="text-center"><input type="checkbox" name="NewValue[IsDefault]"></td>
+				<?php ValueModifiersFields(); ?>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="7" class="text-center">
+					<div id="AddValueButton" class="btn btn-circle btn-default" onClick="javascript: tryToAddValue();">
+						<i class="fa fa-plus-circle"></i>&nbsp;<?php msg('BTN_ADD'); ?>
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

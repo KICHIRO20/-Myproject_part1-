@@ -1,0 +1,44 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold uppercase">
+				<i class="fa fa-tags"></i>&nbsp;<?php xmsg('PO','CCR_HEADER'); ?>&nbsp;-&nbsp;
+			</span>
+			<span class="caption-helper" style="color:#FFFFFF;"><?php EntityType(); ?>: <?php EntityName(); ?></span>
+		</div>
+		<div class="actions">
+			<a class="btn btn-circle btn-default" href="po_crules_editor.php?parent_entity=<?php _parent_entity(); ?>&entity_id=<?php _entity_id(); ?>">
+				<i class="fa fa-undo"></i>&nbsp;<?php Msg('BTN_RETURN'); ?>
+			</a>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="table-responsvie">
+			<table class="table table-striped table-hover table-bordered">
+				<tbody>
+					<tr>
+						<td colspan="2" class="bg-green-jungle"><?php xmsg('PO','CMBS_MAY_ORDER'); ?>:</td>
+					</tr>
+					<?php CorrectCombinations(); ?>
+					<tr>
+						<td colspan="2" class="bg-green-jungle"><?php xmsg('PO','CMBS_MAY_NOT_ORDER'); ?>:</td>
+					</tr>
+					<?php InCorrectCombinations(); ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2" class="text-center">
+							<a class="btn btn-circle btn-default" href="po_crules_editor.php?parent_entity=<?php _parent_entity(); ?>&entity_id=<?php _entity_id(); ?>">
+								<i class="fa fa-undo"></i>&nbsp;<?php Msg('BTN_RETURN'); ?>
+							</a>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!-- END TPL (DO NOT REMOVE!) -->

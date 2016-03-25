@@ -1,0 +1,18 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php $local_id = getLocal_FormFieldID(); ?>
+<div class="form_row" id="tr_<?php echo $local_id; ?>">
+    <div class="form_descr"><label for="input_text_req_<?php echo $local_id; ?>" class="required"><?php Local_FieldLabel(); ?><?php Label('CHECKOUT_ASTERISK'); ?></label></div>
+    <div class="form_field">
+        <span id="<?php echo $local_id; ?>">
+            <input type="text"
+                   name="<?php Local_FormFieldName(); ?>"
+                   id="input_text_req_<?php echo $local_id; ?>"
+                   class="Normal"
+                   value="<?php Local_FormFieldValue(); ?>"
+                   size="<?php Local_FormFieldSize(); ?>"
+                   maxlength="<?php Local_FormFieldMaxlength(); ?>" />
+        </span>
+    </div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

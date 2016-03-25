@@ -1,0 +1,184 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<!-- tinyMCE -->
+<script language="javascript" type="text/javascript">
+  sendMessage = function(formname)
+  {
+    var form = document.forms[formname];
+  }
+  
+  function formSubmit(formName, action)
+  {
+    var form = document.forms[formName];
+    if (action == 'save')
+    {
+      if (trim(form.letter_subject.value) == "")
+      {
+        window.alert("<?php xmsg('NLT', 'ERROR_NO_SUBJECT_JS'); ?>");
+        return;
+      }
+      
+      if (trim(form.letter_from_name.value) == "")
+      {
+        window.alert("<?php xmsg('NLT', 'ERROR_NO_FROM_NAME_JS'); ?>");
+        return;
+      }
+      
+      if (trim(form.letter_from_email.value) == "")
+      {
+        window.alert("<?php xmsg('NLT', 'ERROR_NO_FROM_EMAIL_JS'); ?>");
+        return;
+      }
+      
+      if (!isValidEmail(trim(form.letter_from_email.value)))
+      {
+        window.alert("<?php xmsg('NLT', 'ERROR_MALFORMED_EMAIL_JS'); ?>");
+        return;
+      }
+    }
+    
+    form.submit();
+  }
+  function trim(s)
+  {
+      var left = 0;
+      var len = s.length;
+  
+      if (len == 0) return "";
+  
+      while (s.charAt(left) == ' ' && left < len)
+      {
+          left++;
+      }
+  
+      if (left >= len) return "";
+  
+      var right = len - 1;
+      while (s.charAt(right) == ' ' && right >= 0)
+      {
+          right--;
+      }
+  
+      if (right < 0) return "";
+  
+      return s.substring(left, right + 1);
+  }
+
+function isValidEmail(email)
+{
+    var supported = 0;
+    if (window.RegExp)
+    {
+        var tempStr = "a";
+        var tempReg = new RegExp(tempStr);
+        if (tempReg.test(tempStr))
+            supported = 1;
+    }
+    if (!supported) 
+        return (email.indexOf(".") > 1) && (email.indexOf("@") > 1);
+    var r1 = new RegExp("(@.*@)|(\\.\\.)|(@\\.)|(^\\.)");
+    var r2 = new RegExp("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,6}|[0-9]{1,3})(\\]?)$");
+    return (!r1.test(email) && r2.test(email));
+}</script>
+<!-- /tinyMCE -->
+<?php ResultMessageRow(); ?>
+<form action="<?php SaveActionUrl(); ?>" method="post" id="LetterEditForm">
+<input type="hidden" name="letter_id" value="<?php LetterId(); ?>">
+<?php ViewState(); ?>
+<?php Errors(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-envelope font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('NLT', 'NEWSLETTER_TITLE1'); ?></span>
+			<span class="caption-helper text-lowercase"><?php xmsg('NLT', 'COMPOSE_TITLE'); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" title="<?php xmsg('NLT','BUTTON_ADD'); ?>" onclick="formSubmit('LetterEditForm', 'save');" class="btn btn-circle btn-default"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		
+		
+		<!-- Subject -->
+		<!-- div align="right">
+			<?php //if (getAscAction() == 'edit') SelectPageLanguage('', 'Newsletter_Compose', 'do_newsletter_save'); ?>
+		</div -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-2">
+				<span class="required"><?php xmsg('NLT', 'FIELD_SUBJECT'); ?> *</span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('FIELD_SUBJECT','newsletter-messages'); ?>
+                                 </a>
+			</div>                       
+			<div class="col-md-10">
+				<input type="text" name="letter_subject" value="<?php Subject(); ?>" maxlength="512" onBlur="formatInput(this);" patternType="string512" class="form-control input-sm input-xlarge">
+			</div>
+		</div>
+
+	  	<!-- From Name -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-2">
+				<span class="required"><?php xmsg('NLT', 'FIELD_FROM'); ?> *</span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('FIELD_FROM','newsletter-messages'); ?>
+                                 </a>
+			</div>
+			<div class="col-md-10">
+				<input type="text" name="letter_from_name" value="<?php FromName(); ?>" maxlength="512" onBlur="formatInput(this);" patternType="string512" class="form-control input-sm input-xlarge">
+			</div>
+		</div>
+
+		<!-- reply to -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-2">
+				<span class="required"><?php xmsg('NLT', 'FIELD_REPLY_TO'); ?> *</span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('FIELD_REPLY_TO','newsletter-messages'); ?>
+                                 </a>
+			</div>
+			<div class="col-md-10">
+				<input type="text" name="letter_from_email" value="<?php FromEmail(); ?>" maxlength="512" onBlur="formatInput(this);" patternType="string512" class="form-control input-sm input-xlarge">
+			</div>
+		</div>
+
+		<!-- message content -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-2">
+				<span class=""><?php xmsg('NLT', 'FIELD_HTML_CONTENT'); ?></span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('FIELD_HTML_CONTENT','newsletter-messages'); ?>
+                                 </a>
+			</div>
+		</div>
+
+		<div class="row margin-bottom-10">
+			<div class="col-sm-12">
+				<textarea class="tiny_mce form-control" id="letter_html" name="letter_html" cols="74" rows="5" onBlur="return formatInput(this);" patternType="string512"><?php BodyHtml(); ?></textarea>
+			</div>
+		</div>
+		<!-- topics -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-2">
+				<span class=""><?php xmsg('SUBSCR', 'FIELD_TOPICS'); ?></span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                          <?php hinttext('FIELD_TOPICS','newsletter-messages'); ?>
+                                 </a>
+			</div>
+			<div class="col-md-10">
+				<?php TopicsList() ?>
+			</div>
+		</div>
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="SaveButton2" title="<?php xmsg('NLT','BUTTON_ADD'); ?>" onclick="formSubmit('LetterEditForm', 'save');" class="btn btn-circle btn-default"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+		
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

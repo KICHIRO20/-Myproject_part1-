@@ -1,0 +1,4 @@
+[Product Type Filter Button]
+.product_type_filter .input_submit {
+    margin;
+}

@@ -1,0 +1,30 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="pf_files_list.php?asc_action=add_file_to_product&product_id=<?php ProductID(); ?>" name="AddFileForm" method="post" enctype="multipart/form-data">
+
+	<div class="row">
+		<div class="col-sm-2">
+			<label class="col-sm-13 control-label"><?php xmsg('PF','LBL_FILE'); ?>:</label>
+		</div>
+		<div class="col-sm-4">
+			<input type="file" name="new_product_file" size="70">
+		</div>
+		<div class="col-sm-2">
+			<div onclick="document.forms['AddFileForm'].submit();" class="btn btn-circle btn-default" >
+				<i class=""><?php msg('BTN_ADD'); ?></i> 
+		        </div>
+		</div>
+		<div class="col-sm-2">
+			<label class="col-sm-13 control-label"><?php xmsg('PF','LBL_DESCRIPTION'); ?>:</label>
+		</div>
+		<div class="col-sm-4">
+			<input type="text" name="new_file_descr" size="65" value="">
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="text-danger"><strong><?php AddFileNoteMessage(); ?></strong></p>
+			</div>
+		</div>
+	</div>         
+
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

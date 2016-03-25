@@ -1,0 +1,107 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2',
+                            'DeleteFsRuleButton_id',
+                            'AddFsRuleButton_id'
+                            );
+    disableButtons(buttons);
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    
+    if (formAction == 'Save')
+    {
+        if (parseFloat(form.FS_OO.value) <= 0)
+        {
+            alert("<?php Msg('GSS_001'); ?>");
+            return;
+        }
+
+        if (parseFloat(form.FH_OO.value) <= 0)
+        {
+            alert("<?php Msg('GSS_001'); ?>");
+            return;
+        }
+    }
+
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+function DeleteFsRules()
+{
+    var chb_count = document.getElementById("delete_ids_count_id").value;
+    var checked_exist = false;
+    for (i=0; i < chb_count; i++)
+    {
+        var checkbox = document.getElementById("fsr_" + i +"_id");
+        if (checkbox.checked == true)
+        {
+            checked_exist = true;
+            break;
+        }
+    }
+    if (checked_exist == false)
+        return false;
+
+    bootbox.confirm("<?php xmsg('SCC', 'FS_RULE_JS_DELETE_WARNING'); ?>",function(result){
+    if(result){
+    var form = document.forms['SCC_Form'];
+    form.action = "<?php FsRuleDeleteActionUrl(); ?>";
+    disableButtonsInForm();    
+    form.submit();
+    } });
+}
+
+//-->
+</script>
+    <div class="portlet light">
+              
+        <div class="portlet-title">
+          <div class="caption">
+            <i class="fa fa-gears font-blue-sharp"></i>
+            <span class="caption-subject font-blue-sharp bold uppercase"><?php xmsg('SCC', 'SCC_FSTABLE_RULES_TITLE'); ?></span>
+          </div>
+	<div class="actions">
+		<button id="DeleteFsRuleButton_id" title="<?php xmsg('SCC', 'BTN_DELETE_FSRULE_LABEL'); ?>" onclick="DeleteFsRules();" type="button" name="<?php xmsg('SCC', 'BTN_DELETE_FSRULE_LABEL'); ?>" class="btn btn-default btn-circle"><i class="fa fa-times-circle"></i> <span class="hidden-480"><?php xmsg('SCC', 'BTN_DELETE_FSRULE_LABEL'); ?></span>
+                        </button>
+                    
+                        <a id="AddFsRuleButton_id" title="<?php xmsg('SCC', 'BTN_ADD_FSRULE_LABEL'); ?>" href="<?php AddFsRuleHref(); ?>" class="btn btn-primary btn-circle"><i class="fa fa-plus-circle"></i> <span class="hidden-480"><?php xmsg('SCC', 'BTN_ADD_FSRULE_LABEL'); ?></span>
+                        </a>
+	</div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-container form">
+                <form action="scc_settings.php?asc_action=update_scc_settings" id="SCC_Form" name="SCC_Form" method="post">
+                <?php HiddenArrayViewState(); ?>
+		<div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="1%">&nbsp;</th>
+                            <th class="text-left"><?php xmsg('SCC', 'SCC_FSTABLE_RULE_NAME_LABEL'); ?></th>
+                            <th class="text-center"><?php xmsg('SCC', 'SCC_FSTABLE_MIN_SUBTOTAL_LABEL'); ?></th>
+                            <th class="text-center"><?php xmsg('SCC', 'SCC_FSTABLE_CAT_PROD_LABEL'); ?></th>
+                            <th class="text-center"><?php xmsg('SCC', 'SCC_FSTABLE_DIRTY_CART_LABEL'); ?></th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                <?php Items(); ?>
+                <?php EmptyPlaceHolders(); ?>
+                </table>
+		</div>
+                </form>
+            </div>
+        </div>    
+    </div>            
+<!-- END TPL (DO NOT REMOVE!) -->

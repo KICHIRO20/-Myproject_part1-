@@ -1,0 +1,23 @@
+div.ui-dynatree-container
+{
+    font-family: Verdana, Sans-serif;
+    color: #759EC6;
+    font-weight: bold;
+    background-color: white; 
+}
+
+div.ui-dynatree-container div
+{
+    padding: 0;
+}
+
+div.ui-dynatree-container a
+{
+    font-family: Verdana, Sans-serif;
+    color: #759EC6;
+    font-weight: bold;
+}
+
+span.item_selected {
+    color: #0c9eee;
+}

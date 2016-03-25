@@ -1,0 +1,305 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT SRC="js/uspss.js"></SCRIPT>
+<script language="javascript" type="text/javascript">
+    jQuery(document).ready(function(){
+            jQuery("#store_owner_state_text_div").hide();
+            jQuery("#store_owner_state_menu_select").show();
+    
+      });
+
+    function submitHandler(formname)
+    {
+      var form = document.getElementById(formname);
+      if (!isValidEmail(document.getElementById('store_owner_email').value))
+      {
+          alert('<?php Msg("OWNER_PROFILE_WRN_001"); ?>');
+          return;
+      }
+      if (!isValidEmail(document.getElementById('store_owner_site_administrator_email').value))
+      {
+          alert('<?php Msg("OWNER_PROFILE_WRN_002"); ?>');
+          return;
+      }
+      if (!isValidEmail(document.getElementById('store_owner_orders_department_email').value))
+      {
+          alert('<?php Msg("OWNER_PROFILE_WRN_003"); ?>');
+          return;
+      }
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+</script>
+<?php JavascriptCountriesAndStates(); ?>
+<form action="" name="OwnerProfile" id="OwnerProfile" method="post"> 
+<input type="hidden" name="asc_action" value="UpdateStoreOwnerProfile">
+<?php ResultMessageRow(); ?>
+<?php Errors(); ?>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg("OWNER_PROFILE_PAGE_SUBTITLE"); ?></span>
+			<span class="caption-helper text-lowercase"><?php Msg("STRSET_STORE_OWNER_DESCR"); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="EditButton1" class="btn btn-circle btn-default" name="settings" type="button" onclick="submitHandler('OwnerProfile');"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_000"); ?></lable>
+			</div>
+			<div class="col-md-1">
+                               <a class="pull-right" style="cursor:pointer;">
+                                      <?php hinttext('OWNER_PROFILE_FIELD_000'); ?>
+                               </a>
+			</div>
+			<div class="col-md-8">
+				<?php StoreOwnerPageTitle(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_001"); ?></lable>
+			</div>
+			<div class="col-md-1">
+                               <a class="pull-right" style="cursor:pointer;">
+                                      <?php hinttext('OWNER_PROFILE_FIELD_001'); ?>
+                               </a>
+			</div>
+			<div class="col-md-8">
+				<?php StoreOwnerName(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_002"); ?></lable>
+			</div>
+			<div class="col-md-1">
+                               <a class="pull-right" style="cursor:pointer;">
+                                      <?php hinttext('OWNER_PROFILE_FIELD_002'); ?>
+                               </a>
+			</div>
+			<div class="col-md-8">
+				<?php StoreOwnerWebsite(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_003"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerPhones(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_004"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerFax(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_005"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerStreetLine1(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_006"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerStreetLine2(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_007"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerCity(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_010"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerCountry(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_009"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerPostcode(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_008"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<span style="display:inline;"><?php StoreOwnerState(); ?></span>
+			</div>
+		</div>
+		<!-- End - Row -->
+
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_011"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<div class="row margin-bottom-10">
+					<div class="col-md-2">
+						<span style="display:inline;"><?php Msg("OWNER_PROFILE_FIELD_017"); ?></span>
+					</div>
+					<div class="col-md-1">
+				               <a class="pull-right" style="cursor:pointer;">
+				                      <?php hinttext('OWNER_PROFILE_FIELD_014'); ?>
+				               </a>
+					</div>
+					<div class="col-md-6">
+						<?php StoreOwnerEmailFrom(); ?>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-2">
+						<span style="display:inline;"><?php Msg("OWNER_PROFILE_FIELD_018"); ?></span>
+					</div>
+					<div class="col-md-1">
+				               <a class="pull-right" style="cursor:pointer;">
+				                      <?php hinttext('OWNER_PROFILE_FIELD_011'); ?>
+				               </a>
+					</div>
+					<div class="col-md-6">
+						<?php StoreOwnerEmail(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_012"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<div class="row margin-bottom-10">
+					<div class="col-md-2">
+						<span style="display:inline;"><?php Msg("OWNER_PROFILE_FIELD_017"); ?></span>
+					</div>
+					<div class="col-md-1">
+				               <a class="pull-right" style="cursor:pointer;">
+				                      <?php hinttext('OWNER_PROFILE_FIELD_015'); ?>
+				               </a>
+					</div>
+					<div class="col-md-6">
+						<?php StoreOwnerSiteAdministratorEmailFrom(); ?>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-2">
+						<span style="display:inline;"><?php Msg("OWNER_PROFILE_FIELD_018"); ?></span>
+					</div>
+					<div class="col-md-1">
+				               <a class="pull-right" style="cursor:pointer;">
+				                      <?php hinttext('OWNER_PROFILE_FIELD_012'); ?>
+				               </a>
+					</div>
+					<div class="col-md-6">
+						<?php StoreOwnerSiteAdministratorEmail(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Begin - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"><?php Msg("OWNER_PROFILE_FIELD_013"); ?></lable>
+			</div>
+			<div class="col-md-8">
+				<div class="row margin-bottom-10">
+					<div class="col-md-2">
+						<span style="display:inline;"><?php Msg("OWNER_PROFILE_FIELD_017"); ?></span>
+					</div>
+					<div class="col-md-1">
+				               <a class="pull-right" style="cursor:pointer;">
+				                      <?php hinttext('OWNER_PROFILE_FIELD_016'); ?>
+				               </a>
+					</div>
+					<div class="col-md-6">
+						<?php StoreOwnerOrdersDepartmentEmailFrom(); ?>
+					</div>
+				</div>
+				<div class="row margin-bottom-10">
+					<div class="col-md-2">
+						<span style="display:inline;"><?php Msg("OWNER_PROFILE_FIELD_018"); ?></span>
+					</div>
+					<div class="col-md-1">
+				               <a class="pull-right" style="cursor:pointer;">
+				                      <?php hinttext('OWNER_PROFILE_FIELD_013'); ?>
+				               </a>
+					</div>
+					<div class="col-md-6">
+						<?php StoreOwnerOrdersDepartmentEmail(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End - Row -->
+	</div>
+	<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button class="btn btn-circle btn-default" name="settings" type="button" onclick="submitHandler('OwnerProfile');"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

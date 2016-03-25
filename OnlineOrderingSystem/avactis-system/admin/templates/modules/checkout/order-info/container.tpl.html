@@ -1,0 +1,465 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="javascript" type="text/javascript">
+
+    function submitHandler(formname) 
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+    function advancedForm(formname) {
+        var form = document.getElementById(formname);
+        form.FormSubmitValue.value='AdvancedForm';
+        form.submit();
+        return true;
+    } 
+
+    function prepareSubmitLogDecryptedCreditCardInfoReview()
+    {
+        form_action_id = 'asc_action2';
+        el = document.getElementById(form_action_id);
+        old_form_action = el.value;
+        el.value = 'log_decrypted_credit_card_info_review';
+        //el = document.getElementById('LogDecryptedCreditCardInfoReview');
+        //el.submit();
+    }
+
+    function SubmitRemovePersonInfoGroup(order_id, group_person_info_variant_id)
+    {
+        //set parameters
+        el = document.getElementById('RemovePersonInfoGroup_order_id');
+        el.value = order_id;
+
+        el = document.getElementById('RemovePersonInfoGroup_person_info_variant_id');
+        el.value = group_person_info_variant_id;
+
+        //submit form
+        el = document.getElementById('RemovePersonInfoGroup');
+        el.submit();
+    }
+
+    function prepareSubmitPurgeCVV(person_info_variant_id, group_id)
+    {
+        //group_id is needed to determine the RSA private key input field name.
+        //person_info_variant_id should be equal to group_id almost always (?).
+
+        //set parameters
+        el = document.getElementById('PurgeCVV_person_info_variant_id');
+        el.value = person_info_variant_id;
+
+        form_action_id = 'asc_action1';
+        el = document.getElementById(form_action_id);
+        old_form_action = el.value;
+        el.value = 'PurgeCVVFromStoredCreditCardInfo';
+
+        el = document.getElementById('EncryptedDataIndex1');
+        el.value = group_id;
+
+//        form_id = 'OrderInfo';
+//        el = document.getElementById(form_id);
+//        old_form_target = el.target;
+//        el.target = "IframePurgeCVV";
+//        el.submit();
+
+//        setTimeout('restoreFormParams("'+form_id+'","'+old_form_target+'","'+form_action_id+'","'+old_form_action+'");', 500); //0.5 s - wait a little; form.submit and other function calls may be asynchronious.
+    }
+
+    /**
+     * Check if <input type="file> was filled by user
+     */
+    function checkPrivateKeyFileIsSelected(group_id)
+    {
+        el = document.getElementById('rsa_private_key_' + group_id);
+        if(el.value == '')
+            return false;
+        else
+            return true;
+    }
+
+    function submit_currency_form()
+    {
+        document.getElementById('order_currency_id').value = document.getElementById('order_currency_id_select').value;
+        _order_currency_form = document.getElementById('order_currency_form');
+        _order_currency_form.submit();
+    }
+    
+    
+    // check whether any order prices are in need to be recalculated
+    function setPricesAsEdited()
+    {
+        document.getElementById("arePricesEdited").value = "true";
+    }
+
+</script> 
+<iframe style="" name="IframeOrderInfo" id="IframeOrderInfo" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold uppercase">
+				<i class="fa fa-shopping-cart"></i>&nbsp;<?php msg('ORDERS_INFO_ORDER_NUMBER'); ?>:
+			</span>
+			<span> <?php OrderId(); ?></span>
+		</div>
+		<div class="actions">
+			<?php Controls(); ?>
+		</div>
+	</div>
+	<div class="portlet-body">
+		 <?php ResultMessageRow(); ?>
+		<form id="order_currency_form" action="<?php OrderCurrencyHREF(); ?>" method="POST">
+			<input type="hidden" name="order_currency_id" id="order_currency_id">
+		</form>
+		<form action="orders_info.php" name="OrderInfo" id="OrderInfo" method="post" enctype="multipart/form-data" target="_self">
+			<input type="hidden" name="asc_action" id="asc_action" value="UpdateOrderAction">
+			<!--                     CVV               .            '1'. -->
+			<input type="hidden" name="asc_action1" id="asc_action1" value="">
+			<!--                                          .            '2'. -->
+			<input type="hidden" name="asc_action2" id="asc_action2" value="">
+
+			<input type="hidden" name="FormSubmitValue" id="FormSubmitValue" value="Save"> 
+			<input type="hidden" name="style" value="<?php FormStyle(); ?>">
+			<input type="hidden" name="order_id" value="<?php OrderId(); ?>">
+			<!--                     CVV               .            '1'. -->
+			<input type="hidden" name="person_info_variant_id" id="PurgeCVV_person_info_variant_id" value="">
+
+			<input type="hidden" name="EncryptedDataIndex" id="EncryptedDataIndex" value="">
+			<!--                     CVV               .            '1'. -->
+			<input type="hidden" name="EncryptedDataIndex1" id="EncryptedDataIndex1" value="">
+			<div class="table-responsive">
+				<table class="table borderless table-bordered table-striped">
+					<thead>
+						<tr class="bg-grey">
+							<th colspan="3" class="text-left"><?php msg('ORDERS_INFO_KEY_DETAILS'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr> <!-- Order ID -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_ID'); ?></td>
+							<td><a class="pull-right" style="cursor:pointer;"><?php hinttext('ORDERS_INFO_ORDER_ID'); ?></a></td>
+							<td class="text-left"><?php OrderId(); ?></td>
+						</tr>
+						<tr> <!-- Link to Invoice page -->
+							<td class="text-left"><?php msg('ORDERS_INFO_INVOICE'); ?></td>
+							<td></td>
+							<td class="text-left"><a href="<?php OrderIvoiceHREF(); ?>" target="_blank"><?php msg('ORDERS_INFO_INVOICE'); ?></a></td>
+						</tr>
+						<tr> <!-- Link to Packing Slip page -->
+							<td class="text-left"><?php msg('ORDERS_INFO_PACKING_SLIP'); ?></td>
+							<td></td>
+							<td class="text-left"><a href="<?php OrderPackingSlipHREF(); ?>" target="_blank"><?php msg('ORDERS_INFO_PACKING_SLIP'); ?></a></td>
+						</tr>
+							<tr> <!-- Payment Processor Order ID -->
+							<td class="text-left"><?php msg('ORDERS_INFO_PAYMENT_PROCESSOR_ORDER_ID'); ?></td>
+							<td>
+								<a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('ORDERS_INFO_PAYMENT_PROCESSOR_ORDER_ID'); ?>
+								</a>
+							</td>
+							<td class="text-left"><?php OrderPaymentProcessorOrderId(); ?></td>
+						</tr>
+						<tr> <!-- Order Date -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_DATE'); ?></td>
+							<td class="help" width="5%"></td>
+							<td class="text-left"><?php OrderDate(); ?></td>
+						</tr>
+						<tr> <!-- Amount -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_AMOUNT'); ?></td>
+							<td></td>
+							<td class="text-left"><?php OrderPriceTotal(); ?></td>
+						</tr>
+						<tr> <!-- Order Status -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_STATUS'); ?></td>
+							<td><a href="<?php hinttext('ORDERS_INFO_ORDER_STATUS'); ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td class="text-left"><?php OrderStatusSelector(); ?></td>
+						</tr>
+						<tr> <!-- Payment Status -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_PAYMENT_STATUS'); ?></td>
+							<td>
+								<a class="pull-right" style="cursor:pointer;">
+										<?php hinttext('ORDERS_INFO_ORDER_PAYMENT_STATUS'); ?>
+								</a>
+							</td>
+							<td class="text-left"><?php OrderPaymentStatusSelector(); ?></td>
+						</tr>
+						<tr> <!-- Payment Method -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_PAYMENT_METHOD'); ?></td>
+							<td>
+								<a class="pull-right" style="cursor:pointer;">
+										<?php hinttext('ORDERS_INFO_ORDER_PAYMENT_METHOD'); ?>
+								</a>
+							</td>
+							<td class="text-left"><?php OrderPaymentMethod(); ?></td>
+						</tr>
+						<!-- Payment Details -->
+						<!--  <tr> 
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_PAYMENT_DETAILS'); ?></td>
+							<td></td>
+							<td class="text-left"><?php OrderPaymentMethodDetail(); ?></td>
+						</tr>
+						-->
+						<tr> <!-- Shipping Method -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_SHIPPING_METHOD'); ?></td>
+							<td>
+								<a class="pull-right" style="cursor:pointer;">
+										<?php hinttext('ORDERS_INFO_ORDER_SHIPPING_METHOD'); ?>
+								</a>
+							</td>
+							<td class="text-left"><?php OrderShippingMethod(); ?>&nbsp;(<?php OrderPriceShippingLabelOnly(); ?>)</td>
+						</tr>
+							<tr> <!-- Tracking Number -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_TRACKING_NUMBER'); ?></td>
+							<td>
+								<a class="pull-right" style="cursor:pointer;">
+										<?php hinttext('ORDERS_INFO_ORDER_TRACKING_NUMBER'); ?>
+								</a>
+							</td>
+							<td class="text-left"><?php OrderTrackId(); ?></td>
+						</tr>
+						<tr> <!-- Affiliate ID -->
+							<td class="text-left"><?php msg('ORDERS_INFO_AFFILIATE_ID'); ?></td>
+							<td><a class="pull-right" style="cursor:pointer;"><?php hinttext('ORDERS_INFO_AFFILIATE_ID'); ?></a></td>
+							<td class="text-left"><?php OrderAffiliateID(); ?></td>
+						</tr>
+						<tr style="<?php OrderCurrencyStyle(); ?>"> <!-- Order Currency -->
+							<td class="text-left"><?php msg('ORDERS_INFO_ORDER_CURRENCY'); ?></td>
+							<td>
+								<a class="pull-right" style="cursor:pointer;"><?php hinttext('ORDERS_INFO_ORDER_CURRENCY'); ?></a>
+							</td>
+							<td class="text-left">
+								<select name="order_currency" id="order_currency_id_select" onchange="submit_currency_form();" class="form-control input-sm input-medium">
+									<?php OrderCurrency(); ?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div id="appinfo4" class="panel-group accordion scrollable">
+									<!-- Begin Panel -->
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a href="#_gcinfo" data-parent="#gcinfo" data-toggle="collapse" class="accordion-toggle collapsed">
+													<?php msg('ORDERS_INFO_GIFTCERTIFICATES'); ?>
+												</a>
+											</h4>
+										</div>
+										<div class="panel-collapse collapse" id="_gcinfo">
+											<div class="panel-body">
+												<div class="row table-responsvie">
+													<table class="table table-hover table-striped borderless">
+														<tbody>
+															
+															<script language="javascript">$(function () { setFromState('gc_'); });</script>
+															<?php AppliedGiftCertificatesList(); ?>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- END Panel -->
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div id="appinfo3" class="panel-group accordion scrollable">
+									<!-- Begin Panel -->
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a href="#_orderinfo" data-parent="#orderinfo" data-toggle="collapse" class="accordion-toggle collapsed">
+													<?php msg('ORDERS_INFO_PRODUCTS'); ?>
+												</a>
+											</h4>
+										</div>
+										<div class="panel-collapse collapse" id="_orderinfo">
+											<div class="panel-body">
+												<?php areOrderPricesEditable(); ?>
+												<div class="row table-responsvie">
+													<table class="table table-hover table-condensed table-striped borderless">
+															
+														<thead>
+															<tr>
+																<th class="text-center">Product ID</th>
+																<th class="text-center">Product SKU</th>
+																<th class="text-center">Product Name</th>
+																<th class="text-center">Quantity</th>
+																<th class="text-center">Price</th>
+																<th class="text-center">
+																Amount
+																<input type="hidden" name="arePricesEdited" id="arePricesEdited" value="false" />
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<?php Products(); ?>
+															<tr>
+																<td colspan="6">&nbsp;</td>
+															</tr>
+															<tr> <!-- Subtotal -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_SUBTOTAL'); ?></td>
+																<td><?php OrderPriceSubtotal(); ?></td>
+															</tr>
+															<tr> <!-- SubtotalGlobalDiscount -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_SUBTOTAL_GLOBAL_DISCOUNT'); ?></td>
+																<td><?php OrderPriceSubtotalGlobalDiscount(); ?></td>
+															</tr>
+															<tr> <!-- SubtotalPromoCodeDiscount -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_SUBTOTAL_PROMO_CODE_DISCOUNT'); ?> <?php OrderPriceSubtotalPromoCodeDiscountInfo(); ?>:</td>
+																<td><?php OrderPriceSubtotalPromoCodeDiscount(); ?></td>
+															</tr>
+															<tr> <!-- QuantityDiscount -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_QUANTITY_DISCOUNT'); ?></td>
+																<td><?php OrderPriceQuantityDiscount(); ?></td>
+															</tr>
+															<tr> <!-- DiscountedSubtotal -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_DISCOUNTED_SUBTOTAL'); ?></td>
+																<td><?php OrderPriceDiscountedSubtotal(); ?></td>
+															</tr>
+															<tr> <!-- Shipping and Handling -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_SHIPPING'); ?>&nbsp;(<?php OrderShippingMethodLabelOnly(); ?>):</td>
+																<td><?php OrderPriceShipping(); ?></td>
+															</tr>
+															<tr> <!-- Taxes -->
+																<?php OrderPriceTaxes(); ?>
+															</tr>
+															<tr class="bold"> <!-- Total -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_TOTAL'); ?></td>
+																<td><?php OrderPriceTotal(); ?></td>
+															</tr>
+															<tr class="bold"> <!-- TotalPrepaidByGC -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_TOTAL_PREPAID_BY_GC'); ?></td>
+																<td><?php OrderPriceTotalPrepaidByGC(); ?></td>
+															</tr>
+															<tr class="bold"> <!-- TotalToPay -->
+																<td colspan="5" class="text-right"><?php msg('ORDERS_INFO_PRODUCTS_TOTAL_TO_PAY'); ?></td>
+																<td><?php OrderPriceTotalToPay(); ?></td>
+															</tr>
+ 
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- END Panel -->
+								</div>
+							</td>
+						</tr>
+						<?php PersonInfo(); ?>
+						<tr>
+							<td colspan="3">
+								<div id="appinfo5" class="panel-group accordion scrollable">
+									<!-- Begin Panel -->
+									<?php AddCommentVisibilityOpen(); ?>
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a href="#_comment" data-parent="#comment" data-toggle="collapse" class="accordion-toggle collapsed">
+													<?php msg('ORDERS_INFO_COMMENTS'); ?>
+												</a>
+											</h4>
+										</div>
+										<div class="panel-collapse collapse" id="_comment">
+											<div class="panel-body">
+												<div class="row table-responsvie">
+													<table class="table table-hover table-striped borderless">
+														<tbody>
+															<tr id="comment_0">
+																<td class="text-left" style="vertical-align:middle;"><?php msg('ORDERS_INFO_ADD_COMMENT'); ?></td>
+																<td style="vertical-align:middle;"><a  class="pull-right" style="cursor:pointer;"><?php hinttext('ORDERS_INFO_ADD_COMMENT'); ?></a></td>
+																<td class="text-left"><textarea name="comment" cols="65" rows="5" class="form-control"></textarea></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<?php AddCommentVisibilityClose(); ?>
+									<!-- END Panel -->
+								</div>
+							</td>
+						</tr>
+						<?php OrderComments(); ?>
+						<script language="javascript">$(function () { setFromState('comment_'); });</script> 
+						<tr>
+							<td colspan="3">
+								<div id="appinfo6" class="panel-group accordion scrollable">
+									<!-- Begin Panel -->
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a href="#_orderinfohistory" data-parent="#orderinfohistory" data-toggle="collapse" class="accordion-toggle collapsed">
+													<?php msg('ORDERS_INFO_HISTORY'); ?>
+												</a>
+											</h4>
+										</div>
+										<div class="panel-collapse collapse" id="_orderinfohistory">
+											<div class="panel-body">
+												<div class="row table-responsvie">
+													<table class="table table-hover table-striped borderless">
+														<tbody>
+															<?php OrderHistory(); ?>
+															<script language="javascript">$(function () { setFromState('history_'); });</script>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- END Panel -->
+								</div>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3" class="text-center">
+								<?php Controls(); ?>
+							</td>
+						</tr>
+
+					</tfoot>
+				</table>
+			</div>
+		</form>
+
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<!--                                  decrypted credit card info -->
+<iframe style="" name="IframeLogDecryptedCreditCardInfoReview" id="IframeLogDecryptedCreditCardInfoReview" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="orders_info.php" name="LogDecryptedCreditCardInfoReview" id="LogDecryptedCreditCardInfoReview" method="post" target="IframeLogDecryptedCreditCardInfoReview">
+<input type="hidden" name="asc_action" id="LogDecryptedCreditCardInfoReview_asc_action" value="log_decrypted_credit_card_info_review">
+<input type="hidden" name="order_id" id="LogDecryptedCreditCardInfoReview_order_id" value="<?php OrderId(); ?>">
+</form>
+
+<!--                           credit card info (          )                -->
+<iframe style="" name="IframeRemovePersonInfoGroup" id="IframeRemovePersonInfoGroup" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="orders_info.php" name="RemovePersonInfoGroup" id="RemovePersonInfoGroup" method="post" target="IframeRemovePersonInfoGroup">
+<input type="hidden" name="asc_action" id="RemovePersonInfoGroup_asc_action" value="RemovePersonInfoOrderData">
+<input type="hidden" name="order_id" id="RemovePersonInfoGroup_order_id" value="">
+<input type="hidden" name="person_info_variant_id" id="RemovePersonInfoGroup_person_info_variant_id" value="">
+</form>
+
+<!--                           CVV    credit card info                -->
+<iframe style="" name="IframePurgeCVV" id="IframePurgeCVV" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,866 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/javascript_sprintf.js" language="javascript" type="text/javascript"></script>
+<script src="js/timer.js" language="javascript" type="text/javascript"></script>
+<style type="text/css">
+.progress_bar_container {
+  border: solid 1px black;
+  width: 650px;
+  height: 15px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 15px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+
+<script language="javascript" type="text/javascript">
+<!--
+
+document.title = "<?php xMsg('ML', 'ML_IMPORT_LABELS_TITLE'); ?>";
+
+var def_lng = "<?php DefaultLanguage(); ?>";
+var Res = new Array();
+
+Res["total"] = new Array();
+Res["total"]["new"] = 0;
+Res["total"]["found"] = 0;
+Res["total"]["error"] = 0;
+
+Res["language"] = new Array();
+<?php FillLanguageArray(); ?>
+
+Res["type"] = new Array();
+<?php FillTypeArray(); ?>
+
+var items_count = 0;
+var pixels_count = 650;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+var finished = 0;
+var executed = 0;
+var stop_bar = 0;
+
+var _log_str_v = "<?php xMsg('ML', 'ML_IMPORT_LABELS_VALIDATION_COUNT'); ?>";
+var _log_str_i = "<?php xMsg('ML', 'ML_IMPORT_LABELS_PROCESSING_COUNT'); ?>";
+var _no_action = "<?php xMsg('ML', 'ML_IMPORT_LABELS_NO_ACTION'); ?>";
+
+function processResults(info)
+{
+    if (typeof(info) != "object")
+        return;
+
+    for(superblock in info)
+    {
+        if (typeof(info[superblock]) != "object")
+        {
+            setInfoText("", "", superblock, info[superblock]);
+        }
+        else
+        {
+            if (superblock == "total")
+            {
+                for(block in info[superblock])
+                {
+                    Res[superblock][block] = parseInt(Res[superblock][block]) + parseInt(info[superblock][block]);
+                    setInfoText("", superblock, block, Res[superblock][block]);
+                }
+            }
+            else if (superblock == "language") 
+            {
+                for(parentblock in info[superblock])
+                    for(block in info[superblock][parentblock])
+                    {
+                        Res[superblock][parentblock][block] = parseInt(Res[superblock][parentblock][block]) + parseInt(info[superblock][parentblock][block]);
+                        setInfoText(superblock, parentblock, block, Res[superblock][parentblock][block]);
+                    }
+            }
+            else if (superblock == "type")
+            {
+                for(parentblock in info[superblock])
+                    for(block in info[superblock][parentblock])
+                    {
+                        Res[superblock][parentblock][block] = parseInt(Res[superblock][parentblock][block]) + parseInt(info[superblock][parentblock][block]);
+                        setInfoText(superblock, parentblock, block, Res[superblock][parentblock][block]);
+                    }
+            }
+            else
+            {
+                for(parentblock in info[superblock])
+                {
+                    if (typeof(info[superblock][parentblock]) != "object")
+                    {
+                        setInfoText("", superblock, parentblock, info[superblock][parentblock]);
+                    }
+                    else
+                    {
+                        for(block in info[superblock][parentblock])
+                            setInfoText(superblock, parentblock, block, info[superblock][parentblock][block]);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function increment_bar(bar_id)
+{
+    if (stop_bar == 0)
+    { 
+        current_progress++;
+        document.getElementById(bar_id).style.width = current_progress + "px";
+	
+        if (current_progress < (pixels_count - 1))
+            setTimeout("increment_bar('" + bar_id + "')", increment_speed);
+        else
+            finished++;
+    }
+}
+
+function appendToLog(log_id, res)
+{
+    result = 0; // success
+    try 
+    {
+        if (res["errors"])
+            for(i = 0; i < res["errors"].length; i++)
+            {
+                appendStringToLog(log_id, res["errors"][i], "red");
+                result = 1; // failed
+            }
+
+        if (res["warnings"])
+            for(i = 0; i < res["warnings"].length; i++)
+                appendStringToLog(log_id, res["warnings"][i], "blue");
+
+        if (res["messages"])
+            for(i = 0;i<res["messages"].length;i++)
+                appendStringToLog(log_id, res["messages"][i], "green");
+    }
+    catch(e) 
+    {
+        result = 1; // failed
+    }
+    return result;
+}
+
+function appendStringToLog(log_id, str, color)
+{
+    if (str.length < 2)
+    {
+        return 0; // success
+    }
+
+    showBlock(log_id, 10);
+    _time = new Date();
+    _time_str = "[" + sprintf("%02d", _time.getHours()) + ":" + sprintf("%02d", _time.getMinutes()) + ":" + sprintf("%02d", _time.getSeconds()) + "]";
+    log_el = document.getElementById(log_id);
+    _html = _time_str + '&nbsp;<span style="color: ' + color + '; font-weight: normal;">' + str + '</span><br>';
+    if (navigator.userAgent.indexOf("MSIE") != -1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+    return 1; // failed
+}
+
+function clearLog(log_id)
+{
+    document.getElementById(log_id).innerHTML = "";
+}
+
+function setNextButton()
+{
+    if(document.getElementById("file_name_hidden").value=="")
+        disableButton("ContinueButton1");
+    else
+        enableButton("ContinueButton1", (function() { startValidation(); }));
+}
+
+function checkActionStatus(box, block, action)
+{
+    if (box.checked)
+    {
+        if (block == "i_total")
+        {
+            for(el = 0; el < document.CheckForm.elements.length; el++)
+            {
+                if (document.CheckForm.elements[el].type &&
+                    document.CheckForm.elements[el].type == "checkbox" &&
+                    document.CheckForm.elements[el].name && 
+                    document.CheckForm.elements[el].name.substring(document.CheckForm.elements[el].name.length - 5 - action.length) == "_" + action + "_box")
+                    document.CheckForm.elements[el].checked = true;
+            }
+        }
+
+        if (block == "i_language_" + def_lng && action == "new")
+        {
+            for(el = 0; el < document.CheckForm.elements.length; el++)
+            {
+                if (document.CheckForm.elements[el].type &&
+                    document.CheckForm.elements[el].type == "checkbox" &&
+                    document.CheckForm.elements[el].name && 
+                    document.CheckForm.elements[el].name.substring(document.CheckForm.elements[el].name.length - 5 - action.length) == "_" + action + "_box")
+                    document.CheckForm.elements[el].checked = true;
+            }
+        }
+    }
+    else
+    {
+        if (block == "i_total")
+        {
+            for(el = 0; el < document.CheckForm.elements.length; el++)
+            {
+                if (document.CheckForm.elements[el].type &&
+                    document.CheckForm.elements[el].type == "checkbox" &&
+                    document.CheckForm.elements[el].name && 
+                    document.CheckForm.elements[el].name.substring(document.CheckForm.elements[el].name.length - 5 - action.length) == "_" + action + "_box")
+                    document.CheckForm.elements[el].checked = false;
+            }
+        }
+        else
+        {
+            document.CheckForm.elements["i_total_" + action + "_box"].checked = false;
+        }
+
+        if (action == "new")
+            document.CheckForm.elements["i_language_" + def_lng + "_new_box"].checked = false;
+    }
+}
+
+function setInfoText(superblock, parentblock, block, text)
+{
+    if (superblock)    
+        superblock = superblock + "_";
+    superblock = "i_" + superblock;
+    if (parentblock)
+        parentblock = parentblock + "_";
+
+    if (text)
+    {
+        if (document.getElementById(superblock + parentblock + block))
+            document.getElementById(superblock + parentblock + block).innerHTML = text;
+        if (document.getElementById(superblock + parentblock + block + "_str"))
+            document.getElementById(superblock + parentblock + block + "_str").style.display = "";
+        if (document.getElementById(superblock + parentblock + "container"))
+            document.getElementById(superblock + parentblock + "container").style.display = "";
+        if (document.getElementById(superblock + "container"))
+            document.getElementById(superblock + "container").style.display = "";
+        if (document.getElementById(superblock + "str"))
+            document.getElementById(superblock + "str").style.display = "";
+    }
+    else
+    {
+        if (document.getElementById(superblock + parentblock + block + "_str"))
+            document.getElementById(superblock + parentblock + block + "_str").style.display = "none";
+        if (document.getElementById(superblock + parentblock + "container"))
+            document.getElementById(superblock + parentblock + "container").style.display = "none";
+        if (document.getElementById(superblock + "container"))
+            document.getElementById(superblock + "container").style.display = "none";
+        if (document.getElementById(superblock + "str"))
+            document.getElementById(superblock + "str").style.display = "none";
+    }
+}
+
+function showFirstStep()
+{
+    document.getElementById("step_2").style.display = "none";
+    document.getElementById("step_1").style.display = "";
+    document.getElementById("step_text").innerHTML = "<?php xMsg('ML', 'ML_IMPORT_STEP_1_TITLE'); ?>";
+    clearFileInfo();
+    clearLog("v_log");
+
+    Res["total"]["new"] = 0;
+    Res["total"]["found"] = 0;
+    Res["total"]["error"] = 0;
+
+    for(el in Res)
+        if (el != "total")
+            for(e in Res[el])
+            {
+                Res[el][e]["new"] = 0;
+                Res[el][e]["found"] = 0;
+            }
+}
+
+function startValidation()
+{
+    document.getElementById("step_2").style.display = "";
+    document.getElementById("step_1").style.display = "none";
+    __str = new String("<?php xMsg('ML', 'ML_IMPORT_STEP_2_TITLE'); ?>");
+    document.getElementById("step_text").innerHTML = __str.replace("%01%", document.getElementById("file_name").innerHTML);
+
+    current_progress = 0;
+    start_speed = 50;
+    increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+    finished = 0;
+    executed = 0;
+    document.getElementById("valid_process_img").style.display = "";
+    document.getElementById("valid_process_text").innerHTML = "<?php xMsg('ML', 'ML_IMPORT_LABELS_PROCESSING'); ?>";
+    disableButton("ImportButton");
+    disableButton("BackButton");
+    document.getElementById("validation_pbar").style.width = current_progress + "px";
+    clearLog("v_log");
+    appendStringToLog("v_log", "<?php xMsg('ML', 'ML_IMPORT_LABELS_VALIDATION_START'); ?>");
+    addTimer("vld_timer");
+    showTimer("vld_timer");
+    startTimer("vld_timer");
+    requestToInitValidation();
+}
+
+function requestToInitValidation()
+{
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_import_labels",
+            "il_target": "init",
+            "script_step": "1",
+            "src_file": document.getElementById("file_name_hidden").value
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            var error = appendToLog("v_log", result);
+            error = error || appendStringToLog("v_log", '', "gray");
+
+            if (result && result["process_info"] && result["process_info"]["info"])
+                processResults(result["process_info"]["info"]);
+
+            if (result["process_info"]["status"] == "INITED")
+            {
+                items_count = result["process_info"]["items_count"];
+                increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+                setTimeout("requestToDoValidation()", 10);
+                setTimeout("increment_bar('validation_pbar')", 10);
+                setTimeout("waitFinishValidation()", 500);
+            }
+            else if (result["process_info"]["status"] == "ERRORS_HAPPENED")
+            {
+                breakValidation();
+            };
+        },
+        'json'
+    );
+}
+
+function requestToDoValidation()
+{
+    var d = new Date();
+    var start_time = d.getTime();
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_import_labels",
+            "il_target": "do"
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+
+            if (result && result["process_info"] && result["process_info"]["info"])
+                processResults(result["process_info"]["info"]);
+
+            var error = appendToLog("v_log", result);
+            error = error || appendStringToLog("v_log", '', "gray");
+
+            var d = new Date();
+            var end_time = d.getTime();
+            var ex = result["process_info"]["items_processing"] - executed;
+            var k = ex * 100 / items_count;
+            increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+            executed = result["process_info"]["items_processing"];
+
+            if (result["process_info"]["status"] == "COMPLETED")
+            {
+                finished++;
+                increment_speed = 2;
+            }
+            else 
+            {
+                __log_str = _log_str_v.replace("__01__", executed).replace("__02__", items_count);
+                appendStringToLog("v_log", __log_str, "black");
+                setTimeout("requestToDoValidation()", 10);
+            }
+        },
+        'json'
+    );
+}
+
+function waitFinishValidation()
+{
+    if (finished < 2)
+    {
+        setTimeout("waitFinishValidation()", 500);
+        return;
+    };
+  
+    increment_bar("validation_pbar");
+    document.getElementById("valid_process_img").style.display = "none";
+    document.getElementById("valid_process_text").innerHTML = "<?php xMsg('ML', 'ML_IMPORT_LABELS_VALIDATION_COMPLETED'); ?>";
+    enableButton("BackButton", (function() { showFirstStep(); }));
+
+    stopTimer("vld_timer");
+
+    __log_str = _log_str_v.replace("__01__", executed).replace("__02__", items_count);
+    appendStringToLog("v_log", __log_str, "black");
+    __log_str = "<?php xMsg('ML', 'ML_IMPORT_LABELS_VALIDATION_COMPLETED'); ?>";
+    appendStringToLog("v_log", __log_str, "black");
+
+    if (parseInt(Res["total"]["new"]) + parseInt(Res["total"]["found"]) <= 0)
+    {
+        setInfoText("", "", "information", _no_action);
+        document.getElementById("v_results").scrollTop = 1000000;
+    }
+    else
+    {
+        enableButton("ImportButton", (function() { startImport(); }));
+    }
+}
+
+function breakValidation()
+{
+    stop_bar = 1;
+    document.getElementById("valid_process_img").style.display = "none";
+    document.getElementById("valid_process_text").innerHTML = "<?php xMsg('CTL', 'IMP_VLD_ERRORS'); ?>";
+    enableButton("BackButton",(function() { showFirstStep(); }));
+    stopTimer("vld_timer");
+}
+
+function startImport()
+{
+    disableButton("BackButton");
+    disableButton("ImportButton");
+    document.getElementById("BackButton").style.display = "none";
+    document.getElementById("step_text").innerHTML = "<?php xMsg('ML', 'ML_IMPORT_STEP_3_TITLE'); ?>";
+
+    current_progress = 0;
+    start_speed = 1;
+    items_count = 0;
+    increment_speed = 1000;
+    finished = 0;
+    executed = 0;
+    document.getElementById("valid_process_img").style.display = "";
+    document.getElementById("valid_process_text").innerHTML = "<?php xMsg('ML', 'ML_IMPORT_LABELS_PROCESSING'); ?>";
+    document.getElementById("validation_pbar").style.width = current_progress + "px";
+    appendStringToLog("v_log", "<?php xMsg('ML', 'ML_IMPORT_LABELS_IMPORT_START'); ?>");
+    addTimer("vld_timer");
+    showTimer("vld_timer");
+    startTimer("vld_timer");
+    requestToInitImport();
+}
+
+function requestToInitImport()
+{
+    // getting the filters...
+    // to minimize the request length (GET request has limitations) 
+    // it chooses if checked or unchecked values to send
+    // 1. languages
+    var lang_filter_new_checked = "";
+    var lang_filter_new_unchecked = "";
+    var lang_filter_found_checked = "";
+    var lang_filter_found_unchecked = "";
+    var type_filter_new_checked = "";
+    var type_filter_new_unchecked = "";
+    var type_filter_found_checked = "";
+    var type_filter_found_unchecked = "";
+    var lang_filter_new = "";
+    var lang_filter_found = "";
+    var type_filter_new = "";
+    var type_filter_found = "";
+    for(el = 0; el < document.CheckForm.elements.length; el++)
+    {   
+        ch = document.CheckForm.elements[el];
+        if (!ch || !ch.type)
+            continue;
+        if (ch.type == "checkbox" && ch.name.substring(0, 11) == "i_language_")
+        {
+            if (ch.name.substring(11 + ch.value.length + 1) == "found_box")
+            {
+                if (ch.checked)
+                    lang_filter_found_checked = lang_filter_found_checked + "|" + ch.value;
+                else
+                    lang_filter_found_unchecked = lang_filter_found_unchecked + "|" + ch.value;
+            }
+            if (ch.name.substring(11 + ch.value.length + 1) == "new_box")
+            {
+                if (ch.checked)
+                    lang_filter_new_checked = lang_filter_new_checked + "|" + ch.value;
+                else
+                    lang_filter_new_unchecked = lang_filter_new_unchecked + "|" + ch.value;
+            }
+        }
+
+        if (ch.type == "checkbox" && ch.name.substring(0, 7) == "i_type_")
+        {
+            if (ch.name.substring(7 + ch.value.length + 1) == "found_box")
+            {
+                if (ch.checked)
+                    type_filter_found_checked = type_filter_found_checked + "|" + ch.value;
+                else
+                    type_filter_found_unchecked = type_filter_found_unchecked + "|" + ch.value;
+            }
+            if (ch.name.substring(7 + ch.value.length + 1) == "new_box")
+            {
+                if (ch.checked)
+                    type_filter_new_checked = type_filter_new_checked + "|" + ch.value;
+                else
+                    type_filter_new_unchecked = type_filter_new_unchecked + "|" + ch.value;
+            }
+        }
+
+        if (ch.type == "checkbox")
+            ch.disabled = "disabled";
+    }
+
+    if (lang_filter_new_checked.length <= lang_filter_new_unchecked.length)
+        lang_filter_new = "-" + lang_filter_new_checked;
+    else
+        lang_filter_new = "+" + lang_filter_new_unchecked;
+
+    if (lang_filter_found_checked.length <= lang_filter_found_unchecked.length)
+        lang_filter_found = "-" + lang_filter_found_checked;
+    else
+        lang_filter_found = "+" + lang_filter_found_unchecked;
+
+    if (type_filter_new_checked.length <= type_filter_new_unchecked.length)
+        type_filter_new = "-" + type_filter_new_checked;
+    else
+        type_filter_new = "+" + type_filter_new_unchecked;
+
+    if (type_filter_found_checked.length <= type_filter_found_unchecked.length)
+        type_filter_found = "-" + type_filter_found_checked;
+    else
+        type_filter_found = "+" + type_filter_found_unchecked;
+
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_import_labels",
+            "il_target": "init",
+            "script_step": "2",
+            "tt_new": ((document.CheckForm.i_total_new_box.checked) ? "-" : "+"),
+            "tt_found": ((document.CheckForm.i_total_found_box.checked) ? "-" : "+"),
+            "l_new": lang_filter_new,
+            "l_found": lang_filter_found,
+            "t_new": type_filter_new,
+            "t_found": type_filter_found
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            var error = appendToLog("v_log", result);
+            error = error || appendStringToLog("v_log", '', "gray");
+
+            if (result["process_info"]["status"] == "INITED")
+            {
+                items_count = result["process_info"]["items_count"];
+                increment_speed = 1000;
+                setTimeout("requestToDoImport()", 10);
+                setTimeout("increment_bar('validation_pbar')", 10);
+                setTimeout("waitFinishImport()", 500);
+            }
+            else if (result["process_info"]["status"] == "ERRORS_HAPPENED")
+            {
+                breakValidation();
+            };
+        },
+        'json'
+    );
+}
+
+function requestToDoImport()
+{
+    var d = new Date();
+    var start_time = d.getTime();
+    jQuery.post(
+        "jquery_ajax_handler.php", // backend
+        {
+            "asc_action": "do_import_labels",
+            "il_target": "do"
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+
+            var error = appendToLog("v_log", result);
+            error = error || appendStringToLog("v_log", '', "gray");
+
+            var d = new Date();
+            var end_time = d.getTime();
+            var ex = result["process_info"]["items_processing"] - executed;
+            var k = ex * 100 / items_count;
+            increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+            executed = result["process_info"]["items_processing"];
+
+            if (result["process_info"]["status"] == "COMPLETED")
+            {
+                finished++;
+                increment_speed = 2;
+            }
+            else 
+            {
+                __log_str = _log_str_i.replace("__01__", executed).replace("__02__", items_count);
+                appendStringToLog("v_log", __log_str, "black");
+                setTimeout("requestToDoImport()", 10);
+            }
+        },
+        'json'
+    );
+}
+
+function waitFinishImport()
+{
+    if (finished < 2)
+    {
+        setTimeout("waitFinishImport()", 500);
+        return;
+    };
+  
+    increment_bar("validation_pbar");
+    document.getElementById("valid_process_img").style.display = "none";
+    document.getElementById("valid_process_text").innerHTML = "<?php xMsg('ML', 'ML_IMPORT_LABELS_IMPORT_COMPLETED'); ?>";
+    document.getElementById("step_text").innerHTML = "<?php xMsg('ML', 'ML_IMPORT_LABELS_IMPORT_COMPLETED'); ?>";
+
+    stopTimer("vld_timer");
+
+    __log_str = _log_str_i.replace("__01__", executed).replace("__02__", items_count);
+    appendStringToLog("v_log", __log_str, "black");
+    __log_str = "<?php xMsg('ML', 'ML_IMPORT_LABELS_IMPORT_COMPLETED'); ?>";
+    appendStringToLog("v_log", __log_str, "black");
+
+    document.getElementById("CloseButton2").style.display = "none";
+    document.getElementById("ImportButton").innerHTML = "<?php Msg('BTN_CLOSE') ?>";
+    if (window.opener)
+        window.opener.location.reload();
+parent.location.reload();
+    enableButton("ImportButton", (function() { closeAndFocusParent(); }));
+}
+
+function clearFileInfo()
+{
+    document.getElementById("i_format_str").style.display = "none";
+    document.getElementById("i_delimiter_str").style.display = "none";
+    document.getElementById("i_warning_str").style.display = "none";
+    document.getElementById("i_error_str").style.display = "none";
+    document.getElementById("i_columns_container").style.display = "none";
+    document.getElementById("i_columns_type_str").style.display = "none";
+    document.getElementById("i_columns_name_str").style.display = "none";
+    for(lng in Res["language"])
+        document.getElementById("i_columns_" + lng + "_str").style.display = "none";
+    document.getElementById("i_total_container").style.display = "none";
+    document.getElementById("i_total_new_str").style.display = "none";
+    document.getElementById("i_total_new_box").checked = false;
+    document.getElementById("i_total_found_str").style.display = "none";
+    document.getElementById("i_total_found_box").checked = false;
+    document.getElementById("i_total_error_str").style.display = "none";
+    document.getElementById("i_language_container").style.display = "none";
+    for(lng in Res["language"])
+    {
+        document.getElementById("i_language_" + lng + "_container").style.display = "none";
+        document.getElementById("i_language_" + lng + "_new_str").style.display = "none";
+        document.getElementById("i_language_" + lng + "_new_box").checked = false;
+        document.getElementById("i_language_" + lng + "_found_str").style.display = "none";
+        document.getElementById("i_language_" + lng + "_found_box").checked = false;
+    }
+    document.getElementById("i_type_container").style.display = "none";
+    for(m in Res["type"])
+    {
+        document.getElementById("i_type_" + m + "_container").style.display = "none";
+        document.getElementById("i_type_" + m + "_new_str").style.display = "none";
+        document.getElementById("i_type_" + m + "_new_box").checked = false;
+        document.getElementById("i_type_" + m + "_found_str").style.display = "none";
+        document.getElementById("i_type_" + m + "_found_box").checked = false;
+    }
+}
+
+// -->
+</script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-sign-in font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php xMsg('ML', 'ML_IMPORT_LABELS_TITLE'); ?> </span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<?php PageHelpLink('import_labels'); ?>
+			</div>
+		</div>
+	</div>
+
+	<div id="ImportLabelsForm">
+		<div class="portlet-body form">
+			<h4 id="step_text" class="form-section"><?php xMsg('ML', 'ML_IMPORT_STEP_1_TITLE'); ?></h4>
+			<div id="step_1">
+				<div class="row margin-bottom-10">
+				<form action="" name="InitForm" style="margin: 0;">
+					<input type="hidden" id="file_name_hidden" value="">
+				</form>
+					<div class="col-sm-2">
+						<?php xMsg('ML', 'ML_IMPORT_LABELS_FILE'); ?>
+						<a class="pull-right" style="cursor:pointer;"><?php hinttext('ML_IMPORT_LABELS_FILE', 'multilang-messages'); ?></a>
+					</div>
+					<div class="col-sm-10">
+						<span id="file_name"><?php xMsg('ML', 'ML_IMPORT_LABELS_NO_FILE'); ?></span>
+						<button id="ChooseImagesDirButton1" onClick="disableBlock('ImportLabelsForm',3); showBlock('fselector_file_name',4);" type="button" class="btn btn-circle btn-default" data-target="#stack1" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-check"></i> <?php xmsg('CTL','BTN_CHOOSE'); ?></button>
+					</div>
+				</div>
+
+				<div class="alert alert-danger">
+					<h4><?php xMsg('ML', 'ML_IMPORT_LABELS_NOTE'); ?>&nbsp;</h4>
+					<?php xMsg('ML', 'ML_IMPORT_LABELS_NOTE_TEXT'); ?>
+				</div>
+
+				<div class="actions" align="center">
+					<div class="actions btn-set">
+						<a id="ContinueButton1" title="<?php xMsg('ML', 'BTN_IMPORT_NEXT'); ?>" onclick="" type="button" class="btn blue button_disabled"><i class="fa fa-arrow-right"></i> <span class="hidden-480"><?php xMsg('ML', 'BTN_IMPORT_NEXT'); ?></span></a>
+						<a id="CloseButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="portlet-body" id="step_2" style="display: none;">
+		<form action="" name="CheckForm" style="margin: 0;">
+			<div class="table-responsive">
+				<table class="table table-striped" id="ImportLabelsForm">
+					<tr>
+						<td align="center">
+							<table width="100%">
+							<tr>
+								<td colspan="2">
+					<!-- progress bar: start -->
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr style="height: 19px;">
+										<td id="valid_process_text" style="text-align: left;">&nbsp;&nbsp;<?php xMsg('ML', 'ML_IMPORT_LABELS_VALIDATING'); ?></td>
+										<td width="3%"><img id="valid_process_img" src="images/ajax/snake.gif"></td>
+										<td width="15%" align="right"><?php xMsg('ML', 'ML_EXPORT_TIME_ELAPSED'); ?>:</td>
+										<td width="5%" align="left" width="5%">&nbsp;<span id="vld_timer"></span></td>
+									</tr>
+									<tr>
+										<td colspan="4" align="center">
+										    <div class="progress_bar_container" style="text-align: left"><div id="validation_pbar" class="progress_bar_bar"></div></div>
+										</td>
+									</tr>
+									</table>
+					<!-- progress bar:  end  -->
+								</td>
+							<tr>
+							<tr>
+								<td width="50%" valign="top">
+					<!-- check results: start -->
+									<table width="100%" height="350px" cellpadding="4" cellspacing="1" style="background: #CED4DD;">
+									<tr>
+										<td style="height: 15px; text-align: left;"><?php xMsg('ML', 'ML_IMPORT_LABELS_CHECK_RESULTS'); ?></td>
+									</tr>
+									<tr>
+										<td bgcolor="white" height="100%">
+										    <div id="v_results" style="height: 335px; overflow: auto; text-align: left;">
+					<!-- check result information: start -->
+										        <table width="100%">
+										        <tr id="i_format_str" style="display: none;">
+										            <td colspan="3"><?php xMsg('ML', 'ML_EXPORT_FORMAT'); ?>:&nbsp;<span id="i_format" style="color: #888888;"></span></td>
+										        </tr>
+										        <tr id="i_delimiter_str" style="display: none;">
+										            <td colspan="3"><?php xMsg('ML', 'ML_EXPORT_DELIMITER'); ?>:&nbsp;<span id="i_delimiter" style="color: #888888;"></span></td>
+										        </tr>
+										        <tr id="i_warning_str" style="display: none;">
+										            <td colspan="3"><?php xMsg('ML', 'ML_IMPORT_LABELS_WARNING'); ?>:&nbsp;<span id="i_warning" style="color: blue;">warning</span></td>
+										        </tr>
+										        <tr id="i_error_str" style="display: none;">
+										            <td colspan="3"><?php xMsg('ML', 'ML_IMPORT_LABELS_ERROR'); ?>:&nbsp;<span id="i_error" style="color: red;">error</span></td>
+										        </tr>
+										        <tr id="i_columns_container" style="display: none;">
+										            <td bgcolor="#DEDEDE" colspan="3"><?php xMsg('ML', 'ML_IMPORT_LABELS_COLUMNS_INFO'); ?></td>
+										        </tr>
+										        <tr id="i_columns_type_str" style="display: none;">
+										            <td colspan="3"><?php xMsg('ML', 'ML_LABEL_TYPE'); ?>:&nbsp;<span id="i_columns_type" style="color: #888888;"></span></td>
+										        </tr>
+										        <tr id="i_columns_name_str" style="display: none;">
+										            <td colspan="3"><?php xMsg('ML', 'ML_LABEL_NAME'); ?>:&nbsp;<span id="i_columns_name" style="color: #888888;"></span></td>
+										        </tr>
+										        <?php ColumnsInfo(); ?>
+										        <tr id="i_total_container" style="display: none;">
+										            <td bgcolor="#DEDEDE" colspan="3"><?php xMsg('ML', 'ML_IMPORT_LABELS_GENERAL_INFO'); ?></td>
+										        </tr>
+										        <tr id="i_total_new_str" style="display: none;">
+										            <td width="80%"><?php xMsg('ML', 'ML_IMPORT_LABELS_NEW_LABELS'); ?>:&nbsp;<span id="i_total_new" style="color: #888888;"></span></td>
+										            <td><input type="checkbox" name="i_total_new_box" id="i_total_new_box" onclick="checkActionStatus(this, 'i_total', 'new')" value="" /></td>
+										            <td nowrap="nowrap"><label for="i_total_new_box"><?php xMsg('ML', 'ML_IMPORT_LABELS_SKIP_ADDING'); ?></label></td>
+										        </tr>
+										        <tr id="i_total_found_str" style="display: none;">
+										            <td width="80%"><?php xMsg('ML', 'ML_IMPORT_LABELS_FOUND_LABELS'); ?>:&nbsp;<span id="i_total_found" style="color: #888888;"></span></td>
+										            <td><input type="checkbox" name="i_total_found_box" id="i_total_found_box" onclick="checkActionStatus(this, 'i_total', 'found')" value="" /></td>
+										            <td nowrap="nowrap"><label for="i_total_found_box"><?php xMsg('ML', 'ML_IMPORT_LABELS_SKIP_UPDATING'); ?></label></td>
+										        </tr>
+										        <tr id="i_total_error_str" style="display: none;">
+										            <td width="80%"><?php xMsg('ML', 'ML_IMPORT_LABELS_ERROR_LABELS'); ?>:&nbsp;<span id="i_total_error" style="color: #888888;"></span></td>
+										            <td>&nbsp;</td>
+										            <td nowrap="nowrap"><?php xMsg('ML', 'ML_IMPORT_LABELS_SKIP_ERRORS'); ?></td>
+										        </tr>
+										        <tr id="i_language_container" style="display: none;">
+										            <td bgcolor="#DEDEDE" colspan="3"><?php xMsg('ML', 'ML_IMPORT_LABELS_INFO_BY_LANGUAGE'); ?></td>
+										        </tr>
+										        <?php InfoByLanguage(); ?>
+										        <tr id="i_type_container" style="display: none;">
+										            <td bgcolor="#DEDEDE" colspan="3"><?php xMsg('ML', 'ML_IMPORT_LABELS_INFO_BY_TYPE'); ?></td>
+										        </tr>
+										        <?php InfoByType(); ?>
+										        <tr id="i_information_str" style="display: none;">
+										            <td colspan="3"><span id="i_information" style="color: green;">info</span></td>
+										        </tr>
+										        </table>
+					<!-- check result information:  end  -->
+										    </div>
+										</td>
+									</tr>
+									</table>
+					<!-- check results:  end  -->
+								</td>
+								<td width="50%" valign="top">
+					<!-- log: start -->
+									<table width="100%" height="350px" cellpadding="4" cellspacing="1" style="background: #CED4DD;">
+									<tr>
+										<td style="height: 15px; text-align: left;"><?php xMsg('ML', 'ML_IMPORT_LABELS_CHECK_LOG'); ?></td>
+									</tr>
+									<tr>
+										<td bgcolor="white" height="100%">
+										    <div id="v_log" style="height: 335px; overflow: auto; text-align: left;"></div>
+										</td>
+									</tr>
+									</table>
+					<!-- log:  end  -->
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">
+									<table width="100%"> 
+									<tr>
+										<td width="10%" align="left"><a id="BackButton" class="btn btn-default btn-circle" onclick="showFirstStep();"> <i class="fa fa-undo"></i> <?php xMsg('ML', 'BTN_BACK'); ?></a></td>
+										<td align="center"><a id="ImportButton" class="btn btn-default btn-circle button_disabled" onclick=""><i class="fa fa-sign-in"></i> <?php xMsg('ML', 'BTN_IMPORT_IMPORT'); ?></a></td>
+										<td width="10%" align="right"><a id="CloseButton2" class="btn btn-default btn-circle" onclick="closeAndFocusParent();"><i class="fa fa-times"></i> <?php Msg('BTN_CANCEL'); ?></a></td>
+									</tr>
+									</table>
+								</td>
+							</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</form>
+		</div>
+	</div>
+</div>
+<div id="stack1" class="modal fade" tabindex="-1" data-width="400">
+<?php FileSelector('ImportLabelsForm', 'file_name', 'setNextButton();'); ?>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

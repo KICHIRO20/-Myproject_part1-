@@ -1,0 +1,154 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main">
+    <div class="container">
+    <div class="row margin-bottom-40"> 
+<div class="myaccount checkout step_4_active col-md-12 <?php ViewClassName(); ?>">
+    <h1><?php Label("ACCOUNT_MANAGE_ACCOUNT_LABEL"); ?></h1>
+    <div class="content-page" style="overflow:hidden;">
+        <h3><?php Label("ACCOUNT_VIEW_ORDER_NUMBER"); ?><?php Local_OrderID(); ?></h3>
+
+        <div class="checkout_addresses">
+            <div class="content">
+                           
+                <div class="portlet box blue-hoki">
+            <div class="portlet-title key_order_details">
+            <div class="caption key_order_details"><?php Label("ACCOUNT_KEY_ORDER_DETAILS"); ?>
+            </div></div></div>
+            
+                <div class="col-md-12"> 
+                <div class=" portlet-body form key_order_details">
+                <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("ACCOUNT_ORDER_ID"); ?></label> <div class="col-lg-6"><span class="value"><?php Label("ACCOUNT_BARS"); ?><?php Local_OrderId(); ?></span></div>
+                    </div>
+                    <div class="form-group" style="overflow: hidden;">
+                    <?php if (($m=getLocal_OrderPaymentProcessorOrderId())!=''): ?>
+                    <label class="control-label col-lg-3"><?php Label("ACCOUNT_PAYMENT_ID"); ?></label> 
+                    <div class="col-lg-6"><span class="value"><?php echo $m; ?></span></div>
+                    <?php endif; ?>
+                    </div>
+                    <div class="form-group" style="overflow: hidden;">
+                     <label class="control-label col-lg-3"><?php Label("ACCOUNT_ORDER_DATE"); ?></label>  <div class="col-lg-6"><span class="value"><?php Local_OrderDate(); ?></span></div>
+                     </div>
+                     <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("ACCOUNT_ORDER_STATUS"); ?></label> <div class="col-lg-6"><span class="value"><?php Local_OrderStatus(); ?></span></div>
+                    </div>
+                     <div class="form-group" style="overflow: hidden;">
+                     <label class="control-label col-lg-3"><?php Label("ACCOUNT_PAYMENT_STATUS"); ?></label>
+                     <div class="col-lg-6"> <span class="value"><?php Local_OrderPaymentStatus(); ?></span></div>
+                     </div>
+                      <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("ACCOUNT_PAYMENT_METHOD"); ?></label> 
+                    <div class="col-lg-6"><span class="value"><?php Local_OrderPaymentMethod(); ?></span></div>
+                    </div>
+                     <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("ACCOUNT_SHIPPING_METHOD"); ?></label> 
+                    <div class="col-lg-6"><span class="value"><?php Local_OrderShippingMethod(); ?></span></div>
+                    </div>
+                     <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("ACCOUNT_TRACK_ID"); ?></label>
+                    <div class="col-lg-6"> <span class="value"><?php Local_OrderTrackId(); ?></span></div>
+                    </div>
+                     <div class="form-group" style="overflow: hidden;">
+                    <?php if (!getLocal_ForcedOrderID()) { ?>
+                     <label class="control-label col-lg-3"><?php Label("ACCOUNT_INVOICE"); ?></label> 
+                     <div class="col-lg-6"><span class="value"><?php Local_Invoice(); ?></span></div>
+                    <?php } ?>
+                    </div>
+                    <span class="label">&nbsp;</span>
+                </div>
+                </div>
+                
+                <div class="clear_both"></div>
+                </div>
+            
+             <div class="col-md-6 ">
+             
+              <div class="portlet box blue-hoki">
+              <div class="portlet-title">
+              <div class="caption"><?php Label("ACCOUNT_BILLING_ADDRESS"); ?>
+              </div></div></div>               
+              
+               <div class="billing-form portlet-body form" style="font-size:13px">  
+                <label class="control-label col-lg-10"><?php Local_BillingFirstname(); ?> <?php Local_BillingLastname(); ?><br/></label>
+
+                    <label class="control-label col-lg-10"><?php Local_BillingStreetline1(); echo ife(getLocal_BillingStreetline1()=='','','<br/>'); ?></label>
+
+                    <label class="control-label col-lg-10"><?php Local_BillingStreetline2(); echo ife(getLocal_BillingStreetline2()=='','','<br/>'); ?></label>
+
+                    <label class="control-label col-lg-10"><?php Local_BillingCity(); ?>, <?php Local_BillingState(); ?> <?php Local_BillingPostcode(); ?></label>
+                    <label class="control-label col-lg-10"><?php echo ife((getLocal_BillingCity().getLocal_BillingState().getLocal_BillingPostcode())=='','','<br/>'); ?></label>
+
+                    <label class="control-label col-lg-10"><?php Local_BillingCountry(); echo ife(getLocal_BillingCountry()=='','','<br/>');?></label>
+
+                    <br/>
+                    <label class="control-label col-lg-10"><?php Local_BillingPhone(); echo ife(getLocal_BillingPhone()=='','','<br/>');?></label>
+                    <label class="control-label col-lg-10"><?php Local_BillingEmail(); echo ife(getLocal_BillingEmail()=='','','<br/>');?></label>
+
+                    <br/>
+                    <label class="control-label col-lg-10"><?php Local_BillingCommentArea(); echo ife(getLocal_BillingCommentArea()=='','','<br/>'); ?></label>
+                    <label class="control-label col-lg-10"><?php Local_BillingCommentLine(); echo ife(getLocal_BillingCommentLine()=='','','<br/>'); ?></label>
+                    <label class="control-label col-lg-10"><?php echo ife((getLocal_BillingCommentLine().getLocal_BillingCommentArea())=='','','<br/>'); ?></label>
+                    <label class="control-label col-lg-10"><?php
+                            $custom_tags = modApiFunc("OrderInfo", "getBillingCustomTags");
+                            foreach($custom_tags as $tag_info)
+                            {
+                                if ($tag_info['value'] != '')
+                                {
+                                    echo $tag_info['name'].' '.$tag_info['value'].'<br/>';
+                                }
+                            }
+                    ?>
+               </div>
+            </div>    
+            
+            <div class="col-md-6 ">
+              <div class="portlet box blue-hoki">
+              <div class="portlet-title">
+              <div class="caption"><?php Label("ACCOUNT_SHIPPING_ADDRESS"); ?>
+              </div></div></div>               
+               <div class="shipping-form portlet-body form" style="font-size:13px">   <?php Local_ShippingFirstname(); ?> <?php Local_ShippingLastname(); ?><br/></label>
+
+                    <label class="control-label col-lg-10"><?php Local_ShippingStreetline1(); echo ife(getLocal_ShippingStreetline1()=='','','<br/>'); ?></label>
+
+                    <label class="control-label col-lg-10"><?php Local_ShippingStreetline2(); echo ife(getLocal_ShippingStreetline2()=='','','<br/>'); ?></label>
+
+                    <label class="control-label col-lg-10"><?php Local_ShippingCity(); ?>, <?php Local_ShippingState(); ?> <?php Local_ShippingPostcode(); ?></label>
+                    <label class="control-label col-lg-10"><?php echo ife((getLocal_ShippingCity().getLocal_ShippingState().getLocal_ShippingPostcode())=='','','<br/>'); ?></label>
+
+                    <label class="control-label col-lg-10"><?php Local_ShippingCountry(); echo ife(getLocal_ShippingCountry()=='','','<br/>');?></label>
+
+                    <br/>
+                    <label class="control-label col-lg-10"><?php Local_ShippingPhone(); echo ife(getLocal_ShippingPhone()=='','','<br/>');?></label>
+                    <label class="control-label col-lg-10"><?php Local_ShippingEmail(); echo ife(getLocal_ShippingEmail()=='','','<br/>');?></label>
+
+                    <br/>
+                    <label class="control-label col-lg-10"><?php Local_ShippingCommentArea(); echo ife(getLocal_ShippingCommentArea()=='','','<br/>'); ?></label>
+                    <label class="control-label col-lg-10"><?php Local_ShippingCommentLine(); echo ife(getLocal_ShippingCommentLine()=='','','<br/>'); ?></label>
+                    <label class="control-label col-lg-10"><?php echo ife((getLocal_ShippingCommentLine().getLocal_ShippingCommentArea())=='','','<br/>'); ?></label>
+                    <label class="control-label col-lg-10"><?php
+                            $custom_tags = modApiFunc("OrderInfo", "getShippingCustomTags");
+                            foreach($custom_tags as $tag_info)
+                            {
+                                if ($tag_info['value'] != '')
+                                {
+                                    echo $tag_info['name'].' '.$tag_info['value'].'<br/>';
+                                }
+                            }
+                    ?></label>
+               </div></div>
+                  <div class="clear_both"></div>
+            </div>
+        <?php Local_ProductList(); ?>
+       <div class="col-lg-12 form-group" style="overflow: hidden;">
+        <?php if (getLocal_ForcedOrderID()) { ?>
+        <a href="<?php PageURL('ProductList'); ?>"><span class="<?php lang(); ?> btn btn-primary"><?php Label('BUTTON_CONTINUE_SHOPPING'); ?></span></a>
+        <?php } else { ?>
+        <a href="<?php PageURL('CustomerOrdersHistory'); ?>"><span class="<?php lang(); ?> btn btn-blue button_back"><?php Label('ACCOUNT_BACK_TO_HOME_PAGE'); ?></span></a>
+        <?php } ?>
+       </div>
+    </div>
+</div>
+
+</div></div></div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

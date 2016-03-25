@@ -1,0 +1,510 @@
+/*
+    COMMON STYLES
+*/
+
+html { height: 100%; }
+
+body {
+    width:  998px; 
+    min-width: 978px;
+    min-height: 100%;
+    background: #ECCC77; 
+    color: #575757;
+    font-family: Verdana, Sans-serif;
+    font-size: 9pt;
+    margin: 0px auto; 
+    padding: 0px;
+}
+
+.page_background {
+    position: relative;
+    background-color: white;
+    padding: 0px 10px 0px 10px;
+}
+
+input[type=text], input[type=password], input[type=file], .input_text, .input_password, .input_file, select, textarea {
+    color: black;
+    border: 1px #AD6D34 solid;
+    background-color: #F5EBD2;
+    font-family: Verdana, Sans-serif;
+    font-size: 8pt;
+    vertical-align: sub;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=file]:focus, .input_text:focus, .input_password:focus, .input_file:focus, select:focus, textarea:focus {
+    border: 1px solid #31699E;
+}
+
+.input[type=checkbox], .input[type=radio], .input_checkbox, .input_radio {
+    border: 0;
+    background: none;
+    vertical-align: sub;
+}
+
+.form_field.error input, .form_field.Error input, .form_field.error select, .form_field.error textarea, .form_field.Error textarea,
+input.error, input.Error, select.error, textarea.error {
+    border-color: red;
+    background-color: #ffeeff;
+}
+
+h1, h2 {
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+hr {
+    width: 95%;
+    height: 1px;
+    color: #AD6D34;
+    border: 0px;
+    background-color: #AD6D34;
+    margin: 0px auto;
+    padding: 0px;
+}
+
+
+a {
+    color: #AD6D34;
+}
+
+img {
+    border: none;
+}
+
+p, form, .input_hidden {
+    padding: 0px;
+    margin: 0px;
+}
+
+.clear_both {
+    clear: both;
+}
+
+.error_message {
+    color: red;
+    font-size: 10pt;
+    font-weight: bold;
+    border: 1px solid red;
+    text-align: left;
+    padding: 7px 20px 7px 20px;
+    margin: 10px 20px;
+    display: block;
+}
+
+.success_message {
+    color: green;
+    font-size: 10pt;
+    font-weight: bold;
+    border: 1px solid green;
+    text-align: left;
+    padding: 7px 20px 7px 20px;
+    margin: 10px 20px;
+    display: block;
+}
+
+.note {
+    color: #575757;
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.page_container a {
+    color: #AD6D34;
+}
+
+.page_container p {
+    margin: 0px 0px 10px 0px;
+}
+
+
+/* ************************************************ */
+/* TREE */
+ul.tree,
+ul.tree li {
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+ul.tree {
+    padding-left: 21px;
+    padding-top: 10px;
+}
+
+ul.tree li span {
+    display: block;
+    line-height: 18px;
+    padding: 3px 11px 1 10px;
+    margin: 0 11px 0 -10px;
+}
+
+ul.tree li span a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+ul.tree li span.selected,
+ul.tree li span.selected a {
+    color: #AD6D34;
+    font-weight: bold;
+}
+
+ul.tree li span:hover,
+ul.tree li span a:hover{
+    background-color: #ECCC77;
+}
+
+ul.tree li ul li span {
+    padding-left: 30px;
+    margin-left: -50px;
+}
+
+ul.tree li ul li ul li span {
+    padding-left: 50px;
+    margin-left: -90px;
+}
+
+ul.tree li ul li ul li ul li span {
+    padding-left: 70px;
+    margin-left: -130px;
+}
+
+ul.tree li ul li ul li ul li ul li span {
+    padding-left: 90px;
+    margin-left: -170px;
+}
+
+ul.tree li ul li ul li ul li ul li ul li span {
+    padding-left: 110px;
+    margin-left: -210px;
+}
+
+ul.tree li ul li ul li ul li ul li ul li ul li span {
+    padding-left: 130px;
+    margin-left: -250px;
+}
+/* ************************************************ */
+
+
+/* RATING STARTS ********************************** */
+.rating-box {
+    width: 69px;
+    height: 13px;
+    background: url(../images/star_blank.gif) repeat-x;
+    margin: auto auto;
+}
+
+.rating-box .rating {
+    width: 69px;
+    height: 13px;
+    background: url(../images/star_full.gif) repeat-x;
+}
+/* ************************************************ */
+
+
+/* ************************************************ */
+.paginator {
+    color: #404040;
+    font-size: 8pt;
+    font-weight: normal;
+    float: left;
+}
+
+.paginator.products_shown {
+    float: left;
+}
+
+.paginator.line {
+    float: right;
+}
+/* ************************************************ */
+
+
+/* ************************************************ */
+.product-list-sorter {
+    float: right;
+    white-space: nowrap;
+    color: #404040;
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.product-list-sorter ul {
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+}
+
+.product-list-sorter ul li {
+	display: inline;
+    padding: 0px;
+    margin-left: 5px;
+}
+
+.box .product-list-sorter ul li a {
+    color: #5A3333;
+}
+
+.product-list-sorter ul li a:hover {
+    color: #666666;
+}
+/* ************************************************ */
+
+
+/* DISCOUNT *************************************** */
+.discount_star {
+    position: absolute;
+    width: 69px;
+    height: 69px;
+    top: 70px;
+    right: 10px;
+    background: url("../images/discount-star.png") top left no-repeat;
+    text-align: center;
+}
+
+.discount_star span {
+    color: white;
+    display: block;
+}
+
+.discount_star span.label {
+    font-weight: normal;
+    padding: 10px 0px 0px 0px;
+    font-size: 8pt;
+    width: 53px;
+    margin: auto auto;
+}
+
+.discount_star span.value {
+    font-weight: bold;
+    font-size: 10pt;
+}
+/* ************************************************ */
+
+
+
+/* FORMS ****************************************** */
+.form_view .form_row {
+    padding-bottom: 10px;
+    width: auto;
+    overflow: hidden;
+}
+
+.form_view .form_row {
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+
+.form_view .form_row .form_descr {
+    float: left;
+    width: 20%;
+    margin-right: 20px;
+}
+
+.form_view .form_row .form_descr.error {
+    color: red;
+}
+
+.form_view .form_row .form_field {
+	overflow: hidden;
+}
+
+.form_view .form_row .form_field textarea,
+.form_view .form_row .form_field .input_password,
+.form_view .form_row .form_field .input_file,
+.form_view .form_row .form_field .input_text {
+    width: 90%;
+    margin-left: 0px;
+    vertical-align: top;
+}
+
+.form_view .form_row .form_field select {
+    width: 91%;
+}
+
+.form_view .form_row .form_field textarea {
+    height: 100px;
+}
+
+.form_view .form_row .form_field .input_radio,
+.form_view .form_row .form_field .input_checkbox {
+    vertical-align: middle;
+}
+
+.form_view .form_row .form_hint {
+    margin-right: 7%;
+}
+/* ************************************************ */
+
+
+/* ************************************************ */
+.product_rating_info {
+    overflow: hidden;
+}
+
+.product_rating_info .label {
+    width: 20px;
+    float: left;
+    clear: left;
+}
+
+.product_rating_info .rating-box {
+    margin: 0px;
+    margin-left: 60px;
+    margin-top: 1px;
+    margin-right: 30px;
+}
+/* ************************************************ */
+
+
+/* ************************************************ */
+.product_review {
+    padding: 15px 15px 0px 15px;
+}
+
+.product_review .review_text {
+    border-bottom: 1px solid #AD6D34;
+    padding-bottom: 10px;
+}
+
+.product_review .product_review_author .label {
+    font-size: 8pt;
+}
+
+.product_review .product_review_author .author {
+    font-weight: bold;
+}
+
+.product_review .product_review_posted_on {
+    font-size: 8pt;
+    padding-bottom: 10px;
+}
+
+.product_review .product_rating_info {
+    padding-bottom: 10px;
+}
+
+.product_review .review_text {
+    max-height: 400px;
+    overflow: auto;
+}
+/* *********************************************** */
+
+
+/* *********************************************** */
+.add_review {
+    padding: 15px;
+}
+
+.review_select_rating,
+.review_input_text,
+.review_input_name,
+.review_target {
+    padding-bottom: 10px;
+}
+
+.review_target .product_name {
+    font-weight: bold;
+}
+
+.review_input_text .label {
+    display: block;
+    text-align: left;
+}
+
+.review_input_text textarea {
+    width: 99%;
+    height: 200px;
+}
+
+.review_select_rating {
+    overflow: hidden;
+}
+
+.review_select_rating .ratings_block {
+    padding-right: 0px;
+    overflow:hidden;
+    clear: left;
+}
+
+.review_select_rating .ratings_block .rating_name {
+    font-weight: bold;
+    display: block;
+    width: 55px;
+    float: left;
+}
+
+.review_select_rating .ratings_block .product_rating_info {
+    padding-bottom: 5px;
+    float: left;
+    width: 95px;
+}
+
+.review_select_rating .ratings_block .product_rating_info .rating-box {
+    margin-left: 22px;
+    margin-top: 2px;
+}
+/* *********************************************** */
+
+
+/* *********************************************** */
+.product_detailed_img img {
+    vertical-align: top;
+    height: 50px;
+}
+
+.product_img img:hover,
+.product_detailed_img img:hover {
+    border: 1px solid #CECECE;
+}
+
+.product_img {
+    padding-bottom: 10px;
+}
+
+.product_detailed_img img,
+.product_img img {
+    padding: 1px;
+    border: 1px solid white;
+}
+/* *********************************************** */
+
+
+/* *********************************************** */
+.shoppingcart_total {
+    overflow: hidden;
+    padding: 10px 20px 10px 0px;
+}
+
+.shoppingcart_total hr {
+    float: right;
+}
+
+.shoppingcart_total .total_name {
+    float: left;
+    width: 65%;
+    text-align: right;
+    font-weight: bold;
+    display: block;
+}
+
+.shoppingcart_total .total_value {
+    float: right;
+    width: 30%;
+    text-align: right;
+    display: block;
+    padding-right: 10px;
+}
+/* *********************************************** */
+
+
+.store_closed .empty {
+    padding: 100px 20px 100px 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cmspage_content {
+    padding: 20px;
+}

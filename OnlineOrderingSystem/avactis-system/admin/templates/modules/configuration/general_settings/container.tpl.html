@@ -1,0 +1,797 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+    function submitHandler(formname) 
+    {
+      if (document.getElementById('paginator_default_rows_per_page_az').options.length == 0 ||
+          document.getElementById('paginator_default_rows_per_page_cz').options.length == 0)
+     {
+      alert('<?php msg("GNRL_SET_ALERT_001"); ?>');
+      return;
+     }
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+    }
+
+    function showOfflineKey(element)
+    {
+        key = element.value;
+        value = "";
+        var url = [];
+        
+<?php GSStoreURL(); ?>
+
+        for (k=0; k < i; k++)
+        {
+            value += '<a href="' + url[k] + '" target="_blank">' + url[k]  + '</a><br />';
+        }
+        document.getElementById('OfflineKey').innerHTML = value;
+    }
+
+function addItemsPerPageValue(element_id, dependent_element_id)
+{
+    var from = document.getElementById('text_'+element_id);
+    var to = document.getElementById('select_'+element_id);
+    var hidden = document.getElementById(element_id);
+    var dependent_element = document.getElementById(dependent_element_id);
+    from.value = from.value.replace(/[^0-9]/g, '');
+    if (from.value == "" || from.value == 0)
+    {
+        from.value = "";
+        return false;
+    }
+    
+    var tmp_hidden_value = '|' + hidden.value + '|';
+    if (tmp_hidden_value.indexOf('|' + from.value + '|') != -1)
+    {
+        from.value = "";
+        return false;
+    }
+    
+    from.value = parseInt(from.value);
+
+    if (hidden.value != '')
+    {
+        hidden.value+= '|'+from.value;
+    }
+    else
+    {
+        hidden.value = from.value;
+    }
+    var arr = explode('|', hidden.value);
+    arr.sort(_sort);
+    arr = newSelectElevent(to, arr);
+    newSelectElevent(dependent_element, arr);
+    hidden.value = implode('|', arr);
+    from.value = '';
+    if (arr.length >= 3)
+    {
+       to.size = arr.length;
+    }
+}
+
+function removeItemsPerPageValue(element_id, dependent_element_id)
+{
+    var from = document.getElementById('select_'+element_id);
+    var hidden = document.getElementById(element_id);
+    var dependent_element = document.getElementById(dependent_element_id);
+    var arr = new Array();
+    var j=0;
+    for (var i=0;i<from.options.length;i++)
+    {
+        if (from.selectedIndex == i)
+        {
+            continue;
+        }
+        else
+        {
+            arr[j] = from.options[i].value;
+            j++;
+        }
+    }
+
+    arr = newSelectElevent(from, arr);
+    newSelectElevent(dependent_element, arr);
+    hidden.value = implode('|', arr);
+    if (arr.length >= 3)
+    {
+        from.size = arr.length;
+    }
+}
+
+function explode(delimiter, string)
+{
+    return string.split(delimiter);
+}
+
+function implode(glue, pieces)
+{
+    return pieces.join(glue);
+}
+
+function _sort(a, b)
+{
+    return a - b
+}
+
+function in_array(needle, haystack)
+{
+    for(var i=0;i<haystack.length;i++)
+        if (haystack[i] == needle)
+            return true;
+    return false;
+}
+
+function newSelectElevent(select_element, arr)
+{
+    select_element.options.length = 0;
+    var _arr = new Array();
+    var j = 0;
+    for(var i=0;i<arr.length;i++)
+    {
+        if (!in_array(arr[i], _arr))
+        {
+            select_element.options[j] = new Option(arr[i],arr[i]);
+            _arr[j] = arr[i];
+            j++;
+        }
+    }
+    return _arr;
+}
+
+</script>
+
+<form action="" name="GeneralSettings" id="GeneralSettings" method="post"> 
+<input type="hidden" name="asc_action" value="UpdateGeneralSettings">
+
+<?php ResultMessageRow(); ?>
+<?php FormErrors(); ?>
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php msg('GNRL_SET_PAGE_SUBTITLE'); ?></span>
+			<span class="caption-helper text-lowercase"><?php msg('STRSET_GENERAL_DESCR'); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button class="btn btn-circle btn-default" name="settings" type="button" onclick="submitHandler('GeneralSettings');"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div id="general_settings" class="panel-group accordion scrollable">
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#close_open" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_001"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="close_open" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_001"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_001'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSOnline(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_002"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_002'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSOfflineKey(); ?></span>
+								<span id="OfflineKey"></span>
+								<script language="javascript" type="text/javascript">
+									showOfflineKey(document.getElementById("store_offline_key"));
+								</script>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#stock_control" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_009"); ?></a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="stock_control" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_003"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_003'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSShowAbsent(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_022"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_022'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSAllowBuyMoreThanStock(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_032"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_032'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSReturnProductToStockOrderDeleted(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_033"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_033'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSReturnProductToStockOrderCancelled(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_034"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_034'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSEnableWishList(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#store_time" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_003"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="store_time" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_005"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_005'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSTime(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_006"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_006'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSTimeShift(); ?> <?php Msg("GNRL_SET_LABEL_001"); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#lock_admin" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_004"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="lock_admin" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_007"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_007'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSSignCount(); ?> <?php Msg("GNRL_SET_LABEL_002"); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_008"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_008'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSSignTimeout(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#shopping_cart" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_005"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="shopping_cart" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_009"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_009'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSShowCart(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_021"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_021'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSMinSubtotalToCheckout(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_017"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_017'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSAddToCartAddNotReplace(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#product_quantity" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_14"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="product_quantity" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_014"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_014'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSAddToCartMaxQuantity(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_015"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_015'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSAddToCartDefaultQuantity(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_016"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_016'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSAddToCartLimitMaxQuantityByStock(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#admin_paginator" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_006"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="admin_paginator" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_011"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_011'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSPaginatorRowsPerPageValuesAZ(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_010"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_010'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSPaginatorDefaultRowsPerPageAZ(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_023"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_023'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSPaginatorPagesPerLineAZ(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#storefront_paginator" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_007"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="storefront_paginator" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_011"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_011'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSPaginatorRowsPerPageValuesCZ(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_010"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_010'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSPaginatorDefaultRowsPerPageCZ(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_023"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_023'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-6">
+								<span style="display:inline;"><?php GSPaginatorPagesPerLineCZ(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+			<!-- Begin - Panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#miscellaneous" data-parent="#general_settings" data-toggle="collapse" class="accordion-toggle collapsed">
+						<?php Msg("GNRL_SET_HEADER_008"); ?> </a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse" id="miscellaneous" style="height: 0px;">
+					<div class="panel-body">
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php Msg("GNRL_SET_FIELD_012"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('GNRL_SET_FIELD_012'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-5">
+								<span style="display:inline;"><?php GSNextOrderId(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php xMsg('RP',"SETS_RP_PER_LINE"); ?></lable>
+							</div>
+							<div class="col-md-1" align="right">
+                                                              <a class="pull-right" style="cursor:pointer;">
+								<?php hinttext('SETS_RP_PER_LINE','related-products-messages'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-5">
+								<span style="display:inline;"><?php RPperLine(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php xMsg('RP',"SETS_RP_RANDOM_PER_LINE"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('SETS_RP_RANDOM_PER_LINE','related-products-messages'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-1">
+								<span style="display:inline;"><?php RP_RandomCheckbox(); ?></span>
+							</div>
+							<div class="col-md-5">
+								<span style="display:inline;"><?php RP_RandomThreshold(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php xMsg('FP',"SETS_FP_PER_LINE"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('SETS_FP_PER_LINE','featured-products-messages'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-5">
+								<span style="display:inline;"><?php FPperLine(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php xMsg('FP',"SETS_FP_RANDOM_PER_LINE"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('SETS_FP_RANDOM_PER_LINE','featured-products-messages'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-1">
+								<span style="display:inline;"><?php FP_RandomCheckbox(); ?></span>
+							</div>
+							<div class="col-md-5">
+								<span style="display:inline;"><?php FP_RandomThreshold(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php xMsg('BS',"SETS_BS_PER_LINE"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('SETS_BS_PER_LINE','bestsellers-messages'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-5">
+								<span style="display:inline;"><?php BSperLine(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+						<!-- Begin - Row -->
+						<div class="row margin-bottom-10">
+							<div class="col-md-1"></div>
+							<div class="col-md-4">
+								<lable class="help-block"><?php xMsg('BS',"SETS_BS_RANDOM_PER_LINE"); ?></lable>
+							</div>
+							<div class="col-md-1">
+                                                              <a class="pull-right" style="cursor:pointer;">
+                                                                           <?php hinttext('SETS_BS_RANDOM_PER_LINE','bestsellers-messages'); ?>
+                                                              </a>
+							</div>
+							<div class="col-md-1">
+								<span style="display:inline;"><?php BS_RandomCheckbox(); ?></span>
+							</div>
+							<div class="col-md-5">
+								<span style="display:inline;"><?php BS_RandomThreshold(); ?></span>
+							</div>
+						</div>
+						<!-- End - Row -->
+					</div>
+				</div>
+			</div>
+			<!-- End - Panel -->
+		</div>
+	</div>
+	<div class="actions" style="text-align:center;">
+		<div class="actions btn-set">
+			<button class="btn btn-circle btn-default" name="settings" type="button" onclick="submitHandler('GeneralSettings');"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

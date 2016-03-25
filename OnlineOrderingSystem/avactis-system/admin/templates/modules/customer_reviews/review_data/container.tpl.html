@@ -1,0 +1,47 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php PageJSCode(); ?>
+<form action="add_review.php" method="post" name="CRReviewDataForm">
+<?php ActionField(); ?>
+
+<?php ModeField(); ?>
+
+<?php ReviewIDField(); ?>
+
+<?php IPField(); ?>
+<?php ResultMessage(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php EditPageTitle(); ?>: </span>
+			<span class="caption-subject font-green-sharp"><?php xmsg('CR','CR_REVIEW_DATA'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="UpdateButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript: document.forms['CRReviewDataForm'].submit();" type="button"  class="btn btn-primary btn-circle"><i class="fa fa-save"></i><span class="hidden-480">&nbsp;<?php Msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<?php ReviewData(); ?>
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="UpdateButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="javascript: document.forms['CRReviewDataForm'].submit();" type="button"  class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<script language="javascript" type="text/javascript">
+document.title = '<?php xmsg('CR','CR_REVIEW_DATA'); ?>';
+
+function onproductselection(product_id, product_name)
+{
+    disableButton('UpdateButton1');
+    disableButton('UpdateButton2');
+    document.forms['CRReviewDataForm'].mode.value = 'product_changed';
+    document.forms['CRReviewDataForm'].submit();
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

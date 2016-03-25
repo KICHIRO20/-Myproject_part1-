@@ -1,0 +1,18 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="product-item">
+    <div class="product_img pi-img-wrapper">
+    <?php if(($i=getProductSmallImage())!=''){ ?>
+    <a href="<?php ProductInfoLink(); ?>"><img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>" /></a>
+    <?php } else { ?>
+    <img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductLargeImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>" />
+    <?php }?>
+    </div>
+     <a href="<?php ProductInfoLink(); ?>"> <div class="product_name"><h3><?php ProductName(); ?></h3></div>
+    <div class="product_rating"><?php ProductRating(); ?></div></a>
+    <div class="product_sale_price  pi-price"><span class="value"><?php ProductSalePrice(); ?></span></div>
+  <a href="<?php ProductInfoLink(); ?>" class="btn btn-primary detail"><span class="<?php lang(); ?> button_details"></span><?php Msg('DETAILS');?></a>
+</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

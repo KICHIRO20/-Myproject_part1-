@@ -1,0 +1,198 @@
+/* BOX ************************************************ */
+.box {
+    margin-bottom: 7px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.box .content {
+    padding: 0px;
+}
+
+.box .cn {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    overflow: hidden;
+}
+
+/* BOX ************************************************ */
+
+
+/* BOX in .page_container ***************************** */
+.page_container .box .cn {
+    background: url('../images/bg-box-corners-on-white.gif') no-repeat;
+}
+
+.box .cn.lt {
+    left: -5px;
+    top: -5px;
+    background: url('../images/bg-box-lt-corner-on-white.gif') no-repeat;
+}
+
+.box .cn.rt {
+    left: -5px;
+    top: -5px;
+    margin-left: 100%;
+    background: url('../images/bg-box-rt-corner-on-white.gif') no-repeat;
+}
+
+.box .cn.lb {
+    left: -6px;
+    bottom: -6px;
+    background: url('../images/bg-box-lb-corner-on-white.gif') no-repeat;
+}
+
+.box .cn.rb {
+    bottom: -6px;
+    left: -4px;
+    margin-left: 100%;
+    background: url('../images/bg-box-rb-corner-on-white.gif') no-repeat;
+}
+
+.box.page_top_menu .cn.lb,
+.box.page_top_menu .cn.rb {
+    background-image: none;
+    left: 0;
+    bottom: 0;
+}
+
+.box.page_top_menu .cn.lt {
+    left: 0px;
+    top: 0px;
+    width: 18px;
+    height: 18px;
+    background-image: none;
+}
+
+.box.page_top_menu .cn.rt {
+    left: -18px;
+    top: 0px;
+    width: 18px;
+    height: 18px;
+    margin-left: 100%;
+    background-image: none;
+}
+
+.page_container .box .content {
+    background-color: white;
+    padding-bottom: 16px;
+    border-left: 1px solid #FFC47C;
+    border-right: 1px solid #FFC47C;
+    border-bottom: 1px solid #FFC47C;
+}
+
+.page_container .box.manufacturer .content ul.tree li span a {
+    color: #759EC6;
+}
+
+.page_container .box.nogradient .content {
+   background-image: none;
+}
+
+.right_column .box  select,
+.left_column .box select {
+    display: block;
+    margin: 16px auto 0px auto;
+    width: 85%;
+}
+
+.box h1,
+.box h2,
+.box .header,
+.box .subheader,
+.box .toolbar {
+    display: block;
+    height: 23px;
+    text-align: left;
+    padding: 5px 20px 0px 20px;
+    margin: 0px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.box h1 span, .box h2 span {
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box h1 span a, .box h2 span a {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box h1,.box h2,
+.box .header {
+    color: white;
+    background: url(../images/bg-menu-box-header.gif) repeat-x;
+    background-color: transparent;
+    border-bottom: none;
+    border-top: none;
+    font-family: Tahoma;
+    font-weight: bold;
+}
+
+.box h2,
+.box .subheader,
+.box .subheader a,
+.box h2 a {
+    background-color: #FFC47C;
+    color: white;
+}
+
+.box h1 a, .box h2 a {
+    font-size: 10pt;
+    font-weight: bold;
+    color: white;
+}
+
+.box .toolbar {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+.box hr {
+    width: 95%;
+    height: 1px;
+    color: #FFC47C;
+    border: 0px;
+    background-color: #FFC47C;
+    margin: 0px auto;
+    padding: 0px;
+}
+/* BOX in .page_container ***************************** */
+
+
+/* BOX inside BOX in .page_container ****************** */
+.box .box {
+    margin: 20px;
+    width: auto;
+}
+
+.box .box .cn {
+    background: none;
+}
+
+.box .box .content {
+    background: none;
+    border: 1px solid #FFC47C;
+}
+
+.box .box h1,.box .box h2,
+.box .box .header {
+    color: white;
+    background: #FFC47C;
+    font-size: 9pt;
+    font-weight: bold;
+    height: 20px;
+}
+
+.box .wishlist_send {
+    margin-top: 5px;
+}
+
+/* BOX inside BOX in .page_container ****************** */

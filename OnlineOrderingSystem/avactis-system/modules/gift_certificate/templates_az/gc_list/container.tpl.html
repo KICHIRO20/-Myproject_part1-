@@ -1,0 +1,125 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script language="JavaScript" type="text/javascript">
+function Dell_GC_OnSubmit(windowURL){
+    
+    gc_elem = document.forms['gc_list'].elements['gc_code'];
+    var gc_selected_code = '';
+
+    if (!gc_elem)
+    {
+        return false;
+    }
+    
+    var is_gc_elem_checked = false;
+    
+    if(!gc_elem.length)
+    {
+        is_gc_elem_checked = gc_elem.checked;
+        gc_selected_code = gc_elem.value;
+    }
+    else
+    {
+        for(i in gc_elem)
+        {
+            if(gc_elem[i].checked == true)
+            {
+                is_gc_elem_checked = true;
+                gc_selected_code = gc_elem[i].value;
+                break;
+            }
+        }
+    }
+
+    if(!is_gc_elem_checked)
+    {
+        alert('<?php xmsg("GCT", "GC_WARNING_DELL_GC"); ?>');
+        return false;
+    }
+    
+    URL = windowURL + gc_selected_code;
+
+    var confirm_str = new String('<?php xmsg("GCT", "GC_CONFIRM_DELL_GC"); ?>');
+    confirm_str = confirm_str.replace('{GC_CODE}', gc_selected_code);
+    
+    if (confirm(confirm_str))
+    {
+        go(URL);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    
+}
+</script>
+<form action="#" name="gc_list">
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-gift font-green-sharp"></i>
+					<span class="caption-subject font-green-sharp bold uppercase"><?php xMsg('GCT','PAGE_TITLE'); ?></span>
+					<span class="caption-helper text-lowercase"><?php xMsg('GCT','MARKETING_DESCRIPTION'); ?>...</span>
+				</div>
+				<div class="actions">
+					<div class="actions btn-set">
+						<a href="marketing_add_gc.php" id="UpdateRowsButton" title="<?php xmsg('GCT', 'BTN_ADD_GC'); ?>" class="btn btn-circle btn-default"><i class="fa fa-plus"></i> <span class="hidden-480"><?php xmsg('GCT', 'BTN_ADD_GC'); ?></span></a>
+						<a id="UpdateRowsButton" title="<?php xmsg('GCT', 'BTN_EDIT_GC'); ?>" onclick="NewWindowExt('GiftCertificateEditView', 'marketing_edit_gc.php?gc_code=', 'Edit', true, '<?php xmsg('GCT', 'GC_NOT_SELECTED'); ?>', 'gc_list', 'gc_code');" class="btn btn-circle btn-default"><i class="fa fa-edit"></i> <span class="hidden-480"><?php xmsg('GCT', 'BTN_EDIT_GC'); ?></span></a>
+						<a id="DelRowsButton" title="<?php xmsg('SYS', 'BTN_DELETE'); ?>" onclick="Dell_GC_OnSubmit('<?php Local_Dell_GC_Href(); ?>');" class="btn btn-circle btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php xmsg('SYS', 'BTN_DELETE'); ?></span></a>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover" id="datatable_gc">
+						<thead>
+							<tr role="row" class="heading">
+								<th width="5%" align="center" style="text-align: center;">
+									
+								</th>
+								<th width="18%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_CODE'); ?>
+								</th>
+								<th width="15%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_FROM'); ?>
+								</th>
+								<th width="15%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_TO'); ?>
+								</th>
+								<th width="5%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_AMOUNT'); ?>
+								</th>
+								<th width="5%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_REMAINDER'); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_SENDTYPE'); ?>
+								</th>
+								<th width="5%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_STATUS'); ?>
+								</th>
+								<th width="12%" align="center" style="text-align: center;">
+									<?php xmsg('GCT', 'GC_DATE_CREATED'); ?>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php Local_Items(); ?>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<?php PaginatorLine(); ?>
+		            <?php PaginatorRows(); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

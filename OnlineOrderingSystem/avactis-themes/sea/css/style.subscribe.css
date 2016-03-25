@@ -1,0 +1,103 @@
+.subscribe_form {
+    padding: 15px 15px 0px 15px;
+}
+
+.subscribe_form h2 {
+    padding: 0px 0px 5px 0px;
+    margin: 0px 0px 5px 0px;
+    background-color: white;
+    font-size: 10pt;
+    color: #0C9EEE;
+    text-transform: uppercase;
+    font-family: Arial;
+    font-weight: bold;
+    border-bottom: 1px solid #E9F0F6;
+}
+
+
+.subscribe_form .success_message,
+.subscribe_form .error_message {
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+.subscribe_form .form_view {
+    padding: 10px 0px 5px 15px;
+}
+
+.subscribe_form .form_view .input_checkbox {
+    vertical-align: sub;
+}
+
+.subscribe_form .input_text {
+    display:block;
+    margin: auto auto;
+    width: 95%;
+}
+
+.right_column .subscribe_form .input_submit,
+.left_column .subscribe_form .input_submit {
+    display:block;
+    margin: auto auto;
+    margin-top: 5px;
+}
+
+#step1 .box.subscribe_on_checkout .content,
+#step2 .box.subscribe_on_checkout .content {
+    border-top: none;
+}
+
+.center_column .subscribe_form .input_submit {
+    margin-top: 5px;
+    display: block;
+}
+
+.center_column .subscribe_form {
+    padding: 20px 20px 20px 20px;
+}
+
+.myaccount .subscribe_form .input_text {
+    display: inline;
+    margin: 0px;
+    width: 20%;
+}
+
+.myaccount .subscribe_form .current_email {
+    width: 30%;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+}
+
+.myaccount .subscribe_form_buttons {
+    overflow: hidden;
+    margin: 20px 20px 20px 20px;
+    padding-top: 20px;
+    border-top: 1px solid #0C9EEE;
+}
+
+.myaccount .subscribe_form_buttons .button_back {
+    float: left;
+} 
+
+.myaccount .no_subscribed_emails {
+    width: 33%;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.myaccount .subscribe_form .new_email {
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.subscribe_form .already_subscribed {
+    padding-top: 10px;
+}
+
+.subscribe_form input .input_text {
+}

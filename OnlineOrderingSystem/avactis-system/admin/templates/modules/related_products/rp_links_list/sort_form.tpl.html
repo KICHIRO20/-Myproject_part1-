@@ -1,0 +1,58 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+#SortRPForm{
+    z-index: 4;
+    left: 44em;
+    position: fixed;
+    top: 6em !important;
+}
+</style>
+
+<script language="JavaScript" src="js/shuttle.js"></script>
+<div style="display: none;" id="SortRPForm">
+	<div class="portlet box blue-hoki">
+		<div class="portlet-title">
+			<div class="caption">
+				<span class="caption-subject bold uppercase">
+					<i class="fa fa-sort"></i>&nbsp;<?php xmsg('RP','SORT_ORDER'); ?>
+				</span>
+			</div>
+			<div class="tools">
+				<a class="remove" href="javascript:hideBlock('SortRPForm'); enableBlock('RPInterfaceBlock');" data-original-title="" title=""></a>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="table-responsive">
+				<table class="table borderless">
+					<tbody>
+						<tr>
+							<td style="vertical-align: middle;">
+								<a href="javascript:moveItemUp('RPSortOrder');"><i class="fa fa-chevron-circle-up fa-lg"></i></a>
+								<br />
+								<a href="javascript:moveItemDown('RPSortOrder');"><i class="fa fa-chevron-circle-down fa-lg"></i></a>
+							</td>
+							<td>
+								<select id="RPSortOrder" name="RPSortOrder" class="form-control input-middle" size="8">
+								</select>
+								<input type="hidden" name="RPSortOrder.hidden" id="RPSortOrder.hidden" value="">
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2" class="text-center">
+								<div id="UpdateSortOrderButton1" class="btn btn-default btn-circle" onClick="OnUpdateRPSortOrderClick();">
+									<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+								</div>
+                  						<div id="CloseSortFormButton1" class="btn btn-default btn-circle" onClick="hideBlock('SortRPForm'); enableBlock('RPInterfaceBlock');">
+									<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_CANCEL'); ?>
+								</div>				
+							</td>			
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,10 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form-group">
+   <label for="DstCountry"><?php Label("SCC_COUNTRY"); ?></label>
+    <div class="">
+        <select name="DstCountry" class="form-control input-large" id="DstCountry" onchange="refreshStatesList('DstCountry', 'DstState_menu_select', 'stub_state_text_input');">
+            <?php CountriesOptions(); ?>
+        </select>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

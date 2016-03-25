@@ -1,0 +1,44 @@
+
+.banner-system {
+  margin: 0px auto 12px auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+.banner-system div.content {
+  text-align: left;
+  width: 100% !important;
+}
+#banner-system-code-T, #banner-system-code-B, #banner-system-code-L, #banner-system-code-R, #banner-system-code-demo {
+  display: none;
+}
+#banner_system_navigation {
+  height: 21px;
+  line-height: 21px;
+  text-align: center;
+  position: absolute;
+  bottom: 20px;
+  left: 50px;
+  z-index: 50;
+}
+#banner_system_navigation img {
+  float: left;
+  margin: 0 5px;
+}
+.banner_system_navigation {
+  float: left;
+}
+.banner_system_navigation a {
+  margin: 0 5px;
+  padding: 3px 5px;
+  border: 1px solid #ccc;
+  background: #fff;
+  text-decoration: none;
+}
+.banner_system_navigation a.activeSlide {
+  background: #8F8F8F;
+  color: #fff;
+}
+.banner_system_navigation a:focus {
+  outline: none;
+} 

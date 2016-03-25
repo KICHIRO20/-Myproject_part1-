@@ -1,0 +1,24 @@
+User-agent: *
+Disallow: /activation.php
+Disallow: /cart.php
+Disallow: /change-password.php
+Disallow: /checkout.php
+Disallow: /download.php
+Disallow: /forgot-password.php
+Disallow: /home.php
+Disallow: /init.php
+Disallow: /new-password.php
+Disallow: /order-download-links.php
+Disallow: /order-info.php
+Disallow: /order-invoice.php
+Disallow: /orders.php
+Disallow: /personal-info.php
+Disallow: /register.php
+Disallow: /search-form.php
+Disallow: /search-results.php
+Disallow: /store-closed.php
+Disallow: /subscriptions.php
+Disallow: /unsubscribe.php
+Disallow: /avactis-system/
+
+

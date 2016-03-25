@@ -1,0 +1,89 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" src="js/jquery.iframe-transport.js"></script>
+<style type="text/css">
+.file_selector {
+    position: absolute;
+    width: 400px;
+    left: 170px;
+    top: 50px;
+    border: solid 1px black;
+}
+
+.hd_fselector_new_file_name
+ {
+  display:none;
+ }
+</style>
+<script language="JavaScript">
+function FSonOkClick_<?php ParentField(); ?>()
+{
+    frm = document.forms['fselector_<?php ParentField(); ?>'];
+    var f_src = '';
+    for(i=0;i<frm.elements['fsrc'].length;i++)
+        if(frm.elements['fsrc'][i].checked)
+            f_src = frm.elements['fsrc'][i].value;
+    
+    if(f_src == 'server')
+    {
+        full_path = document.getElementById('server_file_<?php ParentField(); ?>').value;
+        last_slash = full_path.lastIndexOf('/');
+        base_name = full_path.substr(last_slash+1);
+        setParentField_<?php ParentField(); ?>(full_path, base_name);
+        return;
+    };
+
+    if(f_src == 'local')
+    {
+        requestToUploadFile_<?php ParentField(); ?>('local_file_<?php ParentField(); ?>');
+        return;
+    };
+    
+};
+function setParentField_<?php ParentField(); ?>(full_path, base_name)
+{
+    document.getElementById('<?php ParentField(); ?>').innerHTML = base_name;
+    document.getElementById('<?php ParentField(); ?>_hidden').value = full_path;
+    hideBlock('fselector_<?php ParentField(); ?>');
+    enableBlock('<?php ParentBlock(); ?>');
+    <?php PostJScode(); ?>
+};
+function requestToUploadFile_<?php ParentField(); ?>(file_field_id)
+{
+    disableBlock('fselector_<?php ParentField(); ?>',5);
+    disableButton('btn_ok_<?php ParentField(); ?>');
+    disableButton('btn_cancel_<?php ParentField(); ?>');
+        jQuery.ajax(this.action, {
+            url:'jquery_ajax_handler.php', // backend
+			type:'POST',
+			dataType:'json',
+            data:{
+				'__ASC_FORM_ID__': __ASC_FORM_ID__,
+            	'asc_action': 'shell_upload_file',
+            	'src_file': document.getElementById(file_field_id)
+            },
+			files: document.getElementById(file_field_id),
+			iframe: true,
+			processData: false,
+            // Function is called when an answer arrives. 
+            success:function(result, output) {
+                if(result==undefined || result['error']==undefined)
+                {
+                    alert('<?php xmsg('SH','E_UPLOAD_ERR_UNKNOW'); ?>');
+                }
+                else if(result['error']!='')
+                {
+                    alert(result['error']);
+                }
+                else
+                {
+                    setParentField_<?php ParentField(); ?>(result['full_path'],result['base_name']);
+                };
+                enableBlock('fselector_<?php ParentField(); ?>');
+			    enableButton('btn_ok_<?php ParentField(); ?>', function() { FSonOkClick_<?php ParentField(); ?>(); });
+			    enableButton('btn_cancel_<?php ParentField(); ?>', function() { hideBlock('fselector_<?php ParentField(); ?>'); enableBlock('<?php ParentBlock(); ?>'); });
+            }
+        });
+};
+</script>
+<?php Local_FSBrowser(); ?>
+<!-- END TPL (DO NOT REMOVE!) -->

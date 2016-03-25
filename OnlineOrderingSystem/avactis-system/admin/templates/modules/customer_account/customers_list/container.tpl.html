@@ -1,0 +1,25 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php ResultMessage(); ?>
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<?php SearchForm(); ?>
+	<?php CustomersTable(); ?>
+</div>
+<br>
+<?php PaginatorLine(); ?>
+<?php PaginatorRows(); ?>
+<!-- END TPL (DO NOT REMOVE!) -->

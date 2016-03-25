@@ -1,0 +1,855 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<body>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!--              "                          "        Save/Cancel                 . -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var onload_bak_offline_cc_az = window.onload;
+window.onload = function()
+{
+    if(onload_bak_offline_cc_az){onload_bak_offline_cc_az();}
+    enable_inner_buttons();
+}
+//-->
+</SCRIPT>
+<script src="js/base64.js" type=text/javascript></SCRIPT>
+<script src="js/hex.js" type=text/javascript></SCRIPT>
+<script src="js/keygen.js" type=text/javascript></SCRIPT>
+<script src="js/rsa.js" type=text/javascript></SCRIPT>
+<script src="js/date_format.js" type=text/javascript></SCRIPT>
+<!-- tinyMCE -->
+<script language="javascript" type="text/javascript">
+<!--
+
+function progress_bar_init(id)
+{
+    //              
+    progress_set_position(id, 0.0);
+}
+
+function progress_bar_set_position(id, pos)
+{
+    //              
+    el_border = document.getElementById('progress_bar_border_' + id);
+    if(el_border)
+    {
+        border_width = el_border.clientWidth;
+        new_content_width = border_width * pos;
+        el_content = document.getElementById('progress_bar_content_' + id);
+        if(el_content)
+        {
+            //     : clientWidth = width + css padding. Find padding.
+            el_content.style.width = new_content_width + 'px';
+        }
+    }
+}
+
+function hide_block(block_id)
+{
+    el = document.getElementById(block_id);
+    if(el)
+    {
+        el.style.display = 'none';
+    }
+}
+
+function show_block(block_id)
+{
+    el = document.getElementById(block_id);
+    if(el)
+    {
+        el.style.display = 'inline-block';
+    }
+}
+
+function hide_all_steps()
+{
+    hide_block('step1');
+    hide_block('step2');
+    hide_block('step3');
+    hide_block('step4');
+    hide_block('step5');
+    hide_block('step6');
+
+    hide_save_cancel_buttons();
+}
+
+function show_save_cancel_buttons()
+{
+    show_block('SaveButton1');
+    show_block('CancelButton1');
+    show_block('SaveButton2');
+    show_block('CancelButton2');
+}
+
+function hide_save_cancel_buttons()
+{
+    hide_block('SaveButton1');
+    hide_block('CancelButton1');
+    hide_block('SaveButton2');
+    hide_block('CancelButton2');
+}
+
+function switch_to_step(block_id)
+{
+    enable_inner_buttons();
+    hide_all_steps();
+    show_block(block_id);
+}
+
+function enable_inner_buttons()
+{
+    el = document.getElementById('GenerateRSAKeyPairInJSButton');
+    if(el)
+    {
+        el.onclick = function(){disable_inner_buttons(); genkey(); GenerateRSAKeyPairInPHPOnSuccessHandler();};
+        el.style.backgroundColor = '#6a94df';
+    }
+
+    el = document.getElementById('GenerateRSAKeyPairInPHPButton');
+    if(el)
+    {
+        el.onclick = function(){disable_inner_buttons(); generateRSAKeyPairInPHP();};
+        el.style.backgroundColor = '#6a94df';
+    }
+
+    el = document.getElementById('GenerateRSAKeyPairDownloadPrivateKeyOnConfirm');
+    if(el)
+    {
+        el.onclick = function(){disable_inner_buttons(); CheckRSAPrivateKeyDownload('rsa_key_generator_private_key_asc_format', 'generateRSAKeyPairCheckRSAPrivateKeyDownloadOnSucces', 'generateRSAKeyPairCheckRSAPrivateKeyDownloadOnFailure');};
+        el.style.backgroundColor = '#6a94df';
+    }
+ 
+
+
+    el = document.getElementById('ReplacementGenerateRSAKeyPairInJSButton');
+    if(el)
+    {
+        el.onclick = function(){disable_inner_buttons(); gen_replacement_key(); GenerateReplacementRSAKeyPairInJSOnSuccessHandler();};
+        el.style.backgroundColor = '#6a94df';
+    }
+
+    el = document.getElementById('ReplacementGenerateRSAKeyPairInPHPButton');
+    if(el)
+    {
+        el.onclick = function(){disable_inner_buttons(); fGenerateReplacementRSAKeyPairInPHP();};
+        el.style.backgroundColor = '#6a94df';
+    }
+
+    el = document.getElementById('UploadOldPrivateKeyInJSButton');
+    if(el)                        
+    {
+        el.onclick = function(){disable_inner_buttons(); UploadOldPrivateKeyInJS();};
+        el.style.backgroundColor = '#6a94df';
+    }
+
+    el = document.getElementById('DownloadNewRSAPrivateKeyInJSDIVConfirmButton');
+    if(el)
+    {
+        el.onclick = function(){disable_inner_buttons(); CheckRSAPrivateKeyDownload('replacement_rsa_key_generator_private_key_asc_format', 'replaceRSAKeyPairCheckRSAPrivateKeyDownloadOnSucces', 'replaceRSAKeyPairCheckRSAPrivateKeyDownloadOnFailure');};
+        el.style.backgroundColor = '#6a94df';
+    }
+}
+
+function disable_inner_buttons()
+{
+    el = document.getElementById('GenerateRSAKeyPairInJSButton');
+    if(el)
+    {
+        el.onclick = '';
+        el.style.backgroundColor = '#AAAAAA';
+    }
+
+    el = document.getElementById('GenerateRSAKeyPairInPHPButton');
+    if(el)
+    {
+        el.onclick = '';
+        el.style.backgroundColor = '#AAAAAA';
+    }
+
+    el = document.getElementById('GenerateRSAKeyPairDownloadPrivateKeyOnConfirm');
+    if(el)
+    {
+        el.onclick = '';
+        el.style.backgroundColor = '#AAAAAA';
+    }
+ 
+
+
+    el = document.getElementById('ReplacementGenerateRSAKeyPairInJSButton');
+    if(el)
+    {
+        el.onclick = '';
+        el.style.backgroundColor = '#AAAAAA';
+    }
+
+    el = document.getElementById('ReplacementGenerateRSAKeyPairInPHPButton');
+    if(el)
+    {
+        el.onclick = '';
+        el.style.backgroundColor = '#AAAAAA';
+    }
+
+    el = document.getElementById('UploadOldPrivateKeyInJSButton');
+    if(el)                        
+    {
+        el.onclick = '';
+        el.style.backgroundColor = '#AAAAAA';
+    }
+
+    el = document.getElementById('DownloadNewRSAPrivateKeyInJSDIVConfirmButton');
+    if(el)
+    {
+        el.onclick = '';
+        el.style.backgroundColor = '#AAAAAA';
+    }
+}
+
+function genkey()
+{
+ var bits = 512;
+
+ //init random
+ el = document.getElementById('rsa_key_generator_random_data');
+ seed(el.value)
+
+ rsaKeys(bits);
+
+ el = document.getElementById('rsa_key_generator_public_key_asc_format');
+ el.value = "n:"+ s2hex(b2s(rsa_pq)) + ";" + 
+            "e:"+ s2hex(b2s(rsa_e))  + ";";
+ el = document.getElementById('rsa_key_generator_private_key_asc_format');
+ el.value = "n:"+ s2hex(b2s(rsa_pq)) + ";" + 
+            "d:"+ s2hex(b2s(rsa_d))  + ";";
+}
+
+function gen_replacement_key()
+{
+ set_replacement_rsa_key_generator_progress_text('Start replacement key generation...');
+ var bits = 512;
+
+ //init random
+ el = document.getElementById('replacement_rsa_key_generator_random_data');
+ seed(el.value)
+
+ rsaKeys(bits);
+
+ el = document.getElementById('replacement_rsa_key_generator_public_key_asc_format');
+ el.value = "n:"+ s2hex(b2s(rsa_pq)) + ";" + 
+            "e:"+ s2hex(b2s(rsa_e))  + ";";
+ el = document.getElementById('replacement_rsa_key_generator_private_key_asc_format');
+ el.value = "n:"+ s2hex(b2s(rsa_pq)) + ";" + 
+            "d:"+ s2hex(b2s(rsa_d))  + ";";
+ set_replacement_rsa_key_generator_progress_text('End replacement key generation.');
+}
+
+function set_replacement_rsa_key_generator_progress_text(text)
+{
+// el = document.getElementById('replacement_rsa_key_generator_progress_text');
+// el.style.display = 'block';
+// el.innerHTML = text;
+}
+
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2'
+                            );
+    disableButtons(buttons);
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    if (formAction == 'save')
+    {
+        if (form.ModuleName.value == "")
+        {
+            alert('<?php Alert_001(); ?>');
+            return;
+        }
+    }
+
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+function enableStatusSwitcher()
+{
+    el = document.getElementById('status_inactive');
+    el.disabled = false;
+
+    el = document.getElementById('status_active');
+    el.disabled = false;
+}
+
+function GenerateRSAKeyPairInPHPOnSuccessHandler()
+{
+    /**
+      *                                   .
+      *                                     .
+      *                                      
+      * Private               .
+      */
+
+    /**
+      *                             (IE                                        ,
+      *                             )                              .
+      *                  "        "             ,                              .
+      */
+    var form = document.forms['EditOfflineCCForm'];
+    form.elements['ViewState[FormSubmitValue]'].value = 'reload_before_check_new_private_key_file_download';
+    el = document.getElementById('EditOfflineCCForm');
+    //                  asc_action,                             Action' 
+    el.action = "<?php checkout_payment_module_settings_url(); ?>";
+    el.submit();
+}
+
+function GenerateRSAKeyPairInPHPOnSuccessHandler2()
+{
+    el = document.getElementById('rsa_key_generator_private_key_asc_format');
+    d = new Date();
+    formSubmitResendDataAsFile('asc_rsa_private_key_'+d.format("Y_m_d")+'.txt', el.value);
+
+    //set_replacement_rsa_key_generator_progress_text('New RSA private key has been sent. Waiting for server responce...');
+    //            ,                              ,                     RSA private key.
+    switch_to_step('step2');
+}
+
+function formSubmitResendDataAsFile(file_name, file_content)
+{
+    //                                               .
+    el = document.getElementById('file_content');
+    el.value = file_content;
+
+    el = document.getElementById('file_name');
+    el.value = file_name;
+
+    el = document.getElementById('ResendDataAsFile');
+    el.submit();
+}
+
+function generateRSAKeyPairInPHP()
+{
+    el = document.getElementById('GenerateRSAKeyPairInPHP');
+    el.submit();
+}
+
+/**
+ *                 RSA Private Key          .                
+ *                                      .
+ *           Private Key         hidden      source_rsa_private_key_asc_format_id:
+ * rsa_key_generator_private_key_asc_format
+ *    
+ * replacement_rsa_key_generator_private_key_asc_format.
+ *                       
+ * private_key_asc_format
+ *      :              private key         ! (      Action   View).               
+ *                   ACTION.
+ */
+function CheckRSAPrivateKeyDownload(source_rsa_private_key_asc_format_id, callback_function_on_success, callback_function_on_failure)
+{
+    //         ,                             :
+    el = document.getElementById('UploadNewPrivateKeyInJSInput');
+    if(el.value == '')
+    {
+        alert('<?php msg('CHECKOUT_ORDER_INFO_PRIVATE_KEY_FILE_NOT_SELECTED_MSG'); ?>');
+        enable_inner_buttons();
+        return false;
+    }
+
+    set_replacement_rsa_key_generator_progress_text('Start upload new private key to server...');
+
+    //          Private     :
+    rsa_private_key_from_el = document.getElementById(source_rsa_private_key_asc_format_id);
+    rsa_private_key_to_el = document.getElementById('private_key_asc_format');
+    rsa_private_key_to_el.value = rsa_private_key_from_el.value;
+
+    //           callback "On success"
+    el = document.getElementById('EditOfflineCCForm_callback_function_on_success');
+    el.value = callback_function_on_success;
+
+    //           callback "On failure"
+    el = document.getElementById('EditOfflineCCForm_callback_function_on_failure');
+    el.value = callback_function_on_failure;
+
+    var form = document.forms['EditOfflineCCForm'];
+    form.elements['ViewState[FormSubmitValue]'].value = 'check_new_private_key_file_download';
+    el = document.getElementById('EditOfflineCCForm');
+    old_target = el.target;
+    el.target = "IframeCheckRSAPrivateKeyDownload";
+    //               
+    el.submit();
+    set_replacement_rsa_key_generator_progress_text('Upload new private key to server. Waiting for server responce...');
+    //          0.5                   .                   .
+    setTimeout('RestoreMainFormTarget("'+ old_target +'");', 500);
+}
+
+/**
+ *                        RSA Private                        .
+ *                         .
+ */
+function generateRSAKeyPairCheckRSAPrivateKeyDownloadOnSucces()
+{
+    //                    .
+    switch_to_step('step3');
+
+    //                                  .
+    generateRSAKeyPairSavePublicKey();
+}
+
+/**
+ *                        RSA Private                          .
+ *                        .
+ */
+function generateRSAKeyPairCheckRSAPrivateKeyDownloadOnFailure()
+{
+    alert('<?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_008(); ?>');
+    switch_to_step('step1');
+}
+
+function generateRSAKeyPairSavePublicKey()
+{
+    //Save Public Key to DB.
+    el_from = document.getElementById('rsa_key_generator_public_key_asc_format');
+    el_to   = document.getElementById('rsa_public_key_asc_format');
+    el_to.value = el_from.value;
+
+    el = document.getElementById('SaveRSAPublicKey');
+    el.submit();
+}
+
+function generateRSAKeyPairSaveRSAPublicKeyOnSuccessHandler()
+{
+    /**
+     *            "         ".
+     *                            .                                  
+     *                     .
+     */
+    switch_to_step('step4');
+    show_save_cancel_buttons();
+    //alert("Key Pair generation completed successfully.");
+    enableStatusSwitcher();
+}
+
+
+
+
+
+/**
+ *                          RSA                        .
+ *                                             .
+ */
+function GenerateReplacementRSAKeyPairInJSOnSuccessHandler()
+{
+    //Show "Upload Old Private Key" controls.
+    switch_to_step('step3');
+}
+
+/**
+ *                  RSA Private Key          .
+ *      -                     hidden     ,                  
+ *                                  .                ?   -  
+ *                                             <input type="file">:                        
+ *                             .                                                .   
+ *                                                                        .
+ *                           <input type="file">, 
+ *                  -        <input type="hidden">.
+ */
+function UploadOldPrivateKeyInJS()
+{
+    set_replacement_rsa_key_generator_progress_text('Start upload old private key to server...');
+//    //           asc_action
+//    el = document.getElementById('main_asc_action');
+//    el.value = "resend_old_private_key_file_as_text";
+
+
+    var form = document.forms['EditOfflineCCForm'];
+    form.elements['ViewState[FormSubmitValue]'].value = 'resend_old_private_key_file_as_text';
+    el = document.getElementById('EditOfflineCCForm');
+    old_target = el.target;
+    el.target = "IframeReplaceRSAKeyPairStep1PrepareServerTmpData";
+    //               
+    el.submit();
+    set_replacement_rsa_key_generator_progress_text('Upload old private key to server. Waiting for server responce...');
+    //          0.5                   .                   .
+    setTimeout('RestoreMainFormTarget("'+ old_target +'");', 500);
+}
+
+function RestoreMainFormTarget(old_main_form_target)
+{
+    el = document.getElementById('EditOfflineCCForm');
+    el.target = old_main_form_target;
+}
+         
+function UploadOldPrivateKeyInJSProcessServerResponce(old_rsa_private_key_asc_format)
+{
+    el = document.getElementById('old_rsa_private_key_asc_format');
+    el.value = old_rsa_private_key_asc_format;
+    set_replacement_rsa_key_generator_progress_text('End upload old private key to server. Got server responce.');
+
+    //                               .
+    UploadOldPrivateKeyInJSOnSuccessHandler();
+}
+
+function UploadOldPrivateKeyInJSOnSuccessHandler()
+{
+    //                                (             )           .                         RSA       
+    ReplaceRSAKeyPairStep1PrepareServerTmpData();
+}
+
+/** 
+ *                                 (             )           .                         RSA       
+ *                                             .                  RSA       
+ */
+function ReplaceRSAKeyPairStep1PrepareServerTmpData()
+{
+    set_replacement_rsa_key_generator_progress_text('Start data reencryption. Prepare server tmp data. Submitting request to server...');
+    el = document.getElementById('ReplaceRSAKeyPairStep1PrepareServerTmpData');
+    el.submit();
+    set_replacement_rsa_key_generator_progress_text('Start data reencryption. Prepare server tmp data. Waiting server responce...');
+}
+
+/**
+ *                                                         .
+ *                            .
+ */
+function ReplaceRSAKeyPairStep1PrepareServerTmpDataOnSuccessHandler()
+{
+    set_replacement_rsa_key_generator_progress_text('Start data reencryption. Got server responce. Server data prepared.');
+    ReplaceRSAKeyPairStep2ReecryptTmpData();
+}
+
+/** 
+ *                                         .                  RSA       
+ */
+function ReplaceRSAKeyPairStep2ReecryptTmpData()
+{
+    //                            (                          ) RSA private key.
+    set_replacement_rsa_key_generator_progress_text('Start data reencryption. Reencrypt server data. Submitting request to server.');
+    el_from = document.getElementById('replacement_rsa_key_generator_public_key_asc_format');
+    el_to   = document.getElementById('rsa_replacement_public_key_asc_format');
+    el_to.value = el_from.value;
+    el = document.getElementById('old_rsa_private_key_asc_format');
+                                       
+    el      = document.getElementById('ReplaceRSAKeyPairStep2ReencryptTmpData');
+    el.submit();
+    set_replacement_rsa_key_generator_progress_text('Start data reencryption. Reencrypt server data. Waiting for server responce...');
+}
+
+/** 
+ *                                                           .
+ *                         .
+ */
+function ReplaceRSAKeyPairStep2ReecryptTmpDataOnSuccessHandler()
+{
+//    alert("All data are reencrypted!");
+    /**
+      *                             (IE                                        ,
+      *                             )                              .
+      *                  "        "             ,                              .
+      */
+    var form = document.forms['EditOfflineCCForm'];
+    form.elements['ViewState[FormSubmitValue]'].value = 'reload_before_check_new_private_key_file_download';
+    el = document.getElementById('EditOfflineCCForm');
+    //                  asc_action,                             Action' 
+    el.action = "<?php checkout_payment_module_settings_url(); ?>";
+    el.submit();
+}
+
+function ReplaceRSAKeyPairStep2ReecryptTmpDataOnSuccessHandler2()
+{
+    ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile();
+}
+/** 
+ *                                                     -         .
+ *                        .
+ */
+function ReplaceRSAKeyPairStep2ReecryptTmpDataOnFailureHandler(msg)
+{
+    alert(msg);
+    switch_to_step('step2');
+}
+
+function ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile()
+{
+    //                            (                          ) RSA private key.
+    set_replacement_rsa_key_generator_progress_text('Start send new RSA private key as file.');
+    el_from = document.getElementById('replacement_rsa_key_generator_private_key_asc_format');
+    el_to   = document.getElementById('ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile_file_content');
+    el_to.value = el_from.value;
+
+    el      = document.getElementById('ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile_file_name');
+    d = new Date();
+    el.value = "asc_rsa_private_key_" + d.format("Y_m_d") + ".txt";
+
+    el = document.getElementById('ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile');
+    el.submit();
+    set_replacement_rsa_key_generator_progress_text('New RSA private key has been sent. Waiting for server responce...');
+    //            ,                              ,                     RSA private key.
+    switch_to_step('step4');
+}
+
+/**
+ *                        RSA Private                        .
+ *                         .
+ */
+function replaceRSAKeyPairCheckRSAPrivateKeyDownloadOnSucces()
+{
+    //                    .
+    switch_to_step('step5');
+
+    //                                  .
+    ReplaceRSAKeyPairStep4SaveRSAPublicKey();
+}
+
+/**
+ *                        RSA Private                          .
+ *                        .
+ */
+function replaceRSAKeyPairCheckRSAPrivateKeyDownloadOnFailure()
+{
+    alert('<?php MODULE_PAYMENT_OFFLINE_CC_MSG_GENERATE_KEY_008(); ?>');
+    switch_to_step('step2');
+}
+
+//                              .
+function ReplaceRSAKeyPairStep4SaveRSAPublicKey()
+{
+    set_replacement_rsa_key_generator_progress_text('Start saving new RSA public key into db.');
+    el_from = document.getElementById('replacement_rsa_key_generator_public_key_asc_format');
+    el_to = document.getElementById('ReplaceRSAKeyPairStep4SaveRSAPublicKey_rsa_public_key_asc_format');
+    el_to.value = el_from.value;
+
+    el = document.getElementById('ReplaceRSAKeyPairStep4SaveRSAPublicKey');
+    el.submit();
+    set_replacement_rsa_key_generator_progress_text('Start saving new RSA public key into db. Waiting server responce...');    
+}
+
+function ReplaceRSAKeyPairStep4SaveRSAPublicKeyOnSuccessHandler()
+{
+    //                        RSA               .                     .
+    ReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData();
+}
+
+function ReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData()
+{
+    set_replacement_rsa_key_generator_progress_text('Start replacing old encrypted data with new reencrypted tmp data.');
+    el = document.getElementById('ReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData');
+    el.submit();
+    set_replacement_rsa_key_generator_progress_text('Start replacing old encrypted data with new reencrypted tmp data. Waiting server responce...');
+}
+
+function ReplaceRSAKeyPairStep5SwapCurrentDataWithTmpDataOnSuccessHanlder()
+{
+    //                   .
+    switch_to_step('step6');
+    show_save_cancel_buttons();
+    set_replacement_rsa_key_generator_progress_text('New RSA Key pair generation completed successfully.');
+}
+
+//                 RSA       .                             PHP.                 .
+function fGenerateReplacementRSAKeyPairInPHP()
+{
+    el = document.getElementById('GenerateReplacementRSAKeyPairInPHP');
+    el.submit();
+}
+
+function GenerateReplacementRSAKeyPairInPHPOnSuccessHandler()
+{
+    GenerateReplacementRSAKeyPairInJSOnSuccessHandler();
+}
+//-->
+</script>
+
+<form <?php EditOfflineCCForm(); ?> method="post" id="EditOfflineCCForm" enctype="multipart/form-data">
+<?php HiddenArrayViewState(); ?>
+<input type="hidden" name="private_key_asc_format" id="private_key_asc_format" value="">
+<input type="hidden" name="callback_function_on_success" id="EditOfflineCCForm_callback_function_on_success" value="">
+<input type="hidden" name="callback_function_on_failure" id="EditOfflineCCForm_callback_function_on_failure" value="">
+<?php Errors(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php ModuleType(); ?> </span>
+			<span class="caption-subject font-blue-sharp"><?php ModuleName(); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditOfflineCCForm', 'save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleStatusFieldName(); ?></span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_STATUS_FIELD_NAME', 'payment-module-offline-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<?php ModuleStatusField(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleNameFieldName(); ?> *</span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MODULE_NAME_FIELD_NAME', 'payment-module-offline-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<input class="form-control input-sm input-large" type="text" <?php ModuleNameField(); ?>>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php MathLibNameFieldName(); ?></span>
+                                <a class="pull-right" style="cursor:pointer;">
+                                              <?php hinttext('MATH_LIB_NAME_FIELD_NAME', 'payment-module-offline-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<?php MathLibNameField(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-12">
+				<?php HTTPSRequirement(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-12">
+				<?php RSAKeyPairGenerator(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-12">
+				<?php ReplacementRSAKeyPairGenerator(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<span class="required alert-danger"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span>
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="SaveButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditOfflineCCForm', 'save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+
+
+
+
+<!--                       RSA           Javascript -->
+<!--                                             "Save File"         -->
+<iframe style="" name="IframeResendDataAsFile" id="IframeResendDataAsFile" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="ResendDataAsFile" id="ResendDataAsFile" target="IframeResendDataAsFile">
+<input type="hidden" name="asc_action" id="ResendDataAsFile_asc_action" value="resend_data_as_text_file">
+<input type="hidden" name="file_content" id="file_content" value="">
+<input type="hidden" name="file_name" id="file_name" value="">
+</form>
+
+<!--                 Private       RSA                                          .                  . -->
+<iframe style="" name="IframeCheckRSAPrivateKeyDownload" id="IframeCheckRSAPrivateKeyDownload" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+
+<!--                             RSA -->
+<iframe style="" name="IframeSaveRSAPublicKey" id="IframeSaveRSAPublicKey" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="SaveRSAPublicKey" id="SaveRSAPublicKey" target="IframeSaveRSAPublicKey">
+<input type="hidden" name="asc_action" id="SaveRSAPublicKey_asc_action" value="save_rsa_public_key">
+<input type="hidden" name="rsa_public_key_asc_format" id="rsa_public_key_asc_format">
+<input type="hidden" name="callback_function" id="SaveRSAPublicKey_callback_function" value="generateRSAKeyPairSaveRSAPublicKeyOnSuccessHandler">
+</form>
+
+
+<!--                       RSA           PHP -->
+<!--                                          hidden      . -->
+<iframe style="" name="IframeGenerateRSAKeyPairInPHP" id="IframeGenerateRSAKeyPairInPHP" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="GenerateRSAKeyPairInPHP" id="GenerateRSAKeyPairInPHP" target="IframeGenerateRSAKeyPairInPHP">
+<input type="hidden" name="asc_action" id="GenerateRSAKeyPairInPHP_asc_action" value="generate_rsa_key_pair_in_php">
+<input type="hidden" name="rsa_private_key_field_id" id="GenerateReplacementRSAKeyPairInPHP_rsa_private_key_field_id" value="rsa_key_generator_private_key_asc_format">
+<input type="hidden" name="rsa_public_key_field_id" id="GenerateReplacementRSAKeyPairInPHP_rsa_public_key_field_id" value="rsa_key_generator_public_key_asc_format">
+<input type="hidden" name="callback_function" id="GenerateRSAKeyPairInPHP_callback_function" value="GenerateRSAKeyPairInPHPOnSuccessHandler">
+</form>
+
+
+
+<!--             RSA        -->
+<!--                      RSA                  .                             RSA        -->
+<!--                   ,                                                           -->
+<iframe style="" name="IframeGenerateReplacementRSAKeyPairInPHP" id="IframeGenerateReplacementRSAKeyPairInPHP" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="GenerateReplacementRSAKeyPairInPHP" id="GenerateReplacementRSAKeyPairInPHP" target="IframeGenerateReplacementRSAKeyPairInPHP">
+<input type="hidden" name="asc_action" id="GenerateReplacementRSAKeyPairInPHP_asc_action" value="generate_rsa_key_pair_in_php">
+<input type="hidden" name="rsa_private_key_field_id" id="GenerateReplacementRSAKeyPairInPHP_rsa_private_key_field_id" value="replacement_rsa_key_generator_private_key_asc_format">
+<input type="hidden" name="rsa_public_key_field_id" id="GenerateReplacementRSAKeyPairInPHP_rsa_public_key_field_id" value="replacement_rsa_key_generator_public_key_asc_format">
+<input type="hidden" name="callback_function" id="GenerateReplacementRSAKeyPairInPHP_callback_function" value="GenerateReplacementRSAKeyPairInPHPOnSuccessHandler">
+</form>
+
+<!--                                 (             )           .                         RSA        -->
+<!--                                             .                  RSA        -->
+<iframe style="" name="IframeReplaceRSAKeyPairStep1PrepareServerTmpData" id="IframeReplaceRSAKeyPairStep1PrepareServerTmpData" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="ReplaceRSAKeyPairStep1PrepareServerTmpData" id="ReplaceRSAKeyPairStep1PrepareServerTmpData" target="IframeReplaceRSAKeyPairStep1PrepareServerTmpData">
+<input type="hidden" name="asc_action" id="ReplaceRSAKeyPairStep1PrepareServerTmpData_asc_action" value="replace_rsa_key_pair_step1_prepare_server_tmp_data">
+</form>
+
+<!--                                            .                  RSA        -->
+<iframe style="" name="IframeReplaceRSAKeyPairStep2ReencryptTmpData" id="IframeReplaceRSAKeyPairStep2ReencryptTmpData" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="ReplaceRSAKeyPairStep2ReencryptTmpData" id="ReplaceRSAKeyPairStep2ReencryptTmpData" target="IframeReplaceRSAKeyPairStep2ReencryptTmpData">
+<input type="hidden" name="asc_action" id="ReplaceRSAKeyPairStep2ReencryptTmpData_asc_action" value="replace_rsa_key_pair_step2_reencrypt_tmp_data">
+<input type="hidden" name="rsa_replacement_public_key_asc_format" id="rsa_replacement_public_key_asc_format">
+<!--        private key                          .                                                   -->
+<input type="hidden" name="old_rsa_private_key_asc_format" id="old_rsa_private_key_asc_format">
+</form>
+
+<!--     3 -                             Private     .                                   -                             . -->
+<!--                                             "Save File"         -->
+<iframe style="" name="IframeReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile" id="IframeReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile" id="ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile" target="IframeReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile">
+<input type="hidden" name="asc_action" id="ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile_asc_action" value="resend_data_as_text_file">
+<input type="hidden" name="file_content" id="ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile_file_content">
+<input type="hidden" name="file_name" id="ReplaceRSAKeyPairStep3ResendNewRSAPrivateKeyAsFile_file_name">
+</form>
+
+<!--     4 -                Public                   . -->
+<iframe style="" name="IframeReplaceRSAKeyPairStep4SaveRSAPublicKey" id="IframeReplaceRSAKeyPairStep4SaveRSAPublicKey" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="ReplaceRSAKeyPairStep4SaveRSAPublicKey" id="ReplaceRSAKeyPairStep4SaveRSAPublicKey" target="IframeReplaceRSAKeyPairStep4SaveRSAPublicKey">
+<input type="hidden" name="asc_action" id="ReplaceRSAKeyPairStep4SaveRSAPublicKey_asc_action" value="save_rsa_public_key">
+<input type="hidden" name="rsa_public_key_asc_format" id="ReplaceRSAKeyPairStep4SaveRSAPublicKey_rsa_public_key_asc_format">
+<input type="hidden" name="callback_function" id="ReplaceRSAKeyPairStep4SaveRSAPublicKey_callback_function" value="ReplaceRSAKeyPairStep4SaveRSAPublicKeyOnSuccessHandler">
+</form>
+
+<!--                                                                      .                  RSA        -->
+<iframe style="" name="IframeReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData" id="IframeReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData" SRC="images/logo.gif" FRAMEBORDER="0" SCROLLING="No" WIDTH="1" HEIGHT="1"></iframe>
+<form action="index.php" method="post" name="ReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData" id="ReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData" target="IframeReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData">
+<input type="hidden" name="asc_action" id="ReplaceRSAKeyPairStep5SwapCurrentDataWithTmpData_asc_action" value="replace_rsa_key_pair_step5_replace_old_encrypted_data_with_new_reencrypted_tmp_data">
+</form>
+<div style="border: 1px solid black; display: none;" name="replacement_rsa_key_generator_progress_text" id="replacement_rsa_key_generator_progress_text">&nbsp;</div>
+
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</body>
+</html>

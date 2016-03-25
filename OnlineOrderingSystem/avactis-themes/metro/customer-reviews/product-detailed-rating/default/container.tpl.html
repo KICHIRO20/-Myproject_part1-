@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="product_rating_info <?php ViewClassName(); ?>">
+    <?php Local_RatingList(); ?>
+<span class="review__short_details">
+    <a class="ReviewNumber" href="javascript:void(0)"><?php ProductReviewsNumber(); ?> <?php Label('CUSTOMER_REVIEWS_REVIEWS_LABEL'); ?></a>
+    <?php ProductAddReviewLink(0, 'ProductInfo'); ?>
+</span>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+<a href="<?php Local_ProductInfoLink(); ?>"><?php Label('CUSTOMER_REVIEWS_BACK_TO_PRODUCT_INFO_LABEL'); ?></a>

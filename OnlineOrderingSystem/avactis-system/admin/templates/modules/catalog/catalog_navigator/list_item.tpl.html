@@ -1,0 +1,9 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+    <tr style="height: 25px;">
+        <td width="50%"  align="left" style="padding: 0px 5px 0px 5px;"><INPUT TYPE="radio" value="<?php CategoryID(); ?>" name="category_id" onclick="selectRowDeselectOther(this);" <?php Checked(); ?>><A HREF="<?php CategoryLink(); ?>"><b><?php CategoryName(); ?></b></A></td>
+        <td STYLE="text-align:   left;"><span class="categoryListInfo"><b><u><?php CategoryRecursiveStatus(); ?></u></b></span></td>
+        <td STYLE="text-align: center;"><span class="categoryListInfo"><?php CategoryID(); ?></span></td>
+        <td STYLE="text-align: center;"><span class="categoryListInfo"><?php CategoryProductsNumber(); ?></span></td>
+        <td STYLE="text-align: center;"><span class="categoryListInfo"><?php CategoryOfflineAndOnlineSubcategoriesNumber(); ?></span></td>
+    </tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

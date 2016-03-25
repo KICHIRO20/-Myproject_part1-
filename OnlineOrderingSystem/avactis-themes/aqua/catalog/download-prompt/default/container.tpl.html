@@ -1,0 +1,18 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box nogradient">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("CATALOG_DOWNLOAD_FILE"); ?></h1>
+        <div class="download_prompt">
+        <?php Label('CATALOG_DOWNLOAD_FILE_MESSAGE'); ?> <b><?php FileName(); ?></b>
+        <br/>
+        <?php Label('CATALOG_FILE_SIZE_LABEL'); ?>  <b><?php FSize(); ?></b>
+        <br/><br/>
+        <?php DownloadButton(); ?>
+        </div>
+     </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

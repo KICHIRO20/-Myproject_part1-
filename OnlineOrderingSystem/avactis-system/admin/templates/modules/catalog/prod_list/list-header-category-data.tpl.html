@@ -1,0 +1,22 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+		/******************** For category dropdown display ******************/
+		$catid = modApiFunc('CProductListFilter','getCurrentCategoryId');
+?>
+
+<div class="col-sm-6 col-sm-6">
+	<span class="bold"><?php Msg('MNG_PRD_CURR_CTGR'); ?>&nbsp;<?php Breadcrumb(); ?>&nbsp; <label class="text-muted">(<?php msg('CAT_ID_NAME'); ?>: <?php echo $catid?>)</label></span><br /><br />
+	<span class="bold font-info"><?php msg('SELECT_CATEGORY'); ?>:</span>
+	<select name="category_ids" id="categoryval_id" onchange="gotoCategory();" class="table-group-action-input form-control input-inline input-medium input-sm">
+		<?php ProductListSubcategories();?>	
+	</select>
+</div>
+<div class="col-sm-6 col-sm-6">
+	<span><?php Msg('MNG_PRD_HEADER_001', getFrom(), getTo(), getProductsNumber()); ?></span><br /><br />
+	<span><?php CategoryStatistics(); ?></span>
+
+</div>
+
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,98 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td width="30%" class="label popup_dialog_body_left_padded"><?php Msg('TAX_CALCULATOR_FIELD_009'); ?></td>
+<!--     <td class="help"><div style="cursor:pointer;"><img src="images/question.gif"></div></td> -->
+    <td width="70%" class="value popup_dialog_body_right_padded" colspan="2">
+<TABLE width="100%" cellpadding="0" cellspacing="0" border="0">
+  <TR>
+    <TD colspan="2" style="padding-top: 8px;"><B><U><?php Msg('TAX_CALCULATOR_STAGE_001'); ?></U></B></TD>
+  </TR>
+  <TR>
+    <TD colspan="2" style="padding-top: 6px;"><B><?php Msg('TAX_CALCULATOR_TRACE_INFO_001'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD colspan="2">
+      <TABLE cellpadding="2" width="100%" cellspacing="0" border="1">
+        <TR>
+            <TH width="50%"><?php Msg('TAX_CALCULATOR_TRACE_INFO_TABLE1_HEADER_001'); ?></TH>
+            <TH width="50%"><?php Msg('TAX_CALCULATOR_TRACE_INFO_TABLE1_HEADER_002'); ?></TH>
+        </TR>
+        <?php ProductTaxClassesList(); ?>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD colspan="2" style="padding-top: 15px;"><B><?php Msg('TAX_CALCULATOR_TRACE_INFO_002'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD colspan="2">
+      <TABLE cellpadding="2" width="100%" cellspacing="0" border="1">
+        <TR>
+            <TH width="50%"><?php Msg('TAX_CALCULATOR_TRACE_INFO_TABLE2_HEADER_001'); ?></TH>
+            <TH width="50%"><?php Msg('TAX_CALCULATOR_TRACE_INFO_TABLE2_HEADER_002'); ?></TH>
+        </TR>
+        <?php AddressesList(); ?>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD colspan="2" style="padding-top: 15px;"><B><?php Msg('TAX_CALCULATOR_TRACE_INFO_003'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD colspan="2">
+      <TABLE width="100%" cellpadding="2" cellspacing="0" border="1">
+        <tr>
+          <th width="25%"><?php Msg('TAX_CALCULATOR_COLUMN_001'); ?></td>
+          <th width="20%"><?php Msg('TAX_CALCULATOR_COLUMN_002'); ?></td>
+          <th width="55%"><?php Msg('TAX_CALCULATOR_COLUMN_003'); ?></td>
+        </tr>
+        <?php TaxRatesListStage1(); ?>
+      </TABLE>
+    </TD>
+  </TR>
+  <TR>
+    <TD colspan="2"><HR><BR></td>
+  </tr>
+  <TR>
+    <TD colspan="2" style="padding-top: 8px;"><B><U><?php Msg('TAX_CALCULATOR_STAGE_002'); ?></U></B></TD>
+  </TR>
+  <TR>
+    <TD colspan="2" style="padding-top: 6px;"><B><?php Msg('TAX_CALCULATOR_TRACE_INFO_010'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD width="100%" valign="top">
+      <table width="100%" cellpadding="2" cellspacing="0" border="1">
+        <tr>
+          <th width="50%"><?php Msg('TAX_CALCULATOR_TRACE_INFO_004'); ?></th>
+          <th width="50%"><?php Msg('TAX_CALCULATOR_TRACE_INFO_005'); ?></th>
+        </tr>
+        <tr>
+          <td valign="top"><?php ApplicableTaxes(); ?></td>
+          <td valign="top"><?php NotApplicableTaxes(); ?></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <TR>
+    <TD colspan="2"><HR><BR></td>
+  </tr>
+  <TR>
+    <TD colspan="2" style="padding-top: 8px;"><B><U><?php Msg('TAX_CALCULATOR_STAGE_003'); ?></U></B></TD>
+  </TR>
+  <TR>
+    <TD colspan="2" style="padding-top: 6px;"><B><?php Msg('TAX_CALCULATOR_TRACE_INFO_006'); ?></B></TD>
+  </TR>
+  <TR>
+    <TD colspan="2">
+        <?php TaxRatesListStage3(); ?>
+    </TD>
+  </TR>
+  <TR>
+    <TD colspan="2" style="padding-top: 14px;">
+        <B><?php Msg('TAX_CALCULATOR_TAX_TOTAL_LABEL'); ?><?php Total(); ?></B>
+    </TD>
+  </TR>
+</TABLE>
+    </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

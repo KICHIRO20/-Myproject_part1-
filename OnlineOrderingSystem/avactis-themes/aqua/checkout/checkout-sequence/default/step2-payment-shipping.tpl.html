@@ -1,0 +1,66 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+	  	global $application;
+    	$mr = &$application->getInstance('MessageResources');
+?>
+<div class="box checkout step_2_active nogradient">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+        <h1><?php Label("CHECKOUT_CHECKOUT"); ?><?php CustomerSignInOutHint(); ?></h1>
+        <form  name="<?php Local_FormName(); ?>" action="<?php Local_FormAction(); ?>" method="<?php Local_FormMethod(); ?>" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="<?php Local_FormActionFieldName(); ?>" value="<?php Local_FormActionFieldValue(); ?>" />
+        <?php Local_FormHiddenFields(); ?>
+        <div class="checkout_rule step_2_active">
+            <span class="step_1"><?php Label("CHECKOUT_STEP_1"); ?></span>
+            <span class="step_1_2"></span>
+            <span class="step_2"><?php Label("CHECKOUT_STEP_2"); ?></span>
+            <span class="step_2_3"></span>
+            <span class="step_3"><?php Label("CHECKOUT_STEP_3"); ?></span>
+        </div>
+        <?php if (($m=getCheckoutErrors())!=''): ?><div class="error_message"><?php echo $m; ?></div><?php endif; ?>
+        <div class="box checkout_addresses">
+            <div class="cn lt"></div>
+            <div class="cn rt"></div>
+            <div class="cn lb"></div>
+            <div class="cn rb"></div>
+            <div class="content">
+                <div class="header">
+                    <div class="shipping_form"><?php Label("CHECKOUT_SHIPPING_ADDRESS"); ?></div>
+                    <div class="billing_form"><?php Label("CHECKOUT_BILLING_ADDRESS"); ?></div>
+                </div>
+                <div class="shipping_form"><?php CheckoutShippingInfoOutput(); ?></div>
+                <div class="billing_form"><?php CheckoutBillingInfoOutput(); ?></div>
+                <div class="clear_both"></div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="cn lt"></div>
+            <div class="cn rt"></div>
+            <div class="cn lb"></div>
+            <div class="cn rb"></div>
+            <div class="content">
+                <div class="header">
+                    <div class="payment_methods"><?php Label("CHECKOUT_BILLING_OPTIONS"); ?></div>
+                    <div class="shipping_methods"><?php Label("CHECKOUT_SHIPPING_OPTIONS"); ?></div>
+                </div>
+                <div class="payment_methods"><?php CheckoutPaymentMethodsSelect(); ?></div>
+                <div class="shipping_methods"><?php CheckoutShippingMethodsSelect(); ?></div>
+                <div class="clear_both"></div>
+            </div>
+        </div>
+        <?php SubscribeOnCheckoutOutput(); ?>
+        <div class="checkout_buttons">
+            <a href="<?php CheckoutStepLink(1); ?>"><span class="<?php lang(); ?> button_back"><?php echo $mr->getMessage('BACK'); ?></span></a>
+            <input type="submit" value="<?php echo $mr->getMessage('CONTINUE_CHECKOUT'); ?>" class="<?php lang(); ?> buttons button_continue_checkout" />
+        </div>
+        </form>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+                
+                
+

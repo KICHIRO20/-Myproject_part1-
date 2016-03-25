@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="subdiv">
+	  <?php	MenuGroupName(); ?>
+</div>
+<ul style="padding-left: 7px;">
+	<?php Menu_Items(); ?>
+</ul>
+<?php if(getMenu_Items() == ""){ ?>
+        <div style="font-weight:bold;padding: 44px;text-align: center;"><?php Msg('EMPTY_EXT_LIST_MSG') ?></div>
+<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->

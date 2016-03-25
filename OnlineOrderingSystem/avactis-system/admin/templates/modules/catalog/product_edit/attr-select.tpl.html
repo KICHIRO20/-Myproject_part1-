@@ -1,0 +1,18 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<div class="row">
+	<div class="col-sm-2">
+		<label class="col-sm-13 control-label"><?php AttributeName(); ?></label>
+	</div><br>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp(getProductTypeID(),getAttributeTag()); ?>
+		</a>
+	</div>
+	<div class="col-sm-4">  
+		<select class="form-control input-xmedium input-sm input-inline" name="<?php AttributeTag(); ?>">
+			<?php AttributeSelectOptions(); ?>
+		</select>
+		&nbsp;<A HREF="javascript: void(0);" onclick="javascript:openURLinNewWindow('<?php AddLink(); ?>', 'TaxClasses');"><?php AddLinkText(); ?></A><br/>
+	</div>
+</div><br>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

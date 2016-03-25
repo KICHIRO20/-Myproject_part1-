@@ -1,0 +1,143 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- tinyMCE -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    var buttons = new Array(
+                            'SaveButton1',
+                            'SaveButton2',
+                            'CancelButton1',
+                            'CancelButton2'
+                            );
+    disableButtons(buttons);
+}
+
+function trim(s)
+{
+    var left = 0;
+    var len = s.length;
+
+    if (s.length == 0) return "";
+
+    while (s.charAt(left) == ' ')
+    {
+        if (left == len - 1) break;
+        left++;
+    }
+
+    if (left == len - 1) return "";
+
+    var right = len - 1;
+    while (s.charAt(right) == ' ')
+    {
+        if (right == 0) break;
+        right--;
+    }
+
+    if (right == 0) return "";
+
+    return s.substring(left, right + 1);
+}
+
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+    if (formAction == 'save')
+    {
+        if (trim(form.ModuleName.value) == "")
+        {
+            alert('<?php Alert_001(); ?>');
+            return;
+        }
+    }
+
+    form.elements['ViewState[FormSubmitValue]'].value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+//-->
+</script>
+<form <?php EditCodForm(); ?> method="post" id="EditCodForm">
+<?php HiddenArrayViewState(); ?>
+<?php Errors(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php ModuleType(); ?> </span>
+			<span class="caption-subject font-blue-sharp"><?php ModuleName(); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditCodForm', 'save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton1" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<!-- Start - Row -->
+		<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleStatusFieldName(); ?></span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('MODULE_STATUS_FIELD_NAME', 'payment-module-cod-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<?php ModuleStatusField(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="required bold"><?php ModuleMethodNameFieldName(); ?> *</span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('MODULE_METHOD_NAME_FIELD_NAME', 'payment-module-cod-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<input class="form-control input-large input-sm" type="text" <?php ModuleNameField(); ?>>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php ModulePerOrderShippingFeeFieldName(); ?></span>
+                                 <a class="pull-right" style="cursor:pointer;">
+                                           <?php hinttext('MODULE_PER_ORDER_SHIPPING_FEE_FIELD_NAME', 'payment-module-cod-messages'); ?>
+                                </a>
+			</div>
+			<div class="col-sm-8">
+				<input class="form-control input-large input-sm" type="text" <?php ModulePerOrderShippingFeeField(); ?> onblur="formatInput(this);" patterntype="currency" <?php CostFormat(); ?>>
+			</div>
+		</div>
+		<!-- End - Row -->
+		<!-- Start - Row -->
+<div class="row margin-bottom-10">
+			<div class="col-sm-4">
+				<span class="bold"><?php ModuleDescrFieldName(); ?></span>
+				<span class="pull-right"></span>
+			</div>
+			<div class="col-sm-8">
+				<?php ModuleDescrFieldValue(); ?>
+			</div>
+		</div>
+		<!-- End - Row -->
+
+		<span class="required alert-danger"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span>
+
+		<div class="actions" align="center">
+			<div class="actions btn-set">
+				<button id="SaveButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="formSubmit('EditCodForm', 'save');" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+				<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

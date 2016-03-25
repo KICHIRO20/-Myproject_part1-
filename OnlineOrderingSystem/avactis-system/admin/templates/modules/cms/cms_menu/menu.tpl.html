@@ -1,0 +1,13 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<tr>
+	<td>
+		<a href="cms_add_menus.php?menu_id=<?php MenuID(); ?>">
+			<?php MenuIndex(); ?>
+		</a>
+	</td>
+	<td><?php MenuName(); ?></td>
+	<td class="text-center"><?php MenuActiveLinks(); ?></td>
+	<td class="text-center"><?php MenuInactiveLinks(); ?></td>
+	<td class="text-center"><input type="checkbox" name="delete[<?php MenuID(); ?>]" value="Y" onclick="checkSelectedMenu(this);" class="form-control"/></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

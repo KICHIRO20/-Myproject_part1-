@@ -1,0 +1,2974 @@
+[Common Box]
+.box { margin; }
+
+[Left Top Corner Box]
+.box .cn.lt { position; }
+
+[Right Top Corner Box]
+.box .cn.rt { position; }
+
+[Left Bottom Corner Box]
+.box .cn.lb { position-bottom; }
+
+[Right Bottom Corner Box]
+.box .cn.rb { position-bottom; }
+
+[Corner Image]
+.page_container .box .cn {
+    background-image;
+    size;
+}
+
+[Common Box Content]
+.page_container .box .content {
+    background;
+    padding-bottom;
+    border-left;
+    border-right;
+    border-bottom;
+}
+
+[Common Box Content Alt Bg]
+.page_container .box.nogradient .content {
+   background;
+}
+
+[Dropdown in Side Column]
+.right_column .box select, .left_column .box select {
+    margin;
+    width;
+}
+
+[Common Box Header]
+.box h1, .box .header {
+    text;
+    height;
+    padding;
+    margin;
+    border-bottom;
+    background;
+}
+ 
+[Common Box Header Link]
+.box h1 a {
+    text;
+}
+
+[Common Box Subheader]
+.box h2, .box .subheader {
+    text;
+    height;
+    padding;
+    margin;
+    border-bottom;
+    background;
+}
+
+[Common Box Subheader Link]
+.box h2 a, .box .subheader a {
+    text;
+    background;
+    color;
+}
+
+[Toolbar inside Common Box]
+.box .toolbar {
+    height;
+    text;
+    padding;
+    margin;
+}
+
+[Element inside Box Header]
+.box h1 span {
+    top;
+    right;
+    text;
+}
+
+[Link inside Box Header]
+.box h1 span a {
+    text;
+}
+
+[Horizontal Rule inside Box]
+.box hr {
+    size;
+    border;
+    background;
+    margin;
+}
+
+[Box inside another Box]
+.box .box {
+    margin;
+}
+
+[Box inside Box Content]
+.box .box .content {
+    background: none;
+    border: 1px solid #ccd9e6;
+}
+
+[Box inside Box Header 1]
+.box .box h1, .box .box .header {
+    text;
+    background-color;
+    height;
+    padding;
+}
+
+
+[Main Banner Box]
+.page_container .box.welcome {
+    height;
+}
+
+[Main Banner Background]
+.page_container .box.welcome .content {
+    background;
+    padding;
+    border;
+}
+
+
+
+[Page Body]
+body {
+    width;
+    background; 
+    text;
+    margin; 
+    padding;
+}
+
+[Page Background]
+.page_background {
+    background;
+    border;
+    padding;
+}
+
+[Text Input Field]
+input[type=text], input[type=password], .input_text, .input_password, textarea {
+    text;
+    border;
+    background;
+    padding;
+}
+[Text Input Field Focused]
+input[type=text]:focus, input[type=password]:focus, .input_text:focus, .input_password:focus, textarea:focus {
+    text;
+    border;
+    background;
+}
+
+[Dropdown]
+select {
+    text;
+    border;
+    background;
+}
+[Dropdown Focused]
+select:focus {
+    text;
+    border;
+    background;
+}
+
+[Button]
+.text_buttons {
+    text;
+    border;
+    background;
+    margin;
+    padding;
+    cursor;
+}
+
+[Check Box]
+input[type=checkbox], input_checkbox {
+    margin;
+    padding;
+}
+[Radio Button]
+input[type=radio], .input_radio {
+    margin;
+    padding;
+}
+
+[Field in Error State]
+.form_field.error input,
+.form_field.error select,
+.form_field.error textarea,
+select.error, textarea.error {
+    border;
+    background;
+}
+
+[Header Level 1 or 2]
+h1, h2 {
+    text;
+}
+
+[Horizontal Rule]
+hr {
+    size;
+    border;
+    background;
+    margin;
+}
+
+[Link]
+a {
+    text;
+}
+
+[Link Hovered]
+a:hover {
+    text;
+}
+
+[Error Message]
+.error_message {
+    text;
+    border;
+    padding;
+    margin;
+}
+
+[Success Message]
+.success_message {
+    text;
+    border;
+    padding;
+    margin;
+}
+
+[Note]
+.note {
+    text;
+}
+
+[Page Paragraph]
+.page_container p {
+    text;
+    margin;
+    padding;
+}
+
+
+[Common Tree]
+ul.tree {
+    padding;
+    margin;
+}
+
+[Common Tree Item Container]
+ul.tree li {
+    padding;
+    margin;
+}
+
+[Common Tree Item]
+ul.tree li span {
+    padding;
+    margin;
+    background;
+}
+
+[Common Tree Item Text]
+ul.tree li span a {
+    text;
+}
+
+[Common Tree Item Selected]
+ul.tree li span.selected {
+    background;
+    border;
+}
+
+[Common Tree Item Text Selected]
+ul.tree li span.selected a {
+    text;
+}
+
+[Common Tree Item Hovered]
+ul.tree li span:hover {
+    background;
+    border;
+}
+
+[Common Tree Item Text Hovered]
+ul.tree li span a:hover {
+    text;
+}
+
+[Common Tree Item Level 2]
+ul.tree li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 3]
+ul.tree li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 4]
+ul.tree li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 5]
+ul.tree li ul li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 6]
+ul.tree li ul li ul li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Common Tree Item Level 7]
+ul.tree li ul li ul li ul li ul li ul li ul li span {
+    padding;
+    margin;
+    background;
+    text;
+}
+
+[Product Rating Box]
+.rating-box {
+    width;
+    height;
+    background;
+    margin;
+}
+
+[Product Rating]
+.rating-box .rating {
+    width;
+    height;
+    background;
+}
+
+[Paginator]
+.paginator {
+    text;
+}
+
+[Product List Sorter]
+.product-list-sorter {
+    text;
+    padding;
+}
+
+[Direction]
+.product-list-sorter ul li {
+    margin;
+}
+
+[Direction Link]
+.box .product-list-sorter ul li a {
+    padding;
+    text;
+}
+
+[Direction Link Hovered]
+.product-list-sorter ul li a:hover {
+    text;
+    background;
+}
+
+[Discount Star]
+.discount_star {
+    width;
+    height;
+    top;
+    right;
+    background;
+    text;
+}
+
+[Discount Amount]
+.discount_star span {
+    text;
+}
+
+[Discount Amount Label]
+.discount_star span.label {
+    text;
+    padding;
+    width;
+    margin;
+}
+
+[Discount Amount Value]
+.discount_star span.value {
+    text;
+}
+
+[Form Row]
+.form_view .form_row {
+    padding;
+}
+
+[Field Label]
+.form_view .form_row .form_descr {
+    text;
+    width;
+}
+
+[Field Label in Error State]
+.form_view .form_row .form_descr.error {
+    text;
+    background;
+}
+
+[Common Form Field Container]
+.form_view .form_row .form_field {
+    margin;
+    width;
+}
+
+[Common Input Field]
+.form_view .form_row .form_field textarea,
+.form_view .form_row .form_field select,
+.form_view .form_row .form_field .input_password,
+.form_view .form_row .form_field .input_file,
+.form_view .form_row .form_field .input_text {
+    width;
+    margin;
+}
+
+[Form Field - Text Area]
+.form_view .form_row .form_field textarea {
+    height;
+}
+
+[Form Field Hint]
+.form_view .form_row .form_hint {
+    margin;
+}
+
+[Product Rating Label]
+.product_rating_info .label {
+    width;
+}
+
+[Product Rating Box]
+.product_rating_info .rating-box {
+    margin;
+}
+
+[Product Review]
+.product_review {
+    padding;
+}
+
+[Product Review Text]
+.product_review .review_text {
+    border-bottom;
+    padding;
+}
+
+[Product Review Author Label]
+.product_review .product_review_author .label {
+    text;
+}
+
+[Product Review Author Name]
+.product_review .product_review_author .author {
+    text;
+}
+
+[Product Review Post Date]
+.product_review .product_review_posted_on {
+    text;
+    padding;
+}
+
+[Product Review Rating]
+.product_review .product_rating_info {
+    padding;
+}
+
+[Product Review Text]
+.product_review .review_text {
+    text;
+}
+
+[Add Review]
+.add_review {
+    padding;
+}
+
+[Add Review Form Fields]
+.review_select_rating,
+.review_input_text,
+.review_input_name,
+.review_target {
+    padding;
+}
+
+[Add Review Product Name]
+.review_target .product_name {
+    text;
+}
+
+[Add Review Field Label]
+.review_input_text .label {
+    text;
+}
+
+[Add Review Text]
+.review_input_text textarea {
+    width;
+    height;
+}
+
+
+[Add Review Rating]
+.review_select_rating .ratings_block {
+    padding;
+}
+
+[Add Review Rating Name]
+.review_select_rating .ratings_block .rating_name {
+    text;
+    width;
+}
+
+[Add Review Rating Value]
+.review_select_rating .ratings_block .product_rating_info {
+    padding;
+}
+
+[Add Review Rating Value Box]
+.review_select_rating .ratings_block .product_rating_info .rating-box {
+    margin;
+}
+
+[Product Detailed Image]
+.product_detailed_img img {
+    height;
+}
+
+[Product Image Hovered]
+.product_img img:hover,
+.product_detailed_img img:hover {
+    border;
+}
+
+[Product Image]
+.product_detailed_img img,
+.product_img img {
+    padding;
+    border;
+}
+
+[Cart Total]
+.shoppingcart_total {
+    padding;
+}
+
+[Cart Total Label]
+.shoppingcart_total .total_name {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Cart Total Value]
+.shoppingcart_total .total_value {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Store Closed Box]
+.box.store_closed {
+    margin;
+    size;
+}
+[Store Closed Container]
+.box.store_closed .content {
+    border;
+    background;
+}
+[Store Closed Text]
+.store_closed .empty {
+    padding;
+    text;
+    text-align;
+    background;
+}
+
+[CMS Page Content]
+.cmspage_content {
+    padding;
+}
+[Page Header Box]
+.box.page_header .content {
+    height;
+    background;
+}
+
+[Page Header Corner Image]
+.box.page_header  .cn {
+    background;
+}
+
+[Logo Background]
+.logo_bg {
+    background;
+    position;
+    size;
+}
+
+[Logo]
+.logo_img {
+    background;
+    position;
+    size;
+}
+
+
+[Page Top Menu Box]
+.box.page_top_menu .content {
+    height;
+    border;
+    background;
+}
+
+[Page Top Menu Box Corner Image]
+.box.page_top_menu .cn {
+    background;
+}
+
+[Page Container]
+.page_container {
+    width;
+}
+
+[Left Column]
+.page_container .left_column {
+    width;
+    margin;
+}
+
+[Right Column]
+.page_container .right_column {
+    width;
+    margin;
+}
+
+[Center Column]
+.page_container .center_column {
+    margin;
+}
+
+[Center Column with Left]
+.page_container.columnsLC .center_column {
+    margin-left;
+}
+
+[Center Column with Right]
+.page_container.columnsCR .center_column {
+    margin;
+}
+
+[Center Column Alone]
+.page_container.columnsC .center_column {
+    margin;
+}
+
+[Page Footer]
+.page_footer {
+    height;
+    width;
+    padding;
+    margin;
+}
+
+[Top User Image 1]
+.page_header .top_user1 {
+    position;
+}
+
+[Top User Image 2]
+.page_header .top_user2 {
+    position;
+}
+
+[Page Footer - CC Icon]
+.page_footer img.cc_icon {
+    position;
+}
+
+[Page Footer - W3C Icon]
+.page_footer img.w3c_icon {
+    position;
+}
+
+[Page Footer - Horizontal Rule]
+.page_footer hr {
+    size;
+    border;
+    background;
+    margin;
+}
+
+[Page Footer - Copyright]
+.page_footer .copyright {
+    margin;
+    padding;
+    text;
+}
+[Search Button]
+input.button_search {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Add To Cart Button]
+input.button_add_to_cart {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Add To Cart Button - Disabled]
+input.button_add_to_cart.disabled {
+    background-image;
+}
+
+[Out Of Stock Button]
+input.button_out_of_stock {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Add To Wishlist Button]
+input.add_to_wishlist {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Add To Wishlist Button - Disabled]
+input.add_to_wishlist.disabled {
+    background-image;
+}
+
+[Continue Checkout Button]
+input.button_continue_checkout {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Save Changes Button]
+input.button_save_changes {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Sign In Button]
+input.button_signin {
+    background-image;
+    size;
+    cursor;
+}
+
+[Register Button]
+input.button_register {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Continue Button]
+input.button_continue {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Proceed To Checkout Button]
+span.button_proceed_to_checkout {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Continue Shopping Button]
+span.button_continue_shopping {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Continue Shopping Back Button]
+span.button_continue_shopping_back {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Continue Checkout Button]
+span.button_continue_checkout {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Back Button]
+span.button_back {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Register Button]
+span.button_register {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Details Button]
+span.button_details {
+    background-image;
+    size;
+    padding;
+    margin;
+    cursor;
+}
+
+[Checkout Button]
+span.button_checkout {
+    background-image;
+    size;
+    cursor;
+}
+
+[Update Button]
+.text_buttons.button_update {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Subscribe Button]
+.text_buttons.button_subscribe {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Unsubscribe Button]
+.text_buttons.button_unsubscribe {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Order Search Button]
+.text_buttons.button_order_search {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Product Filter Button]
+.text_buttons.button_product_filter {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Payment Redirect Button]
+.text_buttons.button_payment_redirect {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Add Review Button]
+.text_buttons.button_add_review {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Calculate Button]
+.text_buttons.button_calculate {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Remember Button]
+.text_buttons.button_remember {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+
+[Send Button]
+.text_buttons.button_send {
+    text;
+    background;
+    size;
+    padding;
+    margin;
+    cursor;
+    border;
+}
+[Checkout Box]
+.checkout .box {
+    margin;
+}
+
+[Checkout Box - Content]
+.checkout .box .content {
+    border-bottom;
+}
+
+[Checkout Header]
+.checkout .header .payment_methods,
+.checkout .header .shipping_methods,
+.checkout .header .billing_form,
+.checkout .header .selected_payment_shipping_methods,
+.checkout .header .key_order_details,
+.checkout .header .cart_summary,
+.checkout .header .shipping_form {
+    padding;
+    text;
+}
+
+[Checkout Section]
+.checkout .payment_methods,
+.checkout .shipping_methods,
+.checkout .billing_form,
+.checkout .key_order_details,
+.checkout .selected_payment_shipping_methods,
+.checkout .cart_summary,
+.checkout .shipping_form {
+    text;
+    padding;
+}
+
+[Checkout Key Order Details]
+.checkout .key_order_details {
+    width;
+}
+
+[Checkout Selected Methods]
+.checkout .selected_payment_shipping_methods {
+    width;
+}
+
+[Checkout Cart Summary]
+.checkout .cart_summary {
+    width;
+    text;
+}
+
+[Checkout Billing Form]
+.checkout .billing_form {
+    width;
+    text;
+}
+
+[Checkout Shipping Form]
+.checkout .shipping_form {
+    width;
+    text;
+    padding;
+}
+
+[Checkout Payment Methods]
+.checkout .payment_methods {
+    width;
+}
+
+[Checkout Shipping Methods]
+.checkout .shipping_methods {
+    width;
+}
+
+[Checkout Box - Content Header]
+.checkout .box .content .header {
+    text;
+    background;
+    padding;
+}
+
+[Checkout Cart Total]
+.checkout .shoppingcart_total {
+    padding;
+    text;
+}
+
+[Checkout Cart Total Rule]
+.checkout .shoppingcart_total hr {
+    color;
+}
+
+[Checkout Cart Total Value]
+.checkout .shoppingcart_total .total_value {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Checkout Cart Total Label]
+.checkout .shoppingcart_total .total_name {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Checkout Cart Summary Note]
+.checkout .cart_summary .note {
+    padding;
+}
+
+[Checkout Addresses]
+.checkout .box.checkout_addresses .content {
+    border;
+}
+
+[Checkout Selected Methods Label]
+.checkout .selected_payment_shipping_methods .label {
+    text;
+}
+
+[Checkout Selected Methods - Method]
+.checkout .selected_payment_shipping_methods .selected_payment_method {
+    padding;
+}
+
+[Checkout Form]
+.checkout .form_view {
+    text;
+}
+
+[Checkout Form - Row]
+.checkout .form_view .form_row {
+    text;
+}
+
+[Checkout Form - Field Label]
+.checkout .form_view .form_row .form_descr {
+    width;
+    text;
+}
+
+[Checkout Form - Field Container]
+.checkout .form_view .form_row .form_field {
+    width;
+    margin;
+}
+
+[Checkout Option Container]
+.checkout .shipping_same_as_billing,
+.checkout .tax_exempt {
+    text;
+    padding;
+    margin;
+}
+
+[Checkout Buttons]
+.checkout .checkout_buttons {
+    margin;
+    padding;
+}
+
+[Checkout Rule]
+.checkout_rule {
+    background;
+    size;
+    margin;
+    text;
+}
+
+[Checkout Rule Step 1]
+.checkout_rule.step_1_active {
+    background;
+}
+
+[Checkout Rule Step 2]
+.checkout_rule.step_2_active {
+    background;
+}
+
+[Checkout Rule Step 3]
+.checkout_rule.step_3_active {
+    background;
+}
+
+[Checkout Rule Step 1 Label]
+.checkout_rule span.step_1 {
+    color;
+    size;
+}
+
+[Checkout Rule Step 2 Label]
+.checkout_rule span.step_2 {
+    color;
+    size;
+}
+
+[Checkout Rule Step 3 Label]
+.checkout_rule span.step_3 {
+    color;
+    size;
+}
+
+[Checkout Rule Inactive Label]
+.checkout_rule.step_1_active span.step_2,
+.checkout_rule.step_1_active span.step_3,
+.checkout_rule.step_2_active span.step_1,
+.checkout_rule.step_2_active span.step_3,
+.checkout_rule.step_3_active span.step_1,
+.checkout_rule.step_3_active span.step_2 {
+    color;
+}
+
+[Checkout Rule Active Label]
+.checkout_rule.step_1_active span.step_1,
+.checkout_rule.step_2_active span.step_2,
+.checkout_rule.step_3_active span.step_3 {
+    color;
+}
+
+[Payment and Shipping Methods List]
+.checkout .payment_method_list .payment_method_list_row,
+.checkout .payment_method_list,
+.checkout .shipping_method_list .shipping_method_list_row,
+.checkout .shipping_method_list {
+    width;
+}
+
+[Checkout Payment Methods Note]
+.checkout .payment_method_list .note {
+    padding;
+    margin;
+}
+
+[Checkout Payment or Shipping Method Row]
+.checkout .payment_method_list .payment_method_list_row,
+.checkout .shipping_method_list .shipping_method_list_row {
+    padding;
+    margin;
+}
+
+[Checkout Shipping Method Name]
+.shipping_method_list_row .shipping_method_name {
+    text;
+    width;
+}
+
+[Checkout Shipping Method Days]
+.shipping_method_list_row .shipping_method_days {
+    text;
+    width;
+}
+
+[Checkout Shipping Method Cost]
+.shipping_method_list_row .shipping_method_cost {
+    text;
+    width;
+}
+
+[Checkout Payment Method Label]
+.checkout .payment_method_form .form_descr {
+    text;
+    padding;
+    margin;
+}
+
+[Checkout Cart Item]
+.checkout .box.shoppingcart .product_item {
+    border;
+    padding;
+}
+
+[Checkout Cart Item Cell]
+.checkout .box.shoppingcart .product_item .product_name,
+.checkout .box.shoppingcart .product_item .product_total_price,
+.checkout .box.shoppingcart .product_item .product_sale_price,
+.checkout .box.shoppingcart .product_item .product_quantity_selector {
+    padding;
+}
+
+[Checkout Cart Item Header Cell]
+.checkout .box.shoppingcart .header .product_item .product_name,
+.checkout .box.shoppingcart .header .product_item .product_total_price,
+.checkout .box.shoppingcart .header .product_item .product_sale_price,
+.checkout .box.shoppingcart .header .product_item .product_quantity_selector {
+    text;
+    padding;
+}
+
+[Checkout Cart Item Name Cell]
+.checkout .box.shoppingcart .product_item .product_name {
+    padding;
+}
+
+[Checkout Cart Item Name]
+.checkout .box.shoppingcart .product_item .product_name a {
+    text;
+}
+
+[Checkout Cart Content]
+.checkout .box.shoppingcart .content {
+    padding;
+}
+
+[Checkout Step 3/4 - Cart Total]
+.checkout.step_4_active .shoppingcart_total,
+.checkout.step_3_active .shoppingcart_total {
+    margin;
+    padding;
+}
+
+[Checkout Step 4 Header]
+.checkout.step_4_active h1 {
+    text;
+    margin;
+}
+
+[Checkout Step 4 Note]
+.checkout.step_4_active .note {
+    padding;
+    text;
+}
+
+[Checkout Key Order Details Row]
+.checkout.step_4_active .key_order_details .value,
+.checkout.step_4_active .key_order_details .label {
+    line-height;
+}
+
+[Checkout Key Order Details Label]
+.checkout.step_4_active .key_order_details .label {
+    width;
+    text-align;
+}
+
+[Checkout Key Order Details Value]
+.checkout.step_4_active .key_order_details .value {
+    width;
+    margin;
+    text-align;
+}
+
+[Checkout Product File Link Container]
+.checkout .box.shoppingcart .product_item .product_name .product_files_link {
+    padding;
+    margin;
+}
+
+[Checkout Product File Link]
+.checkout .box.shoppingcart .product_item .product_name .product_files_link a {
+    text;
+}
+
+[Checkout Payment Method CC Info]
+.checkout .payment_method_list .form_view.credit_card_output {
+    padding;
+}
+
+[Checkout Payment Method CC Info Row]
+.checkout .payment_method_list .form_view.credit_card_output .form_row {
+    text;
+}
+
+[CC Info - Label]
+.form_view.credit_card_output .form_row .form_descr {
+    width;
+}
+
+[CC Info - Field Container]
+.form_view.credit_card_output .form_row .form_field {
+    margin;
+    width;
+}
+
+[Checkout PaypalPro ExpressCheckout]
+.checkout .paypalpro_expresscheckout {
+    position;
+    width;
+}
+
+[Checkout PaypalPro ExpressCheckout Container]
+.checkout .paypalpro_expresscheckout .paypalpro_uk_expresscheckout div {
+    padding;
+}
+
+[Checkout PaypalPro ExpressCheckout Error Message]
+.checkout .paypalpro_expresscheckout .paypalpro_uk_expresscheckout .error_message {
+    margin;
+    width;
+}
+
+[Checkout PaypalPro UK ExpressCheckout]
+.checkout .paypalpro_uk_expresscheckout {
+    position;
+    width;
+}
+
+[Order Items Border Color]
+table.order_items, table.order_items td, table.order_items th {
+    border-color;
+}
+[Order Items Header]
+table.order_items th {
+    background-color;
+    text;
+    text-align;
+}
+
+[Order Items]
+.order_items {
+    margin;
+    border;
+}
+
+[Order Items Without Images]
+.order_items.without_images {
+    border;
+}
+
+[Order Items With Images]
+.order_items.with_images {
+    border;
+}
+
+[Order Items - Product Name Header]
+.order_items th.product_data {
+    text-align;
+}
+
+[Order Items With Images - Header]
+.order_items.with_images th {
+    text;
+    padding;
+}
+
+[Order Items Without Images - Header]
+.order_items.without_images th {
+    text;
+    padding;
+}
+
+[Order Items Without Images - Data Cell]
+.order_items.without_images td {
+    text;
+    padding;
+    border;
+}
+
+[Order Items With Images - Data Cell]
+.order_items.with_images td {
+    text;
+    padding;
+    border;
+}
+
+[Order Items - Image]
+.order_items .product_img {
+    width;
+    text-align;
+}
+
+[Order Items - Product Name Cell]
+.order_items .product_data {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Product Name]
+.order_items td.product_data .product_name {
+    text;
+}
+
+[Order Items - Product Options]
+.order_items td.product_data .product_options {
+    padding;
+}
+
+[Order Items - Product Option List]
+.order_items td.product_data .product_options ul {
+    padding;
+    margin;
+}
+
+[Order Items - Product Option Value]
+.order_items td.product_data .product_options ul li .product_option_selected_value {
+    text;
+}
+
+[Order Items - Quantity]
+.order_items td.product_quantity_selector {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Sale Price]
+.order_items td.product_sale_price {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Total]
+.order_items td.product_total_price {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Button]
+.order_items td.product_total_price .label {
+    padding;
+    margin;
+}
+
+[Order Items - Button Label]
+.order_items td.product_total_price .label a {
+    text;
+    padding;
+}
+
+[Order Items - Button Label Hovered]
+.order_items td.product_total_price .label a:hover {
+    text;
+    background;
+}
+
+[Order Items Margin]
+.order_items_margin {
+    margin;
+}
+
+[Order Items Margin inside Shopping Cart]
+.shoppingcart .order_items_margin {
+    margin;
+}
+
+[Page Header Menu]
+.page_header .menu ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+[Page Header Menu Item]
+.page_header .menu li {
+    padding;
+    margin;
+    background;
+}
+
+[Page Header Menu Item w/o Link]
+.page_header .menu li.nolink {
+    text;
+    background;
+    padding;
+}
+
+[Page Header Menu Item Link]
+.page_header .menu li a {
+    text;
+}
+
+[Page Header Menu Item Link Hovered]
+.page_header .menu li a:hover {
+    text;
+    background;
+}
+
+[Page Top Menu Container]
+.page_top_menu .menu {
+    position;
+}
+
+[Page Top Menu]
+.page_top_menu .menu ul {
+    margin;
+    padding;
+}
+
+[Page Top Menu Item]
+.page_top_menu .menu li {
+    margin;
+    background;
+    border;
+}
+
+[Page Top Menu Last Item]
+.page_top_menu .menu li.last {
+    border;
+}
+
+[Page Top Menu Item Link]
+.page_top_menu .menu li a {
+    text;
+    padding;
+}
+
+[Page Top Menu Item Link Hovered]
+.page_top_menu .menu li a:hover {
+    text;
+    background;
+}
+
+[Page Footer Menu Container]
+.page_footer .menublock {
+    text-align;
+    padding;
+}
+
+[Page Footer Menu]
+.page_footer .menublock ul {
+    margin;
+    padding;
+}
+
+[Page Footer Menu Item]
+.page_footer .menublock li {
+    background;
+    border;
+    padding;
+    margin;
+}
+
+[Page Footer Menu Last Item]
+.page_footer .menublock li.last {
+    border;
+}
+
+[Page Footer Menu Item Link]
+.page_footer .menublock li a {
+    text;
+    padding;
+}
+
+[Page Footer Menu Item Link Hovered]
+.page_footer .menublock li a:hover {
+    text;
+    background;
+}
+
+[Account Form - Common Subheader]
+.box.myaccount .subheader {
+    padding;
+    margin;
+    background;
+    text;
+    border;
+}
+
+[Product File Download Link Container]
+.myaccount .product_download_link {
+    padding;
+}
+
+[Product File Download Link]
+.myaccount.checkout .product_item .product_name .product_download_link a {
+    text;
+}
+
+[Registration Subheader]
+.myaccount .signin_form .subheader,
+.myaccount .registr_invitation .subheader {
+    margin;
+    border;
+}
+
+[Registration Invitation]
+.myaccount .registr_invitation {
+    text;
+    width;
+    padding;
+    margin;
+    border;
+}
+
+[Sign In Form]
+.myaccount .signin_form {
+    text;
+    width;
+    padding;
+    margin;
+}
+
+[Registration Invitation Button]
+.myaccount .registr_invitation .button_register {
+    margin;
+}
+
+[Sign In Form - Row]
+.myaccount .signin_form .form_row {
+    padding;
+}
+
+[Sign In Form - Field Container]
+.myaccount .signin_form .form_field {
+    width;
+    margin;
+}
+
+[Sign In Form - Field Label]
+.myaccount .signin_form .form_descr {
+    width;
+}
+
+[Sign In Form - Field Label Text]
+.myaccount .signin_form .form_descr label {
+    text;
+}
+
+[Sign In Form - Button]
+.myaccount .signin_form .input_submit {
+    margin;
+}
+
+[Sign In Message]
+.myaccount .signin_form .success_message,
+.myaccount .signin_form .error_message {
+    margin;
+}
+
+[Sign In Box]
+.myaccount .signin_box {
+    padding;
+}
+
+[Sign In Box - Row]
+.left_column .myaccount .signin_box .form_view .form_row input,
+.right_column .myaccount .signin_box .form_view .form_row input {
+    margin;
+}
+
+[Sign In Box - Field Container]
+.myaccount .signin_box .form_field {
+    width;
+    margin;
+}
+
+[Sign In Box - Field Label]
+.myaccount .signin_box .form_descr {
+    width;
+    text;
+}
+
+[Sign In Box - Button]
+.myaccount .signin_box .input_submit {
+    margin;
+}
+
+[Sign In Box - Field Message]
+.myaccount .signin_box .success_message,
+.myaccount .signin_box .error_message {
+    margin;
+}
+
+[Sign In Box - Link]
+.myaccount .signin_box a {
+    margin;
+    padding;
+}
+
+[Signed In Box]
+.myaccount .signed_in_box  {
+    padding;
+}
+
+[Signed In Box - Link]
+.myaccount .signed_in_box a {
+    margin;
+    padding;
+}
+
+[Registration Form]
+.myaccount .registration_form {
+    padding;
+    margin;
+}
+
+[Registration Form - Message]
+.myaccount .registration_form .success_message,
+.myaccount .registration_form .error_message {
+    margin;
+}
+
+[Registration Form - Body]
+.myaccount .registration_form .form_view {
+    width;
+    margin;
+}
+
+[Registration Form - Row]
+.myaccount .registration_form .form_view .form_row {
+    padding;
+}
+
+[Registration Form - Label]
+.myaccount .registration_form .form_view .form_descr {
+    width;
+}
+
+[Registration Form - Field]
+.myaccount .registration_form .form_view .form_field {
+    width;
+    margin;
+}
+
+[Registration Form - Button]
+.myaccount .registration_form .input_submit {
+    margin;
+}
+
+[My Account]
+.myaccount .box.myaccount_home {
+    margin;
+}
+
+[My Account - Content]
+.box.myaccount_home .content {
+    padding;
+}
+
+[My Account - Header]
+.myaccount_home .content .header {
+    padding;
+    margin;
+    text;
+}
+
+[My Account - Section Header]
+.myaccount_home .content .header * {
+    text;
+    padding;
+    border;
+}
+
+[My Account - Section]
+.myaccount_home .orders_search,
+.myaccount_home .account_settings {
+    padding;
+    margin;
+}
+
+[My Account - Orders Search]
+.myaccount_home .orders_search {
+    width;
+    border;
+}
+
+[My Account - Order List Header]
+.myaccount_home .order_list {
+    margin;
+}
+
+[My Account - Order List Header]
+.myaccount_home .order_list th {
+    padding;
+    background;
+    text;
+    text-align;
+}
+
+[My Account - Order List Cell]
+.myaccount_home .order_list td {
+    text;
+    padding;
+    text-align;
+}
+
+[My Account - Empty Order List]
+.myaccount_home .order_list.empty {
+    text;
+    text-align;
+    padding;
+}
+
+[My Account - Search Orders By Status]
+.myaccount_home .orders_search .by_statuses {
+    text;
+    width;
+    line-height;
+}
+
+[My Account - Search Order By Status - Label]
+.myaccount_home .orders_search .by_statuses .label {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters]
+.myaccount_home .orders_search .by_form {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters - Form Row]
+.myaccount_home .orders_search .by_form .form_descr {
+    text-align;
+    padding;
+}
+
+[My Account - Search Orders By Parameters - Date Dropdown]
+.myaccount_home .orders_search .by_form .form_field.date select {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters - Dropdown]
+.myaccount_home .orders_search .by_form .form_field select {
+    text;
+    width;
+}
+
+[My Account - Search Orders By Parameters - Button]
+.myaccount_home .orders_search .by_form .input_submit {
+    margin;
+    position;
+}
+
+[My Account - Search Orders By Id]
+.myaccount_home .orders_search .by_id {
+    text;
+    margin;
+}
+
+[My Account - Account Settings]
+.myaccount_home .account_settings {
+    width;
+}
+
+[My Account - Account Settings - Link]
+.myaccount_home .account_settings a {
+    text;
+    line-height;
+    padding;
+    margin;
+}
+
+[My Account - Back Button]
+.myaccount .button_back {
+    margin;
+}
+
+[Invoice - Invoice Header]
+.myaccount.invoice .content .header,
+.myaccount.invoice .content h1 {
+    background;
+    color;
+}
+
+[Invoice - Invoice Total]
+.myaccount.invoice .shoppingcart_total {
+    padding;
+}
+
+[Invoice Items - Header]
+.myaccount.invoice .order_items th {
+    background;
+    text;
+}
+
+[Change Password Box]
+.myaccount .change_password {
+    text;
+    padding;
+    margin;
+}
+
+[Change Password - Message]
+.myaccount .change_password .success_message,
+.myaccount .change_password .error_message {
+    margin;
+}
+
+[Change Password - Form]
+.myaccount .change_password .form_view {
+    width;
+    margin;
+}
+
+[Change Password - Form Row]
+.myaccount .change_password .form_view .form_row {
+    padding;
+}
+
+[Change Password - Form Field Label]
+.myaccount .change_password .form_view .form_descr {
+    text;
+    width;
+}
+
+[Change Password - Form Field Container]
+.myaccount .change_password .form_view .form_field {
+    text;
+    width;
+    margin;
+}
+
+[Change Password - Form Button]
+.myaccount .change_password .input_submit {
+    margin;
+}
+
+[Personal Info]
+.myaccount .personalinfo_form {
+    padding;
+    margin;
+}
+
+[Personal Info - Subheader]
+.myaccount .personalinfo_form .form_view .subheader {
+    text;
+    margin;
+}
+
+[Personal Info - Message]
+.myaccount .personalinfo_form .success_message,
+.myaccount .personalinfo_form .error_message {
+    text;
+    paddin;
+    margin;
+    border;
+}
+
+[Personal Info - Form]
+.myaccount .personalinfo_form .form_view {
+    width;
+    margin;
+}
+
+[Personal Info - Form Row]
+.myaccount .personalinfo_form .form_view .form_row {
+    padding;
+    margin;
+}
+
+[Personal Info - Form Field Label]
+.myaccount .personalinfo_form .form_view .form_descr {
+    width;
+}
+
+[Personal Info - Form Field Container]
+.myaccount .personalinfo_form .form_view .form_field {
+    text;
+    width;
+    margin;
+}
+
+[Personal Info - Form Button]
+.myaccount .personalinfo_form .input_submit {
+    margin;
+}
+
+[Product File Download - Link List Header]
+.myaccount .product_download_links .header.link_list {
+    background;
+    text;
+    padding;
+}
+
+[Product File Download - Header Cell]
+.myaccount .product_download_links .header .attribute,
+.myaccount .product_download_links .header .value {
+    text;
+    padding;
+}
+
+[Product File Download - Cell]
+.myaccount .product_download_links .attribute,
+.myaccount .product_download_links .value {
+    text;
+    padding;
+    width;
+    text-align;
+}
+
+[Product File Download - Value Column]
+.myaccount .product_download_links .value {
+    width;
+}
+
+[Activation Message]
+.myaccount .activation_message {
+    padding;
+    text;
+}
+
+[Download Prompt]
+.download_prompt {
+    text;
+    padding;
+    text-align;
+}
+
+[Remember Me Option]
+.account_remember_me_option {
+    text;
+    padding;
+    margin;
+}[Navigation Bar Item]
+.navigation_bar ul li span {
+    border;
+    background;
+    padding;
+    margin;
+}
+
+[Navigation Bar Item Hovered]
+.navigation_bar ul li span:hover {
+    border;
+    background;
+}
+
+[Navigation Bar Item Text]
+.navigation_bar ul li span a {
+    text;
+}
+
+[Navigation Bar Item Text Hovered]
+.navigation_bar ul li span a:hover {
+    text;
+}
+
+[Navigation Bar Empty]
+.navigation_bar.empty p {
+    padding;
+    text;
+}
+[Detailed Product Info]
+.product_info .detailed_product_info {
+    width;
+    padding;
+    margin;
+}
+
+[Product Name]
+.product_info .product_name {
+    text;
+    padding;
+    margin;
+}
+
+[Product Info - Limited Inventory]
+.product_info .limited_inventory {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Quantity]
+.product_info .product_add_quantity {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Rating ]
+.product_info .product_rating {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Buttons]
+.product_info .product_buttons {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - Options Message]
+.product_info .options_error {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - List Price]
+.product_info .product_list_price {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+[Product Info - List Price Value]
+.product_info .product_list_price .value {
+    text;
+}
+
+[Product Info - Sale Price]
+.product_info .product_sale_price {
+    text;
+    width;
+    text-align;
+    padding;
+    margin;
+}
+
+[Product Info - Sale Price Value]
+.product_info .product_sale_price .value {
+    text;
+}
+
+[Product Info - Product Image]
+.product_info .product_img {
+    width;
+    text-align;
+    padding;
+    margin;
+}
+
+[Product Info - Rating]
+.product_info .product_rating_info {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Options]
+.product_info .product_options {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Short Description]
+.product_info .product_short_description {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Detailed Description]
+.product_info .product_detailed_description {
+    text;
+    line-height;
+    background;
+    padding;
+    margin;
+}
+
+[Product Info - Rating Box]
+.product_info .product_rating .rating-box {
+    margin;
+}
+
+[Discount Star]
+.product_info .discount_star {
+    width: 69px;
+    text-align;
+    padding: 0px;
+    margin;
+}
+
+
+[Detailed Description Paragraph]
+.product_info .product_detailed_description p {
+    margin;
+    padding;
+}
+
+[Limited Inventory]
+.product_info .limited_inventory {
+    width:  120px;
+    margin: auto auto;
+    padding-left: 50px;
+}
+
+
+[Product Options Row]
+.product_options.form_view .form_row {
+    padding;
+    margin;
+}
+
+[Product Options]
+.product_options.form_view {
+    padding;
+    margin;
+}
+
+[Product Option - Name]
+.product_options.form_view .form_descr {
+    text;
+}
+
+[Product Option - Value Container]
+.product_options.form_view .form_field {
+    margin;
+    width;
+}
+
+[No Image Icon]
+.noimage {
+    background;
+    size;
+    margin;
+}
+[Product List Subheader]
+.product_list .subheader {
+    text;
+    background;
+    border;
+}
+
+[Product List Toolbar]
+.product_list .toolbar {
+    border;
+}
+
+[Product List Top Toolbar]
+.product_list .toolbar.top {
+    border;
+}
+
+[Product List Bottom Toolbar]
+.product_list .toolbar.bottom {
+    border;
+    background;
+}
+
+[Products Box Content]
+.box.product_list .content {
+    padding;
+}
+
+[Product List Empty]
+.checkout .product_list_items.empty,
+.shoppingcart .product_list_items.empty,
+.product_list .product_list_items.empty {
+    padding;
+    text;
+    text-align;
+    line-height;
+}
+
+[Product List - View All Link Container]
+.product_list .view_all_link {
+    text;
+    padding;
+    margin;
+}
+
+[Center Column Product List - View All Link Container]
+.center_column .product_list .view_all_link {
+    position;
+}
+
+[Center Column Product List - View All Link]
+.center_column .product_list .view_all_link a {
+    text;
+}
+
+
+[Product Item]
+.product_item {
+    width;
+    text-align;
+}
+
+[4 Columns List - Product Item]
+.product_list_items.columns_4  .product_item {
+    width;
+}
+
+[5 Columns List - Product Item]
+.product_list_items.columns_5  .product_item {
+    width;
+}
+
+[Product Item Rating Box]
+.product_item .product_rating .rating-box {
+    margin;
+}
+
+[Product Item - Image Section]
+.product_item .product_img {
+    text-align;
+    width;
+    padding;
+    margin;
+}
+
+[Product Item - Product Name]
+.product_item .product_name a {
+    text;
+}
+[Product Item - Product Name Hovered]
+.product_item .product_name a:hover {
+    text;
+    background;
+}
+
+[Product Item - Rating Section]
+.product_item .product_rating {
+    margin;
+    padding;
+    width;
+}
+
+[Product Item - List Price Section]
+.product_item .product_list_price {
+    text;
+    width;
+    padding;
+    margin;
+}
+[Product Item - List Price Value]
+.product_item .product_list_price .value {
+    text;
+}
+
+[Product Item - Sale Price Section]
+.product_item .product_sale_price {
+    text;
+    width;
+    padding;
+    margin;
+}
+[Product Item - Sale Price Value]
+.product_item .product_sale_price .value {
+    text;
+}
+
+[Product Item - Limited Inventory]
+.product_item .limited_inventory {
+    text;
+    background;
+}
+
+[Product Item - Buttons Section]
+.product_item .product_buttons {
+    padding;
+    margin;
+}
+
+
+[Product Item in Side Column]
+.left_column .product_list.bestsellers .product_item,
+.right_column .product_list.bestsellers .product_item,
+.left_column .product_list.related_products .product_item,
+.right_column .product_list.related_products .product_item,
+.left_column .product_list.featured_products .product_item,
+.right_column .product_list.featured_products .product_item {
+    width;
+    border;
+    padding;
+    margin;
+}
+
+[Product Type Filter Button]
+.product_type_filter .input_submit {
+    margin;
+}
+[Top Search Pattern Input Field]
+.page_header .search .input_text {
+    background;
+    border: none;
+    text;
+    padding;
+    width;
+    margin;
+}
+
+[Top Search Button]
+.page_header .search input.button_search {
+    padding;
+    margin;
+}
+
+[Search Results Subheader]
+.product_list.search_result .subheader {
+    border;
+}
+
+[Search Results - Toolbar]
+.product_list.search_result .toolbar {
+    border;
+}
+
+[Search Results - Top Toolbar]
+.product_list.search_result .toolbar.top {
+    border;
+}
+
+[Search Results - Bottom Toolbar]
+.product_list.search_result .toolbar.bottom {
+    border;
+}
+
+[Search Results Content]
+.box.product_list.search_result .content {
+    padding;
+}
+
+[Search Results - Product Items]
+.product_list.search_result .product_list_items {
+    background;
+}
+
+[Search Results Empty]
+.product_list.search_result .product_list_items.empty {
+    background;
+    padding;
+    text;
+}
+
+[Search Results - Product Item]
+.search_result .product_item {
+    width;
+    padding;
+    text;
+}
+
+[Search Results - Product Item Section]
+.search_result .product_item .limited_inventory,
+.search_result .product_item .product_descr,
+.search_result .product_item .product_rating,
+.search_result .product_item .product_buttons,
+.search_result .product_item .product_img,
+.search_result .product_item .product_list_price,
+.search_result .product_item .product_sale_price,
+.search_result .product_item .product_name {
+    width;
+}
+
+[Search Results - Product Rating Box]
+.search_result .product_item .product_rating .rating-box {
+    margin;
+}
+
+[Search Results - Product Item Image]
+.search_result .product_item .product_img {
+    text-align;
+    padding;
+    width;
+}
+
+[Search Results - Product List Price]
+.search_result .product_item .product_list_price {
+    padding;
+}
+
+[Search Results - Search Form]
+.search_result .search_form {
+    padding;
+}
+
+[Search Results - Search Form - Pattern Input Field]
+.search_result .search_form .input_text {
+    width;
+}
+
+[Search Results - Search Form - Button]
+.search_result .search_form input.button_search {
+    background;
+    padding;
+    margin;
+}
+
+[Search Results Empty]
+.search_result .product_list_items.empty {
+    width;
+    margin;
+    text;
+    padding;
+}
+[Shipping Calculator - Label]
+.box.shipping_calculator .form_descr {
+    text;
+}
+
+[Shipping Calculator - Field]
+.box.shipping_calculator .form_field {
+    text;
+}
+
+[Shipping Calculator - Address Label]
+.box.shipping_calculator .ship_to_address .form_descr,
+.box.shipping_calculator .dest_address_form .form_descr {
+    text;
+    width;
+}
+
+[Shipping Calculator - Address Field]
+.box.shipping_calculator .ship_to_address .form_field,
+.box.shipping_calculator .dest_address_form .form_field {
+    text;
+    margin;
+    width;
+}
+
+[Shipping Calculator - Method Label]
+.box.shipping_calculator .chosen_method .form_descr,
+.box.shipping_calculator .shipping_method_form .form_descr {
+    text;
+    width;
+}
+
+[Shipping Calculator - Method Field]
+.box.shipping_calculator .chosen_method .form_field,
+.box.shipping_calculator .shipping_method_form .form_field {
+    text;
+    margin;
+    width;
+}
+
+[Shipping Calculator Section]
+.box.shipping_calculator .ship_to_address,
+.box.shipping_calculator .chosen_method,
+.box.shipping_calculator .shipping_method_form,
+.box.shipping_calculator .dest_address_form {
+    padding;
+    width;
+}
+
+[Shipping Calculator Header]
+.box.shipping_calculator h3 {
+    background;
+    border;
+    text;
+    margin;
+    padding;
+}[Cart Preview]
+.cart_preview {
+    position-right;
+    text;
+    background;
+    padding;
+}
+
+[Top Checkout Button Margin]
+.page_top_menu .button_checkout {
+    margin;
+} 
+
+[Shopping Cart Content]
+.box.shoppingcart .content {
+    padding;
+}
+
+[Shopping Cart - Buttons]
+.shoppingcart .cart_buttons {
+    margin;
+    padding;
+    border;
+}
+
+[Shopping Cart - Promo Code Form]
+.shoppingcart .promo_code_form {
+    padding;
+    line-height;
+    text;
+}
+
+[Shopping Cart - Total]
+.shoppingcart .shoppingcart_total {
+    width;
+    padding;
+}
+
+[Shopping Cart - Box]
+.shoppingcart .box .content {
+    border;
+    padding;
+}
+
+[Shopping Cart - Header]
+.shoppingcart .header {
+    padding;
+}
+
+[Shopping Cart - Product Items - Header]
+.shoppingcart .header .product_item {
+    border;
+    padding;
+}
+
+[Shopping Cart - Product Items - Header Cell]
+.shoppingcart .header .product_name,
+.shoppingcart .header .product_options,
+.shoppingcart .header .product_quantity_selector,
+.shoppingcart .header .product_sale_price,
+.shoppingcart .header .product_total_price,
+.shoppingcart .header .product_img {
+    padding;
+}
+
+[Shopping Cart - Header - Product Name]
+.shoppingcart .header .product_name {
+    width;
+    text;
+}
+
+[Checkout - Shopping Cart - Product Name]
+.checkout .shoppingcart .product_name {
+    width;
+}
+
+[Checkout - Shopping Cart - Header - Product Name] 
+.checkout .shoppingcart .header .product_name {
+    width;
+}
+
+[Minicart - Product Item]
+.minicart_item {
+    width;
+    padding;
+}
+
+[Minicart - Item Image]
+.minicart_item .product_img {
+    width;
+    padding;
+    margin;
+    text-align;
+}
+
+[Minicart - Item Name]
+.minicart_item .product_name {
+    text;
+    width;
+    padding;
+    margin;
+}
+
+[Minicart - Item Link]
+.minicart_item .product_name a {
+    text;
+    padding;
+}
+
+[Minicart - Item Link Hovered]
+.minicart_item .product_name a:hover {
+    text;
+    background;
+}
+
+[Minicart - Total]
+.minishoppingcart .shoppingcart_total {
+    padding;
+}
+
+[Minicart - Value Name]
+.minishoppingcart .shoppingcart_total .total_name {
+    width;
+    text;
+}
+
+[Minicart - Value]
+.minishoppingcart .shoppingcart_total .total_value {
+    width;
+    text;
+}
+
+[Minicart - Links]
+.minishoppingcart .cart_buttons {
+    padding;
+}
+
+[Minicart - Link]
+.minishoppingcart .cart_buttons  a {
+    padding;
+}
+
+[Shopping Cart - Gift Certificate Content]
+.box.shoppingcart .box.gift_certificate .content {
+}
+
+[Shopping Cart - Gift Certificate Header]
+.box.shoppingcart .box.gift_certificate .content .header {
+    padding;
+}
+
+[Gift Certificate Form]
+.gift_certificate_applied_list, .gift_certificate_form {
+    padding;
+}
+
+[Gift Certificate Applied List]
+.gift_certificate_applied_list {
+    padding;
+}
+
+[Gift Certificate Code]
+.gift_certificate_applied_list .gift_certificate_code {
+    width;
+}
+
+[Gift Certificate Amount]
+.gift_certificate_applied_list .gift_certificate_amount {
+    width;
+}
+
+[Gift Certificate Code]
+.gift_certificate_applied_list .gift_certificate_remainder {
+    width;
+}
+
+[Gift Certificate Remove Link]
+.gift_certificate_applied_list .gift_certificate_removelink {
+    width;
+}
+
+[Create Gift Certificate Form]
+.create_gc_form {
+    padding;
+}
+
+[Create Gift Certificate Form - Form]
+.create_gc_form form {
+    width;
+    margin;
+}
+
+[Create Gift Certificate Form - Field]
+.create_gc_form .form_view .form_field {
+    width;
+}
+
+[Create Gift Certificate Form - Buttons]
+.create_gc_form .buttons {
+    margin;
+}
+
+[Subcategory List]
+.page_container .subcategory_list {
+    padding;
+}
+
+[Subcategory List - Item]
+.page_container .subcategory_list .subcategory_item {
+    padding;
+    width;
+    text-align;
+    height;
+}
+
+[Subcategory List in Right Column - Item]
+.right_column .subcategory_list .subcategory_item {
+    width;
+}
+ 
+[Subcategory Item - Image]
+.page_container .subcategory_item .subcategory_img {
+    margin;
+}
+
+[Subcategory Item - Name]
+.page_container .subcategory_item .subcategory_name {
+    padding;
+    margin;
+}
+[Subscription Form]
+.subscribe_form {
+    padding;
+}
+
+[Subscription Form Header]
+.subscribe_form h2 {
+    padding;
+    margin;
+    background;
+    text;
+    border;
+}
+
+[Subscription Form - Error Message]
+.subscribe_form .success_message,
+.subscribe_form .error_message {
+    padding;
+    margin;
+}
+
+[Subscription Topic List]
+.subscribe_form .form_view {
+    padding;
+}
+
+[Subscription Topic Name]
+.subscribe_form .form_row label {
+    text;
+}
+
+[Subscription Form - E-Mail Input]
+.subscribe_form .input_text {
+    margin;
+    width;
+}
+
+[Subscription Form in Column - Submit Button]
+.right_column .subscribe_form .input_submit,
+.left_column .subscribe_form .input_submit {
+    margin;
+}
+
+[Subscription Form in Center - Submit Button]
+.center_column .subscribe_form .input_submit {
+    margin;
+}
+
+[Subscription Form in Center]
+.center_column .subscribe_form {
+    padding;
+}
+
+[Subscription Form in Center - Row]
+.center_column .subscribe_form .form_row {
+    padding;
+    margin;
+}
+
+[Subscription Form on Subscription Page - E-Mail Input]
+.myaccount .subscribe_form .input_text {
+    margin;
+    width;
+}
+
+[Currently Subscribed E-Mail]
+.myaccount .subscribe_form .current_email {
+    text;
+    width;
+    padding;
+}
+
+[Subscription Form Buttons]
+.myaccount .subscribe_form_buttons {
+    margin;
+    padding;
+    border-top;
+}
+
+['No Subscribed E-Mails' Message]
+.myaccount .no_subscribed_emails {
+    width;
+    padding;
+    text;
+}
+
+[Subscription Form on Subscription Page - New E-Mail]
+.myaccount .subscribe_form .new_email {
+    padding;
+}
+
+[Subscription Form - 'Already Subscribed' Message]
+.subscribe_form .already_subscribed {
+    text;
+	padding;
+}

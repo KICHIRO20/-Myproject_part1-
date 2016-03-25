@@ -1,0 +1,14 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<?php if(getLocal_HeaderNestedCategories() == ""){ ?> 
+<li>
+<a href="<?php CategoryLink(); ?>" title=""><?php CategoryName(); ?></a>
+</li>
+ <?php } else { ?>
+<li class="dropdown dropdown-megamenu">
+<a href="<?php CategoryLink(); ?>" title="" data-toggle="dropdown" class="dropdown-toggle"><?php CategoryName(); ?></a>
+<ul class="dropdown-menu"><li><div class="header-navigation-content"><div class="row"><?php Local_HeaderNestedCategories(); ?></div></div></li></ul>
+</li>
+<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->
+<div class="header-navigation-content"><?php Local_HeaderNestedCategories(); ?></div>

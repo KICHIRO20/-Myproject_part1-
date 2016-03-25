@@ -1,0 +1,10 @@
+<table>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="label popup_dialog_body_left_padded" style="text-align: center; background-color: <?php TDStyle(); ?>;"><div id="div_<?php CurrencyId(); ?>" style="font-weight: <?php CurrencyCodeStyle(); ?>;"><?php CurrencyCode(); ?></div><INPUT TYPE="hidden" name="hf_<?php CurrencyId(); ?>" value="<?php CurrencyId(); ?>"></td>
+    <td class="label" style="text-align: center; background-color: <?php TDStyle(); ?>;"><INPUT TYPE="text" name="ci_<?php CurrencyId(); ?>" id="ci_<?php CurrencyId(); ?>" value="<?php CurrencyName(); ?>" size=50 <?php CurrencyEnabled(); ?> style="background-color: <?php CurrencyStyle(); ?>;"></td>
+    <td class="label" style="text-align: center; background-color: <?php TDStyle(); ?>;"><INPUT TYPE="checkbox" value="<?php CurrencyId(); ?>" style="border: 0;" <?php CurrencyActive(); ?> onclick="return changeCurrencyActivation(this, <?php CurrencyId(); ?>);" id="cb_<?php CurrencyId(); ?>" name="cb_<?php CurrencyId(); ?>"></td>
+    <td class="label popup_dialog_body_right_padded" style="text-align: center; background-color: <?php TDStyle(); ?>;"><INPUT TYPE="radio" value="<?php CurrencyId(); ?>" style="border: 0;" <?php CurrencyDefault(); ?> <?php CurrencyEnabled(); ?> name="default_currency" id="default_<?php CurrencyId(); ?>"></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</table>

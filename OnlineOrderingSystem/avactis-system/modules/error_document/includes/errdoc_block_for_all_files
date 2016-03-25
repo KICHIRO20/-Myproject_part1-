@@ -1,0 +1,1 @@
+ErrorDocument %error_code% %url_dir%%error_code_file%

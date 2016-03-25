@@ -1,0 +1,11 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form-group" id="tr_<?php Local_FormSelectFieldID(); ?>">
+<label for="<?php Local_FormSelectFieldID(); ?>" class="required"><?php Local_FieldLabel(); ?><?php Label('CHECKOUT_ASTERISK'); ?></label>
+        <select class="Normal form-control"
+                name="<?php Local_FormSelectFieldName(); ?>"
+                id="<?php Local_FormSelectFieldID(); ?>"
+                onchange="<?php Local_FormSelectOnchange(); ?>">
+            <?php Local_FormSelectOptions(); ?>
+        </select>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

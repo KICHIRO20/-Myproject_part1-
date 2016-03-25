@@ -1,0 +1,173 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.file_browser {
+    position:fixed;
+    top: 5.5em;
+    border: solid 1px black;
+    background: #FFFFFF;
+    overflow: hidden;
+    height: 100%;
+}
+.fb_side {
+	border: solid 1px black;
+	overflow: auto;
+	width: 228px;
+	height: 200px;
+}
+.folders_list {
+	border: 0px;
+	
+	font-size: 8pt;
+	font-weight: normal;
+}
+.files_list {
+	border: 0px;
+	
+	font-size: 8pt;
+	font-weight: normal;
+}
+.fb_record {
+	background: #FFFFFF;
+	color: #000000;
+	cursor: default;
+}
+.fb_record_hover {
+	background: #CED4DD;
+	color: #000000;
+	cursor: pointer;
+}
+</style>
+<script language="JavaScript">
+function onFBRecordOver_<?php ParentField(); ?>(el)
+{
+  el.className = 'fb_record_hover';
+};
+function onFBRecordOut_<?php ParentField(); ?>(el)
+{
+  el.className = 'fb_record';
+};
+function onFolderClick_<?php ParentField(); ?>(fld)
+{
+  requestToFolderContent_<?php ParentField(); ?>(current_dir_<?php ParentField(); ?>+fld);
+};
+function onFileClick_<?php ParentField(); ?>(fl)
+{
+  document.getElementById('fb_selected_file_<?php ParentField(); ?>').value = current_dir_<?php ParentField(); ?> + fl;
+};
+var current_dir_<?php ParentField(); ?> = '<?php StartFolder(); ?>';
+function requestToFolderContent_<?php ParentField(); ?>(folder_path)
+{
+        disableBlock('fbrowser_<?php ParentField(); ?>',7);
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'dummy': '<?php ParentField(); ?>',
+            	'asc_action': 'get_folder_content',
+            	'folder_path': folder_path
+            },
+            // Function is called when an answer arrives. 
+            function(result, output) {
+            	fillBrowserSides_<?php ParentField(); ?>(result["folder_content"]);
+            	current_dir_<?php ParentField(); ?> = result["folder_content"]["folder_path"];
+            	document.getElementById('fb_selected_dir_<?php ParentField(); ?>').value = result["folder_content"]["folder_path"];
+                enableBlock('fbrowser_<?php ParentField(); ?>');
+            },
+            'json'
+        );
+};
+function fillBrowserSides_<?php ParentField(); ?>(content)
+{
+  document.getElementById('fb_folders_<?php ParentField(); ?>').innerHTML = '';
+  var _html = '<table class="folders_list" cellspacing="0" cellpadding="1" width="100%">';
+  _html += '<colgroup><col width="17"><col width="98%"></colgroup>';
+  for(i=0;i<content["folders"].length;i++)
+  {
+    if(content["folders"][i]!='.')
+    {
+        record_img = (content["folders"][i] == '..') ? 'fld_up.gif' : 'folder.gif';
+		record_html = '<tr class="fb_record" onMouseOver="onFBRecordOver_<?php ParentField(); ?>(this);" onMouseOut="onFBRecordOut_<?php ParentField(); ?>(this);" onClick="onFolderClick_<?php ParentField(); ?>(\''+content["folders"][i]+'\')">';
+		record_html += '<td><img src="images/fsicons/'+record_img+'"></td>';
+		record_html += '<td nowrap>'+content["folders"][i]+'</td></tr>';
+	    _html += record_html;
+	};
+  };
+  _html += '</table>';
+  document.getElementById('fb_folders_<?php ParentField(); ?>').innerHTML = _html;
+  document.getElementById('fb_files_<?php ParentField(); ?>').innerHTML = '';
+  _html = '<table class="files_list" cellspacing="0" cellpadding="1" width="100%">'
+  _html += '<colgroup><col width="17"><col width="98%"></colgroup>';
+  for(i=0;i<content["files"].length;i++)
+  {
+		record_html = '<tr class="fb_record" onMouseOver="onFBRecordOver_<?php ParentField(); ?>(this);" onMouseOut="onFBRecordOut_<?php ParentField(); ?>(this);" onClick="onFileClick_<?php ParentField(); ?>(\''+content["files"][i]+'\')">';
+		record_html += '<td>&nbsp;</td>';
+		record_html += '<td nowrap>'+content["files"][i]+'</td></tr>';
+	    _html += record_html;
+  };
+  _html += '</table>';
+  document.getElementById('fb_files_<?php ParentField(); ?>').innerHTML = _html;
+};
+function FBonOKClick_<?php ParentField(); ?>()
+{
+    document.getElementById('<?php ParentField(); ?>').value = document.getElementById('fb_selected_file_<?php ParentField(); ?>').value;
+    enableBlock('<?php ParentBlock(); ?>');
+    hideBlock('fbrowser_<?php ParentField(); ?>');
+}
+</script>
+<div class="file_browser row" id="fbrowser_<?php ParentField(); ?>" style="display: none;">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-file-image-o"></i>&nbsp;<?php xmsg('SH','FILE_BROWSER'); ?>
+					</span>
+				</div>
+				<div class="actions">
+					<a class="btn btn-circle btn-default" href="javascript:hideBlock('fbrowser_<?php ParentField(); ?>'); enableBlock('<?php ParentBlock(); ?>')" data-original-title="" title="">
+						<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_CANCEL'); ?>
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-sm-12">
+						<input type="text" id="fb_selected_dir_<?php ParentField(); ?>" class="value form-control" value="<?php StartFolder(); ?>" readonly>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-sm-6">
+						<div id="fb_folders_<?php ParentField(); ?>" class="fb_side"></div>
+					</div>
+					<div class="col-sm-6">
+						<div id="fb_files_<?php ParentField(); ?>" class="fb_side"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<?php xmsg('SH','SELECTED_FILE'); ?><br />
+						<textarea id="fb_selected_file_<?php ParentField(); ?>" class="form-control" readonly></textarea>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-sm-12 col-sm-offset-4">
+						<a class="btn btn-circle btn-default" href="javascript:FBonOKClick_<?php ParentField(); ?>();"><i class="fa fa-check"></i> &nbsp;<?php msg('BTN_OK'); ?></a>
+						<a class="btn btn-circle btn-default" href="javascript:hideBlock('fbrowser_<?php ParentField(); ?>'); enableBlock('<?php ParentBlock(); ?>')"><i class="fa fa-times"></i>&nbsp;<?php msg('BTN_CANCEL'); ?></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script language="JavaScript">
+fb_win_onload_back_<?php ParentField(); ?> = window.onload;
+window.onload = function() {
+    if(fb_win_onload_back_<?php ParentField(); ?>)
+        fb_win_onload_back_<?php ParentField(); ?>();
+    setTimeout("requestToFolderContent_<?php ParentField(); ?>(current_dir_<?php ParentField(); ?>)",window_onload_timeout);
+};
+window_onload_timeout += 10;
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

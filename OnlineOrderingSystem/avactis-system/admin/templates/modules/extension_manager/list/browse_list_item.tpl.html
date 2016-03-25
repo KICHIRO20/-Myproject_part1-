@@ -1,0 +1,261 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<script type="text/javascript">
+function openModal() {
+        document.getElementById('modal').style.display = 'block';
+        document.getElementById('fade').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById('fade').style.display = 'none';
+}
+   
+
+
+   $(document).ready(function() {    
+	
+   $("#install_ext_<?php ExtensionFolderName(); ?>").click(function (event) {
+
+   /*Colorbox - start*/
+   	<?php 
+   	
+   		$getUserName = json_decode(getFetchUserDetails());
+   		if($getUserName[0] == '')
+   		{ 
+ 	?> 		
+ 	 
+ 			$(".marketlogin").show();
+ 			$("#install_ext_<?php ExtensionFolderName(); ?>").colorbox({inline:true, href:".marketlogin",maxheight:"80%",maxwidth:"80%",height:"400px",width:"500px"});
+ 			event.preventDefault();
+ 	<?php
+ 		}
+ 		else
+ 		{
+   	?>
+    /*Colorbox - End*/
+   	
+	var marketplace_usr = $("#marketplace_username").val();
+	var marketplace_pwd = $("#marketplace_password").val();
+	var extension_zip_name = $("#extension_zip_name_<?php ExtensionFolderName(); ?>").val();
+    var store_url = $("#store_url").val();
+
+        event.preventDefault();
+        openModal();
+        $('html, body').animate({scrollTop:$('#ext_header_img').position().top}, '600');
+        $.ajax({ 
+            type: "post",
+            url: store_url+"download_extension.php?asc_action=MarketPlaceActionURL",
+            data: {
+            	marketplace_usr : marketplace_usr,
+            	marketplace_pwd : marketplace_pwd,
+            	store_url : store_url,
+            	extension_zip_name : extension_zip_name,
+               },
+               
+            success: function (response) {
+           
+             closeModal();
+
+		     	if((response.indexOf("not_valid_marketplace_user") >= 0) || (response.indexOf("not_valid_next_user") >= 0) || (response.indexOf("ziparchive_class_not_found") >= 0) || $.trim(response)== "") 
+				{
+					response = response;
+				} 
+				
+            	else
+            	{
+            		response = "success";
+            	}
+
+           		switch($.trim(response))
+           		{
+           		
+           			case 'ziparchive_class_not_found' :	
+       								var msg = "<?php Msg('ZIPARCHIVE_CLASS_NOT_FOUND'); ?>";
+       								$("#user_msg").html(msg); 
+       								$("#user_msg").show();
+								$('html, body').animate({scrollTop:$('#ext_header_img').position().top}, '600');
+       								break;
+           		
+           			case 'success':	
+           			
+           							$.post("admin_template.php?identifier=AddMarketPlaceExtensions&asc_action=InstallMarketPlaceExtension",
+									{
+											extension_zip_name : extension_zip_name,
+									},
+									function(data, textStatus)
+									{
+										for(i = 0; i < data.length; i++) 
+								 		{
+								 		 	var verify_msg = data[0];
+											$("#verify_msg").html(verify_msg);
+						
+											var download_msg = data[1];
+											$("#download_msg").html(download_msg);
+						
+											var extracting_msg = data[2];
+											$("#extracting_msg").html(extracting_msg);
+					
+											var installing_msg = data[3];
+											$("#installing_msg").html(installing_msg);
+						
+											var installed_ext_msg = data[4];
+											$("#installed_ext_msg").html(installed_ext_msg);
+
+											if(!installed_ext_msg) 
+											{ 
+												$('#parent_msg_div .slidediv').each(function(index){
+												var _this = this;
+												setTimeout( function(){ $(_this).show(); $("#configure_ext_msg").css('display','none'); }, 1000*index );
+												});
+											}
+											else
+											{
+												$('#parent_msg_div .slidediv').each(function(index){
+												var _this = this;
+												setTimeout( function(){ $(_this).show(); }, 1000*index );
+												});
+											}
+											
+										
+											$('#parent_msg_div .slidediv').hide();
+											$('#parent_msg_div #user_msg').hide();
+										 }
+	 									},"json"
+									);
+									
+									$("#install_ext_<?php ExtensionFolderName(); ?>").attr('disabled','true');
+									// For scrolling to top of the page							 
+									$('html, body').animate({scrollTop:$('#ext_header_img').position().top}, '600');
+	       							break;	
+           							          			
+           			case 'not_valid_marketplace_user': 
+           									var msg = "<?php Msg('NOT_VALID_MARKETPLC_USR'); ?>";
+           									$("#user_msg").html(msg);
+           									$("#user_msg").show();  
+										$('html, body').animate({scrollTop:$('#ext_header_img').position().top}, '600');
+
+           							break;
+           						
+           			case 'not_valid_next_user' :
+           								var msg = "<?php Msg('NO_AVACNEXT_MEMBERSHIP'); ?>";
+           								$("#user_msg").html(msg);
+           								$("#user_msg").show();
+									$('html, body').animate({scrollTop:$('#ext_header_img').position().top}, '600');
+
+           						break;
+           			
+           		}           
+            },
+        });
+       <?php
+       }
+       ?>         	
+    });
+
+    	
+    	$("#installform_<?php ExtensionFolderName(); ?>").mouseover(function(){
+    		$(".ext-block-back_<?php ExtensionFolderName(); ?>").css({'display':'block'}) ;
+			$(".ext-block-front_<?php ExtensionFolderName(); ?>").css({'display':'none'}) ;
+	   	});
+    	
+    	$("#installform_<?php ExtensionFolderName(); ?>").mouseout(function(){
+    		 $(".ext-block-front_<?php ExtensionFolderName(); ?>").css({'display':'block'}) ;
+    	});
+    	
+});
+
+</script>
+<div> 
+<?php
+		global $application;
+		
+		$getUserDetails = json_decode(getFetchUserDetails());
+
+		$marketplace_usr = $getUserDetails[0];
+		$marketplace_pwd = $getUserDetails[1];
+
+	 	$store_url = $application->getAppIni('HTTP_URL');
+	 	
+?>
+
+	<?php 	
+		$type = getModuleType(); 
+		if(($_GET['type_filter_by'] == $type) || ($_GET['type_filter_by'] == getMsg('SYS','CUSTOMERS_SEARCH_ALL')) || ($_GET['type_filter_by'] == ''))
+		{		
+?>
+
+	<form id="installform_<?php ExtensionFolderName(); ?>" method="post" action="" style="float:left;margin:10px;">
+	<input type="hidden" id="marketplace_username" name="marketplace_username" value="<?php echo $marketplace_usr; ?>" />
+	<input type="hidden" id="marketplace_password" name="marketplace_password" value="<?php echo $marketplace_pwd; ?>" />
+	<input type="hidden" name="extension_zip_name" id="extension_zip_name_<?php ExtensionFolderName(); ?>" value="<?php ExtensionZipName(); ?>" />
+	<input type="hidden" name="store_url" id="store_url" value="<?php echo $store_url; ?>" />
+		<div class="ext-block"  >
+			<div class="ext-block-front_<?php ExtensionFolderName(); ?>">
+				<div class="ext-block-content-top ext-center">
+						<div class="row-fluid">
+							<div class="text-center">
+								<img data-original="<?php ModuleImage(); ?>" src="<?php ModuleImage(); ?>" alt="ext_image" class="lazyimages" style="display: inline;">
+								</div>
+							</div>
+						</div>
+				
+						<div class="ext-block-content-bottom">
+							<div class="pull-left">
+								<span class="ext-block-content-name"><?php ModuleName(); ?></span>
+								<div class="clr"></div>
+								<span class="ext-block-content-type"><?php CategoryName(); ?></span>
+							</div>
+							<div class="pull-right ext-running-status-payplans-2checkout">
+								</div>	
+							</div>
+				</div>
+				<div class="ext-block-back_<?php ExtensionFolderName(); ?>" style="top: 250px;">
+						<div class="ext-block-content-top">
+							<div class="pull-left">
+								<div>
+									<span class="ext-block-content-name"><?php ModuleName(); ?></span>
+									<div class="clr"></div>
+									<span class="ext-block-content-type"><?php CategoryName(); ?></span>
+								</div>							
+								<div class="ext-block-content-desc">
+									<?php ModuleDescr(); ?>
+								</div>
+							</div>
+						</div>
+						<div class="ext-block-content-bottom">						
+							<div class="row-fluid">
+								<div class="text-center">
+								<?php 
+									if((getExtensionInstalled() != ''))
+									{
+								?>								
+										<span class="btn disabled"><?php Msg('INSTALLED'); ?></span>
+								<?php 
+									}
+									else
+									{
+									?>
+										<input type="submit" id="install_ext_<?php ExtensionFolderName(); ?>" class="btn btn-success" value="<?php Msg('INSTALL'); ?>" />
+									<?php
+									}
+								?>
+							</div>
+							</div>
+						</div>									
+					</div>
+					</div>
+					<?php 
+						if((getExtensionInstalled() != ''))
+						{ 
+					?>
+					<div class="installed_bar"><span class="installed_txt"><?php Msg('INSTALLED'); ?></span></div>
+					<?php } ?>
+					
+	</form>
+	<?php }
+?>
+	
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

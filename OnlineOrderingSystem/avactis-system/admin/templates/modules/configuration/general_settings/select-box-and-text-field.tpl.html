@@ -1,0 +1,18 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<div class="row margin-bottom-10">
+	<div class="col-md-4">
+		<select id="select_<?php InputControlName(); ?>" size="<?php InputControlSize(); ?>" class="form-control form-filter input-small">
+          <?php InputControlOptions(); ?>
+        </select>
+	</div>
+	<div class="col-md-6">
+		<?php msg('GNRL_SET_FIELD_PGNTRS_NEW_VALUE'); ?>&nbsp;<input class="form-control form-filter input-sm input-small" type="text" size="5" id="text_<?php InputControlName(); ?>" maxlength="3" style="display:inline;">
+        <INPUT TYPE="hidden" name="<?php InputControlName(); ?>" id="<?php InputControlName(); ?>" value="<?php InputControlValue(); ?>">
+      &nbsp;&nbsp;<i style="cursor:pointer;" class="fa fa-arrow-circle-left" title="<?php msg('GNRL_SET_FIELD_PGNTRS_ADD'); ?>" onClick="addItemsPerPageValue('<?php InputControlName(); ?>', '<?php DependentControl(); ?>')"></i>&nbsp;&nbsp;
+      <BR />
+      &nbsp;&nbsp;<i style="cursor:pointer;" class="fa fa-times-circle" title="<?php msg('GNRL_SET_FIELD_PGNTRS_DEL'); ?>" onClick="removeItemsPerPageValue('<?php InputControlName(); ?>', '<?php DependentControl(); ?>')"></i>&nbsp;&nbsp;
+	</div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>

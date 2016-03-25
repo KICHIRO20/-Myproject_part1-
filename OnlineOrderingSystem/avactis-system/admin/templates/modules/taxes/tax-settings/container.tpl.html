@@ -1,0 +1,246 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+var CheckBoxId = new Array();
+CheckBoxId['TaxNameCheckBoxes'] = "";
+CheckBoxId['TaxDisplayOptionCheckBoxes'] = "";
+CheckBoxId['TaxClassCheckBoxes'] = "";
+CheckBoxId['TaxRateCheckBoxes'] = "";
+
+function selectTaxRow (Element) {
+
+    var buttons_with_the_same_name = document.getElementsByName(Element.name); 
+    
+    for(var i=0; i<buttons_with_the_same_name.length; i++) 
+    {
+        if (Element != buttons_with_the_same_name[i]) 
+        {
+            buttons_with_the_same_name[i].checked = false;
+        }
+        buttons_with_the_same_name[i].parentNode.parentNode.className = '';
+    }
+
+    var selectedTableRow = Element.parentNode.parentNode;
+    if (Element.checked) {
+        selectedTableRow.className = 'selected';
+        CheckBoxId[Element.name] = Element.id;
+    } else {
+        selectedTableRow.className = '';
+        CheckBoxId[Element.name] = "";
+    }
+}
+
+function noRowsInForm(CheckBoxes, URL, windowName, action, wrn_001, DelMsg)
+{
+    return (CheckBoxId[CheckBoxes] == "");
+}
+
+function openEditDeleteForm(CheckBoxes, URL, windowName, action, wrn_001, DelMsg)
+{
+    if (CheckBoxId[CheckBoxes] == "")
+    {
+        alert(wrn_001);
+        return;
+    }
+    URL += document.getElementById(CheckBoxId[CheckBoxes]).value;
+    if (action == "Edit")
+    {
+        openURLinNewWindow(URL, windowName);
+    }
+    if (action == "Delete")
+    {
+        confirmDelete(CheckBoxes, URL, DelMsg);
+    }
+}
+
+var CanAddTaxRate = <?php CanAddTaxRate(); ?>;
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function confirmDelete(CheckBoxes, URL, DelMsg)
+{
+    switch (DelMsg)
+    {
+        case 'DeleteTaxName':
+            var TaxName = document.getElementById("name_"+document.getElementById(CheckBoxId[CheckBoxes]).value).value;
+            var warning = new String('<?php Msg("TAXES_PAGE_WRN_002"); ?>');
+            warning = warning.replace('{TaxName}', TaxName);
+            break;
+        case 'DeleteTaxDisplayOption':
+            var warning = '<?php Msg("TAXES_PAGE_WRN_004"); ?>';
+            break;
+        case 'DeleteTaxRate':
+            var warning = '<?php Msg("TAXES_PAGE_WRN_006"); ?>';
+            break;
+        case 'DeleteTaxClass':
+            var TaxClass = document.getElementById("class_"+document.getElementById(CheckBoxId[CheckBoxes]).value).value;
+            var warning = new String('<?php Msg("TAXES_PAGE_WRN_009"); ?>');
+            warning = warning.replace('{TaxClass}', TaxClass);
+            break;
+    }
+    if (DelMsg == 'DeleteTaxClass'&&document.getElementById(CheckBoxId[CheckBoxes]).getAttribute('canDeleteTaxClass') == 0)
+    {
+        alert('<?php Msg("TAXES_PAGE_WRN_010"); ?>');
+        return false;
+    }
+    if (DelMsg == 'DeleteTaxRate'&&document.getElementById(CheckBoxId[CheckBoxes]).getAttribute('canDelete') == 0)
+    {
+        alert('<?php Msg("TAXES_PAGE_WRN_007"); ?>');
+        return false;
+    }
+    bootbox.confirm(warning,function(result){
+    if(result){
+    go(URL);
+    return true;
+    } });
+}
+//-->
+</SCRIPT>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-file-text"></i>&nbsp;<?php Msg('MANAGE_TAXES_TITLE'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+            	<button id="AddButton1" title="<?php Msg('BTN_SETTINGS'); ?>"  onclick="javascript:openURLinNewWindow('popup_window.php?page_view=SettingParamList&group=TAXES_PARAMS', 'SettingGroupEditor');" type="button" name="?php Msg('BTN_SETTINGS'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SETTINGS'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<?php Msg('MANAGE_TAXES_MESSAGE'); ?>
+	</div>
+</div>
+<div class="tab-content">
+	<div class="tab-pane active" id="tab_1">
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="portlet blue-hoki box">
+					<div class="portlet-title">
+						<div class="caption">
+							<?php Msg('TAX_NAMES_TITLE'); ?>
+						</div>
+						<div class="actions">						                                            
+						<button id="AddButton1" title="<?php Msg('BTN_ADD'); ?>"  onclick="javascript:openURLinNewWindow('store_settings_tax_add_name.php', 'TaxSettings');" type="button" name="?php Msg('BTN_ADD'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+						
+							 <button id="EditButton1" title="<?php Msg('BTN_EDIT'); ?>" onclick="javascript:openEditDeleteForm('TaxNameCheckBoxes', '<?php TaxNamesEditLink(); ?>', 'TaxSettings', 'Edit', '<?php Msg('TAXES_PAGE_WRN_014'); ?>', '');"type="button" name="?php Msg('BTN_EDIT'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_EDIT'); ?></span></button>
+							 
+							 <button id="DeleteButton1" title="<?php Msg('BTN_DELETE'); ?>" onclick="javascript:openEditDeleteForm('TaxNameCheckBoxes', '<?php TaxNamesDeleteLink(); ?>', '', 'Delete',  '<?php Msg('TAXES_PAGE_WRN_001'); ?>', 'DeleteTaxName');" type="button" name="?php Msg('BTN_DELETE'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_DELETE'); ?></span></button>
+                        
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered table-striped" style="border-collapse:collapse !important;" cellspacing='0' cellpadding='0'>
+								<thead>
+									<tr>
+										<th><?php Msg('TAX_NAMES_HEADER_001'); ?></th>
+										<th>Price</th>
+										<th><?php Msg('TAX_NAMES_HEADER_002'); ?></th>
+										<th>Select</th>
+									</tr>
+								</thead>								
+								<tbody>
+									<?php TaxNamesItems(); ?>
+								</tbody>
+							</table>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="portlet blue-hoki box">
+					<div class="portlet-title">
+						<div class="caption">
+							<?php Msg('TAX_DISPLAY_TITLE'); ?>
+						</div>
+						<div class="actions">
+						<button id="AddButton1" title="<?php Msg('BTN_ADD'); ?>"  onclick="if(document.getElementById('tn_1')){javascript:openURLinNewWindow('store_settings_tax_add_display.php', 'TaxSettings');}else{alert('<?php Msg('TAXES_PAGE_WRN_015'); ?>');}" type="button" name="?php Msg('BTN_ADD'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+						
+							 <button id="EditButton1" title="<?php Msg('BTN_EDIT'); ?>" onclick="openEditDeleteForm('TaxDisplayOptionCheckBoxes', '<?php TaxDisplayOptionEditLink(); ?>', 'TaxDisplayOptionsSettings', 'Edit', '<?php Msg('TAXES_PAGE_WRN_013'); ?>', '');" type="button" name="?php Msg('BTN_EDIT'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_EDIT'); ?></span></button>
+							 
+							 <button id="DeleteButton1" title="<?php Msg('BTN_DELETE'); ?>" onclick="javascript:openEditDeleteForm('TaxDisplayOptionCheckBoxes', '<?php TaxDisplayOptionDeleteLink(); ?>', '', 'Delete', '<?php Msg('TAXES_PAGE_WRN_003'); ?>', 'DeleteTaxDisplayOption');" type="button" name="?php Msg('BTN_DELETE'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_DELETE'); ?></span></button>
+                        
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered table-striped">
+								<thead>
+									<tr> 
+										<th><?php Msg('TAX_DISPLAY_HEADER_001'); ?></th>
+										<th><?php Msg('TAX_DISPLAY_HEADER_002'); ?></th>
+										<th>Select</th>
+									</tr>
+								</thead>								
+								<tbody>
+									<?php TaxDisplayOptionsItems(); ?>
+								</tbody>
+							</table>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="portlet blue-hoki box">
+					<div class="portlet-title">
+						<div class="caption">
+							<?php Msg('TAX_CLASSES_TITLE'); ?>
+						</div>
+						<div class="actions">                        
+						<button id="AddButton1" title="<?php Msg('BTN_ADD'); ?>"  onclick="javascript:openURLinNewWindow('store_settings_tax_add_class.php', 'TaxSettings');" type="button" name="?php Msg('BTN_ADD'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>						
+							 <button id="EditButton1" title="<?php Msg('BTN_EDIT'); ?>" onclick="openEditDeleteForm('TaxClassCheckBoxes', '<?php TaxClassesEditLink(); ?>', 'TaxClassSettings', 'Edit', '<?php Msg('TAXES_PAGE_WRN_008'); ?>', '');" type="button" name="?php Msg('BTN_EDIT'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_EDIT'); ?></span></button>							 
+							 <button id="DeleteButton1" title="<?php Msg('BTN_DELETE'); ?>" onclick="javascript:openEditDeleteForm('TaxClassCheckBoxes', '<?php TaxClassesDeleteLink(); ?>', '', 'Delete', '<?php Msg('TAXES_PAGE_WRN_008'); ?>', 'DeleteTaxClass');" type="button" name="?php Msg('BTN_DELETE'); ?>" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_DELETE'); ?></span></button>
+                        
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered table-striped">
+								<thead>
+									<tr> 
+										<th><?php Msg('TAX_CLASS_HEADER_001'); ?></th>
+										<th><?php Msg('TAX_CLASS_HEADER_002'); ?></th>
+										<th>Select</th>
+									</tr>
+								</thead>								
+								<tbody>
+									<?php TaxClassesItems(); ?>
+								</tbody>
+							</table>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="portlet blue-hoki box">
+					<div class="portlet-title">
+						<div class="caption">
+							<?php Msg('TAX_SHIPPING_TITLE'); ?>
+						</div>
+						<div class="actions">                        												
+							 <button id="EditButton1" title="<?php Msg('BTN_EDIT'); ?>" onclick="javascript:openURLinNewWindow('store_settings_tax_edit_shipping_modules.php', 'TaxSettings');" class="btn btn-default btn-sm"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_EDIT'); ?></span></button>							        
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered table-striped">
+								<thead>
+									<tr> 
+										<td><B><?php Msg('TAX_SHIPPING_DESCRIPTION'); ?></B><BR><div style="padding-top: 10px;"><?php ShippingModulesList(); ?></div></td>
+									</tr>
+								</thead>															
+							</table>
+						</div>
+					</div>					
+				</div>
+			</div>						
+		</div>
+	</div>
+</div>
+<?php TaxRates(); ?>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

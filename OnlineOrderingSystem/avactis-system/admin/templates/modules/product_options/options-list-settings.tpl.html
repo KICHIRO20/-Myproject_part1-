@@ -1,0 +1,29 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --><!-- deprecated -->
+  	    <form action="po_options_list.php?asc_action=update_options_settings" method="post" name="OSForm" id="OSForm">
+  	    <input type="hidden" name="parent_entity" value="<?php _parent_entity(); ?>">
+  	    <input type="hidden" name="entity_id" value="<?php _entity_id(); ?>">
+  		<table border="0" cellpadding="5" cellspacing="0" width="100%" class="form">
+  		<tr>
+  			<td width="100%" class="value" style="text-align: justify">
+				<?php settingAAWDdescr(); ?>  			
+			</td>
+  		</tr>
+  		<tr>
+  		  <td align="center"><?php lblAAWD(); ?></td>
+		</tr>
+		<tr>
+		  <td align="center">
+			  <select name="os[AAWD]">
+			  	<option value='Y' <?php isAAWDYes(); ?>><?php lblYES(); ?></option>
+			  	<option value='N' <?php isAAWDNo(); ?>><?php lblNO(); ?></option>
+			  </select>
+  		  </td>
+		</tr>
+		<tr>
+			<td align="center">
+  			  <div class="btn btn-default btn-circle" onClick="javascript: document.forms['OSForm'].submit();"><?php msg('BTN_UPDATE'); ?></div>
+  			</td>
+		</tr>
+  		</table>
+  		</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

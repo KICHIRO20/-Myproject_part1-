@@ -1,0 +1,1 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->Access to Avactis Admin menu temporarily blocked for IP={IP_ADDRESS}<!-- END TPL (DO NOT REMOVE!) --><hr>

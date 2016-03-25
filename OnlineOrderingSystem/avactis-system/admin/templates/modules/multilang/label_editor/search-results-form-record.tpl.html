@@ -1,0 +1,29 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr role="row">
+    <td style="text-align: center;"><?php DeleteCheckBox(); ?></td>
+    <td style="text-align: left;">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td style="text-align: left; white-space: nowrap; border: 0; width: 90%;">
+                <?php xMsg('ML', 'ML_LABEL_NAME'); ?>:&nbsp;<span style="font-weight: bold"><?php LabelName(); ?></span><br />
+                <?php xMsg('ML', 'ML_LABEL_ZONE'); ?>:&nbsp;<span style="font-weight: bold"><?php LabelZone(); ?></span><br />
+            </td>
+            <td style="width: 50px; text-align: right; white-space: nowrap; border: 0;">
+                <a id="EditButton_<?php LabelID(); ?>" class="btn btn-default btn-circle" onclick="javascript: openURLinNewWindow('popup_window.php?page_view=LabelData&label_id=<?php LabelID(); ?>&lng=<?php CurLang(); ?>', 'LabelData');"><i class="fa fa-edit"></i> <span class=""><?php xMsg('ML', 'BTN_WYSIWYG_EDIT'); ?></span></a>
+            </td>
+        <tr>
+        <tr>
+            <td colspan="2" style="text-align: left; white-space: nowrap; border: 0;">
+                <?php xMsg('ML', 'ML_LABEL_TYPE'); ?>:&nbsp;<span style="font-weight: bold"><?php LabelType(); ?></span><br />
+                <?php if (getLabelStatus()) { ?>
+                <?php xMsg('ML', 'ML_LABEL_STATUS'); ?>:&nbsp;<span style="font-weight: bold"><?php LabelStatus(); ?></span><br />
+                <?php } ?>
+                <?php xMsg('ML', 'ML_LABEL_USAGE'); ?>:&nbsp;<span style="font-weight: bold"><?php LabelUsage(); ?></span>
+             </td>
+        </tr>
+        </table>
+    </td>
+    <td style="text-align: center;"><?php LabelValue(); ?></td>
+    <td style="text-align: center;"><?php LabelDefValue(); ?></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

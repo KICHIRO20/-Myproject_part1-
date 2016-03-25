@@ -1,0 +1,10 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr bgcolor="<?php CycleColor(); ?>" style="font-size: 8pt;">
+	<td rowspan="<?php RowsCount(); ?>" width="1%" align="center"><?php SortOrderID(); ?>.</td>
+	<td rowspan="<?php RowsCount(); ?>" width="2%"><input class="" type="checkbox" name="_ir_<?php InvRecID(); ?>" onClick="if(this.checked) addToDel('<?php InvRecID(); ?>'); else delFromDel('<?php InvRecID(); ?>');"></td>
+	<td width="23%" style=""><?php OptionName(); ?></td>
+	<td width="39%" style=""><?php ValuesField(); ?></td>
+	<td width="20%" rowspan="<?php RowsCount(); ?>" class="value"><input class="form-control input-sm input-small input-inline" type="text" <?php SKUField(); ?>></td>
+	<td width="15%" rowspan="<?php RowsCount(); ?>" class="value"><input class="form-control input-sm input-small input-inline" type="text" <?php QuantityField(); ?>></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

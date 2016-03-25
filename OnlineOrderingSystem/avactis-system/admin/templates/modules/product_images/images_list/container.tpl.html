@@ -1,0 +1,66 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script>
+jQuery(document).ready(function($){
+	$(".color_box").colorbox({rel:'color_box', transition:"fade"});
+});
+</script>
+<div class="portlet light">
+<div class="portlet">
+<div class="portlet-title">
+	<div class="caption">
+		<i class="fa fa-image font-green-sharp"></i>
+		<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('PI','MNG_PRODUCT_IMAGES'); ?>
+</span>
+		<span class="caption-helper text-lowercase">manage images..</span>
+	</div>
+
+	<div class="actions">
+		<div class="actions btn-set">
+			<button title="Sort" onclick="showSortForm();" type="button"  style="display: <?php UpdButDisplay(); ?>" class="btn btn-circle btn-default" id="SormImagesButton1"><i class="fa fa-sort"></i> <span class="hidden-480"><?php msg('BTN_SORT'); ?></span></button>
+		    <button title="Save" type="button"  onClick="onUpdateClick();" style="display: <?php UpdButDisplay(); ?>"  class="btn btn-circle btn-default" id="UpdateImagesButton2"><i class="fa fa-refresh"></i> <?php msg('BTN_UPDATE'); ?></button>
+              <?php
+            if ($link = getProductInfoLink()) {
+                ?>
+                <button  type="button" class="btn btn-circle btn-default" onClick="openURLinNewLargeWindow('<?php echo $link?>', 'ProductPreview')" ><i class="fa fa-eye"></i>&nbsp;<?php xmsg('CTL', 'PREVIEW_PRODUCT_BUTTON') ?></button>
+                <?php
+            }
+          ?>		 
+		</div>
+	</div>
+</div>
+
+<div class="portlet-title">
+<div class="caption">
+<span class="caption-helper text-uppercase"><?php msg('MNG_CTGR_CURR_PRD'); ?>&nbsp;<?php ProductName(); ?></span>
+</div>
+</div>
+<?php Local_ProductBookmarks(); ?>
+<div class="portlet-body">
+<div class="row">
+<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+<?php xmsg('PI','IMAGES_LIST'); ?></div></div>
+</div>				
+</div>
+<br>
+<?php ImagesList(); ?>
+<br>
+<br>
+<br>
+<div class="row">
+<div class="portlet box blue-hoki">
+<div class="portlet-title">
+<div class="caption">
+<?php xmsg('PI','ADD_NEW_IMAGE'); ?></div></div>
+</div>				
+</div>
+<?php AddImageForm(); ?>
+</div>
+</div>
+<?php SortForm(); ?>		
+</div>
+
+<!-- begin Bookmarks -->
+
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,83 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript" type="text/javascript">
+
+submitHandler = function(formname) 
+{
+  var groups = new Array();
+  jQuery.map(jQuery('.MembershipVisibility'), function(checkbox){
+    if(checkbox.checked) groups.push(checkbox.value);
+  });
+  var gr_str = groups.join('|');
+  if(gr_str!='') jQuery('.membership_str').val(gr_str);
+  var form = document.getElementById(formname);
+  if (form.onsubmit) form.onsubmit(); 
+  form.submit();
+}
+
+function CheckState()
+{
+    var fso = document.getElementsByName('FreeShipping');
+    var pisc = document.getElementsByName('PerItemShippingCost');
+    if (fso.length)
+    {
+        fso[0].onchange = function (event) { var fs = document.getElementsByName('PerItemShippingCost'); var el = document.getElementsByName('FreeShipping'); var ii = el[0].selectedIndex; if (el[0].options[ii].value == "1") {fs[0].disabled = true; fs[0].value = "0.00"} else {fs[0].disabled = false;} }
+        var si = fso[0].selectedIndex;
+        if (fso[0].options[si].value == "1") // free shipping enabled 
+        {
+            pisc[0].disabled = true;
+            pisc[0].value = "0.00";
+        }
+    }
+}
+</script>
+<div class="portlet light">
+<div class="portlet">
+<div class="portlet-title">
+	<div class="caption">
+		<i class="fa fa-gift font-green-sharp"></i>
+		<span class="caption-subject font-green-sharp bold uppercase"> <?php msg('PRD_EDIT_PAGE_TITLE'); ?>
+</span>
+		<span class="caption-helper text-lowercase"><?php Breadcrumb(); ?></span>
+	</div>
+	<div class="actions">
+		<div class="actions btn-set">
+			<?php if ($link = getProductInfoLink()) { ?>
+            <button class="btn btn-circle btn-default"  type="button" onclick="openURLinNewLargeWindow('<?php echo $link?>', 'ProductPreview')" ><i class="fa fa-eye"></i> <?php xmsg('CTL', 'PREVIEW_PRODUCT_BUTTON') ?></button>
+			<?php } ?>
+			<button id="SaveButton1" class="btn btn-circle btn-default" name="btn_save" type="button" onclick="submitHandler('CatalogEditProduct'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CloseButton1', 'CloseButton2', 'UploadButton'));" title="<?php msg('BTN_SAVE_EDIT_PRD_TITLE'); ?>"><i class="fa fa-save"></i> <span class="hidden-480">Save</span></button>
+		</div>
+	</div>
+</div>
+<?php Local_ProductBookmarks(); ?>
+
+<form action="catalog_editproduct.php" method="post" id="CatalogEditProduct" name="CatalogEditProduct" enctype="multipart/form-data" style="margin: 0px;">
+  <input type="hidden" name="asc_action" value="UpdateProductInfo">
+  <input type="hidden" name="FormSubmitValue" value="UploadImagesAndSave">
+  <input type="hidden" name="ViewState[hasCloseScript]" value="<?php ViewStateClose(); ?>">
+  <input type="hidden" name="ViewState[LargeImage]" value="<?php ViewStateLargeImage(); ?>" id="ViewState_LargeImage">
+  <input type="hidden" name="ViewState[SmallImage]" value="<?php ViewStateSmallImageRelativePath(); ?>" id="ViewState_SmallImage">
+  <input type="hidden" name="ID" value="<?php ProductID(); ?>">
+  <input type="hidden" name="TypeID" value="<?php ProductTypeID(); ?>">
+  <?php Errors(); ?>
+  <?php SavedOkMessage(); ?>
+  <?php ResultMessageRow(); ?>
+  <div class="tab-content">
+  <div id="accordion1" class="panel-group accordion">
+  <?php Items(); ?>
+  </div>
+  </div>
+  
+  
+</form>
+<script language="javascript">jQuery(function () { CheckState(); setVisible('group_1'); <?php additionalJS(); ?> });</script>
+
+
+		
+</div>
+<div class="actions" align="center">
+	<div class="actions btn-set">
+		<button title="<?php msg('BTN_SAVE_EDIT_PRD_TITLE'); ?>" onclick="submitHandler('CatalogEditProduct'); " type="button"  class="btn btn-circle btn-default" id="SaveButton2"><i class="fa fa-save"></i> <?php msg('BTN_SAVE'); ?></button>
+	</div>
+</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

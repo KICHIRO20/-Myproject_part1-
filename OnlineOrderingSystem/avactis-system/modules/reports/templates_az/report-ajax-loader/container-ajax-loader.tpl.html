@@ -1,0 +1,67 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div id="{ReportID}" style="position: relative;">
+	<div id="{ReportID}Loading" style="display: none; position: absolute; left: 43%; top: 50%; width: 76px; text-align: center; font-size: 10pt; font-weight: normal; background-color: #AFC0DE; color: black;"><?php xmsg('RPTS','LOADING'); ?></div>
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-file-text"></i>&nbsp;{ReportName}
+					</span>
+				</div>			
+				<div class="actions">
+					{DatetimePeriodSelector}
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div id="{ReportID}Content" class="table-responsive">
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						{Footer}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Portlet PORTLET-->
+
+</div>
+
+<script type="text/javascript">
+<!--
+function {ReportID}_reportPeriodChanged(v)
+{
+    {ReportID}_getReportContent(v);
+}
+function {ReportID}_getReportContent(period)
+{
+        period = (period == null) ? 0 : period;
+        showBlock('{ReportID}Loading', 10);
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'getReportContent',
+            	'reportName': '{ReportID}',
+            	'reportPlaceholderWidth': document.getElementById('{ReportID}Content').offsetWidth,
+            	'reportPeriod': period
+            },
+            // Function is called when an answer arrives. 
+            function(output) 
+            {
+                hideBlock('{ReportID}Loading');
+                putHtmlToElement('{ReportID}Content', output);
+            }
+        );
+};	
+
+var onload_bak_{ReportID}_getReportContent = window.onload;
+window.onload = function()
+{
+    if(onload_bak_{ReportID}_getReportContent){onload_bak_{ReportID}_getReportContent();}
+    {ReportID}_getReportContent();
+}
+//-->
+</script>
+
+<!-- END TPL (DO NOT REMOVE!) -->

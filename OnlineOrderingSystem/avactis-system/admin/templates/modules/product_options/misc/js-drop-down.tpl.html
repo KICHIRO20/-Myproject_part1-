@@ -1,0 +1,32 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<table class="form" cellpadding="0" cellspacing="0" width="100%" align="center" border="0">
+<tr>
+
+<td style="font-weight: normal; color: #666666;" nowrap><?php xmsg('PO','INV_PGN_NOC'); ?>:&nbsp;</td>
+
+<td>
+
+<table id="js_dd_select" class="js_drop_down_outer" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<table id="js_dd_container" class="js_drop_down_inner" cellpadding="0" cellspacing="0" onMouseDown="js_dd_onMdown(this)" onMouseUp="js_dd_onMup(this)">
+			<tr>
+				<td class="js_drop_down_text" style="font-weight: normal; text-align: left;"><?php SelectedValueText(); ?></td>
+				<td class="js_drop_down_arrow"></td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+</td>
+
+</tr>
+</table>
+
+<div id="js_dd_options" style="display: none; position: absolute;">
+<table class="js_drop_down_options" cellpadding="0" cellspacing="0">
+<?php Values(); ?>
+</table>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

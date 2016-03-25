@@ -1,0 +1,42 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="product-item">
+    <?php Local_ProductFormStart(); ?>
+    <div class="product_img pi-img-wrapper"><a href="<?php ProductInfoLink(); ?>">
+    <?php
+    if (getProductLargeImageWidth() == '') {
+        if (getProductSmallImageWidth() == '') {
+            ?><div class="noimage"></div><?php
+        }
+        else {
+            ?>
+<img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>"/><?php
+        }
+    }
+    else {
+        if (getProductSmallImageWidth() == '') {
+            ?><img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>"/><?php
+        }
+        else {
+            ?><img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>" /><?php
+        }
+    } 
+    ?>
+    </a>
+    <div>
+   <a href="<?php ProductLargeImageSrc(); ?>" class="btn btn-default fancybox-button">Zoom</a>
+  </div></div>
+  <a href="<?php ProductInfoLink(); ?>"> <div class="product_name"><h3><?php $name = getProductName(); $str_len = strlen($name); if($str_len > 25){ echo (substr(getProductName(), 0, 27)); echo " ..."; } else {ProductName();}?></h3></div>
+    <div class="product_rating"><?php ProductRating(); ?></div></a>
+    <div class="product_sale_price pi-price"><span class="value"><?php ProductSalePrice(); ?></span></div>
+    <div class="limited_inventory"><?php ProductStockMessage(); ?></div>
+	<?php echo apply_filters("cz_productlist_b4_buttons","",getProductId()); ?>
+<a class="btn btn-primary detail" disabled="disabled">
+ <span class="en button_details"></span>
+ <?php Msg('OUT_OF_STOCK'); ?>
+    </a>
+    <?php Local_ProductFormEnd(); ?>
+</div>
+</div>
+
+<!-- END TPL (DO NOT REMOVE!) -->

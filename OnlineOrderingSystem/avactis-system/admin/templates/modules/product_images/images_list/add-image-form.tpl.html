@@ -1,0 +1,177 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+ <script type="text/javascript" src="js/jquery.iframe-transport.js"></script>
+<script language="JavaScript">
+var uploaded_image = '';
+var ready = false;
+function previewImage()
+{
+	   
+        uploaded_image = '';
+        hideBlock('preview_block');
+        disableBlock('ImagesManageBlock',2);
+        jQuery.ajax(this.action, {
+            url:'jquery_ajax_handler.php', // backend
+			type:'POST',
+			dataType:'json',
+            data:{
+				'__ASC_FORM_ID__': __ASC_FORM_ID__,
+            	'asc_action': 'upload_image_for_preview',
+            	'product_id': <?php ProductID(); ?>,
+            	'new_product_image': document.getElementById('new_product_image')
+            },
+			files: document.getElementById('new_product_image'),
+			iframe: true,
+			processData: false,
+            // Function is called when an answer arrives.
+            success:function(result, output) {
+                if(result['error']==undefined)
+                {
+                    alert('<?php xmsg('SH','E_UPLOAD_ERR_UNKNOW'); ?>');
+                }
+                else if(result['error'] != 0)
+                {
+                    alert(result['error_msg']);
+                }
+                else
+                {
+                    document.getElementById('cat-new_product_image').src = result['http_link'];
+                    document.getElementById('cat-new_product_image').width = result['preview_sizes'][0];
+                    document.getElementById('cat-new_product_image').height = result['preview_sizes'][1];
+                    showBlock('preview_block',1);
+                    uploaded_image = result['full_path'];
+                }
+                enableBlock('ImagesManageBlock');
+            }
+        });
+};
+
+function getServerFilePath()
+{
+	imgURL = jQuery("#ViewState_new_product_image").val();
+	imgDirURL = jQuery("#imgDirURL").val();
+	imgDirPath = jQuery("#imgDirPath").val();
+	imgAbsPath = imgURL.replace(imgDirURL,imgDirPath);
+	return imgAbsPath;
+}
+
+function addImage()
+{
+		if(uploaded_image == '')
+			uploaded_image = getServerFilePath();
+        disableBlock('ImagesManageBlock',2);
+        jQuery.ajax(this.action, {
+        	
+            url:'jquery_ajax_handler.php', // backend
+			type:'POST',
+			dataType:'json',
+            data:{
+				'__ASC_FORM_ID__': __ASC_FORM_ID__,
+            	'asc_action': 'add_image_to_product',
+            	'product_id': <?php ProductID(); ?>,
+            	'uploaded_image': uploaded_image,
+            	'new_product_image': (uploaded_image == '') ? document.getElementById('new_product_image') : '',
+            	'new_image_alt_text': document.getElementById('new_image_alt_text').value
+            },
+			files: document.getElementById('new_product_image'),
+			iframe: true,
+			processData: false,
+            // Function is called when an answer arrives. 
+            success: function(result, output) {
+            	
+                if(result['error']==undefined)
+                {
+                    alert('<?php xmsg('SH','E_UPLOAD_ERR_UNKNOW'); ?>');
+                }
+                else if(result['error'] != 0)
+                {
+                    alert(result['error_msg']);
+                }
+                else
+                {
+                    window.location.reload();
+                }
+                enableBlock('ImagesManageBlock');
+            }
+        });
+        ready = true;  
+}
+
+function new_product_image_togglebuttons()
+{
+	jQuery("#buttons-new_product_image").toggle();
+	jQuery("#upload-new_product_image").toggle();
+}
+
+function new_product_image_deletebuttons()
+{
+    jQuery("#ViewState_new_product_image").val('images/no-image.gif');
+	jQuery("#cat-new_product_image").attr('src', 'images/no-image.gif');
+}
+
+</script>
+<div class="row" id="preview_block">
+ <img id="cat-new_product_image" src="images/no-image.gif" width="100px">
+	<span id="buttons-new_product_image">
+			<a href="javascript:;" onclick="javascript:new_product_image_togglebuttons();" class="btn yellow" title="<?php xmsg('SH','FILE_ON_LOCAL_PC'); ?>"><i class="fa fa-upload"></i></a>
+			<a href="javascript:;" onclick="javascript:openURLinNewWindow('tinymce/plugins/image/image.php?catalog=yes&for=new_product_image','Image Manager')" class="btn blue" title="<?php xmsg('SH','FILE_ON_SERVER'); ?>"><i class="fa fa-check"></i></a>
+			<a href="javascript:;" onclick="javascript:new_product_image_deletebuttons();" class="btn red" title="Remove Image"><i class="fa fa-times"></i></a>
+	</span>
+</div>
+<br>
+<form action="pi_images_list.php" name="AddImageForm" method="post" onsubmit="if (ready != true) return false;" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+
+<div class="alert alert-warning" style="display:none;" id="upload-new_product_image">
+<div class="row">
+	<div class="col-sm-2">
+		<label class="col-sm-13 control-label"><?php xmsg('PI','HDR_IMG_PATH'); ?></label>
+	</div>
+	<div class="col-sm-8">
+		<input type="file" onkeydown="return false;" onkeypress="return false;" size="65" name="new_product_image" id="new_product_image">
+		<input type="hidden" id="ViewState_new_product_image" value="">
+		<input type="hidden" id="cat-width" value="">
+		<input type="hidden" id="cat-height" value="">
+		<input type="hidden" id="imgDirURL" value="<?php imgDirURL(); ?>">
+		<input type="hidden" id="imgDirPath" value="<?php imgDirPath(); ?>">
+	</div>
+	<div class="col-sm-2">
+		<span class="pull-right"><a href="javascript:;" onclick="javascript:new_product_image_togglebuttons()"><i class="fa fa-times"></i></a></span>
+		<div onclick="previewImage();" class="btn yellow" ><i class="fa fa-eye"> <?php msg('BTN_PREVIEW'); ?></i></div>
+	</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-sm-2">
+<label class="col-sm-13 control-label"><?php xmsg('PI','HDR_ALT_TEXT'); ?></label>
+</div>
+<div class="col-sm-4">
+<input class= "form-control" type="text" id="new_image_alt_text" size="70" maxlength="255">
+</div>
+
+</div>   
+<br>
+<div class="row">
+<div class="col-sm-2">
+	<div onclick="addImage();" class="btn green" >
+				<i class="fa fa-plus"> <?php msg('BTN_ADD'); ?></i> 
+    </div> 
+</div>
+
+
+</div> 
+<br>
+<div class="row">
+<div class="col-sm-12">
+							<p class="text-danger"><strong><?php AddImageNoteMessage(); ?></strong></p>
+					</div>
+					<div class="col-sm-12">
+							<p class="text-danger"><strong><?php ThumbSizeNoteMessage(); ?></strong></p>
+					</div>
+					
+				</div>
+</form>  
+
+
+
+   
+<!-- END TPL (DO NOT REMOVE!) -->

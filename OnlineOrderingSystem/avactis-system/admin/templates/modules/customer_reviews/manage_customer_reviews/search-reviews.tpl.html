@@ -1,0 +1,164 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+    function submitHandler(formname, mode) 
+    {
+        var form = document.getElementById(formname);
+        if (mode != '' && form.elements['mode'])
+        {
+            if (mode == 'delete' && !confirm('<?php xMsg('CR', 'CR_MSG_REVIEW_DELETE_CONFIRMATION'); ?>'))
+                return;
+            form.elements['mode'].value = mode;
+        }
+        form.submit();
+    }
+    
+    function fillSearchField(field, value)
+    {
+        if (!DOM) return;
+        if (document.forms['SearchReviews'] && document.forms['SearchReviews'].elements[field])
+            document.forms['SearchReviews'].elements[field].value = value;
+    }
+
+    function checkSearchCheckbox(field, checked)
+    {
+        if (!DOM) return;
+        if (document.forms['SearchReviews'] && document.forms['SearchReviews'].elements[field])
+            document.forms['SearchReviews'].elements[field].checked = checked;
+    }
+
+    function onproductselection(product_id, product_name)
+    {
+        document.forms['SearchReviews'].product_exactly.checked = 'checked';
+    }
+</script>
+<div class="row">
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light blue-soft" href="customer_reviews.php?asc_action=ShowPendingReviews">
+			<div class="visual">
+				<i class="fa fa-comments"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountPending(); ?>
+				</div>
+				<div class="desc">
+					<?php xMsg('CR', 'CR_PENDING_REVIEWS') ?>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light red-soft" href="customer_reviews.php?asc_action=ShowBadReviews">
+			<div class="visual">
+				<i class="fa fa-thumbs-down"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountBad(); ?>
+				</div>
+				<div class="desc">
+					<?php xMsg('CR', 'CR_BAD_REVIEWS') ?>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light green-soft" href="customer_reviews.php?asc_action=ShowGoodReviews">
+			<div class="visual">
+				<i class="fa fa-thumbs-up"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountGood(); ?>
+				</div>
+				<div class="desc">
+					<?php xMsg('CR', 'CR_GOOD_REVIEWS') ?>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<a class="dashboard-stat dashboard-stat-light purple-soft" href="customer_reviews.php?asc_action=ShowAllReviews">
+			<div class="visual">
+				<i class="fa fa-comments"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					<?php CountAll(); ?>
+				</div>
+				<div class="desc">
+					<?php xMsg('CR', 'CR_ALL_REVIEWS') ?>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<div class="portlet blue-hoki box">
+			<div class="portlet-title">
+				<div class="caption">
+					<?php xMsg('CR', 'CR_SEARCH_REVIEWS') ?>
+				</div>
+				<div class="actions">
+					<a id="product_select" class="btn btn-circle btn-default" href="javascript:void(0);" onclick="javascript: openURLinNewWindow('popup_window.php?page_view=CR_Rates_Settings');"> 
+						<i class="fa fa-plus"></i> 
+						<span class="hidden-480"> <?php xMsg('CR', 'CR_ADD_RATE'); ?> </span> 
+					</a>
+					<a id="product_select" class="btn btn-circle btn-default" href="javascript:void(0);" onclick="javascript: openURLinNewWindow('popup_window.php?page_view=SettingParamList&group=CUSTOMER_REVIEWS');"> 
+						<i class="fa fa-gear "></i> 
+						<span class="hidden-480"> <?php xMsg('SYS', 'BTN_SETTINGS'); ?> </span> 
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<form name="SearchReviews" id="SearchReviews" action="customer_reviews.php" method="get">
+					<?php ActionField(); ?>
+			        	<?php ProductField(); ?>
+					<div class="row static-info">
+						<div class="col-md-2 col-md-offset-1 name"><?php xMsg('CR', 'CR_DATE_RANGE')?>:</div>
+						<div class="col-md-9 value">
+							<?php SelectFromDay(); ?>
+							<?php SelectFromMonth(); ?>
+							<?php SelectFromYear(); ?>
+							- <?php SelectToDay(); ?>
+							<?php SelectToMonth(); ?>
+							<?php SelectToYear(); ?>
+						</div>
+					</div>
+					<div class="row static-info">
+						<div class="col-md-2 col-md-offset-1 name"><?php xMsg('CR', 'CR_AUTHOR'); ?>:</div>
+						<div class="col-md-9 value">
+							<?php AuthorField(); ?> &nbsp; &nbsp; <?php AuthorCheckbox(); ?> <?php xMsg('CR', 'CR_EXACTLY'); ?>
+						</div>
+					</div>
+					<div class="row static-info">
+						<div class="col-md-2 col-md-offset-1 name"><?php xMsg('CR', 'CR_IP_ADDRESS') ?>:</div>
+						<div class="col-md-9 value"><?php IPAddressField(); ?></div>
+					</div>
+					<div class="row static-info">
+						<div class="col-md-2 col-md-offset-1 name"><?php xMsg('CR', 'CR_PRODUCT'); ?>:</div>
+						<div class="col-md-9 value">
+							<?php ProductNameField(); ?> &nbsp; &nbsp; <?php ProductCheckbox(); ?> <?php xMsg('CR', 'CR_EXACTLY'); ?> 								&nbsp;&nbsp;&nbsp; 
+							<a id="product_select" class="btn btn-circle btn-default" href="javascript:void(0);" onclick="javascript: openURLinNewWindow('popup_window.php?page_view=CR_Select_Product&formname=SearchReviews&use_callback=yes&productid=' + document.SearchReviews.product_id.value, 'SelectProduct');"> 
+								<i class="fa fa-plus"></i> 
+								<span class="hidden-480"> <?php xMsg('CR', 'BTN_SELECT_PRODUCT'); ?> </span> 
+							</a>
+						</div>
+					</div>
+					<div class="row static-info">
+						<div class="col-md-2 col-md-offset-1 name"><?php xMsg('CR', 'CR_RATING') ?>:</div>
+						<div class="col-md-9 value"><?php RatingSelect(); ?> <?php RatingAddSelect();?></div>
+					</div>
+					<div class="row static-info">
+						<div class="col-md-2 col-md-offset-1 name"><?php xMsg('CR', 'CR_STATUS'); ?>:</div>
+						<div class="col-md-9 value"><?php StatusSelect(); ?></div>
+					</div>
+					<div align="center"><a class="btn blue margin-top-20" onclick="submitHandler('SearchReviews')"><?php msg('ORDERS_SEARCH_OK'); ?> <i class="m-icon-swapright m-icon-white"></i></a></div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

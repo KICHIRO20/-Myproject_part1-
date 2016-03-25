@@ -1,0 +1,104 @@
+/*
+
+    IE6 STYLE FIXES
+
+*/
+
+
+/* COMMON STYLES ******************************************************** */
+.box { width: auto; }
+.form_view .form_row .form_field { margin-left: 0; }
+.box, .page_header { position: relative; zoom: 1; }
+.box .content { background-color: white; zoom: 1; }
+.product_item, .product_list_items { position: relative; zoom: 1; }
+.clear_both { clear: both; position: relative; zoom: 1; display: block; width: 0; height: 0; overflow: hidden; font-size: 0; }
+/* COMMON STYLES ******************************************************** */
+
+
+/* PAGE LAYOUT ******************************************************** */
+.page_container .left_column   { float: left; width: 200px; margin-right: 5px; }
+.page_container .right_column  { float: right; width: 200px; margin-left: 5px; }
+.page_container .center_column { margin-left: 205px; margin-right: 205px; }
+
+.page_container.columnsLC .right_column  { display: none; }
+.page_container.columnsLC .center_column { margin-left: 205px; margin-right: 0px; }
+
+.page_container.columnsCR .left_column   { display: none; }
+.page_container.columnsCR .center_column { margin-left: 0px; margin-right: 205px; }
+
+.page_container.columnsC .left_column   { display: none; }
+.page_container.columnsC .right_column  { display: none; }
+.page_container.columnsC .center_column { margin-left: 0px; margin-right: 0px; }
+/* PAGE LAYOUT ******************************************************** */
+
+
+
+/* BOX CORNERS ******************************************************** */
+.page_container .box .cn.lt { display: none; }
+.page_container .box .cn.rt { display: none; }
+.page_container .box .cn.lb { display: none; }
+.page_container .box .cn.rb { display: none; }
+.page_container .box .content { padding-bottom: 16px; }
+.page_container .box .content {
+    border-left: 1px solid #B8C2CA;
+    border-right: 1px solid #B8C2CA;
+    border-bottom: 1px solid #ADB6BD;
+}
+/* BOX CORNERS ******************************************************** */
+
+.product_info .discount_star { margin-left: 40px; }
+
+.box.shipping_calculator .ship_to_address .form_field,
+.box.shipping_calculator .dest_address_form .form_field {
+    margin-left:0px;
+    width: 60%;
+}
+
+.myaccount_home .orders_search .by_form .form_row,
+.checkout .payment_method_form .form_view .form_row,
+.checkout .shipping_form .form_view .form_row,
+.checkout .billing_form .form_view .form_row,
+.box.shipping_calculator .shipping_method_form .form_row,
+.box.shipping_calculator .chosen_method .form_row,
+.box.shipping_calculator .ship_to_address .form_row,
+.box.shipping_calculator .dest_address_form .form_row {
+    padding-bottom: 5px;
+}
+
+.myaccount .signin_form .form_view,
+.myaccount_home .orders_search .by_form .form_view,
+.checkout .payment_method_form .form_view,
+.checkout .shipping_form .form_view,
+.checkout .billing_form .form_view,
+.box.shipping_calculator .shipping_method_form .form_view,
+.box.shipping_calculator .chosen_method .form_view,
+.box.shipping_calculator .ship_to_address .form_view,
+.box.shipping_calculator .dest_address_form .form_view {
+    padding-top: 5px;
+}
+
+.box.shipping_calculator .chosen_method .form_field,
+.box.shipping_calculator .shipping_method_form .form_field {
+    width: 20%;
+}
+
+.box.shipping_calculator .chosen_method .form_descr,
+.box.shipping_calculator .shipping_method_form .form_descr {
+    width: 70%;
+}
+
+.checkout .billing_form .form_view .form_field,
+.checkout .shipping_form .form_view .form_field {
+    width: 60%;
+}
+
+.signin_box .form_view .form_field {
+    width: auto;
+}
+
+.subscribe_form .form_view .form_row {
+    padding-bottom: 0px;
+}
+.cart_preview img {
+    margin-bottom: -2px;
+}

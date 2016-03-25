@@ -1,0 +1,81 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.text {
+    color: #666;
+    font-size: 8pt;
+    font-weight: normal;
+    text-align: left;
+}
+</style>
+<script language="JavaScript">
+<!--
+    function submitForm(formID)
+    {
+        var form = document.forms[formID];
+        form.elements['asc_action'].value = '{AscAction}';
+        form.elements['ViewState[hasCloseScript]'].value = 'true';
+        form.submit();
+    }
+//-->
+</script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-users font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold">{WinTitle}</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button class="btn blue" name="<?php Msg('BTN_SAVE'); ?>" type="button" onclick="submitForm('TopicEditForm', 'save');" title="<?php Msg('BTN_SAVE'); ?>" id="EditButton1"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body form">
+
+		<div style="margin-left:50px">
+		<div class="margin-bottom-10">
+			<label><?php xMsg('SUBSCR', 'TITLE_TOPIC'); ?></label>
+			<span><?php if (getAscAction() == 'update_topic') SelectPageLanguage('DEFAULT', '', 'update_topic'); ?></span>
+		</div>
+
+	<form action="{FormAction}" method="post" id="TopicEditForm">
+	<input type="hidden" name="asc_action" value="" />
+	<input type="hidden" name="ViewState[hasCloseScript]" value="false" />
+	<input type="hidden" name="topic" value="{TopicId}" />
+
+	<?php ErrorsBox(); ?>
+
+<!-- Topic Name -->
+		<div class="form-section">
+			<span class="required bold">* <?php xmsg('SUBSCR', 'FIELD_TOPIC_NAME'); ?>: </span>
+			<span style="margin-left:20px"><input style="display:inline" type="text" name="topic_name" value="{TopicName}" size="70" maxlength="255" onBlur="formatInput(this);" patternType="string255" class="form-control input-sm input-large"></span>
+		</div>
+
+<!-- Topic Access -->
+		<div class="form-section">
+			<span class="bold"><?php xmsg('SUBSCR', 'FIELD_TOPIC_ACCESS'); ?>: </span>
+			<div style="margin-left:100px">{TopicAccessSelect}</div>
+		</div>
+
+<!-- Topic Status -->
+		<div class="form-section">
+			<span class="bold"><?php xmsg('SUBSCR', 'FIELD_TOPIC_STATUS'); ?>: </span>
+			<div style="margin-left:100px">{TopicStatusSelect}</div>
+		</div>
+
+<!-- Topic Autosubscribe -->
+		<div class="form-section">
+			<span class="bold"><?php xmsg('SUBSCR', 'FIELD_TOPIC_AUTOSUBSCRIBE'); ?>: </span>
+			<div style="margin-left:100px">{TopicAutosubscribeSelect}</div>
+		</div>
+	</form>
+		</div>
+		<div align="center" class="actions">
+			<div class="actions btn-set">
+				<button class="btn blue" name="<?php Msg('BTN_SAVE'); ?>" type="button" onclick="submitForm('TopicEditForm', 'save');" title="<?php Msg('BTN_SAVE'); ?>" id="EditButton2"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+				<button class="btn btn-default" name="<?php Msg('BTN_CANCEL'); ?>" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>" id="CancelButton2"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

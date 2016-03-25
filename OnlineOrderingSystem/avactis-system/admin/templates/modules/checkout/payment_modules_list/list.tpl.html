@@ -1,0 +1,253 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/shuttle.js" type=text/javascript></SCRIPT>
+<link type="text/css" rel="stylesheet" href="styles/jquery.ui.payment_shipping.css">
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+submitHandler = function(formname) 
+{
+  var SelModules = document.getElementById('SelModules');  
+  var form = document.getElementById(formname);
+  if(SelModules.value == ''){
+	form.submit();
+   }
+  if (form.onsubmit) form.onsubmit(); 
+  form.submit();
+}
+
+function getPaymentModuleGroups()
+{
+    return new Array('Merge');
+}
+
+function getPaymentModuleInfo(module_uid, key)
+{
+    var value = '';
+    switch(module_uid)
+    {
+        <?php getPaymentModuleInfoItemsJS(); ?>
+    }
+    return value;
+}
+
+function getPaymentModuleGroupByPaymentModuleID(module_uid)
+{
+    return getPaymentModuleInfo(module_uid, 'PaymentModulesGroupID');
+}
+
+function getSelectIDByPaymentModuleID(module_uid)
+{
+    return getPaymentModuleGroupByPaymentModuleID(module_uid);
+}
+
+function getSelectsListWithAvailableModules()
+{
+    var PaymentGroups = getPaymentModuleGroups();
+    PaymentGroups[0] = 'AvailableSelect_Merged';
+    return PaymentGroups;
+}
+
+function unmark_all_available_modules_selects()
+{
+    clearAll('AvailableSelect_Merged');
+}
+
+function unmark_selected_modules_select()
+{
+    clearAll("SelectedModules");
+}
+
+function get_number_of_selected_options_in_available_lists()
+{
+	var selectedCount = 0;
+    oSrcWindow = document.getElementById('AvailableSelect_Merged');
+    for (i = 0; i < oSrcWindow.options.length; i++)
+    {
+        if (oSrcWindow.options[i].selected) 
+        {
+            selectedCount++;
+        }
+    } 
+
+    return selectedCount;
+}
+
+function get_number_of_selected_options_in_selected_list()
+{
+    var selectedCount = 0;
+    oSrcWindow = document.getElementById("SelectedModules");
+    for (i = 0; i < oSrcWindow.options.length; i++) 
+    {
+        if (oSrcWindow.options[i].selected) 
+        {
+            selectedCount++;
+        }
+    }
+
+    return selectedCount;
+}
+
+function get_first_list_name_with_selected_element()
+{
+    oSrcWindow = document.getElementById('AvailableSelect_Merged');
+    for (j = 0; j < oSrcWindow.options.length; j++) 
+    {
+        if (oSrcWindow.options[j].selected) 
+        {
+            return 'AvailableSelect_Merged';
+        }
+    }
+    return "";
+}
+
+function get_first_selected_element_value_from_selected()
+{
+    oSrcWindow = document.getElementById("SelectedModules");
+    for (i = 0; i < oSrcWindow.options.length; i++) 
+    {
+        if (oSrcWindow.options[i].selected) 
+        {
+            return oSrcWindow.options[i].value;
+        }
+    }
+}
+
+function onClickMoveToSelectedButton()
+{
+     if(get_number_of_selected_options_in_available_lists() != 1)
+     {
+         //no elements selected, or more than one
+         return true;
+     }
+     else
+     {
+         //move selected element to "Selected Modules" list
+         moveItemsExtToSelected(get_first_list_name_with_selected_element(), "SelectedModules");
+         return true;
+     }
+}
+
+function onClickMoveToAvailableButton()
+{
+    if (get_number_of_selected_options_in_selected_list() != 1)
+    {
+        //no elements selected, or more than one
+        return true;
+    }
+    else
+    {
+        var elem_id = get_first_selected_element_value_from_selected();
+
+        var tgtSelectID = getSelectIDByPaymentModuleID(elem_id);        
+		var group = document.getElementById('optgroup_' + tgtSelectID + '_id');
+		var oSrcWindow = document.getElementById('SelectedModules');
+		var oTgtWindow = document.getElementById('AvailableSelect_Merged');	
+		if (group != null && oSrcWindow != null && oTgtWindow != null)
+		{
+			module_short_name = getPaymentModuleInfo(elem_id, 'ShortName');
+			var option = document.createElement('option');
+			option.value = elem_id;
+			option.innerHTML = module_short_name;
+			
+			group.appendChild(option);
+			//group.innerHTML += '';//'<option value="' + elem_id + '">' + module_short_name + "</option>";
+
+			  
+			var j = 0;
+		    for (var i = 0; i < oSrcWindow.options.length + j; i++) 
+		    {        
+		        if (oSrcWindow.options[i - j].selected) 
+		        {   			
+		            // Remove from source shuttle window
+		            oSrcWindow.remove(i - j);
+		            j++;
+		        }
+		    }	
+
+		    updateHiddenInput(oTgtWindow, 'AvailableSelect_Merged.hidden');
+		    updateHiddenInput(oSrcWindow, 'SelectedModules.hidden');
+		}
+        return true;
+    }
+}
+jQuery(document).ready(function(){
+    jQuery("#payment_opt").click(function(){
+	var arrows = jQuery(this).find("i");
+        jQuery("#paymentlist").slideToggle(function(){
+        arrows.toggle();
+    	});
+    });
+});
+
+jQuery(document).ready(function () {
+	jQuery(".checkbox-inline").change(function(){
+		var selectedValue = new Array();
+		jQuery('input:checkbox[name="sel_payment"]:checked').each(function() {
+			selectedValue.push(this.value);
+		});
+		jQuery('#SelModules').val(selectedValue);
+	});
+	jQuery(".ui-state-default").click(function(){
+  		var selectedValue = new Array();
+                jQuery('input:checkbox[name="sel_payment"]:checked').each(function() {
+                        selectedValue.push(this.value);
+                        jQuery('#SelModules').val(selectedValue);
+               });
+	});
+});
+
+//to sort selected payment methods
+jQuery(function() {
+	jQuery( "#sortable" ).sortable();
+	jQuery( "#sortable" ).disableSelection();
+});
+//-->
+</SCRIPT>
+<FORM METHOD=POST ACTION="<?php SaveSelectedPaymentModulesListHref(); ?>" id="SaveSelectedPaymentModulesListForm" name="SelectedPaymentModulesListForm" style="margin: 0px; padding: 0px;">
+<INPUT TYPE="hidden" <?php HiddenFieldAction(); ?>>
+<?php HiddenArrayViewState(); ?>
+
+<?php ResultMessageRow(); ?>
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-check-square"></i>
+			<span class="caption-subject bold uppercase"><?php xmsg('SYS','STRSET_GENERAL'); ?></span>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="row margin-bottom-10">
+			<div class="col-sm-11">
+				<ul id="sortable">
+					<input type="hidden" value="" name="SelectedModules[]" id="SelectedModules"  ></input>
+						<?php Items(); ?>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<div class="portlet-body">
+		<div class="row margin-bottom-10">
+			<div class="col-sm-11" id="show-details">
+				<span class="caption-subject" id="payment_opt"><i class="fa fa-chevron-right fa-1g"></i><i class="fa fa-chevron-up fa-1g" style="display:none;"></i>&nbsp;&nbsp;<?php xmsg('SYS','MORE_PAYMENT_METHODS'); ?></span>
+			</div>
+		</div>
+		<div class="row margin-bottom-10" id="paymentlist">
+			<ul name="AvailableSelect_Merged" id="AvailableSelect_Merged">
+                			<?php PaymentModuleCheckGroupList_Merged(); ?>
+			</ul>
+				<input type="hidden" id="SelModules" name="SelModules" value="<?php HiddenSelectedModules(); ?>">
+		</div>
+		<div class="actions" style="text-align:center;">
+				<div class="actions btn-set">
+					<button class="btn blue-hoki" id="save1" name="settings" type="button" onclick="submitHandler('SaveSelectedPaymentModulesListForm');">
+						<i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span>
+					</button>
+				</div>
+		</div>
+		<div class="row margin-bottom-10">
+			<div class="col-md-11" id="alert_msg"><b style="color:red;">* </b><?php msg('PAYM_METH_DESCR_003'); ?></div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

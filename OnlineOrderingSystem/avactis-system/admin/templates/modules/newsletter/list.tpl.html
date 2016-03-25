@@ -1,0 +1,143 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+<SCRIPT language="JavaScript" type="text/javascript">
+
+function el(element_id)
+{
+  return document.getElementById(element_id);
+}
+//
+//     : insert your code here
+//
+function selectedMessageId()
+{
+  //          ,                             
+  var elem = el("letter_id_1");
+  var i = 1;
+  while (elem)
+  {
+    i++;
+    if (elem.checked)
+    {
+      return elem.value;
+    }
+    elem = el("letter_id_" + i);
+  }
+  return null;
+}
+
+//
+//                                                 
+//
+function editLetter()
+{
+  var selectedId = selectedMessageId();
+  if (selectedId)
+  {
+    //               
+    openURLinNewWindow("popup_window.php?page_view=Newsletter_Compose&letter_id=" + selectedId);
+    return;
+  }
+  window.alert("<?php xmsg('NLT', 'ERROR_LETTER_NOT_SELECTED_JS'); ?>");
+}
+
+function deleteLetter()
+{
+  var selectedId = selectedMessageId();
+  if (selectedId)
+  {
+    bootbox.confirm("<?php xmsg('NLT', 'DELETE_LETTER_CONFIRMATION_JS'); ?>",function(result){
+    if(result){
+      var url = "<?php SelfUrl(); ?>" + selectedId;
+      go(url);
+    } });
+  }
+  else
+  {
+    window.alert("<?php xmsg('NLT', 'ERROR_LETTER_NOT_SELECTED_JS'); ?>");
+  }
+}
+
+function sendLetter()
+{
+  var selectedId = selectedMessageId();
+  if (selectedId)
+  {
+    openURLinNewWindow("popup_window.php?page_view=Newsletter_Send&letter_id=" + selectedId);
+  }
+  else
+  {
+    window.alert("<?php xmsg('NLT', 'ERROR_LETTER_NOT_SELECTED_JS'); ?>");
+  }
+}
+</SCRIPT>
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-envelope font-green-sharp"></i>
+					<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('NLT', 'NEWSLETTER_TITLE1'); ?></span>
+					<span class="caption-helper text-lowercase"><?php xmsg('NLT', 'NEWSLETTER_TITLE'); ?>...</span>
+				</div>
+				<div class="actions">
+					<div class="actions btn-set">
+						<a id="AddRowsButton" title="<?php xmsg('NLT','BUTTON_ADD'); ?>" href="compose_newsletter.php" class="btn btn-circle btn-default"><i class="fa fa-plus"></i> <span class="hidden-480"><?php xmsg('NLT',"BUTTON_ADD"); ?></span></a>
+						<!-- a id="EditRowsButton" title="<?php xmsg('NLT','BUTTON_EDIT'); ?>" href="javascript:editLetter()" class="btn btn-circle btn-default"><i class="fa fa-edit"></i> <span class="hidden-480"><?php xmsg('NLT','BUTTON_EDIT'); ?></span></a -->
+						<a id="SendRowsButton" title="<?php xmsg('NLT','BUTTON_SEND'); ?>" href="javascript:sendLetter();" class="btn btn-circle btn-default"><i class="fa fa-send"></i> <span class="hidden-480"><?php xmsg('NLT','BUTTON_SEND'); ?></span></a>
+						<a id="DelRowsButton" title="<?php xmsg('NLT','BUTTON_DELETE'); ?>" href="javascript:deleteLetter();" class="btn btn-circle btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php xmsg('NLT','BUTTON_DELETE'); ?></span></a>
+
+						<div class="btn-group">
+							<a data-toggle="dropdown" href="#" class="btn btn-default btn-circle">
+							<i class="fa fa-share"></i> More <i class="fa fa-angle-down"></i>
+							</a>
+							<ul class="dropdown-menu pull-right">
+								<li>
+									<a href="subscriptions_signature.php"><?php xmsg('SUBSCR', 'BTN_SIGNATURE'); ?> </a>
+								</li>
+								<li>
+									<a href="subscriptions_manage.php"> <?php xmsg('SUBSCR', 'BTN_SUBSCRIPTIONS'); ?> </a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-responsive">
+					<form name="NewsletterListForm">
+					<!-- <input type="hidden" name="asc_action">
+					<input type="hidden" name="letter_id"> -->
+					<table class="table table-striped table-bordered table-hover" id="datatable_promo_codes">
+						<thead>
+							<tr role="row" class="heading">
+								<th width="2%" align="center" style="text-align: center;">
+									
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('NLT',"HEADER_SUBJECT"); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('NLT',"HEADER_FROM"); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('SUBSCR',"HEADER_TOPICS"); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('NLT',"HEADER_CREATION_DATE"); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('NLT',"HEADER_SENT_DATE"); ?>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+          <?php MessagesList(); ?>
+						</tbody>
+					</table>
+			        </form>
+				</div>
+			</div>
+		</div>
+
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,29 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr class="odd" role="row">
+    	<td>
+        	<?php DeleteValue(); ?>
+    	</td>
+    	<td>
+		<a href="javascript: submitHandler('SearchReviews');" onclick="<?php DateFilter(); ?>"><?php DateValue(); ?></a><br><?php TimeValue(); ?>
+	</td>
+    	<td>
+		<?php xMsg('CR', 'CR_PRODUCT') ?>:&nbsp;&nbsp;<a href="javascript: submitHandler('SearchReviews');" onclick="<?php ProductFilter(); ?>"><?php ProductValue(); ?></a> <a href="javascript: void(0);" onclick="<?php ProductOpenLink(); ?>"><img src="images/icon-info-circle.gif" border="0" /></a> <br />
+		<?php xMsg('CR', 'CR_POSTED_BY') ?>&nbsp; <a href="javascript: submitHandler('SearchReviews');" onclick="<?php AuthorFilter(); ?>"><?php AuthorValue(); ?></a> 
+		&nbsp;<?php xMsg('CR', 'CR_FROM') ?> <a href="javascript: submitHandler('SearchReviews');" onclick="<?php IPFilter(); ?>"><?php IPValue(); ?></a> <br />
+		<?php ReviewValue(); ?>
+    	</td>
+    	<td>
+            	<?php RatingValue(); ?>
+    	</td>
+    	<td>
+        	<?php StatusValue(); ?>
+    	</td>
+	<td align="center">
+		<div class="margin-bottom-5">
+			<a class="btn btn-default yellow" id="<?php EditLinkID(); ?>" href="add_review.php?page_view=CR_Review_Data<?php EditLinkCR(); ?>">
+				<span><?php Msg('BTN_EDIT') ?></span>
+			</a>
+		</div>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

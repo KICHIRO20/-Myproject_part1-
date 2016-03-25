@@ -1,0 +1,53 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+            <form id="checkout_3" name="checkout_3" action="<?php Local_FormAction(); ?>" method="post">
+            <input type="hidden" name="asc_action" value="ConfirmOrder" />
+            <input type="hidden" name="step_id" value="4" />
+            <input type="hidden" name="previous_step_id" value="3" />
+            <input type="hidden" name="CHECKOUT_CZ_BLOWFISH_KEY" value="<?php Local_BlowFishKey(); ?>" />
+            <div class="checkout_rule">
+	            <span class="step_1"><?php Label("CHECKOUT_STEP_1"); ?></span>
+	            <span class="step_1_2"></span>
+            </div>
+            <div class="checkout_rule ">
+	          <span class="step_2"><?php Label("CHECKOUT_STEP_2"); ?></span>
+	            <span class="step_2_3"></span>
+            </div>
+            <div class="checkout_rule step_3_active">
+	            <span class="step_3"><?php Label("CHECKOUT_STEP_3"); ?></span>
+            </div>
+            <div id="step_3_errors" class="error_message<?php if (!getLocal_Errors_3()) { ?> invisible<?php } ?>"><?php Local_Errors_3(); ?></div>
+            <div class="box checkout_addresses">
+                <div class="content-page" style="overflow:hidden">
+                    <div class="header">
+                        <h3 class="shipping_form"><?php Label("CHECKOUT_SHIPPING_ADDRESS"); ?></h3>
+                        <h3 class="billing_form"><?php Label("CHECKOUT_BILLING_ADDRESS"); ?></h3>
+                    </div>
+                    <div class="shipping_form col-lg-6"><?php CheckoutShippingInfoOutput(); ?></div>
+                    <div class="billing_form col-lg-6"><?php CheckoutBillingInfoOutput(); ?></div>
+                    <div class="clear_both"></div>
+                </div>
+            </div>
+          
+                <div class="content-page selected_payment_shipping_methods ">                 
+                        <h3><?php Label("CHECKOUT_BILLING_AND_SHIPPING_OPTIONS"); ?></h3>
+                        <div class="selected_payment_method" style="overflow:hidden">
+                            <label class="col-lg-2"><?php Label("CHECKOUT_PAYMENT_METHOD_COLON"); ?></label>
+                            <div class="payment_method_list col-lg-5">
+                                <?php Local_PaymentMethodOutput(); ?>
+                            </div>
+                        </div>
+                        <div class="selected_shipping_method">
+                            <label class="col-lg-2"><?php Label("CHECKOUT_SHIPPING_METHOD_COLON"); ?></label>
+                            <div class="shipping_method_list col-lg-5">   
+                            <?php CheckoutShippingMethodsOutput(); ?>
+                            </div>
+                        </div>
+                    </div>
+            <?php CheckoutSummary(); ?>
+            <?php SubscribeOnCheckoutOutput(); ?>
+            <div class="checkout_buttons">
+                <a href="javascript: showStep(2); void(0);"><span class="<?php lang(); ?> btn btn-default button_back"><?php Label('CHECKOUT_BACK_TO_PREVIOUS_STEP'); ?></span></a>
+                <input type="submit" value="<?php Msg('PLACE_ORDER'); ?>" class="<?php lang(); ?> btn btn-primary button_place_order" />
+            </div>
+            </form>
+<!-- END TPL (DO NOT REMOVE!) -->

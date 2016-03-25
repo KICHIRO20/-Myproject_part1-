@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+	<td class="text-center">
+		<input type="checkbox" name="customer_selected" id="customer_<?php CustomerID(); ?>" onClick="this.parentNode.parentNode.className = this.checked ? 'info' : '';" value="<?php CustomerID(); ?>"/>
+	</td>
+	<td class="text-center">
+		<img src="images/icons/people-<?php CustomerIcon(); ?>.gif" title="<?php addslashes(CustomerStatusLongMsg()); ?>">
+	</td>
+	<td class="text-center">
+		<a href="javascript:void(0);" onClick="openURLinNewWindow('popup_window.php?page_view=CustomerAccountInfo&customer_id=<?php CustomerID(); ?>');">
+			<?php CustomerAccount(); ?>
+		</a>
+	</td>
+	<td class="text-center"><?php CustomerName(); ?></td>
+	<td class="text-center"><?php CustomerOrdersCount(); ?></td>
+	<td class="text-center"><?php CustomerTotalFullyPaid(); ?></td>
+	<td class="text-center"><?php CustomerTotalAmount(); ?></td>
+	<td class="text-center"><?php CustomerMembership(); ?></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

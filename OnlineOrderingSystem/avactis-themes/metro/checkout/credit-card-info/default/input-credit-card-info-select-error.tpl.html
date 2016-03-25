@@ -1,0 +1,25 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form-group col-lg-12" id="tr_id_<?php Local_trID(); ?>">
+    <label for="input_id_<?php Local_trID(); ?>" class="control-label col-lg-3"><?php Local_FieldLabel(); ?></label>
+    <div class="col-lg-6">
+        <select class="error"
+                id="input_id_<?php Local_trID(); ?>"
+                name="<?php Local_FormSelectFieldName(); ?>"
+                onchange="<?php Local_FormSelectOnchange(); ?>">
+            <?php Local_FormSelectOptions(); ?>
+        </select>
+    </div>
+</div>
+<div class="form-group col-lg-12" id="tr_req_id_<?php Local_trID(); ?>" style="display: none">
+<label class="control-label col-lg-3" for="input_req_id_<?php Local_trID(); ?>" class="required"><?php Local_FieldLabel(); ?></label>
+    <div class="col-lg-6">
+        <select class="error form-control input-medium"
+                id="input_req_id_<?php Local_trID(); ?>"
+                name="<?php Local_FormSelectFieldName(); ?>"
+                onchange="<?php Local_FormSelectOnchange(); ?>"
+                disabled="disabled">
+            <?php Local_FormSelectOptions(); ?>
+        </select>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

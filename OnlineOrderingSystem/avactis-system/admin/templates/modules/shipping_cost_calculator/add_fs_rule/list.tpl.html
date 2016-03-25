@@ -1,0 +1,95 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      
+      var rule_name_el = document.getElementById('rule_name_id');
+      if (!rule_name_el)
+        return false;
+        
+      if (rule_name_el.value == '')
+      {
+          alert('<?php xmsg("SCC", "ERROR_EMPTY_RULE_NAME"); ?>');
+          return false;
+      }
+      
+      form.submit();
+      return true;
+    }
+</script>
+    <div class="portlet light">
+            
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-gears font-blue-sharp"></i>
+                <span class="caption-subject font-blue-sharp bold uppercase"><?php xmsg('SCC', 'ADD_FS_RULE'); ?></span>
+            
+              </div>
+            </div>
+            
+            <div class="portlet-body">
+              <div class="table-container form">
+                <form <?php AddFsRuleForm(); ?> method="post" enctype="multipart/form-data" id="AddFsRuleForm">
+                  <?php HiddenArrayViewState(); ?>
+                  <?php HiddenArrayViewStateConstants(); ?>
+                  <input type="hidden" <?php HiddenFormSubmitValue(); ?>>
+                  <?php Subtitle(); ?>
+                  <?php Errors(); ?>
+
+                  <div class="row margin-bottom-10">
+                      <div class="col-md-3 col-sm-4">
+                        <lable class="help-block"><span class="required"><?php xmsg('SCC', 'SCC_RULE_NAME_LABEL'); ?>*</span></lable>
+                      </div>
+                      <div class="col-md-3 col-sm-5">
+                            <a class="pull-right" style="cursor:pointer;">
+                                      <?php hinttext('SCC_FSTABLE_RULE_NAME_LABEL', 'shipping-cost-calculator-messages'); ?>
+                            </a>
+                        <input type="text" id='rule_name_id' class="<?php FsRuleNameInputStyleClass(); ?> form-control input-large" <?php FsRuleName(); ?> onBlur="formatInput(this);" patternType="string128"><br><?php FsRuleNameError(); ?>
+                      </div>
+                  </div>
+
+                  <div class="row margin-bottom-10">
+                      <?php FsRuleEffectiveAreaLaconic(); ?>
+                  </div>
+
+                  <div class="row margin-bottom-10">
+                      <div class="col-md-3 col-sm-4">
+                        <lable class="help-block"><?php xmsg('SCC', 'SCC_MIN_SUBTOTAL_LABEL'); ?></lable>
+                      </div>
+                      <div class="col-md-3 col-sm-5">
+                            <a class="pull-right" style="cursor:pointer;">
+                                      <?php hinttext('SCC_MIN_SUBTOTAL_LABEL', 'shipping-cost-calculator-messages'); ?>
+                            </a>
+                       <input type="text" class="<?php FsRuleMinSubtotalInputStyleClass(); ?> form-control input-large" <?php FsRuleMinSubtotal(); ?> 
+                          onBlur="formatInput(this);" patternType="currency" <?php FsRuleMinSubtotalFormat(); ?>>
+                            <br> <?php FsRuleMinSubtotalError(); ?></span>
+                      </div>
+                      <div class="col-md-1 col-sm-2">
+                        <lable class="help-block"><?php FsRuleMinSubtotalSign(); ?></lable>
+                      </div>
+                  </div>
+
+                  <div class="row margin-bottom-10">
+                     <?php FsRuleStrictCartSelect(); ?>
+                  </div>
+                  
+                  <div class="row margin-bottom-10">
+                      <span style="color: red"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span>
+                  </div>
+                
+                </form>
+              </div>
+
+              <div class="actions" align="center">
+                <div class="actions btn-set">
+                  <button id="SaveButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="if(submitHandler('AddFsRuleForm')){disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2', 'UploadButton'));}" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+                  
+                </div>
+              </div>
+            
+
+            </div>
+    </div>
+<!-- END TPL (DO NOT REMOVE!) -->

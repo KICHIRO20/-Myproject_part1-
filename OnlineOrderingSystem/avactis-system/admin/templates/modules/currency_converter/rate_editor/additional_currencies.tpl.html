@@ -1,0 +1,48 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form id="AdditionalCurrenciesForm_id" action="<?php FormActionUrl(); ?>" method=post>
+<input type="hidden" value="updateAC" name="ViewState[FormSubmitValue]" id="form_submit_value_id"/>
+<input type="hidden" name="currency_id" id="currency_id_id" value="">
+	<table class="table table-bordered borderless table-striped table-hover">
+		<thead>
+			<tr class="bg-info">
+				<th colspan="2">
+					<?php xmsg('CC','CC_ADDITIONAL_CURRENCIES_LABEL'); ?>
+					<button id="UpdateButton1"  title="<?php Msg('BTN_SAVE'); ?>" onClick="UpdateAC();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue pull-right">
+						<i class="fa fa-refresh"></i>&nbsp;<span class="hidden-480"><?php msg('BTN_UPDATE'); ?></span>
+					</button>
+				</th>
+			</tr>
+		</thead>
+		<!-- Begin - Row -->
+		<tbody>
+			<?php AdditionalCurrenciesList(); ?>
+		</tbody>
+		<!-- End - Row -->	
+		<tfoot>
+			<tr>
+				<td colspan="2" class="text-center" >
+					<button id="UpdateButton1"  title="<?php Msg('BTN_SAVE'); ?>" onClick="UpdateAC();" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue">
+						<i class="fa fa-refresh"></i>&nbsp;<span class="hidden-480"><?php msg('BTN_UPDATE'); ?></span>
+					</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<script>
+	function flipDiv(id)
+	{
+	    var div = document.getElementById('sc_div_' + id + '_id');
+	    if (!div) return false;
+	    
+	    if (div.style.display == 'none')
+	    {
+		div.style.display = '';
+	    }
+	    else
+	    {
+		div.style.display = 'none';
+	    }
+	}
+	</script>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

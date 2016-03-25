@@ -1,0 +1,25 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="customer_reviews.php" name="SearchResults" id="SearchResults" method="post" style="padding: 0;"> 
+	<?php ResActionField(); ?>
+	<?php ResModeField(); ?>
+	<div class="portlet light">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="icon-users font-green-sharp"></i> 
+				<span class="caption-subject font-green-sharp bold uppercase"><?php xMsg('CR', 'CR_SEARCH_RESULT'); ?>: <?php SearchTotal(); ?></span>
+			</div>
+			<div class="actions">
+				<div class="actions btn-set">
+					<a id="AddButton1" class="btn btn-circle btn-default" href="add_review.php?page_view=CR_Review_Data<?php AddLinkID(); ?>', 'ReviewData');"><i class="fa fa-plus"></i> <span class="hidden-480"> <?php xMsg('CR', 'BTN_ADD_NEW'); ?> </span></a>
+					<?php TopButtons(); ?>
+				</div>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<?php ResultForm(); ?>
+			<?php BottomButtons(); ?>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

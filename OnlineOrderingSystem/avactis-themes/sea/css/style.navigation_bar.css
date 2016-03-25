@@ -1,0 +1,10 @@
+.navigation_bar ul li span,
+.box.manufacturer ul li span {
+    border-bottom: 1px dotted #0C9EEE;
+}
+
+.navigation_bar.empty p {
+    padding: 50px 0px 50px 0px;
+    text-align: center;
+    font-weight: bold;
+}

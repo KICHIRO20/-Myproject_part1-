@@ -1,0 +1,40 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+var del_checked = 0;
+function onDelCBclick(el)
+{
+    if(el.checked)
+        del_checked++;
+    else
+        del_checked--;
+        
+    if(del_checked > 0)
+        enableButton('DelFilesButton1',function() { 
+            if(confirm('<?php xmsg('PF','WRN_DELETE_FILES'); ?>'))
+            {
+                document.forms['DelFilesForm'].asc_action.value = 'del_files_from_product';
+                document.forms['DelFilesForm'].submit();
+            };
+          });
+    else
+        disableButton('DelFilesButton1');
+};
+
+function onUpdateClick()
+{
+    document.forms['DelFilesForm'].asc_action.value = 'update_files_of_product';
+    document.forms['DelFilesForm'].submit();
+}
+
+</script>
+<div class="row">
+<div class="col-sm-2">
+<form action="pf_files_list.php" name="DelFilesForm" method="post" style="margin: 0px; padding: 0px;">
+<input type="hidden" name="asc_action" value="" style="height: 0px; margin: 0px; padding: 0px;"><input type="hidden" name="product_id" value="<?php ProductID(); ?>" style="height: 0px; margin: 0px; padding: 0px;">
+</div>
+</div>
+		<?php ListByOne(); ?>
+		<?php DeleteButton(); ?>
+
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,234 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet-body">
+	<div class="row">
+		<div class="col-md-12">
+			<img src="images/icons/people-reg.gif"  width="16" height="16">&nbsp;<?php xmsg('CA','CUSTOMER_STATUS_A'); ?>&nbsp;&nbsp;&nbsp;
+			<img src="images/icons/people-reg-na.gif" width="16" height="16">&nbsp;<?php xmsg('CA','CUSTOMER_STATUS_N'); ?>&nbsp;&nbsp;&nbsp;
+			<img src="images/icons/people-reg-dp.gif" width="16" height="16">&nbsp;<?php xmsg('CA','CUSTOMER_STATUS_R'); ?>&nbsp;&nbsp;&nbsp;
+			<img src="images/icons/people-not-reg.gif" width="16" height="16">&nbsp;<?php xmsg('CA','CUSTOMER_STATUS_B'); ?>
+		</div>
+	</div>
+	<br />
+	<!--Responsive Table Start -->
+	<div class="table-responsive">
+		<table class="table table-bordered borderless table-striped table-hover">
+			<thead>
+				<tr class="bg-grey">
+					<th>&nbsp;</th>
+					<th><?php Label('ACCOUNT_STATUS'); ?></th>
+					<?php ca_Header(); ?>
+					<?php cn_Header(); ?>
+					<?php oc_Header(); ?>
+					<?php fp_Header(); ?>
+					<?php ta_Header(); ?>
+					<?php ms_Header(); ?>					
+				</tr>
+			</thead>		
+			<tbody>
+				<?php CustomersRows(); ?>
+				<tr class="bg-grey disabled">
+					<th>&nbsp;</th>
+					<th class="text-center"><?php Label('ACCOUNT_STATUS'); ?></th>
+					<th class="text-center"><?php xmsg('CA','LBL_ACCOUNT'); ?></th>
+					<th class="text-center"><?php xmsg('CA','LBL_NAME'); ?></th>
+					<th class="text-center"><?php xmsg('CA','LBL_ORDERS'); ?></th>
+					<th class="text-center"><?php xmsg('CA','LBL_TOTAL_FULLY_PAID'); ?></th>
+					<th class="text-center"><?php xmsg('CA','LBL_TOTAL_AMOUNT'); ?></th>
+					<th class="text-center"><?php xmsg('CA','LBL_MEMBERSHIP'); ?></th>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="8" class="text-right">
+						<div id="CustomerGroupsButton2" class="btn btn-default btn-circle" onClick="openURLinNewWindow('customer_groups.php');">
+							<i class="fa fa-users"></i>&nbsp;<?php xmsg('CA','CA_CUSTOMER_GROUPS'); ?>
+						</div>
+						<div id="ExportButton2" class="btn btn-default btn-circle" onClick="OnExportClick();">
+							<i class="fa fa-sign-out"></i>&nbsp;<?php xmsg('CA','BTN_EXPORT'); ?>
+						</div>
+						<div id="DropPasswdButton2" class="btn btn-default btn-circle" onClick="OnDropPasswdClick();">
+							<i class="fa fa-key"></i>&nbsp;<?php xmsg('CA','BTN_DROP_PASSWD'); ?>
+						</div>
+						<div id="ActivateButton2" class="btn btn-default btn-circle" onClick="OnActivateClick();">
+							<i class="fa fa-check-square"></i>&nbsp;<?php xmsg('CA','BTN_ACTIVATE'); ?>
+						</div>
+						<div id="UpdateButton2" class="btn btn-default btn-circle" onClick="OnUpdateClick();">
+							<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_UPDATE'); ?>
+						</div>
+						<div id="DeleteButton2" class="btn btn-default btn-circle" onClick="OnDeleteClick();">
+							<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_DELETE'); ?>
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<!--Responsive Table End -->
+</div>
+<!-- END Portlet PORTLET-->
+
+<form action="customers.php" name="CustomersActionsForm" method="post">
+<input type="hidden" name="asc_action" value="">
+<input type="hidden" name="customers_ids" value="">
+<input type="hidden" name="customers_groups" value="">
+</form>
+
+<script language="JavaScript">
+
+function isOneChecked(name)
+{
+    var els = document.getElementsByName(name);
+    var one_checked = false;
+    
+    for(i=0; i<els.length; i++)
+    {
+        if(els[i].checked)
+        {
+            one_checked = true;
+            break;
+        };
+    };
+    
+    return one_checked;
+};
+
+function getCheckedCustomers()
+{
+    var els = document.getElementsByName('customer_selected');
+    var customers_ids = new Array();
+    
+    for(i=0; i<els.length; i++)
+    {
+        if(els[i].checked)
+        {
+            customers_ids[customers_ids.length] = els[i].id.replace('customer_','');
+        };
+    };
+    
+    return customers_ids;
+};
+
+function getCheckedCustomersGroups()
+{
+    return jQuery.map(getCheckedCustomers(), function(n){
+        return n + '>>=' + jQuery(document.getElementsByName('membership['+n+']')[0]).val();
+    });
+}
+
+function OnUpdateClick()
+{
+    if(!isOneChecked('customer_selected'))
+    {
+        alert('<?php addslashes(xmsg('CA','WRN_SELECT_CUSTOMER')); ?>');
+        return;
+    };
+
+    if(!confirm('<?php addslashes(xmsg('CA','CNFR_UPDATE_CUSTOMERS')); ?>'))
+    {
+        return;
+    };
+
+    var frm = document.forms['CustomersActionsForm'];
+    frm.elements['asc_action'].value = 'update_customers_accounts';
+    frm.elements['customers_ids'].value = getCheckedCustomers().join('|');
+    frm.elements['customers_groups'].value = getCheckedCustomersGroups().join('|');
+    frm.submit();
+}
+
+function OnDeleteClick()
+{
+    if(!isOneChecked('customer_selected'))
+    {
+        alert('<?php addslashes(xmsg('CA','WRN_SELECT_CUSTOMER')); ?>');
+        return;
+    };
+    
+    bootbox.confirm('<?php addslashes(xmsg('CA','CNFR_DEL_CUSTOMERS')); ?>',function(result){
+    if(result){
+    var frm = document.forms['CustomersActionsForm'];
+    frm.elements['asc_action'].value = 'delete_customers_accounts';
+    frm.elements['customers_ids'].value = getCheckedCustomers().join('|');
+    frm.submit();
+    }});
+};
+
+function OnActivateClick()
+{
+    if(!isOneChecked('customer_selected'))
+    {
+        alert('<?php addslashes(xmsg('CA','WRN_SELECT_CUSTOMER')); ?>');
+        return;
+    };
+    
+    if(!confirm('<?php addslashes(xmsg('CA','CNFR_ACTIVATE_CUSTOMERS')); ?>'))
+    {
+        return;
+    };
+    
+    var frm = document.forms['CustomersActionsForm'];
+    frm.elements['asc_action'].value = 'activate_customers_accounts';
+    frm.elements['customers_ids'].value = getCheckedCustomers().join('|');
+    frm.submit();
+};
+
+function OnDropPasswdClick()
+{
+    if(!isOneChecked('customer_selected'))
+    {
+        alert('<?php addslashes(xmsg('CA','WRN_SELECT_CUSTOMER')); ?>');
+        return;
+    };
+    
+    if(!confirm('<?php addslashes(xmsg('CA','CNFR_DROP_PASSWORD')); ?>'))
+    {
+        return;
+    };
+    
+    var frm = document.forms['CustomersActionsForm'];
+    frm.elements['asc_action'].value = 'drop_accounts_passwords';
+    frm.elements['customers_ids'].value = getCheckedCustomers().join('|');
+    frm.submit();
+};
+
+function OnExportClick()
+{
+   if(document.getElementsByName('customer_selected').length == 0)
+    {
+        alert('<?php addslashes(xmsg('CA','WRN_NO_CUSTOMERS')); ?>');
+        return;
+    };
+    var customerIds=getCheckedCheckboxes("customer_selected");
+    if(customerIds=="")
+	openURLinNewWindow('popup_window.php?page_view=ExportCustomers','ExportCustomers');
+    else
+	openURLinNewWindow('popup_window.php?page_view=ExportCustomers&cust_Id='+customerIds,'ExportCustomers')
+}
+
+(function(){
+    jQuerydropDowns = jQuery("select").filter(function(){return this.name.match(/membership/);});
+    jQuerydropDowns.change(function(){
+        var arr = this.name.match(/^membership\[(\d+)\]$/);
+        if(arr && arr[1]){
+            jQuery("#customer_"+arr[1]).attr("checked",true).parent().parent().addClass("info");
+        }
+    }); 
+})();
+
+function getCheckedCheckboxes(checkboxName) {
+	var checkboxes = document.getElementsByName(checkboxName);
+	var selected="";
+	var isAdded=false;
+	for (var i=0; i<checkboxes.length; i++) {
+	    if (checkboxes[i].checked) {
+		if(isAdded){
+			selected=selected+"|";
+		}	
+		selected=selected+checkboxes[i].value;
+		isAdded=true;	
+	    }
+	}
+	return selected;
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

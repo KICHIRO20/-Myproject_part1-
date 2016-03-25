@@ -1,0 +1,29 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr id="blocktag_template_<?php ActionId(); ?>_<?php I(); ?>" style="<?php Display(); ?>">
+	<td>
+                <a class="pull-left" style="cursor:pointer;">
+		   <?php hinttext('NTFCTN_INFO_FIELD_019','notifications-messages'); ?>
+		</a>
+		&nbsp;&nbsp;<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_019'); ?>&nbsp;<?php BlockTagName(); ?>
+		<br />
+		<TEXTAREA class="form-control input-large" NAME="nonification_block_body_<?php ActionId(); ?>[<?php BlocktagId(); ?>]" id="template_<?php ActionId(); ?>_<?php BlocktagId(); ?>" style="height: 108px;">
+			<?php Body(); ?>
+		</TEXTAREA>		
+	</td>
+	<td class="text-center" style="vertical-align: middle;">
+		<a href="javascript:insertAtCursor('template_<?php ActionId(); ?>_<?php BlocktagId(); ?>', 'infoTags_<?php ActionId(); ?>_<?php BlocktagId(); ?>', '');">
+			<i class="fa fa-arrow-circle-left fa-lg"></i>
+		</a>
+	</td>
+	<td>
+                <a class="pull-left" style="cursor:pointer;">
+		   <?php hinttext('NTFCTN_INFO_FIELD_009','notifications-messages'); ?>
+		</a>
+		&nbsp;&nbsp;<?php xMsg('NTFCTN','NTFCTN_INFO_FIELD_009'); ?>&nbsp;<?php BlockTagName(); ?>
+		<br />
+		<select class="form-control input-large" size=8 style="width: 150px" id="infoTags_<?php ActionId(); ?>_<?php BlocktagId(); ?>">
+			<?php InfoTags(); ?>
+		</select>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

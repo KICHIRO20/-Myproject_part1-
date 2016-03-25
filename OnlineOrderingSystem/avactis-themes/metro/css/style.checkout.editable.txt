@@ -1,0 +1,539 @@
+[Checkout Box]
+.checkout .box {
+    margin;
+}
+
+[Checkout Box - Content]
+.checkout .box .content {
+    border-bottom;
+}
+
+[Checkout Header]
+.checkout .header .payment_methods,
+.checkout .header .shipping_methods,
+.checkout .header .billing_form,
+.checkout .header .selected_payment_shipping_methods,
+.checkout .header .key_order_details,
+.checkout .header .cart_summary,
+.checkout .header .shipping_form {
+    padding;
+    text;
+}
+
+[Checkout Section]
+.checkout .payment_methods,
+.checkout .shipping_methods,
+.checkout .billing_form,
+.checkout .key_order_details,
+.checkout .selected_payment_shipping_methods,
+.checkout .cart_summary,
+.checkout .shipping_form {
+    text;
+    padding;
+}
+
+[Checkout Key Order Details]
+.checkout .key_order_details {
+    width;
+}
+
+[Checkout Selected Methods]
+.checkout .selected_payment_shipping_methods {
+    width;
+}
+
+[Checkout Cart Summary]
+.checkout .cart_summary {
+    width;
+    text;
+}
+
+[Checkout Billing Form]
+.checkout .billing_form {
+    width;
+    text;
+}
+
+[Checkout Shipping Form]
+.checkout .shipping_form {
+    width;
+    text;
+    padding;
+}
+
+[Checkout Payment Methods]
+.checkout .payment_methods {
+    width;
+}
+
+[Checkout Shipping Methods]
+.checkout .shipping_methods {
+    width;
+}
+
+[Checkout Box - Content Header]
+.checkout .box .content .header {
+    text;
+    background;
+    padding;
+}
+
+[Checkout Cart Total]
+.checkout .shoppingcart_total {
+    padding;
+    text;
+}
+
+[Checkout Cart Total Rule]
+.checkout .shoppingcart_total hr {
+    color;
+}
+
+[Checkout Cart Total Value]
+.checkout .shoppingcart_total .total_value {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Checkout Cart Total Label]
+.checkout .shoppingcart_total .total_name {
+    width;
+    padding;
+    text;
+    text-align;
+}
+
+[Checkout Cart Summary Note]
+.checkout .cart_summary .note {
+    padding;
+}
+
+[Checkout Addresses]
+.checkout .box.checkout_addresses .content {
+    border;
+}
+
+[Checkout Selected Methods Label]
+.checkout .selected_payment_shipping_methods .label {
+    text;
+}
+
+[Checkout Selected Methods - Method]
+.checkout .selected_payment_shipping_methods .selected_payment_method {
+    padding;
+}
+
+[Checkout Form]
+.checkout .form_view {
+    text;
+}
+
+[Checkout Form - Row]
+.checkout .form_view .form_row {
+    text;
+}
+
+[Checkout Form - Field Label]
+.checkout .form_view .form_row .form_descr {
+    width;
+    text;
+}
+
+[Checkout Form - Field Container]
+.checkout .form_view .form_row .form_field {
+    width;
+    margin;
+}
+
+[Checkout Option Container]
+.checkout .shipping_same_as_billing,
+.checkout .tax_exempt {
+    text;
+    padding;
+    margin;
+}
+
+[Checkout Buttons]
+.checkout .checkout_buttons {
+    margin;
+    padding;
+}
+
+[Checkout Rule]
+.checkout_rule {
+    background;
+    size;
+    margin;
+    text;
+}
+
+[Checkout Rule Step 1]
+.checkout_rule.step_1_active {
+    background;
+}
+
+[Checkout Rule Step 2]
+.checkout_rule.step_2_active {
+    background;
+}
+
+[Checkout Rule Step 3]
+.checkout_rule.step_3_active {
+    background;
+}
+
+[Checkout Rule Step 1 Label]
+.checkout_rule span.step_1 {
+    color;
+    size;
+}
+
+[Checkout Rule Step 2 Label]
+.checkout_rule span.step_2 {
+    color;
+    size;
+}
+
+[Checkout Rule Step 3 Label]
+.checkout_rule span.step_3 {
+    color;
+    size;
+}
+
+[Checkout Rule Inactive Label]
+.checkout_rule.step_1_active span.step_2,
+.checkout_rule.step_1_active span.step_3,
+.checkout_rule.step_2_active span.step_1,
+.checkout_rule.step_2_active span.step_3,
+.checkout_rule.step_3_active span.step_1,
+.checkout_rule.step_3_active span.step_2 {
+    color;
+}
+
+[Checkout Rule Active Label]
+.checkout_rule.step_1_active span.step_1,
+.checkout_rule.step_2_active span.step_2,
+.checkout_rule.step_3_active span.step_3 {
+    color;
+}
+
+[Payment and Shipping Methods List]
+.checkout .payment_method_list .payment_method_list_row,
+.checkout .payment_method_list,
+.checkout .shipping_method_list .shipping_method_list_row,
+.checkout .shipping_method_list {
+    width;
+}
+
+[Checkout Payment Methods Note]
+.checkout .payment_method_list .note {
+    padding;
+    margin;
+}
+
+[Checkout Payment or Shipping Method Row]
+.checkout .payment_method_list .payment_method_list_row,
+.checkout .shipping_method_list .shipping_method_list_row {
+    padding;
+    margin;
+}
+
+[Checkout Shipping Method Name]
+.shipping_method_list_row .shipping_method_name {
+    text;
+    width;
+}
+
+[Checkout Shipping Method Days]
+.shipping_method_list_row .shipping_method_days {
+    text;
+    width;
+}
+
+[Checkout Shipping Method Cost]
+.shipping_method_list_row .shipping_method_cost {
+    text;
+    width;
+}
+
+[Checkout Payment Method Label]
+.checkout .payment_method_form .form_descr {
+    text;
+    padding;
+    margin;
+}
+
+[Checkout Cart Item]
+.checkout .box.shoppingcart .product-item {
+    border;
+    padding;
+}
+
+[Checkout Cart Item Cell]
+.checkout .box.shoppingcart .product-item .product_name,
+.checkout .box.shoppingcart .product-item .product_total_price,
+.checkout .box.shoppingcart .product-item .product_sale_price,
+.checkout .box.shoppingcart .product-item .product_quantity_selector {
+    padding;
+}
+
+[Checkout Cart Item Header Cell]
+.checkout .box.shoppingcart .header .product-item .product_name,
+.checkout .box.shoppingcart .header .product-item .product_total_price,
+.checkout .box.shoppingcart .header .product-item .product_sale_price,
+.checkout .box.shoppingcart .header .product-item .product_quantity_selector {
+    text;
+    padding;
+}
+
+[Checkout Cart Item Name Cell]
+.checkout .box.shoppingcart .product-item .product_name {
+    padding;
+}
+
+[Checkout Cart Item Name]
+.checkout .box.shoppingcart .product-item .product_name a {
+    text;
+}
+
+[Checkout Cart Content]
+.checkout .box.shoppingcart .content {
+    padding;
+}
+
+[Checkout Step 3/4 - Cart Total]
+.checkout.step_4_active .shoppingcart_total,
+.checkout.step_3_active .shoppingcart_total {
+    margin;
+    padding;
+}
+
+[Checkout Step 4 Header]
+.checkout.step_4_active h1 {
+    text;
+    margin;
+}
+
+[Checkout Step 4 Note]
+.checkout.step_4_active .note {
+    padding;
+    text;
+}
+
+[Checkout Key Order Details Row]
+.checkout.step_4_active .key_order_details .value,
+.checkout.step_4_active .key_order_details .label {
+    line-height;
+}
+
+[Checkout Key Order Details Label]
+.checkout.step_4_active .key_order_details .label {
+    width;
+    text-align;
+}
+
+[Checkout Key Order Details Value]
+.checkout.step_4_active .key_order_details .value {
+    width;
+    margin;
+    text-align;
+}
+
+[Checkout Product File Link Container]
+.checkout .box.shoppingcart .product-item .product_name .product_files_link {
+    padding;
+    margin;
+}
+
+[Checkout Product File Link]
+.checkout .box.shoppingcart .product-item .product_name .product_files_link a {
+    text;
+}
+
+[Checkout Payment Method CC Info]
+.checkout .payment_method_list .form_view.credit_card_output {
+    padding;
+}
+
+[Checkout Payment Method CC Info Row]
+.checkout .payment_method_list .form_view.credit_card_output .form_row {
+    text;
+}
+
+[CC Info - Label]
+.form_view.credit_card_output .form_row .form_descr {
+    width;
+}
+
+[CC Info - Field Container]
+.form_view.credit_card_output .form_row .form_field {
+    margin;
+    width;
+}
+
+[Checkout PaypalPro ExpressCheckout]
+.checkout .paypalpro_expresscheckout {
+    position;
+    width;
+}
+
+[Checkout PaypalPro ExpressCheckout Container]
+.checkout .paypalpro_expresscheckout .paypalpro_uk_expresscheckout div {
+    padding;
+}
+
+[Checkout PaypalPro ExpressCheckout Error Message]
+.checkout .paypalpro_expresscheckout .paypalpro_uk_expresscheckout .error_message {
+    margin;
+    width;
+}
+
+[Checkout PaypalPro UK ExpressCheckout]
+.checkout .paypalpro_uk_expresscheckout {
+    position;
+    width;
+}
+
+[Order Items Border Color]
+table.order_items, table.order_items td, table.order_items th {
+    border-color;
+}
+[Order Items Header]
+table.order_items th {
+    background-color;
+    text;
+    text-align;
+}
+
+[Order Items]
+.order_items {
+    margin;
+    border;
+}
+
+[Order Items Without Images]
+.order_items.without_images {
+    border;
+}
+
+[Order Items With Images]
+.order_items.with_images {
+    border;
+}
+
+[Order Items - Product Name Header]
+.order_items th.product_data {
+    text-align;
+}
+
+[Order Items With Images - Header]
+.order_items.with_images th {
+    text;
+    padding;
+}
+
+[Order Items Without Images - Header]
+.order_items.without_images th {
+    text;
+    padding;
+}
+
+[Order Items Without Images - Data Cell]
+.order_items.without_images td {
+    text;
+    padding;
+    border;
+}
+
+[Order Items With Images - Data Cell]
+.order_items.with_images td {
+    text;
+    padding;
+    border;
+}
+
+[Order Items - Image]
+.order_items .product_img {
+    width;
+    text-align;
+}
+
+[Order Items - Product Name Cell]
+.order_items .product_data {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Product Name]
+.order_items td.product_data .product_name {
+    text;
+}
+
+[Order Items - Product Options]
+.order_items td.product_data .product_options {
+    padding;
+}
+
+[Order Items - Product Option List]
+.order_items td.product_data .product_options ul {
+    padding;
+    margin;
+}
+
+[Order Items - Product Option Value]
+.order_items td.product_data .product_options ul li .product_option_selected_value {
+    text;
+}
+
+[Order Items - Quantity]
+.order_items td.product_quantity_selector {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Sale Price]
+.order_items td.product_sale_price {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Total]
+.order_items td.product_total_price {
+    text;
+    width;
+    text-align;
+}
+
+[Order Items - Button]
+.order_items td.product_total_price .label {
+    padding;
+    margin;
+}
+
+[Order Items - Button Label]
+.order_items td.product_total_price .label a {
+    text;
+    padding;
+}
+
+[Order Items - Button Label Hovered]
+.order_items td.product_total_price .label a:hover {
+    text;
+    background;
+}
+
+[Order Items Margin]
+.order_items_margin {
+    margin;
+}
+
+[Order Items Margin inside Shopping Cart]
+.shoppingcart .order_items_margin {
+    margin;
+}
+

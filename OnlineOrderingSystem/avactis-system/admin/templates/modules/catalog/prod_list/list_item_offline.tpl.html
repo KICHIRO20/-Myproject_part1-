@@ -1,0 +1,77 @@
+<table>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+    <tr style="height: 55px;">
+        <td STYLE="text-align: center;"><INPUT TYPE="checkbox" class="form-control" id="select_<?php i(); ?>" name="selected_products[<?php i(); ?>]" onclick="UncheckAll('ProductListing'); selectRow (this);" value="<?php ProductID(); ?>" <?php Checked(); ?>></td>
+        <td STYLE="text-align: center;"><A HREF="<?php ProductInfoLink(); ?>" style="color: rgb(175, 175, 175);"><b><span style="color: rgb(175, 175, 175);"><?php ProductID(); ?></span></b></A></td>
+        <td STYLE="text-align: center;"><A HREF="<?php ProductInfoLink(); ?>" style="color: rgb(175, 175, 175);"><?php ProductThumbnail(); ?></A>&nbsp;</td>
+        <td STYLE="text-align: center;"><A HREF="<?php ProductInfoLink(); ?>" style="color: rgb(175, 175, 175);"><b><span style="color: rgb(175, 175, 175);"><?php ProductSKU(); ?></span></b></A></td>
+        <td STYLE="text-align: center; color: <?php ProductOfflineStatusColor(); ?>;">
+            <?php xmsg('CTL','LBL_STATUS'); ?>&nbsp;<?php ProductAvailable(); ?>&nbsp;<span style="color: rgb(175, 175, 175);"><b><?php ProductOfflineStatusReason(); ?></b></span>
+            <br>
+            <a href="javascript:void(0);" 
+               onmouseover="return overlib('<div style=\'black: gray;background:white\'><span style=\'color: gray;\'><?php xmsg('CTL','LBL_THIS_PRODUCT_IS_LOCATED_IN'); ?></span><br><?php ProductCatsList(); ?></div>');" 
+               onmouseout="return nd();" 
+               style="color: #666666; text-decoration: none">
+               <?php xmsg('CTL','LBL_LOCATION_IN'); ?> <?php ProductCatsCount(); ?>&nbsp;<?php (getProductCatsCount()>1 ? xmsg('CTL','LBL_CATEGORIES') : xmsg('CTL','LBL_CATEGORY')); ?>
+            </a>
+         </td>
+        <td STYLE="text-align: center;"><A HREF="<?php ProductInfoLink(); ?>" style="color: rgb(175, 175, 175);"><b><span style="color: rgb(175, 175, 175);"><?php ProductName(); ?></span></b></A></td>
+        <td class="text-center" style="display:table-cell;vertical-align:middle;">
+		<?php 
+				/******************** For category dropdown display ****************/
+				
+				$catid = modApiFunc('CProductListFilter','getCurrentCategoryId');
+			
+		?>
+        	<select class="form-control input-sm input-small input-inline" name="cat_id" id="catval_id_<?php i(); ?>" onchange="autocheck(<?php i(); ?>);">
+        		<?php 
+        				$categorylist =  modApiFunc("Catalog", "getSubcategoriesFullListWithParent", 1, false);
+        				
+							foreach($categorylist as $val=>$data)
+							{
+								$catvalid = $data["id"];
+								if(($data['level'] == 2))
+								{
+							 		
+							?>
+							<option value="<?php echo $catvalid; ?>"
+								<?php 
+									if($catid == $catvalid)
+										{ 
+								?>
+										selected="selected"
+										<?php
+										}else {}
+								?>
+							><?php echo "&nbsp;&nbsp;&nbsp;".$data['name']; ?></option>
+							<?php 
+							 	}
+							 	else{
+								?>
+								<option value="<?php echo $catvalid; ?>"
+								<?php 
+									if($catid == $catvalid)
+									{ 
+								?>
+								selected="selected"
+										<?php
+										}else {}
+								?>
+								
+								><?php echo $data['name']; ?></option>
+								<?php
+							 		
+							 	}
+							}
+							
+        		?>
+        		
+        	</select>
+        	<input type="hidden" id="selected_category" name="selected_category" value="" />
+        	
+        </td>
+        <td STYLE="text-align: center;"><span class="categoryListInfo" style="color: rgb(175, 175, 175);"><?php ProductSalePrice(); ?></span></td>
+        <td STYLE="text-align: center; color: rgb(175, 175, 175);"><span class="categoryListInfo" style="color: rgb(175, 175, 175);"><?php ProductQuantityInStock(); ?></span></td>
+    </tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</table>

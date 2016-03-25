@@ -1,0 +1,19 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="checkout nogradient">
+    <div class="content-page">
+        <h2><?php Label('CHECKOUT_TRANSACTION_FAILED_LABEL'); ?></h2>
+        <div class="product_list_items empty">
+            <div class="error_message">
+            <?php Label('CHECKOUT_ORDER_FAILURE_MESSAGE'); ?><br>
+            <?php Label('CHECKOUT_CONTACT_ADMIN_MESSAGE'); ?> <?php StoreOwnerEmail(); ?><BR>
+            <?php Label('CHECKOUT_ORDER_ID_IS_LABEL'); ?> <?php Local_OrderID(); ?>
+            <?php Local_Step4PaymentModuleMessage(); ?>
+            </div>
+        </div>
+        <div class="checkout_buttons">
+            <a href="<?php PageURL('ProductList'); ?>"><span class="<?php lang(); ?> btn btn-blue button_continue_shopping"><?php Label('BUTTON_CONTINUE_SHOPPING'); ?></span></a>
+        </div>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

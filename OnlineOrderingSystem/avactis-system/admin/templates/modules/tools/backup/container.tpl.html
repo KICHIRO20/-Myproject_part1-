@@ -1,0 +1,138 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var selectedIndex = null;
+
+function isFileSelected()
+{
+    var is_selected = false;
+    var i=0;
+    var elem = document.getElementById('BackupFile_'+i);
+    while (elem)
+    {
+        if (elem.checked)
+        {
+            is_selected = true;
+            selectedIndex = i;
+            break;
+        }
+        i++;
+        elem = document.getElementById('BackupFile_'+i);
+    }
+    if(!is_selected)
+    {
+        alert('<?php Msg("BCP_ALERT_001"); ?>');
+        return false;
+    }
+    return true;
+}
+
+function submitForm(formId, actionURL, action)
+{
+    var form = document.forms[formId];
+    if (isFileSelected())
+    {
+        form.action = actionURL;
+        if (action == "delete")
+        {
+//            openURLinNewWindow(actionURL+document.getElementById('BackupFile_'+selectedIndex).value, 'BackupDelete');
+            form.action+= document.getElementById('BackupFile_'+selectedIndex).value;
+            if (!confirm('<?php Msg("BCP_ALERT_002"); ?>')) return;
+            form.submit();
+        }
+        if (action == "restore")
+        {
+            openURLinNewWindow(actionURL+document.getElementById('BackupFile_'+selectedIndex).value, 'RestoreBackup');
+        }
+        if (action == "download")
+        {
+            go(actionURL+document.getElementById('BackupFile_'+selectedIndex).value+'.tar.gz');
+        }
+    }
+}
+
+//-->
+</SCRIPT>
+<form method=POST action="" name="BackupForm" id="BackupForm" style="margin-bottom: 0px;">
+<?php Warnings(); ?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-archive font-green-sharp"></i>
+					<span class="caption-subject font-green-sharp bold uppercase"><?php msg('BCP_PAGE_SUBTITLE'); ?></span>
+				</div>
+				<div class="actions">
+					<div class="actions btn-set">
+						<a class="btn btn-circle btn-default" href="javascript:;" onclick="javascript:submitForm('BackupForm', '<?php DownloadFormAction(); ?>', 'download');">
+				<i class="fa fa-plus"></i> 
+				<span class="hidden-480"><?php Msg('BTN_DOWNLOAD'); ?></span>
+			</a>
+			<a class="btn btn-circle btn-default" href="javascript:;" onclick="javascript:submitForm('BackupForm', '<?php DeleteFormAction(); ?>', 'delete');">
+				<i class="fa fa-times"></i> 
+				<span class="hidden-480"><?php Msg("BTN_DELETE"); ?></span>
+			</a>              
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-container">
+					<table class="table table-striped table-bordered table-hover" id="datatable_promo_codes">
+						<thead>
+							<tr role="row" class="heading">
+								<th width="5%" align="center" style="text-align: center;">
+									<input type="checkbox" class="group-checkable">
+								</th>
+								<th width="40%" align="center" style="text-align: center;">
+									<?php Msg('BCP_HEADER_001'); ?>
+								</th>
+								<th width="40%" align="center" style="text-align: center;">
+									<?php Msg('BCP_HEADER_002'); ?>
+								</th>
+								<th width="25%" align="center" style="text-align: center;">
+									<?php Msg('BCP_HEADER_003'); ?>
+    </th>
+</tr>
+</thead>
+						<tbody>
+        <?php Items(); ?>
+						</tbody>
+    </table>
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>
+<input type='hidden' name='FormSubmitValue'>
+</form>
+<?php if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN'): ?>
+<div class="portlet-body">
+	<div class="panel-group accordion scrollable" id="accordion2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_1">Backup and Restore Scripts</a></h4>
+			</div>
+			<div id="collapse_3_1" class="panel-collapse in">
+				<div class="panel-body">
+					<p>
+                    These scripts allow you to backup and restore your shopping cart system, including the 
+                    product catalog, orders, customers, settings and all files installed in your storefront 
+                    directory. For backup and restore set permissions for these scripts as <b>Executable</b>. For more 
+                    instructions please refer to the <a href="http://docs.avactis.com/20/cron_backup__restore_uc.htm" target="_blank">shopping cart manual</a>.
+                    <br>
+                    <br>
+                    <b>Backup Script Path:</b> <code><?php echo dirname(dirname(__FILE__)).'/backup.sh'; ?></code>
+                    <br>
+                    <b>Restore Script Path:</b> <code><?php echo dirname(dirname(__FILE__)).'/restore.sh'; ?></code>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+<BR><BR>
+&nbsp;
+<!-- END TPL (DO NOT REMOVE!) --><hr>

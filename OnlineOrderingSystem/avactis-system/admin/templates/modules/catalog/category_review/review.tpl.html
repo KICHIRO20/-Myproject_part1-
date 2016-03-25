@@ -1,0 +1,44 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="table-responsive">
+	<table class="table table-bordered borderless table-striped table-condensed">
+		<thead>
+			<tr class="bg-blue-hoki">
+				<th colspan="2"><h4><strong><i class="fa fa-tags"></i>&nbsp;<?php CategoryName(); ?></strong></h4></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?php xmsg('CTL','CTG_RVW_LBL_CTG_ID'); ?>&nbsp;&nbsp;<strong><?php CategoryId(); ?></strong></td>
+				<td><?php xmsg('CTL','CTG_RVW_LBL_CTG_STS'); ?>&nbsp;&nbsp;<strong><?php CategoryStatus(); ?></strong></td>
+			</tr>
+			<tr>
+				<td colspan="2"><?php xmsg('CTL','CTG_RVW_LBL_CTG_PRD'); ?> <?php CategoryProducts(); ?> / <?php CategoryProductsRec(); ?></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<img width="120" src="<?php AttributeImageURL(); ?>">
+				</td>
+			</tr>
+			<tr class="bg-grey bold">
+				<td colspan="2"><?php xmsg('CTL','CTG_RVW_TTL_FEAT'); ?></td>
+			</tr>
+			<tr>
+				<td colspan="2"><?php FeaturedProducts(); ?></td>
+			</tr>
+			<tr class="bg-grey bold">
+				<td colspan="2"><?php xmsg('CTL','CTG_RVW_TTL_BSTS'); ?></td>
+			</tr>
+			<tr>
+				<td colspan="2"><?php BestsellersProducts(); ?></td>
+			</tr>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

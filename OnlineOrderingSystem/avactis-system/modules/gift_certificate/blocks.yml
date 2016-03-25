@@ -1,0 +1,4 @@
+- CreateGiftCertificateForm:
+    title: Gift Certificate Form
+    description: Gift Certificate Form
+    page: gift-certificate.php

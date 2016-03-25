@@ -1,0 +1,100 @@
+.button {    
+	border-top: #ffffff 2px groove;
+    border-right: #a8b5d8  2px groove;
+    border-bottom: #a8b5d8 2px groove;
+    border-left: #ffffff 2px groove;
+    padding: 4px 17px;
+    font-weight: bold;
+    font-size: 8pt;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Tahoma, Sans-serif;
+    white-space: nowrap;
+	border-style: none !important;
+    height: 1.3em; 
+
+    background-color: #848482;
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    
+    -moz-user-select: none;
+    -khtml-user-select: none; 
+}
+
+.button_disabled {
+    background-color: #c0c0c0;
+	cursor: default;
+}
+
+.link_disabled {
+    visibility: hidden;
+}
+
+.button_enabled {
+    background-color: #6a94df;
+}
+
+.button_small {
+	width: 5em;
+}
+
+.button_medium {
+	width: 10em;
+}
+
+.button_large {
+	width: 15em;
+}
+
+.button_3em {
+    width: 3em;
+} 
+
+.button_4em {
+    width: 4em;
+} 
+
+.button_5em {
+    width: 5em;
+} 
+
+.button_6em {
+    width: 6em;
+} 
+
+.button_7em {
+    width: 7em;
+} 
+
+.button_8em {
+    width: 8em;
+} 
+
+.button_9em {
+    width: 9em;
+}
+
+.button_10em {
+    width: 10em;
+}
+
+.button_11em {
+    width: 11em;
+}
+
+.button_12em {
+    width: 12em;
+}
+
+.button_13em {
+    width: 13em;
+}
+
+.button_14em {
+    width: 14em;
+}
+
+.button_15em {
+    width: 15em;
+}

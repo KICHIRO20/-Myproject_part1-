@@ -1,0 +1,78 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script>
+	jQuery(document).ready(function($){
+		var myDate = new Date();
+		var prettyDate = (myDate.getFullYear()) + '-' + (myDate.getMonth() + 1)
+				+ '-' + myDate.getDate();
+		jQuery("#date_start<?php BannerID(); ?>,#date_end<?php BannerID(); ?>").datepicker({
+			yearRange : '-1:+4',
+			dateFormat : 'mm-dd-yy',
+			altFormat : 'mm-dd-yy',
+			changeMonth : true,
+			changeYear : true,
+			buttonText : "Calendar",
+			showOn : 'both',
+			buttonImage : "../../avactis-extensions/banner/views/admin/styles/images/calendar.png",
+			buttonImageOnly : true
+		});
+
+	});
+</script>
+<tr bgcolor="#FFFAFC";>
+
+	<td>
+	<input type="hidden" name="banner_location" value="<?php
+		Location(); ?>">
+	<input
+		type="checkbox" class="<?php DelCheckboxCssClass(); ?>"
+		id="select_<?php BannerN(); ?>"
+		name="selected_banners[<?php BannerID(); ?>]"
+		onclick="selectRow(this); formDelete(this);"
+		value="<?php BannerID(); ?>" type="checkbox"></td>
+	<td><input
+		type="text" value="<?php BannerWidth(); ?>"
+		name="banner_data[<?php BannerID(); ?>][banner_width]" class="form-control input-small"></td>
+
+	<td><input
+		type="text"  value="<?php BannerHeight(); ?>"
+		name="banner_data[<?php BannerID(); ?>][banner_height]" class="form-control input-small"></td>
+	<?php if(getBannerStatus() != '') { ?>
+	        <?php if(getBannerStatus() == "expired") { ?>
+	        <td><input
+		type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229); background-color: #FF0000;" id="date_start<?php BannerID(); ?>" name="banner_data[<?php BannerID(); ?>][start_date]" value="<?php
+		BannerStartDate();?>"></td>
+	<td><input
+		type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229); background-color: #FF0000;" id="date_end<?php BannerID(); ?>" name="banner_data[<?php BannerID(); ?>][end_date]" value="<?php
+		BannerEndDate();?>"></td>
+	        <?php } else { ?>
+	        <td><input
+		type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229);background-color: #aaf ;" id="date_start<?php BannerID(); ?>" name="banner_data[<?php BannerID(); ?>][start_date]" value="<?php
+		BannerStartDate();?>"></td>
+	<td><input
+		type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229);background-color: #aaf ;" id="date_end<?php BannerID(); ?>" name="banner_data[<?php BannerID(); ?>][end_date]" value="<?php
+		BannerEndDate();?>"></td>
+	        <?php } ?>
+	<?php  } else { ?>
+	<td><input
+		type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229);" id="date_start<?php BannerID(); ?>" name="banner_data[<?php BannerID(); ?>][start_date]" value="<?php
+		BannerStartDate();?>"></td>
+	<td><input
+		type="text" style="height: 33px;border: 1px solid rgb(229, 229, 229);" id="date_end<?php BannerID(); ?>" name="banner_data[<?php BannerID(); ?>][end_date]" value="<?php
+		BannerEndDate();?>"></td>
+	<?php } ?>
+	
+	<td>
+	<select class="form-control" name="banner_data[<?php BannerID(); ?>][banner_effect]" >
+        <?php BannerEffect(); ?>
+    </select>
+	</td>
+	<td><input
+		type="checkbox" name="banner_data[<?php BannerID(); ?>][nav]" value="Y" <?php BannerNavigation();
+		?>></td>
+</tr>
+<tr>
+	<td class=" TableSubHead" style="padding: 5px 0px 8px 12px;"
+		colspan="11"><a
+		href="admin.php?page_view=BannerContentManagement&amp;bannerid=<?php BannerID();?>&amp;type=<?php Location() ;?>"><strong><?php xMsg('BN','BN_EDIT'); ?></strong></a></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

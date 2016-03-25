@@ -1,0 +1,86 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 	
+$type = getExtn_Category();
+$button_type = getExtn_type(); 
+if(($_GET['category_filter_by'] == $type) || ($_GET['category_filter_by'] == getMsg('SYS','CUSTOMERS_SEARCH_ALL')) || ($_GET['category_filter_by'] == '')){
+	if(!(getIsExtnInstalled() == "N")){	
+		$extn_name=getExtn_Name();
+		$cVersion=getExtn_cVersion();
+		$aVersion=getExtn_AVersion();
+		$iVersion=getExtn_IVersion();
+		$ext_name=getExtn_Name();
+		$count=getCount();
+		$isUpgrade=((int)str_replace(".", "", $iVersion))< ((int)str_replace(".", "", $cVersion));
+
+?>
+<tr>
+	<form name="ext_manager" method="post" id="<?php echo $extn_name; ?>_uninstall" action="configure-extensions.php">
+		<input type="hidden" name="extn_name" value="<?php echo $ext_name;?>" />
+		<input type="hidden" name="asc_action" value="ActivateDeactivateExtension"/>
+		<td width="1%" style="vertical-align:middle">
+		 	<!--<input id="chkbox" type="checkbox" />-->
+		</td>
+		<td class="text-center" style="vertical-align:middle" width="24%">
+	      		<strong><?php Extn_Display_Name(); ?></strong>
+			<br />
+			<?php if(getisActive()){ ?>
+				<?php if(getisSettingExist()){ ?>
+			<a  HREF="javascript: void(0);" onclick="javascript:openURLinNewWindow('popup_window.php?page_view=SettingParamList&group=<?php echo$ext_name; ?>', 'SettingGroupEditor');"><?php Msg('BTN_SETTINGS'); ?></a> | 
+			<?php } ?>
+
+			<input type="hidden" name="status" value="deactive"/>
+			<button class="btn btn-circle btn-link" type="submit">Deactivate</button>
+			<?php } else { ?>
+			<input type="hidden" name="status" value="active"/>
+			<button class="btn btn-circle btn-link" type="submit"><?php xMsg('CA', 'BTN_ACTIVATE'); ?></button>
+			<?php $deleteLink="configure-extensions.php?asc_action=UninstallExtensionAction&extn_name=".$ext_name; ?>
+			| <a class="btn btn-link" href="<?php echo $deleteLink; ?>"><?php Msg('BTN_DELETE'); ?></a>
+			<?php } ?>
+		</td>
+		<td style="vertical-align:middle">
+			<?php Extn_Desc(); ?> <a href="extension_details.php?page_view=ExtensionDetails&ext_name=<?php echo $extn_name;?>&update=update<?php echo $isUpgrade?'&upgrade=upgrade':''; ?>" data-target="#ajax<?php echo $count; ?>" data-toggle="modal">Detail</a>
+			<div style="bottom: 0px;">
+				<hr style="bottom: 0px;" /> Version : <?php echo $iVersion; ?> | By : Avactis 	
+				<?php 
+			
+					if($isUpgrade){
+				?>
+				 	| Available New Version : <?php echo $cVersion; ?>&nbsp;&nbsp;
+						<a class="btn btn-default btn-circle" href="extension_details.php?page_view=ExtensionDetails&ext_name=<?php echo $extn_name;?>&update=update<?php echo $isUpgrade?'&upgrade=upgrade':''; ?>" data-target="#ajax<?php echo $count; ?>" data-toggle="modal"><i class="fa fa-arrow-circle-up"></i>&nbsp;Upgrade Now</a>
+				<?php } ?>
+			</div>
+		</td>
+	</form>
+	<form name="ext_manager" method="post" id="<?php echo $extn_name; ?>" action="manage-extensions.php">
+		<input type="hidden" name="extn_name" value="<?php Extn_Name();?>" />
+		<input type="hidden" name="extn_type" value="<?php Extn_type();?>" />
+		<input type="hidden" name="extn_version" value="<?php echo $iVersion;?>" />
+		<input type="hidden" name="asc_action" value="GetMarketPlaceExtension"/>
+	</form>
+	<!-- END Portlet PORTLET-->
+	<!-- Model Start-->							
+	<div class="modal fade bs-modal-lg" id="ajax<?php echo $count; ?>" tabindex="-1" role="dialog" aria-hidden="true" data-width="400">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="modal-content"></div> 
+				</div>
+				<div class="modal-footer">
+					<div class="loading-spinner text-center">
+						<div class="progress progress-striped active">
+							<div class="progress-bar" style="width: 100%;">Loading ...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>						
+
+</tr>
+<?php
+	}
+}
+?>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

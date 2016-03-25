@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Thank you for your payment</title>
+</head>
+<WPDISPLAY FILE=header.html DEFAULT="<body bgcolor=#ffffff>">
+<WPDISPLAY ITEM=banner>
+<WPDISPLAY FILE=footer.html DEFAULT="</body>">
+<form method="post" action="<WPDISPLAY ITEM=MC_callback>" name="returnForm" id="returnForm">
+<input type="hidden" name="transId" value="<WPDISPLAY ITEM=transId>">
+<input type="hidden" name="transStatus" value="<WPDISPLAY ITEM=transStatus>">
+<input type="hidden" name="futurePayId" value="<WPDISPLAY ITEM=futurePayId>">
+<input type="hidden" name="transTime" value="<WPDISPLAY ITEM=transTime>">
+<input type="hidden" name="authAmount" value="<WPDISPLAY ITEM=authAmount>">
+<input type="hidden" name="authCurrency" value="<WPDISPLAY ITEM=authCurrency>">
+<input type="hidden" name="authAmountString" value="<WPDISPLAY ITEM=authAmountString>">
+<input type="hidden" name="rawAuthMessage" value="<WPDISPLAY ITEM=rawAuthMessage>">
+<input type="hidden" name="rawAuthCode" value="<WPDISPLAY ITEM=rawAuthCode>">
+<input type="hidden" name="callbackPW" value="<WPDISPLAY ITEM=callbackPW>">
+<input type="hidden" name="cardType" value="<WPDISPLAY ITEM=cardType>">
+<input type="hidden" name="countryMatch" value="<WPDISPLAY ITEM=countryMatch>">
+<input type="hidden" name="AVS" value="<WPDISPLAY ITEM=AVS>">
+<script type="text/javascript">
+<!--
+document.forms["returnForm"].submit();
+//-->
+</script>
+<noscript>
+<input type="submit" value="Return To Merchant">
+</noscript>
+</form>
+</html>

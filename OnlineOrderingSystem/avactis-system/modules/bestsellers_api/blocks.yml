@@ -1,0 +1,8 @@
+- Bestsellers:
+    title: Bestsellers
+    description: Bestsellers
+- Bestsellers1:
+    title: Bestsellers (Home)
+    description: Bestsellers from 'Home' category (category_id = 1)
+    template: '<?php Bestsellers(1); ?>'
+

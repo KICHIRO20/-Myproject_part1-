@@ -1,0 +1,99 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="main">
+<div class="container">
+<div class="row margin-bottom-40">
+
+<h1><?php Label("CHECKOUT_THANK_YOU"); ?></h1>
+<div class="checkout step_4_active nogradient goods-page">
+    <div class="goods-data clearfix">
+       <div class="note note-success note-bordered">
+            <?php Label("CHECKOUT_YOUR_ORDER_SUCCESSFULLY_CREATED"); ?><?php Local_OrderId(); ?>
+            <br/>
+            <?php Label("CHECKOUT_ORDER_DETAILS_SENT"); ?>
+        </div>
+        <?php if (($m=getLocal_Step4PaymentModuleMessage())!=''): ?>
+            <div class="note">
+            <?php echo $m; ?>
+            </div>
+        <?php endif; ?>
+        <div class="checkout_addresses">
+            <div class="row" style="margin:0px;">
+         
+            <div class="portlet box blue-hoki">
+            <div class="portlet-title key_order_details">
+            <div class="caption"><?php Label("CHECKOUT_KEY_ORDER_DETAILS"); ?></div>
+            </div></div>
+
+            <div class="col-md-12"> 
+            <div class="portlet-body form key_order_details">
+             <div class="form-group" style="overflow: hidden;"></div>  
+            <div class="form-group" style="overflow: hidden;">
+            <label class="control-label col-lg-3"><?php Label("CHECKOUT_ORDER_ID_COLON"); ?></label>
+            <div class="col-lg-6"><?php Label("CHECKOUT_BARS"); ?><?php Local_OrderId(); ?></div>
+            </div>
+            
+             
+               <?php if (($m=getLocal_OrderPaymentProcessorOrderId())!=''): ?>
+                     <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("CHECKOUT_PAYMENT_PROCESSOR_ID_COLON"); ?></label> 
+                    <div class="col-lg-6"><?php echo $m; ?></div>
+                   </div>  
+                 <?php endif; ?>
+               
+           
+              <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("CHECKOUT_ORDER_DATE_COLON"); ?></label> 
+                    <div class="col-lg-6"><?php Local_OrderDate(); ?></div>
+              </div>
+            
+              <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("CHECKOUT_ORDER_STATUS_COLON"); ?></label> 
+                    <div class="col-lg-6"><?php Local_OrderStatus(); ?></div>
+              </div>
+              <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("CHECKOUT_PAYMENT_STATUS_COLON"); ?></label> 
+                    <div class="col-lg-6"><?php Local_OrderPaymentStatus(); ?></div>
+              </div>
+              <div class="form-group" style="overflow: hidden;">
+                    <label class="control-label col-lg-3"><?php Label("CHECKOUT_PAYMENT_METHOD_COLON"); ?></label> 
+                    <div class="col-lg-6"><?php Local_OrderPaymentMethod(); ?></div>
+              </div>
+
+               <div class="form-group" style="overflow: hidden;"> 
+                    <label class="control-label col-lg-3"><?php Label("CHECKOUT_SHIPPING_METHOD_COLON"); ?></label> 
+                    <div class="col-lg-6"><?php Local_OrderShippingMethod(); ?></div>
+              </div>
+              <span class="label">&nbsp;</span>
+            </div>
+            </div>
+              
+              <div class="col-md-6 ">
+              <div class="portlet box blue-hoki">
+              <div class="portlet-title">
+              <div class="caption"><?php Label("CHECKOUT_BILLING_ADDRESS"); ?>
+              </div></div></div>               
+               <div class="billing_form portlet-body form" style="font-size:13px"><?php CheckoutBillingInfoOutput(); ?></div>
+               </div> 
+
+              <div class="col-md-6 ">
+              <div class="portlet box blue-hoki">
+              <div class="portlet-title">
+              <div class="caption"><?php Label("CHECKOUT_SHIPPING_ADDRESS"); ?>
+              </div></div></div>               
+               <div class="billing_form portlet-body form" style="font-size:13px"><?php CheckoutShippingInfoOutput(); ?></div>
+               </div> 
+
+            </div>
+        </div>
+        <?php CheckoutSummary(); ?>
+        <?php TransactionTrackingHtmlCode(); ?>
+        <div class="checkout_buttons">
+          <a class="btn btn-default" href="<?php PageURL('ProductList'); ?>"><?php Label('BUTTON_CONTINUE_SHOPPING'); ?></a>
+        </div>
+    </div>
+</div>
+
+</div></div></div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+

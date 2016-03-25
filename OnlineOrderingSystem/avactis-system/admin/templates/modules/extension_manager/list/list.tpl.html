@@ -1,0 +1,78 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php GetRegisterStoreMsg(); ?>
+	<div class="note note-info note-bordered">
+		<div class="pull-right" style="margin-top:-5px;" >
+			<button type="submit" onclick="window.location.href='<?php ReloadMarketPlace();?>'" 
+				value="<?php xMsg('SYS','RELOAD')?>" class="btn btn-circle btn-default">
+				<i class="fa fa-refresh"></i>&nbsp;<?php xMsg('SYS','RELOAD')?>
+			</button>
+		</div>		
+			<?php xMsg('CA', 'LBL_FILTER_BY'); ?> :&nbsp; <?php SelectExtensionType(); ?> &nbsp; <?php SelectExtensionFilterType(); ?>		
+	</div>
+	<?php InstallMessage(); ?>
+	<?php ErrorMessage();?>
+	<?php UninstallMessage(); ?>
+<div class="row">
+    <?php ListExtensionItems(); ?>
+</div>
+<script type="text/javascript">
+	function performAction(name,type){
+		jQuery.post(
+		    'extension_details.php', // backend
+		    {
+			'page_view': 'ExtensionDetails',
+			'asc_action': 'ExtensionDetails',
+			'ext_name': name,
+			'reset'	: 'reset'		
+		    },
+		    // Function is called when an answer arrives. 
+		    function(result, output) {
+		    },
+		    'json'
+		);
+		installForm(name);
+		document.getElementById("refreshContent").value = "1";
+	}
+	function installForm(form_id){
+
+		document.getElementById(form_id).submit();
+
+	}
+	
+	function performLinkAction(url,name){
+		jQuery.post(
+		    'extension_details.php', // backend
+		    {
+			'page_view': 'ExtensionDetails',
+			'ext_name': name,
+			'reset'	: 'reset'		
+		    },
+		    // Function is called when an answer arrives. 
+		    function(result, output) {
+		    },
+		    'json'
+		);
+		openInNewTab(url);
+		document.getElementById("refreshContent").value = "1";
+	}
+	function openInNewTab(url) {
+	  var win = window.open(url, '_blank');
+	  win.focus();
+	}
+	
+	function reloadPage(){
+		var refreshPageValue = document.getElementById("refreshContent").value;
+		if(refreshPageValue == "1" || refreshPageValue == 1){
+			var urlLink=window.location.href;
+			if(urlLink.indexOf("?reload")>-1){
+				window.location.reload();
+			}else if(urlLink.indexOf("?")>-1){
+				window.location.href=window.location.href+"&reload";
+			}else{
+				window.location.href=window.location.href+"?reload";
+			}
+		}
+	}
+</script>
+<input type="hidden" id="refreshContent" value="0"/>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

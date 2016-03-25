@@ -1,0 +1,126 @@
+/*** page_header menu *********************************************************
+     This styles define how to display menu block inside page_header block.
+*******************************************************************************/
+
+.page_header .menu ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.page_header .menu li {
+    display: inline;
+    padding-left: 9px;
+    margin-left: 10px;
+    background-image:url("../images/page-top-menu-triangle.gif");
+    background-repeat:no-repeat;
+    background-position: 0px 4px;
+}
+
+.page_header .menu li.nolink {
+    background-image: none;
+    padding-left: 0px;
+}
+
+.page_header .menu li,
+.page_header .menu li a {
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.page_header .top_user3 .menu li,
+.page_header .top_user3 .menu li a {
+    color: green;
+}
+
+.page_header .menu li a:hover {
+    text-decoration: underline;
+}
+/*** page_header menu *********************************************************/
+
+
+
+/*** page_top_menu menu ********************************************************
+     This styles define how to display menu block inside page_top_menu block.
+*******************************************************************************/
+.page_top_menu .menu {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+}
+
+.page_top_menu .menu ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.page_top_menu .menu li {
+    display: inline;
+    padding-left: 9px;
+    padding-right: 20px;
+    margin-left: 10px;
+    background-image: none;
+    border-right: 1px solid #b3b3b3;
+}
+
+.page_top_menu .menu li.last {
+    border: none;
+}
+
+.page_top_menu .menu li,
+.page_top_menu .menu li a {
+    color: #5c8f4c;
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.page_top_menu .menu li a:hover {
+    text-decoration: underline;
+}
+/*** page_top_menu menu *********************************************************/
+
+
+
+/*** .page_footer menu *********************************************************/
+.page_footer .menublock {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.page_footer .menublock ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.page_footer .menublock li {
+    display: inline;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-image: none;
+    border-right: 1px solid #404040;
+}
+
+.page_footer .menublock li.last {
+    border: none;
+}
+
+.page_footer .menublock li,
+.page_footer .menublock li a {
+    color: #404040;
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.page_footer .menublock li a:hover {
+    text-decoration: underline;
+}
+

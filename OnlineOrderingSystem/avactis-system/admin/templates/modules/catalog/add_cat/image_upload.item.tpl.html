@@ -1,0 +1,16 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="row margin-bottom-10">
+	<div class="col-sm-2">
+		<label class="control-label"><div><?php ImageTitle(); ?></div></label>
+	</div>
+	<div class="col-sm-2">
+		<a class="pull-left" style="cursor:pointer;">
+			<?php AttributeHelp('0', getImageViewTag(), 'cat_attr'); ?>
+		</a>
+	</div>
+	<div class="col-sm-5"> 
+		<?php ImageHint(); ?>
+		<input type="file" onkeydown="return false;" onkeypress="return false;" <?php InputField(); ?>>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

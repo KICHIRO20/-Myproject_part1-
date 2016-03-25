@@ -1,0 +1,33 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script src="js/hints.js" charset="CP-1251"></script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet box blue-hoki">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-tags"></i><?php xmsg('PO','OPTION'); ?>:&nbsp;<?php OptionName(); ?>
+		</div>
+		<div class="actions">
+			<div class="btn btn-circle btn-default" onClick="javascript: window.location='<?php EditLink(); ?>'">
+				<i class="fa fa-edit"></i>&nbsp;<?php msg('BTN_EDIT'); ?>
+			</div>
+			<div class="btn btn-circle btn-default" onClick="javascript: <?php jsDelOptFunc(); ?>(<?php _option_id(); ?>)">
+				<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_DELETE'); ?>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="table-responsvie">
+			<table class="table table-striped table-hover table-bordered">
+				<thead>
+					<?php ValuesHeader(); ?>
+				</thead>
+				<tbody>
+					<?php ValuesList(); ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<?php OInfDiv(); ?>
+<!-- END TPL (DO NOT REMOVE!) -->

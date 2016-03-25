@@ -1,0 +1,252 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript" language="javascript" src="js/JsHttpRequest.js"></script>
+<script type="text/javascript" language="javascript">
+<!--
+var busy = 0;
+var busy_id = 0;
+var error_message = "<?php Label('CHECKOUT_ERROR_AJAX_IS_NOT_CONFIGURED'); ?>";
+
+function applyFieldStyle()
+{
+    $("input[type='checkbox']").addClass("input_checkbox");
+    $("input[type='radio']").addClass("input_radio");
+    $("input[type='hidden']").addClass("input_hidden");
+    $("input[type='password']").addClass("input_password");
+    $("input[type='file']").addClass("input_file");
+    $("input[type='text']").addClass("input_text");
+    $("input[type='submit']").addClass("input_submit");
+
+    if ($.fn.pngfix)
+        $("input, .discount_star, span").pngfix();
+}
+
+function applyCreditCardTypeChange()
+{
+    var input_el;
+    for (i in marks)
+    {
+        input_el = document.getElementById("input_id_12_" + marks[i]);
+        if (input_el != undefined)
+        {
+            onCreditCardTypeChange(input_el.value, marks[i]);
+	}
+    }
+}
+
+function showStep(step)
+{
+    document.getElementById('step' + (step + 1)).style.display = 'none';
+    document.getElementById('step' + step).style.display = 'block';
+}
+
+function abnormalStepSubmitting(step)
+{
+    if (busy == 1)
+    {
+        document.getElementById('step_' + step + '_errors').innerHTML = error_message;
+        document.getElementById('step_' + step + '_errors').style.display='block';
+        document.getElementById('loading_img').style.height = '0px';
+        document.getElementById('loading_img').style.marginBottom = '0px'; 
+        document.getElementById('loading_img').style.display = 'none';
+        busy = 0;
+    }
+}
+
+function submitStep(step)
+{
+    if (busy)
+        return;
+
+    busy = 1;
+    height = document.getElementById('checkout_content').offsetHeight;
+    document.getElementById('loading_img').style.height = height + 'px';
+    document.getElementById('loading_img').style.marginBottom = (0 - height) + 'px'; 
+    document.getElementById('loading_img').style.display = 'block';
+    JsHttpRequest.query(
+        "js_http_request_frontend.php", // backend
+        document.getElementById("checkout_" + step),
+        // Function is called when an answer arrives. 
+        function(result, output) 
+        {
+            if (!busy)
+            {
+                // responce is too late
+                return;
+            }
+            if (busy_id)
+                clearTimeout(busy_id);
+            if (result['error'])
+            {
+                // cart is incorrect...
+                document.location.reload();
+                return;
+            }
+            if (!result['output'])
+            {
+                // we have an error here...
+                document.getElementById('step_' + step + '_errors').innerHTML = error_message;
+                document.getElementById('step_' + step + '_errors').style.display='block';
+            }
+            else
+            {
+                document.getElementById('step' + result['step']).innerHTML = result['output'];
+                if (step != result['step'])
+                {
+                    document.getElementById('step' + step).innerHTML = result['prev_output'];
+                    document.getElementById('step' + step).style.display = 'none';
+                    document.getElementById('step' + result['step']).style.display = 'block';
+                }
+                applyFieldStyle();
+                if (result['step'] == 1 || step == 1)
+                {
+                    try {
+                        refreshStatesList('shipping-info-input_country_select',
+                                          'shipping-info-input_state_menu_select',
+                                          'tr_shipping-info-input_state_text_div');
+                        refreshStatesList('billing-info-input_country_select',
+                                          'billing-info-input_state_menu_select',
+                                          'tr_billing-info-input_state_text_div');
+                    } 
+                    catch(ex) {};
+                }
+                if (result['step'] == 2 || step == 2)
+                {
+                    applyCreditCardTypeChange();
+                }
+            }
+            document.getElementById('loading_img').style.height = '0px';
+            document.getElementById('loading_img').style.marginBottom = '0px'; 
+            document.getElementById('loading_img').style.display = 'none';
+            busy = 0;
+        },
+        true  // disable caching
+    );
+    busy_id = setTimeout('abnormalStepSubmitting(' + step + ')', 30000);
+}
+// -->
+</script>
+<script type="text/javascript" language="javascript">
+<!--
+var names = new Array();
+var cc_attrs = new Array();
+var marks = new Array();
+<?php Local_CreditCardInfoJSAttrRules(); ?>
+
+function disableInput(iEl){iEl.disabled = "DISABLED";}
+function enableInput(iEl){iEl.disabled = "";}
+function hideTr(trEl){trEl.style.display = "none";}
+function showTr(trEl){trEl.style.display = "";}
+function transferValue(srcEl, dstEl)
+{
+	if (srcEl == undefined || dstEl == undefined)
+		return;
+
+	if (srcEl.type == 'text' && dstEl.type == 'text')
+		transferText(srcEl, dstEl);
+	else if (srcEl.type == 'select-one' && dstEl.type == 'select-one')
+		transferSelect(srcEl, dstEl);
+}
+function transferSelect(srcEl, dstEl)
+{
+	dstEl.selectedIndex = srcEl.selectedIndex;
+}
+function transferText(srcEl, dstEl)
+{
+	if (srcEl.value != '')
+		dstEl.value = srcEl.value;
+}
+function turnOff(trEl, iEl){hideTr(trEl);disableInput(iEl);}
+function turnOn(trEl, iEl){showTr(trEl);enableInput(iEl);}
+function cntr(req, i, pre){return 'tr_' + req + 'id_' + i + '_' + pre;}
+function cni(req, i, pre){return 'input_' + req + 'id_' + i + '_' + pre;}
+
+function onCreditCardTypeChange(value, suffix)
+{
+	if (suffix == '')
+		return;
+
+	if (value == undefined)
+	{
+		return;
+		for (var key in names) 
+		{
+			value = key;
+			break;
+		}
+	}
+
+    if (names[value] == undefined)
+        return;
+
+    if (cc_attrs[names[value]] == undefined)
+        return;
+	
+	var card = names[value];
+	var len = cc_attrs[card].length;
+	for (i=0; i < len; i++)
+	{
+		if (i == 12 || cc_attrs[card][i] == undefined)
+			continue;
+
+		var trEl = document.getElementById(cntr('', i, suffix));
+		var iEl = document.getElementById(cni('', i, suffix));
+
+		var trEl_req = document.getElementById(cntr('req_', i, suffix));
+		var iEl_req = document.getElementById(cni('req_', i, suffix));
+
+		if (cc_attrs[card][i][0] == 0) 
+		{
+			// attr is not visible, turn both off
+			turnOff(trEl, iEl);
+			turnOff(trEl_req, iEl_req);
+		}
+		else // visible, check if required
+		{
+			// not required
+			if (cc_attrs[card][i][1] == 0)
+			{ 
+				turnOn(trEl, iEl);
+				turnOff(trEl_req, iEl_req);
+				transferValue(iEl_req, iEl)
+			}
+			else // required
+			{
+				turnOff(trEl, iEl);
+				turnOn(trEl_req, iEl_req);
+				transferValue(iEl, iEl_req);
+			}
+		}
+	}
+}
+// -->
+</script>
+<div class="container">
+<div class="checkout one_step_checkout row margin-bottom-40">
+    <div id="loading_img" class="checkout_loading_img invisible"></div>
+    <div id="checkout_content" class="col-md-12 col-sm-12">
+        <h1><?php Label("CHECKOUT_CHECKOUT"); ?><?php CustomerSignInOutHint(); ?></h1>
+         
+        <div id="step1"<?php if (getLocal_StepID() != 1) { ?> class="invisible"<?php } ?>>
+            <?php OneStepCheckout(1); ?>
+        </div>
+        <div id="step2"<?php if (getLocal_StepID() != 2) { ?> class="invisible"<?php } ?>>
+            <?php OneStepCheckout(2); ?>
+        </div>
+        <div id="step3"<?php if (getLocal_StepID() != 3) { ?> class="invisible"<?php } ?>>
+            <?php OneStepCheckout(3); ?>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+var input_el;
+for (i in marks)
+{
+	input_el = document.getElementById("input_id_12_" + marks[i]);
+	if (input_el != undefined)
+	{
+         onCreditCardTypeChange(input_el.value, marks[i]);
+	}
+}
+</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

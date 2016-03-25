@@ -1,0 +1,49 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php Local_PermissionsWarning() ?>
+<div class="alert row current_skin <?php if(getS_Skin() == getS_Active()) { echo 'active_skin'; } ?>">
+	<div class="col-md-3" align="center">
+		<?php if (getS_Thumbnail()) { ?>
+		<?php if (getS_Image()) { ?>
+			<a href="<?php S_ImagePath(); ?>" class="color_box"><?php } ?><img src="<?php S_ThumbnailPath(); ?>" alt="<?php S_Name(); ?>" border="0" />
+			<?php if (getS_Image()) { ?></a><?php } ?>
+		<?php } else { ?>
+			<img src="images/no-image.gif" alt="<?php S_Name(); ?>" width="120px" height="120px" />
+		<?php } ?>
+		<div class="name bold"><?php S_Name(); ?></div>
+		<div class="version text-muted"><?php S_Version(); ?></div>
+	</div>
+	<div class="col-md-9">
+		<?php if (getLocal_isMultipleThemes()) { ?>
+			<div class="switcher-box margin-bottom-10">
+				<div class="switcher">
+				<?php
+					xMsg('LF', 'LF_CURRENT_ACTIVE_THEME');
+				    Local_ThemeSwitcher();
+		    	?>
+				</div>
+				<div class="working"></div>
+				<div class="success"></div>
+				<div class="failure"></div>
+    		</div>
+		<?php } ?>
+		<div class="location margin-bottom-10"><?php xMsg('LF', 'LF_SKIN_LOCATION'); ?>: &nbsp;<code><?php S_Location(); ?></code></div>
+		<?php if (getS_Description()) { ?><div class="desc margin-bottom-10 text-muted"><?php S_Description(); ?></div><?php } ?>
+		<div class="actions">
+			<div class="actions btn-set">
+				<?php Local_LaunchEditorButton() ?>
+				<?php if(getS_Skin() != getS_Active()){ ?>
+				<button class="btn green" name="edit" type="button" onclick="document.location='look_feel.php?asc_action=Change_Skin&skin=<?php S_Skin(); ?>';" title="<?php xMsg('LF', 'LF_ACTIVATE'); ?>" id="EditButton2"><i class="fa fa-check"></i> <span class="hidden-480"><?php xMsg('LF', 'LF_ACTIVATE'); ?></span></button>
+				<?php }else{ ?>
+					<script>
+        				var expires;
+            			var date = new Date();
+            			date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
+            			expires = "; expires=" + date.toGMTString();
+        				document.cookie = 'edit_skin' + "=" + '' + expires + "; path=/";
+					</script>
+				<?php }?>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

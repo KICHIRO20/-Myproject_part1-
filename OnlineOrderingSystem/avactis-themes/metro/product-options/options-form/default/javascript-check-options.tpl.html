@@ -1,0 +1,19 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript">
+
+function checkOptions_<?php ProductID(); ?>()
+{
+	product_form = document.forms['ProductForm_<?php ProductID(); ?>'];
+	<?php Local_jsCheckCustomInputs(); ?>
+	return true;
+}
+
+existing_<?php ProductID(); ?> = ProductFormSubmit_<?php ProductID(); ?>;
+ProductFormSubmit_<?php ProductID(); ?> = function() {
+	if(!checkOptions_<?php ProductID(); ?>())
+		return;
+	existing_<?php ProductID(); ?>();
+};
+
+</script>
+<!-- END TPL (DO NOT REMOVE!) -->

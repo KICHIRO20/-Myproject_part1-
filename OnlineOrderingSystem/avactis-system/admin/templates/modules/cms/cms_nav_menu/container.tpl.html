@@ -1,0 +1,515 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script type="text/javascript">
+   function getval(sel) { var menuId = sel.value;document.getElementById("selectMenu").href = 'menu_manager.php?menu_id='+ sel.value; }
+</script>
+<script language="javascript" type="text/javascript">
+   <!--
+      function SearchSystemPages(str)
+      {
+      	if(str.length == 0){ document.getElementById("system-pages-list").innerHTML=""; return ;}
+      	 jQuery.post(
+      		        'jquery_ajax_handler.php', // backend
+      		        {
+      		            'asc_action': 'SearchNavMenu','search_string':str,'search_type':'systemPages',
+      		        },
+      		        function(result, output) { 
+                         jQuery( "#system-pages-list" ).empty();
+                         for (i = 0; i < result.length; i++) { 
+                      	 var val = result[i];               	        
+                      	 var node = document.createElement("label");
+                      	 var nodespan = document.createElement("span");
+                      	 nodespan.setAttribute("class", "checkBox");               	 
+                      	 var inputnode = document.createElement("input");
+                      	 inputnode.setAttribute('type',"checkbox");
+                      	 inputnode.setAttribute('class',"form-control");
+                      	 inputnode.setAttribute('value',result[i]);
+                      	 inputnode.setAttribute('name', 'SysPageNam['+val+']');        
+                      	 nodespan.appendChild(inputnode);	 
+                      	 node.appendChild(nodespan);
+                      	 var textnode = document.createTextNode(val);
+                      	 node.appendChild(textnode);               	 
+                      	 document.getElementById("system-pages-list").appendChild(node); 
+                      }   
+                    },
+      		        'json'
+      		    ); 
+      	 }
+      function SearchStaticArticle(str)
+      {
+      	if(str.length == 0){ document.getElementById("list-static-article").innerHTML=""; return ;	}
+      	 jQuery.post(
+      		        'jquery_ajax_handler.php', // backend
+      		        {
+      		            'asc_action': 'SearchNavMenu', 'search_string':str, 'search_type':'staticArticle',
+      		        },
+      		        function(result, output) {
+                         jQuery( "#list-static-article" ).empty();                      
+                         jQuery.each( result , function( key, value ) {
+                      	 var node = document.createElement("label");
+                      	 var nodespan = document.createElement("span");
+                      	 nodespan.setAttribute("class", "checkBox");               	 
+                      	 var inputnode = document.createElement("input");
+                      	 inputnode.setAttribute('type',"checkbox");
+                      	 inputnode.setAttribute('class',"form-control");
+                      	 inputnode.setAttribute('value',value);
+                      	 inputnode.setAttribute('name', 'statPageNam['+key+']');              	 
+                      	 nodespan.appendChild(inputnode);	 
+                      	 node.appendChild(nodespan);
+                      	 var textnode = document.createTextNode(value);
+                      	 node.appendChild(textnode);             	 
+                      	 document.getElementById("list-static-article").appendChild(node);               	  
+                      	});       
+                },
+      		        'json'
+      		    );
+      }
+      function SearchCategory(str)
+      {
+      	if(str.length == 0){ document.getElementById("list-category").innerHTML=""; return ;	 }
+      	 jQuery.post(
+      		        'jquery_ajax_handler.php', // backend
+      		        {
+      		            'asc_action': 'SearchNavMenu', 'search_string':str, 'search_type':'categoryList',
+      		        },
+      		        function(result, output) {
+                         jQuery( "#list-category" ).empty();              
+                         jQuery.each( result , function( key, value ) {
+                      	 var node = document.createElement("label");
+                      	 var nodespan = document.createElement("span");
+                      	 nodespan.setAttribute("class", "checkBox");               	 
+                      	 var inputnode = document.createElement("input");
+                      	 inputnode.setAttribute('type',"checkbox");
+                      	 inputnode.setAttribute('class',"form-control");
+                      	 inputnode.setAttribute('value',value);
+                      	 inputnode.setAttribute('name', 'CatPageList['+key+']');
+                      	 nodespan.appendChild(inputnode);	 
+                      	 node.appendChild(nodespan);
+                      	 var textnode = document.createTextNode(value);
+                      	 node.appendChild(textnode);
+                      	 document.getElementById("list-category").appendChild(node);
+                      	  
+                      	});       
+                },
+      		        'json'
+      		    );
+      }
+      function AddNewLinkName(field) {
+      	        var type = field; 
+      		document.getElementById('mode').value = "add_link";
+      		document.getElementById('menu_type').value = type;
+      		document.forms['CMSMenuDataForm'].submit();
+      }
+      function DeleteSelectedItems(LinkId){
+                        var deletelinkid = LinkId;
+      			document.getElementById('mode').value = "delete_links";
+                        document.getElementById('deleteLinkId').value = deletelinkid;
+      			document.forms['CMSMenuDataForm'].submit();}
+      function DeleteMenu(MenuID){
+                        var deletemenuid = MenuID;
+      			document.getElementById('mode').value = "delete_menu";
+                        document.getElementById('deleteMenu').value = deletemenuid;
+      			document.forms['CMSMenuDataForm'].submit();
+      			}
+      //-->
+</script>
+<?php MenuJSCode(); ?>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light" style="overflow: hidden">
+   <div class="portlet-title">
+      <div class="caption">
+         <i class="fa fa-link font-green-sharp"></i> <span
+            class="caption-subject font-green-sharp bold uppercase"> <?php EditMenuTitle(); ?>
+         </span> <span class="caption-helper text-lowercase"> <?php xMsg('CMS', 'CMS_MENU_DATA'); ?>
+         </span>
+      </div>
+     <div class="actions">
+     <a class="btn btn-circle btn-default" href="cms_menus.php">
+     Switch to old <?php xmsg('SYS','MENU_CMS_MENUS'); ?> editor
+     </a>
+     </div>
+   </div>
+   <div class="portlet-body">
+      <ul class="nav nav-tabs ">
+         <li class="active"><a data-toggle="tab" href="#tab_5_1"><?php xMsg('CMS', 'CMS_EDIT_MENU'); ?> </a></li>
+         <li class=""><a data-toggle="tab" href="#tab_5_2"><?php xMsg('CMS', 'CMS_MANAGE_MENU'); ?></a></li>
+      </ul>
+      <?php ResultMessage(); ?>
+      <div class="tab-content" id="nav_menu">
+         <div id="tab_5_1" class="tab-pane active">
+            <form action="" method="post" name="CMSMenuDataForm">
+               <input type="hidden" name="asc_action" value="update_nav_menu_data" />
+               <input type="hidden" name="mode" id="mode" value="update" /> <input
+                  type="hidden" name="menu_data[menu_id]" value="<?php MenuID(); ?>" />
+               <div class="alert fade in select_menu col-lg-12 navbar navbar-default">
+                  <div class="col-lg-12">
+                     <label class="col-md-2 control-label"><?php xMsg('CMS', 'CMS_NAV_MENU_SELECT'); ?></label> 
+                     <span class="col-md-2 menu_selct">
+                        <select name="menu" class="form-control input-sm input-small" onchange="getval(this);">
+                           <option selected="selected" value="0">------ Select ------</option>
+                           <?php FoundMenu(); ?>
+                        </select>
+                     </span>
+                     <span class="col-md-1 add_menu">
+                     <a class="btn btn-circle btn-sm grey-cascade" id="selectMenu"> select </a> </span> <label class="control-label">or <a
+                        href="menu_manager.php?menu_id=0"><?php xMsg('CMS', 'CMS_ADD_MENU'); ?></a> </label>
+                  </div>
+               </div>
+               <?php if (getMenuID() == 0) { AddNewMenu(); } ?>
+               <?php if (getMenuID() > 0) { ?>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div id="accordion4" class="panel-group accordion">
+                        <input type="hidden" id="menu_type" name="menu_type" value="" />
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h4 class="panel-title">
+                                 <a class="accordion-toggle accordion-toggle-styled collapsed"
+                                    href="#collapse_4_1" data-parent="#accordion4"
+                                    data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_URL'); ?>
+                                 </a>
+                              </h4>
+                           </div>
+                           <div class="panel-collapse collapse" id="collapse_4_1">
+                              <div class="panel-body" id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>">
+                                 <div class="form-group row">
+                                    <label class="control-label col-lg-3">
+                                    <?php xMsg('CMS', 'CMS_MENU_LINK_TEXT'); ?></label> <input
+                                       type="text"
+                                       name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>[item_name]"
+                                       value="" class="form-control input-sm input-medium" />
+                                 </div>
+                                 <div class="form-group row">
+                                    <label class="control-label col-lg-3">
+                                    <?php xMsg('CMS', 'CMS_MENU_URL'); ?></label> <input type="text"
+                                       name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>[link_url]"
+                                       value="" class="form-control input-sm input-medium" />
+                                 </div>
+                                 <span id="AddLinkButton" class="btn btn-circle btn-default"
+                                    onclick="AddNewLinkName(<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>);">
+                                 <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- new static pages -->
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h4 class="panel-title">
+                                 <a class="accordion-toggle accordion-toggle-styled collapsed"
+                                    href="#collapse_4_2" data-parent="#accordion4"
+                                    data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_STATIC_PAGE'); ?>
+                                 </a>
+                              </h4>
+                           </div>
+                           <div class="panel-collapse collapse" id="collapse_4_2">
+                              <div class="panel-body">
+                                 <div class="tabbable-custom">
+                                    <ul class="nav nav-tabs ">
+                                       <li class="active"><a data-toggle="tab"
+                                          href="#tab_6_1"> <?php xMsg('CMS','CMS_NAV_MENU_ALL'); ?> </a>
+                                       </li>
+                                       <li><a data-toggle="tab" href="#tab_6_2"> <?php xMsg('CMS','CMS_NAV_SEARCH'); ?> </a></li>
+                                    </ul>
+                                    <div class="tab-content margin-bottom-10">
+                                       <div id="tab_6_1" class="tab-pane active">
+                                          <div
+                                             id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>"
+                                             class="form-group">
+                                             <?php if (getMenuStaticCount()) { ?>
+                                             <div class="checkbox-list"
+                                                name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>[link_static_page]">
+                                                <?php MenuStaticPages(); ?>
+                                             </div>
+                                             <?php } else { ?>
+                                             <?php xMsg('CMS', 'CMS_MENU_NO_STATIC_PAGES'); ?>
+                                             <?php } ?>
+                                          </div>
+                                       </div>
+                                       <!-- tab 6-1 -->
+                                       <div id="tab_6_2" class="tab-pane">
+                                          <div class="form-group">
+                                             <input class="quick-search form-control" type="text" name="search_pattern" value=""
+                                                placeholder="Search" onkeyup="SearchStaticArticle(this.value)" >
+                                          </div>
+                                          <div id="list-static-article"
+                                             name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>[link_static_page]"
+                                             class="checkbox-list"></div>
+                                       </div>
+                                    </div>
+                                    <!-- tab content -->
+                                    <span id="AddStaticPageButton"
+                                       class="btn btn-circle btn-default"
+                                       onclick="AddNewLinkName(<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>);">
+                                    <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                                    </span>
+                                 </div>
+                                 <!-- tabbable-custom -->
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end new static pages -->
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h4 class="panel-title">
+                                 <a class="accordion-toggle accordion-toggle-styled collapsed"
+                                    href="#collapse_4_3" data-parent="#accordion4"
+                                    data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_TEXT'); ?>
+                                 </a>
+                              </h4>
+                           </div>
+                           <div class="panel-collapse collapse" id="collapse_4_3">
+                              <div class="panel-body">
+                                 <div class="form-group row">
+                                    <label class="control-label col-lg-3">
+                                    <?php xMsg('CMS', 'CMS_MENU_LINK_TEXT'); ?></label> <input
+                                       type="text" name="link_new_3[item_name]" value=""
+                                       class="form-control input-sm input-medium" />
+                                 </div>
+                                 <span id="AddLinkButton" class="btn btn-circle btn-default"
+                                    onclick="AddNewLinkName(3);"> <i
+                                    class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h4 class="panel-title">
+                                 <a class="accordion-toggle accordion-toggle-styled collapsed"
+                                    href="#collapse_4_4" data-parent="#accordion4"
+                                    data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?>
+                                 </a>
+                              </h4>
+                           </div>
+                           <div class="panel-collapse collapse" id="collapse_4_4">
+                              <div class="panel-body">
+                                 <div class="form-group row">
+                                    <label class="control-label col-lg-3">
+                                    <?php xMsg('CMS', 'CMS_MENU_LINK_TEXT'); ?></label> <input
+                                       type="text"
+                                       name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>[item_name]"
+                                       value="" class="form-control input-sm input-medium" />
+                                 </div>
+                                 <div
+                                    id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>"
+                                    class="form-group row">
+                                    <label class="control-label col-lg-3">
+                                    <?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?></label> <input
+                                       type="text"
+                                       name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>[link_external_url]"
+                                       value="" class="form-control input-sm input-medium" />
+                                 </div>
+                                 <span id="AddLinkButton" class="btn btn-circle btn-default"
+                                    onclick="AddNewLinkName(<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>);">
+                                 <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h4 class="panel-title">
+                                 <a class="accordion-toggle accordion-toggle-styled collapsed"
+                                    href="#collapse_4_5" data-parent="#accordion4"
+                                    data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_SYSTEM_PAGE'); ?>
+                                 </a>
+                              </h4>
+                           </div>
+                           <div class="panel-collapse collapse" id="collapse_4_5">
+                              <div class="panel-body">
+                                 <div class="tabbable-custom">
+                                    <ul class="nav nav-tabs ">
+                                       <li class="active"><a href="#tab_7_1"
+                                          data-toggle="tab"> <?php xMsg('CMS', 'CMS_NAV_MENU_ALL'); ?></a>
+                                       </li>
+                                       <li><a href="#tab_7_2" data-toggle="tab"> <?php xMsg('CMS', 'CMS_NAV_SEARCH'); ?> </a>
+                                       </li>
+                                    </ul>
+                                    <div class="tab-content margin-bottom-10">
+                                       <div id="tab_7_1" class="tab-pane active">
+                                          <div
+                                             id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>"
+                                             class="form-group row">
+                                             <?php if (getMenuSystemCount()) { ?>
+                                             <div class="checkbox-list"
+                                                name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>[link_system_page]">
+                                                <?php MenuSystemPages(); ?>
+                                             </div>
+                                             <?php } else { ?>
+                                             <?php xMsg('CMS', 'CMS_MENU_NO_SYSTEM_PAGES'); ?>
+                                             <?php } ?>
+                                          </div>
+                                          <div id="link_new_prodlist" style="display: none;" class="form-group row">
+                                             <label class="label-control col-lg-3"> 
+                                             <?php xMsg('CMS', 'CMS_MENU_ITEM_CATEGORY_ID'); ?>&nbsp;:</label>
+                                             <input type="text"
+                                                name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>[list_catid]"
+                                                value="" class="form-control input-sm input-xsmall" />
+                                          </div>
+                                          <div style="display: none;" id="link_new_prodinfo"
+                                             class="form-group row">
+                                             <label class="label-control col-lg-3"> 
+                                             <?php xMsg('CMS', 'CMS_MENU_ITEM_PRODUCT_ID'); ?>&nbsp;:</label>
+                                             <input type="text"
+                                                name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>[info_prodid]"
+                                                value="" class="form-control input-sm input-xsmall" />
+                                          </div>
+                                       </div>
+                                       <div id="tab_7_2" class="tab-pane">
+                                          <div class="form-group">
+                                             <input class="quick-search form-control" type="text"
+                                                placeholder="Search" value=""
+                                                onkeyup="SearchSystemPages(this.value)"
+                                                name="search_pattern">
+                                          </div>
+                                          <div id="system-pages-list"
+                                             name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>[link_system_page]"
+                                             class="checkbox-list"></div>
+                                       </div>
+                                    </div>
+                                    <span id="AddLinkButton" class="btn btn-circle btn-default"
+                                       onclick="AddNewLinkName(<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>);">
+                                    <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                                    </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                              <h4 class="panel-title">
+                                 <a class="accordion-toggle accordion-toggle-styled collapsed"
+                                    href="#collapse_4_7" data-parent="#accordion4"
+                                    data-toggle="collapse"> <?php xMsg('CMS', 'CMS_MENU_TYPE_CATEGORY_LIST'); ?>
+                                 </a>
+                              </h4>
+                           </div>
+                           <div class="panel-collapse collapse" id="collapse_4_7">
+                              <div class="panel-body">
+                                 <div class="tabbable-custom">
+                                    <ul class="nav nav-tabs ">
+                                       <li class="active"><a data-toggle="tab" href="#tab_8_1"> 
+                                       <?php xMsg('CMS', 'CMS_NAV_MENU_ALL'); ?> </a></li>
+                                       <li><a data-toggle="tab" href="#tab_8_2"> <?php xMsg('CMS', 'CMS_NAV_SEARCH'); ?> </a></li>
+                                    </ul>
+                                    <div class="tab-content margin-bottom-10">
+                                       <div id="tab_8_1" class="tab-pane active">
+                                          <div
+                                             id="link_new_<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>"
+                                             class="form-group row">
+                                             <?php if (getMenuSystemCount()) { ?>
+                                             <div class="checkbox-list"
+                                                name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>[link_category]">
+                                                <?php MenuCategoryPages(); ?>
+                                             </div>
+                                             <?php } else { ?>
+                                             <?php xMsg('CMS', 'CMS_MENU_NO_CATEGORY'); ?>
+                                             <?php } ?>
+                                          </div>
+                                       </div>
+                                       <div id="tab_8_2" class="tab-pane">
+                                          <div class="form-group">
+                                             <input class="quick-search form-control" type="text"
+                                                name="search_pattern" value=""
+                                                placeholder="Search" onkeyup="SearchCategory(this.value)"></input>
+                                          </div>
+                                       <div class="checkbox-list" 
+                                       name="link_new_<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>[link_category]" 
+                                       id="list-category"></div>
+                                       </div>
+                                    </div>
+                                    <span id="AddLinkButton" class="btn btn-circle btn-default"
+                                       onclick="AddNewLinkName(<?php echo(CMS_MENU_ITEM_TYPE_CATEGORY_LIST); ?>);">
+                                    <i class="fa fa-plus-circle"></i>&nbsp;<?php xMsg('CMS', 'BTN_ADD'); ?>
+                                    </span>
+                                 </div>
+                                 <!-- tab custom -->
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-8">
+                     <div class="portlet box grey-cascade">
+                        <div class="portlet-body form">
+                           <div class="nav_menu_container form-actions top right navbar navbar-default">
+                              <div class="form-group col-lg-12">
+                                 <label class="control-label col-lg-3 menu_name">
+                                 <?php xMsg('CMS', 'CMS_NAV_MENU_NAME'); ?></label> <span
+                                    class="col-lg-7"><input
+                                    class="form-control input-medium input-sm" type="text"
+                                    placeholder="Enter menu name here"
+                                    name="menu_data[menu_index]" value="<?php MenuIndex(); ?>" />
+                                 </span>
+                                 <button id="UpdateButton1" class="btn blue input-sm"
+                                    type="submit"
+                                    onclick="document.forms['CMSMenuDataForm'].submit();">
+                                 <i class="fa fa-save"></i>&nbsp;
+                                 <?php Msg('BTN_SAVE'); ?>
+                                 </button>
+                              </div>
+                           </div>
+                           <div class="form-body" style="overflow: hidden;">
+                              <?php if(getMenuItemCount()) { ?>
+                              <h4><?php xMsg('CMS', 'CMS_MENU_STRUCTURE'); ?></h4>
+                              <p><?php xMsg('CMS', 'CMS_NAV_MENU_DATA'); ?></p>
+                              <div id="accordion3" class="panel-group accordion"><?php MenuItems(); ?></div>
+                              <?php } else { ?><span class="col-lg-12"><?php xMsg('CMS', 'CMS_MENU_NO_LINKS'); ?></span><?php } ?>
+                           </div>
+                           <div class="nav_menu_right form-actions right navbar navbar-default">
+                              <div class="btn btn-default DeleteMenu input-sm"
+                                 onclick="DeleteMenu(<?php MenuID(); ?>)">
+                                 <i class="fa fa-times"></i>&nbsp; <?php xMsg('CMS', 'CMS_NAV_DELETE'); ?>
+                              </div>
+                              <input type="hidden" name="deleteMenu" id="deleteMenu" /> <input
+                                 type="hidden" name="delete" id="deleteLinkId" value="" />
+                              <button id="UpdateButton1" class="btn blue input-sm"
+                                 type="submit"
+                                 onclick="document.forms['CMSMenuDataForm'].submit();">
+                              <i class="fa fa-save"></i>&nbsp;
+                              <?php Msg('BTN_SAVE'); ?>
+                              </button>
+                           </div>
+                        </div>
+                        <!-- portlet body -->
+                     </div>
+                  </div>
+                  <!-- col-md-8 -->
+               </div>
+         </div>
+         <?php } ?>
+         </form>
+         <div id="tab_5_2" class="tab-pane">
+            <form action="menu_manager.php" method="post"
+               name="CMSNavMenuLocation">
+               <input type="hidden" name="asc_action"
+                  value="update_nav_menu_location" /> <label
+                  class="form-group control-label">
+               </label>
+               <div class="table-scrollable  col-lg-10">
+                  <table class="table table-hover">
+                     <thead>
+                        <tr>
+                           <th></th>
+                           <th><?php xMsg('CMS', 'CMS_NAV_MENU_LOCATION'); ?></th>
+                           <th class="assigned"><?php xMsg('CMS', 'CMS_NAV_MENU_ASSIGNED'); ?></th>
+                           <th></th>
+                        </tr>
+                     </thead>
+                     <tbody><?php ThemeNavMenu(); ?></tbody>
+                  </table>
+                  <div class="form-group"></div>
+                  <div class="form-group col-md-offset-5 col-md-7">
+                     <button id="UpdateButton1" class="btn blue input-sm" type="submit" 
+                     onclick="document.forms['CMSNavMenuLocation'].submit();">
+                     <i class="fa fa-save"></i>&nbsp;
+                     <?php Msg('BTN_SAVE'); ?>
+                     </button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

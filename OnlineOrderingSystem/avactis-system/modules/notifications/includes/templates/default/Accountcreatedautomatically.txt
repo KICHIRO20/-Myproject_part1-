@@ -1,0 +1,18 @@
+Greetings,
+
+We received an order linked with your e-mail. If you made this order, please follow the instructions below. If you did not make this order at our online store, you can safely ignore this e-mail.
+
+For each new customer our store creates a customer account. With this customer account you can continue to make orders online without providing billing and shipping information a second time. Also, you can review the status of all your online orders.
+
+Click the link below to activate your customer account {AccountName} and set your password.
+
+{AccountNewPasswordLink}
+
+If clicking doesn't seem to work, you can copy and paste the link into your browser's address window, or retype it there. 
+
+Thank you for visiting our store!
+
+-------------------------------------------------------------
+{StoreOwnerName}
+{StoreOwnerWebsite}
+-------------------------------------------------------------

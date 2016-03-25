@@ -1,0 +1,32 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script>
+	$(document).ready(function(){
+				
+		$(".cart_preview").click(function () {
+            if ($("#emptymainmini").is(":hidden")) {
+                $("#emptymainmini").slideDown("slow");
+                $("#cart_arrow_empty").show();
+            } else {
+            	$("#cart_arrow_empty").hide();
+                $("#emptymainmini").hide();
+            }
+        });
+
+		$("#emptymainmini").mouseleave(function(){
+			$("#cart_arrow_empty").hide();
+		  $(this).hide('fast',function(){
+		   });
+		});
+	});
+</script>
+<div class="cart_preview <?php ViewClassName(); ?>">
+    <?php ShoppingCartProductsQuantity(); ?> <?php Label('PAGES_ITEMS_IN_YOUR_BAG');?>
+</div>
+<?php 
+	if(getShoppingCartProductsQuantity() ==0 )
+{
+?>
+ <div id="cart_arrow_empty" style="display:none"></div>
+<div id="emptymainmini" style="display:none;"><?php Label("CATALOG_EMPTY_MINICART"); ?></div>
+<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->

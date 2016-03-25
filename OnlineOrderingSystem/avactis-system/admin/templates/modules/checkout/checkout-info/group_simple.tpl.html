@@ -1,0 +1,49 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+var CheckedId<?php VariantId(); ?> = -1;
+
+function setId<?php VariantId(); ?>(id) {
+    CheckedId<?php VariantId(); ?> = id;
+}
+
+function OnEditClick<?php VariantId(); ?>() {
+    if (CheckedId<?php VariantId(); ?> == -1) {
+        alert("<?php Msg('CHECKOUT_INFO_EDIT_IS_NOT_POSSIBLE'); ?>");
+        return;
+    }
+//    unselect("radio<?php VariantId(); ?>");
+    var url = '<?php EditFieldLink(); ?>' + '?' + 'VariantId=<?php VariantId(); ?>' + '&AttributeId=' + CheckedId<?php VariantId(); ?>;
+    openURLinNewWindow(url, 'checkout_info_window');
+//    CheckedId<?php VariantId(); ?> = -1
+}
+
+function OnSortClick<?php VariantId(); ?>() {
+    var url = '<?php SortGroupLink(); ?>' + '?' + 'VariantId=<?php VariantId(); ?>';
+    openURLinNewWindow(url, 'checkout_info_window');
+}
+
+function OnStatusClick<?php PersonInfoTypeId(); ?>() {
+    document.forms['PersonInfoTypeIdStatus<?php VariantId(); ?>'].submit();
+}
+
+//-->
+</SCRIPT>
+<form action="<?php FlipPersonInfoTypeStatusHref(); ?>" id="PersonInfoTypeIdStatus<?php VariantId(); ?>" name="PersonInfoTypeIdStatus<?php VariantId(); ?>" method="post"><input type="hidden" name="person_info_type_id" value="<?php PersonInfoTypeId(); ?>"></form>
+<div class="portlet light">
+<div class="portlet-title" style=" border-bottom:none !Important">
+	<div class="caption">
+		<i class="fa fa-shopping-cart font-green-sharp"></i>
+		<span class="caption-subject font-green-sharp bold uppercase"><?php VisibleName(); ?></span>
+	</div>
+	<div class="actions">
+		<div class="actions btn-set">				
+			<button id="StatusButton<?php VariantId(); ?>"   title="<?php Msg('CHECKOUT_INFO_BTN_TURN_STATUS_OFF'); ?>" onclick="return OnStatusClick<?php PersonInfoTypeId(); ?>();" type="button" name="<?php Msg('CHECKOUT_INFO_BTN_TURN_STATUS_OFF'); ?>" class="btn red"><i class="fa fa-off"></i> <span class="hidden-480"><?php Msg('CHECKOUT_INFO_BTN_TURN_STATUS_OFF'); ?></span></button>
+		</div>
+	</div>
+</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

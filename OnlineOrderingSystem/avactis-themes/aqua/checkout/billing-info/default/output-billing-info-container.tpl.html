@@ -1,0 +1,39 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="form_view">
+    <?php Local_Firstname(); ?> <?php Local_Lastname(); ?><br/>
+
+    <?php Local_Streetline1(); echo ife(getLocal_Streetline1()=='','','<br/>'); ?>
+
+    <?php Local_Streetline2(); echo ife(getLocal_Streetline2()=='','','<br/>'); ?>
+
+    <?php Local_City(); ?><?php echo ife(getLocal_State() == '' || getLocal_City() == '','',','); ?> <?php Local_State(); ?> <?php Local_Postcode(); ?>
+    <?php echo ife((getLocal_City().getLocal_State().getLocal_Postcode())=='','','<br/>'); ?>
+
+    <?php Local_Country(); echo ife(getLocal_Country()=='','','<br/>');?>
+
+    <br/>
+    <?php Local_Phone(); echo ife(getLocal_Phone()=='','','<br/>');?>
+    <?php Local_Email(); echo ife(getLocal_Email()=='','','<br/>');?>
+
+    <br/>
+    <?php Local_CommentArea(); echo ife(getLocal_CommentArea()=='','','<br/>'); ?>
+    <?php Local_CommentLine(); echo ife(getLocal_CommentLine()=='','','<br/>'); ?>
+    <?php echo ife((getLocal_CommentLine().getLocal_CommentArea())=='','','<br/>'); ?>
+
+    <?php
+            $custom_tags = modApiFunc("Checkout", "getPersonInfoCustomTagList", 'billingInfo');
+            foreach($custom_tags as $tag_info)
+            {
+                if ($tag_info['value'] != '')
+                {
+                    echo $tag_info['name'].' '.$tag_info['value'].'<br/>';
+                }
+            }
+    ?>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+
+
+<?php BillingInfoOutputAllAttributesRows(); ?>
+
+

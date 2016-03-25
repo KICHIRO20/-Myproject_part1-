@@ -1,0 +1,20 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="product_img" valign="top">
+        <img src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<170) {ProductSmallImageWidth();} else {echo '170';}; ?>" alt="" />
+    </td>
+    <td class="product_data">
+        <div class="product_name"><?php ProductName(); ?></div>
+        <?php Local_ProductOptionsSelected(); ?>
+    </td>
+    <td class="product_quantity_selector">
+        <?php Local_HiddenFieldCartID(); ?>
+        <select name="<?php Local_FormQuantityFieldName(); ?>">
+           <option value="1">1</option>
+        </select>
+    </td>
+    <td class="product_sale_price"><span class="value"><?php Local_CartItemSalePrice(); ?></span></td>
+    <td class="product_total_price"><span class="value"><?php Local_ProductSubtotal(); ?></span><br/><span class="label"><a href="<?php Local_RemoveProductLink(); ?>"><?php Label("CATALOG_REMOVE_ITEM"); ?></a></span></td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->
+

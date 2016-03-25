@@ -1,0 +1,119 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php
+	$isActive = getLocal_Is_Active();
+?>
+
+<style>
+.avac_overlay {
+	display:none;
+	position:fixed;
+	z-index:9998;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background:#fff;
+	zoom:1;
+	filter:alpha(opacity=75);
+	opacity:0.75;
+}
+.loading_img {
+	position:fixed;
+	z-index:9999;
+	top:50%; left:50%;
+	height: 32px;
+	width: 32px;
+	background-image: url("images/loading.gif");
+	background-repeat: no-repeat;
+}
+#errdoc_msg {
+    display: none;
+}
+</style>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+jQuery(document).ready(function($){
+ $("#EditButton2").click(function(){
+	$(".avac_overlay").show();
+	$("#errdoc_msg").hide();
+	$.post("",
+	{
+	  asc_action:"UpdateErrDocStatus",
+	  errdoc_status:$("#errdoc_status").val()
+	},
+	function(data,status){
+		var objJSON = JSON.parse(data);
+		$("#errdoc_msg").text(objJSON.errdoc_msg);
+		$(".avac_overlay").hide();
+		$("#errdoc_msg").show(300);
+	}
+ );
+	});
+});
+//-->
+</script>
+
+<div class="avac_overlay">
+	<img class="loading_img" alt="loading...">
+</div>
+
+<div class="portlet light">
+  
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-gears font-blue-sharp"></i>
+        <span class="caption-subject font-blue-sharp bold uppercase"><?php Msg('GNRL_SET_PAGE_TITLE'); ?></span>
+        <span class="caption-subject font-blue-sharp">Error Document Configuration</span>
+      </div>
+	<div class="actions">
+			<div class="actions btn-set">
+				<?php PageHelpLink('error_document_manager'); ?>
+			</div>
+		</div>
+    </div>
+    
+
+    <div class="portlet-body">
+          <div class="table-container form">
+			<form action="" name="ErrorDocument" id="ErrorDocument" method="post">
+
+				<div class="row margin-bottom-10">
+          			<div class="col-md-7 col-sm-10"></div>
+          			<div class="col-md-2 col-sm-2"><?php PageHelpLink('error_document'); ?>&nbsp;&nbsp;<?php VideoTutorialLink('error_document'); ?>
+          			</div>
+        		</div>
+        		<div class="row margin-bottom-10">
+        			<div id="errdoc_msg" class="note note-success note-bordered"></div>
+        		</div>
+				<div class="row margin-bottom-10">
+                  <div class="col-md-3 col-sm-2">
+                  </div>
+                  <div class="col-md-3 col-sm-1">
+                    	<lable class="help-block">Status:</lable>
+                  </div>
+                  <div class="col-md-3 col-sm-5">
+                   <span style="display:inline;">
+                    <select name="errdoc_status" id="errdoc_status" class="form-control">
+					<option value="1" <?php if($isActive) echo 'selected'; ?> ><?php xmsg('ERRD','ENABLE_ERRDOC'); ?></option>
+					<option value="0" <?php if(!$isActive) echo 'selected'; ?> ><?php xmsg('ERRD','DISABLE_ERRDOC'); ?></option>
+					</select>
+                   </span>
+                  </div>
+                </div>
+          </form>
+          </div>
+
+
+
+        <div class="actions" align="center">
+      	  <div class="actions btn-set">
+        	<button id="EditButton2" title="<?php Msg('BTN_SAVE'); ?>" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span></button>
+        	<button id="CancelButton2" title="<?php Msg('BTN_CLOSE'); ?>" onclick="javascript: closeAndFocusParent();" type="button" name="<?php Msg('BTN_CLOSE'); ?>" class="btn btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CLOSE'); ?></span></button>
+      	  </div>
+    	</div>
+        
+    </div>
+ </div>    
+
+<!-- END TPL (DO NOT REMOVE!) -->

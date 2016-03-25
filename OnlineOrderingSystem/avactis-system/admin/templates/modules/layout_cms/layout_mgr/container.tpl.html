@@ -1,0 +1,797 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<link type="text/css" rel="stylesheet" href="styles/layout_cms.css">
+<div class="row">
+	<div class="col-lg-12">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-green-sharp bold uppercase">
+						<i class="fa fa-list-alt "></i>&nbsp;<?php xmsg('LC','LC_LAYOUT_CMS'); ?>
+					</span>
+				</div>
+				<div class="actions">
+					<a href="javascript:updateData('restore');" class="btn btn-circle btn-default">
+						<i class="fa fa-refresh"></i><span class="hidden-480">&nbsp;<?php xmsg('LC','BTN_RESTORE_LAYOUT'); ?></span>
+					</a>
+					<a href="javascript:updateData();" class="btn btn-circle btn-default">
+						<i class="fa fa-undo"></i><span class="hidden-480">&nbsp;<?php xmsg('LC','BTN_UNDO_CHANGES'); ?></span>
+					</a>
+					<a href="javascript:savePage();" class="btn btn-circle btn-default">
+						<i class="fa fa-save"></i><span class="hidden-480">&nbsp;<?php xmsg('LC','BTN_SAVE_CHANGES'); ?></span>
+					</a>
+				</div>
+			</div>		
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-12">
+						<!-- BEGIN Portlet PORTLET-->
+						<div class="portlet light">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase">
+										<?php xmsg('LC','LBL_PAGE'); ?>
+									</span>
+								</div>
+							</div>		
+							<div class="portlet-body">
+								<div class="row">
+                                                                   <div class="col-lg-6" style="overflow:hidden">
+									<div class="col-sm-3">
+										<?php xmsg('LC','LBL_THEME_SELECTOR'); ?>
+									</div>
+									<div class="col-sm-4">
+										<select size="1" id="theme-select" class="form-control input-sm input-large">
+											<?php ThemesList(); ?>
+										</select>
+									</div>
+                                                                     </div>
+                                                                     <div class="col-lg-6">
+									<div class="col-sm-3">
+										<?php xmsg('LC','LBL_PAGE_SELECTOR'); ?>
+									</div>
+									<div class="col-sm-4">
+										<select size="1" id="page-select" class="form-control input-sm input-large">
+											<?php PagesList(); ?>
+										</select>
+									</div>
+                                                                 </div>
+								</div>
+								<br />
+								<div class="row">
+									<div class="col-sm-12 font-red">
+										<div id="current-page-descr" ></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END Portlet PORTLET-->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<!-- BEGIN Portlet PORTLET-->
+						<div class="portlet light">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase">
+										<?php xmsg('LC','LBL_PAGE_OPTIONS'); ?>
+									</span>
+								</div>
+							</div>		
+							<div class="portlet-body">
+								<div class="row">
+									<div class="page-settings col-sm-12 table-responsive"></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 font-red">
+									    <span><sup>*</sup><?php xmsg('LC','LBL_PAGE_SETTING_TIP'); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END Portlet PORTLET-->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<!-- BEGIN Portlet PORTLET-->
+						<div class="portlet box blue-hoki">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase">
+										<?php xmsg('LC','LBL_DEFAULT_PAGE_BLOCKS'); ?>
+									</span>
+								</div>
+								<div class="actions">
+									<div class="ph-legend">
+										<div class="d-n-d-rect"></div>
+										<div class="d-n-d-label"><?php xmsg('LC','LBL_DRAG_N_DROP_AREA'); ?></div>
+										<div class="static-rect"></div>
+										<div class="static-label"><?php xmsg('LC','LBL_STATIC_AREA'); ?></div>
+									</div>
+								</div>
+							</div>		
+							<div class="portlet-body">
+								<div class="row">
+									<div class="col-sm-12">
+										<h4 id="current-page-title"></h4>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="template"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END Portlet PORTLET-->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<a href="javascript:updateData();" class="btn btn-circle btn-default">
+							<i class="fa fa-undo"></i>&nbsp;<?php xmsg('LC','BTN_UNDO_CHANGES'); ?>
+						</a>
+						<a href="javascript:savePage();" class="btn btn-circle btn-default">
+							<i class="fa fa-save"></i>&nbsp;<?php xmsg('LC','BTN_SAVE_CHANGES'); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Portlet PORTLET-->
+	</div>
+</div>		
+
+<!--     ABSOLUTE POSITIONED    -->
+<div class="coverlet"></div>
+<div class="add-block-form table-responsive">
+	<div class="row">
+		<div class="col-sm-12 col-md-5">
+					<div class="ab-container">
+        					<h4><?php xmsg('LC','LBL_AVAILABLE_BLOCKS'); ?></h4>
+						<div id="blocks_search"><input type="text" disabled id="blocks_search_inp" class="form-control" /></div>
+        					<div class="blocks-list"></div>
+					</div>
+		</div>
+		<div class="col-sm-12 col-md-7">
+			<div class="add-block-params">
+				<span><?php xmsg('LC','LBL_BLOCK_TITLE'); ?></span><br>
+				<input maxlength="30" type="text" class="ab-title form-control"><br>
+				<span><?php xmsg('LC','LBL_BLOCK_DESCRIPTION'); ?></span><br>
+				<textarea class="ab-descr form-control" cols="40" rows="2"></textarea><br>
+				<span><?php xmsg('LC','LBL_BLOCK_CONTENT'); ?></span><br>
+				<textarea class="ab-tmpl form-control" cols="40" rows="3"></textarea><br>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+ 		<div class="col-sm-12 col-md-12">
+			<div class="text-center">
+				<a href="javascript:saveNewBlockContent();" class="btn btn-circle btn-default">
+					<i class="fa fa-save"></i>&nbsp;<?php xmsg('LC','BTN_SAVE'); ?>
+				</a>
+				<a href="javascript:cancelBlockAdding();" class="btn btn-circle btn-default">
+					<i class="fa fa-times"></i>&nbsp;<?php xmsg('LC','BTN_CANCEL'); ?>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="edit-block-form">
+  <span><?php xmsg('LC','LBL_BLOCK_TITLE'); ?></span><br><input maxlength="30" type="text" class="eb-title form-control input-sm input-medium input-inline" size="35"><br>
+  <span><?php xmsg('LC','LBL_BLOCK_DESCRIPTION'); ?></span><br><textarea class="eb-descr form-control input-sm input-medium input-inline"></textarea><br>
+  <span><?php xmsg('LC','LBL_BLOCK_CONTENT'); ?></span><br><textarea class="eb-tmpl form-control input-sm input-medium input-inline"></textarea><br>
+  <center>
+    <p>
+        <center>	
+          <table>
+            <tr>
+                <td> <a href="javascript:void(0);" class="btn green" onclick="saveBlockContent();"><i class="fa fa-save"></i> <?php xmsg('LC','BTN_SAVE'); ?></a> </td>
+                <td> <a href="javascript:void(0);" class="btn btn-default" onclick="cancelBlockEditing();"><i class="fa fa-times"></i> <?php xmsg('LC','BTN_CANCEL'); ?></a> </td>
+            </tr>
+          </table>
+        </center>
+    </p>
+  </center>
+</div>
+
+<div class="waiter"></div>
+<div class="settings-helper">
+    <input type="text" class="search-setting">
+    <div class="settings-list">
+        <?php SettingsList(); ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+function insertAtCursor(input, str) {
+  if(input.selectionStart || input.selectionStart == '0') {
+    input.value = input.value.substring(0, input.selectionStart)
+                  + str
+                  + input.value.substring(input.selectionEnd, input.value.length);
+  } else input.value += str;
+  input.focus();
+}
+
+function searchBlocks()
+{
+    var self = this;
+    gt(jQuery(".blocks-list .a_block"), function(a_bl){
+        a_bl.attr('title').toLowerCase().match(self.value.toLowerCase()) ? a_bl.show() : a_bl.hide();
+    });
+}
+
+function removeBlockControls(block)
+{
+    block.find(".block-header div").remove();
+}
+
+function gt(arr, cb)
+{
+    for(var i=0; i<arr.length; i++) {
+        if(typeof(arr[i].click=='undefined')) arr[i] = jQuery(arr[i]);
+        cb(arr[i],i);
+    }
+}
+
+function scroll()
+{
+    return {
+            left: document.body.scrollLeft 
+                                || document.documentElement.scrollLeft 
+                                || window.pageXOffset
+                                || jQuery(window).scrollLeft()
+                                || 0,
+            top: document.body.scrollTop 
+                                || document.documentElement.scrollTop 
+                                || window.pageYOffset
+                                || jQuery(window).scrollTop()
+                                || 0
+           }
+}
+
+function addBlockControlsHandlers(blocks)
+{
+    gt(blocks, function(b){
+        gt(b.find(".info-icon"), function(ctrl){
+            ctrl.click(function(){
+                jQuery(this).parent().parent().find(".block-descr").toggle();
+            })
+        });
+        gt(b.find(".ui-icon-delete"), function(del){
+            del.click(function(){
+                if(confirm('<?php xmsg("LC","WARN_DELETE_BLOCK"); ?>')){
+                    jQuery(this).parent().parent().remove();
+                    confChanged(true);
+                    getAvailableBlocks();
+                }
+            });
+        });
+        gt(b.find(".edit-block"), function(edit){
+            edit.click(function(){
+                var self = this;
+                showCoverlet('.edit-block-form', function(){
+                    jQuery('.edit-block-form')
+                    .children('.eb-tmpl').attr('id', 'eb-textarea-'+self.parentNode.parentNode.id)
+                    .val(jQuery(self).parent().parent().children('.block-content').text().decode_tags()).end()
+                    .children('.eb-title').val(jQuery(self).parents('.block').attr('title')).end()
+                    .children('.eb-descr').val(jQuery(self).parents('.block').children('.block-descr').text()).end();
+                });
+            });
+        });
+        gt(b.find(".show-block, .hide-block"), function(ctrl){
+            ctrl.click(function(){
+                confChanged(true);
+                jQuery(this).parent().children(".show-block, .hide-block").toggleClass('h_el');
+                jQuery(this).parents('.block').toggleClass('hidden_block');
+            });
+        });
+    });
+}
+
+function centerize(selector)
+{
+    var scr = scroll();
+    jQuery(selector)
+        .css('left', scr.left + Math.round(jQuery(window).width()/2) - Math.round(objw(jQuery(selector))/2)+'px')
+        .css('top', scr.top + Math.round(jQuery(window).height()/2) - Math.round(objh(jQuery(selector))/2)+'px');
+}
+
+function showCoverlet(contentSelector, cb)
+{
+    jQuery('.coverlet').fadeTo(200, 0.5, 
+        function(){
+            jQuery(contentSelector).fadeIn(100, function(){
+                if(typeof(cb)=='function') setTimeout(function(){cb();}, 10);
+            });
+        })
+        .css('width',jQuery(document).width()+'px')
+        .css('height',jQuery(document).height()+'px');
+    centerize(contentSelector);
+}
+
+function enableWaiter() 
+{ 
+    showCoverlet('.waiter'); 
+}
+
+function disableWaiter()
+{
+    jQuery('.waiter').fadeOut(function(){jQuery('.coverlet').fadeOut(200);});
+}
+
+function addBlockControls(block, controls)
+{
+    var ctrls = controls || [];
+    var b_header = block.find(".block-header");
+
+    removeBlockControls(block);
+    if(b_header.children().length==0){
+        jQuery.map(ctrls, function(ctrl){
+            var ctrl_html = '';
+            switch(ctrl){
+                case 'edit': 
+                    ctrl_html = '<div class="edit-block"><?php xmsg("LC","LBL_EDIT"); ?></div>'; 
+                break;
+                case 'hide': 
+                    ctrl_html = '<div class="show-block h_el"><?php xmsg("LC","LBL_SHOW"); ?></div>'
+                              + '<div class="hide-block"><?php xmsg("LC","LBL_HIDE"); ?></div>'; 
+                break;
+                case 'toggle': 
+                    ctrl_html = '<div class="info-icon" title="<?php xmsg('LC','LBL_CLICK_TO_SEE_DESCRIPTION'); ?>"></div>';
+                break;
+                case 'delete': 
+                    ctrl_html = '<div class="ui-icon-delete"></div>'; 
+                break;
+                case 'cross':
+                    ctrl_html = '<div class="cross"></div>'; 
+                break;
+                default: 
+                break;
+            }
+            jQuery.each(b_header, function(i,b){ jQuery(b).prepend(ctrl_html); });
+        });
+
+        jQuery.each(b_header, function(i,b){
+            var hidden = jQuery(b).parent().hasClass('hidden_block');
+            if(hidden) jQuery(b).children('.show-block, .hide-block').toggleClass('h_el');
+        });
+        addBlockControlsHandlers(b_header);
+    }
+}
+
+function saveNewBlockContent()
+{
+    var block_title = jQuery('.add-block-form .ab-title').val().replace(/(^\s+)|(\s+$)/g, "");
+    if(!block_title){
+        alert('<?php xmsg("LC","WARN_EMPTY_BLOCK_TITLE"); ?>');
+        jQuery('.add-block-form .ab-title').focus();
+        return;
+    }
+
+    var block_descr = jQuery('.add-block-form .ab-descr').val();
+    var block_tmpl = jQuery('.add-block-form .ab-tmpl').val().encode_tags();
+    var d = new Date();
+    var column_id = jQuery('.add-block-form').attr('name');
+    var bid = column_id + '-block' + d.getTime();
+    jQuery('#'+column_id).append(
+       '<div class="block" id="' + bid + '" title="'+block_title+'" style="display:none;">'
+            + '<div class="block-header">'+block_title+'</div>'
+            + '<div class="block-descr">'+block_descr+'</div>'
+            + '<div class="block-content">'+block_tmpl+'</div>'
+     + '</div>' 
+    ); 
+    addBlockControls(jQuery('#'+bid), ['edit', 'hide', 'toggle', 'cross', 'delete']);
+    jQuery('#'+bid).slideDown(300);
+
+    confChanged(true);
+    cancelBlockAdding();
+    jQuery('.add-block-form .ab-title').val('');
+    jQuery('.add-block-form .ab-descr').val('');
+    jQuery('.add-block-form .ab-tmpl').val('');
+}
+
+function saveBlockContent()
+{
+    var block_title = jQuery('.edit-block-form .eb-title').val().replace(/(^\s+)|(\s+$)/g, "");    
+    if(!block_title){
+        alert('<?php xmsg("LC","WARN_EMPTY_BLOCK_TITLE"); ?>');
+        jQuery('.edit-block-form .eb-title').focus();
+        return;
+    }
+    var textarea = jQuery('.edit-block-form .eb-tmpl');
+    var block_id = textarea.attr('id').replace('eb-textarea-','');
+    var block_descr = jQuery('.edit-block-form .eb-descr').val();    
+    var textarea_cont = textarea.val().encode_tags();
+    var block_ctrls = jQuery('#'+block_id+' .block-header').clone(true).children('div');
+
+    jQuery('#'+block_id+' .block-header').text(block_title).prepend(block_ctrls); 
+    jQuery('#'+block_id+' .block-descr').text(block_descr); 
+    jQuery('#'+block_id+' .block-content').text(textarea_cont); 
+    jQuery('#'+block_id).attr('title', block_title); 
+    
+    confChanged(true);
+    cancelBlockEditing();
+}
+
+function cancelBlockAdding()
+{
+    jQuery('.add-block-form').fadeOut(function(){jQuery('.coverlet').fadeOut(200);});
+}
+
+function cancelBlockEditing()
+{
+    jQuery('.edit-block-form').fadeOut(function(){jQuery('.coverlet').fadeOut(200);});
+}
+
+function makeBlocksSortable()
+{
+    jQuery(".list .column").sortable({
+        connectWith: '.list .column'
+        ,opacity: 0.5
+        ,helper: 'original'
+        ,items: '.block'
+        ,update: function(ev, ui){onUpdateSortables();}
+    });
+    jQuery(".list .hidden_col").sortable('disable');
+
+    addBlockControls(jQuery(".fixed .block"), ['edit', 'hide', 'toggle']);
+    gt(jQuery(".list .block"), function(block){
+        var page = block.attr('page');
+        if(page!=window.LayoutCMS.cur_page) 
+            addBlockControls(block, ['edit', 'hide', 'toggle', 'cross', 'delete']);
+        else 
+            addBlockControls(block, ['hide', 'toggle', 'cross']);
+    });
+    jQuery(".column").disableSelection();
+}
+
+function json2html()
+{
+    var hl = '';
+    var hs = '';
+    var jsonLayout = window.LayoutCMS.jsonLayout.rows;
+    var jsonSettings = window.LayoutCMS.jsonLayout.settings;
+
+    for(var i=0; i<jsonLayout.length; i++) {
+        hl += '<div class="row ' + jsonLayout[i].name + ' ' + jsonLayout[i].data.type + '">';
+        for(var j=0; j<jsonLayout[i].data.placeholders.length; j++) {
+            if(!jsonLayout[i].data.placeholders[j].data) continue;
+            var columnName = jsonLayout[i].data.placeholders[j].name;
+            var visibility = jsonLayout[i].data.placeholders[j].data.visibility || 'visible';
+	    var col_size="col-xs-12";
+	    switch(columnName){
+		case "left_column":
+		case "right_column":
+		case "center_column":
+			col_size+=" col-md-4";
+			break;
+	    }
+            hl += '<div class="borders column '+(visibility=='hidden' ? ' hidden_col':'')+" "+col_size+'" id="'+columnName+'">';
+            hl += '<div class="column_header">';
+            hl +=   '<div class="column_title">' + columnName + '</div>';
+            hl +=   '<div class="column_show'+(visibility=='visible' ? ' h_el' : '')+'"><?php xmsg("LC","LBL_SHOW"); ?></div>';
+            hl +=   '<div class="column_hide'+(visibility!='visible' ? ' h_el' : '')+'"><?php xmsg("LC","LBL_HIDE"); ?></div>';
+            if(jsonLayout[i].data.type=='list') 
+                hl += '<div class="block_add '+(visibility=='visible' ? '':' h_el')+'"><?php xmsg("LC","LBL_ADD_BLOCK"); ?></div>';
+            hl += '</div>';
+            hl += '<div style="clear:both;"></div>';
+            hl += '<div class="column_hidden_lbl'+(visibility=='visible' ? ' h_el':'')+'"><?php xmsg("LC","LBL_HIDDEN"); ?></div>';
+                if(jsonLayout[i].data.placeholders[j].data.blocks)
+                    for(var k=0; k<jsonLayout[i].data.placeholders[j].data.blocks.length; k++){
+                        var blk = jsonLayout[i].data.placeholders[j].data.blocks[k];
+                        hl += 
+                            '<div class="block'
+                                +(visibility!='visible' ? ' h_el' : '')
+                                +(blk.visibility!='visible' ? ' hidden_block' : '')
+                                +'" id="' + columnName + '-' + blk.name + '" title="'+blk.title+'"'
+                                + (blk.page ? ' page="'+ blk.page +'"' : '') 
+                            + '>'
+                            + '<div class="block-header">' + blk.title + '</div>'
+                            + '<div class="block-descr">'+ blk.description + '</div>'
+                            + '<div class="block-content">'+ blk.template + '</div>'
+                            +'</div>';
+                    }
+            hl += '</div>';
+        }
+        hl += '</div>';
+    }
+
+// ===== Page settings ===
+    var id2label = {
+        template:         '<?php xmsg("LC", "LBL_TEMPLATE"); ?>:',
+        page_title:       '<?php xmsg("LC", "LBL_PAGE_TITLE"); ?>:<sup>*</sup>',
+        page_description: '<?php xmsg("LC", "LBL_PAGE_DESCRIPTION"); ?>:<sup>*</sup>',
+        page_keywords:    '<?php xmsg("LC", "LBL_PAGE_KEYWORDS"); ?>:<sup>*</sup>'
+    };
+    hs += '';
+    for(var i=0; i<jsonSettings.length; i+=2) {
+        hs += '<div class="row">';
+        hs += '<div class="col-sm-2">' + id2label[jsonSettings[i].name] + '</div>' +
+            '<div class="col-sm-4"><input type="text" class="page-settings-inp form-control input-sm" id="'+jsonSettings[i].name+'" value="'+jsonSettings[i].content.decode_tags()+'"></div>';
+        if(jsonSettings[i+1])
+            hs += '<div class="col-sm-2">' + id2label[jsonSettings[i+1].name] + '</div>' +
+            '<div class="col-sm-4"><input type="text" class="page-settings-inp form-control input-sm" id="'+jsonSettings[i+1].name+'" value="'+jsonSettings[i+1].content.decode_tags()+'"></div>';
+        hs += '</div><br />';
+    }
+    hs += '';
+
+    return {layout: hl, settings: hs};
+}
+
+function updateData(restore)
+{
+    enableWaiter();
+    jQuery.post('js_http_request_backend.php',
+            {
+                'asc_action': 'get_layout_tmpl',
+                'page': window.LayoutCMS.cur_page,
+                'theme': window.LayoutCMS.cur_theme,
+                'restore': restore || undefined
+            },
+            function(resp){
+                eval("window.LayoutCMS.jsonLayout="+resp.replace(/\n/,'').encode_tags()+";");
+                var html = json2html();
+                jQuery('div.template').html(html.layout);
+                jQuery('.save_button, .undo_button, .restore_button').show();
+                jQuery('div.page-settings').html(html.settings);
+                if(jQuery('div.template').html() == '') return;
+                getAvailableBlocks();
+                makeBlocksSortable();
+                if(restore) savePage(); 
+                disableWaiter();
+                addColumnCtrlsHnd();
+                addPageSettingsInputsHnd();
+                jQuery('#current-page-title').text(window.LayoutCMS.cur_page);
+                jQuery('td.bread-crumbs').html("<?php xMsg('LC', 'LC_LAYOUT_CMS') ?>&nbsp;&gt;&gt;&nbsp;" + window.LayoutCMS.cur_page);
+		var page_descr=window.LayoutCMS.jsonLayout.page_description;
+		if(page_descr!=null && page_descr!="")
+			jQuery("#current-page-descr").attr("class", "alert alert-info alert-bordered font-green-sharp");
+		else
+			jQuery("#current-page-descr").attr("class", "");
+                jQuery('#current-page-descr').text(page_descr);
+            });
+    confChanged(false);
+}
+
+function isIE () {
+  var myNav = navigator.userAgent.toLowerCase();
+  return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+}
+
+function isIE9()
+{
+    return isIE()==9;
+}
+
+function objw(jObject)
+{
+    return (jQuery.browser.opera || isIE9()) ? jObject.innerWidth() : jObject.width();
+}
+
+function objh(jObject)
+{
+    return (jQuery.browser.opera || isIE9()) ? jObject.innerHeight() : jObject.height();
+}
+
+function addPageSettingsInputsHnd()
+{
+    jQuery('.page-settings-inp')
+        .keypress(function(e){
+            window.LayoutCMS.cur_edited_setting = this;
+            if(e.keyCode=='27') jQuery('.settings-helper').slideUp(500);
+            else if(e.ctrlKey && (e.keyCode=='10' || e.keyCode=='13') && this.id!='template')
+            {
+                var o = jQuery(this).offset();
+                var top = o.top + objh(jQuery(this)) + 10;
+                
+                jQuery('.settings-helper').css('left',o.left+'px').css('top',top+'px').slideDown(300);
+                jQuery('.search-setting').focus()
+                     .keyup(function(e){
+                            var self = this;
+                            gt(jQuery(".setting"), function(setting){
+                                setting.text().toLowerCase().match(self.value.toLowerCase()) 
+                                    ? setting.show() 
+                                    : setting.hide();
+                            });
+                            if(e.keyCode=='27')
+                            {
+                                jQuery('.settings-helper').slideUp(300);
+                                window.LayoutCMS.cur_edited_setting.focus();
+                                return;
+                            }
+                        });
+                gt(jQuery('.setting'), function(sett){
+                    if(typeof(sett[0].onclick)!='function')
+                    {
+                        sett[0].onclick = function(){
+                            var infoTag = "(?php " + jQuery(this).text() + "(); ?)";
+                            jQuery('.settings-helper').slideUp(500);
+                            insertAtCursor(window.LayoutCMS.cur_edited_setting, infoTag.decode_tags());
+                        }
+                    }
+                });
+            }
+            confChanged(true);
+        });
+}
+
+function addColumnCtrlsHnd()
+{
+    jQuery('.column_show, .column_hide').click(function(){
+        var column = jQuery(this).parents('.column');
+        column.find('.column_show, .column_hide').toggleClass('h_el');
+        column.toggleClass('hidden_col');
+        var add_link = column.find('.block_add');
+        if(add_link.length) add_link.toggleClass('h_el');
+        var hide = jQuery(this).hasClass('column_hide');
+        try { column.sortable(hide ? 'disable' : 'enable'); } catch(err) {};
+        column.find('.block').toggleClass('h_el');
+        column.find('.column_hidden_lbl').toggleClass('h_el');
+        confChanged(true);
+    });
+
+    jQuery('.block_add').click(function(){
+        showCoverlet('.add-block-form', function(){jQuery('#blocks_search_inp').focus();});
+        jQuery('.add-block-form').attr('name', jQuery(this).parents('.column').attr('id'));
+    });
+}
+
+function serializeRows(){
+    var rows = new Array();
+    gt(jQuery('.row'), function(row){
+        var rname = row[0].className.replace(/(row|list|fixed)/g,'').replace(/(^\s+)|(\s+$)/g, "");
+        var rtype = row[0].className.match('fixed') ? 'fixed' : 'list';
+        var placeholders = new Array();
+        gt(row.children(".column"), function(column){
+            var PHname = column.attr('id');
+            var PHvisibility = column.hasClass('hidden_col') ? 'hidden' : 'visible';
+            var blocks = new Array();
+            gt(column.find(".block"), function(block){
+                var bname = block.attr('id').split('-').pop();
+                var btitle = block.attr('title');
+                var bdescr = block.children(".block-descr").text();
+                var bcont = block.children(".block-content").text();
+                var bvisible = block.hasClass('hidden_block') ? 'hidden' : 'visible';
+                blocks.push({
+                    name: bname, 
+                    visibility: bvisible, 
+                    title: btitle,
+                    description: bdescr,
+                    template: bcont
+                });
+            });
+            placeholders.push({name: PHname, visibility: PHvisibility, blocks: blocks});
+        });
+        rows.push({name: rname, placeholders: placeholders});
+    });
+
+    return rows;
+}
+
+function serializeSettings(){
+    return jQuery.map(jQuery(".page-settings-inp"), function(setting){
+        var set = new Object();
+        set.name = setting.id;
+        set.value = setting.value.encode_tags();
+        return set;
+    });
+}
+
+function onUpdateSortables()
+{
+    confChanged(true);
+}
+
+function savePage()
+{
+
+    enableWaiter();
+    jQuery.post('js_http_request_backend.php',
+            {
+                'asc_action': 'save_layout_tmpl',
+                'page': window.LayoutCMS.cur_page,
+                'theme': window.LayoutCMS.cur_theme,
+                'rows': serializeRows(),
+                'settings': serializeSettings()
+            },
+            function(resp){
+                disableWaiter();
+            });
+    confChanged(false);
+}
+
+function renderBlocksList(blocks)
+{
+    var html = jQuery.map(blocks, function(block){
+        var cp = window.LayoutCMS.cur_page
+        if(cp!='default' && block.page!='any' && block.page!=cp) return '';
+        return '<div class="a_block" title="'+block.title+'" name="'+block.name+'"><div class="block-description">'+block.description.encode_tags()+'</div><div class="block-tmpl">'+block.template.encode_tags()+'</div>'+block.title+'</div>';
+    }).join('');
+    jQuery('.blocks-list').html(html);
+    gt(jQuery('.a_block'), function(block){
+        block.click(function(){
+            jQuery('.ab-title').val(this.title);
+            jQuery('.ab-descr').val(jQuery(this).children('.block-description').html());
+            jQuery('.ab-tmpl').val(jQuery(this).children('.block-tmpl').html().decode_tags());
+        });
+    });
+    jQuery("#blocks_search_inp").attr("disabled", false).keyup(function(){searchBlocks.call(this);});
+}
+
+function getAvailableBlocks()
+{
+    if(window.LayoutCMS.blocks_avail.length) renderBlocksList(window.LayoutCMS.blocks_avail);
+    else
+        jQuery.post('js_http_request_backend.php',
+            {
+                'asc_action': 'get_available_blocks',
+                'page': window.LayoutCMS.cur_page,
+                'theme': window.LayoutCMS.cur_theme
+            },
+            function(resp){ 
+                eval("var blocks="+resp.replace(/\n/,'')+";");
+                renderBlocksList(blocks);
+                window.LayoutCMS.blocks_avail = blocks;
+            });
+}
+
+function confChanged(flag)
+{
+    window.LayoutCMS.conf_changed = flag;
+}
+
+function confIsChanged() 
+{
+    if(window.LayoutCMS.conf_changed)
+    {
+        if(confirm('<?php xmsg("LC","WARN_SURE_TO_UNDO"); ?>')) return false;
+        return true;
+    }
+    return false;
+}
+
+//================ MAIN FUNCTION =======================
+
+jQuery(document).ready(function($){
+    $(".coverlet, .edit-block-form, .waiter, .settings-helper, .add-block-form").appendTo("body");
+
+    window.LayoutCMS = window.LayoutCMS || {
+        cur_page: '<?php FirstPage(); ?>',
+        cur_theme: $("#theme-select").val(),
+        conf_changed: false,
+        blocks_avail: []
+    }
+    setTimeout(function(){updateData();}, 100);
+
+    $("#page-select").change(function(){
+            if(this.value!=window.LayoutCMS.cur_page && confIsChanged()) 
+            {   
+                $(this).val(window.LayoutCMS.cur_page);
+                return false;
+            }
+            window.LayoutCMS.cur_page = this.value;
+            updateData();
+    });
+
+    $("#theme-select").change(function(){
+            if(this.value!=window.LayoutCMS.cur_theme && confIsChanged())
+            {
+                $(this).val(window.LayoutCMS.cur_theme);
+                return false;
+            }
+            window.LayoutCMS.cur_theme = this.value;
+            updateData();
+    });
+
+});
+
+
+
+</script>
+
+<!-- END TPL (DO NOT REMOVE!) -->

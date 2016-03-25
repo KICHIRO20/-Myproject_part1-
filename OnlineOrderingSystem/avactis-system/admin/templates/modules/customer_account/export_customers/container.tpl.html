@@ -1,0 +1,392 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style type="text/css">
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+document.title = '<?php echo addslashes(getMsg('CA','EXP_PAGE_TITLE')); ?>';
+</script>
+<script src="js/javascript_sprintf.js"></script>
+<script src="js/timer.js"></script>
+<style type="text/css">
+/*           progress-bar */
+.progress_bar_container {
+  border: solid 1px black;
+  width: 100%;
+  height: 15px;
+}
+.progress_bar_bar {
+  background-color: #0000FF;
+  width: 0px;
+  height: 15px;
+}
+.percents_text {
+  font-family: Tahoma, San-Serif;
+  font-size: 8pt;
+}
+</style>
+<script language="JavaScript">
+var current_section = 1;
+function switchSection(new_section)
+{
+    hideBlock('section_'+current_section);
+    showBlock('section_'+new_section,0);
+    current_section = new_section;
+};
+
+function isOneChecked(name)
+{
+    var els = document.getElementsByName(name);
+    var one_checked = false;
+    
+    for(i=0; i<els.length; i++)
+    {
+        if(els[i].checked)
+        {
+            one_checked = true;
+            break;
+        };
+    };
+    
+    return one_checked;
+};
+
+function changeStateOfAllAttrs(attrs_state)
+{
+    var els = document.getElementsByName('info_attribute');
+    
+    for(i=0; i<els.length; i++)
+    {
+        els[i].checked = attrs_state;
+    };
+    
+    setExportState();
+};
+
+function setExportState()
+{
+    var el = document.getElementById('exp_warning');
+    if(isOneChecked('info_attribute'))
+    {
+        el.innerHTML = '<i class="fa fa-info-circle"></i>&nbsp;<?php echo addslashes(getMsg('CA','EXP_MSG_PRESS_START')); ?>';
+        el.style.color = 'green';
+        enableButton('StartButton1',function() { initSecondSection(); });
+    }
+    else
+    {
+        el.innerHTML = '<i class="fa fa-info-circle"></i>&nbsp;<?php echo addslashes(getMsg('CA','EXP_WRN_SELECT_ATTR')); ?>';
+        el.style.color = 'red';
+        disableButton('StartButton1');
+    };
+};
+
+function getCheckedAttributes()
+{
+    var els = document.getElementsByName('info_attribute');
+    var attrs = new Array();
+    
+    for(i=0; i<els.length; i++)
+    {
+        if(els[i].checked)
+        {
+            attrs[attrs.length] = els[i].id.replace('infotag_','');
+        };
+    };
+    
+    return attrs;
+};
+
+var _log_str = '<?php xmsg('CA','EXP_PROCESSING_COUNT'); ?>';
+
+var items_count = 0;
+var pixels_count = 100;
+var current_progress = 0;
+var start_speed = 10;
+var increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+var finished = 0;
+var executed = 0;
+function increment_bar(bar_id)
+{
+  current_progress++;
+  document.getElementById(bar_id).style.width = current_progress+'%';
+  document.getElementById('bar_completed').innerHTML=current_progress+'% Completed';
+  if(current_progress<(pixels_count-1))
+    setTimeout('increment_bar(\''+bar_id+'\')',increment_speed);
+  else{
+  	finished++;
+	document.getElementById('bar_completed').innerHTML='Completed';
+	document.getElementById('export_pbar').className= 'progress-bar progress-bar-striped';
+  }
+};
+
+function initSecondSection()
+{
+    switchSection(2);
+    addTimer('export_timer');
+    showTimer('export_timer');
+    startTimer('export_timer');
+    appendStringToLog('export_log','<?php xmsg('CA','EXP_STARTED'); ?>','black');
+    requestToInitExport(getCheckedAttributes());
+};
+
+function requestToInitExport(attrs)
+{
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'do_customers_export',
+            	'ce_target': 'init',
+            	'customers_filter': '<?php echo base64_encode(getCustomersFilter()); ?>',
+            	'attrs': attrs
+            },
+            // Function is called when an answer arrives. 
+            function(result) {
+                appendToLog('export_log',result);
+                if(result["process_info"]["status"]=='INITED')
+                {
+            	    items_count = result["process_info"]["items_count"];
+            	    increment_speed = items_count / start_speed * 10 / (pixels_count / 100);
+          		    setTimeout("requestToDoExport()",10);
+   	       		    setTimeout('increment_bar(\'export_pbar\')',10);
+       	   		    setTimeout("waitFinishExport()",500);
+                    document.getElementById('export_process_text').innerHTML = '<?php xmsg('CA','EXP_PRC_PROCESSING'); ?>';
+       	   		}
+       	   		else
+       	   		{
+       	   		    breakExport();
+       	   		};
+                
+            },'json'
+        );
+};
+
+function requestToDoExport()
+{
+		var d = new Date();
+		var start_time = d.getTime();
+        jQuery.post(
+            'jquery_ajax_handler.php', // backend
+            {
+            	'asc_action': 'do_customers_export',
+            	'ce_target': 'do'
+            },
+            // Function is called when an answer arrives. 
+            function(result) {
+                appendToLog('export_log',result);
+                
+				var d = new Date();
+            	var end_time = d.getTime();
+            	var ex = result["process_info"]["items_processing"] - executed;
+            	var k = ex * 100 / items_count;
+            	increment_speed = (end_time - start_time) / k / (pixels_count / 100);
+				executed = result["process_info"]["items_processing"];
+            	if(result["process_info"]["status"]=='COMPLETED')
+            	{
+            		finished++;
+            		increment_speed = 2;
+            	}
+            	else if(result["process_info"]["status"]=='PROCESSING')
+            	{
+            	    __log_str = _log_str.replace('%01%',executed).replace('%02%',items_count);
+            	    appendStringToLog('export_log',__log_str,'black');
+	           		setTimeout("requestToDoExport()",10);
+	            }
+	            else if(result["process_info"]["status"]=='ERRORS_HAPPENED')
+	            {
+	                breakExport();
+	            };
+            },'json'
+        );
+};
+
+function waitFinishExport()
+{
+  if(finished<2)
+  {
+  	setTimeout("waitFinishExport()",500);
+  	return;
+  };
+  
+  increment_bar('export_pbar');
+  document.getElementById('export_process_img').style.display = 'none';
+  document.getElementById('export_process_text').innerHTML = '<?php xmsg('CA','EXP_PRC_COMPLETED'); ?>';
+  enableButton('DownloadCSVButton1',(function() { getCSV(); }));
+  stopTimer('export_timer');
+
+  __log_str = _log_str.replace('%01%',executed).replace('%02%',items_count);
+  appendStringToLog('export_log',__log_str,'black');
+  __log_str = '<?php xmsg('CA','EXP_FINISHED'); ?>';
+  __log_str += '&nbsp;'+'<?php xmsg('CA','EXP_MSG_DWNLD_01'); ?>'
+  appendStringToLog('export_log',__log_str,'black');
+};
+
+function breakExport()
+{
+  document.getElementById('export_process_img').style.display = 'none';
+  document.getElementById('export_process_text').innerHTML = '<?php xmsg('CA','EXP_PRC_ERRORS'); ?>!';
+  increment_speed = 3600000;
+  stopTimer('export_timer');
+};
+
+function appendToLog(log_id,res)
+{
+    for(i=0;i<res["errors"].length;i++)
+        appendStringToLog(log_id,res["errors"][i],'red');
+    for(i=0;i<res["warnings"].length;i++)
+        appendStringToLog(log_id,res["warnings"][i],'blue');
+    for(i=0;i<res["messages"].length;i++)
+        appendStringToLog(log_id,res["messages"][i],'green');
+};
+
+function appendStringToLog(log_id,str,color)
+{
+    _time = new Date();
+    _time_str = '['+sprintf("%02d",_time.getHours())+':'+sprintf("%02d",_time.getMinutes())+':'+sprintf("%02d",_time.getSeconds())+']';
+    log_el = document.getElementById(log_id);
+    _html = _time_str+'&nbsp;<span style="color: '+color+'; font-weight: normal;">'+str+'</span><br>';
+    if(navigator.userAgent.indexOf("MSIE")!=-1)
+    {
+        new_div = document.createElement("div");
+        new_div.innerHTML = _html;
+        log_el.appendChild(new_div);
+    }
+    else
+    {
+        log_el.innerHTML += _html;
+    };
+    log_el.scrollTop = 1000000;
+};
+
+function getCSV()
+{
+    document.forms['getFileForm'].elements['ce_target'].value = 'get_csv';
+    document.forms['getFileForm'].submit();
+    disableButton('DownloadCSVButton1');
+};
+
+</script>
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-blue-sharp bold uppercase">
+				<i class="fa fa-sign-out"></i>&nbsp;<?php xmsg('CA','EXP_PAGE_TITLE'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			<div class="btn btn-default btn-circle" onClick="closeAndFocusParent();">
+				<i class="fa fa-times-circle"></i><span class="hidden-480">&nbsp;<?php msg('BTN_CANCEL'); ?></span>
+			</div>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<div class="table-responsvie">
+			<table class="table table-bordered borderless table-striped table-hover" id="section_1">
+				<thead>
+					<tr class="bg-blue-hoki">
+						<th colspan="2" class="text-left bold"><?php xmsg('CA','EXP_STEP_1_TITLE'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-left bold"><?php xmsg('CA','EXP_CUSTOMERS_COUNT'); ?></td>
+						<td class="text-left" id="customers_count"><?php CustomersToExportCount(); ?></td>
+					</tr>
+					<tr class="group bg-info" id="attrs_header">
+						<td class="text-left bold"><?php xmsg('CA','EXP_ATTRS'); ?></td>
+						<td class="text-right"><a href="javascript: void(0);" onClick="changeStateOfAllAttrs(true);">
+							<?php xmsg('CA','EXP_ATTRS_CHECK_ALL'); ?>
+							</a>
+							&nbsp;/&nbsp;
+							<a href="javascript: void(0);" onClick="changeStateOfAllAttrs(false);">
+								<?php xmsg('CA','EXP_ATTRS_UNCHECK_ALL'); ?>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text-left" id="exp_warning" style="color: red;">
+							<i class="fa fa-info-circle"></i>&nbsp;<?php xmsg('CA','EXP_WRN_SELECT_ATTR'); ?>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top"><?php AttrsLeftSide(); ?></td>
+						<td valign="top"><?php AttrsRightSide(); ?></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="text-center" colspan="2">
+							<div id="StartButton1" class="btn btn-default btn-circle disabled" onClick="">
+								<i class="fa fa-play"></i>&nbsp;<?php xmsg('CA','BTN_START'); ?>
+							</div>
+							<div id="CancelButton1" class="btn btn-default btn-circle" onClick="closeAndFocusParent();">
+								<i class="fa fa-times-circle"></i>&nbsp;<?php msg('BTN_CANCEL'); ?>
+							</div>
+						</td>
+					</tr>
+ 				</tfoot>
+			</table>
+			<table class="table table-bordered borderless table-striped table-hover"  id="section_2" style="display: none;">
+				<thead>
+					<tr class="bg-blue-hoki">
+						<th colspan="4" class="text-left"><?php xmsg('CA','EXP_STEP_2_TITLE'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id="export_process_text"><?php xmsg('CA','EXP_PRC_PREPARING'); ?></td>
+						<td width="4%"><i id="export_process_img" class="fa fa-spinner fa-spin"></i></td>
+						<td width="15%" align="right"><?php xmsg('CA','TIME_ELAPSED'); ?>&nbsp;</td>
+						<td width="5%"><div id="export_timer"></div></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="text-center">
+							<div id="pbar_container" class="progress">
+								<div id="export_pbar" class="progress-bar progress-bar-striped active" role="progressbar">
+									<span id="bar_completed">0% Complete</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="bg-grey">
+						<td colspan="4" class="text-left bg-grey"><?php xmsg('CA','EXP_PRC_LOG'); ?></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="text-left">
+							<div id="export_log"></div>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4" class="text-center">
+							<div id="DownloadCSVButton1" class="btn btn-default btn-circle disabled">
+								<i class="fa fa-download"></i>&nbsp;<?php xmsg('CA','BTN_DOWNLOAD_CSV'); ?>
+							</div>
+							<div class="btn btn-default btn-circle" onClick="closeAndFocusParent();">
+								<i class="fa fa-times-circle"></i>&nbsp;<?php msg('BTN_CANCEL'); ?>
+							</div>
+						</td>
+					</tr>
+
+ 				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+<form action="popup_window.php" name="getFileForm" method="post">
+<input type="hidden" name="asc_action" value="do_customers_export">
+<input type="hidden" name="ce_target" value="">
+</form>
+<!-- END TPL (DO NOT REMOVE!) -->

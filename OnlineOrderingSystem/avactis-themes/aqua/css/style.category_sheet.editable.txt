@@ -1,0 +1,57 @@
+[Main block]
+.category_sheet {
+    padding;
+}
+
+[Level 1]
+.category_sheet .category_level_1{
+    margin;
+}
+
+[Level 2]
+.category_sheet .category_level_2{
+    margin;
+}
+
+[Level 3]
+.category_sheet .category_level_3{
+    margin;
+}
+
+[Level 4]
+.category_sheet .category_level_4{
+    margin;
+}
+
+[Level 5]
+.category_sheet .category_level_5{
+    margin;
+}
+
+[Decor of list of category]
+.category_sheet ul{
+    list-style;
+    padding;
+    margin;
+}
+
+[Decor of category item]
+.category_sheet div{
+    background;
+    padding;
+}
+
+[Decor for link of category]
+.category_sheet .col div a{
+   text;
+}
+
+[Decor of product item]
+.category_sheet .category_products li{
+    padding;
+}
+
+[Decor for link of product]
+.category_sheet .category_products li a{
+    text;
+}

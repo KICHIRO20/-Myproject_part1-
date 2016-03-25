@@ -1,0 +1,118 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<script language="javascript">
+    var gClientHeight, gDivHeight;
+    var gMinDivSideSize = 200;
+    var gHeaderHeight = 20;
+    
+    window.onresize = onresizeHandler;
+    
+    function onresizeHandler(){
+        if (document.getElementById('large_image_div').style.display=='') {
+            showLargeImage();
+        }
+    }
+    
+
+    function showLargeImage() {
+        var imageWidthOrig = <?php AttributeImageWidth(); ?>;
+        var imageHeightOrig = <?php AttributeImageHeight(); ?>;
+        
+        //                       ,                                            
+        var arr = modifyImageSidesForBrowser(imageWidthOrig, imageHeightOrig);
+        
+        var imageWidthNew = arr.width;
+        var imageHeightNew = arr.height;
+        
+        var large_image_image = document.getElementById('large_image_image');
+        
+        //                                   
+        large_image_image.width = imageWidthNew;
+        large_image_image.height = imageHeightNew;
+        
+        //                            ,                                       
+        var divWidth = (imageWidthNew < gMinDivSideSize) 
+    	           ? gMinDivSideSize
+    	           : imageWidthNew;
+    	var divHeight = (imageHeightNew < gMinDivSideSize) //        DIV'                               
+    	           ? gMinDivSideSize + gHeaderHeight
+    	           : imageHeightNew + gHeaderHeight;
+    	           
+        var clientHeight = document.documentElement.clientHeight;
+        var clientWidth = document.documentElement.clientWidth;
+        
+        var large_image_div = document.getElementById('large_image_div');
+        large_image_div.style.top = document.documentElement.scrollTop + 0.5 * (clientHeight - divHeight) + 'px';
+        large_image_div.style.left =  0.5 * (clientWidth - divWidth) + 'px';
+        var version = (navigator.userAgent.indexOf ("MSIE 6") != -1) ? "IE6" : "";
+        
+        if (version=="IE6") {
+            large_image_div.style.position='absolute';
+            gClientHeight = clientHeight;
+            gDivHeight = divHeight;
+            window.onscroll = scrollHandler;//(clientHeight, divHeight);
+        }
+        
+        //                             ,                                                                       
+        document.getElementById('large_image_link').style.display = 
+            (imageWidthOrig == imageWidthNew || imageHeightOrig == imageHeightNew) 
+            ? 'none' //                             =>                     
+            : ''; //                            =>                
+            
+        // display DIV
+        large_image_div.style.display='';
+    }
+    
+    //                                       ,      DIV'  
+    function modifyImageSidesForBrowser(width, height) {
+        newWidth = width;
+        newHeight = height;
+        
+        //                           0
+        if (width == 0 || height == 0) {
+            return {width: 0, height: 0};
+        }
+        
+        var clientHeight = document.documentElement.clientHeight;
+        var clientWidth = document.documentElement.clientWidth;
+       // alert('clientHeight: ' + clientHeight + ' clientWidth: ' + clientWidth);
+        var indent = 100; //                                  ,               2
+        var maxWidth = ((clientWidth - indent) > gMinDivSideSize)
+            ? clientWidth - indent
+            : gMinDivSideSize;
+        var maxHeight = ((clientHeight - indent) > gMinDivSideSize)
+            ? clientHeight - indent
+            : gMinDivSideSize;
+        
+        if (newWidth > maxWidth) {
+            newWidth = maxWidth;
+            newHeight = (height * newWidth) / width;
+        }
+        if (newHeight > maxHeight) {
+            newHeight = maxHeight;
+            newWidth = (width * newHeight) / height;
+        }
+        return {width: parseInt(newWidth), height: parseInt(newHeight)};
+    }
+    
+    // used by IE6 only
+    function scrollHandler() {
+        //alert (clientHeight);
+    	document.getElementById('large_image_div').style.top = document.documentElement.scrollTop + 0.5 * (gClientHeight - gDivHeight);
+    }
+</script>
+
+
+  
+      <a href="javascript: void(0);" onclick="showLargeImage()">Large image</a>
+      <div id="large_image_div" style="position: fixed; left: 0; display: none; z-index:10;">
+      	<table cellpadding="0" cellspacing="0" style="border: solid 1px black">
+    	  <tr class="top" style="background-color: #2b7dc7; height: 20px;">
+    	      <td><div id="large_image_link" style="display: none;"><a href="<?php AttributeImageURL(); ?>" style="color: #ffffff; font-size:8pt" target="_blank">Click to see fullsize image</a></div></td>
+    	  	  <td align="right"><a href="javascript: void(0);" onClick="document.getElementById('large_image_div').style. display='none'"><img src="images/close.gif" border="0" width="17" height="17"></a></td>
+    	  </tr>
+    	  <tr style="background-color: #FFFFFF;" onclick="document.getElementById('large_image_div').style.display='none'" style="width: 200;">
+    		  <td colspan="2" id="large_image_cell" valign="middle" align="center" width="200" height="200"><img id="large_image_image" src="<?php AttributeImageURL(); ?>" border="0"></td>
+    	  </tr>
+      	</table>
+      </div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

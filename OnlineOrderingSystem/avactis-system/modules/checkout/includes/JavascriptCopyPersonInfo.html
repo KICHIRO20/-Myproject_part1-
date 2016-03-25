@@ -1,0 +1,51 @@
+<script type="text/javascript">
+/* <![CDATA[ */
+function copyPersonInfo(form_name, person_info_prefix_from, person_info_prefix_to)
+{
+    var i = 0;
+    var j = 0;
+    var regExpr = "^" + person_info_prefix_from + "\\[([a-zA-Z0-9_]*)\\]$";
+    var re = new RegExp(regExpr);//  /^_form1\[([a-zA-Z0-9_]*)\]$/;
+    var form_elements = new Array();
+    
+    while(document[form_name].elements[i])
+    {   
+        //Check if element is from "from" Customer Info set.
+        if(re.test(document[form_name].elements[i].name))
+        {
+            form_elements[j] = document[form_name].elements[i].name;
+            j++;
+        }
+        i++;
+    }
+    
+    form_elements.sort();
+    for (i = 0; i<form_elements.length; i++)
+    {
+        //document.write(form_elements[i] + "<br>");
+                         
+        var matches = form_elements[i].match(re);
+        var attribute_name = matches[1];
+        var attribute_name_from = person_info_prefix_from + "[" + attribute_name + "]";
+        var attribute_name_to   = person_info_prefix_to   + "[" + attribute_name + "]";
+
+        if(document[form_name][attribute_name_to])
+        {
+            //Consider attribute html type: input text, select, ...
+            if(document[form_name][attribute_name_to].type == "text")
+            {
+                document[form_name][attribute_name_to].value = document[form_name][attribute_name_from].value;
+            }
+            else if(document[form_name][attribute_name_to].type == "select-one")
+            {
+                document[form_name][attribute_name_to].selectedIndex = document[form_name][attribute_name_from].selectedIndex;
+                if(document[form_name][attribute_name_to].onchange)
+                {
+                   document[form_name][attribute_name_to].onchange();
+                }
+            }
+        }
+    }
+}
+/* ]]> */
+</script>

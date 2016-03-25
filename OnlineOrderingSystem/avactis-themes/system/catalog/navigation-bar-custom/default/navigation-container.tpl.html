@@ -1,0 +1,15 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box navigation_bar <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content catalog">
+        <h2><?php CategoryName( getLocal_RootCategoryID() ); ?></h2>
+        <ul class="tree"><?php Local_Items(); ?></ul>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+
+<ul class="sf-menu sf-vertical"><?php Local_Items(); ?></ul>

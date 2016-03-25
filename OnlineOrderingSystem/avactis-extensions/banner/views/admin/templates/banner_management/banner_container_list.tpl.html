@@ -1,0 +1,85 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet" href="../../avactis-extensions/banner/views/admin/styles/jquery-ui.css">
+
+<script type="text/javascript" src="../../avactis-extensions/banner/views/admin/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../avactis-extensions/banner/views/admin/js/jquery-ui.js"></script>
+
+<script>
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+
+    if (formAction == 'DelRows')
+    {
+        isSelected = false;
+        i=1;
+        while (cb = document.getElementById('select_'+i))
+        {
+            if (cb.checked)
+            {
+                isSelected = true;
+                break;
+            }
+            i++;
+        }
+        if (!isSelected)
+        {
+            i=1;
+            while (cb = document.getElementById('select_'+i))
+            {
+                if (cb.checked)
+                {
+                    isSelected = true;
+                    break;
+                }
+                i++;
+            }
+        }
+        if (!isSelected)
+        {
+            alert('<?php xmsg('BN', 'BN_ALERT_001'); ?>');
+            return;
+        }
+        else
+        {
+            if (!confirm('<?php xmsg('BN', 'BN_ALERT_002'); ?>'))
+            return;
+        }
+    }
+
+    form.FormSubmitValue.value = formAction;
+    form.submit(); 
+    
+}
+</script>
+</head>
+<body>
+	<form
+		<?php DeleteFormAction(); ?> id="DeleteBannerForm"> <input type='hidden' name='FormSubmitValue' value=''></input>
+		
+					<div class="help error_msg"
+						style="padding: 0px 5px 0px 5px; text-align: left;"></div>
+					<table id="banners" class="table table-hover">
+						<thead>
+                                                        <tr>
+                                                                <th><?php xMsg('BN','BN_DELETE'); ?></th>
+                                                                <th><?php xMsg('BN','BN_WIDTH'); ?></th>
+                                                                <th><?php xMsg('BN','BN_HEIGHT'); ?></th>
+                                                                <th><?php xMsg('BN','BN_START_DATE'); ?></th>
+                                                                <th><?php xMsg('BN','BN_END_DATE'); ?></th>
+                                                                <th><?php xMsg('BN','BN_EFFECT'); ?></th>
+                                                                <th><?php xMsg('BN','BN_NAVIGATION'); ?></th>
+                                                        </tr>
+                                              </thead>
+						<?php Items(); ?>
+					</table>
+				
+			   <?php BannerFooter(); ?>
+	</form>
+</body>
+</html>
+<!-- END TPL (DO NOT REMOVE!) -->

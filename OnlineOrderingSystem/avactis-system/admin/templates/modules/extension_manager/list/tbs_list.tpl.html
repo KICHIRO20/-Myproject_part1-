@@ -1,0 +1,44 @@
+<script language="javascript">
+function exec (formId, asc_action) 
+{
+    var form = document.forms[formId];
+    form.elements['asc_action'].value = asc_action;
+    form.submit();
+    return true;
+}    
+</script>
+<link href="../../../../styles/stylesheet.css" rel="stylesheet" type="text/css">
+
+<form action="index.php" method="GET" id="Modules_Manager">
+<input type="hidden" name="asc_action" value="">
+<table class="list" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th colspan="4">Active Modules List</th>
+        </tr>
+    </thead>
+    <tr>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Version</th>
+    </tr>
+    <tr>
+        <td><input type="radio" name="module_name" value="[blk1.val.name;block=tr]"></td>
+        <td>[blk1.val.name]</td>
+        <td>[blk1.val.description]</td>
+        <td>[blk1.val.version]</td>
+    </tr>
+    <tfoot>
+        <tr>
+            <th colspan="4" style="text-align: left;">
+                <table class="clear">
+                    <tr>
+                        <td><div class="button button_8em" onclick="exec('Modules_Manager', 'ReinstallModuleAction');">Reinstall</div></td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </tfoot>
+</table>
+</form>

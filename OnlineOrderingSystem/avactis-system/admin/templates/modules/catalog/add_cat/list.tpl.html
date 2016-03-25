@@ -1,0 +1,201 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+	<script language="javascript" type="text/javascript">
+submitHandler = function(formname) 
+{
+	var form = document.getElementById(formname);
+	if (form.onsubmit) form.onsubmit(); 
+	form.submit();
+}
+</script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gift font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php Msg('MNG_CTGR_CURR_CTGR'); ?> <?php Breadcrumb(); ?></span>
+			<span class="caption-helper"><?php Msg('ADD_CTGR_PAGE_NAME'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<button id="SaveButton1" class="btn btn-circle btn-default"  type="button" onclick="submitHandler('AddCatForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2', 'UploadButton'));" ><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_SAVE'); ?></span></button>
+				<button id="CancelButton1" class="btn btn-circle btn-default"  type="button" onclick="closeAndFocusParent();" ><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<?php Local_CategoryBookmarks(); ?>
+		<?php Errors(); ?>
+		<form <?php AddCatForm(); ?> method="post" enctype="multipart/form-data" id="AddCatForm">
+			<?php HiddenArrayViewState(); ?>
+			<?php HiddenArrayViewStateConstants(); ?>
+			<input type="hidden" <?php HiddenFormSubmitValue(); ?>>
+			<div class=" portlet-tabs">
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_1">
+						<div id="appinfo" class="panel-group accordion scrollable">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title bg-blue-hoki">
+										<a href="#accordion1_1" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle">
+Basic category details</a>
+									</h4>
+								</div>
+								<div class="panel-collapse collapse in" id="accordion1_1">
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-sm-2">
+												<label class="col-sm-13 control-label"><div><?php msg('CAT_NAME_NAME'); ?>*</div></label>
+											</div><br>
+											<div class="col-sm-2">
+												<a class="pull-left" style="cursor:pointer;">
+													<?php AttributeHelp('0','Subcategory', 'cat_attr'); ?>
+												</a>
+											</div>
+											<div class="col-sm-5"> 
+												<input type="text" class="form-control" <?php Subcategory(); ?> onBlur="formatInput(this);" patternType="string256"> <br> <?php SubcategoriesError(); ?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label class="col-sm-13 control-label"><div><?php msg('CAT_STATUS_NAME'); ?></div></label>
+											</div><br>
+											<div class="col-sm-1">
+												<a class="pull-left" style="cursor:pointer;">
+													<?php hinttext('CAT_STATUS_NAME'); ?>
+												</a>
+											</div>
+											<div class="col-sm-5"> 
+												<?php CategoryStatus(); ?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label class="col-sm-13 control-label"><div><?php msg('CATEGORY_PRODUCTS_RECURSIVELY_STATUS_NAME'); ?></div></label>
+										</div><br>
+											<div class="col-sm-1">
+												<a class="pull-left" style="cursor:pointer;">
+													<?php hinttext('CATEGORY_PRODUCTS_RECURSIVELY_STATUS_NAME'); ?>
+												</a>
+											</div>
+											<div class="col-sm-5"> 
+												<?php CategoryShowProductsRecursivelyStatus(); ?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label class="col-sm-13 control-label"><div><?php msg('CAT_DESCR_NAME'); ?></div></label>
+											</div>
+											<div class="col-sm-2">
+												<a class="pull-left" style="cursor:pointer;">
+													<?php AttributeHelp('0','CategoryDescription', 'cat_attr'); ?>
+												</a>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<textarea class=" form-control tiny_mce" id="CategoryDescription" <?php CategoryDescription(); ?> style="overflow: hidden; padding: 0px;"><?php DescriptionText(); ?></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title bg-blue-hoki">
+										<a href="#accordion1_2" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle">
+											<?php Msg('ADD_CTGR_GRP_001'); ?> </a>
+									</h4>
+								</div>
+								<div class="panel-collapse collapse" id="accordion1_2">
+								<div class="panel-body">
+									<?php ImageControls(); ?>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title bg-blue-hoki">
+									<a href="#accordion1_3" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle">
+										<?php Msg('ADD_CTGR_GRP_002'); ?></a>
+								</h4>
+							</div>
+							<div class="panel-collapse collapse" id="accordion1_3">
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-sm-2">
+											<label class="col-sm-13 control-label"><div><?php msg('CAT_PAGETTL_NAME'); ?></div></label>
+										</div><br>
+										<div class="col-sm-2">
+											<a class="pull-left" style="cursor:pointer;">
+												<?php AttributeHelp('0','PageTitle', 'cat_attr'); ?>
+											</a>
+										</div>
+										<div class="col-sm-5"> 
+											<input type="text" class="form-control" <?php PageTitle(); ?> onBlur="formatInput(this);" patternType="string256">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2">
+											<label class="col-sm-13 control-label"><div><?php msg('CAT_METAKWRD_NAME'); ?></div></label>
+										</div><br>
+										<div class="col-sm-2">
+											<a class="pull-left" style="cursor:pointer;">
+												<?php AttributeHelp('0','MetaKeywords', 'cat_attr'); ?>
+											</a>
+										</div>
+										<div class="col-sm-5"> 
+											<textarea class="<?php MetaKeywordsInputStyleClass(); ?> form-control" <?php MetaKeywords(); ?> onBlur="formatInput(this);" onkeyup="formatInput(this);" patternType="string1024" style="padding: 0px;"><?php MetaKeywordsText(); ?></textarea> <br><?php MetaKeywordsError(); ?>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2">
+											<label class="col-sm-13 control-label"><div><?php msg('CAT_METADESCR_NAME'); ?></div></label>
+										</div><br>
+										<div class="col-sm-2">
+											<a class="pull-left" style="cursor:pointer;">
+												<?php AttributeHelp('0','MetaDescription', 'cat_attr'); ?>
+											</a>
+										</div>
+										<div class="col-sm-5"> 
+											<textarea class="<?php MetaDescriptionInputStyleClass(); ?> form-control" <?php MetaDescription(); ?> onBlur="formatInput(this);"  onkeyup="formatInput(this);" patternType="string1024" style="padding: 0px;"><?php MetaDescriptionText(); ?></textarea> <br><?php MetaDescriptionError(); ?>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2">
+											<label class="col-sm-13 control-label"><div><?php xmsg('CTL','CAT_SEO_URL_PREFIX'); ?></div></label>
+										</div><br>
+										<div class="col-sm-2">
+											<a class="pull-left" style="cursor:pointer;">
+												<?php hinttext('CAT_SEO_URL_PREFIX','catalog-messages'); ?>
+											</a>
+										</div>
+										<div class="col-sm-5"> 
+											<input type="text" class="form-control" <?php SEO_URL_prefix(); ?> onBlur="formatInput(this);" patternType="string256">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="text-danger"><strong><?php Msg('REQUIRED_FIELD_LABEL'); ?></strong></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<div onclick="submitHandler('AddCatForm'); disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2', 'UploadButton'));" class="btn btn-circle btn-default" id="SaveButton2">
+					<i class="fa fa-save"><?php Msg('BTN_SAVE'); ?></i> 
+				</div>    	
+				<div onclick="closeAndFocusParent();" class="btn btn-circle btn-default" id="DeleteButton1">
+					<i class="fa fa-times"><?php Msg('BTN_CANCEL'); ?></i> 
+				</div>    						
+			</div>
+		</div>
+</form>
+	</div>
+</div>
+<script language="javascript">jQuery(function () { setFromState('group_1'); setFromState('group_2'); });</script>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

@@ -1,0 +1,8 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<th class="text-center" onClick="go('customers.php?sort_by=<?php sort_by(); ?>&sort_dir=<?php new_sort_dir(); ?>');" style="cursor: pointer;" <?php js_mouse_events(); ?>>
+	<?php column_name(); ?>&nbsp;&nbsp;
+	<div class="inline" style="display: <?php img_display(); ?>">
+		<img src="images/icons/sort_<?php cur_sort_dir(); ?>.gif" border="0">
+	</div>
+</th>
+<!-- END TPL (DO NOT REMOVE!) -->

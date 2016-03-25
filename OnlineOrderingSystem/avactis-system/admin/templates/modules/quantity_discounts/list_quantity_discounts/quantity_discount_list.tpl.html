@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<SCRIPT SRC="js/main.js"></SCRIPT>
+<SCRIPT SRC="js/validate.js"></SCRIPT></HEAD>
+<body>
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+<!--
+function disableButtonsInForm()
+{
+    disableButtons(new Array('AddRowButton', 'SaveButton1', 'CancelButton1', 'SaveButton2', 'CancelButton2', 'DelRowsButton'));
+}
+
+function formSubmit(formId, formAction)
+{
+    var form = document.forms[formId];
+
+    if (formAction == 'DelRows')
+    {
+        isSelected = false;
+        i=1;
+        while (cb = document.getElementById('select_'+i))
+        {
+            if (cb.checked)
+            {
+                isSelected = true;
+                break;
+            }
+            i++;
+        }
+        if (!isSelected)
+        {
+            i=1;
+            while (cb = document.getElementById('select_'+i))
+            {
+                if (cb.checked)
+                {
+                    isSelected = true;
+                    break;
+                }
+                i++;
+            }
+        }
+        if (!isSelected)
+        {
+            alert('<?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_ALERT_003'); ?>');
+            return;
+        }
+        else
+        {
+            if (!confirm('<?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_ALERT_004'); ?>'))
+            return;
+        }
+    }
+
+    form.FormSubmitValue.value = formAction;
+    disableButtonsInForm();
+    form.submit();
+}
+
+function changeUnitsValue(selectId, elementId)
+{
+    var element = document.getElementById(elementId);
+    var selectel = document.getElementById(selectId);
+    element.innerHTML = selectel.options[selectel.selectedIndex].innerHTML;
+}
+
+function activateRow()
+{
+    //Change style
+}
+
+//                    action
+function activateRate(rate_id, checkbox)
+{
+    active_status = checkbox.checked ? 1 : 2; //YES : NO
+
+    //Save current state
+    //if (!DOM) return;
+    var selectedTableRow = checkbox.parentNode.parentNode;
+    var old_classname = selectedTableRow.className;
+    selectRowAlways(checkbox, 'selected');
+
+    jQuery.post(
+        'jquery_ajax_handler.php', // backend
+        {
+            'asc_action': 'update_quantity_discounts',
+            'FormSubmitValue': 'SetRowActive',
+            'rate_id': rate_id,
+            'rate_status': active_status
+        },
+        // Function is called when an answer arrives. 
+        function(result, output) {
+            if(result["ERR_CODE"]=='')
+            {
+                //alert('Status changes successfully.');
+                selectRowAlways(checkbox, old_classname);
+            }
+            else
+            {
+                checkbox.checked = !checkbox.checked;
+                //alert('Error:' + result["ERR_CODE"]);
+            };
+        },
+        'json'
+    );
+}
+
+//             "New Price" -               %/$
+function discount_or_new_price_on_select()
+{
+    el1 = document.getElementById('discount_or_new_price');
+    el2 = document.getElementById('CostTypeId');
+    el1value = el1.options[el1.selectedIndex].value;
+    if(el1value == 2) //New Price
+    {
+        //              %/$
+        el2.selectedIndex = 0; 
+        el2.disabled = true;
+    }
+    else if(el1value == 1)
+    {
+        //         Select %/$
+        el2.disabled = false;
+    }
+}
+
+//-->
+</script>
+<div class="portlet light">
+<div class="portlet">
+<div class="portlet-title">
+<div class="caption">
+		<i class="fa fa-image font-green-sharp"></i>
+		<span class="caption-subject font-green-sharp bold uppercase"><?php xmsg('QUANTITY_DISCOUNTS','MNG_PRODUCT_QUANTITY_DISCOUNTS'); ?>
+</span>
+		<span class="caption-helper text-lowercase">manage discounts..</span>
+	</div>
+			<div class="actions">
+		<div class="actions btn-set">
+			<button id="UpdateRowsButton"  onclick="EditQuantityDiscountForm.FormSubmitValue.value = 'UpdateRows'; EditQuantityDiscountForm.submit(); disableButtons(new Array('UpdateRowsButton', 'UpdateRowsButton2', 'AddRowButton', 'SaveButton1', 'CancelButton1', 'SaveButton2', 'CancelButton2', 'DelRowsButton'));" type="button"  class="btn btn-circle btn-default" ><i class="fa fa-refresh"></i> <?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_BTN_UPDATE_ROWS'); ?></button>
+		   
+              <?php
+            if ($link = getProductInfoLink()) {
+                ?>
+                <button  type="button" class="btn btn-circle btn-default" onClick="openURLinNewLargeWindow('<?php echo $link?>', 'ProductPreview');" ><i class="fa fa-eye"></i> <?php xmsg('CTL', 'PREVIEW_PRODUCT_BUTTON') ?></button>
+                <?php
+            }
+          ?>		 
+		</div>
+	</div>
+</div>
+<div class="portlet-title">
+<div class="caption">
+<span class="caption-helper text-uppercase"><?php msg('MNG_CTGR_CURR_PRD'); ?>&nbsp;<?php ProductName(); ?></span>
+</div>
+</div>
+<?php Local_ProductBookmarks(); ?>
+<div class="portlet-body">
+	<div class="text-center margin-bottom-20">
+		<span style=" font-size: 10pt; color: black; text-align: center; font-weight: bold;"><?php xmsg('QUANTITY_DISCOUNTS','MNG_PRODUCT_QUANTITY_DISCOUNTS_SALE_PRICE_LABEL'); ?>: <?php Local_ProductSalePrice(); ?></span>   						
+	</div>
+<?php Errors(); ?>
+<?php ResultMessage(); ?>				
+<form <?php EditQuantityDiscountForm(); ?> method="post" id="EditQuantityDiscountForm" style="padding: 0px; margin: 0px;">
+<?php HiddenArrayViewState(); ?>
+<input type="hidden" name="product_id" id="product_id" value="<?php Local_ProductId(); ?>">
+<div class="table-responsive">
+					<table id="datatable_global_discount" class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr class="heading" role="row">
+								<th width="2%" align="center" style="text-align: center;">
+								&nbsp;	
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_LABEL_ORDER_SUBTOTAL'); ?>	</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_LABEL_ORDER_DISCOUNT'); ?>	</th>
+								<th width="10%" align="center" style="text-align: center;">
+									<?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_LABEL_ORDER_MEMBERSHIP'); ?>
+								</th>
+								<th width="10%" align="center" style="text-align: center;">
+								   <div  id="DelRowsButton" onclick="{formSubmit('EditQuantityDiscountForm', 'DelRows');}" class="btn btn-circle btn-default" ><i class="fa fa-times"></i> <?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_BTN_DEL_ROWS'); ?>
+        		</div>
+									
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php Items(); ?>
+                </tbody>
+			</table>
+					
+</div>
+<br>
+<div class="table-responsive">
+			<table id="datatable_add_global_discount" class="table table-striped table-hover">
+						<thead>
+							<tr class="heading" role="row">
+								<th width="20%" align="center" style="text-align: center;">
+									<b><?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_LABEL_005'); ?></b>&nbsp;
+									<input type="text"   value="<?php RvFromValue(); ?>" placeholder="Amount" style="display:inline" dec_point="." decimals="2" patterntype="currency" onblur="formatInput(this);" maxlength="15" size="8" value="" name="rv_from" class="text-lowercase form-control form-filter input-small input-sm" <?php RvFormat(); ?>>
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<select class="form-control form-filter input-inline input-sm" name="CostTypeId" id="CostTypeId" ><?php CostTypeOptions(); ?></select>
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+									<input class="text-lowercase form-control form-filter input-small input-sm" type=text' name='cost' value="<?php CostValue(); ?>"  onBlur="formatInput(this);" patternType="<?php CostPatternType(); ?>" <?php CostFormat(); ?> ></input>
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+								<b><?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_LABEL_008'); ?></b>&nbsp;
+									 <?php MembershipDropDown(); ?>
+								</th>
+								<th width="20%" align="center" style="text-align: center;">
+								<a  id="AddRowButton" onclick="EditQuantityDiscountForm.FormSubmitValue.value = 'AddRow'; EditQuantityDiscountForm.submit(); disableButtons(new Array('AddRowButton', 'SaveButton1', 'CancelButton1', 'SaveButton2', 'CancelButton2'));" class="btn btn-circle btn-default" ><i class="fa fa-plus"></i> <?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_BTN_ADD_ROW'); ?></a>
+									  
+                        <input type='hidden' name='FormSubmitValue'></input>
+								</th>
+							</tr>
+						</thead>
+						<tr><td colspan="5" align="left">
+                    <div class="alert alert-info"><?php xmsg('QUANTITY_DISCOUNTS', 'NOTE_Default_Group'); ?><br>
+                    <?php xmsg('QUANTITY_DISCOUNTS', 'NOTE_Unsigned_Group'); ?></div>
+                </td></tr>
+			</table>
+		</div>
+	<div class="actions" align="center">
+		<div class="actions btn-set">
+			<a  id="UpdateRowsButton2" onclick="EditQuantityDiscountForm.FormSubmitValue.value = 'UpdateRows'; EditQuantityDiscountForm.submit(); disableButtons(new Array('UpdateRowsButton','UpdateRowsButton2', 'AddRowButton', 'SaveButton1', 'CancelButton1', 'SaveButton2', 'CancelButton2', 'DelRowsButton'));" class="btn btn-circle btn-default" ><i class="fa fa-refresh"></i> <?php xmsg('QUANTITY_DISCOUNTS', 'DISCOUNTS_BTN_UPDATE_ROWS'); ?></a>
+		</div>
+	</div>
+</form>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="JavaScript">
+document.title = '<?php xmsg('PF','ORDER_HOTLINKS_HEADER'); ?>';
+</script>
+<!-- JS-Calendar -->
+<link href="jscalendar/skins/calendar-blue2.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="jscalendar/calendar.js"></script>
+<script type="text/javascript" src="jscalendar/lang/calendar-en.js"></script>
+<script type="text/javascript" src="jscalendar/calendar-setup.js"></script>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php msg('ORDERS_INFO_ORDER_NUMBER'); ?>: </span>
+			<span class="caption-subject font-blue-sharp"><?php OrderId(); ?></span>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="form">
+			<h4 class="form-section"><?php xmsg('PF','HOTLINKS_FOR_PRODUCT'); ?>: <?php ProductName(); ?></h4>
+			<?php HotlinksList(); ?>
+		</div>
+		<div align="center" class="actions">
+			<div class="actions btn-set">
+				<button class="btn btn-default" name="Close" type="button" onclick="closeAndFocusParent();" title="<?php msg('BTN_CLOSE'); ?>" id="CancelButton2"><i class="fa fa-times"></i> <span class="hidden-480"><?php msg('BTN_CLOSE'); ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

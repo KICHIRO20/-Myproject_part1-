@@ -1,0 +1,258 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.form-control {
+	display:inline-block;
+}
+</style>
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      if(formname == 'AddPromoCodeForm')
+      {
+          var promo_code_discount_cost = document.getElementById('promo_code_discount_cost').value;
+          //     discount_cost = 0.0,                               
+          if(promo_code_discount_cost == 0)
+          {
+              if(!confirm("<?php xmsg('PROMOCODES', 'PROMOCODES_PAGE_WRN_002'); ?>"))
+              {
+                  return false;
+              }
+          }
+
+          var promo_code_times_to_use = document.getElementById('promo_code_times_to_use').value;
+          //     times_to_use = 0,                               
+          if(promo_code_times_to_use == 0)
+          {
+              if(!confirm("<?php xmsg('PROMOCODES', 'PROMOCODES_PAGE_WRN_003'); ?>"))
+              {
+                  return false;
+              }
+          }
+      }
+      form.submit();
+      return true;
+    }
+  </script>
+
+<!-- BEGIN PAGE CONTENT-->
+<form <?php AddPromoCodeForm(); ?> method="post" enctype="multipart/form-data" id="AddPromoCodeForm">
+<?php HiddenArrayViewState(); ?>
+<?php HiddenArrayViewStateConstants(); ?>
+<input type="hidden" <?php HiddenFormSubmitValue(); ?>>
+
+<?php Errors(); ?>
+	<!-- Begin: life time stats -->
+		<div class="portlet light">
+    		<?php Subtitle(); ?>
+			<div class="portlet-body form form-horizontal">
+				<div class="form-body">
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<?php PromoCodeId(); ?>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+					    <?php PromoCodeSummary(); ?>
+					</div>
+					<!-- Form Group - End -->
+
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+					    <?php PromoCodeEffectiveAreaLaconic(); ?>
+					</div>
+					<!-- Form Group - End -->
+
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label required"><?php xmsg('PROMOCODES', 'PROMO_CODE_CAMPAIGN_NAME_NAME'); ?>*</label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_CAMPAIGN_NAME_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<input type="text" placeholder="<?php xmsg('PROMOCODES', 'PROMO_CODE_CAMPAIGN_NAME_NAME'); ?>" class="form-control" <?php PromoCodeCampaignName(); ?> onBlur="formatInput(this);" patternType="string128">
+								<?php PromoCodeCampaignNameError(); ?>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label required"><?php xmsg('PROMOCODES', 'PROMO_CODE_PROMO_CODE_NAME'); ?>*</label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_PROMO_CODE_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<input type="text" placeholder="<?php xmsg('PROMOCODES', 'PROMO_CODE_PROMO_CODE_NAME'); ?>" class="form-control" <?php PromoCodePromoCode(); ?> onBlur="formatInput(this);" patternType="string128">
+								<?php PromoCodePromoCodeError(); ?>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_STATUS_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_STATUS_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<?php PromoCodeStatus(); ?>
+								<?php PromoCodeStatusError(); ?>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_MIN_SUBTOTAL_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_MIN_SUBTOTAL_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<input style="width:93%; display:inline-block;" id="promo_code_min_subtotal" type="text" placeholder="<?php xmsg('PROMOCODES', 'PROMO_CODE_MIN_SUBTOTAL_NAME'); ?>" class="form-control" <?php PromoCodeMinSubtotal(); ?> onBlur="formatInput(this);" patternType="currency" <?php PromoCodeMinSubtotalFormat(); ?>>
+								<span style="margin-left:2%;"><?php PromoCodeMinSubtotalSign(); ?></span>
+								<?php PromoCodeMinSubtotalError(); ?>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_DISCOUNT_COST_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_DISCOUNT_COST_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<input id="promo_code_discount_cost" style="width:78%; display:inline-block;" type="text" placeholder="<?php xmsg('PROMOCODES', 'PROMO_CODE_DISCOUNT_COST_NAME'); ?>" class="form-control" <?php PromoCodeDiscountCost(); ?> onBlur="formatInput(this);" patternType="currency" <?php PromoCodeDiscountCostFormat(); ?>>
+								<span style="width:20%;float:right;margin-left:2%;"><?php PromoCodeDiscountCostTypeID(); ?></span>
+								<?php PromoCodeDiscountCostError(); ?>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_START_DATE_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_START_DATE_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<span style="display:inline-block;"><?php PromoCodeStartDateFYear(); ?></span>
+								<span style="display:inline-block;"><?php PromoCodeStartDateMonth(); ?></span>
+								<span style="display:inline-block;"><?php PromoCodeStartDateDay(); ?></span>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_END_DATE_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_END_DATE_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<span style="display:inline-block;"><?php PromoCodeEndDateFYear(); ?></span>
+								<span style="display:inline-block;"><?php PromoCodeEndDateMonth(); ?></span>
+								<span style="display:inline-block;"><?php PromoCodeEndDateDay(); ?></span>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_TIMES_TO_USE_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_TIMES_TO_USE_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<input id="promo_code_times_to_use" type="text" placeholder="<?php xmsg('PROMOCODES', 'PROMO_CODE_TIMES_TO_USE_NAME'); ?>" class="form-control" <?php PromoCodeTimesToUse(); ?> onBlur="formatInput(this);" patternType="item" <?php PromoCodeTimesToUseFormat(); ?>>
+								<?php PromoCodeTimesToUseError(); ?>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_B_IGNORE_OTHER_DISCOUNTS_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_B_IGNORE_OTHER_DISCOUNTS_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<?php PromoCodeBIgnoreOtherDiscounts(); ?>
+								<?php PromoCodeBIgnoreOtherDiscountsError(); ?>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_OFFERS_FREE_SHIPPING_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_OFFERS_FREE_SHIPPING_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<select name="FreeShipping" id="FreeShipping_id" class="form-control">
+					                <?php PromoCodeOffersFreeShippingOptions(); ?>
+            					</select>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_OFFERS_FREE_HANDLING_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_OFFERS_FREE_HANDLING_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<select name="FreeHandling" id="FreeHandling_id" class="form-control">
+					                <?php PromoCodeOffersFreeHandlingOptions(); ?>
+            					</select>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+					<!-- Form Group - Begin -->
+					<div class="form-group">
+						<label class="col-md-3 control-label"><?php xmsg('PROMOCODES', 'PROMO_CODE_STRICT_CART_NAME'); ?></label>
+					 	<div class="col-md-1">
+                                                        <a class="pull-right" style="cursor:pointer;">
+                                                                   <?php hinttext('PROMO_CODE_STRICT_CART_NAME', 'promo-codes-messages'); ?>
+                                                        </a>
+						</div>
+						<div class="col-md-5">
+								<select name="StrictCart" id="StrictCart_id" class="form-control">
+					                <?php PromoCodeStrictCartOptions(); ?>
+            					</select>
+						</div>
+					</div>
+					<!-- Form Group - End -->
+						<span class="required"><?php Msg('REQUIRED_FIELD_LABEL'); ?></span>
+				</div>
+
+				<div class="actions" align="center">
+					<div class="actions btn-set">
+						<button id="SaveButton1"  class="btn btn-circle btn-default" name="btn_save" type="button" onclick="if(submitHandler('AddPromoCodeForm')) {disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2', 'UploadButton'));}" title="<?php xmsg('SYS','BTN_SAVE'); ?>"><i class="fa fa-save"></i> <span class="hidden-480"><?php xmsg('SYS','BTN_SAVE'); ?></span></button>
+					</div>
+				</div>
+			</div>
+
+			<?php OrderList(); ?>
+
+		</div>
+</form>
+<!-- END PAGE CONTENT-->
+<!-- END TPL (DO NOT REMOVE!) --><hr>

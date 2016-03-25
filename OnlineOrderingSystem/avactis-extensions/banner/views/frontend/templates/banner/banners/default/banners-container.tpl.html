@@ -1,0 +1,38 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<style>
+  div .custom
+{
+border-radius: .2em;
+border: 1px solid #cccccc;
+-webkit-transition: border linear .2s, box-shadow linear .2s;
+-moz-transition: border linear .2s, box-shadow linear .2s;
+-o-transition: border linear .2s, box-shadow linear .2s;
+transition: border linear .2s, box-shadow linear .2s;
+} 
+</style>
+<script type="text/javascript" src="/avactis-extensions/banner/views/frontend/templates/js/module.customslider.js"></script>
+<link rel="stylesheet" type="text/css" href="avactis-extensions/banner/views/frontend/templates/css/module.custom_slider.css" />
+</head>
+<body>
+
+<?php BannerContent(); ?>
+
+
+<script type="text/javascript">
+//<![CDATA[
+  
+   $(document).ready(function() {
+     $('#banner-system-code-<?php Location(); ?> pre code').each(function() {
+         eval($(this).text());
+       });
+     });
+  
+//]]>
+</script>
+</body>
+</html> 
+
+<!-- END TPL (DO NOT REMOVE!) -->

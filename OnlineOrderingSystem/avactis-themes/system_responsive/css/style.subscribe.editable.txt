@@ -1,0 +1,96 @@
+[Subscription Form]
+.subscribe_form {
+    padding;
+}
+
+[Subscription Form Header]
+.subscribe_form h2 {
+    padding;
+    margin;
+    background;
+    text;
+    border;
+}
+
+[Subscription Form - Error Message]
+.subscribe_form .success_message,
+.subscribe_form .error_message {
+    padding;
+    margin;
+}
+
+[Subscription Topic List]
+.subscribe_form .form_view {
+    padding;
+}
+
+[Subscription Topic Name]
+.subscribe_form .form_row label {
+    text;
+}
+
+[Subscription Form - E-Mail Input]
+.subscribe_form .input_text {
+    margin;
+    width;
+}
+
+[Subscription Form in Column - Submit Button]
+.right_column .subscribe_form .input_submit,
+.left_column .subscribe_form .input_submit {
+    margin;
+}
+
+[Subscription Form in Center - Submit Button]
+.center_column .subscribe_form .input_submit {
+    margin;
+}
+
+[Subscription Form in Center]
+.center_column .subscribe_form {
+    padding;
+}
+
+[Subscription Form in Center - Row]
+.center_column .subscribe_form .form_row {
+    padding;
+    margin;
+}
+
+[Subscription Form on Subscription Page - E-Mail Input]
+.myaccount .subscribe_form .input_text {
+    margin;
+    width;
+}
+
+[Currently Subscribed E-Mail]
+.myaccount .subscribe_form .current_email {
+    text;
+    width;
+    padding;
+}
+
+[Subscription Form Buttons]
+.myaccount .subscribe_form_buttons {
+    margin;
+    padding;
+    border-top;
+}
+
+['No Subscribed E-Mails' Message]
+.myaccount .no_subscribed_emails {
+    width;
+    padding;
+    text;
+}
+
+[Subscription Form on Subscription Page - New E-Mail]
+.myaccount .subscribe_form .new_email {
+    padding;
+}
+
+[Subscription Form - 'Already Subscribed' Message]
+.subscribe_form .already_subscribed {
+    text;
+	padding;
+}

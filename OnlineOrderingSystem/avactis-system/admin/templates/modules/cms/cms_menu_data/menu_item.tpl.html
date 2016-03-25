@@ -1,0 +1,69 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+	<td><input type="text" class="form-control input-sm" name="link[<?php MenuItemID(); ?>][item_name]" value="<?php MenuItemName(); ?>" /></td>
+	<td>
+		<select name="link[<?php MenuItemID(); ?>][item_type]" onchange="checkLinkType(this, 'link_<?php MenuItemID(); ?>_', 'link[<?php MenuItemID(); ?>][link_system_page]');" class="form-control input-sm">
+			<option value="<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>"<?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_URL) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_URL'); ?></option>
+			<option value="<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>"<?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_SYSTEM_PAGE) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_SYSTEM_PAGE'); ?></option>
+			<option value="<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>"<?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_STATIC_PAGE) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_STATIC_PAGE'); ?></option>
+			<option value="<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>"<?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_TEXT) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_TEXT'); ?></option>
+			<option value="<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>"<?php if (getMenuItemType() == CMS_MENU_ITEM_TYPE_EXTERNAL_URL) { ?> selected="selected"<?php } ?>><?php xMsg('CMS', 'CMS_MENU_TYPE_EXTERNAL_URL'); ?></option>
+		</select>
+	</td>
+	<td>
+		<div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_URL); ?>"<?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_URL) { ?> style="display: none;"<?php } ?>>
+			<input type="text" name="link[<?php MenuItemID(); ?>][link_url]" value="<?php MenuItemLinkURL(); ?>" class="form-control input-sm" />
+		</div>
+		<div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_EXTERNAL_URL); ?>"<?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_EXTERNAL_URL) { ?> style="display: none;"<?php } ?>>
+			<input type="text" name="link[<?php MenuItemID(); ?>][link_external_url]" value="<?php MenuItemLinkURL(); ?>" class="form-control input-sm" />
+		</div>
+		<div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>"<?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_SYSTEM_PAGE) { ?> style="display: none;"<?php } ?>>
+			<?php if (getMenuSystemCount()) { ?>
+				<select name="link[<?php MenuItemID(); ?>][link_system_page]" class="form-control input-sm" onchange="checkLinkType(this.form.elements['link[<?php MenuItemID(); ?>][item_type]'], 'link_<?php MenuItemID(); ?>_', this.name);">
+					<?php MenuItemSystemPages(); ?>
+				</select>
+			<?php } else { ?>
+				<?php xMsg('CMS', 'CMS_MENU_NO_SYSTEM_PAGES'); ?>
+			<?php } ?>
+		</div>
+		<div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>_prodlist" style="<?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_SYSTEM_PAGE || _ml_strtolower(getMenuItemLink()) != 'productlist') { ?> display: none;<?php } ?>">
+			<table class="table boderless">
+				<tbody>
+					<tr>
+						<td><?php xMsg('CMS', 'CMS_MENU_ITEM_CATEGORY_ID'); ?>:&nbsp;</td>
+						<td><input type="text" name="link[<?php MenuItemID(); ?>][list_catid]" value="<?php MenuItemParam1(); ?>" class="form-control input-sm input-xsmall" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_SYSTEM_PAGE); ?>_prodinfo" style="<?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_SYSTEM_PAGE || _ml_strtolower(getMenuItemLink()) != 'productinfo') { ?> display: none;<?php } ?>">
+			<table cellpadding="0" cellspacing="0" align="right">
+				<tbody>
+					<tr>
+						<td><?php xMsg('CMS', 'CMS_MENU_ITEM_PRODUCT_ID'); ?>:&nbsp;</td>
+						<td><input type="text" name="link[<?php MenuItemID(); ?>][info_prodid]" value="<?php MenuItemParam2(); ?>" class="form-control input-sm input-xsmall" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_STATIC_PAGE); ?>"<?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_STATIC_PAGE) { ?> style="display: none;"<?php } ?>>
+			<?php if (getMenuStaticCount()) { ?>
+				<select name="link[<?php MenuItemID(); ?>][link_static_page]" class="form-control input-sm">
+					<?php MenuItemStaticPages(); ?>
+				</select>
+			<?php } else { ?>
+				<?php xMsg('CMS', 'CMS_MENU_NO_STATIC_PAGES'); ?>
+			<?php } ?>
+		</div>
+		<div id="link_<?php MenuItemID(); ?>_<?php echo(CMS_MENU_ITEM_TYPE_TEXT); ?>"<?php if (getMenuItemType() != CMS_MENU_ITEM_TYPE_TEXT) { ?> style="display: none;"<?php } ?>>
+			&nbsp; 
+		</div>
+	</td>
+	<td class="text-center">
+		<input type="checkbox" class="form-control input-sm" name="link[<?php MenuItemID(); ?>][item_status]"<?php if (getMenuItemStatus() == CMS_MENU_ITEM_STATUS_ACTIVE) { ?> checked="checked"<?php } ?> />
+	</td>
+	<td class="text-center">
+		<input type="checkbox" class="form-control input-sm" name="delete[<?php MenuItemID(); ?>]" value="<?php MenuItemID(); ?>" onclick="checkSelectedItems(this);" />
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

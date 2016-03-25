@@ -1,0 +1,8 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td colspan="5" style="text-align: right;">
+		<a id="UpdateButton" class="btn btn-default btn-circle" onclick="document.language_settings.mode.value='update'; document.language_settings.submit();"><i class="fa fa-refresh"></i> <?php Msg('BTN_UPDATE'); ?></a>
+		<a id="DeleteButton" class="btn btn-default btn-circle button_disabled disabled" onclick="bootbox.confirm('<?php xMsg('ML', 'MNG_LNGS_DELETE_LNG_CONFIRMATION') ?>',function(result){if(result){document.language_settings.mode.value='delete'; document.language_settings.submit();}});"><i class="fa fa-times"></i> <?php Msg('BTN_DELETE'); ?></a>
+    </td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

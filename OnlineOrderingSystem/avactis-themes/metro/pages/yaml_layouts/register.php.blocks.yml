@@ -1,0 +1,31 @@
+---
+- 
+  name: user1
+  title: Search form
+  description: Search form
+  template: '<?php SearchForm(); ?>'
+- 
+  name: top_menu
+  title: CMS top menu
+  description: CMS top menu
+  template: '<?php CMSMenu('top_menu'); ?>'
+- 
+  name: main_menu
+  title: CMS main menu
+  description: CMS main menu
+  template: '<?php CMSMenu('main_menu'); ?>'
+- 
+  name: CustomerRegistrationForm
+  title: Customer registration form
+  description: Customer registration form
+  template: '<?php CustomerRegistrationForm(); ?>'
+- 
+  name: footer_menu
+  title: CMS footer menu
+  description: CMS footer menu
+  template: '<?php CMSMenu('footer_menu'); ?>'
+- 
+  name: copyright
+  title: Copyright
+  description: Copyright string
+  template: '<?php CMSPageContent('copyright'); ?>'

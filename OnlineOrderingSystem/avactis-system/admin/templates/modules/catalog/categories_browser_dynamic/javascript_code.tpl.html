@@ -1,0 +1,206 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+var {UnqPrefix}_current_category = {PreselectedNodeId};
+function {UnqPrefix}_confirmNodeDelete(tree_obj, node) {
+    if ( typeof({beforeDelete}) == 'function' ) {
+        return {beforeDelete}(tree_obj, node);
+    }
+    return true;
+}
+function {UnqPrefix}_setCategoriesTreeChanged(tree_obj)
+{
+	if ( typeof({onTreeChanged}) == 'function' ) {
+		{onTreeChanged}(tree_obj);
+	}
+}
+function {UnqPrefix}_selectCategory(tree_obj, node)
+{
+    if ( typeof({onNodeSelected}) == 'function' ) {
+        {onNodeSelected}(tree_obj, node);
+    }
+}
+function {UnqPrefix}_goToProducts(node)
+{
+    if ( typeof({onGoToProducts}) == 'function' ) {
+        {onGoToProducts}(node, '{urlGoToProducts}');
+    }
+}
+function {UnqPrefix}_pushRollBack(rb, tree_obj)
+{
+    if ( typeof({pushRollBack}) == 'function' ) {
+        var cs = {};
+        cs[ tree_obj.container.attr('id') ] = tree_obj.get_rollback();
+        {pushRollBack}(tree_obj, rb, cs);
+    }
+}
+function {UnqPrefix}_overwriteRollBack(rb, tree_obj)
+{
+    if ( typeof({overwriteRollBack}) == 'function' ) {
+        var cs = {};
+        cs[ tree_obj.container.attr('id') ] = tree_obj.get_rollback();
+        {overwriteRollBack}(tree_obj, rb, cs);
+    }
+}
+var context_menu = [ 
+{
+    id      : "create",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_CREATE_CHILD'); ?>", 
+    icon    : "create.png",
+    visible : function (NODE, TREE_OBJ) { if(NODE.length != 1) return false; return TREE_OBJ.check("creatable", NODE); }, 
+    action  : function (NODE, TREE_OBJ) { TREE_OBJ.do_create = true; TREE_OBJ.create(false, TREE_OBJ.get_node(NODE)); } 
+},
+{
+    id      : "create_before",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_CREATE_BEFORE'); ?>", 
+    icon    : "create.png",
+    visible : function (NODE, TREE_OBJ) { return TREE_OBJ.parent(NODE) != false; }, 
+    action  : function (NODE, TREE_OBJ) { TREE_OBJ.do_create = true; TREE_OBJ.create(false, TREE_OBJ.get_node(NODE), 'before'); } 
+},
+{
+    id      : "create_after",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_CREATE_AFTER'); ?>", 
+    icon    : "create.png",
+    visible : function (NODE, TREE_OBJ) { return TREE_OBJ.parent(NODE) != false; }, 
+    action  : function (NODE, TREE_OBJ) { TREE_OBJ.do_create = true; TREE_OBJ.create(false, TREE_OBJ.get_node(NODE), 'after'); } 
+},
+"separator",
+{ 
+    id      : "rename",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_RENAME'); ?>", 
+    icon    : "rename.png",
+    visible : function (NODE, TREE_OBJ) { if(NODE.length != 1) return false; return TREE_OBJ.check("renameable", NODE); }, 
+    action  : function (NODE, TREE_OBJ) {
+        if (NODE != null) {
+            NODE.data('textContentBeforeRename', NODE.text());
+            TREE_OBJ.rename(NODE);
+        }
+        else {
+            TREE_OBJ.rename();
+        } 
+    } 
+},
+{
+    id      : "edit",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_EDIT_CAT'); ?>", 
+    icon    : "edit.gif",
+    visible : function (NODE, TREE_OBJ) { return NODE && parseInt(NODE.attr('ctg_id')) > 0; }, 
+    action  : function (NODE, TREE_OBJ) { ManageCategories_editCategory(TREE_OBJ, NODE.get(0)); } 
+},
+"separator",
+{
+    id      : "expand_all",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_EXPAND_ALL'); ?>", 
+    icon    : "plus_circle.png",
+    visible : function (NODE, TREE_OBJ) { return true; }, 
+    action  : function (NODE, TREE_OBJ) { TREE_OBJ.open_all(); } 
+},
+{
+    id      : "collapse_all",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_COLLAPSE_ALL'); ?>", 
+    icon    : "minus_circle.png",
+    visible : function (NODE, TREE_OBJ) { return true; }, 
+    action  : function (NODE, TREE_OBJ) { TREE_OBJ.close_all(); } 
+},
+"separator",
+{ 
+    id      : "delete",
+    label   : "<?php xMsg('CTL', 'MNG_CTG_MENU_DELETE'); ?>",
+    icon    : "remove.png",
+    visible : function (NODE, TREE_OBJ) { var ok = true; jQuery.each(NODE, function () { if(TREE_OBJ.check("deletable", this) == false) ok = false; return false; }); return ok; }, 
+    action  : function (NODE, TREE_OBJ) { jQuery.each(NODE, function () { TREE_OBJ.remove(this); }); } 
+}
+];
+
+var {UnqPrefix}_onload = window.onload;
+window.onload = function() {
+if (typeof({UnqPrefix}_onload) == 'function') {
+    {UnqPrefix}_onload();
+}
+jQuery("#{UnqPrefix}_tree").tree({
+    uniq_id: '{UnqPrefix}',
+    save_alert: jQuery('#{UnqPrefix}_save_alert'),
+    saving_msg: jQuery('#{UnqPrefix}_saving_msg'),
+    lang : {
+      new_node: '<?php xMsg('CTL', 'CAT_TREE_NEW_NODE') ?>',
+      loading: '<?php xMsg('CTL', 'CAT_TREE_LOADING') ?>'
+    }, 
+	data : { 
+	  type : "json", 
+	  json : {JSON_Structure}
+    },
+    selected: {PreselectedNodeId},
+    rules: {
+        draggable: ['folder'],
+        deletable: ['folder'],
+        renameable: 'all',
+        drag_copy: 'ctrl',
+        dragrules: ['folder * folder', 'folder inside root']
+    },
+    ui: {
+        dots: true,
+        theme_name: 'default',
+        context: context_menu
+    },
+    path: 'jstree/',
+    callback: {
+        beforedelete: function(node, tree_obj) {
+            return {UnqPrefix}_confirmNodeDelete(tree_obj, node);
+        },
+        onselect: function (node, tree_obj) {
+    	    {UnqPrefix}_selectCategory(tree_obj, node);
+        },
+        onrename: function (node, language, tree_obj, rb) {
+			var $node = jQuery(node);
+            if ($node.text() != $node.data('textContentBeforeRename')) {
+                if( tree_obj.do_create == true ) {
+                    {UnqPrefix}_overwriteRollBack(rb, tree_obj);
+                }
+                else {
+                    $node.addClass('new_ctg');
+                    {UnqPrefix}_pushRollBack(rb, tree_obj);
+                }
+                tree_obj.do_create = false;
+            }
+        },
+        onmove: function (node, ref_node, location, tree_obj, rb) {
+            {UnqPrefix}_pushRollBack(rb, tree_obj);
+        },
+        oncopy: function (node, ref_node, location, tree_obj, rb) {
+            node.removeAttribute('ctg_id');
+            {UnqPrefix}_pushRollBack(rb, tree_obj);
+        },
+        oncreate: function (node, ref_node, location, tree_obj, rb) {
+            node.setAttribute('rel', 'folder');
+            var ctg_id = node.getAttribute('ctg_id');
+            if (typeof(ctg_id) == 'string' && isFinite(parseInt(ctg_id))) {
+                ManageCategories_incrementUndoOrigin(tree_obj);
+            }
+            else {
+                jQuery(node).addClass('new_ctg');
+            }
+            {UnqPrefix}_pushRollBack(rb, tree_obj);
+        },
+        ondelete: function (node, tree_obj, rb) {
+            {UnqPrefix}_pushRollBack(rb, tree_obj);
+        },
+        ondblclk: function (node, tree_obj) {
+            {UnqPrefix}_goToProducts(node);
+        } 
+    }
+});
+}
+
+window.onbeforeunload = function(event) {
+    var e = e || window.event;
+    if (typeof({isTreeChanged}) == 'function' ) {
+        if ({isTreeChanged}()) {
+            var msg = "<?php xMsg('CTL', 'MNG_CTG_CONFIRM_UNLOAD'); ?>";
+            if (e) {
+                e.returnValue = msg;
+            }
+            return msg;
+        }
+    }
+    return;
+}
+
+<!-- END TPL (DO NOT REMOVE!) -->

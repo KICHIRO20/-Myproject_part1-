@@ -1,0 +1,22 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="box myaccount nogradient <?php ViewClassName(); ?>">
+    <div class="cn lt"></div>
+    <div class="cn rt"></div>
+    <div class="cn lb"></div>
+    <div class="cn rb"></div>
+    <div class="content">
+    	<a name="subscribe_box"></a>
+        <h2><?php Label("SUBSCRIPTION_MANAGE_SUBSCRIPTIONS"); ?></h2>
+        <div class="subscribe_form">
+            <?php Local_Messages(); ?>
+            <h3><?php Label("SUBSCRIPTION_YOUR_CURRENT_SUBSCRIPTIONS"); ?></h3>
+            <p><?php Label("SUBSCRIPTION_YOU_CAN_MODIFY"); ?></p>
+        	<?php Local_SubscriptionFormsList(); ?>
+        </div>
+        <div class="subscribe_form_buttons">
+            <a href="home.php"><span class="<?php lang(); ?> button_back"></span></a>
+        </div>
+     </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
+

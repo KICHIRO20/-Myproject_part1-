@@ -1,0 +1,8 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+	<td>
+		<input type="checkbox" id="<?php InputID(); ?>" name="<?php CheckBoxName(); ?>" onClick="if(this.checked) addTo<?php SideName(); ?>(<?php OptionID(); ?>,<?php ValueID(); ?>); else delFrom<?php SideName(); ?>(<?php OptionID(); ?>,<?php ValueID(); ?>)" <?php IsDisabled(); ?> />
+		&nbsp;<span id="v_<?php OptionID(); ?>_<?php ValueID(); ?>"><?php OptionValueName(); ?></span>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

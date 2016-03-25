@@ -1,0 +1,182 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function formSubmit(formId, formTarget)
+{
+    var form = document.getElementById(formId);
+
+    var is_selected = false;
+
+    var i=0;
+    var elem = document.getElementById('item_'+i+'_id');
+    while (elem)
+    {
+        if (elem.checked)
+        {
+            is_selected = true;
+            break;
+        }
+        i++;
+        elem = document.getElementById('item_'+i+'_id');
+    }
+    if(!is_selected)
+    {
+        alert('<?php xmsg("TAX_ZIP", "SETS_LIST_SELECT_BEFORE_DELETE"); ?>');
+        return; 
+    }
+    
+    if (!confirm("<?php xmsg('TAX_ZIP', 'SETS_LIST_CONFIRM_DELETE'); ?>"))
+        return;
+
+    form.submit();
+}
+
+function submitCheckRates()
+{
+    form = document.getElementById("CheckRatesForm_id");
+    if (form)
+    {
+        form.submit();
+    }
+}
+/*
+function download()
+{
+    var selected = -1;
+
+    var i=0;
+    var elem = document.getElementById('item_'+i+'_id');
+    while (elem)
+    {
+        if (elem.checked)
+        {
+            selected = elem.value;
+            break;
+        }
+        i++;
+        elem = document.getElementById('item_'+i+'_id');
+    }
+    if(selected == -1)
+    {
+        alert('<?php xmsg("TAX_ZIP", "SETS_LIST_SELECT_BEFORE_DELETE"); ?>');
+        return; 
+    }
+    alert(selected);
+}
+*/
+function clearRows()
+{
+    var num = {SETS_NUMBER};
+    for (i=0; i < num; i++)
+    {
+        tr = document.getElementById("ItemTr_" + i);
+        if (tr)
+        {
+            tr.className = '';
+        }
+    }
+}
+
+function updateSet()
+{
+    for (i=0;; i++)
+    {
+        btn = document.getElementById("item_" + i + "_id");
+        if (!btn) break;
+        
+        if (btn.checked)
+        {
+            var url = "popup_window.php?page_view=TaxRateByZip_AddNewSet&updateSid=" + btn.value;
+            openURLinNewWindow(url, 'TaxRateByZip_AddNewSet');
+            return;
+        }
+    }
+    alert('<?php xmsg("TAX_ZIP", "SETS_LIST_SELECT_BEFORE_ACTION"); ?>');
+}
+
+function flip(id)
+{
+    td = document.getElementById(id + "Td_id");
+    img = document.getElementById(id + "Img_id");
+    
+    if (td.style.display == "none")
+    {
+        td.style.display = "inline";
+        img.src = "images/sort_desc.gif";
+    }
+    else
+    {
+        td.style.display = "none";
+        img.src = "images/sort_right.gif";
+    }
+}
+//-->
+</SCRIPT>
+<FORM {FormInners} id="ItemsForm_id" style="margin-bottom: 0px;">
+<input type="hidden" value="deleteSet" name="ViewState[FormSubmitValue]"/>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-green-sharp"></i>
+			<span class="caption-subject font-green-sharp bold uppercase"><?php xMsg('SYS','TAX_ZIP_SETS_PAGE_TITLE'); ?></span>
+			<span class="caption-helper text-lowercase"><?php xmsg('TAX_ZIP', 'SETS_LIST_TABLE_HEADER'); ?>...</span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+            <button id="AddButton1" title="<?php Msg('BTN_ADD'); ?>"  onclick="openURLinNewWindow('popup_window.php?page_view=TaxRateByZip_AddNewSet', 'TaxRateByZip_AddNewSet')" type="button" name="?php Msg('BTN_ADD'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+            
+            <button id="UpdateButton1" title="<?php Msg('BTN_UPDATE'); ?>"  onclick="updateSet();" type="button" name="?php Msg('BTN_UPDATE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_UPDATE'); ?></span></button>           
+            <button id="DeleteButton1" title="<?php Msg('BTN_DELETE'); ?>"  onclick="formSubmit('ItemsForm_id');" type="button" name="?php Msg('BTN_DELETE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_DELETE'); ?></span></button>		
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+	<div class="table-container" style="">
+			<div id="datatable_orders_wrapper" class="dataTables_wrapper dataTables_extended_wrapper no-footer">
+				<div class="table-scrollable">
+					<table  id="datatable_promo_codes" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="datatable_orders_info" role="grid">
+<thead>
+							<tr role="row" class="heading">
+								<th width="30%" style="text-align: center;">
+									<?php xmsg("TAX_ZIP", "SETS_LIST_TABLE_DESCRIPTION"); ?>
+								</th>
+								<th width="30%" style="text-align: center;">
+									<?php xmsg("TAX_ZIP", "SETS_LIST_TABLE_DATE"); ?>
+								</th>
+								<th width="30%" style="text-align: center;">
+									<?php xmsg("TAX_ZIP", "SETS_LIST_TABLE_RECORDS"); ?>
+								</th>
+								<th width="10%"  style="text-align: center;">
+								Select
+     </th>
+</tr>
+</thead>
+						<tbody>
+        {Items}
+						</tbody>
+    </table>
+				</div>				
+			</div>	
+		</div>				
+	</div>
+	<!-- Begin - Row -->
+	<div class="portlet-body">
+		<div class="row margin-bottom-10">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<lable class="help-block"></lable>
+			</div>
+			<div class="col-md-8">        	
+         <button id="AddButton1" title="<?php Msg('BTN_ADD'); ?>"  onclick="openURLinNewWindow('popup_window.php?page_view=TaxRateByZip_AddNewSet', 'TaxRateByZip_AddNewSet')" type="button" name="?php Msg('BTN_ADD'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_ADD'); ?></span></button>
+            
+            <button id="UpdateButton1" title="<?php Msg('BTN_UPDATE'); ?>"  onclick="updateSet();" type="button" name="?php Msg('BTN_UPDATE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_UPDATE'); ?></span></button>           
+            <button id="DeleteButton1" title="<?php Msg('BTN_DELETE'); ?>"  onclick="formSubmit('ItemsForm_id');" type="button" name="?php Msg('BTN_DELETE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg('BTN_DELETE'); ?></span></button>	
+			</div>
+	</div>
+	</div>
+		<!-- End - Row -->
+</div>	
+</form>
+<!-- Check Rates -->
+{CheckRatesBlock}
+<!-- END TPL (DO NOT REMOVE!) --><hr>

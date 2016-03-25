@@ -1,0 +1,16 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="order_items_margin goods-data">
+    <table class="order_items without_images">
+        <tr>
+            <th class="product_data"><?php Label("ACCOUNT_ITEM"); ?></th>
+            <th class="product_quantity_selector"><?php Label("ACCOUNT_QUANTITY"); ?></th>
+            <th class="product_sale_price"><?php Label("ACCOUNT_ITEM_PRICE"); ?></th>
+            <th class="product_total_price"><?php Label("ACCOUNT_ITEM_TOTAL"); ?></th>
+        </tr>
+        <?php Local_OrderedProducts(); ?>
+        
+    </table>
+</div>
+<div class="shoppingcart_total shopping-total"><ul><?php Local_OrderPrices(); ?><ul></div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

@@ -1,0 +1,11 @@
+- ShoppingCart:
+    title: Shopping cart
+    description: Shopping cart
+    page: cart.php
+- MiniCart:
+    title: Mini cart
+    description: Mini cart
+- MiniCartOrRandomProd:
+    title: Variable block
+    description: Block displays Mini cart. If customer cart is empty, then it displays random product set.
+    template: '<?php if (modApiFunc('Cart', 'getCartProductsQuantity')) MiniCart(true); else ProductSet_Rand(); ?>'

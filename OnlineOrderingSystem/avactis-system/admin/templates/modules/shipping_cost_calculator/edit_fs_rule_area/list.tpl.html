@@ -1,0 +1,253 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<script language="javascript" type="text/javascript">
+    submitHandler = function(formname) 
+    {
+      var form = document.getElementById(formname);
+      if (form.onsubmit) form.onsubmit(); 
+      form.submit();
+      return true;
+    }
+    
+    <?php jsProductArray(); ?>
+    <?php jsCatArray(); ?>
+    
+already = false;
+    
+    function unlockSaveAndShowScaryRedWarning()
+    {
+        if (!already)
+        {
+            
+            enableButton('SaveButton2', function() {onClick_Save();});
+            
+            var tr = document.getElementById('red_warning_id');
+            if (tr)
+            {
+                tr.style.display = '';
+            }
+            
+            already = true;
+        }
+    }
+    
+    function onClick_Save()
+    {
+        if (submitHandler('AddFsRuleForm'))
+        {
+            disableButtons(new Array('SaveButton2', 'UploadButton'));
+            return true;
+        }
+        return false;
+    }
+	  
+	function addProductToRPList(product_id, product_name)
+	{
+	    if(in_array(product_array, product_id, false))
+	    {
+	        return;
+	    };
+	
+	    var tbl = document.getElementById('rp_list_table');
+	    var ind = tbl.rows.length;
+	    
+	    var row = tbl.insertRow(ind);
+	    var cell1 = row.insertCell(0);
+	    var cell2 = row.insertCell(1);
+	    var cell3 = row.insertCell(2);
+	    
+	    cell1.innerHTML = '<input type="checkbox" onClick="setDeleteRPbutton();">';
+	    cell2.innerHTML = '<font color=blue>' + product_name + '</font>';
+	    cell2.className = 'rp_list_item';
+	    cell3.innerHTML = '<input type="hidden" name="prod_to_save[]" value="'+product_id+'">';
+	
+	    product_array[product_array.length] = product_id;
+	    unlockSaveAndShowScaryRedWarning();
+	};
+	
+	function removeProductFromRPList(row_index)
+	{
+	    var tbl = document.getElementById('rp_list_table');
+	    var product_id = tbl.rows[row_index].cells[2].childNodes[0].value;
+	    var index = array_search(product_array, product_id, false);
+	    
+	    if(index !== false)
+	    {
+	        product_array.splice(index, 1);
+	    };
+        
+        tbl.rows[row_index].cells[0].innerHTML = '';
+        tbl.rows[row_index].cells[1].innerHTML = '<font color="#AAAAAA"><s>' + tbl.rows[row_index].cells[1].innerHTML + '</s></font>';
+        tbl.rows[row_index].cells[2].innerHTML = '';
+	    
+	    unlockSaveAndShowScaryRedWarning();
+	};
+	
+    function addCategoryToCatList(cat_id, cat_name)
+    {
+        if(in_array(cat_array, cat_id, false))
+        {
+            return;
+        };
+    
+        var tbl = document.getElementById('cat_list_table');
+        var ind = tbl.rows.length;
+        
+        var row = tbl.insertRow(ind);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        
+        cell1.innerHTML = '<input type="checkbox" onClick="setDeleteRPbutton();">';
+        cell2.innerHTML = '<font color=blue>' + cat_name + '</font>';
+        cell2.className = 'cat_list_item';
+        cell3.innerHTML = '<input type="hidden" name="cat_to_save[]" value="'+cat_id+'">';
+    
+        cat_array[cat_array.length] = cat_id;
+        unlockSaveAndShowScaryRedWarning();
+    };
+        
+    function removeCategoryFromCatList(row_index)
+    {
+        var tbl = document.getElementById('cat_list_table');
+        var cat_id = tbl.rows[row_index].cells[2].childNodes[0].value;
+        var index = array_search(cat_array, cat_id, false);
+        
+        if(index !== false)
+        {
+            cat_array.splice(index, 1);
+        };
+        
+        tbl.rows[row_index].cells[0].innerHTML = '';
+        tbl.rows[row_index].cells[1].innerHTML = '<font color="#AAAAAA"><s>' + tbl.rows[row_index].cells[1].innerHTML + '</s></font>';
+        tbl.rows[row_index].cells[2].innerHTML = '';
+        
+        unlockSaveAndShowScaryRedWarning();
+    };
+    
+	function setDeleteRPbutton()
+	{
+	    var prod_tbl = document.getElementById('rp_list_table');
+	    var cat_tbl  = document.getElementById('cat_list_table');
+	    var one_checked = false;
+	    
+	    for (i=0; i < prod_tbl.rows.length; i++)
+	    {
+	        if (prod_tbl.rows[i].cells[0].childNodes[0]
+	           && prod_tbl.rows[i].cells[0].childNodes[0].checked)
+	        {
+	            one_checked = true;
+	            break;
+	        }
+	    }
+	    
+	    for (i=0; i < cat_tbl.rows.length; i++)
+	    {
+            if (cat_tbl.rows[i].cells[0].childNodes[0]
+                && cat_tbl.rows[i].cells[0].childNodes[0].checked)
+            {
+                one_checked = true;
+                break;
+            };       
+	    }
+	    
+	    if(one_checked)
+	    {
+	        enableButton('DeleteButton1', function() { bulkDeleteRP(); });
+	    }
+	    else
+	    {
+	        disableButton('DeleteButton1');
+	    }
+	};
+	
+	function bulkDeleteRP()
+	{
+	    bootbox.confirm('<?php addslashes(xmsg('SCC','FS_RULE_JS_DELETE_WARNING')); ?>',function(result){
+	    if(result){
+	    var prod_tbl = document.getElementById('rp_list_table');
+            var cat_tbl  = document.getElementById('cat_list_table');
+    
+        for (i = prod_tbl.rows.length-1; i >= 0; i--)
+        {
+            if (prod_tbl.rows[i].cells[0].childNodes[0]
+                && prod_tbl.rows[i].cells[0].childNodes[0].checked)
+            {
+                var product_id = prod_tbl.rows[i].cells[2].childNodes[0].value;
+                removeProductFromRPList(i);
+                <?php jsControlPListFunc(); ?>
+            }
+        }
+    
+        for (i = cat_tbl.rows.length-1; i >= 0; i--)
+        {
+            if (cat_tbl.rows[i].cells[0].childNodes[0]
+                && cat_tbl.rows[i].cells[0].childNodes[0].checked)
+            {
+                removeCategoryFromCatList(i);
+            }
+        }
+	} });
+	    setDeleteRPbutton();
+	}
+		
+  </script>
+<div class="portlet light">
+            
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-gears font-blue-sharp"></i>
+                <span class="caption-subject font-blue-sharp bold uppercase"><?php xmsg('SCC', 'SCC_FSTABLE_RULES_TITLE'); ?></span>
+            
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="table-container form">
+                <form action="<?php AddFsRuleForm(); ?>" method="post" enctype="multipart/form-data" id="AddFsRuleForm">
+                    <?php HiddenArrayViewState(); ?>
+                    <?php HiddenArrayViewStateConstants(); ?>
+                    <input type="hidden" <?php HiddenFormSubmitValue(); ?>>
+                    <?php Subtitle(); ?>
+                    <?php Errors(); ?>
+                    <div class="row">
+                        <div class="col-md-12" align="center" id="ProductsBrowserBlock">
+                            <?php Local_ProductsBrowser(); ?>
+                        </div>
+                    </div>
+                    <form action="<?php RPFormAction(); ?>" name="RPForm" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-info">
+                                    <?php xmsg("SCC", "FS_RULE_AFFECTED_CATS_PRODS_HELP_STRING"); ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?php xmsg("SCC", "FS_RULE_CATEGORIES_AFFECTED"); ?>
+                                    <table id="cat_list_table" class="form table table-striped table-hover">
+                                        <?php CategoriesList(); ?>
+                                    </table>
+                                    <button id="DeleteButton1"  class="btn btn-circle btn-default button_disabled" name="btn_save" type="button" onclick="" title="<?php xmsg('SYS','BTN_SAVE'); ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php msg('BTN_DELETE'); ?></span></button>
+                                </div>
+                                <div class="col-md-6">
+                                    <?php xmsg("SCC", "FS_RULE_PRODUCTS_AFFECTED"); ?>
+                                    <table id="rp_list_table" class="form table table-striped table-hover">
+                                        <?php ProductList(); ?>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </form>
+              </div>
+
+              <div class="actions" align="center">
+                <div class="actions btn-set">
+                  <button id="SaveButton2" title="<?php Msg('BTN_SAVE'); ?>" onclick="" type="button" name="<?php Msg('BTN_SAVE'); ?>" class="btn blue"><i class="fa fa-save"></i> <span class="hidden-480"><?php Msg("BTN_SAVE"); ?></span>
+                  </button>
+                  <div id="red_warning_id" style="display: none;">
+                    <?php xmsg('SCC', 'FS_RULE_RED_WARNING_URGING_TO_SAVE'); ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

@@ -1,0 +1,50 @@
+.box.shipping_calculator .content {
+    overflow: hidden;
+}
+
+.box.shipping_calculator .form_descr {
+    width: 70%;
+}
+
+.box.shipping_calculator .form_field {
+}
+
+.box.shipping_calculator .ship_to_address .form_descr,
+.box.shipping_calculator .dest_address_form .form_descr {
+    width: 30%;
+}
+
+.box.shipping_calculator .ship_to_address .form_field,
+.box.shipping_calculator .dest_address_form .form_field {
+}
+
+.box.shipping_calculator .ship_to_address,
+.box.shipping_calculator .chosen_method,
+.box.shipping_calculator .shipping_method_form,
+.box.shipping_calculator .dest_address_form {
+    padding: 20px;
+    width: 45%;
+}
+
+.box.shipping_calculator .dest_address_form,
+.box.shipping_calculator .ship_to_address {
+    float: left;
+    clear: left;
+}
+
+.box.shipping_calculator .shipping_method_form,
+.box.shipping_calculator .chosen_method {
+    float: right;
+    clear: right;
+}
+
+.box.shipping_calculator h3 {
+    background-color:white;
+    border-bottom:1px solid #AD6D34;
+    color:#AD6D34;
+    font-family:Tahoma;
+    font-size:10pt;
+    font-weight:bold;
+    margin: 0px 0px 5px 0px;
+    padding: 0px;
+}

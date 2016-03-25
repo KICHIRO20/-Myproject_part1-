@@ -1,0 +1,13 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr height="25">
+	<td class="text-center">
+		<?php AttrName(); ?><?php AttrHidden(); ?>
+	</td>
+	<td class="text-center">
+		<input type=checkbox id="vis_<?php AttrId(); ?>" class="form-control" name="<?php VisibilityName(); ?>" <?php VisibilityCheckbox(); ?> onChange="checkVis(<?php AttrId(); ?>)"><?php VisibilityHidden(); ?>
+	</td>
+	<td class="text-center">
+		<input type=checkbox id="req_<?php AttrId(); ?>" class="form-control" name="<?php RequiredName(); ?>" <?php RequiredCheckbox(); ?> onChange="checkReq(<?php AttrId(); ?>)"><?php RequiredHidden(); ?>
+	</td>
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

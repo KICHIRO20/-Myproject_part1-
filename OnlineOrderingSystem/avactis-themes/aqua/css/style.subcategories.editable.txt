@@ -1,0 +1,28 @@
+[Subcategory List]
+.page_container .subcategory_list {
+    padding;
+}
+
+[Subcategory List - Item]
+.page_container .subcategory_list .subcategory_item {
+    padding;
+    width;
+    text-align;
+    height;
+}
+
+[Subcategory List in Right Column - Item]
+.right_column .subcategory_list .subcategory_item {
+    width;
+}
+ 
+[Subcategory Item - Image]
+.page_container .subcategory_item .subcategory_img {
+    margin;
+}
+
+[Subcategory Item - Name]
+.page_container .subcategory_item .subcategory_name {
+    padding;
+    margin;
+}

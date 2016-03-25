@@ -1,0 +1,9 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) --> 
+<TR>
+    <td><img src="images/icons/people-<?php CustomerRegStatus(); ?>.gif"></td>
+    <TD><A href="javascript: void(0);" onclick="javascript:openURLinNewWindow('customers_info.php?asc_action=SetCurrentCustomer&customer_id=<?php CustomerId(); ?>', 'ViewCustomer');"><?php CustomerName(); ?></A></TD>
+    <TD><A href="mailto:<?php CustomerEmail(); ?>"><?php CustomerEmail(); ?></A></TD>
+    <TD><?php CustomerTotalOrders(); ?></TD>
+    <TD><?php CustomerTotalAmount(); ?></TD>
+</TR>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

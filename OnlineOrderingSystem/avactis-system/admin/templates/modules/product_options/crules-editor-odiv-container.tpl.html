@@ -1,0 +1,56 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<div id="<?php ODivID(); ?>" style="position: absolute; left: 0; top: 0; border: none; display: none;">
+	<!-- BEGIN Portlet PORTLET-->
+	<div class="portlet box blue-hoki">
+		<div class="portlet-title">
+			<div class="caption">
+				<span class="bold uppercase">
+					<i class="fa fa-puzzle-piece"></i>&nbsp;<?php xmsg('PO','COMBINATION'); ?>
+				</span>
+			</div>
+			<div class="actions">
+				<div class="btn btn-circle btn-default" onClick="clear<?php ODivID(); ?>();">
+					<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_CLEAR'); ?>
+				</div>
+				<div class="btn btn-circle btn-default" onClick="hideOpForm('<?php ODivID(); ?>'); make<?php ODivID(); ?>Text();">
+					<i class="fa fa-check-circle">&nbsp;</i><?php msg('BTN_OK'); ?>
+				</div>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="table-responsvie">
+				<table class="table borderless">
+					<?php ODivOptionsForm(); ?>
+					<tfoot>
+						<tr>
+							<td class="text-center">
+								<div class="btn btn-circle btn-default" onClick="hideOpForm('<?php ODivID(); ?>'); make<?php ODivID(); ?>Text();">
+									<i class="fa fa-check-circle">&nbsp;</i><?php msg('BTN_OK'); ?>
+								</div>
+								<div class="btn btn-circle btn-default" onClick="clear<?php ODivID(); ?>();">
+									<i class="fa fa-refresh"></i>&nbsp;<?php msg('BTN_CLEAR'); ?>
+								</div>
+							</tr>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- END Portlet PORTLET-->
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

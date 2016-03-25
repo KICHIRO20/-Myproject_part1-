@@ -1,0 +1,28 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="alert alert-success alert-bordered">
+	<?php EmailSearchForm(); ?><br />
+	<span>{PaginatorTitle} <?php LinkResetSearchEmail(); ?></span>
+</div>
+
+<form width="94%" name="manage_subscriptions" method="POST" style="margin:0; padding:0;" enctype="multipart/form-data" 
+  action="{FormAction}">
+<input type="hidden" name="asc_action" value="" />
+      <input type="hidden" name="topic_id[{TopicId}]" value="{TopicId}" />
+      <input type="hidden" name="topic" value="{TopicId}" />
+	<div class="table-container">
+	<table class="table table-striped table-bordered table-hover" id="datatable_subscription_emails">
+		<thead>
+			<tr role="row" class="heading">
+				<th style="text-align: center;" align="center" width="2%"><input class="group-checkable" id="SelectAll" type="checkbox" onclick="selectItems('manage_subscriptions');" /></th>
+				<th style="padding-left:2%;" width="20%"><?php xmsg('SUBSCR', 'HEADER_EMAIL'); ?></th>
+				<th style="padding-left:2%;" width="20%"><?php xmsg('SUBSCR', 'HEADER_USERNAME'); ?></th>
+        
+        </tr>
+		</thead>
+		<tbody>
+        <?php EmailsRows(); ?>
+		</tbody>
+      </table>
+	</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

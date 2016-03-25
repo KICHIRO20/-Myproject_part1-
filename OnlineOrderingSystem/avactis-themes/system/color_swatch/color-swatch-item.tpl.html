@@ -1,0 +1,21 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php if(getLocal_ColorSwatchLabelText() != "")
+      {
+     
+?>
+
+<div id="colorsw_wrap">
+
+<div id="colorsw_<?php Local_ProductID(); ?>" style="height:75px;">
+<div style="float: left; padding-right: 14px;">
+<div class="lbl_text" style="font-size: 12px;"><?php Local_ColorSwatchLabelText(); ?>&nbsp;</div>
+
+<div class="lbl_text" style="font-size: 10px;">You can select only <?php Local_ColorSwatchNumbers(); ?> color(s).</div>
+
+</div>
+<div class="colsw_img_div"><?php Local_ColorSwatchImages(); ?></div>
+</div>
+
+</div>
+<?php } ?>
+<!-- END TPL (DO NOT REMOVE!) -->

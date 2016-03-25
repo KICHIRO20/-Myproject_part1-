@@ -1,0 +1,7 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr class="odd" role="row">
+<td><div id="div_<?php CountryId(); ?>" style="font-weight: <?php CountryCodeStyle(); ?>;"><?php CountryCode(); ?></div></td>    <td><INPUT class="form-control form-filter input-medium" TYPE="text" name="ci_<?php CountryId(); ?>" id="ci_<?php CountryId(); ?>" value="<?php CountryName(); ?>" size=50 <?php CountryEnabled(); ?> style="background-color: <?php CountryStyle(); ?>;"></td>
+<td><INPUT TYPE="checkbox" value="<?php CountryId(); ?>" style="border: 0;" <?php CountryActive(); ?> onclick="changeCountryStateActivation(this);" name="cb_<?php CountryId(); ?>" id="cb_<?php CountryId(); ?>"></td>	
+<td><INPUT TYPE="radio" value="<?php CountryId(); ?>" style="border: 0;" <?php CountryDefault(); ?> <?php CountryEnabled(); ?> name="default_country" id="default_<?php CountryId(); ?>"></td>		
+</tr>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

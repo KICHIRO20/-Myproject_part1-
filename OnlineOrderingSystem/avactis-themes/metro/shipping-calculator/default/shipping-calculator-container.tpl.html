@@ -1,0 +1,22 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php JavascriptSynchronizeCountriesAndStatesLists(); ?>
+<div class="shipping_calculator <?php ViewClassName(); ?> content-page">
+    <div class="row" style="overflow:hidden;margin:0px;">
+        <h2><?php Label("SCC_ESTIMATE_SHIPPING_COSTS"); ?></h2>
+        <div class="shipping_calculator">
+            <form method="post" action="<?php Local_FormAction(); ?>" id="ShippingCalculatorForm_id" name="ShippingCalculatorForm">
+            <input type="hidden" name="subaction" id="subaction_id" value="calculate" />
+            <div id="SC_DestAddress_Form" class="dest_address_form col-lg-6">
+                <h3><?php Label("SCC_SELECT_DESTINATION_ADDRESS"); ?></h3>
+                <div class="form_group">
+                    <?php Local_DestinationFields(); ?>
+                    <input type="submit" class="<?php lang(); ?> btn button_calculate" value="<?php Label("SCC_CALCULATE_BUTTON"); ?>" />
+                </div>
+            </div>
+            </form>
+        </div>
+     </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+
+

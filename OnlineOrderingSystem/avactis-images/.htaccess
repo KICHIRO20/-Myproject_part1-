@@ -1,0 +1,11 @@
+Order Deny,Allow
+Allow from all
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/gif A86400
+ExpiresByType image/png A86400
+ExpiresByType image/jpeg A86400
+ExpiresByType application/x-shockwave-flash A86400
+ExpiresByType video/x-flv A86400
+</IfModule> 

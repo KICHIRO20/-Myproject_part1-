@@ -1,0 +1,66 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+table.form tr.value td {
+    text-align: left; 
+    color: black;
+    font-weight: normal;
+}
+</style>
+<script language="JavaScript">
+<!--
+    function submitForm(formID)
+    {
+        var form = document.forms[formID];
+        form.elements['asc_action'].value = 'delete_topics';
+        form.elements['ViewState[hasCloseScript]'].value = 'true';
+        form.submit();
+    }
+//-->
+</script>
+<form action="{FormAction}" method="post" id="TopicEditForm">
+<input type="hidden" name="asc_action" value="" />
+<input type="hidden" name="ViewState[hasCloseScript]" value="false" />
+<input type="hidden" name="topics" value="{TopicsIds}" />
+
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-users font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold"><?php xmsg('SUBSCR', 'TITLE_DELETE_TOPICS'); ?></span>
+		</div>
+	</div>
+
+	<div class="table-responsive">
+	<table class="table">
+		<thead>
+		<tr role="row" class="heading">
+			<th width="10%" align="center" style="text-align: center;">
+				<?php xmsg('SUBSCR', 'HEADER_TOPIC_NAME'); ?>
+			</th>
+			<th width="10%" align="center" style="text-align: center;">
+				<?php xmsg('SUBSCR', 'HEADER_TOPIC_EMAILS'); ?>
+			</th>
+			<th width="10%" align="center" style="text-align: center;">
+				<?php xmsg('SUBSCR', 'HEADER_TOPIC_ACCESS'); ?>
+			</th>
+			<th width="10%" align="center" style="text-align: center;">
+				<?php xmsg('SUBSCR', 'HEADER_TOPIC_STATUS'); ?>
+			</th>
+        </tr>
+		</thead>
+		<tbody>
+        	<?php TopicsList(); ?>
+		</tbody>
+	</table>
+	</div>
+
+	<div align="center" class="actions">
+		<div class="actions btn-set">
+			<button id="SaveButton1" class="btn blue" type="button" onclick="submitForm('TopicEditForm', 'save');" title="<?php xMsg('SUBSCR', 'BTN_CONFIRM_DELETE'); ?>"><i class="fa fa-check"></i> <span class="hidden-480"><?php xMsg('SUBSCR', 'BTN_CONFIRM_DELETE'); ?></span></button>
+			<button id="CancelButton1" class="btn btn-default" type="button" onclick="closeAndFocusParent();" title="<?php Msg('BTN_CANCEL'); ?>"><i class="fa fa-times"></i> <span class="hidden-480"><?php Msg('BTN_CANCEL'); ?></span></button>
+		</div>
+	</div>
+</div>
+
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

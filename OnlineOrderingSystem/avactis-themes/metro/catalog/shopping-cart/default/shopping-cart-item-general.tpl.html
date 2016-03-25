@@ -1,0 +1,51 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<tr>
+    <td class="goods-page-image">
+        <?php
+                if (getProductLargeImageWidth() == '1') {
+                    if (getProductSmallImageWidth() == '1') {
+                        ?><div class="noimage"></div><?php
+                    }
+                    else {
+                        ?><img src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<170) { ProductSmallImageWidth(); } else { echo '170'; } ?>" /><?php
+                    }
+                }
+                else {
+                    if (getProductSmallImageWidth() == '1') {
+                        ?><a class="color_box" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>" alt="<?php ProductName(); ?>" /></a><?php
+                    }
+                    else {
+                        ?><a class="color_box" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<170) {ProductSmallImageWidth();} else {echo '170';}; ?>" alt="<?php ProductName(); ?>" /></a><?php
+                    }
+                } 
+        ?>
+    </td>
+    <td class="goods-page-description">
+        <h3><a href="<?php ProductInfoLink(); ?>"><?php ProductName(); ?></a></h3>
+        <p>
+            <?php Local_ProductOptionsSelected(); ?>
+            <?php Local_ColorSwatchName(); ?>
+        </p>
+    </td>
+    <td class="product_quantity_selector goods-page-quantity">
+     <div class="product-quantity">
+        <?php Local_HiddenFieldCartID(); ?>
+        <select name="<?php Local_FormQuantityFieldName(); ?>" onchange="<?php Local_FormId(); ?>.submit();">
+            <?php Local_ProductQuantityOptions(); ?>
+        </select>
+         </div>
+    </td>
+    <td class="goods-page-price">
+        <strong><?php Local_CartItemSalePrice(); ?></strong>
+    </td>
+
+    <td class="goods-page-total">
+        <strong><?php Local_ProductSubtotal(); ?></strong>
+    </td>
+
+    <td class="del-goods-col">
+        <a class="del-goods" href="<?php Local_RemoveProductLink(); ?>">&nbsp;</a>
+    </td>
+
+</tr>
+<!-- END TPL (DO NOT REMOVE!) -->

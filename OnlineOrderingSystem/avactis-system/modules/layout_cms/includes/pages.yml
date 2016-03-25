@@ -1,0 +1,30 @@
+pages:
+ default: Default page layout.
+ activation.php: This page allows customer to activate registered account.
+ cart.php: This page shows customer products that were added to shopping cart. Required page blocks - ShoppingCart, ShippingCalculator.
+ change-password.php: This page allows registered customer to change account password. Required page block - CustomerChangePasswordForm.
+ checkout.php: This page allows customer to purchase products that were added to shopping cart. Required page blocks - Checkout, OneStepCheckout.
+ cmspage.php: This page shows customer CMS pages. Required page block of the page CMSPage.
+ download.php: This page allows customer to download digital products from your store. Required page block - DownloadProductFilePrompt.
+ forgot-password.php: This page allows customer to restore password. Required page block - CustomerForgotPasswordForm.
+ gift-certificate.php: This page allows customer to add Gift Certificate to cart.
+ home.php: This page allows registered customer to manage account and view orders. Required page block - CustomerHomePage.
+ index.php: Main page of the storefront.
+ new-password.php: This page allows registered customer to enter new account password. Required page block - CustomerNewPasswordForm.
+ order-download-links.php: This page shows registered customer order download links. Required page block - OrderDownloadLinks.
+ order-info.php: This page shows registered customer information about placed order. Required page block - OrderInfo.
+ order-invoice.php: This page shows registered customer order invoice information. Required page block - OrderInvoice.
+ order_placed.php: This page shows registered customer information about placed order.
+ orders.php: This page allows registered customer to manage account and view orders. Required page block - OrderHistory.
+ personal-info.php: This page allows registered customer to manage personal information. Required page block - CustomerPersonalInfo.
+ product-info.php: This page shows customer product details. Required page blocks - ProductReviewList, ProductAddReviewForm.
+ product-list.php: This page shows customer products in the specific category.
+ register.php: This page allows customer to register in Avactis shopping cart. Required page block - CustomerRegistrationForm.
+ search-form.php: This page allows customer to search by product name.
+ search-results.php: This page allows customer to search by product name and see search results. Required page block - SearchResult.
+ sign-in.php: This page allows customer to sign in to the store account. Required page block - CustomerSignInForm.
+ store-closed.php: Customers see this page when Avactis store is closed.
+ subscriptions.php: This page shows customer current Newsletter subscriptions and new available subscriptions. Required page block - SubscribeFormProfile.
+ unsubscribe.php: This page allows customer to unsubscribe from Avactis newsletter. Required page block - UnsubscribeByLink.
+ wishlist.php: This page help your customers to remember the products they want to buy later.
+

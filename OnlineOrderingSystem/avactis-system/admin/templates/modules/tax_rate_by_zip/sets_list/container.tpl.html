@@ -1,0 +1,92 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function formSubmit(formId, formTarget)
+{
+    var form = document.getElementById(formId);
+
+    var is_selected = false;
+
+    var i=0;
+    var elem = document.getElementById('select_'+i);
+    while (elem)
+    {
+        if (elem.checked)
+        {
+            is_selected = true;
+            break;
+        }
+        i++;
+        elem = document.getElementById('select_'+i);
+    }
+    if(!is_selected)
+    {
+        //alert('<?php Msg("ADMIN_DELETE_MEMBER_WARNING_002"); ?>');
+        //return; 
+    }
+
+    form.submit();
+}
+
+function clearRows()
+{
+    var num = {SETS_NUMBER};
+    for (i=0; i < num; i++)
+    {
+        tr = document.getElementById("ItemTr_" + i);
+        if (tr)
+        {
+            tr.className = '';
+        }
+    }
+}
+//-->
+</SCRIPT>
+<FORM {FormInners} id="ItemsForm_id">
+<input type="hidden" value="deleteSet" name="ViewState[FormSubmitValue]"/>
+<table class="list" cellspacing="0" cellpadding="5" width="100%">
+<thead>
+
+<tr style="height: 25px;">
+    <th width="80%" style="text-align:left; padding: 0px 0px 0px 4px;"><?php xmsg('TAX_ZIP', 'SETS_LIST_TABLE_HEADER'); ?></th>
+    <th align=right style="text-align:right;  padding: 0px 5px 0px 0px;">
+         <table class="clear" width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td><div id="AddButton1" class="button button_4em" onclick="openURLinNewWindow('popup_window.php?page_view=TaxRateByZip_AddNewSet', 'TaxRateByZip_AddNewSet')"><?php Msg('BTN_ADD'); ?></div>
+                <td><div id="AddButton2" class="button button_4em" onclick="openURLinNewWindow('popup_window.php?page_view=TaxRatesImportView', 'TaxRatesImportView')"><?php Msg('BTN_ADD'); ?></div>
+                <td><div id="UpdateButton1" class="button button_5em" onclick="formSubmit('ItemsForm_id');"><?php Msg('BTN_UPDATE'); ?></div>
+                <td><div id="DownloadButton1" class="button button_8em" onclick="formSubmit('ItemsForm_id');"><?php Msg('BTN_DOWNLOAD'); ?></div>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><div id="DeleteButton1" class="button button_5em" onclick="formSubmit('ItemsForm_id');"><?php Msg('BTN_DELETE'); ?></div>
+            </tr>
+        </table>
+     </th>
+</tr>
+</thead>
+
+<tr>
+    <td colspan=2 width="100%" style="padding: 0px; margin: 0px; border-bottom: 0px;">
+    <table class="list" cellspacing="0" cellpadding="5" width="100%" border=0>
+        <tr style="height: 25px;">
+            <th STYLE="white-space: nowrap; background: rgb(206,212,221); text-align: left; padding: 0px 3px 0px 3px;">Description</th>
+            <th STYLE="white-space: nowrap; background: rgb(206,212,221); text-align: left; padding: 0px 3px 0px 3px;">Date Uploaded</th>
+            <th STYLE="white-space: nowrap; background: rgb(206,212,221); text-align: left; padding: 0px 3px 0px 3px;">File Size</th>
+            <th STYLE="white-space: nowrap; background: rgb(206,212,221); text-align: center; padding: 0px 3px 0px 3px;">&nbsp;</th>
+        </tr>
+        {Items}
+    </table>
+    </td>
+</tr>
+   
+<tfoot>
+<tr style="height: 25px;">
+    <th style="text-align:left; padding: 0px 0px 0px 4px; background: rgb(43,125,199);"></th>
+    <th style="text-align:right;  padding: 0px 5px 0px 0px; background: rgb(43,125,199);">
+        {Buttons}
+    </th>
+</tr>
+</tfoot>
+
+</table>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

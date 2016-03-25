@@ -1,0 +1,9 @@
+- ProductReviewList:
+    title: Product review list
+    description: Product review list
+    page: product-info.php
+- ProductAddReviewForm:
+    title: Product add review form
+    description: Product add review form
+    page: product-info.php
+

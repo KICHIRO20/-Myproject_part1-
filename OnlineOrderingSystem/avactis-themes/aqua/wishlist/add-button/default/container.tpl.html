@@ -1,0 +1,7 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<?php 
+  	global $application;
+    $mr = &$application->getInstance('MessageResources');
+?>
+<div class="product_buttons"><input class="<?php lang(); ?> add_to_wishlist" value="<?php echo $mr->getMessage('ADD_TO_WISHLIST'); ?> " type="button" onclick="this.form.action='wishlist.php'; this.form.asc_action.value='AddToWishlist'; this.form.submit();" /></div>
+<!-- END TPL (DO NOT REMOVE!) -->

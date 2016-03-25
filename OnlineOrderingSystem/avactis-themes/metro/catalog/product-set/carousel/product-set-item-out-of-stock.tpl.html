@@ -1,0 +1,50 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div>
+<div class="product-item">
+    <div class="pi-img-wrapper"><a href="<?php ProductInfoLink(); ?>">
+    <?php
+    if (getProductLargeImageWidth() == '') {
+        if (getProductSmallImageWidth() == '') {
+            ?><div class="noimage"></div><?php
+        }
+        else {
+            ?>
+<img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>" /><?php
+        }
+    }
+    else {
+        if (getProductSmallImageWidth() == '') {
+            ?><img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>" /><?php
+        }
+        else {
+            ?>
+<img class="img-responsive" alt="<?php ProductName(); ?>" src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<275) { echo '275'; } else { ProductSmallImageWidth(); } ?>"/><?php
+        }
+    } 
+    ?>
+    </a>
+  <div>
+   <a href="<?php ProductLargeImageSrc(); ?>" class="btn btn-default fancybox-button">Zoom</a>
+   </div>
+   </div>
+ <a href="<?php ProductInfoLink(); ?>">  <div class="product_name"><h3><?php $name = getProductName(); $str_len = strlen($name); if($str_len > 25){ echo (substr(getProductName(), 0, 24)); echo " ..."; } else {ProductName();}?></h3></div></a>
+    <div class="product_sale_price pi-price"><span class="value"><?php ProductSalePrice(); ?></span></div>
+<a class="btn btn-primary out_of_stock" disabled="disabled"><span class="en button_out_of_stock"></span>      
+ <?php Msg('OUT_OF_STOCK'); ?>   
+    </a>
+    <?php
+            if (getProductListPrice() != '')
+            {
+                $lp = getValProductListPrice();
+                $sp = getValProductSalePrice();
+                if ($lp!=0 && $lp>$sp)
+                {
+                    $d = round(($lp-$sp)*100/$lp);
+    ?>
+                    <div class="sticker sticker-sale"></div>
+    <?php       }
+            }
+    ?>
+</div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->

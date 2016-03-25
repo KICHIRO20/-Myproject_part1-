@@ -1,0 +1,35 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="minicart_item">
+    <div class="product_img">
+        <?php
+                if (getProductLargeImageWidth() == '1') {
+                    if (getProductSmallImageWidth() == '1') {
+                        ?><div class="noimageicon"></div><?php
+                    }
+                    else {
+                        ?><img src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<30) { ProductSmallImageWidth(); } else { echo '30'; } ?>" /><?php
+                    }
+                }
+                else {
+                    if (getProductSmallImageWidth() == '1') {
+                        ?><a class="color_box" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img src="<?php ProductLargeImageSrc(); ?>" width="<?php Local_ThumbnailSide(); ?>" alt="<?php ProductName(); ?>" /></a><?php
+                    }
+                    else {
+                        ?><a class="color_box" href="<?php ProductLargeImageSrc(); ?>" title="<?php ProductName(); ?>"><img src="<?php ProductSmallImageSrc(); ?>" width="<?php if (getValProductSmallImageWidth()<30) {ProductSmallImageWidth();} else {echo '30';}; ?>" alt="<?php ProductName(); ?>" /></a><?php
+                    }
+                } 
+        ?>
+    </div>
+
+    <div class="product_name">
+	    <form method="post">
+		    <div class="del_mini_prod"><?php Label("CATALOG_X"); ?></div>
+		    <input type="hidden" name="asc_action" value="RemoveProductFromCart">
+		    <input type="hidden" name="cart_id" value="<?php CartID(); ?>">
+	    </form>
+        <a href="<?php ProductInfoLink(); ?>"><?php ProductName(); ?></a><br/>
+        <?php Local_CartItemSalePrice(); ?> <?php Label("CATALOG_X"); ?> <?php Local_ProductQuantity(); ?>
+    </div>
+</div>
+<!-- END TPL (DO NOT REMOVE!) -->
+

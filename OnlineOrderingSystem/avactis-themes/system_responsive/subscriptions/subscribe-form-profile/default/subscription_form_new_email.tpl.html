@@ -1,0 +1,13 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<div class="clear_both"></div>
+<h2><?php Label("SUBSCRIPTION_NEW_SUBSCRIPTION"); ?></h2>
+<p><?php Label("SUBSCRIPTION_YOU_CAN_SUBSCRIBE"); ?></p>
+<div class="new_email">
+    <form action="<?php Local_FormActionURL(); ?>" name="SubscribeForm" method="post">
+        <input type="hidden" name="asc_action" value="customer_subscribe" />
+        <label><?php Label("SUBSCRIPTION_SUBSCRIBE_A_NEW_EMAIL_COLON"); ?><b><input type="text" name="email" value="" size="20" /></b></label>
+        <?php Local_TopicsList(); ?>
+        <?php Local_SubmitButton(); ?>
+    </form>
+</div>
+<!-- END TPL (DO NOT REMOVE!) --><hr>

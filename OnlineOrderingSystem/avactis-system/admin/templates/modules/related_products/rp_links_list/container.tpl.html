@@ -1,0 +1,326 @@
+<!-- BEGIN TPL (DO NOT REMOVE!) -->
+<style>
+.borderless>thead>tr>th, 
+.borderless>tbody>tr>th, 
+.borderless>tfoot>tr>th, 
+.borderless>thead>tr>td, 
+.borderless>tbody>tr>td, 
+.borderless>tfoot>tr>td,
+.borderless tbody tr td,
+.borderless thead tr th,
+.borderless td,
+.borderless tr {
+    border: none;
+}
+</style>
+<script language="JavaScript">
+document.title = '<?php xmsg('RP','MNG_RELATED_PRODUCTS'); ?>';
+</script>
+<style type="text/css">
+.rp_list_item {
+    cursor: default;
+}
+</style>
+<!-- BEGIN Portlet PORTLET-->
+<?php ResultMessage(); ?>
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject font-green-sharp bold uppercase">
+				<i class="fa fa-plus-circle"></i>&nbsp;<?php xmsg('RP','MNG_RELATED_PRODUCTS'); ?>
+			</span>
+		</div>
+		<div class="actions">
+			
+			<div id="SaveButton1" class="btn btn-default btn-circle" onClick="document.forms['RPForm'].submit();">
+				<i class="fa fa-save"></i><span class="hidden-480">&nbsp;<?php msg('BTN_SAVE'); ?></span>
+			</div>
+			
+			<?php
+            			if ($link = getProductInfoLink()) {
+                	?>
+					<div class="btn btn-default btn-circle" onclick="openURLinNewLargeWindow('<?php echo $link?>', 'ProductPreview')">
+						<i class="fa fa-eye"></i><span class="hidden-480">&nbsp;<?php xmsg('CTL', 'PREVIEW_PRODUCT_BUTTON') ?><span>
+					</div>
+			<?php } ?>
+		</div>			
+	</div>		
+	<div class="portlet-body">
+		<!-- begin Bookmarks -->
+		<div class="caption font-green-sharp">
+			<strong><i class="fa fa-info-circle"></i>&nbsp;<?php msg('MNG_CTGR_CURR_PRD'); ?>&nbsp;</strong><?php ProductName(); ?>
+		</div>
+		<?php Local_ProductBookmarks(); ?>
+		<!-- end Bookmarks -->
+		
+		<div id="appinfo" class="panel-group accordion scrollable">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title bg-blue-hoki">
+						<a href="#close_open" data-parent="#summery" data-toggle="collapse" class="accordion-toggle collapsed">
+							<?php xmsg('RP','ADD_PRODUCTS_HEADER'); ?>
+						</a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse in" id="close_open" style="">
+					<div class="panel-body">
+						<?php Local_ProductsBrowser(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table borderless table-bordered table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="bg-blue-hoki">
+							<?php xmsg('RP','RELATED_LIST_HEADER'); ?>
+							<div id="SortButton1" class="btn btn-circle btn-default disabled pull-right" onClick="">
+								<i class="fa fa-sort"></i>&nbsp;<?php msg('BTN_SORT'); ?>
+							</div>
+
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<form action="<?php RPFormAction(); ?>" name="RPForm" method="post">
+								<table id="rp_list_table" class="table borderless table-hover">
+									<?php RelatedList(); ?>
+								</table>
+							</form>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="DeleteButton1" class="btn btn-circle btn-default disabled" onClick="">
+								<i class="fa fa-times"></i>&nbsp;<?php msg('BTN_DELETE'); ?>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><span style="color: red;">*</span>&nbsp;<?php xmsg('RP','MSG_PRESS_SAVE_BUTTON'); ?></td>
+					</tr>
+					<tr>
+						<td class="text-center">
+							<div id="SaveButton2" class="btn btn-default btn-circle" onClick="document.forms['RPForm'].submit();">
+								<i class="fa fa-save"></i>&nbsp;<?php msg('BTN_SAVE'); ?>
+							</div>
+						</td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+</div>
+<!-- END Portlet PORTLET-->
+
+
+<?php RPSortForm(); ?>
+
+<script language="JavaScript">
+
+function changeBlockVisible(block_id,img_id)
+{
+  var el = document.getElementById(block_id);
+  var img = document.getElementById(img_id);
+  
+  if(el.style.display == 'none')
+  {
+    showBlock(block_id,1);
+    img.src = "images/minus.gif";
+  }
+  else
+  {
+    hideBlock(block_id);
+    img.src = "images/plus.gif";
+  };
+}
+
+<?php jsRelatedArray(); ?>
+
+function addProductToRPList(product_id, product_name)
+{
+    if(in_array(related_array, product_id, false))
+    {
+        alert('<?php addslashes(xmsg('RP','WRN_PRODUCT_ALREADY_ADDED')); ?>');
+        return;
+    };
+
+    var tbl = document.getElementById('rp_list_table');
+    var ind = tbl.rows.length;
+    
+    var row = tbl.insertRow(ind);
+    var cell1 = row.insertCell(0)
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    
+    cell1.innerHTML = '<input type="checkbox" onClick="setDeleteRPbutton();">';
+    cell2.innerHTML = product_name;
+    cell2.className = 'rp_list_item';
+    cell3.innerHTML = '<input type="hidden" name="to_save[]" value="'+product_id+'">';
+
+    related_array[related_array.length] = product_id;
+    setSortButton();
+};
+
+function removeProductFromRPList(row_index)
+{
+    var tbl = document.getElementById('rp_list_table');
+    var product_id = tbl.rows[row_index].cells[2].childNodes[0].value;
+    var index = array_search(related_array, product_id, false);
+    
+    if(index !== false)
+    {
+        related_array.splice(index,1);
+    };
+    
+    tbl.deleteRow(row_index);
+    setSortButton();
+};
+
+function setSortButton()
+{
+    if(related_array.length > 0)
+    {
+        enableButton('SortButton1',function() { fillSortForm(); disableBlock('RPInterfaceBlock',3); showBlock('SortRPForm',4); repositionBlock('SortRPForm'); });
+    }
+    else
+    {
+        disableButton('SortButton1');
+    };
+};
+
+function fillSortForm()
+{
+    var sf_so = document.getElementById('RPSortOrder');
+    sf_so.selectedIndex = -1;
+    
+    while(sf_so.options.length > 0)
+    {
+        sf_so.remove(0);
+    };
+    
+    var tbl = document.getElementById('rp_list_table');
+    
+    for(i=0;i<tbl.rows.length;i++)
+    {
+        var opt = new Option();
+        opt.text = tbl.rows[i].cells[1].innerHTML.unescapeHTML();
+        opt.value = tbl.rows[i].cells[2].childNodes[0].value;
+        
+        try
+        {
+            sf_so.add(opt,null);
+        }
+        catch(ex) // for IE!
+        {
+            sf_so.add(opt);
+        };
+    };
+    
+};
+
+function repositionBlock(div_id)
+{
+    doc_width = document.documentElement.clientWidth;
+    doc_height = document.documentElement.clientHeight;
+    div_width = document.getElementById(div_id).offsetWidth;
+    div_height = document.getElementById(div_id).offsetHeight;
+    
+    div_left = (doc_width - div_width) / 2;
+    div_top = document.documentElement.scrollTop / 2 + (doc_height - div_height) / 2;
+
+    if(div_top < 0)
+        div_top = 0;
+    if(div_left < 0)
+        div_left = 0;
+
+    document.getElementById(div_id).style.left = div_left + 'px';
+    document.getElementById(div_id).style.top = div_top + 'px';
+};
+
+var rp_back = window.onload;
+window.onload = function() {
+    if(rp_back)
+        rp_back();
+    setSortButton();
+};
+
+function resortRPList()
+{
+    var new_sort_order = new Array();
+    var sf_so = document.getElementById('RPSortOrder');
+    var tbl = document.getElementById('rp_list_table');
+    
+    while(tbl.rows.length > 0)
+    {
+        removeProductFromRPList(0);
+    };
+    
+    for(i=0;i<sf_so.options.length;i++)
+    {
+        addProductToRPList(sf_so.options[i].value, sf_so.options[i].text);
+    };
+};
+
+function OnUpdateRPSortOrderClick()
+{
+    resortRPList();
+    hideBlock('SortRPForm');
+    enableBlock('RPInterfaceBlock');
+};
+
+function setDeleteRPbutton()
+{
+    var tbl = document.getElementById('rp_list_table');
+    var one_checked = false;
+    
+    for(i=0;i<tbl.rows.length;i++)
+    {
+        if(tbl.rows[i].cells[0].childNodes[0].checked)
+        {
+            one_checked = true;
+            break;
+        };
+    };
+    
+    if(one_checked)
+    {
+        enableButton('DeleteButton1',function() { bulkDeleteRP(); });
+    }
+    else
+    {
+        disableButton('DeleteButton1');
+    };
+};
+
+function bulkDeleteRP()
+{
+    if(!confirm('<?php addslashes(xmsg('RP','WRN_DELETE_RP')); ?>'))
+    {
+        return;
+    };
+    
+    var tbl = document.getElementById('rp_list_table');
+
+    for(i=tbl.rows.length-1; i>=0; i--)
+    {
+        if(tbl.rows[i].cells[0].childNodes[0].checked)
+        {
+            var product_id = tbl.rows[i].cells[2].childNodes[0].value;
+            removeProductFromRPList(i);
+            <?php jsControlPListFunc(); ?>
+        };
+    };
+
+    setDeleteRPbutton();
+};
+
+</script>
+
+
+
+<!-- END TPL (DO NOT REMOVE!) -->

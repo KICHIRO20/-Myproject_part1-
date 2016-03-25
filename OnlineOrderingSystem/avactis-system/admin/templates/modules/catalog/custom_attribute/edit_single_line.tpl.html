@@ -1,0 +1,86 @@
+<hr><!-- BEGIN TPL (DO NOT REMOVE!) -->
+<form action="catalog_edit_custom_attribute.php" method="post" name="CatalogEditCustomAttribute" style="margin-bottom: 0px;">
+	<input type="hidden" name="asc_action" value="UpdateCustomAttribute">
+	<input type="hidden" name="form_id" value="<?php FormID(); ?>">
+	<input type="hidden" name="view_tag" id="view_tag" value="<?php AttributeTag(); ?>">
+	<input type="hidden" name="input_type_id" value="<?php InputTypeID(); ?>">
+	<input type="hidden" name="input_type_name" value="<?php InputTypeName(); ?>">
+	<input type="hidden" name="product_type_id" value="<?php ProductTypeID(); ?>">
+<div class="portlet light">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gears font-blue-sharp"></i>
+			<span class="caption-subject font-blue-sharp bold uppercase"><?php msg('PRDTYPE_CUST_ATTR_PAGE_HEADER'); ?> <?php ProductTypeName(); ?></span>
+			<span class="caption-subject font-blue-sharp"><?php msg('PRDTYPE_CUST_ATTR_PAGE_NAME_SL'); ?></span>
+		</div>
+		<div class="actions">
+			<div class="actions btn-set">
+				<a id="SaveButton1" title="<?php msg('BTN_SAVE'); ?>" href="javascript:;" onclick="CatalogEditCustomAttribute.submit(); return true; disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" class="btn btn-circle btn-default"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVE'); ?></span></a>
+				<a id="CancelButton1" title="<?php msg('BTN_CANCEL'); ?>" href="javascript:;" onclick="closeAndFocusParent();" class="btn btn-circle btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php msg('BTN_CANCEL'); ?></span></a>
+			</div>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<?php //PageHelpLink('edit_custome_attr_single_line'); ?>
+		<?php //VideoTutorialLink('edit_custome_attr_single_line'); ?>
+		<div class="row margin-bottom-10">
+			<?php Errors(); ?>
+		</div>
+		<div class="row margin-bottom-10">
+			<div class="col-sm-3">
+				<label class="control-label required"><?php msg('CUSTSL_TAG_NAME'); ?>&nbsp;*</label>
+			</div>
+			<div class="col-sm-2">
+				<a class="pull-left" style="cursor:pointer;">
+					<?php AttributeHelp('0','AttributeTag', 'custsl_attr'); ?>
+				</a>
+			</div>
+			<div class="col-sm-5">
+				<input  class="form-control input-sm input-large"  type="text" name="view_tag" id="view_tag" value="<?php AttributeTag(); ?>"  onkeyup="show_tag_preview();">
+				<div class="margin-top-10">
+	            	<div id="tag_preview"></div>
+				</div>
+			</div>
+			<script>show_tag_preview();</script>
+		</div>
+		<div class="row margin-bottom-10">
+			<div class="col-sm-3">
+				<label class="control-label required"><?php msg('CUSTSL_NAME_NAME'); ?>&nbsp;*</label>
+			</div>
+			<div class="col-sm-2">
+				<a class="pull-left" style="cursor:pointer;">
+					<?php AttributeHelp('0','AttributeName', 'custsl_attr'); ?>
+				</a>
+			</div>
+			<div class="col-sm-5">
+				<input class="form-control input-sm input-large" type="text" name="name" value="<?php AttributeName(); ?>" maxlength="128" onBlur="formatInput(this);" patternType="string128" >
+			</div>
+         </div>
+		<div class="row margin-bottom-10">
+			<div class="col-sm-3">
+				<label class="control-label required"><?php msg('CUSTSL_DESCR_NAME'); ?>&nbsp;*</label>
+			</div>
+			<div class="col-sm-2">
+				<a class="pull-left" style="cursor:pointer;">
+					<?php AttributeHelp('0','AttributeDescr', 'custsl_attr'); ?>
+				</a>
+			</div>
+			<div class="col-sm-5">
+			<textarea class="form-control input-sm input-large" name="descr"  onBlur="formatInput(this);"  onkeyup="formatInput(this);" patternType="string512"><?php AttributeDescr(); ?></textarea>
+           	</div>
+         </div>
+		<div class="row margin-bottom-10">
+			<div class="col-sm-12">
+				<p class="text-danger"><strong><?php msg('REQUIRED_FIELD_LABEL'); ?></strong></p>
+         	</div>
+        </div>
+		<div class="actions text-center">
+			<div class="actions btn-set">
+				<a id="SaveButton2" title="<?php msg('BTN_SAVE'); ?>" href="javascript:;" onclick="CatalogEditCustomAttribute.submit(); return true; disableButtons(new Array('SaveButton1', 'SaveButton2', 'CancelButton1', 'CancelButton2'));" class="btn btn-circle btn-default"><i class="fa fa-save"></i> <span class="hidden-480"><?php msg('BTN_SAVE'); ?></span></a>
+				<a id="CancelButton2" title="<?php msg('BTN_CANCEL'); ?>" href="javascript:;" onclick="closeAndFocusParent();" class="btn btn-circle btn-default"><i class="fa fa-times"></i> <span class="hidden-480"><?php msg('BTN_CANCEL'); ?></span></a>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+<!-- END TPL (DO NOT REMOVE!) --><hr>
